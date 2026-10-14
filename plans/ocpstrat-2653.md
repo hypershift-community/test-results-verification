@@ -110,8 +110,9 @@ only.
 | Item | Reference |
 |------|-----------|
 | Enhancement proposal | [openshift/enhancements#2117](https://github.com/openshift/enhancements/pull/2117) |
-| Implementation PR (API + controller) | [openshift/hypershift#9913](https://github.com/openshift/hypershift/pull/9913) |
-| Implementation PR (ignition server) | [openshift/hypershift#9898](https://github.com/openshift/hypershift/pull/9898) |
+| Implementation PR (API + CEL) | [openshift/hypershift#9913](https://github.com/openshift/hypershift/pull/9913) |
+| Implementation PR (feature gate) | [openshift/hypershift#9898](https://github.com/openshift/hypershift/pull/9898) |
+| Implementation PR (ignition server /kas-ip) | TBD — not yet implemented |
 | Strategy Jira | [OCPSTRAT-2653](https://issues.redhat.com/browse/OCPSTRAT-2653) |
 | Epic | [CNTRLPLANE-4574](https://issues.redhat.com/browse/CNTRLPLANE-4574) |
 | E2E story | [CNTRLPLANE-4579](https://issues.redhat.com/browse/CNTRLPLANE-4579) |
@@ -135,7 +136,7 @@ only.
 | LB provider (CI) | MetalLB |
 | OCP version | 4.18+ / 5.1+ |
 | Prerequisites | `hypershift` CLI, `oc` CLI, MetalLB operator installed |
-| FeatureGate | `DeterministicLoadBalancerIP` |
+| FeatureGate | `DeterministicLBIP` |
 
 ### CI Execution Strategy
 
@@ -178,13 +179,13 @@ spec results in the KAS Service acquiring the specified fixed IP.
 
 **Preconditions:**
 - MetalLB operator installed on management cluster with an IPAddressPool.
-- FeatureGate `DeterministicLoadBalancerIP` enabled.
+- FeatureGate `DeterministicLBIP` enabled.
 
 **Fallback method (manual):**
 
 | Step | Action | Expected Result |
 |------|--------|-----------------|
-| 1 | Create HC with `spec.services[kube-apiserver].serviceAnnotations` including MetalLB pool annotation and target IP | HC creation succeeds |
+| 1 | Create HC with `spec.services[kube-apiserver].servicePublishingStrategy.loadBalancer.serviceAnnotations` including MetalLB pool annotation and target IP | HC creation succeeds |
 | 2 | Inspect the KAS Service in the HCP namespace | Service has the MetalLB annotation |
 | 3 | Wait for LB IP assignment | Service `.status.loadBalancer.ingress[0].ip` matches the target IP |
 | 4 | Verify KAS is reachable at the assigned IP | `oc --server=https://<ip>:6443 get ns` succeeds |
@@ -203,7 +204,7 @@ propagated to the KAS Service.
 
 | Step | Action | Expected Result |
 |------|--------|-----------------|
-| 1 | Create HC with `spec.services[kube-apiserver].loadBalancerClass: "metallb.io/metallb"` | HC creation succeeds |
+| 1 | Create HC with `spec.services[kube-apiserver].servicePublishingStrategy.loadBalancer.loadBalancerClass: "metallb.io/metallb"` | HC creation succeeds |
 | 2 | Inspect the KAS Service | `.spec.loadBalancerClass` equals `metallb.io/metallb` |
 | 3 | Verify MetalLB claims the Service | LB IP is assigned from the MetalLB pool |
 
@@ -234,7 +235,7 @@ controller reconciliation loops.
 works identically to pre-feature behavior.
 
 **Preconditions:**
-- FeatureGate `DeterministicLoadBalancerIP` enabled.
+- FeatureGate `DeterministicLBIP` enabled.
 
 **Fallback method (manual):**
 
@@ -527,7 +528,7 @@ without requiring the deterministic IP feature.
 accepted by CEL validation.
 
 **Preconditions:**
-- FeatureGate `DeterministicLoadBalancerIP` enabled.
+- FeatureGate `DeterministicLBIP` enabled.
 
 **Fallback method (manual):**
 
@@ -539,21 +540,22 @@ accepted by CEL validation.
 
 ---
 
-#### 5.6.2 TC-020: Immutability Regression
+#### 5.6.2 TC-020: loadBalancerClass Immutability
 
-**Objective:** Verify that annotations marked as immutable cannot be changed
-after initial creation.
+**Objective:** Verify that `loadBalancerClass` cannot be changed or removed
+after initial creation (it is the only immutable field in LoadBalancerPublishingStrategy;
+`serviceAnnotations` is mutable and tested separately in TC-021).
 
 **Preconditions:**
-- HC created with an immutable annotation.
+- HC created with `loadBalancerClass` set.
 
 **Fallback method (manual):**
 
 | Step | Action | Expected Result |
 |------|--------|-----------------|
-| 1 | Create HC with an immutable LB annotation | Accepted |
-| 2 | Attempt to modify the immutable annotation value | Rejected by validation |
-| 3 | Attempt to remove the immutable annotation | Rejected by validation |
+| 1 | Create HC with `loadBalancerClass: "metallb.io/metallb"` | Accepted |
+| 2 | Attempt to change `loadBalancerClass` to a different value | Rejected by CEL validation |
+| 3 | Attempt to remove `loadBalancerClass` (set to empty) | Rejected by CEL validation |
 
 ---
 
@@ -667,7 +669,7 @@ change the deployment config hash.
 
 #### 5.7.3 TC-027: Config Hash Changes Without FeatureGate
 
-**Objective:** Verify that without the `DeterministicLoadBalancerIP`
+**Objective:** Verify that without the `DeterministicLBIP`
 FeatureGate, the placeholder mechanism is not active and the hash changes
 when annotations change.
 
@@ -678,7 +680,7 @@ when annotations change.
 
 | Step | Action | Expected Result |
 |------|--------|-----------------|
-| 1 | Disable `DeterministicLoadBalancerIP` FeatureGate | Feature off |
+| 1 | Disable `DeterministicLBIP` FeatureGate | Feature off |
 | 2 | Render config with annotation A, compute hash | Hash_A |
 | 3 | Render config with annotation B, compute hash | Hash_B |
 | 4 | Compare | Hash_A != Hash_B (expected: hash changes without the feature) |
