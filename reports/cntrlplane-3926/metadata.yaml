@@ -1,0 +1,21 @@
+# Report metadata — see docs/format.md#html-bundle-metadata
+plan: cntrlplane-3926
+jira_key: CNTRLPLANE-3926
+format: html-bundle
+date: 2026-10-15
+verdict: pass
+scenario_count: 3
+pass_count: 3
+ci_verified: true
+has_derived_markdown: false
+pr:
+  repo: openshift/hypershift
+  number: 9996
+  url: https://github.com/openshift/hypershift/pull/9996
+tester: "@Nirshal"
+tags:
+  - e2e
+  - test-infrastructure
+  - image-mirroring
+  - idms
+  - aws
