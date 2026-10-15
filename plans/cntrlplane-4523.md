@@ -8,10 +8,8 @@ jira_issues:
     role: primary
     url: https://issues.redhat.com/browse/CNTRLPLANE-4523
   - key: CNTRLPLANE-4522
-    role: primary
     url: https://issues.redhat.com/browse/CNTRLPLANE-4522
   - key: CNTRLPLANE-4747
-    role: primary
     url: https://issues.redhat.com/browse/CNTRLPLANE-4747
 pull_requests:
   - repo: openshift/hypershift
@@ -58,10 +56,19 @@ must act" without inspecting individual Machine objects.
 
 This feature adds a new `InfrastructureFailure` reason to the existing
 `AllMachinesReady` condition. Terminal failures are detected using explicit
-per-platform reason sets matched against the Machine's v1beta2
-`ReadyCondition.Reason`. Classification is based solely on condition
-reasons; message text is not a stable contract and is never used for
-terminal detection.
+per-platform reason sets matched against the reason string derived from
+Machine conditions. The reason is selected by a branch in
+`setAllMachinesReadyCondition`: when `InfrastructureReady` is present and
+not True (and is not a setup counter message), its reason is used;
+otherwise `ReadyCondition.Reason` is used. Classification is based solely
+on condition reasons; message text is not a stable contract and is never
+used for terminal detection.
+
+**Known coverage gap:** All unit tests in the implementation PR simulate
+only the `ReadyCondition` path. The `InfrastructureReady`-derived reason
+path — which is the production-dominant path where providers actually
+emit these reasons — is not exercised by any test case. This is tracked
+as a follow-up in the implementation PR.
 
 Key capabilities under test:
 
@@ -104,10 +111,11 @@ Key capabilities under test:
 
 ### 2.4 Automation-First Principle
 
-The primary verification method for every test case is the automated unit
+The primary verification method for most test cases is the automated unit
 test suite delivered with the implementation PR
-(`TestSetMachineAndNodeConditions` — 27 cases). Manual execution is a
-fallback only.
+(`TestSetMachineAndNodeConditions` — 8 new cases plus 1 updated case).
+TC-012 uses manual end-to-end verification, TC-013 uses code review.
+Manual execution is a fallback for all other test cases.
 
 ---
 
@@ -116,7 +124,7 @@ fallback only.
 | Item | Reference |
 |------|-----------|
 | Implementation PR | [openshift/hypershift#9781](https://github.com/openshift/hypershift/pull/9781) |
-| API constant | `api/hypershift/v1beta1/nodepool_conditions.go` — `NodePoolInfrastructureFailureReason` |
+| API constants | `api/hypershift/v1beta1/nodepool_conditions.go` — `NodePoolInfrastructureFailureReason`, `ManagementConfigDriftReason` (unrelated constant added in the same commit — out of scope for this plan, should be split into a separate PR) |
 | Condition logic | `hypershift-operator/controllers/nodepool/conditions.go` — `setAllMachinesReadyCondition`, `isTerminalInfraReason`, `terminalInfraReasons` |
 | Rate limiter | `hypershift-operator/controllers/nodepool/nodepool_controller.go` — `SetupWithManager` |
 | Unit tests | `hypershift-operator/controllers/nodepool/nodepool_controller_test.go` — `TestSetMachineAndNodeConditions` |
@@ -138,31 +146,58 @@ fallback only.
 
 ## 4. Test Environment
 
+**Unit tests (TC-001 through TC-011):** No cluster required — tests run
+against synthetic `capiv1.Machine` objects in `go test`.
+
+**Manual E2E verification (TC-012 only):**
+
 | Property | Value |
 |----------|-------|
 | Cluster type | HostedCluster |
-| Platforms | AWS, Azure, IBMCloud, PowerVS, OpenStack, KubeVirt |
+| Platform | Any supported platform (AWS is sufficient) |
 | OCP version | 4.18+ / 5.1+ |
 | Prerequisites | `hypershift` CLI, `oc` CLI |
 
+**Code review (TC-013):** No environment required.
+
 ### CI Execution Strategy
 
-All test cases are covered by the unit test suite
-`TestSetMachineAndNodeConditions` in presubmit CI. No new E2E tests are
-introduced — the condition is verified via unit tests with synthetic
-Machine objects.
+TC-001 through TC-011 are covered by the unit test suite
+`TestSetMachineAndNodeConditions` in presubmit CI. TC-004 and TC-005
+(IBMCloud, PowerVS, OpenStack, KubeVirt) currently lack dedicated unit
+tests — the `terminalInfraReasons` map registers the reasons but they
+are not exercised by platform-specific test cases. Adding these tests is
+tracked as a follow-up in the implementation PR.
+
+No new E2E tests are introduced. The condition logic is verified via
+unit tests with synthetic Machine objects. This is a deliberate
+trade-off: the terminal reason strings are hard-coded literals with no
+compile-time link to the providers that emit them, so unit tests cannot
+detect upstream reason renames (see §6 Risks).
 
 **Unit tests (1 suite, presubmit):**
 
 | Suite | TCs Covered | CI Tier |
 |-------|-------------|---------|
-| `TestSetMachineAndNodeConditions` | TC-001 through TC-011 | Presubmit |
+| `TestSetMachineAndNodeConditions` | TC-001, TC-002, TC-003, TC-006 through TC-011 | Presubmit |
+
+**Unit tests pending (implementation PR follow-up):**
+
+| Suite | TCs Covered | CI Tier |
+|-------|-------------|---------|
+| `TestSetMachineAndNodeConditions` | TC-004, TC-005 (IBMCloud, PowerVS, OpenStack, KubeVirt) | Presubmit |
 
 **Manual verification (1 scenario):**
 
 | Scenario | TCs Covered | CI Tier |
 |----------|-------------|---------|
 | Observe condition via `oc get nodepool -o yaml` | TC-012 | Manual |
+
+**Code review (1 scenario):**
+
+| Scenario | TCs Covered | CI Tier |
+|----------|-------------|---------|
+| Rate limiter max delay constant | TC-013 | Code review |
 
 ---
 
@@ -238,9 +273,11 @@ VMProvisionFailed` causes `AllMachinesReady` to report
 `InfrastructureFailure`.
 
 **Primary method (automated):**
-- Covered by `isTerminalInfraReason` through the `terminalInfraReasons`
-  map which registers both reasons for `IBMCloudPlatform` and
-  `PowerVSPlatform`.
+- **No dedicated unit test exists.** The `terminalInfraReasons` map
+  registers both reasons for `IBMCloudPlatform` and `PowerVSPlatform`,
+  but no test case sets `platformType` to either platform. Adding
+  platform-specific test cases is tracked as a follow-up in the
+  implementation PR.
 
 **Fallback method (manual):**
 
@@ -260,8 +297,11 @@ or `InstanceStateError`, and KubeVirt Machines with `VMCreateFailed`,
 produce `InfrastructureFailure`.
 
 **Primary method (automated):**
-- Covered by `isTerminalInfraReason` through the `terminalInfraReasons`
-  map which registers the appropriate reasons for each platform.
+- **No dedicated unit test exists.** The `terminalInfraReasons` map
+  registers the appropriate reasons for each platform, but no test case
+  sets `platformType` to `OpenStackPlatform` or `KubevirtPlatform`.
+  Adding platform-specific test cases is tracked as a follow-up in the
+  implementation PR.
 
 **Fallback method (manual):**
 
@@ -325,13 +365,21 @@ failure (ReadyCondition becomes True), `AllMachinesReady` returns to
 **Primary method (automated):**
 - Test: `TestSetMachineAndNodeConditions` / "When machine recovers from
   infrastructure failure it should return to AsExpected"
+- **Known weakness:** The underlying test creates a fresh NodePool with a
+  healthy Machine and no prior `InfrastructureFailure` condition. Since
+  `setAllMachinesReadyCondition` is stateless (recomputes on every call),
+  this case is behaviourally identical to the happy path. A stronger test
+  would seed a prior `InfrastructureFailure` condition on the NodePool
+  before exercising recovery. Tracked as a follow-up in the
+  implementation PR.
 
 **Fallback method (manual):**
 
 | Step | Action | Expected Result |
 |------|--------|-----------------|
-| 1 | Simulate a Machine with `ReadyCondition` status `True` (recovered from failure) | Machine healthy |
-| 2 | Inspect NodePool conditions | `AllMachinesReady=True`, reason `AsExpected`, message `All is well` |
+| 1 | Create a NodePool on AWS and trigger `InfrastructureFailure` (e.g., via invalid instance type) | `AllMachinesReady=False`, reason `InfrastructureFailure` |
+| 2 | Fix the underlying issue (e.g., correct instance type) and wait for Machine to become Ready | Machine healthy |
+| 3 | Inspect NodePool conditions | `AllMachinesReady=True`, reason `AsExpected`, message `All is well` |
 
 ---
 
@@ -363,6 +411,15 @@ at least one has a terminal failure, `AllMachinesReady` reports
 failure reasons including terminal ones, the condition correctly reports
 `InfrastructureFailure` with aggregated messages.
 
+**Backward-incompatible change:** This test case modifies a pre-existing
+test. The `reason` field changes from a comma-joined list of all reasons
+(e.g., `InstanceProvisionFailed,InstanceTerminated,MachineHasFailure,...`)
+to the single value `InfrastructureFailure`. Any tooling or alerting
+matching the old comma-joined reason string will break. Note:
+`MachineHasFailure` appears in the test data as a non-terminal reason —
+it is included to verify it is not misclassified (consistent with §3
+design note that v1beta1 reasons are not consulted for classification).
+
 **Primary method (automated):**
 - Test: `TestSetMachineAndNodeConditions` / "When 10 of 20 machines are
   not ready with different reasons it should aggregate correctly"
@@ -390,6 +447,10 @@ terminal reasons has a failure reason (e.g. `InstanceProvisionFailed` on
 - Test: `TestSetMachineAndNodeConditions` / "When platform has no terminal
   reasons a provider failure reason should not report
   InfrastructureFailure"
+- **Note:** The underlying test does not set `platformType`, so it runs
+  with the zero value `""` (not `hyperv1.NonePlatform` = `"None"`). The
+  test passes because the empty string has no registered terminal reasons,
+  but this is a subtly different scenario from `NonePlatform`.
 
 **Fallback method (manual):**
 
@@ -452,9 +513,9 @@ persistent failures.
 
 | Risk | Likelihood | Impact | Mitigation |
 |------|------------|--------|------------|
-| CAPI providers change ReadyCondition reason strings | Low | High | Terminal reasons are provider-owned constants; monitor upstream CAPI releases for reason renames |
+| CAPI providers change ReadyCondition reason strings | Low | High | Terminal reasons are provider-owned constants. Failure mode is silent: `isTerminalInfraReason` returns false and the condition reverts to pre-feature behaviour without any test failure, because unit tests feed the same hard-coded literals the code matches on. Mitigation: add E2E integration tests that exercise real provider conditions, or subscribe to upstream CAPI release notes for reason renames |
 | New platform added without terminal reasons registered | Medium | Low | `isTerminalInfraReason` returns false for unknown platforms — falls back to existing behavior |
-| Rate limiter 5m cap delays recovery detection | Low | Medium | Rate limiter resets on successful reconciliation; only affects persistent-failure backoff |
+| Rate limiter 5m cap affects all NodePool reconcile errors | Medium | High | The rate limiter is **controller-wide** — it applies to every NodePool reconcile that returns an error (resource conflicts, API throttling, webhook timeouts, transient cloud errors), not just infrastructure failures. Worst-case reconcile latency increases from 10s to 5m for any error. Mitigation: the limiter resets on successful reconciliation, so only persistent errors see the full 5m backoff. Monitor controller reconcile latency after rollout |
 | Terminal reason false positive on a genuinely transient failure | Low | High | Reason classification is conservative — only reasons known to be terminal are registered |
 | TC-012 manual verification requires specific cloud quota conditions | Medium | Low | Can be triggered with an invalid instance type; automated unit tests cover the logic |
 
