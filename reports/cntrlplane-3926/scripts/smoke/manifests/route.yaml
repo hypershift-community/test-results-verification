@@ -1,0 +1,17 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: ${NAME}
+  namespace: ${NS}
+  labels:
+    app.kubernetes.io/name: ${NAME}
+spec:
+  host: ${HOST}
+  to:
+    kind: Service
+    name: ${NAME}
+  port:
+    targetPort: https
+  tls:
+    termination: passthrough
+    insecureEdgeTerminationPolicy: None
