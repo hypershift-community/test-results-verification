@@ -1,0 +1,9 @@
+# CNTRLPLANE-3927 manual run: one image-mirroring HostedCluster, only the two propagation specs.
+# Passed to create-guests and run-tests as TEST_PLAN (a file path for the local binaries).
+name: image-mirroring-propagation
+platform: aws
+testMatrix:
+  parallel:
+  - name: image-mirroring
+    variant: image-mirroring
+    labelFilter: "lifecycle && image-mirroring"

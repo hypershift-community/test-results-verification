@@ -1,0 +1,1 @@
+CGO_ENABLED=1 GO111MODULE=on GOWORK=off GOFLAGS=-mod=vendor go test -gcflags=all='-N -l' -tags e2ev2 -c -o bin/test-e2e-v2 ./test/e2e/v2/tests
