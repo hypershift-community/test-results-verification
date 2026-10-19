@@ -8,7 +8,10 @@ scenario_count: 1
 pass_count: 1
 ci_verified: true
 has_derived_markdown: false
-# pr: to be added when the openshift/hypershift PR for CNTRLPLANE-3927 is opened (stacked on #9996)
+pr:
+  repo: openshift/hypershift
+  number: 10029
+  url: https://github.com/openshift/hypershift/pull/10029
 tester: "@Nirshal"
 tags:
   - e2e

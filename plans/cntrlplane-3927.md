@@ -7,6 +7,11 @@ jira_issues:
   - key: CNTRLPLANE-3927
     role: primary
     url: https://issues.redhat.com/browse/CNTRLPLANE-3927
+pull_requests:
+  - repo: openshift/hypershift
+    number: 10029
+    url: https://github.com/openshift/hypershift/pull/10029
+    role: implementation
 status: draft
 tags:
   - e2e
@@ -32,9 +37,9 @@ for Software and System Test Documentation.
 **Verification report:** [`reports/cntrlplane-3927/index.html`](../reports/cntrlplane-3927/index.html)
 (HTML bundle: one executed live scenario, automated tests, two independent reviews, the reproduction kit and sanitized evidence).
 
-**Implementation PR:** not yet opened. It will be stacked on
+**Implementation PR:** [openshift/hypershift#10029](https://github.com/openshift/hypershift/pull/10029) (draft), stacked on
 [openshift/hypershift#9996](https://github.com/openshift/hypershift/pull/9996) (CNTRLPLANE-3926, head `8d54f7ab32`);
-the change under test is the single commit `c9ad656db6` on top of that head. The PR will be added to the metadata when it exists.
+the change under test is its last commit, `c9ad656db6`.
 
 ---
 
@@ -112,6 +117,7 @@ The deliverable *is* test automation, and its CI job (CNTRLPLANE-3929) comes lat
 
 | Item | Reference |
 |------|-----------|
+| Implementation PR | [openshift/hypershift#10029](https://github.com/openshift/hypershift/pull/10029) (draft) |
 | Change under test | Commit `c9ad656db6` (`test(e2e): verify image mirroring propagation through independent paths`), parent `8d54f7ab32` |
 | Parent PR (dependency) | [openshift/hypershift#9996](https://github.com/openshift/hypershift/pull/9996) — CNTRLPLANE-3926 mirror fixture and lifecycle wiring; [verification report](https://github.com/hypershift-community/test-results-verification/pull/6) |
 | Feature Jira | [CNTRLPLANE-3927](https://issues.redhat.com/browse/CNTRLPLANE-3927) (parent CNTRLPLANE-3922, epic OCPSTRAT-3316) |
@@ -223,7 +229,7 @@ with the positive and negative label filters, and regression tests of the lifecy
 
 **Objective:** The PR passes the repository's build, lint, verify and e2e-compile checks. The live lane itself is opt-in and
 runs in CNTRLPLANE-3929.
-**Expected result:** required checks pass. Recorded when the PR is opened.
+**Expected result:** required checks pass on [#10029](https://github.com/openshift/hypershift/pull/10029).
 
 ---
 

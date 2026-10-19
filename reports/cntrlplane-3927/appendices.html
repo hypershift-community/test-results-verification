@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-<header class="topbar"><div class="brand">CNTRLPLANE-3927 · Verification report</div><nav><a href="index.html">Dashboard</a><a href="scenario-1.html">1 · Propagation</a><a href="automated-tests.html">Automated tests</a><a href="appendices.html" class="active">Appendices</a><a href="../../plans/cntrlplane-3927.md">Test plan</a><a href="https://github.com/openshift/hypershift/pull/9996">Parent PR #9996</a></nav></header>
+<header class="topbar"><div class="brand">CNTRLPLANE-3927 · Verification report</div><nav><a href="index.html">Dashboard</a><a href="scenario-1.html">1 · Propagation</a><a href="automated-tests.html">Automated tests</a><a href="appendices.html" class="active">Appendices</a><a href="../../plans/cntrlplane-3927.md">Test plan</a><a href="https://github.com/openshift/hypershift/pull/10029">PR #10029</a><a href="https://github.com/openshift/hypershift/pull/9996">Parent PR #9996</a></nav></header>
 <main>
 <h1>Appendices</h1>
 <p class="subtitle">Traceability, environment, design decisions, independent reviews, sanitization, and how the report was produced</p>
@@ -885,12 +885,13 @@ and <code>test-plan.yaml</code> are unchanged.</p>
   <li>CNTRLPLANE-3929: <code>create-guests</code> prints a <code>log.SetLogger(...) was never called</code> stack trace in Phase 3 (pre-existing); set a logger for readable CI logs.</li>
   <li>CNTRLPLANE-3929: HC <code>Available</code> flapped on kube-apiserver load balancer <code>/healthz</code> timeouts during the rollout; <code>create-guests</code> tolerated it, worth watching in CI.</li>
   <li>Kit: consider moving the step 6b queries into <code>check.sh clean</code>.</li>
-  <li>CNTRLPLANE-3927 PR: add its number to the plan and report metadata, and the CI results to TC-12, once opened.</li>
+  <li>#10029: add the CI results to TC-12 once the checks complete; rebase after #9996 merges.</li>
+  <li>Unrelated: <code>cmd/cluster/{agent,kubevirt}</code> <code>TestNewDestroyCommand</code> reads the developer kubeconfig and calls a real API server (fails locally with a context set).</li>
 </ul>
 </main>
 <footer>
 CNTRLPLANE-3927 — e2e v2 test: imageContentSources propagation to the hosted-cluster IDMS and the ignition ConfigMap ·
-commit <code>c9ad656db6</code> on <a href="https://github.com/openshift/hypershift/pull/9996">openshift/hypershift#9996</a> · report date 2026-10-19.<br>
+<a href="https://github.com/openshift/hypershift/pull/10029">openshift/hypershift#10029</a> (commit <code>c9ad656db6</code>, stacked on #9996) · report date 2026-10-19.<br>
 All evidence is sanitized (cluster names, domains, AWS identifiers and local paths replaced; see
 <a href="appendices.html#e-sanitization">appendix E</a>). Cluster commands were run by a human; runbooks, scripts,
 the independent reviews and this report were prepared with AI assistance (see appendix F).

@@ -7,14 +7,14 @@
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-<header class="topbar"><div class="brand">CNTRLPLANE-3927 · Verification report</div><nav><a href="index.html">Dashboard</a><a href="scenario-1.html">1 · Propagation</a><a href="automated-tests.html" class="active">Automated tests</a><a href="appendices.html">Appendices</a><a href="../../plans/cntrlplane-3927.md">Test plan</a><a href="https://github.com/openshift/hypershift/pull/9996">Parent PR #9996</a></nav></header>
+<header class="topbar"><div class="brand">CNTRLPLANE-3927 · Verification report</div><nav><a href="index.html">Dashboard</a><a href="scenario-1.html">1 · Propagation</a><a href="automated-tests.html" class="active">Automated tests</a><a href="appendices.html">Appendices</a><a href="../../plans/cntrlplane-3927.md">Test plan</a><a href="https://github.com/openshift/hypershift/pull/10029">PR #10029</a><a href="https://github.com/openshift/hypershift/pull/9996">Parent PR #9996</a></nav></header>
 <main>
 <h1>Automated tests</h1>
 <p class="subtitle">Unit tests delivered with the change (TC-10), the local quality gate (TC-11) and CI on the PR (TC-12)</p>
 <table><thead><tr><th>TC</th><th>Test case</th><th>Runbook steps</th><th>Covers</th><th>Result</th><th>Key evidence</th></tr></thead><tbody>
 <tr id="tc-10"><td><b>TC-10</b></td><td>Unit tests of the helpers (manual inputs, fake clients)</td><td>—</td><td>AC1, AC2, AC3</td><td><span class="badge pass">PASS</span></td><td>6 tests / 76 subcases, 0 failures; <code>TestE2EV2</code> not executed</td></tr>
 <tr id="tc-11"><td><b>TC-11</b></td><td>Local quality gate</td><td>—</td><td>AC4</td><td><span class="badge pass">PASS</span></td><td>13 commands, all exit 0; discovery: 2 of 1149 selected, negative filter 0</td></tr>
-<tr id="tc-12"><td><b>TC-12</b></td><td>CI on the PR</td><td>—</td><td>AC4</td><td><span class="badge info">PENDING</span></td><td>PR not opened yet; recorded when it is</td></tr>
+<tr id="tc-12"><td><b>TC-12</b></td><td>CI on the PR</td><td>—</td><td>AC4</td><td><span class="badge info">PENDING</span></td><td><a href="https://github.com/openshift/hypershift/pull/10029">#10029</a> opened 2026-10-19 (draft); checks running</td></tr>
 </tbody></table>
 
 <h2 id="unit">Unit tests</h2>
@@ -65,16 +65,16 @@ clean tree, from the repository root. Every command exited 0
 </tbody></table>
 <p class="small">All Go commands ran with <code>GO111MODULE=on GOWORK=off GOFLAGS=-mod=vendor</code>. Dry-run discovery proves selection only; the
 callbacks are not executed. The live execution of both specs is Scenario 1. The commit also passed the repository's commit hooks and
-<code>make run-gitlint</code>. The full <code>make pre-commit</code> is run before the PR is submitted.</p>
+<code>make run-gitlint</code>. <code>make pre-commit</code> on 2026-10-19: <code>all</code>, <code>verify</code> and <code>verify-git-clean</code> pass (no regenerated files); in <code>test</code>, only the untouched <code>cmd/cluster/{agent,kubevirt}</code> <code>TestNewDestroyCommand</code> failed because they read <code>~/.kube/config</code> and call a real API server; <code>KUBECONFIG=/dev/null make test</code> passes.</p>
 
 <h2 id="ci">CI on the PR</h2>
-<div class="callout"><p>The implementation PR for CNTRLPLANE-3927 is not opened yet (it will be stacked on #9996). Its CI status will be recorded here.
+<div class="callout"><p>The implementation PR is <a href="https://github.com/openshift/hypershift/pull/10029">openshift/hypershift#10029</a> (draft, stacked on #9996). Its CI status will be recorded here once the checks complete (live status: <a href="https://github.com/openshift/hypershift/pull/10029/checks">PR checks</a>).
 The new specs are opt-in: no existing job selects the <code>image-mirroring</code> variant or label, so CI on the PR compiles and lints them
 but does not run them live. The live lane is added by CNTRLPLANE-3929.</p></div>
 </main>
 <footer>
 CNTRLPLANE-3927 — e2e v2 test: imageContentSources propagation to the hosted-cluster IDMS and the ignition ConfigMap ·
-commit <code>c9ad656db6</code> on <a href="https://github.com/openshift/hypershift/pull/9996">openshift/hypershift#9996</a> · report date 2026-10-19.<br>
+<a href="https://github.com/openshift/hypershift/pull/10029">openshift/hypershift#10029</a> (commit <code>c9ad656db6</code>, stacked on #9996) · report date 2026-10-19.<br>
 All evidence is sanitized (cluster names, domains, AWS identifiers and local paths replaced; see
 <a href="appendices.html#e-sanitization">appendix E</a>). Cluster commands were run by a human; runbooks, scripts,
 the independent reviews and this report were prepared with AI assistance (see appendix F).

@@ -7,11 +7,11 @@
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-<header class="topbar"><div class="brand">CNTRLPLANE-3927 · Verification report</div><nav><a href="index.html" class="active">Dashboard</a><a href="scenario-1.html">1 · Propagation</a><a href="automated-tests.html">Automated tests</a><a href="appendices.html">Appendices</a><a href="../../plans/cntrlplane-3927.md">Test plan</a><a href="https://github.com/openshift/hypershift/pull/9996">Parent PR #9996</a></nav></header>
+<header class="topbar"><div class="brand">CNTRLPLANE-3927 · Verification report</div><nav><a href="index.html" class="active">Dashboard</a><a href="scenario-1.html">1 · Propagation</a><a href="automated-tests.html">Automated tests</a><a href="appendices.html">Appendices</a><a href="../../plans/cntrlplane-3927.md">Test plan</a><a href="https://github.com/openshift/hypershift/pull/10029">PR #10029</a><a href="https://github.com/openshift/hypershift/pull/9996">Parent PR #9996</a></nav></header>
 <main>
 <h1>E2E v2 test: imageContentSources propagation to the hosted-cluster IDMS and the ignition ConfigMap</h1>
 <p class="subtitle">Verification report for <a href="https://issues.redhat.com/browse/CNTRLPLANE-3927">CNTRLPLANE-3927</a> ·
-commit <code>c9ad656db6</code> on top of <a href="https://github.com/openshift/hypershift/pull/9996">openshift/hypershift#9996</a> (head <code>8d54f7ab32</code>) ·
+PR <a href="https://github.com/openshift/hypershift/pull/10029">openshift/hypershift#10029</a> (commit <code>c9ad656db6</code>, draft) on top of <a href="https://github.com/openshift/hypershift/pull/9996">openshift/hypershift#9996</a> (head <code>8d54f7ab32</code>) ·
 plan <a href="../../plans/cntrlplane-3927.md">TP-CNTRLPLANE-3927-001</a> · 2026-10-19 · tester @Nirshal</p>
 
 <div class="callout ok"><p><b>Verdict: PASS</b>. All four acceptance criteria are covered by passing test cases.
@@ -67,7 +67,7 @@ regression gates pass</td><td>Commit <code>c9ad656db6</code></td><td>2026-10-16<
 </tbody></table>
 <p class="small">Where the tests go beyond the AC wording (exact comparison, fixture provenance precondition, decoded ConfigMap payload,
 fail instead of skip) is explained in the <a href="../../plans/cntrlplane-3927.md">test plan §2.3</a> and in
-<a href="appendices.html#c-design-decisions">appendix C</a>. TC-12 (CI on the PR) is recorded when the PR is opened.</p>
+<a href="appendices.html#c-design-decisions">appendix C</a>. TC-12 (CI on the PR) is recorded once the checks on #10029 complete.</p>
 
 <h2 id="traceability">Code under test and traceability</h2>
 <dl class="kv">
@@ -95,12 +95,12 @@ fail instead of skip) is explained in the <a href="../../plans/cntrlplane-3927.m
   test-only, so this validates the tests against a real producer; current-main producers are covered by the CNTRLPLANE-3929 job.</li>
   <li>One live run on one management cluster, not the five consecutive reliable CI runs that CNTRLPLANE-3922 asks for before making the job required.</li>
   <li>Negative cases (wrong labels, missing or reordered mirrors, wrong ConfigMap, malformed payload) are covered by the unit tests, not by the live run.</li>
-  <li>The implementation PR is not opened yet; CI results on it (TC-12) and its number will be added. It depends on #9996.</li>
+  <li>The implementation PR <a href="https://github.com/openshift/hypershift/pull/10029">#10029</a> is a draft stacked on #9996; its CI results (TC-12) are added once the checks complete.</li>
 </ul>
 </main>
 <footer>
 CNTRLPLANE-3927 — e2e v2 test: imageContentSources propagation to the hosted-cluster IDMS and the ignition ConfigMap ·
-commit <code>c9ad656db6</code> on <a href="https://github.com/openshift/hypershift/pull/9996">openshift/hypershift#9996</a> · report date 2026-10-19.<br>
+<a href="https://github.com/openshift/hypershift/pull/10029">openshift/hypershift#10029</a> (commit <code>c9ad656db6</code>, stacked on #9996) · report date 2026-10-19.<br>
 All evidence is sanitized (cluster names, domains, AWS identifiers and local paths replaced; see
 <a href="appendices.html#e-sanitization">appendix E</a>). Cluster commands were run by a human; runbooks, scripts,
 the independent reviews and this report were prepared with AI assistance (see appendix F).
