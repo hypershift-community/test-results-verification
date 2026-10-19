@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <testsuites tests="2" disabled="0" errors="0" failures="0" time="3.6314131659999997">
+      
+      <testsuite name="hypershift-e2e" package="~/hypershift" tests="2" disabled="0" skipped="0" errors="0" failures="0" time="3.6314131659999997" timestamp="2026-10-19T12:47:31">
+          
+          <properties>
+              
+              <property name="SuiteSucceeded" value="true"></property>
+              
+              <property name="SuiteHasProgrammaticFocus" value="false"></property>
+              
+              <property name="SpecialSuiteFailureReason" value=""></property>
+              
+              <property name="SuiteLabels" value="[]"></property>
+              
+              <property name="SuiteSemVerConstraints" value="[]"></property>
+              
+              <property name="SuiteComponentSemVerConstraints" value="[]"></property>
+              
+              <property name="RandomSeed" value="1792406850"></property>
+              
+              <property name="RandomizeAllSpecs" value="false"></property>
+              
+              <property name="LabelFilter" value="lifecycle &amp;&amp; image-mirroring"></property>
+              
+              <property name="SemVerFilter" value=""></property>
+              
+              <property name="FocusStrings" value=""></property>
+              
+              <property name="SkipStrings" value=""></property>
+              
+              <property name="FocusFiles" value=""></property>
+              
+              <property name="SkipFiles" value=""></property>
+              
+              <property name="FailOnPending" value="false"></property>
+              
+              <property name="FailOnEmpty" value="false"></property>
+              
+              <property name="FailFast" value="false"></property>
+              
+              <property name="FlakeAttempts" value="0"></property>
+              
+              <property name="DryRun" value="false"></property>
+              
+              <property name="ParallelTotal" value="1"></property>
+              
+              <property name="OutputInterceptorMode" value=""></property>
+          
+          </properties>
+          
+          <testcase name="[sig-hypershift][Jira:Hypershift][Feature:ImageMirroring] Hosted Cluster Image Mirroring should propagate imageContentSources to the hosted cluster IDMS with the worker role" classname="hypershift-e2e" status="passed" time="3.092815833">
+              
+              <system-err>&gt; Enter [It] should propagate imageContentSources to the hosted cluster IDMS with the worker role - ~/hypershift/test/e2e/v2/tests/hosted_cluster_image_mirroring_test.go:28 @ 10/19/26 12:47:31.045
+Waiting for HC clusters/image-mirroring-beaa1f2bd2 hosted ImageDigestMirrorSet/cluster mappings and worker role
+observed valid **v1.ImageDigestMirrorSet state after 1.275s
+ - observed **v1.ImageDigestMirrorSet /cluster valid: 
+ - observed **v1.ImageDigestMirrorSet collection valid: 
+Successfully waited for HC clusters/image-mirroring-beaa1f2bd2 hosted ImageDigestMirrorSet/cluster mappings and worker role in 1.275s
+&lt; Exit [It] should propagate imageContentSources to the hosted cluster IDMS with the worker role - ~/hypershift/test/e2e/v2/tests/hosted_cluster_image_mirroring_test.go:28 @ 10/19/26 12:47:34.138 (3.093s)
+&gt; Enter [DeferCleanup (Each)] [sig-hypershift][Jira:Hypershift][Feature:ImageMirroring] Hosted Cluster Image Mirroring - ~/hypershift/test/e2e/v2/tests/hosted_cluster_image_mirroring_test.go:40 @ 10/19/26 12:47:34.138
+&lt; Exit [DeferCleanup (Each)] [sig-hypershift][Jira:Hypershift][Feature:ImageMirroring] Hosted Cluster Image Mirroring - ~/hypershift/test/e2e/v2/tests/hosted_cluster_image_mirroring_test.go:40 @ 10/19/26 12:47:34.138 (0s)
+</system-err>
+          
+          </testcase>
+          
+          <testcase name="[sig-hypershift][Jira:Hypershift][Feature:ImageMirroring] Hosted Cluster Image Mirroring should propagate imageContentSources independently to the control plane ignition ConfigMap" classname="hypershift-e2e" status="passed" time="0.521630666">
+              
+              <system-err>&gt; Enter [It] should propagate imageContentSources independently to the control plane ignition ConfigMap - ~/hypershift/test/e2e/v2/tests/hosted_cluster_image_mirroring_test.go:57 @ 10/19/26 12:47:34.138
+Waiting for HC clusters/image-mirroring-beaa1f2bd2 ConfigMap clusters-image-mirroring-beaa1f2bd2/ignition-config-40-image-content-source decoded IDMS mappings and labels
+observed valid **v1.ConfigMap state after 150ms
+ - observed **v1.ConfigMap collection valid: 
+ - observed **v1.ConfigMap clusters-image-mirroring-beaa1f2bd2/ignition-config-40-image-content-source valid: 
+Successfully waited for HC clusters/image-mirroring-beaa1f2bd2 ConfigMap clusters-image-mirroring-beaa1f2bd2/ignition-config-40-image-content-source decoded IDMS mappings and labels in 150ms
+&lt; Exit [It] should propagate imageContentSources independently to the control plane ignition ConfigMap - ~/hypershift/test/e2e/v2/tests/hosted_cluster_image_mirroring_test.go:57 @ 10/19/26 12:47:34.66 (522ms)
+</system-err>
+          
+          </testcase>
+      
+      </testsuite>
+  
+  </testsuites>

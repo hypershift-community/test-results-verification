@@ -1,0 +1,166 @@
+=== RUN   TestImageMirroringExpected
+=== RUN   TestImageMirroringExpected/When_the_fixture_has_two_sources_and_multiple_mirrors,_it_should_snapshot_the_HC_input
+=== RUN   TestImageMirroringExpected/When_additional_sources_exist,_it_should_retain_all_entries
+=== RUN   TestImageMirroringExpected/When_ICS_is_nil,_it_should_reject_setup
+=== RUN   TestImageMirroringExpected/When_ICS_is_empty,_it_should_reject_setup
+=== RUN   TestImageMirroringExpected/When_a_source_is_blank,_it_should_reject_setup
+=== RUN   TestImageMirroringExpected/When_mirrors_are_empty,_it_should_reject_setup
+=== RUN   TestImageMirroringExpected/When_a_mirror_is_blank,_it_should_reject_setup
+=== RUN   TestImageMirroringExpected/When_a_source_is_duplicated,_it_should_reject_setup
+=== RUN   TestImageMirroringExpected/When_the_real_fixture_source_is_missing,_it_should_reject_setup
+=== RUN   TestImageMirroringExpected/When_the_virtual_fixture_source_is_missing,_it_should_reject_setup
+=== RUN   TestImageMirroringExpected/When_Route_host_is_empty,_it_should_reject_setup
+=== RUN   TestImageMirroringExpected/When_Route_host_is_wrong,_it_should_reject_setup
+=== RUN   TestImageMirroringExpected/When_a_mirror_only_shares_the_host_prefix,_it_should_reject_setup
+=== RUN   TestImageMirroringExpected/When_a_mirror_has_no_repository_path,_it_should_reject_setup
+=== RUN   TestImageMirroringExpected/When_HC_is_nil,_it_should_reject_setup_without_panic
+=== RUN   TestImageMirroringExpected/When_Route_is_nil,_it_should_reject_setup_without_panic
+--- PASS: TestImageMirroringExpected (0.00s)
+    --- PASS: TestImageMirroringExpected/When_the_fixture_has_two_sources_and_multiple_mirrors,_it_should_snapshot_the_HC_input (0.00s)
+    --- PASS: TestImageMirroringExpected/When_additional_sources_exist,_it_should_retain_all_entries (0.00s)
+    --- PASS: TestImageMirroringExpected/When_ICS_is_nil,_it_should_reject_setup (0.00s)
+    --- PASS: TestImageMirroringExpected/When_ICS_is_empty,_it_should_reject_setup (0.00s)
+    --- PASS: TestImageMirroringExpected/When_a_source_is_blank,_it_should_reject_setup (0.00s)
+    --- PASS: TestImageMirroringExpected/When_mirrors_are_empty,_it_should_reject_setup (0.00s)
+    --- PASS: TestImageMirroringExpected/When_a_mirror_is_blank,_it_should_reject_setup (0.00s)
+    --- PASS: TestImageMirroringExpected/When_a_source_is_duplicated,_it_should_reject_setup (0.00s)
+    --- PASS: TestImageMirroringExpected/When_the_real_fixture_source_is_missing,_it_should_reject_setup (0.00s)
+    --- PASS: TestImageMirroringExpected/When_the_virtual_fixture_source_is_missing,_it_should_reject_setup (0.00s)
+    --- PASS: TestImageMirroringExpected/When_Route_host_is_empty,_it_should_reject_setup (0.00s)
+    --- PASS: TestImageMirroringExpected/When_Route_host_is_wrong,_it_should_reject_setup (0.00s)
+    --- PASS: TestImageMirroringExpected/When_a_mirror_only_shares_the_host_prefix,_it_should_reject_setup (0.00s)
+    --- PASS: TestImageMirroringExpected/When_a_mirror_has_no_repository_path,_it_should_reject_setup (0.00s)
+    --- PASS: TestImageMirroringExpected/When_HC_is_nil,_it_should_reject_setup_without_panic (0.00s)
+    --- PASS: TestImageMirroringExpected/When_Route_is_nil,_it_should_reject_setup_without_panic (0.00s)
+=== RUN   TestImageMirroringCheckMappings
+=== RUN   TestImageMirroringCheckMappings/When_mappings_match,_it_should_accept_ordered_mirrors
+=== RUN   TestImageMirroringCheckMappings/When_outer_entries_are_reordered,_it_should_accept_them
+=== RUN   TestImageMirroringCheckMappings/When_an_entry_is_missing,_it_should_reject_it
+=== RUN   TestImageMirroringCheckMappings/When_an_entry_is_extra,_it_should_reject_it
+=== RUN   TestImageMirroringCheckMappings/When_sources_are_duplicated,_it_should_reject_them
+=== RUN   TestImageMirroringCheckMappings/When_sources_are_wrong,_it_should_reject_them
+=== RUN   TestImageMirroringCheckMappings/When_mirrors_belong_to_the_wrong_source,_it_should_reject_them
+=== RUN   TestImageMirroringCheckMappings/When_mirror_priority_changes,_it_should_reject_it
+=== RUN   TestImageMirroringCheckMappings/When_a_mirror_is_dropped,_it_should_reject_it
+=== RUN   TestImageMirroringCheckMappings/When_a_mirror_is_duplicated,_it_should_reject_it
+=== RUN   TestImageMirroringCheckMappings/When_actual_mappings_are_empty,_it_should_reject_them
+=== RUN   TestImageMirroringCheckMappings/When_HC_contains_repeated_mirrors,_it_should_preserve_their_multiplicity
+=== RUN   TestImageMirroringCheckMappings/When_expected_mappings_are_nil,_it_should_reject_vacuous_equality
+=== RUN   TestImageMirroringCheckMappings/When_expected_mappings_are_empty,_it_should_reject_vacuous_equality
+=== RUN   TestImageMirroringCheckMappings/When_expected_source_is_blank,_it_should_reject_it
+=== RUN   TestImageMirroringCheckMappings/When_expected_mirrors_are_empty,_it_should_reject_them
+=== RUN   TestImageMirroringCheckMappings/When_expected_sources_are_duplicated,_it_should_reject_them
+--- PASS: TestImageMirroringCheckMappings (0.00s)
+    --- PASS: TestImageMirroringCheckMappings/When_mappings_match,_it_should_accept_ordered_mirrors (0.00s)
+    --- PASS: TestImageMirroringCheckMappings/When_outer_entries_are_reordered,_it_should_accept_them (0.00s)
+    --- PASS: TestImageMirroringCheckMappings/When_an_entry_is_missing,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckMappings/When_an_entry_is_extra,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckMappings/When_sources_are_duplicated,_it_should_reject_them (0.00s)
+    --- PASS: TestImageMirroringCheckMappings/When_sources_are_wrong,_it_should_reject_them (0.00s)
+    --- PASS: TestImageMirroringCheckMappings/When_mirrors_belong_to_the_wrong_source,_it_should_reject_them (0.00s)
+    --- PASS: TestImageMirroringCheckMappings/When_mirror_priority_changes,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckMappings/When_a_mirror_is_dropped,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckMappings/When_a_mirror_is_duplicated,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckMappings/When_actual_mappings_are_empty,_it_should_reject_them (0.00s)
+    --- PASS: TestImageMirroringCheckMappings/When_HC_contains_repeated_mirrors,_it_should_preserve_their_multiplicity (0.00s)
+    --- PASS: TestImageMirroringCheckMappings/When_expected_mappings_are_nil,_it_should_reject_vacuous_equality (0.00s)
+    --- PASS: TestImageMirroringCheckMappings/When_expected_mappings_are_empty,_it_should_reject_vacuous_equality (0.00s)
+    --- PASS: TestImageMirroringCheckMappings/When_expected_source_is_blank,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckMappings/When_expected_mirrors_are_empty,_it_should_reject_them (0.00s)
+    --- PASS: TestImageMirroringCheckMappings/When_expected_sources_are_duplicated,_it_should_reject_them (0.00s)
+=== RUN   TestImageMirroringCheckIDMS
+=== RUN   TestImageMirroringCheckIDMS/When_the_named_IDMS_matches_with_unrelated_metadata,_it_should_accept_it
+=== RUN   TestImageMirroringCheckIDMS/When_name_is_unrelated,_it_should_reject_it
+=== RUN   TestImageMirroringCheckIDMS/When_namespace_is_nonempty,_it_should_reject_it
+=== RUN   TestImageMirroringCheckIDMS/When_worker_label_is_missing,_it_should_reject_it
+=== RUN   TestImageMirroringCheckIDMS/When_worker_label_is_wrong,_it_should_reject_it
+=== RUN   TestImageMirroringCheckIDMS/When_mappings_are_empty,_it_should_reject_them
+=== RUN   TestImageMirroringCheckIDMS/When_collection_is_nil,_it_should_reject_it
+=== RUN   TestImageMirroringCheckIDMS/When_collection_is_empty,_it_should_reject_it
+=== RUN   TestImageMirroringCheckIDMS/When_target_is_nil,_it_should_reject_it
+=== RUN   TestImageMirroringCheckIDMS/When_multiple_targets_exist,_it_should_reject_them
+--- PASS: TestImageMirroringCheckIDMS (0.00s)
+    --- PASS: TestImageMirroringCheckIDMS/When_the_named_IDMS_matches_with_unrelated_metadata,_it_should_accept_it (0.00s)
+    --- PASS: TestImageMirroringCheckIDMS/When_name_is_unrelated,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckIDMS/When_namespace_is_nonempty,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckIDMS/When_worker_label_is_missing,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckIDMS/When_worker_label_is_wrong,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckIDMS/When_mappings_are_empty,_it_should_reject_them (0.00s)
+    --- PASS: TestImageMirroringCheckIDMS/When_collection_is_nil,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckIDMS/When_collection_is_empty,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckIDMS/When_target_is_nil,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckIDMS/When_multiple_targets_exist,_it_should_reject_them (0.00s)
+=== RUN   TestImageMirroringCheckConfigMap
+=== RUN   TestImageMirroringCheckConfigMap/When_the_payload_matches,_it_should_allow_unrelated_metadata_and_data
+=== RUN   TestImageMirroringCheckConfigMap/When_YAML_key_order_and_formatting_differ,_it_should_accept_them
+=== RUN   TestImageMirroringCheckConfigMap/When_CM_name_is_wrong,_it_should_reject_it
+=== RUN   TestImageMirroringCheckConfigMap/When_CM_namespace_is_wrong,_it_should_reject_it
+=== RUN   TestImageMirroringCheckConfigMap/When_core_label_is_missing,_it_should_reject_it
+=== RUN   TestImageMirroringCheckConfigMap/When_core_label_is_wrong,_it_should_reject_it
+=== RUN   TestImageMirroringCheckConfigMap/When_config_is_missing,_it_should_reject_it
+=== RUN   TestImageMirroringCheckConfigMap/When_config_is_empty,_it_should_reject_it
+=== RUN   TestImageMirroringCheckConfigMap/When_YAML_is_malformed,_it_should_retry_with_decode_diagnostics
+=== RUN   TestImageMirroringCheckConfigMap/When_kind_is_wrong,_it_should_reject_it
+=== RUN   TestImageMirroringCheckConfigMap/When_API_version_is_wrong,_it_should_reject_it
+=== RUN   TestImageMirroringCheckConfigMap/When_GVK_is_absent,_it_should_reject_it
+=== RUN   TestImageMirroringCheckConfigMap/When_payload_name_is_wrong,_it_should_reject_it
+=== RUN   TestImageMirroringCheckConfigMap/When_payload_namespace_is_nonempty,_it_should_reject_it
+=== RUN   TestImageMirroringCheckConfigMap/When_payload_worker_label_is_wrong,_it_should_reject_it
+=== RUN   TestImageMirroringCheckConfigMap/When_payload_worker_label_is_missing,_it_should_reject_it
+=== RUN   TestImageMirroringCheckConfigMap/When_payload_spec_is_empty,_it_should_reject_it
+=== RUN   TestImageMirroringCheckConfigMap/When_payload_mappings_are_wrong,_it_should_reject_them
+=== RUN   TestImageMirroringCheckConfigMap/When_collection_is_nil,_it_should_reject_it
+=== RUN   TestImageMirroringCheckConfigMap/When_collection_is_empty,_it_should_reject_it
+=== RUN   TestImageMirroringCheckConfigMap/When_target_is_nil,_it_should_reject_it
+=== RUN   TestImageMirroringCheckConfigMap/When_multiple_targets_exist,_it_should_reject_them
+=== RUN   TestImageMirroringCheckConfigMap/When_namespace_is_empty,_it_should_reject_it
+--- PASS: TestImageMirroringCheckConfigMap (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_the_payload_matches,_it_should_allow_unrelated_metadata_and_data (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_YAML_key_order_and_formatting_differ,_it_should_accept_them (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_CM_name_is_wrong,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_CM_namespace_is_wrong,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_core_label_is_missing,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_core_label_is_wrong,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_config_is_missing,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_config_is_empty,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_YAML_is_malformed,_it_should_retry_with_decode_diagnostics (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_kind_is_wrong,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_API_version_is_wrong,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_GVK_is_absent,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_payload_name_is_wrong,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_payload_namespace_is_nonempty,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_payload_worker_label_is_wrong,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_payload_worker_label_is_missing,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_payload_spec_is_empty,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_payload_mappings_are_wrong,_it_should_reject_them (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_collection_is_nil,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_collection_is_empty,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_target_is_nil,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_multiple_targets_exist,_it_should_reject_them (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_namespace_is_empty,_it_should_reject_it (0.00s)
+=== RUN   TestImageMirroringGetIDMS
+=== RUN   TestImageMirroringGetIDMS/When_the_exact_hosted_IDMS_exists,_it_should_return_the_observed_singleton
+=== RUN   TestImageMirroringGetIDMS/When_IDMS_is_absent,_it_should_preserve_NotFound
+=== RUN   TestImageMirroringGetIDMS/When_only_an_unrelated_IDMS_exists,_it_should_preserve_NotFound
+=== RUN   TestImageMirroringGetIDMS/When_API_fails,_it_should_preserve_the_error
+--- PASS: TestImageMirroringGetIDMS (0.38s)
+    --- PASS: TestImageMirroringGetIDMS/When_the_exact_hosted_IDMS_exists,_it_should_return_the_observed_singleton (0.37s)
+    --- PASS: TestImageMirroringGetIDMS/When_IDMS_is_absent,_it_should_preserve_NotFound (0.00s)
+    --- PASS: TestImageMirroringGetIDMS/When_only_an_unrelated_IDMS_exists,_it_should_preserve_NotFound (0.00s)
+    --- PASS: TestImageMirroringGetIDMS/When_API_fails,_it_should_preserve_the_error (0.00s)
+=== RUN   TestImageMirroringGetConfigMap
+=== RUN   TestImageMirroringGetConfigMap/When_the_exact_HCP_ConfigMap_exists,_it_should_return_its_payload
+=== RUN   TestImageMirroringGetConfigMap/When_ConfigMap_is_absent,_it_should_preserve_NotFound
+=== RUN   TestImageMirroringGetConfigMap/When_only_a_wrong_namespace_ConfigMap_exists,_it_should_preserve_NotFound
+=== RUN   TestImageMirroringGetConfigMap/When_only_an_unrelated_ConfigMap_exists,_it_should_preserve_NotFound
+=== RUN   TestImageMirroringGetConfigMap/When_API_fails,_it_should_preserve_the_error
+=== RUN   TestImageMirroringGetConfigMap/When_namespace_is_empty,_it_should_fail_without_an_API_call
+--- PASS: TestImageMirroringGetConfigMap (0.02s)
+    --- PASS: TestImageMirroringGetConfigMap/When_the_exact_HCP_ConfigMap_exists,_it_should_return_its_payload (0.00s)
+    --- PASS: TestImageMirroringGetConfigMap/When_ConfigMap_is_absent,_it_should_preserve_NotFound (0.00s)
+    --- PASS: TestImageMirroringGetConfigMap/When_only_a_wrong_namespace_ConfigMap_exists,_it_should_preserve_NotFound (0.00s)
+    --- PASS: TestImageMirroringGetConfigMap/When_only_an_unrelated_ConfigMap_exists,_it_should_preserve_NotFound (0.00s)
+    --- PASS: TestImageMirroringGetConfigMap/When_API_fails,_it_should_preserve_the_error (0.00s)
+    --- PASS: TestImageMirroringGetConfigMap/When_namespace_is_empty,_it_should_fail_without_an_API_call (0.00s)
+PASS
+ok  	github.com/openshift/hypershift/test/e2e/v2/tests	3.347s

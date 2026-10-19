@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Automated tests — CNTRLPLANE-3927 verification</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topbar"><div class="brand">CNTRLPLANE-3927 · Verification report</div><nav><a href="index.html">Dashboard</a><a href="scenario-1.html">1 · Propagation</a><a href="automated-tests.html" class="active">Automated tests</a><a href="appendices.html">Appendices</a><a href="../../plans/cntrlplane-3927.md">Test plan</a><a href="https://github.com/openshift/hypershift/pull/9996">Parent PR #9996</a></nav></header>
+<main>
+<h1>Automated tests</h1>
+<p class="subtitle">Unit tests delivered with the change (TC-10), the local quality gate (TC-11) and CI on the PR (TC-12)</p>
+<table><thead><tr><th>TC</th><th>Test case</th><th>Runbook steps</th><th>Covers</th><th>Result</th><th>Key evidence</th></tr></thead><tbody>
+<tr id="tc-10"><td><b>TC-10</b></td><td>Unit tests of the helpers (manual inputs, fake clients)</td><td>—</td><td>AC1, AC2, AC3</td><td><span class="badge pass">PASS</span></td><td>6 tests / 76 subcases, 0 failures; <code>TestE2EV2</code> not executed</td></tr>
+<tr id="tc-11"><td><b>TC-11</b></td><td>Local quality gate</td><td>—</td><td>AC4</td><td><span class="badge pass">PASS</span></td><td>13 commands, all exit 0; discovery: 2 of 1149 selected, negative filter 0</td></tr>
+<tr id="tc-12"><td><b>TC-12</b></td><td>CI on the PR</td><td>—</td><td>AC4</td><td><span class="badge info">PENDING</span></td><td>PR not opened yet; recorded when it is</td></tr>
+</tbody></table>
+
+<h2 id="unit">Unit tests</h2>
+<table><thead><tr><th>Package</th><th>Command</th><th>Tests</th><th>Result</th></tr></thead><tbody>
+<tr><td><code>test/e2e/v2/tests</code> (new helpers only)</td><td><code>GO111MODULE=on GOWORK=off GOFLAGS=-mod=vendor go test -tags e2ev2 -race -count=1 -v -run '^TestImageMirroring' ./test/e2e/v2/tests</code></td>
+<td>6 tests, 76 subcases</td><td><span class="badge pass">PASS</span></td></tr>
+</tbody></table>
+<p>Run by the independent reviewer on 2026-10-16 at <code>c9ad656db6</code> (go1.26.3). Raw log:
+<a href="assets/evidence/unit-image-mirroring.log"><code>unit-image-mirroring.log</code></a>. The filter excludes <code>TestE2EV2</code>, so no
+suite setup or cluster access happens. The existing <code>make test-e2ev2-unit</code> target does not cover this package; the command above must be run
+explicitly. Coverage was not measured (the package also contains the cluster suite).</p>
+<p>Inputs are written by hand (typed objects and YAML), and expected values never come from the production converters
+(<code>globalconfig.ReconcileImageDigestMirrors</code>, the ignition serializer) or from the fixture's result builder, so the tests cannot inherit a
+producer bug. Each helper has one test:</p>
+<table><thead><tr><th>Test</th><th>What it proves</th></tr></thead><tbody>
+<tr><td><code>TestImageMirroringExpected</code></td><td>The HC input is snapshotted (deep copy) and must be non-empty and valid: no blank source or mirror, no duplicate source,
+both fixture sources present, each with a mirror whose host is exactly the fixture Route host (a shared prefix or a missing repository path fails)</td></tr>
+<tr><td><code>TestImageMirroringCheckMappings</code></td><td>Exact comparison: outer order ignored; missing, extra, duplicate or wrong sources, swapped associations, changed mirror priority,
+dropped or duplicated mirrors fail; repeated mirrors keep their multiplicity; inputs are not mutated</td></tr>
+<tr><td><code>TestImageMirroringCheckIDMS</code></td><td>Exact target identity (name <code>cluster</code>, no namespace), worker label present and correct, non-empty mappings; nil, empty,
+multi-object or nil-element collections fail</td></tr>
+<tr><td><code>TestImageMirroringCheckConfigMap</code></td><td>ConfigMap identity and core-ignition label; non-empty <code>data.config</code>; YAML decodes to a typed IDMS with explicit
+<code>config.openshift.io/v1</code>/<code>ImageDigestMirrorSet</code>, name <code>cluster</code>, no namespace, worker label and HC mappings; harmless key order,
+comments and unrelated data pass; malformed YAML, wrong kind/API/name/namespace, empty spec fail</td></tr>
+<tr><td><code>TestImageMirroringGetIDMS</code></td><td>Fake hosted client: exact key, observed singleton returned, NotFound and API errors preserved (never a synthetic object), supplied context used</td></tr>
+<tr><td><code>TestImageMirroringGetConfigMap</code></td><td>Fake management client: exact namespace and name, unrelated or wrong-namespace objects do not satisfy it, errors preserved,
+empty namespace rejected before any API call</td></tr>
+</tbody></table>
+<details><summary>All 76 subcases</summary><p class="small">76 subcases, all <code>PASS</code>, from the raw log.</p><h4><code>TestImageMirroringExpected</code> (16)</h4><ul><li>When the fixture has two sources and multiple mirrors, it should snapshot the HC input</li><li>When additional sources exist, it should retain all entries</li><li>When ICS is nil, it should reject setup</li><li>When ICS is empty, it should reject setup</li><li>When a source is blank, it should reject setup</li><li>When mirrors are empty, it should reject setup</li><li>When a mirror is blank, it should reject setup</li><li>When a source is duplicated, it should reject setup</li><li>When the real fixture source is missing, it should reject setup</li><li>When the virtual fixture source is missing, it should reject setup</li><li>When Route host is empty, it should reject setup</li><li>When Route host is wrong, it should reject setup</li><li>When a mirror only shares the host prefix, it should reject setup</li><li>When a mirror has no repository path, it should reject setup</li><li>When HC is nil, it should reject setup without panic</li><li>When Route is nil, it should reject setup without panic</li></ul><h4><code>TestImageMirroringCheckMappings</code> (17)</h4><ul><li>When mappings match, it should accept ordered mirrors</li><li>When outer entries are reordered, it should accept them</li><li>When an entry is missing, it should reject it</li><li>When an entry is extra, it should reject it</li><li>When sources are duplicated, it should reject them</li><li>When sources are wrong, it should reject them</li><li>When mirrors belong to the wrong source, it should reject them</li><li>When mirror priority changes, it should reject it</li><li>When a mirror is dropped, it should reject it</li><li>When a mirror is duplicated, it should reject it</li><li>When actual mappings are empty, it should reject them</li><li>When HC contains repeated mirrors, it should preserve their multiplicity</li><li>When expected mappings are nil, it should reject vacuous equality</li><li>When expected mappings are empty, it should reject vacuous equality</li><li>When expected source is blank, it should reject it</li><li>When expected mirrors are empty, it should reject them</li><li>When expected sources are duplicated, it should reject them</li></ul><h4><code>TestImageMirroringCheckIDMS</code> (10)</h4><ul><li>When the named IDMS matches with unrelated metadata, it should accept it</li><li>When name is unrelated, it should reject it</li><li>When namespace is nonempty, it should reject it</li><li>When worker label is missing, it should reject it</li><li>When worker label is wrong, it should reject it</li><li>When mappings are empty, it should reject them</li><li>When collection is nil, it should reject it</li><li>When collection is empty, it should reject it</li><li>When target is nil, it should reject it</li><li>When multiple targets exist, it should reject them</li></ul><h4><code>TestImageMirroringCheckConfigMap</code> (23)</h4><ul><li>When the payload matches, it should allow unrelated metadata and data</li><li>When YAML key order and formatting differ, it should accept them</li><li>When CM name is wrong, it should reject it</li><li>When CM namespace is wrong, it should reject it</li><li>When core label is missing, it should reject it</li><li>When core label is wrong, it should reject it</li><li>When config is missing, it should reject it</li><li>When config is empty, it should reject it</li><li>When YAML is malformed, it should retry with decode diagnostics</li><li>When kind is wrong, it should reject it</li><li>When API version is wrong, it should reject it</li><li>When GVK is absent, it should reject it</li><li>When payload name is wrong, it should reject it</li><li>When payload namespace is nonempty, it should reject it</li><li>When payload worker label is wrong, it should reject it</li><li>When payload worker label is missing, it should reject it</li><li>When payload spec is empty, it should reject it</li><li>When payload mappings are wrong, it should reject them</li><li>When collection is nil, it should reject it</li><li>When collection is empty, it should reject it</li><li>When target is nil, it should reject it</li><li>When multiple targets exist, it should reject them</li><li>When namespace is empty, it should reject it</li></ul><h4><code>TestImageMirroringGetIDMS</code> (4)</h4><ul><li>When the exact hosted IDMS exists, it should return the observed singleton</li><li>When IDMS is absent, it should preserve NotFound</li><li>When only an unrelated IDMS exists, it should preserve NotFound</li><li>When API fails, it should preserve the error</li></ul><h4><code>TestImageMirroringGetConfigMap</code> (6)</h4><ul><li>When the exact HCP ConfigMap exists, it should return its payload</li><li>When ConfigMap is absent, it should preserve NotFound</li><li>When only a wrong namespace ConfigMap exists, it should preserve NotFound</li><li>When only an unrelated ConfigMap exists, it should preserve NotFound</li><li>When API fails, it should preserve the error</li><li>When namespace is empty, it should fail without an API call</li></ul></details>
+
+<h2 id="gate">Local quality gate</h2>
+<p>Re-run independently by the reviewer (<a href="appendices.html#d-independent-reviews">appendix D</a>) on 2026-10-16 at <code>c9ad656db6</code>,
+clean tree, from the repository root. Every command exited 0
+(<a href="assets/evidence/local-gate/exit-codes.txt">exit codes</a>; logs in <code>assets/evidence/local-gate/</code>).</p>
+<table><thead><tr><th>Gate</th><th>Command</th><th>Result</th><th>Log</th></tr></thead><tbody>
+<tr><td>Unit (V1)</td><td>see above</td><td>6 tests, 76 subcases</td><td><a href="assets/evidence/local-gate/v1.log">v1.log</a></td></tr>
+<tr><td>Compile (V2)</td><td><code>make e2ev2</code></td><td><code>bin/test-e2e-v2</code> built</td><td><a href="assets/evidence/local-gate/v2.log">v2.log</a></td></tr>
+<tr><td>Analyzer (V3)</td><td><code>(cd hack/tools &amp;&amp; go test -race -count=1 ./hypershiftlinter/analyzers/e2eutilallowlist)</code></td><td>PASS (the one-symbol <code>WithoutConditionDump</code> allowlist entry)</td><td><a href="assets/evidence/local-gate/v3-analyzer.log">v3-analyzer.log</a></td></tr>
+<tr><td>Lint tools (V3)</td><td><code>make hack/tools/bin/golangci-lint hack/tools/bin/hypershiftlinter.so</code></td><td>built</td><td><a href="assets/evidence/local-gate/v3-tools.log">v3-tools.log</a></td></tr>
+<tr><td>Lint (V3)</td><td><code>hack/tools/bin/golangci-lint run --config ./.golangci.yml --modules-download-mode=readonly ./test/e2e/v2/tests/...</code></td><td>0 issues (unused-exclusion warnings only)</td><td><a href="assets/evidence/local-gate/v3-lint.log">v3-lint.log</a></td></tr>
+<tr><td>Discovery (V4)</td><td><code>bin/test-e2e-v2 --ginkgo.dry-run --ginkgo.v --ginkgo.label-filter='lifecycle &amp;&amp; image-mirroring'</code></td><td>2 of 1149: both new specs, labels <code>[lifecycle, image-mirroring]</code>, not Informing</td><td><a href="assets/evidence/local-gate/v4-positive.log">v4-positive.log</a></td></tr>
+<tr><td>Discovery (V4)</td><td><code>bin/test-e2e-v2 --ginkgo.dry-run --ginkgo.v --ginkgo.label-filter='image-mirroring &amp;&amp; !lifecycle'</code></td><td>0 of 1149</td><td><a href="assets/evidence/local-gate/v4-negative.log">v4-negative.log</a></td></tr>
+<tr><td>Regression (V5)</td><td><code>go test -tags e2ev2 -race -count=1 ./test/e2e/v2/lifecycle/</code></td><td>PASS</td><td><a href="assets/evidence/local-gate/v5-lifecycle.log">v5-lifecycle.log</a></td></tr>
+<tr><td>Regression (V5)</td><td><code>go test -race -count=1 ./test/e2e/v2/util/mirrorregistry/...</code></td><td>PASS</td><td><a href="assets/evidence/local-gate/v5-mirrorregistry.log">v5-mirrorregistry.log</a></td></tr>
+<tr><td>Regression (V5)</td><td><code>make test-e2ev2-unit</code></td><td>PASS</td><td><a href="assets/evidence/local-gate/v5-framework.log">v5-framework.log</a></td></tr>
+<tr><td>Whitespace (V5)</td><td><code>git diff --check</code>; <code>git diff --check 8d54f7ab32 HEAD</code></td><td>clean</td><td><a href="assets/evidence/local-gate/v5-diff-check.log">v5-diff-check.log</a>, <a href="assets/evidence/local-gate/v5-committed-check.log">v5-committed-check.log</a> (empty)</td></tr>
+<tr><td>Scope (V5)</td><td><code>git diff --stat 8d54f7ab32...HEAD</code></td><td>6 files, +703</td><td><a href="assets/evidence/local-gate/v5-stat.log">v5-stat.log</a></td></tr>
+</tbody></table>
+<p class="small">All Go commands ran with <code>GO111MODULE=on GOWORK=off GOFLAGS=-mod=vendor</code>. Dry-run discovery proves selection only; the
+callbacks are not executed. The live execution of both specs is Scenario 1. The commit also passed the repository's commit hooks and
+<code>make run-gitlint</code>. The full <code>make pre-commit</code> is run before the PR is submitted.</p>
+
+<h2 id="ci">CI on the PR</h2>
+<div class="callout"><p>The implementation PR for CNTRLPLANE-3927 is not opened yet (it will be stacked on #9996). Its CI status will be recorded here.
+The new specs are opt-in: no existing job selects the <code>image-mirroring</code> variant or label, so CI on the PR compiles and lints them
+but does not run them live. The live lane is added by CNTRLPLANE-3929.</p></div>
+</main>
+<footer>
+CNTRLPLANE-3927 — e2e v2 test: imageContentSources propagation to the hosted-cluster IDMS and the ignition ConfigMap ·
+commit <code>c9ad656db6</code> on <a href="https://github.com/openshift/hypershift/pull/9996">openshift/hypershift#9996</a> · report date 2026-10-19.<br>
+All evidence is sanitized (cluster names, domains, AWS identifiers and local paths replaced; see
+<a href="appendices.html#e-sanitization">appendix E</a>). Cluster commands were run by a human; runbooks, scripts,
+the independent reviews and this report were prepared with AI assistance (see appendix F).
+</footer>
+</body>
+</html>

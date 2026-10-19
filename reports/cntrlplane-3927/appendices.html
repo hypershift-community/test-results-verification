@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Appendices — CNTRLPLANE-3927 verification</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topbar"><div class="brand">CNTRLPLANE-3927 · Verification report</div><nav><a href="index.html">Dashboard</a><a href="scenario-1.html">1 · Propagation</a><a href="automated-tests.html">Automated tests</a><a href="appendices.html" class="active">Appendices</a><a href="../../plans/cntrlplane-3927.md">Test plan</a><a href="https://github.com/openshift/hypershift/pull/9996">Parent PR #9996</a></nav></header>
+<main>
+<h1>Appendices</h1>
+<p class="subtitle">Traceability, environment, design decisions, independent reviews, sanitization, and how the report was produced</p>
+<ul>
+  <li><a href="#a-traceability">A. Traceability: which code was tested</a></li>
+  <li><a href="#b-environment">B. Environment</a></li>
+  <li><a href="#c-design-decisions">C. Source contract and design decisions (D1–D10)</a></li>
+  <li><a href="#d-independent-reviews">D. Independent reviews (code and live evidence)</a></li>
+  <li><a href="#e-sanitization">E. Sanitization and placeholders</a></li>
+  <li><a href="#f-provenance">F. Provenance, AI assistance and glossary</a></li>
+  <li><a href="#kit-changes">G. Kit changes (evidence vs. reproduction kit)</a></li>
+  <li><a href="#h-follow-ups">H. Follow-ups</a></li>
+</ul>
+
+<h2 id="a-traceability">A. Traceability: which code was tested</h2>
+<p>Everything in this report ran at one commit, <code>c9ad656db6</code>, whose parent is the head of
+<a href="https://github.com/openshift/hypershift/pull/9996">#9996</a> (<code>8d54f7ab32</code>). There was no rebase between the tests and this report:</p>
+<table><thead><tr><th>Evidence</th><th>Commit</th><th>How it is tied to the commit</th></tr></thead><tbody>
+<tr><td>Scenario 1 (live)</td><td><code>c9ad656db6</code></td><td>step 0: <code>git status --short</code> empty, <code>git log</code> = <code>c9ad656db6</code>; every binary built with
+<code>commitHash=c9ad656db618…</code>; <code>hypershift version</code> prints the same hash</td></tr>
+<tr><td>Unit tests and gate</td><td><code>c9ad656db6</code></td><td>independent review: tested HEAD <code>c9ad656db618…</code>, clean tree, no untracked files</td></tr>
+<tr><td>Parent</td><td><code>8d54f7ab32</code></td><td>#9996 open and unchanged on 2026-10-19 (same head as when the plan was written)</td></tr>
+</tbody></table>
+<details class="output"><summary>Full output (<code>git log</code>, <code>git diff --stat</code>, PR state, commit message)</summary><pre tabindex="0"><code>$ git log --oneline -3 c9ad656db6
+c9ad656db6 test(e2e): verify image mirroring propagation through independent paths
+8d54f7ab32 ci: run mirror registry fixture unit tests in other shard
+64ca1b82a7 test(e2e): wire opt-in AWS image mirroring lifecycle
+
+$ git rev-parse c9ad656db6 c9ad656db6^
+c9ad656db618ee953923cb5f8ec91e3566885d95
+8d54f7ab3249ddf01777824b35a60e1025d72972
+
+$ git diff --stat 8d54f7ab3249ddf01777824b35a60e1025d72972 c9ad656db6
+ .../analyzers/e2eutilallowlist/e2eutilallowlist.go |   1 +
+ .../openshift/hypershift/test/e2e/util/util.go     |   4 +
+ .../testdata/src/test/e2e/v2/good/good_test.go     |   1 +
+ .../hosted_cluster_image_mirroring_helpers.go      | 166 ++++++++
+ .../hosted_cluster_image_mirroring_helpers_test.go | 444 +++++++++++++++++++++
+ .../tests/hosted_cluster_image_mirroring_test.go   |  87 ++++
+ 6 files changed, 703 insertions(+)
+
+$ gh pr view 9996 --repo openshift/hypershift --json state,headRefOid,baseRefOid,mergedAt   # 2026-10-19
+{&quot;baseRefOid&quot;:&quot;a325c5477680859a4db11886ad4ade17f548a95a&quot;,&quot;headRefOid&quot;:&quot;8d54f7ab3249ddf01777824b35a60e1025d72972&quot;,&quot;mergedAt&quot;:null,&quot;state&quot;:&quot;OPEN&quot;}
+
+$ git log -1 --format=&quot;%H%n%s%n%n%b&quot; c9ad656db6
+c9ad656db618ee953923cb5f8ec91e3566885d95
+test(e2e): verify image mirroring propagation through independent paths
+
+Detect missing or incorrect image-content-source propagation without letting
+one control plane output serve as the oracle for another.
+
+Add independent lifecycle checks for the hosted cluster IDMS and the decoded
+ignition ConfigMap policy, using nonempty fixture-backed HostedCluster input.
+Preserve mirror priority and multiplicity, require the named targets and worker
+labels, and cover invalid states and exact resource getters with unit tests.
+Allow WithoutConditionDump narrowly so polling avoids unsupported condition
+extraction while retaining useful mismatch diagnostics.
+
+Signed-off-by: Alessandro Rossi &lt;alesross@redhat.com&gt;
+Assisted-by: LLM
+
+</code></pre></details>
+<p>Raw copy: <a href="assets/evidence/traceability.txt"><code>traceability.txt</code></a>.</p>
+
+<h2 id="b-environment">B. Environment</h2>
+<table><tbody>
+<tr><th>Management cluster</th><td>OpenShift 4.20.0, a HyperShift hosted cluster on AWS used as management cluster (same topology as CI's nested management
+clusters), 5 nodes at 33–53 % memory before the run; same cluster as the CNTRLPLANE-3926 Scenario 3</td></tr>
+<tr><th>HyperShift</th><td>Operator server <code>e83d907270ba</code> (supports OCP 4.14–4.21); CLI and lifecycle binaries built from <code>c9ad656db6</code> (CLI reports "Latest supported OCP: 5.1.0")</td></tr>
+<tr><th>Hosted cluster</th><td>OCP 4.20.0 (<code>quay.io/openshift-release-dev/ocp-release:4.20.0-x86_64</code>), 1 NodePool × 2 workers (CLI default instance type,
+64 GiB gp3), kubelet v1.33.5, AWS <code>us-east-1a</code>, public endpoint; created with <code>--pods-labels</code>, <code>--toleration</code>, cleanup and
+skip-release-image-validation annotations as set by <code>create-guests</code></td></tr>
+<tr><th>Producers</th><td>CPO and HCCO image <code>quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:5491113af1d9626f249d8c61c33ca0cbe8751a534a15cf366ab5eb0bf5396aef</code>
+(release payload; no override for it in the repository)</td></tr>
+<tr><th>Fixture</th><td>CNTRLPLANE-3926 defaults; copier <code>ocp-v4.0-art-dev@sha256:0a9d58f9…</code> (<code>openshift/cli</code> ImageStream); CA subject
+<code>hypershift-e2e-mirror-registry-ca</code>; Keycloak also deployed by the AWS <code>PreCreate</code></td></tr>
+<tr><th>Lifecycle environment</th><td><code>HYPERSHIFT_PLATFORM=aws</code>, <code>HYPERSHIFT_E2E_IMAGE_MIRRORING=true</code>, <code>TEST_PLAN</code> = kit <code>test-plan.yaml</code>,
+<code>HYPERSHIFT_NODE_COUNT=2</code>, <code>GINKGO_TIMEOUT=30m</code>, no <code>--aws-creds</code> (SDK default chain, as in CI); see <code>env.sh</code></td></tr>
+<tr><th>Workstation</th><td>macOS; go1.26.3</td></tr>
+</tbody></table>
+
+<h2 id="c-design-decisions">C. Source contract and design decisions (D1–D10)</h2>
+<p>Written and agreed before implementation, from the Jira contract and the producer source at the parent commit. They define what the specs
+assert and why (for example D4: the HC spec is the only oracle; D3: fixture provenance precondition; D7: decoded payload). Both reviews audited
+the change and the evidence against them. Raw copy: <a href="assets/evidence/decisions.md"><code>decisions.md</code></a>.</p>
+<details><summary>Show the source contract and the design decisions</summary><div class="evidence"><p>Extracted verbatim from the implementation plan (sections 2–4), written before implementation and anchored to
+the parent commit <code>8d54f7ab3249ddf01777824b35a60e1025d72972</code> (openshift/hypershift#9996 head). Line numbers are
+navigation aids; symbols are authoritative. Internal workflow sections of the plan (agent assignments, models,
+handoffs) are not reproduced.</p>
+<h2 id="c-2-current-jira-contract">2. Current Jira contract</h2>
+<p><a href="https://redhat.atlassian.net/browse/CNTRLPLANE-3927">CNTRLPLANE-3927</a>, status <code>To Do</code>, updated <code>2026-10-16T07:38:29.864+0000</code>, summary: <strong>E2e test: validate IDMS propagation from imageContentSources to hosted cluster</strong>.</p>
+<p>Current description's acceptance criteria:</p>
+<ol>
+<li>Creating an HC with <code>imageContentSources</code> pointing at the in-cluster mirror results in an IDMS resource in the hosted cluster with matching mirror entries (HCCO path).</li>
+<li>That IDMS has <code>machineconfiguration.openshift.io/role: worker</code>, set by <code>ReconcileImageDigestMirrors</code>, used by CPO and HCCO.</li>
+<li>The corresponding ignition ConfigMap is created in the HCP namespace via CPO / <code>ignition.ReconcileImageSourceMirrorsIgnitionConfigFromIDMS</code>; this is a different path from AC1–2, so consider a separate <code>It</code>.</li>
+<li>Follow v2 conventions, <code>[Feature:ImageMirroring]</code>, <code>RegisterXxxTests</code>, lifecycle test; HC creation must be handled through <code>create-guests</code> or a step-registry chain.</li>
+</ol>
+<p>Additional context explicitly requests <code>e2eutil.EventuallyObjects</code>, file <code>test/e2e/v2/tests/hosted_cluster_image_mirroring_test.go</code>, dependency on CNTRLPLANE-3926. Jira line numbers are stale: use the inspected symbols below, not the issue's old line numbers.</p>
+<p>CNTRLPLANE-3926 was also read (updated 2026-10-14, <code>In Progress</code>). Its fixture provides registry setup/teardown, TLS, reachable address and image-content-source entries. This plan consumes the actual #9996 implementation, not the older 3926 planning document. Parent PR manual validation claims are background, <strong>not validation of 3927</strong>.</p>
+<h3 id="c-jira-minimum-versus-recommended-assertions">Jira minimum versus recommended assertions</h3>
+<ul>
+<li><strong>Required:</strong> named hosted-cluster IDMS exists, mappings correspond to HC input, worker label, named ignition ConfigMap exists in HCP namespace, discoverable v2 lifecycle registration.</li>
+<li><strong>Recommended stronger assertions, requiring approval:</strong> exact mappings (no extra/dropped entries in the managed IDMS); fixture provenance preconditions; decoded ConfigMap payload is the intended IDMS with matching mappings and worker label; core-ignition label on the ConfigMap. These catch stale/wrong/empty objects which existence alone would accept.</li>
+<li><strong>Not proposed:</strong> owner-reference assertion, equality of complete metadata, byte-for-byte YAML, <code>mirrorSourcePolicy</code>/fallback policy, actual node consumption of ignition. Do not imply AC3 proves node configuration or successful image pulls.</li>
+</ul>
+<h2 id="c-3-source-verified-contract-and-reference-index">3. Source-verified contract and reference index</h2>
+<p>All source references below are anchored to <code>8d54f7ab3249ddf01777824b35a60e1025d72972</code>. Line numbers are navigation aids; symbols are authoritative.</p>
+<table>
+<thead>
+<tr>
+<th>Ref</th>
+<th>Inspected source and finding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S1</td>
+<td><code>test/e2e/v2/lifecycle/platform.go: NewPlatformConfig</code>, <code>AWSPlatformOptions</code>; <code>aws.go: ClusterSpecs, PreCreate, setupImageMirroring, TestMatrix, SetupTestEnv</code>. <code>HYPERSHIFT_E2E_IMAGE_MIRRORING</code> opt-in supplies <code>ImageMirroring</code>; only then is variant <code>image-mirroring</code> offered. <code>PreCreate</code> calls the setup hook. Default matrix does <strong>not</strong> select this variant or feature.</td>
+</tr>
+<tr>
+<td>S2</td>
+<td><code>test/e2e/v2/lifecycle/aws.go:175–208</code>: fixture options only supply <code>CopierImage</code>; defaults therefore select namespace <code>test-mirror-registry</code>, name <code>mirror-registry</code>. Requests the pinned <code>mirrorregistry.DefaultRegistryImage</code> twice: real source <code>quay.io/libpod/registry</code>, virtual source <code>mirror-source.hypershift-e2e.invalid/libpod/registry</code>. Setup is bounded by 20 minutes.</td>
+</tr>
+<tr>
+<td>S3</td>
+<td><code>test/e2e/v2/util/mirrorregistry/api.go: constants, Options, Result</code>; <code>registry.go: Setup, buildResult</code> (396–447). Result contains public Route host, internal Service host, CA, image refs and ICS. <code>buildResult</code> deduplicates mirrors, sorts source entries and mirrors. It is fixture output, <strong>not the expected-output generator for the new tests</strong>.</td>
+</tr>
+<tr>
+<td>S4</td>
+<td><code>test/e2e/v2/lifecycle/mirrorregistry.go: cliImage, writeMirrorRegistryResult</code>: reads management <code>openshift/cli</code> resolved latest digest; writes <code>mirror-registry-ca.pem</code>, <code>mirror-registry-ics.yaml</code>, <code>mirror-registry.json</code> under <code>SHARED_DIR</code>; JSON excludes CA. <code>ClusterSpecs</code> passes CA and ICS paths through the existing CLI flags. No test-time JSON-path environment bridge currently exists; <code>SetupTestEnv</code> only handles external OIDC.</td>
+</tr>
+<tr>
+<td>S5</td>
+<td><code>test/e2e/v2/cmd/create-guests/main.go: run</code> (143–277), <code>buildCreateArgs</code>, scheme init. Resolves/validates <code>TEST_PLAN</code>, filters variants, writes identity manifest, invokes <code>PreCreate</code> before creation, then waits for Available and version rollout. Scheme includes route/config/image/batch APIs. <code>cmd/cluster/core/create.go: applyTrustBundleAndImageSources</code> (620–660) reads ICS YAML into <code>prototype.Cluster.Spec.ImageContentSources</code>; CA gets a separate <code>user-ca-bundle</code> ConfigMap/reference.</td>
+</tr>
+<tr>
+<td>S6</td>
+<td><code>hypershift-operator/controllers/hostedcluster/hostedcluster_controller.go: reconcileHostedControlPlane</code> (2954 onward, especially 3035) assigns HC ICS to HCP ICS. Use HC as expected input, <strong>not HCP as the oracle</strong>, so HO propagation errors remain detectable.</td>
+</tr>
+<tr>
+<td>S7</td>
+<td><code>control-plane-operator/hostedclusterconfigoperator/controllers/resources/resources.go: reconcileImageContentPolicyType</code> (3430–3449), called around 1182. HCCO reconciles IDMS using its hosted-cluster <code>r.client</code>. <code>support/globalconfig/imagecontentsource.go: ImageDigestMirrorSet</code> (45), <code>ReconcileImageDigestMirrors</code> (67): cluster-scoped name <code>cluster</code>, worker label, one output entry per HCP input, copying Source and ordered Mirrors.</td>
+</tr>
+<tr>
+<td>S8</td>
+<td><code>control-plane-operator/controllers/hostedcontrolplane/hostedcontrolplane_controller.go: reconcileCoreIgnitionConfig</code> (2423–2480). Uses CPO's management client. <code>ignition.NewIgnitionConfigParams</code> sets <code>HasImageMirrorPolicies = len(hcp.Spec.ImageContentSources)&gt;0</code>; empty input deletes the ignition CM. Otherwise constructs an IDMS <strong>in memory</strong>, then serializes it via <code>ReconcileImageSourceMirrorsIgnitionConfigFromIDMS</code>. This is not a management-cluster IDMS CR.</td>
+</tr>
+<tr>
+<td>S9</td>
+<td><code>control-plane-operator/controllers/hostedcontrolplane/manifests/ignition.go: ImageContentPolicyIgnitionConfig</code> (44): <code>ignition-config-40-image-content-source</code> in HCP namespace. <code>ignition/reconcile.go: reconcileImageContentTypeIgnitionConfigMap, ReconcileIgnitionConfigMap</code> (98–143): <code>Data["config"]</code> is YAML for a <code>config.openshift.io/v1</code> <code>ImageDigestMirrorSet</code>, <strong>not Ignition JSON, a MachineConfig, registries.conf, or base64/gzip</strong>. CM label <code>hypershift.openshift.io/core-ignition-config: "true"</code>; payload name <code>cluster</code> and worker label inherited from S7.</td>
+</tr>
+<tr>
+<td>S10</td>
+<td><code>test/e2e/v2/internal/test_context.go: TestContext, GetHostedCluster, GetHostedClusterClientViaPortForward, SetupTestContextFromEnv</code>. <code>MgmtClient</code>, <code>Context</code>, <code>ClusterNamespace/Name</code>, <code>ControlPlaneNamespace</code> are supplied. HCP namespace computed with <code>pkg/manifests.HostedControlPlaneNamespace</code>; do not concatenate or hard-code it. Port-forward client uses the running KAS and localhost kubeconfig and must be closed with <code>DeferCleanup</code>.</td>
+</tr>
+<tr>
+<td>S11</td>
+<td><code>test/e2e/v2/tests/nodepool_osimagestream_test.go: RegisterNodePoolOSImageStreamLifecycleTests</code> and top-level lifecycle Describe (68); <code>hosted_cluster_pull_secret_test.go</code> lifecycle Describe (419); <code>suite_test.go: TestE2EV2, BeforeSuite, ReportAfterSuite</code>. Register through a file's top-level Describe; there is no central registry list to edit in suite setup.</td>
+</tr>
+<tr>
+<td>S12</td>
+<td><code>test/e2e/util/eventually.go: EventuallyObjects</code> (232), <code>evaluateCollectionPredicates</code>, <code>Predicate</code>, <code>defaultOptions</code>, <code>Conditions</code>. Default 10m timeout / 3s interval, immediate start; getter errors retry; predicate error terminates; false needs a nonempty reason. Empty collections can otherwise pass! IDMS and ConfigMap are <strong>not supported by Conditions</strong>.</td>
+</tr>
+<tr>
+<td>S13</td>
+<td><code>hack/tools/hypershiftlinter/analyzers/e2eutilallowlist/e2eutilallowlist.go</code>: <code>EventuallyObjects</code>, <code>Predicate</code>, <code>WithTimeout</code>, <code>WithInterval</code> allowed, but <strong><code>WithoutConditionDump</code> not allowed</strong> at this revision. Its implementation exists in S12. Narrow allowlist addition/test proposed below, not a general linter relaxation.</td>
+</tr>
+<tr>
+<td>S14</td>
+<td><code>vendor/github.com/openshift/api/config/v1/types_image_digest_mirror_set.go: ImageDigestMirrors</code> (100–142): mirrors' order expresses desired priority (not a guarantee of runtime contact order). Preserve the input mirror sequence in comparisons; ignore ordering between independent source entries.</td>
+</tr>
+<tr>
+<td>S15</td>
+<td><code>test/e2e/v2/lifecycle/testplan.go: TestPlan, Validate, FilterClusterSpecs</code>; <code>platform.go: TestGroup, TestMatrix, Validate, ResolveVariants</code>; <code>cmd/run-tests/main.go: main, runTestBinary</code>. Matrix selects variant and Ginkgo label filter; runner forwards HC identity via env and uses <code>--e2e.junit-report</code>, not Ginkgo's built-in JUnit. Matrix validates variant lane conflicts.</td>
+</tr>
+<tr>
+<td>S16</td>
+<td><code>Makefile</code> 49–58, 96–109, 407–413, 552–562; <code>.golangci.yml</code> build tags include <code>e2ev2</code>; <code>DEVELOPMENT.md</code>; <code>TESTING.md</code>; <code>test/e2e/v2/AGENTS.md</code>. Validations and conventions are expanded below.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="c-end-to-end-flow">End-to-end flow</h3>
+<p><code>HYPERSHIFT_E2E_IMAGE_MIRRORING=true</code> + external <code>TEST_PLAN</code> selecting variant
+→ <code>create-guests</code> / AWS <code>PreCreate</code>
+→ fixture Setup / public Route / returned ICS
+→ files in <code>SHARED_DIR</code>
+→ variant CLI flags
+→ HC spec (management cluster, HC namespace)
+→ HO copies to HCP spec (management cluster, <strong>HCP namespace</strong>)
+→ <strong>two independent outputs</strong>:</p>
+<ol>
+<li>HCCO → hosted-cluster config API → cluster-scoped <code>ImageDigestMirrorSet/cluster</code>.</li>
+<li>CPO → management API → <code>ConfigMap/&lt;ControlPlaneNamespace&gt;/ignition-config-40-image-content-source</code> with serialized IDMS in <code>data.config</code>.</li>
+</ol>
+<p>No fixture/lifecycle gap for creating a positive HC was found. Execution selection is intentionally opt-in and remains external to 3927; a default AWS run does not exercise this feature. No new environment variable or fixture-artifact reader is needed under the chosen contract below.</p>
+<h2 id="c-4-decisions-to-hand-to-implementers">4. Decisions to hand to implementers</h2>
+<p>These are concrete proposed choices, not claims that they are already implemented. Approve the decision set before delegation; an implementer must not substitute alternatives silently.</p>
+<table>
+<thead>
+<tr>
+<th>ID / problem</th>
+<th>Chosen behavior</th>
+<th>Evidence / rejected alternative and reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D1 — test lifecycle</td>
+<td>One feature-scoped Describe with <code>[sig-hypershift][Jira:Hypershift][Feature:ImageMirroring]</code>, Ginkgo labels <code>lifecycle</code>, <code>image-mirroring</code>; proposed registrar <code>RegisterHostedClusterImageMirroringTests(getTestCtx internal.TestContextGetter)</code>, following S11. Two independent <code>It</code>s: hosted IDMS + label; ignition CM + decoded payload. No Ordered/Serial required for these read-only assertions; no Informing label.</td>
+<td>Jira + S11. Reject creation/patching HC inside specs and combining both paths into one <code>It</code> (would hide CPO result after HCCO failure). No change to <code>suite_test.go</code> needed.</td>
+</tr>
+<tr>
+<td>D2 — missing/empty input</td>
+<td>For an explicitly selected mirroring lifecycle test, inability to get HC, nil/empty ICS, blank source, zero mirrors, blank mirror, or duplicate source is a <strong>failure with setup diagnostic</strong>, never Skip or success. Snapshot/deep-copy HC ICS once per <code>It</code>. This is a positive fixture contract, not new API validation.</td>
+<td>S2 has two nonempty distinct sources. S8 deletes CM when empty and S7 can reconcile an empty IDMS; comparing two empty values would be vacuous. Reject generic no-config Skip for this dedicated lane: it can hide broken lifecycle wiring. Default jobs exclude the label.</td>
+</tr>
+<tr>
+<td>D3 — prove mirror fixture is actually the input</td>
+<td>In each <code>It</code>, require the real and virtual source entries from S2 to be present. Read management Route <code>test-mirror-registry/mirror-registry</code> (use existing fixture default constants), require nonempty <code>spec.host</code>, and require at least one mirror in <strong>each of those two entries</strong> to have exactly that repository hostname (component before <code>/</code>, not a string-prefix match). Compare all HC entries downstream, including additional sources. No HTTP or admission re-check.</td>
+<td>S2–S4. Stronger precondition: prevents unrelated ICS from satisfying the dedicated fixture scenario. Reject hard-coded runtime hostname, merely searching <code>.invalid</code>, or reading JSON through an invented env bridge. Route observation proves configured provenance, not contents/reachability. If parent changes fixture identity/layout, re-review rather than weakening the guard.</td>
+</tr>
+<tr>
+<td>D4 — oracle / comparison</td>
+<td>Expected values are the observed HC input, checked independently against typed IDMS fields. Match independent source entries without ordering dependence, but preserve each source's mirror sequence and multiplicity. Require exact source-entry count and one-to-one correspondence; reject duplicate source entries, missing/extra entries, wrong/swapped sources or mirrors. Do not sort/mutate input slices in place. Labels: only test required keys.</td>
+<td>S6–S7, S14. Reject <code>globalconfig.ReconcileImageDigestMirrors</code>, ignition serializer, fixture <code>buildResult</code>, or equality between the two observed outputs to generate expected values (circular or correlated-bug tests). Reject sorting mirrors away (priority lost), flattening pairs to sets (association/duplicates lost), or comparing entire objects (irrelevant defaults/metadata).</td>
+</tr>
+<tr>
+<td>D5 — object selection</td>
+<td>GET the exact named IDMS on a hosted-cluster client, no namespace; GET exact CM on <code>tc.MgmtClient</code> in <code>tc.ControlPlaneNamespace</code>. Adapt each getter to the <code>EventuallyObjects</code> collection interface with a singleton on success and no synthetic object on error. Explicit group predicate requires exactly one nonnil, correctly identified target; per-object predicates verify content.</td>
+<td>S7, S9–S12. Reject LIST-all with worker selector, taking first object, or “any matching IDMS”: unrelated resources can mask a missing managed target, and label selector would hide label loss. Never treat NotFound as successful observation.</td>
+</tr>
+<tr>
+<td>D6 — client lifecycle / independence</td>
+<td>Both specs obtain HC through <code>tc.GetHostedCluster()</code> and use <code>tc.Context</code>. Only the hosted-IDMS spec opens <code>tc.GetHostedClusterClientViaPortForward(hc)</code>, immediately registers <code>DeferCleanup(client.Close)</code>, and polls that client. CM spec must not depend on port-forward setup or success of the first spec.</td>
+<td>S10. Reject shared BeforeEach that opens hosted client for both, and direct hosted API assumptions (AWS variant need not be publicly reachable from runner). No new credentials/context framework.</td>
+</tr>
+<tr>
+<td>D7 — ignition assertion depth</td>
+<td>Require named CM and <code>hypershift.openshift.io/core-ignition-config="true"</code>, nonempty <code>Data["config"]</code>, successful YAML decoding to typed IDMS, explicit GVK <code>config.openshift.io/v1</code>, kind <code>ImageDigestMirrorSet</code>, payload name <code>cluster</code>, empty namespace, worker role and D4 mappings against HC. Allow unrelated CM data/metadata; do not demand exact serialized bytes or unknown-field rejection.</td>
+<td>S8–S9. Jira only requires existence; stronger checks prove it is the corresponding usable policy rather than an empty/stale FIPS/SSH payload. Reject parsing as MachineConfig/Ignition JSON or searching substrings (can accept wrong type/content).</td>
+</tr>
+<tr>
+<td>D8 — async state / errors</td>
+<td>Use <code>EventuallyObjects(GinkgoTB(), tc.Context, ...)</code> independently for each target, explicit 10m cap / 3s interval (existing defaults, S12). Fetch anew each poll with poll context. Missing/wrong observed state, including incomplete/malformed CM payload, returns false + diagnostic reason and can converge; setup expectation errors fail before polling. API errors returned from getter retry under helper's policy, remain visible and timeout. No sleeps/startup waits, no polling for nodes.</td>
+<td>Jira + S12 supersede general stateless-test advice for this propagation lifecycle case. Reject immediate asserts on asynchronously produced objects; reject fatal mismatch on first observation. Do not modify shared polling behavior to classify API errors.</td>
+</tr>
+<tr>
+<td>D9 — diagnostics and linter gap</td>
+<td>Use <code>WithoutConditionDump()</code> for both waits, with <strong>one-symbol</strong> allowlist addition and analyzer test (S13). Predicates report expected/actual source mappings, label values, payload type/name or YAML error, with object identity. Include HC namespace/name and target location in objectives/log context; report fixture/HC precondition errors explicitly. Do not dump kubeconfigs, secrets, whole HC specs or pull secrets.</td>
+<td>S12 Conditions lacks these object types; default dumping adds spurious errors. Reject copying polling implementation or disabling lint. The allowlist addition is a small explicit framework-support change requiring approval.</td>
+</tr>
+<tr>
+<td>D10 — scope of registration/filtering</td>
+<td>Keep feature out of default matrix. Future external plan selects <code>variant: image-mirroring</code>, <code>labelFilter: "lifecycle &amp;&amp; image-mirroring"</code>. Do not add blanket AWS skip/version skip: tests are selected by preconditions, and producing logic is not AWS-specific (fixture provisioning currently is). Dedicated lane must report <strong>two executed passing specs</strong>, not just exit 0.</td>
+<td>S1, S11, S15. Reject assuming textual <code>[Feature:ImageMirroring]</code> is a Ginkgo decorator label, and changing CI/default plans in 3927.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Non-vacuity summary:</strong> nonempty fixture-backed input before any comparison; exact named GET rather than arbitrary/list match; collection cardinality predicate; both mappings and labels observed on real IDMS; nonempty typed payload observed on real CM; each path independently executed; combined gate requires two non-skipped specs. A successful unit comparison or Ginkgo dry-run is not a propagation pass.</p></div></details>
+
+<h2 id="d-independent-reviews">D. Independent reviews (code and live evidence)</h2>
+<h3 id="d-r1">D.1 Code review and local gate (before the live run)</h3>
+<p>A fresh session, separate from the implementation, read the complete change against the parent, audited D1–D10 and the locally checkable part of
+every AC, and re-ran the whole local gate (<a href="automated-tests.html#gate">automated tests</a>). It made no source edits and no cluster calls.
+Verdict: <b>no findings</b>; "LOCAL GATE PASS; LIVE ACCEPTANCE UNVERIFIED" because the live run had not happened yet. Scenario 1 supplies that missing
+live evidence. Raw copy: <a href="assets/evidence/review-R1.md"><code>review-R1.md</code></a>.</p>
+<details><summary>Show the code review</summary><div class="evidence"><h2 id="d-r1-verdict">Verdict</h2>
+<p><strong>LOCAL GATE PASS; LIVE ACCEPTANCE UNVERIFIED.</strong></p>
+<p>No blocking or nonblocking source defects identified in the complete incremental change. D1–D10 and the locally inspectable portions of all four ACs are satisfied. V1–V5 were independently rerun against the completed tree; every command exited 0. This is not an overall/live AC pass: no V6 evidence was supplied or collected, and dry-run does not execute propagation assertions.</p>
+<p><strong>To the same I1 implementer:</strong> no source remediation is requested. Retain the live-acceptance qualification. Actual acceptance requires separately authorized V6 evidence of both executed, non-skipped, non-informing passing specs and their observed resources. No new helper-agent assignment is needed.</p>
+<h2 id="d-r1-reviewed-snapshot-and-complete-scope">Reviewed snapshot and complete scope</h2>
+<ul>
+<li>Checkout: <code>~/hypershift</code>.</li>
+<li>Branch: <code>CNTRLPLANE-3927</code>.</li>
+<li>Tested HEAD: <code>c9ad656db618ee953923cb5f8ec91e3566885d95</code>.</li>
+<li>Its direct parent: <code>8d54f7ab3249ddf01777824b35a60e1025d72972</code> (the requested review base).</li>
+<li>Before and after validation: clean tracked working tree; empty staged and working diffs; <code>git ls-files --others --exclude-standard</code> returned no files. There are no untracked source files to omit. The implementation report's earlier untracked state is explicitly historical; its authorized-commit update agrees with the actual snapshot.</li>
+<li>Read <code>plan.md</code> and <code>implementation.md</code>, repository development/testing guidance, v2 guidance and Effective Go skill. Read all three new source files in full and every analyzer diff. Parent-to-HEAD is six files / 703 insertions, not the underlying 3926 fixture change.</li>
+</ul>
+<p>Complete reviewed inventory (paths relative to root):</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Scope</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>test/e2e/v2/tests/hosted_cluster_image_mirroring_test.go:1–87</code></td>
+<td>New feature registration and two independent specs</td>
+</tr>
+<tr>
+<td><code>test/e2e/v2/tests/hosted_cluster_image_mirroring_helpers.go:1–166</code></td>
+<td>Six private helpers</td>
+</tr>
+<tr>
+<td><code>test/e2e/v2/tests/hosted_cluster_image_mirroring_helpers_test.go:1–444</code></td>
+<td>Six ordinary tests, 76 subcases</td>
+</tr>
+<tr>
+<td><code>hack/tools/hypershiftlinter/analyzers/e2eutilallowlist/e2eutilallowlist.go:42</code></td>
+<td>Only <code>WithoutConditionDump</code> added</td>
+</tr>
+<tr>
+<td><code>hack/tools/hypershiftlinter/analyzers/e2eutilallowlist/testdata/src/test/e2e/v2/good/good_test.go:18</code></td>
+<td>Allowed-symbol exercise</td>
+</tr>
+<tr>
+<td><code>hack/tools/hypershiftlinter/analyzers/e2eutilallowlist/testdata/src/github.com/openshift/hypershift/test/e2e/util/util.go:10–12</code></td>
+<td>Isolated analyzer fixture stub</td>
+</tr>
+</tbody>
+</table>
+<p>The stub is a justified narrow addition to the plan's listed files: analysistest resolves this stand-in package, so the good fixture needs the symbol there. It does not broaden runtime behavior or the allowlist. No production, fixture, lifecycle configuration, suite, CI, or default matrix changes exist.</p>
+<h2 id="d-r1-findings-and-d1d10-audit">Findings and D1–D10 audit</h2>
+<p><strong>Findings: none requiring fixes.</strong> The following file:line references record the contract checks rather than invented defects. In this table, <code>spec</code> means <code>test/e2e/v2/tests/hosted_cluster_image_mirroring_test.go</code>; <code>helpers</code> means <code>test/e2e/v2/tests/hosted_cluster_image_mirroring_helpers.go</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Decision</th>
+<th>Assessment and source evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D1</td>
+<td>PASS — <code>spec:27–87</code>: registrar, feature-scoped Describe, lifecycle/image-mirroring decorators, two ordinary independent Its at 28 and 57. Runtime context acquisition, no creation/mutation, Ordered, Serial or Informing.</td>
+</tr>
+<tr>
+<td>D2</td>
+<td>PASS — <code>helpers:31–73</code>, <code>spec:31–36,60–65</code>: missing HC is an assertion failure; nil/empty ICS, blank sources/mirrors, zero mirrors and duplicate sources are rejected. Each It obtains its own HC and deep-copied ICS snapshot. No Skip.</td>
+</tr>
+<tr>
+<td>D3</td>
+<td>PASS — <code>spec:33–36,62–65</code>, <code>helpers:51–70</code>: management GET of the default fixture Route; nonempty host; both real and virtual sources required; exact hostname component equality plus repository path, not prefix matching. Additional HC entries retained. No fixture output generator or invented artifact bridge.</td>
+</tr>
+<tr>
+<td>D4</td>
+<td>PASS — <code>helpers:108–138</code>: independent HC oracle, exact source count and source-to-mirror association, one-to-one matching by deleting consumed source keys. Duplicate actual sources fail even when length matches. Only outer entry order is ignored; mirror order and multiplicity are retained via ordered slice equality. No mutation/sorting of inputs or production converters.</td>
+</tr>
+<tr>
+<td>D5</td>
+<td>PASS — <code>helpers:75–92</code>, <code>spec:43–52,70–79</code>: exact GET <code>ImageDigestMirrorSet/cluster</code> with empty namespace through hosted client; exact management CM in <code>tc.ControlPlaneNamespace</code>. Successful GET returns only the observed singleton; errors return no synthetic object. Group predicates explicitly reject empty/multiple/nil/wrong-identity targets. No LIST/label selection.</td>
+</tr>
+<tr>
+<td>D6</td>
+<td>PASS — <code>spec:28–82</code>: only first It creates port-forwarded hosted client and immediately registers Close after the error assertion (<code>38–40</code>). Second It uses only management client, independently gets HC/Route and never reads the first output. Both use tc.Context, and poll getters use their supplied context.</td>
+</tr>
+<tr>
+<td>D7</td>
+<td>PASS — <code>helpers:140–166</code> plus <code>94–106</code>: exact CM identity/core label; nonempty config; typed YAML IDMS decoding; explicit API version/kind; payload name, empty namespace, worker label and HC mappings. Allows unrelated metadata/data and formatting, not raw YAML equality or substring validation.</td>
+</tr>
+<tr>
+<td>D8</td>
+<td>PASS — <code>spec:41–54,68–81</code>: separate EventuallyObjects calls with explicit 10m/3s, fresh GETs, WithoutConditionDump. Observed mismatches/decode errors return false, nonempty reason, nil error, so they can converge; input setup failures precede polling. Existing <code>test/e2e/util/eventually.go:232–350</code> retries/logs getter errors and fails on timeout.</td>
+</tr>
+<tr>
+<td>D9</td>
+<td>PASS — <code>helpers:68,100–110,145–164</code>, <code>spec:32,36,39,42,61,65–69</code>: actionable identity/setup/expected-versus-actual diagnostics; no secrets or kubeconfigs dumped. Narrow allowlist and analyzer test pass. Both waits disable unsupported condition extraction, not assertions.</td>
+</tr>
+<tr>
+<td>D10</td>
+<td>PASS — <code>spec:85–87</code>: actual Ginkgo labels, no skip/platform/version masking. Existing AWS matrix remains unchanged and excludes this feature. V4 selects exactly two feature specs and zero under the negative filter. Live execution of both remains unverified.</td>
+</tr>
+</tbody>
+</table>
+<p>Producer/framework cross-checks: <code>support/globalconfig/imagecontentsource.go:45–87</code> establishes named IDMS, worker label and ordered copies; <code>hypershift-operator/controllers/hostedcluster/hostedcluster_controller.go:2954–3082</code> copies HC input to HCP; HCCO <code>controllers/resources/resources.go:3430–3448</code> reconciles hosted IDMS. CPO <code>hostedcontrolplane_controller.go:2423–2480</code> independently builds in-memory IDMS and serializes the ignition CM. <code>ignition/reconcile.go:98–143</code> confirms YAML in <code>data.config</code>, and <code>manifests/ignition.go:44–51</code> confirms the exact CM name. <code>test/e2e/v2/internal/test_context.go:54–70,159–257</code> confirms management HC lookup, hosted API client and cleanup contract. <code>lifecycle/aws.go:175–208</code> and <code>util/mirrorregistry/api.go:13–28</code> agree with the fixture source and Route identity checks. These existing producers are not used to generate test expectations.</p>
+<h2 id="d-r1-ac-coverage-and-limits">AC coverage and limits</h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Local coverage</th>
+<th>Remaining acceptance evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AC1 — fixture HC → matching hosted IDMS</td>
+<td>D2–D6; spec first It; input/mapping/getter adversarial unit tests</td>
+<td>Actual fixture-backed HC and hosted IDMS plus first executed testcase (V6)</td>
+</tr>
+<tr>
+<td>AC2 — worker role</td>
+<td><code>helpers:102–104</code>; absent/wrong-label negatives; not used as a selection filter</td>
+<td>Observed hosted IDMS label in V6</td>
+</tr>
+<tr>
+<td>AC3 — independent ignition CM</td>
+<td>Second It, management exact key and typed payload/labels/mappings; no dependency on hosted client</td>
+<td>Real HCP-namespace CM and second executed testcase (V6)</td>
+</tr>
+<tr>
+<td>AC4 — v2/lifecycle registration and creation path</td>
+<td>Requested filename/registrar/feature annotation; two discovery results; existing 3926 lifecycle setup reused without changes</td>
+<td>Authorized create-guests/step-chain invocation and actual selected lifecycle execution</td>
+</tr>
+<tr>
+<td>Jira EventuallyObjects requirement</td>
+<td>Both independent waits use the required helper and exact cardinality</td>
+<td>Actual convergence behavior remains V6</td>
+</tr>
+</tbody>
+</table>
+<p>The six helpers each have a corresponding TestImageMirroring function. Manual typed fixtures/YAML avoid circular production expectations. Cases cover empty/invalid setup, exact Route provenance, input immutability, missing/extra/duplicate/wrong sources, swapped associations, reordered/dropped/duplicated mirrors, repeated-mirror multiplicity, wrong labels/identities, malformed/wrong/empty payload, unrelated metadata/formatting, exact getter contexts/keys, NotFound and injected API failures. Registrar callbacks are compiled/discovered, not executed by ordinary unit tests; this is intentional and is not live coverage.</p>
+<h2 id="d-r1-independent-validation-evidence">Independent validation evidence</h2>
+<p>All commands below were rerun from the checkout root on the SHA above. Environment: <code>go version go1.26.3 darwin/arm64</code>. Every command exited <strong>0</strong>. Logs and matching numeric <code>.exit</code> files are in <code>.work/cntrlplane-3927/review-evidence/</code>; these are reviewer results, not reused I1 logs.</p>
+<table>
+<thead>
+<tr>
+<th>Gate / log basename</th>
+<th>Exact command</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>V1 / <code>v1</code></td>
+<td><code>GO111MODULE=on GOWORK=off GOFLAGS=-mod=vendor go test -tags e2ev2 -race -count=1 -v -run '^TestImageMirroring' ./test/e2e/v2/tests</code></td>
+<td>6 top-level tests, 76 passing subcases; package 3.347s; no TestE2EV2 execution</td>
+</tr>
+<tr>
+<td>V2 / <code>v2</code></td>
+<td><code>make e2ev2</code></td>
+<td>Binary compiled</td>
+</tr>
+<tr>
+<td>V3 / <code>v3-analyzer</code></td>
+<td><code>(cd hack/tools &amp;&amp; GO111MODULE=on GOWORK=off GOFLAGS=-mod=vendor go test -race -count=1 ./hypershiftlinter/analyzers/e2eutilallowlist)</code></td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>V3 / <code>v3-tools</code></td>
+<td><code>make "$(pwd)/hack/tools/bin/golangci-lint" "$(pwd)/hack/tools/bin/hypershiftlinter.so"</code></td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>V3 / <code>v3-lint</code></td>
+<td><code>hack/tools/bin/golangci-lint run --config ./.golangci.yml --modules-download-mode=readonly ./test/e2e/v2/tests/...</code></td>
+<td>0 issues; unused exclusion configuration warnings only</td>
+</tr>
+<tr>
+<td>V4 / <code>v4-positive</code></td>
+<td><code>bin/test-e2e-v2 --ginkgo.dry-run --ginkgo.v --ginkgo.label-filter='lifecycle &amp;&amp; image-mirroring'</code></td>
+<td>Exactly 2 of 1149 selected; both feature specs</td>
+</tr>
+<tr>
+<td>V4 / <code>v4-negative</code></td>
+<td><code>bin/test-e2e-v2 --ginkgo.dry-run --ginkgo.v --ginkgo.label-filter='image-mirroring &amp;&amp; !lifecycle'</code></td>
+<td>Exactly 0 of 1149 selected</td>
+</tr>
+<tr>
+<td>V5 / <code>v5-lifecycle</code></td>
+<td><code>GO111MODULE=on GOWORK=off GOFLAGS=-mod=vendor go test -tags e2ev2 -race -count=1 ./test/e2e/v2/lifecycle/</code></td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>V5 / <code>v5-mirrorregistry</code></td>
+<td><code>GO111MODULE=on GOWORK=off GOFLAGS=-mod=vendor go test -race -count=1 ./test/e2e/v2/util/mirrorregistry/...</code></td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>V5 / <code>v5-framework</code></td>
+<td><code>make test-e2ev2-unit</code></td>
+<td>PASS</td>
+</tr>
+<tr>
+<td>V5 / <code>v5-diff-check</code></td>
+<td><code>git diff --check</code></td>
+<td>Clean</td>
+</tr>
+<tr>
+<td>Additional / <code>v5-committed-check</code></td>
+<td><code>git diff --check 8d54f7ab3249ddf01777824b35a60e1025d72972 HEAD</code></td>
+<td>Clean committed increment</td>
+</tr>
+<tr>
+<td>V5 / <code>v5-stat</code></td>
+<td><code>git diff --stat 8d54f7ab3249ddf01777824b35a60e1025d72972...HEAD</code></td>
+<td>Expected six files / 703 insertions</td>
+</tr>
+</tbody>
+</table>
+<p>Both discovered specs inherit <code>[sig-hypershift][Jira:Hypershift][Feature:ImageMirroring] Hosted Cluster Image Mirroring</code> and labels <code>[lifecycle, image-mirroring]</code>:</p>
+<ol>
+<li><code>should propagate imageContentSources to the hosted cluster IDMS with the worker role</code></li>
+<li><code>should propagate imageContentSources independently to the control plane ignition ConfigMap</code></li>
+</ol>
+<p>Neither has Informing. The dry-run logs also print two unrelated pending DNS specs with Informing; those are not selected image-mirroring tests. Positive summary is 2 dry-run passed / 0 failed / 2 unrelated pending / 1145 filtered skipped; negative is 0 / 0 / 2 / 1147. These summaries are discovery evidence only, not two live passing cases.</p>
+<p>No source edits, branch changes, commits, publication, Jira, CI or cluster calls were made during review. No V6 or pre-PR make pre-commit was attempted. Normal local build outputs and reviewer support evidence were produced. Actual propagation, runtime permissions/port forwarding, registry reachability, image pulls and node consumption are not established by these gates; the latter workload/node behaviors are also outside this change's scope.</p></div></details>
+<h3 id="d-live">D.2 Review of the live evidence (after the run)</h3>
+<p>After the run, another session reviewed the pasted evidence against <a href="scripts/propagation/VERIFY.md"><code>VERIFY.md</code></a>.
+It made no cluster or AWS calls and was not allowed to edit the evidence blocks. It checked secret hygiene, every step against its expected result,
+and cross-step consistency (same HostedCluster, mirror host and management cluster throughout; HC spec as the only oracle; a plausible timeline).
+Local logs and JUnit files were used only to corroborate. Verdict: <b>PASS with notes</b>. Its one open item (N6, leftovers not covered by
+<code>check.sh clean</code>) was then closed by the tester with the step 6b queries, and the review was updated. Raw copy:
+<a href="assets/evidence/review-live.md"><code>review-live.md</code></a>. A third party can repeat this review with the same checklist.</p>
+<details><summary>Show the evidence review</summary><div class="evidence"><p>Input: <code>propagation/RESULTS.md</code> Evidence (run 2026-10-19, 12:17–13:06 CEST), checked against <code>propagation/VERIFY.md</code>,
+<code>RUNBOOK.md</code>, <code>check.sh</code>, <code>env.sh</code>, <code>test-plan.yaml</code>, the specs at <code>c9ad656db6</code>, and the 3926 T8 baseline.
+No cluster/AWS access by the reviewer. Local read-only cross-checks: <code>out/run-tests*.log</code>, <code>out/artifacts/*.xml</code>,
+<code>v4-positive.log</code>, the <code>server:</code> line of <code>out/mc.kubeconfig</code>, <code>git blame</code>, repo grep.</p>
+<h2 id="d-live-verdict-pass-with-notes">Verdict: <strong>PASS with notes</strong></h2>
+<p>All mandatory steps (0, 1, 2, 3, 6) are present, plus the optional step 4 and step 5 (run anyway). All <code>check.sh</code> blocks
+end with <code>0 failure(s)</code> and the expected counts: fixture 12, hc 4, junit 6 (twice), guest 5, cm 6, clean 7.
+Both specs executed live (DryRun=false) against the right HC and passed, twice. The independent <code>oc</code>/<code>jq</code> checks
+confirm both outputs against the HC spec. Cleanup is clean. No finding blocks the PR. The notes cover a runbook grep
+false negative, pre-existing noise and leftover checks outside <code>check.sh clean</code>. Those were run afterwards
+(RESULTS.md step 6b) and found nothing.</p>
+<h2 id="d-live-secret-hygiene">Secret hygiene</h2>
+<p>Clean. No kubeconfig contents, private keys, pull-secret <code>auths</code>, AWS keys or passwords in <code>RESULTS.md</code>. The only hit
+for <code>password</code> is the <code>E2E_EXTERNAL_OIDC_TEST_USERS</code> env help text. The Keycloak UUIDs, OIDC issuer URL and ELB hostnames
+are not secrets. <strong>But</strong> <code>propagation/out/</code> still holds <code>mc.kubeconfig</code> (admin credentials for mgmt) and the
+<code>dump-guests</code> output under <code>out/artifacts/image-mirroring-beaa1f2bd2/</code>. Never attach <code>out/</code> to the PR or Jira. Delete
+<code>out/mc.kubeconfig</code> when you no longer need it. <code>guest.kubeconfig</code> was already removed.</p>
+<h2 id="d-live-step-table-observed">Step table (observed)</h2>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Result</th>
+<th>Observed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>OK (1 note)</td>
+<td><code>c9ad656db6</code>, <code>git status --short</code> empty; 5 binaries built with commitHash c9ad656; dry run <code>Will run 2 of 1149 specs</code>; spec names <strong>not</strong> printed by the grep (N1), but they appear in <code>v4-positive.log</code> and the live run; <code>test-mirror-registry</code>/<code>keycloak</code>/<code>clusters</code> NotFound; no HC; client c9ad656, server e83d9072 supports 4.14–4.21; copier <code>ocp-v4.0-art-dev@sha256:0a9d58f9…</code>; ARN <code>…123456789012:user/tester</code>; zone public <code>False</code>; pull secret has quay.io; SHARED/ARTIFACTS empty; nodes 33–53 % memory</td>
+</tr>
+<tr>
+<td>1</td>
+<td>OK</td>
+<td>plan <code>image-mirroring-propagation</code>; one cluster <code>image-mirroring-beaa1f2bd2</code>; Keycloak deployed; one <code>Running:</code> line with <code>--name=image-mirroring-beaa1f2bd2 --namespace=clusters --infra-id=… --node-pool-replicas=2 --release-image=…4.20.0-x86_64 --base-domain=hypershift.example.com --additional-trust-bundle=…/mirror-registry-ca.pem --image-content-sources=…/mirror-registry-ics.yaml</code>; no <code>--aws-creds</code>, no <code>--instance-type</code> (CLI default); no ERROR lines; Available 12:24:23, rollout Completed 12:33:04; <code>All clusters are ready</code>, exit=0; 12:17:29→12:33:04 = <strong>15.5 min</strong> (faster than the 25–45 min estimate); fixture 12/12; hc 4/4; ics.yaml has 2 entries <code>HOST/&lt;source&gt;</code> (virtual first); NodePool 2/2, 4.20.0; HC junit "version rollout succeeds"</td>
+</tr>
+<tr>
+<td>2</td>
+<td>OK</td>
+<td><code>Running image-mirroring tests against image-mirroring-beaa1f2bd2...</code>; <code>Will run 2 of 1149</code>; both <code>Successfully waited</code> lines (IDMS 1.075 s, CM 125 ms) with the right HC/namespace/target; <code>Ran 2 of 1149</code>, <code>2 Passed \| 0 Failed \| 2 Pending \| 1145 Skipped</code> (the 2 pending are unrelated <code>PIt</code> DNS specs, N4); <code>image-mirroring tests PASSED</code>, <code>All test groups passed</code>, exit=0; junit 6/6</td>
+</tr>
+<tr>
+<td>3</td>
+<td>OK</td>
+<td>2 nodes Ready (v1.33.5); guest 5/5; cm 6/6; HC spec, hosted IDMS spec and CM payload show the same 2 sources, each with one mirror <code>HOST/&lt;source&gt;</code>, in the same order; IDMS labels <code>machineconfiguration.openshift.io/role: worker</code> (+ <code>hypershift.openshift.io/managed: "true"</code>); no <code>mirrorSourcePolicy</code>; CM label <code>core-ignition-config: "true"</code>; payload <code>config.openshift.io/v1</code> / <code>ImageDigestMirrorSet</code> / <code>name: cluster</code> / worker label / no namespace; CPO = HCCO = <code>ocp-v4.0-art-dev@sha256:5491113a…</code> (N5)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>OK</td>
+<td>IDMS 1.275 s, CM 150 ms; <code>Ran 2 of 1149</code>, <code>2 Passed</code>, <code>All test groups passed</code>; junit 6/6. Local <code>diff</code> of the two logs: only timestamps, seed and durations differ, so the specs are repeatable and read-only</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Info only</td>
+<td>dump-guests OK (5m39s). CPO logs <code>Reconciling ImageDigestMirrorSet</code> (<code>hostedcontrolplane_controller.go:2466</code>, the in-memory IDMS → ignition CM path) about every 1 s during the dump window. That is ordinary reconcile noise. HCCO grep is empty because HCCO does not log IDMS reconciles, which is expected</td>
+</tr>
+<tr>
+<td>6</td>
+<td>OK (notes)</td>
+<td>manifest = the single image-mirroring entry; <code>Destroying 1 clusters from manifest</code>; one <code>destroy cluster aws --name=image-mirroring-beaa1f2bd2 --namespace=clusters --infra-id=image-mirroring-beaa1f2bd2 --cluster-grace-period=40m --region=us-east-1 --base-domain=hypershift.example.com</code>; normal <code>DependencyViolation</code> retries while NAT drained; VPC, IGW, subnets, route tables, EIP, DHCP, VPC endpoint, both private zones, OIDC provider, all IAM roles/policies and instance profile deleted; <code>All clusters destroyed successfully</code>, exit=0; 12:58:45→13:05:16 = <strong>6.5 min</strong> (T8: ~6 min); <code>clusters</code> leftovers = <code>user-ca-bundle</code> + OpenShift defaults only, then ns deleted; keycloak + test-mirror-registry deleted; clean 7/7</td>
+</tr>
+</tbody>
+</table>
+<h2 id="d-live-cross-step-consistency">Cross-step consistency</h2>
+<ul>
+<li><strong>Same HC everywhere: OK.</strong> <code>clusters/image-mirroring-beaa1f2bd2</code> (= sha256(<code>tester-cntrlplane-3927-run1</code>)[:10])
+  appears in env.sh, Phase 0, the manifest (create and step 6), the <code>Running:</code> create line, <code>check.sh hc</code>, <code>against …</code>,
+  both <code>Successfully waited</code> lines, the CM namespace <code>clusters-image-mirroring-beaa1f2bd2</code>, <code>check.sh cm</code> and the destroy
+  line. The infra ID equals the name.</li>
+<li><strong>Same HOST everywhere: OK.</strong> <code>mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com</code>
+  appears in env.sh, the Route and <code>mirror-registry.json</code> (<code>check.sh fixture</code>), ics.yaml, the HC spec, the hosted IDMS and
+  the CM payload. It is identical to the 3926 T8 host.</li>
+<li><strong>Oracle is the HC: OK.</strong> <code>check.sh hc</code> makes the HC spec equal to the fixture ICS file. <code>check.sh guest</code> and <code>check.sh cm</code>
+  then compare each output with the HC spec separately (<code>hc_ics</code>), never with each other. The specs do the same
+  (<code>Successfully waited</code> messages name HC → target).</li>
+<li><strong>Timeline: OK.</strong> create-guests ends 12:33:04 &lt; run-tests 12:40:33–12:40:39 &lt; step 3 (no timestamp; nodes aged 16 min,
+  joined around 12:30, so roughly 12:41–12:47) &lt; step 4 ends 12:47:34 &lt; dump 12:55:41 &lt; destroy 12:58:45–13:05:16
+  &lt; namespace deletion / clean. Step 3 ran while the HC existed: it read live objects from both clusters.</li>
+<li><strong>Context: OK.</strong> Every <code>k</code> call uses <code>--context mgmt</code>. The binaries get <code>out/mc.kubeconfig</code>, whose only context
+  is <code>mgmt</code>, server <code>https://api.mgmt.hypershift.example.com:6443</code>, which matches the
+  expected <code>api.mgmt.hypershift.example.com</code>. The Keycloak issuer and mirror Route are on <code>apps.mgmt…</code>.</li>
+</ul>
+<h2 id="d-live-findings-notes">Findings / notes</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Sev</th>
+<th>Step</th>
+<th>Note</th>
+<th>Class</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>N1</td>
+<td>Low</td>
+<td>0</td>
+<td>The runbook grep <code>'Image Mirroring should'</code> matched no names. Ginkgo colours the output (<code>…Mirroring \e[0m\e[1mshould…</code>) even when piped. <code>Will run 2 of 1149</code> was printed.</td>
+<td>runbook false negative</td>
+<td>Raw proof: <code>v4-positive.log</code> lines 82/86, the live run output and the JUnit testcase names. For reuse, add <code>--ginkgo.no-color</code> to the dry run.</td>
+</tr>
+<tr>
+<td>N2</td>
+<td>Info</td>
+<td>1</td>
+<td>create-guests prints a <code>[controller-runtime] log.SetLogger(...) was never called</code> stack trace at the start of Phase 3 (<code>create-guests/main.go:355</code>, <code>newMgmtClient</code>).</td>
+<td>pre-existing (blame: 2026-05, not 3926/3927), cosmetic</td>
+<td>Optional follow-up: set a logger in create-guests (CNTRLPLANE-3929 log readability). Not a 3927 finding.</td>
+</tr>
+<tr>
+<td>N3</td>
+<td>Info</td>
+<td>1</td>
+<td>During the rollout, HC <code>Available</code> flipped True↔False several times on KAS ELB <code>/healthz</code> timeouts (terminal 2).</td>
+<td>environment (nested mgmt cluster / new ELB)</td>
+<td>None for 3927. CI note: create-guests tolerated it; the specs ran after <code>Completed</code>.</td>
+</tr>
+<tr>
+<td>N4</td>
+<td>Info</td>
+<td>2/4</td>
+<td>The Ginkgo summary shows <code>2 Pending</code>. These are the <code>PIt</code> DNS specs in <code>hosted_cluster_dns_test.go:38/68</code>, which Ginkgo reports as pending regardless of the label filter. They are not in the JUnit file (<code>tests=2 skipped=0</code>).</td>
+<td>pre-existing, harmless</td>
+<td>None.</td>
+</tr>
+<tr>
+<td>N5</td>
+<td>Info</td>
+<td>3</td>
+<td>CPO and HCCO run the same image <code>ocp-v4.0-art-dev@sha256:5491113a…</code>. That is expected: HCCO is a CPO-image binary. The digest is not in any repo override file, so it fits the 4.20.0 payload. Not independently proven without the release info.</td>
+<td>expected</td>
+<td>Optional: <code>oc adm release info quay.io/openshift-release-dev/ocp-release:4.20.0-x86_64 --image-for=hypershift</code> should print the same digest.</td>
+</tr>
+<tr>
+<td>N6</td>
+<td>Low</td>
+<td>6</td>
+<td><code>check.sh clean</code> only checks the VPC and instances. The destroy log covers the other resources, but three were not checked: the OIDC discovery documents in S3 <code>oidc-bucket/image-mirroring-beaa1f2bd2</code>, public-zone records for <code>*.apps.image-mirroring-beaa1f2bd2…</code> in <code>Z00000000000000000000</code>, and the management-side KAS ELB <code>kas-lb…</code> (it should go with the HCP namespace's Service).</td>
+<td>coverage gap</td>
+<td><strong>Resolved</strong>: the four queries below were run after the review (RESULTS.md step 6b) and all printed nothing.</td>
+</tr>
+<tr>
+<td>N7</td>
+<td>Info</td>
+<td>1</td>
+<td>Runbook bug: <code>oc get hostedcluster,nodepool -w</code> is rejected because <code>-w</code> takes a single resource type. The user split it into two terminals.</td>
+<td>runbook</td>
+<td>Fix the runbook if reused.</td>
+</tr>
+<tr>
+<td>N8</td>
+<td>Info</td>
+<td>—</td>
+<td><code>out/</code> holds <code>mc.kubeconfig</code> and an unredacted dump.</td>
+<td>hygiene</td>
+<td>Delete or keep local only, see above.</td>
+</tr>
+</tbody>
+</table>
+<p>No real (class a) failures. <code>check.sh</code> false negatives: none in <code>check.sh</code> itself. N1 is in a runbook grep.</p>
+<p>Read-only leftover confirmation (run after the review; all four printed nothing, see RESULTS.md step 6b):</p>
+<pre class="highlight"><code class="language-bash">e2e aws s3 ls s3://oidc-bucket/image-mirroring-beaa1f2bd2/
+e2e aws route53 list-resource-record-sets --hosted-zone-id Z00000000000000000000 --query &quot;ResourceRecordSets[?contains(Name,'image-mirroring-beaa1f2bd2')].Name&quot; --output text
+e2e aws elb describe-load-balancers --region us-east-1 --query &quot;LoadBalancerDescriptions[?starts_with(LoadBalancerName,'kas-lb')].LoadBalancerName&quot; --output text
+e2e aws elbv2 describe-load-balancers --region us-east-1 --query &quot;LoadBalancers[?starts_with(LoadBalancerName,'kas-lb')].LoadBalancerName&quot; --output text
+</code></pre>
+<p>Result: all four empty, so no S3 OIDC documents, public DNS records or management-side KAS load balancers remain.</p>
+<h2 id="d-live-known-limitations-not-findings">Known limitations (not findings)</h2>
+<ul>
+<li>The producers exercised are the CPO/HCCO of the <strong>4.20.0</strong> release payload, not code built from this branch. The 3927
+  change is test-only. Producers from current main are covered by the CNTRLPLANE-3929 job.</li>
+<li>This was one run on one management cluster, not the five consecutive CI runs CNTRLPLANE-3922 requires.</li>
+<li>Keycloak was deployed by AWS <code>PreCreate</code> although only <code>image-mirroring</code> was selected. That is a cost/flakiness note for
+  CNTRLPLANE-3929.</li>
+<li>Negative cases are covered by the unit tests in <code>hosted_cluster_image_mirroring_helpers_test.go</code>, not by this run.</li>
+</ul>
+<h2 id="d-live-pr-evidence-paragraph">PR evidence paragraph</h2>
+<blockquote>
+<p>Live validation (manual, 2026-10-19) of <code>c9ad656db6</code> on a 4.20 management cluster (HO e83d9072) through the
+v2 lifecycle path CI will use: <code>create-guests</code> with <code>HYPERSHIFT_E2E_IMAGE_MIRRORING=true</code> and a one-group test plan
+(<code>variant: image-mirroring</code>, <code>labelFilter: "lifecycle &amp;&amp; image-mirroring"</code>) set up the mirror registry fixture and
+created one AWS HostedCluster (<code>ocp-release:4.20.0-x86_64</code>, 2 workers) with the fixture CA and two
+imageContentSources (<code>quay.io/libpod/registry</code>, <code>mirror-source.hypershift-e2e.invalid/libpod/registry</code>), each
+mirrored to the fixture Route. Available and version rollout Completed in 15.5 min. <code>run-tests</code> ran <strong>2 of 1149
+specs, 2 passed</strong> (JUnit: 2 testcases <code>passed</code>, none skipped, DryRun=false):
+<code>…should propagate imageContentSources to the hosted cluster IDMS with the worker role</code> and
+<code>…should propagate imageContentSources independently to the control plane ignition ConfigMap</code>. A second run gave the
+same result. Independent <code>oc</code>/<code>jq</code> checks against the HostedCluster spec confirmed the hosted <code>ImageDigestMirrorSet/cluster</code>
+(worker role label, identical mappings, mirror order kept) and the HCP ConfigMap <code>ignition-config-40-image-content-source</code>
+(core-ignition label, <code>data.config</code> decodes to a <code>config.openshift.io/v1</code> IDMS <code>cluster</code> with worker label and
+identical mappings). The producers were the 4.20.0 payload CPO/HCCO. <code>destroy-guests</code> removed the cluster and its AWS
+infrastructure in 6.5 min. No HC, namespaces, PV, VPC or instances were left.</p>
+</blockquote></div></details>
+
+<h2 id="e-sanitization">E. Sanitization and placeholders</h2>
+<p>Evidence was copied from an allowlist of files and transformed with a fixed substitution map (the same placeholders as the CNTRLPLANE-3926 report);
+terminal colour codes were stripped. No other edits were made. Kubeconfigs, the fixture CA, the <code>dump-guests</code> output and the raw logs in
+<code>out/</code> were never copied. Afterwards, a scanner checked every published file for private-key headers, AWS access keys, kubeconfig
+credentials, pull-secret <code>auths</code>, the account ID, internal hostnames, AWS resource and zone IDs, load balancer hostnames and local paths, and
+found nothing. Private RFC 1918 node names, public image digests, AWS request IDs and Keycloak object IDs (of a deleted instance) are kept.</p>
+<table><thead><tr><th>Placeholder</th><th>Replaces</th></tr></thead><tbody>
+<tr><td><code>mgmt</code></td><td>Kubeconfig context and cluster name of the management cluster</td></tr>
+<tr><td><code>hypershift.example.com</code></td><td>Public Route53 base domain (the mirror host is <code>mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com</code>)</td></tr>
+<tr><td><code>api.mgmt.hypershift.example.com</code></td><td>Management-cluster API endpoint (an AWS ELB hostname)</td></tr>
+<tr><td><code>kas-lb</code>, <code>kas-lb.elb.example.com</code></td><td>Name and hostname of the hosted cluster's kube-apiserver load balancer</td></tr>
+<tr><td><code>123456789012</code>, <code>user/tester</code></td><td>AWS account ID and IAM principal</td></tr>
+<tr><td><code>oidc-bucket</code></td><td>S3 bucket used as OIDC issuer</td></tr>
+<tr><td><code>vpc-0000000000000000</code> (and <code>subnet-</code>, <code>nat-</code>, <code>rtb-</code>, <code>igw-</code>, <code>sg-</code>, <code>eipalloc-</code>, <code>dopt-</code>, <code>vpce-</code>)</td><td>AWS resource IDs (all deleted in step 6)</td></tr>
+<tr><td><code>Z00000000000000000000</code></td><td>Route53 hosted zone IDs</td></tr>
+<tr><td><code>tester-cntrlplane-3927-run1</code></td><td>The <code>PROW_JOB_ID</code> of the run. The HostedCluster name <code>image-mirroring-beaa1f2bd2</code> is the hash of the
+<i>original</i> value, so it does not match <code>sha256("tester-cntrlplane-3927-run1")</code></td></tr>
+<tr><td><code>~/hypershift</code>, <code>~/</code></td><td>Local path of the hypershift checkout and home directory</td></tr>
+<tr><td><code>$ </code></td><td>Shell prompt (the original prompt showed context and git branch)</td></tr>
+</tbody></table>
+
+<h2 id="f-provenance">F. Provenance, AI assistance and glossary</h2>
+<ul>
+  <li>Every cluster and AWS command was run by a human (@Nirshal), and the output was pasted verbatim into the results file.</li>
+  <li>The implementation plan, the test code, the runbook, <code>check.sh</code> and <code>VERIFY.md</code> were written with LLM coding assistants and reviewed by the tester.</li>
+  <li>Both reviews (appendix D) were performed by LLMs in separate sessions: the code review without source edits, the evidence review read-only and
+  without cluster access, each against a written checklist.</li>
+  <li>This report (pages, plan, sanitization) was assembled with an LLM assistant from those files. Verdicts are copied from the results file and the
+  reviews, not re-judged.</li>
+</ul>
+<table><thead><tr><th>Term in the evidence</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><code>T8</code></td><td>CNTRLPLANE-3926 Scenario 3 (hosted nodes pull from the mirror); the baseline on the same management cluster</td></tr>
+<tr><td><code>I1</code></td><td>The implementation session (code, unit tests, local gate)</td></tr>
+<tr><td><code>R1</code></td><td>The independent code review (appendix D.1)</td></tr>
+<tr><td><code>V1–V5</code></td><td>Local gate commands (unit, compile, analyzer/lint, discovery, regression)</td></tr>
+<tr><td><code>V6</code></td><td>Live acceptance: Scenario 1</td></tr>
+<tr><td><code>D1–D10</code></td><td>Design decisions (appendix C)</td></tr>
+<tr><td><code>S1–S16</code></td><td>Source references in the contract table (appendix C)</td></tr>
+<tr><td><code>N1–N8</code>, <code>P1–P3</code></td><td>Notes of the evidence review and problems in the results file</td></tr>
+<tr><td><code>.work/cntrlplane-3927/…</code></td><td>Local, gitignored working directory in the hypershift checkout (plan, logs, reviews); not published except as listed here</td></tr>
+</tbody></table>
+
+<h2 id="kit-changes">G. Kit changes (evidence vs. reproduction kit)</h2>
+<p>The files in <a href="scripts/README.md"><code>scripts/</code></a> are the sanitized originals with only these changes: context, domain, AWS inputs,
+release, node count and <code>PROW_JOB_ID</code> are read from the environment (defaults = the sanitized values); the HC name hash works with
+<code>sha256sum</code> or <code>shasum</code>; the runbook uses <code>--ginkgo.no-color</code> for the step 0 grep and two separate watches (notes 1–2);
+the step 6b leftover queries (run by the tester after the review, with literal values) are written with variables recorded before the destroy, and
+<code>VERIFY.md</code> checks them; workflow notes addressed to the assistant are reworded; <code>RESULTS.template.md</code> (blank results file) is added.
+The variable-based form of step 6b (<code>KAS_LB</code>, <code>OIDC_BUCKET</code>, <code>ZONE_ID</code>) was not executed in the original run. <code>check.sh</code>
+and <code>test-plan.yaml</code> are unchanged.</p>
+<details class="output"><summary>Unified diff</summary><pre tabindex="0"><code>+++ scripts/propagation/RESULTS.template.md  (new file, 77 lines: blank results file with the step 6b row)
+
+--- evidence/propagation/RUNBOOK.md
++++ scripts/propagation/RUNBOOK.md
+@@ -13,3 +13,3 @@
+ 
+-Fill `RESULTS.md` as you go (each step has a **Record** line) and paste command output under the matching
++Copy `RESULTS.template.md` to `RESULTS.md` and fill it as you go (each step has a **Record** line) and paste command output under the matching
+ **Evidence** heading. No code changes expected. If something fails, capture the &quot;On failure&quot; commands of the step
+@@ -44,3 +44,3 @@
+ make hypershift e2ev2 e2ev2-create-guests e2ev2-run-tests e2ev2-destroy-guests
+-bin/test-e2e-v2 --ginkgo.dry-run --ginkgo.v --ginkgo.label-filter=&#x27;lifecycle &amp;&amp; image-mirroring&#x27; 2&gt;&amp;1 | grep -E &#x27;Will run|Image Mirroring should&#x27;
++bin/test-e2e-v2 --ginkgo.dry-run --ginkgo.v --ginkgo.no-color --ginkgo.label-filter=&#x27;lifecycle &amp;&amp; image-mirroring&#x27; 2&gt;&amp;1 | grep -E &#x27;Will run|Image Mirroring should&#x27;
+ k get ns &quot;$NS&quot; &quot;$KC_NS&quot; &quot;$HC_NS&quot;                    # expected: all three NotFound
+@@ -65,3 +65,3 @@
+ If `k` fails with `TLS handshake timeout` (seen on 2026/10/14), just retry: the mgmt API is occasionally slow.
+-If `$SHARED` is not empty, a previous run was not cleaned up: stop and finish its step 6 first (or tell me).
++If `$SHARED` is not empty, a previous run was not cleaned up: stop and finish its step 6 first.
+ 
+@@ -71,5 +71,7 @@
+ 
+-Terminal 2 (optional; `source .work/cntrlplane-3927/propagation/env.sh` there too; Ctrl-C when step 1 ends):
+-```bash
+-k -n &quot;$HC_NS&quot; get hostedcluster,nodepool -w
++Terminals 2 and 3 (optional; `source .work/cntrlplane-3927/propagation/env.sh` there too; Ctrl-C when step 1 ends;
++`-w` accepts a single resource type):
++```bash
++k -n &quot;$HC_NS&quot; get hostedcluster -w                 # terminal 2
++k -n &quot;$HC_NS&quot; get nodepool -w                      # terminal 3
+ ```
+@@ -107,3 +109,3 @@
+ - Failed before Phase 2 (Keycloak, mirror, ImageStream): no cloud resources yet; go to step 6.
+-- CLI create failed (e.g. a field the installed HO/CRDs reject; our CLI is newer than the HO): stop and tell me;
++- CLI create failed (e.g. a field the installed HO/CRDs reject; our CLI is newer than the HO): stop and investigate;
+   T8 used `/usr/local/bin/hypershift` (cce02430) as a fallback candidate. Then step 6 (destroy cleans by infra ID).
+@@ -132,3 +134,3 @@
+ On failure: keep the log; the failing `It` prints the HC name, the target and `expected HC mappings … got …`.
+-Run step 3 anyway (it shows the real objects), then send me both. Do **not** change the test to make it pass.
++Run step 3 anyway (it shows the real objects), then analyze both. Do **not** change the test to make it pass.
+ 
+@@ -189,2 +191,7 @@
+ jq -c .clusters &quot;$SHARED/cluster-manifests.json&quot;   # must be the image-mirroring-beaa1f2bd2 entry
++# identifiers for the step 6b leftover queries (read them while the HC still exists)
++KAS_LB=&quot;$(k -n &quot;$HCP_NS&quot; get svc kube-apiserver -o jsonpath=&#x27;{.status.loadBalancer.ingress[0].hostname}&#x27; | cut -d- -f1)&quot;
++OIDC_BUCKET=&quot;$(k -n &quot;$HC_NS&quot; get hostedcluster &quot;$HC_NAME&quot; -o jsonpath=&#x27;{.spec.issuerURL}&#x27; | sed -E &#x27;s#https://([^.]+)\..*#\1#&#x27;)&quot;
++ZONE_ID=&quot;$(e2e aws route53 list-hosted-zones-by-name --dns-name &quot;$BASE_DOMAIN&quot; --max-items 1 --query &#x27;HostedZones[0].Id&#x27; --output text | sed &#x27;s#/hostedzone/##&#x27;)&quot;
++echo &quot;KAS_LB=$KAS_LB OIDC_BUCKET=$OIDC_BUCKET ZONE_ID=$ZONE_ID&quot;
+ date; e2e bin/destroy-guests 2&gt;&amp;1 | tee &quot;$PROP_OUT/destroy.log&quot;; echo &quot;exit=${pipestatus[1]:-${PIPESTATUS[0]}}&quot;; date
+@@ -207,4 +214,17 @@
+ 
++### 6b. Leftovers that `check.sh clean` does not cover
++
++`check.sh clean` checks namespaces, PV, VPC and instances. Also confirm that the OIDC documents, public DNS records and
++the management-side kube-apiserver load balancer are gone (read-only; every command must print nothing):
++```bash
++e2e aws s3 ls &quot;s3://${OIDC_BUCKET}/${INFRA_ID}/&quot;
++e2e aws route53 list-resource-record-sets --hosted-zone-id &quot;$ZONE_ID&quot; --query &quot;ResourceRecordSets[?contains(Name,&#x27;${HC_NAME}&#x27;)].Name&quot; --output text
++e2e aws elb describe-load-balancers --region &quot;$AWS_REGION&quot; --query &quot;LoadBalancerDescriptions[?starts_with(LoadBalancerName,&#x27;${KAS_LB}&#x27;)].LoadBalancerName&quot; --output text
++e2e aws elbv2 describe-load-balancers --region &quot;$AWS_REGION&quot; --query &quot;LoadBalancers[?starts_with(LoadBalancerName,&#x27;${KAS_LB}&#x27;)].LoadBalancerName&quot; --output text
++```
++If `KAS_LB` is empty (the service was already gone), take the ELB name from the HC condition messages in the step 1 watch
++(`Get &quot;https://&lt;name&gt;-&lt;hash&gt;.elb…/healthz&quot;`).
++
+ **Record:** destroy duration, check output, leftovers (should be none).
+ 
+-Then: tell me the run is complete; the evidence is reviewed with `VERIFY.md` in a fresh session.
++Then review the evidence with `VERIFY.md`, in a fresh session or by another person, without cluster access.
+
+--- evidence/propagation/VERIFY.md
++++ scripts/propagation/VERIFY.md
+@@ -6,3 +6,3 @@
+ `test/e2e/v2/tests/hosted_cluster_image_mirroring_test.go` and helpers, and the 3926 T8 baseline
+-`.work/cntrlplane-3926/reachability/RESULTS.md` (same management cluster, same fixture, same release).
++(`reports/cntrlplane-3926/assets/evidence/reachability-RESULTS.md` in this repository: same management cluster, same fixture, same release).
+ 
+@@ -14,2 +14,5 @@
+ ## Constants to cross-check against the evidence
++
++The values below are those of the original run (sanitized). For a new run, replace them with the values printed by
++`env.sh` and the commit under test; the shapes stay the same.
+ 
+@@ -30,3 +33,3 @@
+ 
+-1. **Completeness.** Evidence for steps 0, 1, 2, 3, 6 is mandatory; 4 is optional; 5 only if something failed.
++1. **Completeness.** Evidence for steps 0, 1, 2, 3, 6 (including 6b) is mandatory; 4 is optional; 5 only if something failed.
+    Missing mandatory section → verdict at most `INCOMPLETE` (list what is missing; steps 1–5 cannot be redone after
+@@ -54,2 +57,3 @@
+ | 6 | `Destroying 1 clusters from manifest`; one `destroy cluster aws --name=image-mirroring-beaa1f2bd2 … --infra-id=image-mirroring-beaa1f2bd2`; `All clusters destroyed successfully`; `clusters` leftovers only from this HC (e.g. `user-ca-bundle`) before the ns deletion; `check.sh clean` 7 PASS | any leftover AWS resource or namespace → action item with the exact cleanup command; flag cost risk prominently |
++| 6b | `KAS_LB`, `OIDC_BUCKET`, `ZONE_ID` printed (non-empty) before the destroy; the four S3/Route53/ELB/ELBv2 queries print nothing | an empty `KAS_LB` (the ELB query then lists every load balancer); any output → leftover, action item with the exact cleanup command |
+ 
+
+--- evidence/propagation/env.sh
++++ scripts/propagation/env.sh
+@@ -20,3 +20,3 @@
+ # Management cluster and mirror fixture (mirrorregistry defaults, created by create-guests PreCreate).
+-export CTX=mgmt
++export CTX=&quot;${CTX:-mgmt}&quot;              # kubeconfig context of the management cluster
+ export NS=test-mirror-registry          # mirrorregistry.DefaultNamespace
+@@ -31,5 +31,6 @@
+ # destroy-guests finds the cluster through out/shared/cluster-manifests.json.
+-export PROW_JOB_ID=tester-cntrlplane-3927-run1
+-HC_NAME=&quot;image-mirroring-$(printf %s &quot;${PROW_JOB_ID}&quot; | shasum -a 256 | cut -c1-10)&quot;
+-export HC_NAME                          # run1 → image-mirroring-beaa1f2bd2
++export PROW_JOB_ID=&quot;${PROW_JOB_ID:-tester-cntrlplane-3927-run1}&quot;
++if command -v sha256sum &gt;/dev/null 2&gt;&amp;1; then _sha=(sha256sum); else _sha=(shasum -a 256); fi
++HC_NAME=&quot;image-mirroring-$(printf %s &quot;${PROW_JOB_ID}&quot; | &quot;${_sha[@]}&quot; | cut -c1-10)&quot;; unset _sha
++export HC_NAME                          # original run: image-mirroring-beaa1f2bd2
+ export HC_NS=clusters                   # create-guests default namespace (HYPERSHIFT_NAMESPACE unset)
+@@ -39,8 +40,8 @@
+ # Hosted cluster inputs (same values as 3926 T8, which worked on this management cluster).
+-export BASE_DOMAIN=hypershift.example.com   # public Route53 zone
+-export AWS_REGION=us-east-1
+-export AWS_CREDS=&quot;${HOME}/.aws/credentials&quot;   # default profile, as T8&#x27;s --aws-creds
+-export PULL_SECRET=&quot;${HOME}/pull-secret&quot;
+-export RELEASE_IMAGE=quay.io/openshift-release-dev/ocp-release:4.20.0-x86_64   # HO supports 4.14–4.21
+-export NODE_COUNT=2                     # Prow guest-step default (create-guests&#x27; own default is 3)
++export BASE_DOMAIN=&quot;${BASE_DOMAIN:-hypershift.example.com}&quot;   # public Route53 zone
++export AWS_REGION=&quot;${AWS_REGION:-us-east-1}&quot;
++export AWS_CREDS=&quot;${AWS_CREDS:-${HOME}/.aws/credentials}&quot;   # default profile, as T8&#x27;s --aws-creds
++export PULL_SECRET=&quot;${PULL_SECRET:-${HOME}/pull-secret}&quot;
++export RELEASE_IMAGE=&quot;${RELEASE_IMAGE:-quay.io/openshift-release-dev/ocp-release:4.20.0-x86_64}&quot;   # HO supports 4.14–4.21
++export NODE_COUNT=&quot;${NODE_COUNT:-2}&quot;                    # Prow guest-step default (create-guests&#x27; own default is 3)
+ 
+</code></pre></details>
+
+<h2 id="h-follow-ups">H. Follow-ups</h2>
+<ul>
+  <li>CNTRLPLANE-3929: the AWS <code>PreCreate</code> deploys Keycloak even for an image-mirroring-only plan (cost and flakiness of the dedicated lane).</li>
+  <li>CNTRLPLANE-3929: <code>create-guests</code> prints a <code>log.SetLogger(...) was never called</code> stack trace in Phase 3 (pre-existing); set a logger for readable CI logs.</li>
+  <li>CNTRLPLANE-3929: HC <code>Available</code> flapped on kube-apiserver load balancer <code>/healthz</code> timeouts during the rollout; <code>create-guests</code> tolerated it, worth watching in CI.</li>
+  <li>Kit: consider moving the step 6b queries into <code>check.sh clean</code>.</li>
+  <li>CNTRLPLANE-3927 PR: add its number to the plan and report metadata, and the CI results to TC-12, once opened.</li>
+</ul>
+</main>
+<footer>
+CNTRLPLANE-3927 — e2e v2 test: imageContentSources propagation to the hosted-cluster IDMS and the ignition ConfigMap ·
+commit <code>c9ad656db6</code> on <a href="https://github.com/openshift/hypershift/pull/9996">openshift/hypershift#9996</a> · report date 2026-10-19.<br>
+All evidence is sanitized (cluster names, domains, AWS identifiers and local paths replaced; see
+<a href="appendices.html#e-sanitization">appendix E</a>). Cluster commands were run by a human; runbooks, scripts,
+the independent reviews and this report were prepared with AI assistance (see appendix F).
+</footer>
+</body>
+</html>

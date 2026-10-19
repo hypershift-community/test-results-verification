@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard — CNTRLPLANE-3927 verification</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topbar"><div class="brand">CNTRLPLANE-3927 · Verification report</div><nav><a href="index.html" class="active">Dashboard</a><a href="scenario-1.html">1 · Propagation</a><a href="automated-tests.html">Automated tests</a><a href="appendices.html">Appendices</a><a href="../../plans/cntrlplane-3927.md">Test plan</a><a href="https://github.com/openshift/hypershift/pull/9996">Parent PR #9996</a></nav></header>
+<main>
+<h1>E2E v2 test: imageContentSources propagation to the hosted-cluster IDMS and the ignition ConfigMap</h1>
+<p class="subtitle">Verification report for <a href="https://issues.redhat.com/browse/CNTRLPLANE-3927">CNTRLPLANE-3927</a> ·
+commit <code>c9ad656db6</code> on top of <a href="https://github.com/openshift/hypershift/pull/9996">openshift/hypershift#9996</a> (head <code>8d54f7ab32</code>) ·
+plan <a href="../../plans/cntrlplane-3927.md">TP-CNTRLPLANE-3927-001</a> · 2026-10-19 · tester @Nirshal</p>
+
+<div class="callout ok"><p><b>Verdict: PASS</b>. All four acceptance criteria are covered by passing test cases.
+Both new specs ran and passed (twice) on a real HostedCluster created through the v2 lifecycle path CI will use, and
+independent <code>oc</code>/<code>jq</code> checks confirmed both outputs against the HostedCluster spec. The unit tests and the local quality
+gate pass, and two independent reviews found no defects. Caveats: see <a href="#caveats">Caveats</a>.</p></div>
+
+<div class="cards">
+  <div class="card"><div class="num">1 / 1</div><div class="lbl">live scenario passed (independently reviewed)</div></div>
+  <div class="card"><div class="num">9 / 9</div><div class="lbl">manual test cases passed</div></div>
+  <div class="card"><div class="num">2 / 2</div><div class="lbl">new specs executed and passed, twice (JUnit, not a dry run)</div></div>
+  <div class="card"><div class="num">4 / 4</div><div class="lbl">acceptance criteria covered</div></div>
+  <div class="card"><div class="num">6 + 76</div><div class="lbl">unit tests + subcases, 0 failures</div></div>
+  <div class="card"><div class="num">0</div><div class="lbl">leftover cluster or AWS resources</div></div>
+</div>
+
+<h2 id="what">What is being verified</h2>
+<p>CNTRLPLANE-3927 adds the e2e v2 lifecycle test <code>test/e2e/v2/tests/hosted_cluster_image_mirroring_test.go</code>
+(<code>[Feature:ImageMirroring]</code>, labels <code>lifecycle</code>, <code>image-mirroring</code>). The HostedCluster is created by
+<code>create-guests</code> with the opt-in <code>image-mirroring</code> variant of CNTRLPLANE-3926, whose mirror fixture supplies the CA and
+two image content sources. The test checks that the HostedCluster's <code>spec.imageContentSources</code> reach two outputs that are
+produced by <b>independent</b> controllers, in two independent <code>It</code>s:</p>
+<div class="flow">
+  <div class="step"><b>Input</b>HC <code>spec.imageContentSources</code> from the fixture (real + virtual source, one mirror each)</div><div class="arrow">→</div>
+  <div class="step"><b>HO</b>copies it to the HostedControlPlane</div><div class="arrow">→</div>
+  <div class="step"><b>Spec 1 · HCCO</b>hosted <code>ImageDigestMirrorSet/cluster</code>, label <code>role: worker</code></div>
+  <div class="step"><b>Spec 2 · CPO</b>HCP ConfigMap <code>ignition-config-40-image-content-source</code>, <code>data.config</code> = IDMS YAML</div>
+</div>
+<p>Each spec compares its output with the HostedCluster spec, never with the other output, so a bug shared by both producers
+cannot hide. The comparison is exact: entry order is ignored, mirror order and multiplicity are kept, and missing, extra or
+duplicate sources fail.</p>
+
+<h2 id="scenarios">Scenarios</h2>
+<table><thead><tr><th>#</th><th>Scenario</th><th>Proves</th><th>Code under test</th><th>Date</th><th>Result</th></tr></thead><tbody>
+<tr><td>1</td><td><a href="scenario-1.html">Propagation (live lifecycle run)</a></td><td>Both specs are selected, execute and pass on a real
+HostedCluster created by <code>create-guests</code>; independent checks confirm the hosted IDMS and the ignition ConfigMap against the HC spec;
+repeatable; no leftovers. Independently reviewed</td><td>Commit <code>c9ad656db6</code> (tests and lifecycle binaries); 4.20.0 payload CPO/HCCO</td>
+<td>2026-10-19</td><td><span class="badge note">PASS (notes)</span></td></tr>
+<tr><td>—</td><td><a href="automated-tests.html">Automated tests</a></td><td>Helpers reject every invalid state; compile, lint, analyzer, discovery and
+regression gates pass</td><td>Commit <code>c9ad656db6</code></td><td>2026-10-16</td><td><span class="badge pass">PASS</span></td></tr>
+</tbody></table>
+
+<h2 id="acs">Acceptance criteria coverage</h2>
+<table><thead><tr><th>AC</th><th>CNTRLPLANE-3927 acceptance criterion (abbreviated)</th><th>Test cases</th><th>Status</th></tr></thead><tbody>
+<tr><td><b>AC1</b></td><td>An HC with <code>imageContentSources</code> pointing at the in-cluster mirror results in an IDMS in the hosted cluster with matching mirror entries (HCCO path)</td>
+<td><a href="scenario-1.html#tc-02">TC-02</a>, <a href="scenario-1.html#tc-03">TC-03</a>, <a href="scenario-1.html#tc-06">TC-06</a>, <a href="automated-tests.html#tc-10">TC-10</a></td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td><b>AC2</b></td><td>That IDMS has <code>machineconfiguration.openshift.io/role: worker</code></td>
+<td><a href="scenario-1.html#tc-03">TC-03</a>, <a href="scenario-1.html#tc-06">TC-06</a>, <a href="automated-tests.html#tc-10">TC-10</a></td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td><b>AC3</b></td><td>The corresponding ignition ConfigMap is created in the HCP namespace by CPO, verified in a separate <code>It</code></td>
+<td><a href="scenario-1.html#tc-04">TC-04</a>, <a href="scenario-1.html#tc-07">TC-07</a>, <a href="automated-tests.html#tc-10">TC-10</a></td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td><b>AC4</b></td><td>v2 conventions (<code>[Feature:ImageMirroring]</code>, <code>RegisterXxxTests</code>, lifecycle test); HC created through <code>create-guests</code></td>
+<td><a href="scenario-1.html#tc-01">TC-01</a>, <a href="scenario-1.html#tc-02">TC-02</a>, <a href="scenario-1.html#tc-05">TC-05</a>, <a href="scenario-1.html#tc-08">TC-08</a>, <a href="automated-tests.html#tc-11">TC-11</a>, <a href="automated-tests.html#tc-12">TC-12</a></td><td><span class="badge pass">PASS</span></td></tr>
+</tbody></table>
+<p class="small">Where the tests go beyond the AC wording (exact comparison, fixture provenance precondition, decoded ConfigMap payload,
+fail instead of skip) is explained in the <a href="../../plans/cntrlplane-3927.md">test plan §2.3</a> and in
+<a href="appendices.html#c-design-decisions">appendix C</a>. TC-12 (CI on the PR) is recorded when the PR is opened.</p>
+
+<h2 id="traceability">Code under test and traceability</h2>
+<dl class="kv">
+  <dt>Change</dt><dd><code>c9ad656db6</code>: one commit, 6 files, +703 lines, on parent <code>8d54f7ab32</code> (= head of #9996, still open and unchanged on 2026-10-19)</dd>
+  <dt>Live scenario</dt><dd>binaries built from <code>c9ad656db6</code> with a clean tree (<code>hypershift</code>, <code>test-e2e-v2</code>, <code>create-guests</code>,
+  <code>run-tests</code>, <code>destroy-guests</code>)</dd>
+  <dt>Unit tests and gate</dt><dd>re-run by the independent reviewer at <code>c9ad656db6</code></dd>
+  <dt>Producers</dt><dd>CPO and HCCO from the 4.20.0 release payload; the change is test-only</dd>
+</dl>
+<p>Full output: <a href="appendices.html#a-traceability">appendix A</a>.</p>
+
+<h2 id="verify">How to verify independently</h2>
+<ol>
+  <li><b>Desk audit (no cluster):</b> read the evidence on the <a href="scenario-1.html">scenario page</a> and apply the checklist
+  <a href="scripts/propagation/VERIFY.md"><code>VERIFY.md</code></a>. That is what the
+  <a href="appendices.html#d-independent-reviews">independent evidence review</a> did; compare your findings with it.</li>
+  <li><b>Re-execution:</b> follow <a href="scripts/README.md"><code>scripts/README.md</code></a>. Copy the kit into a hypershift checkout that
+  contains the tests, set <code>CTX</code> and the AWS variables, then run the runbook. Every check prints <code>PASS</code>/<code>FAIL</code> lines.</li>
+  <li><b>Code:</b> re-run the unit tests and the gate commands (<a href="automated-tests.html">automated tests</a>) on the commit.</li>
+</ol>
+
+<h2 id="caveats">Caveats</h2>
+<ul>
+  <li>The producers exercised are the CPO/HCCO of the <b>4.20.0</b> release payload, not code built from this branch. The change is
+  test-only, so this validates the tests against a real producer; current-main producers are covered by the CNTRLPLANE-3929 job.</li>
+  <li>One live run on one management cluster, not the five consecutive reliable CI runs that CNTRLPLANE-3922 asks for before making the job required.</li>
+  <li>Negative cases (wrong labels, missing or reordered mirrors, wrong ConfigMap, malformed payload) are covered by the unit tests, not by the live run.</li>
+  <li>The implementation PR is not opened yet; CI results on it (TC-12) and its number will be added. It depends on #9996.</li>
+</ul>
+</main>
+<footer>
+CNTRLPLANE-3927 — e2e v2 test: imageContentSources propagation to the hosted-cluster IDMS and the ignition ConfigMap ·
+commit <code>c9ad656db6</code> on <a href="https://github.com/openshift/hypershift/pull/9996">openshift/hypershift#9996</a> · report date 2026-10-19.<br>
+All evidence is sanitized (cluster names, domains, AWS identifiers and local paths replaced; see
+<a href="appendices.html#e-sanitization">appendix E</a>). Cluster commands were run by a human; runbooks, scripts,
+the independent reviews and this report were prepared with AI assistance (see appendix F).
+</footer>
+</body>
+</html>

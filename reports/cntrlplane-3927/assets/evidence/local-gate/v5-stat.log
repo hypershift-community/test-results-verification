@@ -1,0 +1,7 @@
+ .../analyzers/e2eutilallowlist/e2eutilallowlist.go |   1 +
+ .../openshift/hypershift/test/e2e/util/util.go     |   4 +
+ .../testdata/src/test/e2e/v2/good/good_test.go     |   1 +
+ .../hosted_cluster_image_mirroring_helpers.go      | 166 ++++++++
+ .../hosted_cluster_image_mirroring_helpers_test.go | 444 +++++++++++++++++++++
+ .../tests/hosted_cluster_image_mirroring_test.go   |  87 ++++
+ 6 files changed, 703 insertions(+)

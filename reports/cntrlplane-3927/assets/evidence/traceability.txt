@@ -1,0 +1,38 @@
+$ git log --oneline -3 c9ad656db6
+c9ad656db6 test(e2e): verify image mirroring propagation through independent paths
+8d54f7ab32 ci: run mirror registry fixture unit tests in other shard
+64ca1b82a7 test(e2e): wire opt-in AWS image mirroring lifecycle
+
+$ git rev-parse c9ad656db6 c9ad656db6^
+c9ad656db618ee953923cb5f8ec91e3566885d95
+8d54f7ab3249ddf01777824b35a60e1025d72972
+
+$ git diff --stat 8d54f7ab3249ddf01777824b35a60e1025d72972 c9ad656db6
+ .../analyzers/e2eutilallowlist/e2eutilallowlist.go |   1 +
+ .../openshift/hypershift/test/e2e/util/util.go     |   4 +
+ .../testdata/src/test/e2e/v2/good/good_test.go     |   1 +
+ .../hosted_cluster_image_mirroring_helpers.go      | 166 ++++++++
+ .../hosted_cluster_image_mirroring_helpers_test.go | 444 +++++++++++++++++++++
+ .../tests/hosted_cluster_image_mirroring_test.go   |  87 ++++
+ 6 files changed, 703 insertions(+)
+
+$ gh pr view 9996 --repo openshift/hypershift --json state,headRefOid,baseRefOid,mergedAt   # 2026-10-19
+{"baseRefOid":"a325c5477680859a4db11886ad4ade17f548a95a","headRefOid":"8d54f7ab3249ddf01777824b35a60e1025d72972","mergedAt":null,"state":"OPEN"}
+
+$ git log -1 --format="%H%n%s%n%n%b" c9ad656db6
+c9ad656db618ee953923cb5f8ec91e3566885d95
+test(e2e): verify image mirroring propagation through independent paths
+
+Detect missing or incorrect image-content-source propagation without letting
+one control plane output serve as the oracle for another.
+
+Add independent lifecycle checks for the hosted cluster IDMS and the decoded
+ignition ConfigMap policy, using nonempty fixture-backed HostedCluster input.
+Preserve mirror priority and multiplicity, require the named targets and worker
+labels, and cover invalid states and exact resource getters with unit tests.
+Allow WithoutConditionDump narrowly so polling avoids unsupported condition
+extraction while retaining useful mismatch diagnostics.
+
+Signed-off-by: Alessandro Rossi <alesross@redhat.com>
+Assisted-by: LLM
+
