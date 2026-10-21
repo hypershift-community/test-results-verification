@@ -99,8 +99,17 @@ id: TP-OCPSTRAT-3298-001        # Unique plan identifier
 date: 2026-09-07                 # Last-updated date (ISO 8601)
 title: "Predictable NodePool Rollout Control"
 status: draft                    # "draft", "active", "superseded", or "archived"
+ieee_829: true                    # Required policy declaration for new plans
 ---
 ```
+
+The discoverability core remains `id`, `title`, `date`, and `status`.
+In addition, new and materially rewritten plans require the boolean
+`ieee_829: true`. Core text fields must be nonempty strings; dates are real
+calendar dates in `YYYY-MM-DD` format (quoted or unquoted). Quoted booleans,
+null required values, duplicate YAML keys, aliases, anchors, merge keys, and
+custom YAML tags are rejected. See [reviewed exceptions](validation.md#legacy-and-adaptation-exceptions)
+for unavailable historical metadata.
 
 ### Recommended Fields
 
@@ -131,7 +140,6 @@ tags:                            # Freeform tags for discovery
   - nodepool
   - rollout
   - machine-config
-ieee_829: true                   # Selects the IEEE 829-2008 body profile
 author: ""                       # Plan author (name or GitHub handle)
 ---
 ```
@@ -156,7 +164,7 @@ author: ""                       # Plan author (name or GitHub handle)
 | `pull_requests[].role` | string | (child) | `implementation`, `backport`, or `test`. |
 | `superseded_by` | string | optional | Filename stem of the replacement plan. |
 | `tags` | list | optional | Freeform tags for search and filtering. |
-| `ieee_829` | boolean | optional | `true` selects the IEEE 829-2008 body profile. |
+| `ieee_829` | boolean | **required for new plans** | Must be `true`; legacy gaps require reviewed exceptions. |
 | `author` | string | optional | Plan author identifier. |
 
 ### Status Lifecycle
@@ -242,13 +250,13 @@ pull_requests:
 
 ## Plan Body Structure
 
-The body structure depends on the plan profile selected via the `ieee_829`
-front-matter field.
+New and materially rewritten plans must use the IEEE 829 profile. The
+lightweight profile is retained only for reviewed legacy artifacts.
 
 ### IEEE 829 Profile (`ieee_829: true`)
 
-When `ieee_829: true`, the plan should follow the IEEE 829-2008 standard
-structure. The recommended sections are:
+Declare `ieee_829: true` and cover these seven content areas, based on the
+repository's IEEE 829-2008-style template:
 
 1. **Test Plan Identifier** — ID, version, date, IEEE 829 reference
 2. **Introduction and Objectives** — purpose, objectives, acceptance criteria
@@ -261,25 +269,37 @@ structure. The recommended sections are:
 6. **Risks and Mitigations** — known risks and contingency plans
 7. **Approvals** — sign-off section
 
-This structure is a guideline. Adapt sections as needed for the feature under
-test — not every IEEE 829 plan needs every section.
+Each area needs a heading and content, but exact numbering and heading text
+are not required. Equivalent headings include **Purpose and Objectives**,
+**References**, **Prerequisites**, **Test Approach and Design**, **Risks and
+Contingencies**, and **Approval and Exit Criteria**. Combined headings may
+cover multiple areas. Code-fenced headings do not satisfy a content area.
+Explain an inapplicable area rather than silently omitting it; substantial
+adaptations can use an explicitly reviewed `STRUCTURE` exception.
 
-### Lightweight Profile (default)
+These are machine-checkable **repository requirements**, not a claim that
+lint certifies IEEE compliance. Reviewers assess meaningful steps, expected
+results, acceptance coverage, and adequate evidence.
 
-When `ieee_829` is absent or `false`, the plan uses a simpler free-form
-Markdown structure. At a minimum it should cover:
+<a id="lightweight-profile-default"></a>
+
+### Lightweight Profile (legacy only)
+
+An explicitly registered legacy plan may retain absent/false `ieee_829`
+metadata and a free-form Markdown body. Preserve available coverage of:
 
 - **Scope** — what feature or behavior is being tested and why.
 - **Test cases** — what will be verified, with steps or references.
 - **Acceptance criteria** — what constitutes a pass.
 
-There is no required section numbering or IEEE heading convention. Authors
-may organize content in whatever way best communicates the test strategy.
+Record known gaps and the original source in the migration inventory and
+[exception configuration](validation.md#legacy-and-adaptation-exceptions).
+Absence of `ieee_829` is not an automatic opt-out for new plans.
 
 ## Plan Template
 
-Choose a template based on the plan profile you want to use. See
-[Plan Body Structure](#plan-body-structure) for details on each profile.
+Use the IEEE 829 template for new plans. The lightweight template is retained
+as a reference for preserving historical artifacts, not for new submissions.
 
 ### IEEE 829 Template (`ieee_829: true`)
 
@@ -393,9 +413,11 @@ Describe the feature under test and the purpose of this plan.
 | Reviewer | | |
 ````
 
-### Lightweight Template (default)
+<a id="lightweight-template-default"></a>
 
-Use this template when the full IEEE 829 structure is not needed:
+### Lightweight Template (legacy only)
+
+Historical reference only; preservation requires a reviewed legacy exception:
 
 ````markdown
 ---
@@ -449,6 +471,24 @@ screenshots, and CI result summaries.
 
 HTML-bundle reports use a `metadata.yaml` file (not YAML front-matter)
 placed at the root of the report directory:
+
+Required fields are `jira_key`, `format`, `date`, `verdict`, `scenario_count`,
+`pass_count`, `ci_verified`, and `has_derived_markdown`. `plan` is optional
+(omit or use `""` when no plan exists). `tags`, `pr`, and `tester` are optional;
+when supplied, `pr` follows the Markdown-report PR mapping below.
+
+- `jira_key` must match the lowercase directory's Jira key.
+- `format` is `html-bundle`; `verdict` is `pass`, `fail`, or `conditional`.
+- Counts are nonnegative decimal integers, not booleans or quoted numbers.
+  `scenario_count` equals the number of root-level `scenario-N.html` pages
+  (positive decimal numbers without leading zeroes); it is not a count of
+  test cases. `pass_count` cannot exceed `scenario_count`.
+- The two flags are YAML booleans. `ci_verified: true` requires
+  `automated-tests.html`; file presence alone does not prove CI passed.
+  `has_derived_markdown` must exactly match `derived/report.md` presence.
+- A supplied nonempty `plan` references an existing production plan filename
+  stem. If that plan lists Jira issues, it must include this report's Jira key,
+  whether primary or backport. Reports without an available plan are valid.
 
 ```yaml
 # reports/ocpbugs-100054/metadata.yaml
@@ -542,6 +582,46 @@ Markdown reports are lightweight, single-file reports for simpler
 verification results. Use this format when the report does not require
 a full HTML bundle.
 
+Required front-matter fields are `jira_key`, `format: markdown`, `pr`, `date`,
+and `verdict`. The `pr` mapping requires `repo`, a positive integer `number`,
+and a matching HTTPS GitHub PR `url`; the filename is `<number>.md`.
+`plan` is optional as above, and `tester` is recommended when known (a string,
+possibly empty for compatibility). Include headings for environment, results,
+and evidence; additional text may appear in the headings. The required
+`verdict` metadata supplies the overall outcome. A body verdict heading or
+header such as `**Verdict:** **PASS**` is optional, not a second requirement.
+
+Both report formats accept well-documented `fail` and `conditional` verdicts.
+Lint checks structure and consistency, not the success of the tested change.
+Markdown reports may keep local screenshots/logs and other evidence in the
+same Jira directory without becoming HTML bundles. Root-level HTML pages or
+`metadata.yaml` or `derived/report.md` indicate an HTML bundle; otherwise a
+directory with only supporting files and no Markdown report is an incomplete
+bundle.
+
+#### Explicit Markdown result counts
+
+Optional report-wide summaries may state counts, for example:
+
+```markdown
+**Verdict:** **CONDITIONAL** (2 pass, 1 fail, 1 skip [environment])
+```
+
+When there is exactly one top-level test-case results table, lint compares
+each explicit `N pass`, `N fail`, or `N skip` count in a top-level `Verdict:`
+or `Summary:` paragraph line against that table's rows. The label can follow
+other header fields in the same paragraph. The table needs a `Test Case`
+column and one `Result` or `Status` column whose cells are `PASS`, `FAIL`, or
+`SKIP`. Labels/statuses are case-insensitive and may use inline formatting.
+Omitted summary counts are not assumed to be zero. A mismatch is a `COUNTS`
+error at the summary line; consistent failed/skipped results remain valid.
+
+This is a deliberately bounded consistency check, not a natural-language
+audit. It does not infer totals from prose, inspect fenced/quoted examples or
+inline-code summary examples, or choose between multiple results tables.
+Empty tables, ambiguous columns, other status vocabularies, HTML dashboards,
+and differently scoped summaries still need human review.
+
 ````markdown
 ---
 plan: ocpstrat-3298              # Filename stem of the test plan
@@ -599,10 +679,9 @@ Automation **must**:
    `pull_requests` when the information is available.
 2. Use the correct filename convention (`plans/<jira-key>.md` or
    `plans/<slug>.md`).
-3. Choose a plan profile:
-   - If `ieee_829: true` is set, follow the IEEE 829-2008 body structure.
-   - Otherwise, use a lightweight Markdown body covering scope, test
-     cases, and acceptance criteria.
+3. Set `ieee_829: true` for new and materially rewritten plans and cover the
+   content areas in [Plan Body Structure](#plan-body-structure). Preserve
+   historical exceptions explicitly; do not generate new lightweight plans.
 4. Set `status: draft` for newly generated plans.
 5. Include all known Jira issues and PRs in the metadata when available.
 6. Open a PR against `main` with title format
@@ -652,9 +731,13 @@ Automation should validate before committing:
 - YAML front-matter is parseable.
 - Required core metadata fields (`id`, `title`, `date`, `status`) are present.
 - All URLs in metadata are well-formed.
-- If `ieee_829: true`, the body contains the expected IEEE 829 sections.
+- New plans declare `ieee_829: true` and cover the required content areas.
 - Filename matches the primary Jira key or slug.
 - No secrets or private content patterns detected.
+
+Run `make lint-artifacts` to perform these checks plus report, relationship,
+local-link, and redacted secret scanning. See [validation](validation.md) for
+rule IDs, operational limits, and requirements that need human review.
 
 > **Note:** Implementation of these automation capabilities in the
 > `ai-helpers` skill library is tracked as a follow-up to

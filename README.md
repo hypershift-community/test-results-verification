@@ -8,7 +8,7 @@ individual personal GitHub repositories.
 
 ```
 .
-├── plans/                  # Test plans (Markdown; IEEE 829 or lightweight)
+├── plans/                  # Test plans (Markdown; IEEE 829 for new plans)
 │   ├── <jira-key>.md       # Plan linked to a Jira issue (e.g. ocpstrat-3298.md)
 │   └── <slug>.md           # Plan without a Jira issue (e.g. csi-snapshot-validation.md)
 ├── reports/                # Verification reports (HTML bundle or Markdown)
@@ -34,14 +34,15 @@ individual personal GitHub repositories.
 ### Plans (`plans/`)
 
 Each test plan is a single Markdown file with YAML front-matter metadata.
-Plans support two profiles:
+**New and materially rewritten plans must declare `ieee_829: true`** and
+cover the content areas in the [format specification](docs/format.md#plan-body-structure).
+Equivalent headings and numbering are supported. Structural validation does
+not certify compliance with the IEEE standard or assess test quality.
 
-- **IEEE 829** — set `ieee_829: true` in front-matter to follow the full
-  IEEE 829-2008 body structure with numbered sections. Preferred for
-  comprehensive, multi-scenario plans.
-- **Lightweight** — when `ieee_829` is absent or `false`, a simpler
-  free-form Markdown structure covering scope, test cases, and acceptance
-  criteria is valid.
+Legacy lightweight/incomplete plans can be preserved through
+[explicit reviewed exceptions](docs/validation.md#legacy-and-adaptation-exceptions).
+Missing metadata must not be fabricated, and minor metadata-only updates do
+not force a rewrite.
 
 A single plan can reference multiple Jira issues and PRs to support backport
 workflows. See [docs/format.md](docs/format.md#naming-conventions) for naming
@@ -80,6 +81,16 @@ Reports support **two formats**:
 3. Copy an existing plan from `plans/` or use the template in
    [docs/format.md](docs/format.md#plan-template).
 4. Open a PR adding your plan or report.
+
+## Validation
+
+Run `make install-tools` once, then `make test lint build` before submitting.
+`make lint-go` runs golangci-lint on the Go implementation;
+`make lint-artifacts` validates plans, reports, local navigation, and sanitization.
+The same checks run in GitHub Actions. See [validation](docs/validation.md) for
+prerequisites, diagnostics, security limitations, and legacy handling.
+CI uses the shared ARM64 self-hosted runners and requires the
+[repository-scoped ARC registration](docs/runners.md).
 
 ## Automation Integration
 

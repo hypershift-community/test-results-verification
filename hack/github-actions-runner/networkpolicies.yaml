@@ -1,0 +1,82 @@
+# Operator-approved isolation for arc-test-results only.
+# Applying/changing these policies requires separate live-cluster approval.
+# ARC job pods carry app.kubernetes.io/component=runner. The controller and
+# listener remain in arc-systems, outside these namespaced policies.
+# Public HTTPS is not a GitHub-only domain allowlist or a complete sandbox.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: runner-default-deny
+  namespace: arc-test-results
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress: []
+  egress: []
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: runner-allow-cluster-dns
+  namespace: arc-test-results
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/component: runner
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: openshift-dns
+          podSelector:
+            matchLabels:
+              dns.operator.openshift.io/daemonset-dns: default
+      ports:
+        # The DNS Service exposes 53; the inspected DNS pods listen on 5353.
+        - protocol: UDP
+          port: 53
+        - protocol: TCP
+          port: 53
+        - protocol: UDP
+          port: 5353
+        - protocol: TCP
+          port: 5353
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: runner-allow-public-https
+  namespace: arc-test-results
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/component: runner
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - ipBlock:
+            cidr: 0.0.0.0/0
+            except:
+              - 0.0.0.0/8
+              - 10.0.0.0/8
+              - 100.64.0.0/10
+              - 127.0.0.0/8
+              - 169.254.0.0/16
+              - 172.16.0.0/12
+              - 192.0.0.0/24
+              - 192.0.2.0/24
+              - 192.88.99.0/24
+              - 192.168.0.0/16
+              - 198.18.0.0/15
+              - 198.51.100.0/24
+              - 203.0.113.0/24
+              - 224.0.0.0/4
+              - 240.0.0.0/4
+      ports:
+        - protocol: TCP
+          port: 443

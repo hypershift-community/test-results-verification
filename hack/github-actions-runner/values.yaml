@@ -1,0 +1,37 @@
+# Repository-scoped pool on the existing shared ARC controller (chart 0.14.2).
+# Deploy in arc-test-results, NOT the existing arc-runners namespace.
+githubConfigUrl: "https://github.com/hypershift-community/test-results-verification"
+githubConfigSecret: "github-app"
+runnerScaleSetName: "arc-runner-set"
+
+controllerServiceAccount:
+  namespace: arc-systems
+  name: arc-gha-rs-controller
+
+# No idle job runners; keep this repository's burst capacity modest.
+minRunners: 0
+maxRunners: 2
+
+template:
+  spec:
+    automountServiceAccountToken: false
+    nodeSelector:
+      kubernetes.io/arch: arm64
+    containers:
+      - name: runner
+        image: quay.io/redhat-user-workloads/crt-redhat-acm-tenant/hypershift-gh-actions-runner@sha256:c078fabc9b9f8b8a9310e576f37baba58b7af87dcf59bb48b49287fd88cd1bf1
+        command: ["/home/runner/run.sh"]
+        resources:
+          requests:
+            cpu: "4"
+            memory: "16Gi"
+          limits:
+            cpu: "4"
+            memory: "16Gi"
+    topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: ScheduleAnyway
+        labelSelector:
+          matchLabels:
+            app.kubernetes.io/component: runner
