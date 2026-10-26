@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scenario 3 — Reachability (hosted-cluster nodes pull from the mirror) — CNTRLPLANE-3926 verification</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topbar"><div class="brand">CNTRLPLANE-3926 · Verification report</div><nav><a href="index.html">Dashboard</a><a href="scenario-1.html">1 · Smoke</a><a href="scenario-2.html">2 · Harness</a><a href="scenario-3.html" class="active">3 · Reachability</a><a href="automated-tests.html">Automated tests</a><a href="appendices.html">Appendices</a><a href="../../plans/cntrlplane-3926.md">Test plan</a><a href="https://github.com/openshift/hypershift/pull/9996">PR #9996</a></nav></header>
+<main>
+<h1>Scenario 3 — Reachability (hosted-cluster nodes pull from the mirror)</h1>
+<p class="subtitle">End-to-end check on a dedicated AWS HostedCluster, with a negative control</p>
+<dl class="kv">
+  <dt>Objective</dt><dd>AC3: nodes of a HostedCluster created with the fixture outputs (<code>--additional-trust-bundle</code>,
+  <code>--image-content-sources</code>) pull from the mirror over verified TLS, anonymously. A pod references the <b>virtual</b> repository
+  <code>mirror-source.hypershift-e2e.invalid/libpod/registry@&lt;digest&gt;</code>. <code>.invalid</code> never resolves, so only the mirror
+  can serve it, and the mirror's own log shows the CRI-O requests</dd>
+  <dt>Code under test</dt><dd>Fixture (via the harness, at <code>38342d4965</code>; fixture package identical to the PR head) +
+  <code>hypershift create cluster aws</code></dd>
+  <dt>Environment</dt><dd>Dedicated HostedCluster <code>clusters/mirror-reach</code>: OCP 4.20.0, 2 workers, RHCOS 9.6, kubelet v1.33.5, CRI-O 1.33.4,
+  AWS <code>us-east-1</code>; HyperShift operator <code>e83d9072…</code>, CLI <code>cce02430…</code></dd>
+  <dt>Tools</dt><dd><a href="scripts/reachability/check.sh"><code>check.sh hc|guest|pods</code></a> (PASS/FAIL lines),
+  <a href="scripts/reachability/manifests/pod.yaml"><code>pod.yaml</code></a> (restricted, <code>imagePullPolicy: Always</code>)</dd>
+  <dt>Date</dt><dd>2026-10-14</dd>
+  <dt>Verdict</dt><dd><span class="badge note">PASS (notes)</span> confirmed by an <a href="appendices.html#d-independent-review">independent read-only review</a> of the
+  evidence against <a href="scripts/reachability/VERIFY.md"><code>VERIFY.md</code></a></dd>
+</dl>
+<div class="callout warn"><p><b>Notes (non-blocking):</b> (1) the raw mirror-log excerpt in step 6 ends on blob GETs; the manifest GETs are
+proven by <code>check.sh pods</code> (<code>4/4 lines</code>) and by step 7 (4 → 8). (2) The runbook says <code>check.sh pods</code> has 5 checks,
+but the script prints 6. (3) <code>hypershift destroy</code> leaves the CLI-created <code>user-ca-bundle</code> ConfigMap in the HostedCluster
+namespace (follow-up for CNTRLPLANE-3929).</p></div>
+<h2 id="test-cases">Test cases</h2>
+<table><thead><tr><th>TC</th><th>Test case</th><th>Runbook steps</th><th>Covers</th><th>Result</th><th>Key evidence</th></tr></thead><tbody><tr id="tc-13"><td><b>TC-13</b></td><td>HostedCluster carries the fixture CA and ICS</td><td>1–3</td><td>AC4, AC6</td><td><span class="badge pass">PASS</span></td><td><code>check.sh hc</code> 3/3; HC Available; NodePool 2/2 AllNodesHealthy</td></tr><tr id="tc-14"><td><b>TC-14</b></td><td>Configuration reaches the hosted cluster and its nodes</td><td>4–5</td><td>AC3, AC4</td><td><span class="badge pass">PASS</span></td><td><code>check.sh guest</code> 7/7; IDMS; digest-only <code>registries.conf</code>; node anchor; node <code>curl</code> → <code>{} 200</code> with system trust</td></tr><tr id="tc-15"><td><b>TC-15</b></td><td>Pod from the virtual repository by digest pulls from the mirror</td><td>6</td><td>AC3</td><td><span class="badge note">PASS (notes)</span></td><td>pulled in 807 ms, <code>imagePullPolicy: Always</code>; mirror log: CRI-O manifest GETs → 200</td></tr><tr id="tc-16"><td><b>TC-16</b></td><td>Negative control: tag pull does not use the mirror</td><td>6</td><td>AC3</td><td><span class="badge pass">PASS</span></td><td><code>lookup mirror-source.hypershift-e2e.invalid … no such host</code>; 0 tag lookups in the mirror log</td></tr><tr id="tc-17"><td><b>TC-17</b></td><td><code>Always</code> re-contacts the mirror with a cached image</td><td>7</td><td>info (3928)</td><td><span class="badge pass">PASS</span></td><td>manifest requests 4 → 8; pulled in 67 ms</td></tr><tr id="tc-18"><td><b>TC-18</b></td><td>Cleanup leaves no leftovers</td><td>8</td><td>—</td><td><span class="badge pass">PASS</span></td><td>destroy ~6 min; VPC/instance queries empty; namespaces NotFound</td></tr></tbody></table>
+
+<h2 id="procedure">Procedure</h2>
+<p>The runbook below is the one in the reproduction kit (<a href="scripts/reachability/RUNBOOK.md"><code>scripts/reachability/RUNBOOK.md</code></a>).
+It is the executed runbook after sanitization, minus the internal workflow notes listed under
+<a href="appendices.html#kit-changes">kit changes</a>.</p>
+<details><summary>Runbook — expected results for every step</summary>
+<div class="evidence"><p>Goal (3926 acceptance criterion): prove that nodes of a hosted cluster created with the fixture's outputs
+(<code>--additional-trust-bundle</code>, <code>--image-content-sources</code>) pull from the mirror over verified TLS, anonymously.
+Evidence that cannot come from anywhere else: a pod referencing the <strong>virtual</strong> repository
+<code>mirror-source.hypershift-e2e.invalid/libpod/registry@&lt;digest&gt;</code> with <code>imagePullPolicy: Always</code> starts
+(<code>.invalid</code> never resolves, so only the mirror can answer), and the mirror's own log shows the CRI-O requests.</p>
+<p>Fill <code>RESULTS.md</code> as you go (each step has a <strong>Record</strong> line) and paste command output under the matching
+<strong>Evidence</strong> heading. This is a manual proof: no code changes expected. If something fails, capture the
+"On failure" commands of the step <strong>before</strong> destroying anything.</p>
+<p>Scope and safety:
+- Management-cluster changes only on <code>mgmt</code>: namespace <code>test-mirror-registry</code> (fixture) and the new
+  HostedCluster <code>clusters/mirror-reach</code> (+ its <code>clusters-mirror-reach</code> control-plane namespace). Parent cluster untouched.
+- The <code>hypershift</code> CLI gets <code>out/mc.kubeconfig</code>, which contains <strong>only</strong> the <code>mgmt</code> context (<code>hs</code> wrapper).
+- AWS: the CLI creates VPC/NAT/IAM/Route53 for <code>mirror-reach</code> (account of <code>~/.aws/credentials</code>); step 8 removes them.
+- <code>out/</code> holds kubeconfigs, the CA (and <code>harness/out</code> the CA keys of T6). Local only, never paste them.
+- Time: ~1.5 h, mostly waiting (HC + nodes ~25–35 min, destroy ~10–15 min). Cost: 2 × default worker + NAT for that time.</p>
+<p>Tools: <code>harness</code> (T6), <code>hs</code> (= <code>hypershift</code> with <code>mc.kubeconfig</code>), <code>guest</code> (= <code>oc</code> on the hosted cluster),
+<code>k</code> (= <code>oc --context mgmt</code>), <code>pod &lt;name&gt; &lt;image&gt;</code> (renders <code>manifests/pod.yaml</code>), <code>check.sh &lt;phase&gt;</code>
+(PASS/FAIL lines). Run everything from the repository root.</p>
+<hr />
+<h4 id="s3-rb-0-environment-and-preflight">0. Environment and preflight</h4>
+<p><pre class="highlight"><code class="language-bash">source .work/cntrlplane-3926/reachability/env.sh
+k get ns "$NS"                                   # expected: NotFound (T6 tore it down)
+k get hostedcluster -A                           # expected: No resources found
+hs version                                       # expected: Client cce02430…, Server e83d9072…, supported up to 4.21
+aws sts get-caller-identity --query Arn --output text                      # expected: arn:aws:iam::123456789012:user/tester
+aws route53 list-hosted-zones-by-name --dns-name "$BASE_DOMAIN" --max-items 1 \
+  --query 'HostedZones[0].[Name,Config.PrivateZone]' --output text           # expected: hypershift.example.com.  False
+jq -e '.auths["quay.io"]' "$PULL_SECRET" &gt;/dev/null &amp;&amp; echo "pull secret has quay.io"
+go build -o /dev/null ./.work/cntrlplane-3926/harness &amp;&amp; echo "harness builds"</code></pre>
+Expected: as commented; <code>env.sh</code> prints <code>HC=clusters/mirror-reach …</code> and <code>HOST=mirror-registry-test-mirror-registry.apps.mgmt…</code>.
+If <code>k</code> fails with <code>TLS handshake timeout</code> (seen on 2026/10/14), just retry: the mgmt API is occasionally slow.</p>
+<p><strong>Record:</strong> versions, anything unexpected.</p>
+<h4 id="s3-rb-1-fresh-mirror-fixture-setup">1. Fresh mirror (fixture Setup)</h4>
+<p>Terminal 2 (optional, same as T6; needs <code>source .work/cntrlplane-3926/reachability/env.sh</code> there too):
+<code>.work/cntrlplane-3926/harness/watch.sh "$REACH_OUT/watch-setup.log"</code> — <strong>stop it with Ctrl-C as soon as <code>harness setup</code>
+exits</strong>; it is not used after step 1 (its log is step 1 evidence).</p>
+<p>Terminal 1:
+<pre class="highlight"><code class="language-bash">harness setup -out "$RUN" 2&gt;&amp;1 | tee "$REACH_OUT/setup.log"
+.work/cntrlplane-3926/harness/verify.sh "$RUN"
+cat "$RUN/ics.yaml"
+openssl x509 -in "$RUN/ca-only/ca.crt" -noout -subject -fingerprint -sha256</code></pre>
+Expected:
+- exit 0 in ~1 min, <code>copier image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:…</code>, <code>result.json</code> printed
+  (same shape as T6 step 1); no <code>VIOLATION</code> in the watcher;
+- <code>verify: 0 failure(s)</code> (5 PASS);
+- <code>ics.yaml</code> has exactly two entries, in this order:
+  <pre class="highlight"><code class="language-yaml">- mirrors:
+  - mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/mirror-source.hypershift-e2e.invalid/libpod/registry
+  source: mirror-source.hypershift-e2e.invalid/libpod/registry
+- mirrors:
+  - mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/quay.io/libpod/registry
+  source: quay.io/libpod/registry</code></pre>
+- CA subject <code>CN=hypershift-e2e-mirror-registry-ca</code> (a <strong>new</strong> CA: the namespace and its <code>-ca</code> Secret were deleted in T6).</p>
+<p><strong>Record:</strong> Setup duration, verify result, CA fingerprint (it is compared in later checks).</p>
+<blockquote>
+<p>Leave the mirror running until step 8. Do <strong>not</strong> re-run <code>harness setup</code> with a different CA while the HC
+exists: nodes trust only the CA they were created with (changing it later means a NodePool rollout).</p>
+</blockquote>
+<h4 id="s3-rb-2-create-the-hosted-cluster-with-the-fixture-outputs">2. Create the hosted cluster with the fixture outputs</h4>
+<p><pre class="highlight"><code class="language-bash">hs create cluster aws \
+  --name "$HC_NAME" --namespace "$HC_NS" \
+  --base-domain "$BASE_DOMAIN" --region "$AWS_REGION" --zones "${AWS_REGION}a" \
+  --aws-creds "$AWS_CREDS" --pull-secret "$PULL_SECRET" \
+  --release-image "$RELEASE_IMAGE" \
+  --node-pool-replicas 2 --generate-ssh \
+  --additional-trust-bundle "$RUN/ca-only/ca.crt" \
+  --image-content-sources "$RUN/ics.yaml" \
+  2&gt;&amp;1 | tee "$REACH_OUT/create.log"
+export INFRA_ID="$(k -n "$HC_NS" get hostedcluster "$HC_NAME" -o jsonpath='{.spec.infraID}')"; echo "INFRA_ID=$INFRA_ID"
+echo "export INFRA_ID=$INFRA_ID" &gt; "$REACH_OUT/infra-id.sh"     # re-source it in a new shell before step 8
+.work/cntrlplane-3926/reachability/check.sh hc
+k -n "$HC_NS" get hostedcluster "$HC_NAME" -o jsonpath='{.spec.additionalTrustBundle}{"\n"}{.spec.imageContentSources}{"\n"}'</code></pre>
+Expected:
+- <code>--aws-creds</code> is deprecated/hidden but works (used for <code>an earlier cluster</code> on 2026/10/09). The CLI logs VPC/subnet/
+  NAT/Route53/IAM/OIDC creation, then <code>Applied Kube resource</code> for Namespace <code>clusters</code>, the pull-secret Secret,
+  ConfigMap <code>clusters/user-ca-bundle</code> (key <code>ca-bundle.crt</code>), HostedCluster and NodePool <code>mirror-reach-us-east-1a</code>; exit 0 in ~3–6 min;
+- <code>INFRA_ID=mirror-reach-xxxxx</code>;
+- <code>check.sh hc</code>: 3 PASS (<code>spec.additionalTrustBundle set</code>, ConfigMap CA == mirror CA, <code>spec.imageContentSources == harness ICS</code>),
+  <code>check hc: 0 failure(s)</code>.</p>
+<p>On failure: keep <code>create.log</code>; if infra was created but the HC was not applied, still run step 8 (destroy cleans by infra ID).</p>
+<p><strong>Record:</strong> duration, INFRA_ID, check output.</p>
+<h4 id="s3-rb-3-wait-for-the-control-plane-and-the-nodes">3. Wait for the control plane and the nodes</h4>
+<p><pre class="highlight"><code class="language-bash">k -n "$HC_NS" wait hostedcluster/"$HC_NAME" --for=condition=Available --timeout=30m
+k -n "$HC_NS" get hostedcluster,nodepool
+k -n "$HC_NS" wait nodepool/"${HC_NAME}-${AWS_REGION}a" --for=condition=AllNodesHealthy --timeout=40m</code></pre>
+Expected: HC <code>Available=True</code> after ~10–15 min (<code>PROGRESS</code> may stay <code>Partial</code> until the guest operators settle; not
+needed here); NodePool <code>2/2</code> (<code>CURRENT NODES 2</code>), <code>AllNodesHealthy=True</code> after another ~10–15 min.
+The control plane must reach Available without problems: our ICS entries only cover <code>quay.io/libpod/registry</code> and the
+virtual repo, so release-image lookups are not affected.</p>
+<p>On failure (before step 8):
+<pre class="highlight"><code class="language-bash">k -n "$HC_NS" get hostedcluster "$HC_NAME" -o jsonpath='{range .status.conditions[*]}{.type}={.status} {.reason}: {.message}{"\n"}{end}'
+k -n "$HC_NS" get nodepool -o jsonpath='{range .items[0].status.conditions[*]}{.type}={.status} {.reason}: {.message}{"\n"}{end}'
+k -n "$HCP_NS" get pods | grep -v -E 'Running|Completed'
+k -n "$HCP_NS" get machines.cluster.x-k8s.io,awsmachines</code></pre>
+<strong>Record:</strong> times to Available / nodes ready, any non-True condition worth noting.</p>
+<h4 id="s3-rb-4-hosted-cluster-access">4. Hosted-cluster access</h4>
+<p><pre class="highlight"><code class="language-bash">k -n "$HC_NS" get secret "${HC_NAME}-admin-kubeconfig" -o jsonpath='{.data.kubeconfig}' | base64 -d &gt; "$GUEST_KUBECONFIG"
+chmod 600 "$GUEST_KUBECONFIG"
+guest get nodes -o wide
+guest get clusterversion</code></pre>
+Expected: 2 nodes <code>Ready</code>, <code>ROLES worker</code>, RHCOS 9.6 / kubelet v1.33 / cri-o 1.33 (OCP 4.20). ClusterVersion may still show an
+empty <code>VERSION</code>, <code>AVAILABLE False</code>, <code>PROGRESSING True</code>, e.g. <code>Unable to apply 4.20.0: the cluster operator monitoring is not available</code>
+for the first ~10–20 min after the nodes join: fine, steps 5–6 do not depend on it (seen on the 2026/10/14 run).</p>
+<p><strong>Record:</strong> node names.</p>
+<h4 id="s3-rb-5-configuration-reached-the-hosted-cluster-and-its-nodes">5. Configuration reached the hosted cluster and its nodes</h4>
+<p><pre class="highlight"><code class="language-bash">.work/cntrlplane-3926/reachability/check.sh guest
+guest get imagedigestmirrorset cluster -o yaml | yq '.spec'
+NODE="$(guest get nodes -o jsonpath='{.items[0].metadata.name}')"
+guest debug -q "node/$NODE" -- chroot /host sh -c 'grep -B2 -A4 "hypershift-e2e.invalid" /etc/containers/registries.conf' 2&gt;/dev/null</code></pre>
+Expected:
+- <code>check.sh guest</code>: 7 PASS — IDMS <code>cluster</code> maps both repos to <code>$HOST/&lt;repo&gt;</code>; <code>openshift-config/user-ca-bundle</code> == mirror CA;
+  node <code>/etc/containers/registries.conf</code> maps the virtual repo to the mirror, digest-only;
+  node anchor <code>/etc/pki/ca-trust/source/anchors/openshift-config-user-ca-bundle.crt</code> == mirror CA;
+  <code>curl https://$HOST/v2/</code> <strong>from the node, without <code>--cacert</code></strong> → <code>{} 200</code> (node reaches the Route and trusts our CA at OS level);
+- IDMS spec: two <code>imageDigestMirrors</code> entries (<code>source</code> + one <code>mirrors</code> item each, no <code>mirrorSourcePolicy</code> → fallback allowed);
+- <code>registries.conf</code> excerpt similar to:
+  <pre class="highlight"><code class="language-toml">[[registry]]
+  prefix = ""
+  location = "mirror-source.hypershift-e2e.invalid/libpod/registry"
+
+  [[registry.mirror]]
+    location = "mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/mirror-source.hypershift-e2e.invalid/libpod/registry"
+    pull-from-mirror = "digest-only"</code></pre>
+<code>oc debug node</code> pulls the tools image from the release payload: the first call takes ~30 s.
+If <code>check.sh guest</code> fails only on the node checks right after step 4, wait a few minutes (HCCO/MCO reconciliation) and re-run.</p>
+<p><strong>Record:</strong> check output, registries.conf excerpt.</p>
+<h4 id="s3-rb-6-the-proof-pod-from-the-virtual-repository-by-digest-and-a-negative-control">6. The proof: pod from the virtual repository by digest, and a negative control</h4>
+<p><pre class="highlight"><code class="language-bash">guest create ns "$GUEST_NS"
+pod "$POD_DIGEST" "${VIRTUAL_REPO}@${TEST_DIGEST}" | guest apply -f -
+guest -n "$GUEST_NS" wait pod/"$POD_DIGEST" --for=condition=Ready --timeout=5m
+pod "$POD_TAG" "${VIRTUAL_REPO}:2.8.2" | guest apply -f -
+sleep 60
+guest -n "$GUEST_NS" get pods -o wide
+guest -n "$GUEST_NS" get events --sort-by=.lastTimestamp | grep -E 'Pulling|Pulled|Failed|BackOff'
+guest -n "$GUEST_NS" logs "$POD_DIGEST" | head -5
+guest -n "$GUEST_NS" get pod "$POD_DIGEST" -o jsonpath='{.spec.nodeName}{"  "}{.status.containerStatuses[0].imageID}{"\n"}'
+.work/cntrlplane-3926/reachability/check.sh pods
+k -n "$NS" logs "deploy/$NAME" | grep cri-o | grep -F "$VIRTUAL_REPO" | tail -5</code></pre>
+Expected:
+- PSA may print a <code>Warning: would violate PodSecurity</code> line only if the manifest were non-compliant — it is compliant, so none;
+- <code>mirror-by-digest</code> <code>Running</code> <code>1/1</code> within ~1 min; events <code>Pulling image "mirror-source.hypershift-e2e.invalid/libpod/registry@sha256:e642e860…"</code>
+  then <code>Successfully pulled image … in &lt;n&gt;s</code>; logs contain <code>listening on [::]:5000</code>;
+- <code>mirror-by-tag</code> <code>ErrImagePull</code>/<code>ImagePullBackOff</code>; its <code>Failed</code> event says the virtual registry cannot be resolved
+  (<code>… lookup mirror-source.hypershift-e2e.invalid … no such host</code> or similar). This proves the source does not exist, so the
+  digest pod could only have been served by the mirror (and that the mirror is used for digests only);
+- <code>imageID</code> references <code>mirror-source.hypershift-e2e.invalid/libpod/registry@sha256:…</code> (the digest may be the amd64
+  instance digest instead of the manifest-list <code>e642e860…</code>; both are fine);
+- <code>check.sh pods</code>: 5 PASS (Ready; image + <code>Always</code>; <code>Successfully pulled</code>; tag pod fails; mirror log has CRI-O
+  <code>GET /v2/mirror-source.hypershift-e2e.invalid/libpod/registry/manifests/sha256:…</code> → 200; no tag lookups), <code>0 failure(s)</code>;
+- mirror log lines: <code>http.request.method=GET</code>, <code>http.request.uri="/v2/mirror-source.hypershift-e2e.invalid/libpod/registry/manifests/sha256:…"</code>,
+  <code>http.request.useragent="cri-o/1.33… "</code>, <code>http.response.status=200</code> (the remote address is the router pod: passthrough
+  Routes do not forward the client IP).</p>
+<p><strong>Record:</strong> time to Running, events, imageID, check output, 2–3 mirror log lines.</p>
+<h4 id="s3-rb-7-quick-recommended-imagepullpolicy-always-hits-the-mirror-again-with-a-cached-image">7. (Quick, recommended) <code>imagePullPolicy: Always</code> hits the mirror again with a cached image</h4>
+<p>The node now has the image. Recreate the pod on the <strong>same node</strong> and check that the mirror gets a new manifest request.
+<pre class="highlight"><code class="language-bash">NODE="$(guest -n "$GUEST_NS" get pod "$POD_DIGEST" -o jsonpath='{.spec.nodeName}')"
+before="$(k -n "$NS" logs "deploy/$NAME" | grep cri-o | grep -cF "/v2/$VIRTUAL_REPO/manifests/")"
+guest -n "$GUEST_NS" delete pod "$POD_DIGEST" --wait
+pod "$POD_DIGEST" "${VIRTUAL_REPO}@${TEST_DIGEST}" | NODE="$NODE" yq '.spec.nodeName = strenv(NODE)' | guest apply -f -
+guest -n "$GUEST_NS" wait pod/"$POD_DIGEST" --for=condition=Ready --timeout=5m
+after="$(k -n "$NS" logs "deploy/$NAME" | grep cri-o | grep -cF "/v2/$VIRTUAL_REPO/manifests/")"
+echo "manifest requests: before=$before after=$after"
+guest -n "$GUEST_NS" get events --field-selector involvedObject.name="$POD_DIGEST" --sort-by=.lastTimestamp | tail -3</code></pre>
+Expected: <code>after &gt; before</code>; the new <code>Pulled</code> event says <code>Successfully pulled image …</code> (or <code>… already present</code> only for
+layers, never skipping the manifest fetch). This confirms the note in <code>plan.md</code> for CNTRLPLANE-3928.</p>
+<p><strong>Record:</strong> before/after counts.</p>
+<h4 id="s3-rb-8-cleanup-hc-first-then-the-mirror">8. Cleanup (HC first, then the mirror)</h4>
+<p>Run in the <strong>same terminal</strong> as the previous steps (env and <code>INFRA_ID</code> are already set). Only if you are in a new
+terminal, first run <code>source .work/cntrlplane-3926/reachability/env.sh &amp;&amp; source "$REACH_OUT/infra-id.sh"</code>.
+The step 1 watcher must already be stopped.</p>
+<p><pre class="highlight"><code class="language-bash">echo "INFRA_ID=$INFRA_ID"          # must be mirror-reach-xxxxx: the AWS leftover queries below filter on it
+guest delete ns "$GUEST_NS" --wait=false 2&gt;/dev/null
+hs destroy cluster aws --name "$HC_NAME" --namespace "$HC_NS" \
+  --aws-creds "$AWS_CREDS" --region "$AWS_REGION" 2&gt;&amp;1 | tee "$REACH_OUT/destroy.log"
+k -n "$HC_NS" get hostedcluster,nodepool                  # expected: No resources found
+k get ns "$HCP_NS"                                        # expected: NotFound
+aws ec2 describe-vpcs --region "$AWS_REGION" --filters "Name=tag:kubernetes.io/cluster/${INFRA_ID},Values=owned" \
+  --query 'Vpcs[].VpcId' --output text                    # expected: empty
+aws ec2 describe-instances --region "$AWS_REGION" --filters "Name=tag:kubernetes.io/cluster/${INFRA_ID},Values=owned" \
+  "Name=instance-state-name,Values=pending,running,stopping,stopped" --query 'Reservations[].Instances[].InstanceId' --output text   # expected: empty
+k -n "$HC_NS" get secret,cm                               # expected: only leftovers of mirror-reach (user-ca-bundle, pull/ssh secrets) + OpenShift defaults
+k delete ns "$HC_NS"                                      # `clusters` did not exist before T8 (only if the line above shows nothing else)
+harness teardown 2&gt;&amp;1 | tee "$REACH_OUT/teardown.log"
+k get ns "$NS"                                            # expected: NotFound</code></pre>
+Expected: destroy exits 0 in ~10–15 min (logs deletion of NodePool, HC, then AWS resources: instances, NAT, EIPs, subnets,
+VPC, Route53 records/zones, IAM roles/instance profiles, OIDC provider); every "expected" line as commented;
+<code>harness teardown</code> ~20 s, then namespace NotFound.</p>
+<p><strong>Record:</strong> destroy duration, leftovers (should be none).</p></div>
+</details>
+<h2 id="results">Results and evidence</h2>
+<p>The text below is the results file from the run, unchanged except for sanitization (raw copy:
+<a href="assets/evidence/reachability-RESULTS.md"><code>assets/evidence/reachability-RESULTS.md</code></a>).
+Long command outputs are collapsed.</p>
+<div class="evidence"><p>Date: 2026-10-14  Cluster: mgmt (OCP 4.20.0, nested hosted cluster)  HC: <code>clusters/mirror-reach</code> (4.20.0, 2 nodes)  Branch/commit: <code>CNTRLPLANE-3926</code> @ <code>38342d4965</code>  Run by: @Nirshal</p>
+<p><strong>Verdict:</strong> PASS with notes (T8a, <code>reviews/T8.md</code>)</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Item</th>
+<th>Result</th>
+<th>Notes / exact values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Preflight (ns absent, no HC, CLI/HO versions, AWS identity, public zone, pull secret)</td>
+<td>OK</td>
+<td>Client cce02430, Server e83d9072 (4.14–4.21), user/tester, zone public</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Fresh <code>harness setup</code> succeeds; verify.sh 5/5</td>
+<td>OK</td>
+<td>46s; 5/5; CA SHA-256 <code>AA:83:E6:32:…:D6:81:1F:B9</code>; no VIOLATION</td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>ics.yaml</code> two entries (virtual + real repo)</td>
+<td>OK</td>
+<td>virtual first, then quay.io; 1 mirror each = <code>HOST/&lt;source&gt;</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>hypershift create cluster aws</code> with <code>--additional-trust-bundle</code> / <code>--image-content-sources</code></td>
+<td>OK</td>
+<td>~26s (15:37:46→15:38:12); INFRA_ID <code>mirror-reach-kn775</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>check.sh hc</code> 3/3 (trust bundle CM == CA, ICS == harness)</td>
+<td>OK</td>
+<td>3/3; <code>{"name":"user-ca-bundle"}</code>, 2 ICS entries</td>
+</tr>
+<tr>
+<td>3</td>
+<td>HC Available</td>
+<td>OK</td>
+<td>Available=True, PROGRESS Partial (expected); no mirror-related conditions</td>
+</tr>
+<tr>
+<td>3</td>
+<td>NodePool 2/2, AllNodesHealthy</td>
+<td>OK</td>
+<td>~9 minutes; 2/2, 4.20.0</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Guest kubeconfig, 2 nodes Ready</td>
+<td>OK</td>
+<td>ip-10-0-130-125, ip-10-0-134-84; RHCOS 9.6, v1.33.5, cri-o 1.33.4</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>check.sh guest</code> 7/7 (IDMS, user-ca-bundle, registries.conf digest-only, node anchor, node → mirror TLS)</td>
+<td>OK</td>
+<td>7/7 on ip-10-0-130-125; <code>pull-from-mirror = "digest-only"</code></td>
+</tr>
+<tr>
+<td>6</td>
+<td>Pod <code>virtual repo@digest</code>, <code>imagePullPolicy: Always</code> Running</td>
+<td>OK</td>
+<td>pulled in 807ms, 1/1 Running; imageID <code>…invalid/libpod/registry@sha256:da1fbcd1…</code></td>
+</tr>
+<tr>
+<td>6</td>
+<td>Negative pod <code>virtual repo:tag</code> fails to pull (<code>.invalid</code> unresolvable)</td>
+<td>OK</td>
+<td>ErrImagePull: <code>lookup mirror-source.hypershift-e2e.invalid on 10.0.0.2:53: no such host</code></td>
+</tr>
+<tr>
+<td>6</td>
+<td>Mirror log shows CRI-O manifest GETs → 200 for the virtual repo; no tag lookups</td>
+<td>OK (note)</td>
+<td>4/4 lines (2 requests) via check.sh; raw tail shows blob GETs only; <code>cri-o/1.33.4</code>; 0 tag lookups</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>check.sh pods</code> 5/5</td>
+<td>OK</td>
+<td>6/6 (script has 6 checks), 0 failure(s)</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>Always</code> re-contacts the mirror with the image cached on the node</td>
+<td>OK</td>
+<td>before=4 after=8; Successfully pulled in 67ms</td>
+</tr>
+<tr>
+<td>8</td>
+<td>HC destroyed; no HC/NodePool/HCP ns; no VPC/instances for INFRA_ID</td>
+<td>OK</td>
+<td>~6 min (16:05:57→16:12:04); all queries empty</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>clusters</code> ns removed; <code>harness teardown</code>; ns <code>test-mirror-registry</code> NotFound</td>
+<td>OK</td>
+<td>only <code>user-ca-bundle</code> CM left, removed with ns; teardown 21s; NotFound</td>
+</tr>
+</tbody>
+</table>
+<h3 id="s3-ev-problems-found">Problems found</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Step</th>
+<th>Symptom</th>
+<th>Root cause</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>6</td>
+<td>Raw mirror-log excerpt (<code>tail -5</code>) shows only blob GETs; manifest GETs proven only by check.sh (4/4) and step 7 (4→8)</td>
+<td>RUNBOOK greps all cri-o lines, so the tail ends on blobs</td>
+<td>Kit: grep <code>/v2/$VIRTUAL_REPO/manifests/</code> in RUNBOOK step 6 (non-blocking)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>6</td>
+<td>VERIFY/RUNBOOK say <code>check.sh pods</code> 5 PASS; the script prints 6</td>
+<td>Doc count</td>
+<td>Fix the count in VERIFY.md</td>
+</tr>
+</tbody>
+</table>
+<h3 id="s3-ev-surprises-follow-ups-t9-pr-description-cntrlplane-39273928">Surprises / follow-ups (T9 PR description, CNTRLPLANE-3927/3928)</h3>
+<ul>
+<li><code>hypershift destroy cluster</code> leaves the <code>user-ca-bundle</code> ConfigMap (fixed name) in the HC namespace: for CNTRLPLANE-3929, check that cleanup removes it so a later HC does not inherit a stale CA.</li>
+<li><code>imagePullPolicy: Always</code> re-fetches manifests from the mirror with the image cached (4→8): confirms the CNTRLPLANE-3928 note.</li>
+<li>Each registry request is logged twice (logfmt + access log): <code>4/4 lines</code> = 2 manifest requests (list + amd64 instance).</li>
+<li>The create CLI took ~26s (runbook said 3–6 min) and logs the HostedCluster with <code>"kind":""</code> (upstream quirk).</li>
+</ul>
+<h3 id="s3-ev-evidence">Evidence</h3>
+<h4 id="s3-ev-step-0-preflight">Step 0 — preflight</h4>
+<pre class="highlight"><code class="language-text">(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) source .work/cntrlplane-3926/reachability/env.sh
+CTX=mgmt NS=test-mirror-registry HOST=mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com
+HC=clusters/mirror-reach BASE_DOMAIN=hypershift.example.com RELEASE=quay.io/openshift-release-dev/ocp-release:4.20.0-x86_64
+REACH_OUT=~/hypershift/.work/cntrlplane-3926/reachability/out
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) k get ns "$NS"
+Error from server (NotFound): namespaces "test-mirror-registry" not found
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) k get hostedcluster -A
+No resources found
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) hs version
+Client Version: openshift/hypershift: cce02430ccc1c322e0698bb36421ed003873edef. Latest supported OCP: 4.22.0
+Server Version: e83d907270ba8545b371edfa7b69989da2903214
+Server Supports OCP Versions: 4.21, 4.20, 4.19, 4.18, 4.17, 4.16, 4.15, 4.14
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) aws sts get-caller-identity --query Arn --output text
+arn:aws:iam::123456789012:user/tester
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) aws route53 list-hosted-zones-by-name --dns-name "$BASE_DOMAIN" --max-items 1 \
+  --query 'HostedZones[0].[Name,Config.PrivateZone]' --output text
+hypershift.example.com.   False  
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) jq -e '.auths["quay.io"]' "$PULL_SECRET" &gt;/dev/null &amp;&amp; echo "pull secret has quay.io"
+pull secret has quay.io
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) go build -o /dev/null ./.work/cntrlplane-3926/harness &amp;&amp; echo "harness builds"
+harness builds
+</code></pre>
+<h4 id="s3-ev-step-1-harness-setup-verifysh-icsyaml-ca">Step 1 — harness setup, verify.sh, ics.yaml, CA</h4>
+<details class="output"><summary>Command output (70 lines) — click to expand</summary><pre class="highlight"><code class="language-text">(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) harness setup -out "$RUN" 2&gt;&amp;1 | tee "$REACH_OUT/setup.log"
+15:34:46 harness: context mgmt → https://api.mgmt.hypershift.example.com:6443
+15:34:46 harness: copier image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:0a9d58f9d8dd969c7bd107319a2498a674fe4e6477185a44558f168d994b39a5
+15:34:46 harness: Setup started
+{
+  "Host": "mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com",
+  "InternalHost": "mirror-registry.test-mirror-registry.svc:5000",
+  "CABundlePEM": null,
+  "ImageContentSources": [
+    {
+      "source": "mirror-source.hypershift-e2e.invalid/libpod/registry",
+      "mirrors": [
+        "mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/mirror-source.hypershift-e2e.invalid/libpod/registry"
+      ]
+    },
+    {
+      "source": "quay.io/libpod/registry",
+      "mirrors": [
+        "mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/quay.io/libpod/registry"
+      ]
+    }
+  ],
+  "Images": [
+    {
+      "From": "quay.io/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f",
+      "SourceRef": "quay.io/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f",
+      "MirrorRef": "mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/quay.io/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f"
+    },
+    {
+      "From": "quay.io/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f",
+      "SourceRef": "mirror-source.hypershift-e2e.invalid/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f",
+      "MirrorRef": "mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/mirror-source.hypershift-e2e.invalid/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f"
+    }
+  ]
+}
+15:35:31 harness: setup finished in 46s
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) .work/cntrlplane-3926/harness/verify.sh "$RUN"
+PASS  anonymous /v2/ with CA → {} 200
+PASS  TLS refused without CA (curl exit 60)
+PASS  digest preserved quay.io/libpod/registry
+PASS  digest preserved mirror-source.hypershift-e2e.invalid/libpod/registry
+PASS  push via Route rejected (405)
+verify: 0 failure(s)
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) cat "$RUN/ics.yaml"
+- mirrors:
+  - mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/mirror-source.hypershift-e2e.invalid/libpod/registry
+  source: mirror-source.hypershift-e2e.invalid/libpod/registry
+- mirrors:
+  - mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/quay.io/libpod/registry
+  source: quay.io/libpod/registry
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) openssl x509 -in "$RUN/ca-only/ca.crt" -noout -subject -fingerprint -sha256
+subject=OU=hypershift-e2e-mirror-registry, CN=hypershift-e2e-mirror-registry-ca
+sha256 Fingerprint=AA:83:E6:32:65:AF:C0:8C:71:CF:1B:63:70:0A:23:DB:A3:DB:CB:8A:BC:A4:F3:E4:A1:69:29:F3:D6:81:1F:B9
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926)
+
+Terminal 2 logs:
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) source .work/cntrlplane-3926/reachability/env.sh
+CTX=mgmt NS=test-mirror-registry HOST=mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com
+HC=clusters/mirror-reach BASE_DOMAIN=hypershift.example.com RELEASE=quay.io/openshift-release-dev/ocp-release:4.20.0-x86_64
+REACH_OUT=~/hypershift/.work/cntrlplane-3926/reachability/out
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) .work/cntrlplane-3926/harness/watch.sh "$REACH_OUT/watch-setup.log"
+15:34:22 route=none readonly=- deploy=none pods=[] jobs=[]
+15:34:49 route=none readonly=false deploy=gen1/obs1/avail0 pods=[v2qlh:Pending] jobs=[]
+15:34:58 route=none readonly=false deploy=gen1/obs1/avail1 pods=[v2qlh:Running] jobs=[]
+15:35:00 route=none readonly=false deploy=gen1/obs1/avail1 pods=[v2qlh:Running] jobs=[mirror-registry-copy-95da31410c:Running]
+15:35:19 route=none readonly=false deploy=gen1/obs1/avail1 pods=[v2qlh:Running] jobs=[mirror-registry-copy-95da31410c:SuccessCriteriaMet,Complete]
+15:35:21 route=none readonly=false deploy=gen1/obs1/avail1 pods=[v2qlh:Running(terminating)] jobs=[]
+15:35:23 route=none readonly=true deploy=gen2/obs2/avail0 pods=[55b5m:Pending] jobs=[]
+15:35:27 route=none readonly=true deploy=gen2/obs2/avail1 pods=[55b5m:Running] jobs=[]
+15:35:33 route=admitted readonly=true deploy=gen2/obs2/avail1 pods=[55b5m:Running] jobs=[]
+^C</code></pre></details>
+<h4 id="s3-ev-step-2-create-log-tail-infra_id-checksh-hc">Step 2 — create log (tail), INFRA_ID, check.sh hc</h4>
+<details class="output"><summary>Command output (72 lines) — click to expand</summary><pre class="highlight"><code class="language-text">(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) hs create cluster aws \
+  --name "$HC_NAME" --namespace "$HC_NS" \
+  --base-domain "$BASE_DOMAIN" --region "$AWS_REGION" --zones "${AWS_REGION}a" \
+  --aws-creds "$AWS_CREDS" --pull-secret "$PULL_SECRET" \
+  --release-image "$RELEASE_IMAGE" \
+  --node-pool-replicas 2 --generate-ssh \
+  --additional-trust-bundle "$RUN/ca-only/ca.crt" \
+  --image-content-sources "$RUN/ics.yaml" \
+  2&gt;&amp;1 | tee "$REACH_OUT/create.log"
+Flag --aws-creds has been deprecated, please use '--sts-creds' with '--role-arn' instead
+{"level":"info","ts":"2026-10-14T15:37:46+02:00","msg":"Creating infrastructure","id":"mirror-reach-kn775"}
+{"level":"info","ts":"2026-10-14T15:37:47+02:00","msg":"Created VPC","id":"vpc-0000000000000000"}
+{"level":"info","ts":"2026-10-14T15:37:47+02:00","msg":"Enabled DNS support on VPC","id":"vpc-0000000000000000"}
+{"level":"info","ts":"2026-10-14T15:37:48+02:00","msg":"Enabled DNS hostnames on VPC","id":"vpc-0000000000000000"}
+{"level":"info","ts":"2026-10-14T15:37:48+02:00","msg":"Created DHCP options","id":"dopt-0000000000000000"}
+{"level":"info","ts":"2026-10-14T15:37:48+02:00","msg":"Associated DHCP options with VPC","vpc":"vpc-0000000000000000","dhcp options":"dopt-0000000000000000"}
+{"level":"info","ts":"2026-10-14T15:37:49+02:00","msg":"Created internet gateway","id":"igw-0000000000000000"}
+{"level":"info","ts":"2026-10-14T15:37:49+02:00","msg":"Attached internet gateway to VPC","internet gateway":"igw-0000000000000000","vpc":"vpc-0000000000000000"}
+{"level":"info","ts":"2026-10-14T15:37:50+02:00","msg":"Created subnet","name":"mirror-reach-kn775-private-us-east-1a","id":"subnet-0000000000000000"}
+{"level":"info","ts":"2026-10-14T15:37:51+02:00","msg":"Created subnet","name":"mirror-reach-kn775-public-us-east-1a","id":"subnet-0000000000000000"}
+{"level":"info","ts":"2026-10-14T15:37:53+02:00","msg":"Created elastic IP for NAT gateway","id":"eipalloc-0000000000000000"}
+{"level":"info","ts":"2026-10-14T15:37:54+02:00","msg":"Created NAT gateway","id":"nat-0000000000000000"}
+{"level":"info","ts":"2026-10-14T15:37:54+02:00","msg":"Created route table","name":"mirror-reach-kn775-private-us-east-1a","id":"rtb-0000000000000000"}
+{"level":"info","ts":"2026-10-14T15:37:59+02:00","msg":"Created route to NAT gateway","route table":"rtb-0000000000000000","nat gateway":"nat-0000000000000000"}
+{"level":"info","ts":"2026-10-14T15:37:59+02:00","msg":"Associated subnet with route table","route table":"rtb-0000000000000000","subnet":"subnet-0000000000000000"}
+{"level":"info","ts":"2026-10-14T15:38:00+02:00","msg":"Created route table","name":"mirror-reach-kn775-public","id":"rtb-0000000000000000"}
+{"level":"info","ts":"2026-10-14T15:38:00+02:00","msg":"Set main VPC route table","route table":"rtb-0000000000000000","vpc":"vpc-0000000000000000"}
+{"level":"info","ts":"2026-10-14T15:38:00+02:00","msg":"Created route to internet gateway","route table":"rtb-0000000000000000","internet gateway":"igw-0000000000000000"}
+{"level":"info","ts":"2026-10-14T15:38:01+02:00","msg":"Associated route table with subnet","route table":"rtb-0000000000000000","subnet":"subnet-0000000000000000"}
+{"level":"info","ts":"2026-10-14T15:38:02+02:00","msg":"Created s3 VPC endpoint","id":"vpce-0000000000000000"}
+{"level":"info","ts":"2026-10-14T15:38:03+02:00","msg":"Found existing public zone","name":"hypershift.example.com","id":"Z00000000000000000000"}
+{"level":"info","ts":"2026-10-14T15:38:04+02:00","msg":"Created private zone","name":"mirror-reach.hypershift.example.com","id":"Z00000000000000000000"}
+{"level":"info","ts":"2026-10-14T15:38:05+02:00","msg":"Created private zone","name":"mirror-reach.hypershift.local","id":"Z00000000000000000000"}
+{"level":"info","ts":"2026-10-14T15:38:05+02:00","msg":"Detected Issuer URL","issuer":"https://oidc-bucket.s3.us-east-1.amazonaws.com/mirror-reach-kn775"}
+{"level":"info","ts":"2026-10-14T15:38:06+02:00","msg":"Created OIDC provider","provider":"arn:aws:iam::123456789012:oidc-provider/oidc-bucket.s3.us-east-1.amazonaws.com/mirror-reach-kn775"}
+{"level":"info","ts":"2026-10-14T15:38:06+02:00","msg":"Created role","name":"mirror-reach-kn775-cloud-controller"}
+{"level":"info","ts":"2026-10-14T15:38:07+02:00","msg":"Added/Updated role policy","name":"mirror-reach-kn775-cloud-controller"}
+{"level":"info","ts":"2026-10-14T15:38:07+02:00","msg":"Created role","name":"mirror-reach-kn775-node-pool"}
+{"level":"info","ts":"2026-10-14T15:38:07+02:00","msg":"Added/Updated role policy","name":"mirror-reach-kn775-node-pool"}
+{"level":"info","ts":"2026-10-14T15:38:08+02:00","msg":"Created role","name":"mirror-reach-kn775-control-plane-operator"}
+{"level":"info","ts":"2026-10-14T15:38:08+02:00","msg":"Added/Updated role policy","name":"mirror-reach-kn775-control-plane-operator"}
+{"level":"info","ts":"2026-10-14T15:38:08+02:00","msg":"Created role","name":"mirror-reach-kn775-cloud-network-config-controller"}
+{"level":"info","ts":"2026-10-14T15:38:08+02:00","msg":"Added/Updated role policy","name":"mirror-reach-kn775-cloud-network-config-controller"}
+{"level":"info","ts":"2026-10-14T15:38:09+02:00","msg":"Created role","name":"mirror-reach-kn775-openshift-ingress"}
+{"level":"info","ts":"2026-10-14T15:38:09+02:00","msg":"Added/Updated role policy","name":"mirror-reach-kn775-openshift-ingress"}
+{"level":"info","ts":"2026-10-14T15:38:09+02:00","msg":"Created role","name":"mirror-reach-kn775-openshift-image-registry"}
+{"level":"info","ts":"2026-10-14T15:38:09+02:00","msg":"Added/Updated role policy","name":"mirror-reach-kn775-openshift-image-registry"}
+{"level":"info","ts":"2026-10-14T15:38:10+02:00","msg":"Created role","name":"mirror-reach-kn775-aws-ebs-csi-driver-controller"}
+{"level":"info","ts":"2026-10-14T15:38:10+02:00","msg":"Added/Updated role policy","name":"mirror-reach-kn775-aws-ebs-csi-driver-controller"}
+{"level":"info","ts":"2026-10-14T15:38:10+02:00","msg":"Created role","name":"mirror-reach-kn775-worker-role"}
+{"level":"info","ts":"2026-10-14T15:38:10+02:00","msg":"Created instance profile","name":"mirror-reach-kn775-worker"}
+{"level":"info","ts":"2026-10-14T15:38:11+02:00","msg":"Added role to instance profile","role":"mirror-reach-kn775-worker-role","profile":"mirror-reach-kn775-worker"}
+{"level":"info","ts":"2026-10-14T15:38:11+02:00","msg":"Created role policy","name":"mirror-reach-kn775-worker-policy"}
+{"level":"info","ts":"2026-10-14T15:38:11+02:00","msg":"Created IAM profile","name":"mirror-reach-kn775-worker","region":"us-east-1"}
+{"level":"info","ts":"2026-10-14T15:38:11+02:00","msg":"Applied Kube resource","kind":"Namespace","namespace":"","name":"clusters"}
+{"level":"info","ts":"2026-10-14T15:38:12+02:00","msg":"Applied Kube resource","kind":"ConfigMap","namespace":"clusters","name":"user-ca-bundle"}
+{"level":"info","ts":"2026-10-14T15:38:12+02:00","msg":"Applied Kube resource","kind":"Secret","namespace":"clusters","name":"mirror-reach-pull-secret"}
+{"level":"info","ts":"2026-10-14T15:38:12+02:00","msg":"Applied Kube resource","kind":"Secret","namespace":"clusters","name":"mirror-reach-ssh-key"}
+{"level":"info","ts":"2026-10-14T15:38:12+02:00","msg":"Applied Kube resource","kind":"Secret","namespace":"clusters","name":"mirror-reach-etcd-encryption-key"}
+{"level":"info","ts":"2026-10-14T15:38:12+02:00","msg":"Applied Kube resource","kind":"","namespace":"clusters","name":"mirror-reach"}
+{"level":"info","ts":"2026-10-14T15:38:12+02:00","msg":"Applied Kube resource","kind":"NodePool","namespace":"clusters","name":"mirror-reach-us-east-1a"}
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) export INFRA_ID="$(k -n "$HC_NS" get hostedcluster "$HC_NAME" -o jsonpath='{.spec.infraID}')"; echo "INFRA_ID=$INFRA_ID"
+INFRA_ID=mirror-reach-kn775
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) echo "export INFRA_ID=$INFRA_ID" &gt; "$REACH_OUT/infra-id.sh"
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) .work/cntrlplane-3926/reachability/check.sh hc
+PASS  spec.additionalTrustBundle set
+PASS  trust bundle ConfigMap user-ca-bundle == mirror CA
+PASS  spec.imageContentSources == harness ICS
+check hc: 0 failure(s)
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) k -n "$HC_NS" get hostedcluster "$HC_NAME" -o jsonpath='{.spec.additionalTrustBundle}{"\n"}{.spec.imageContentSources}{"\n"}'
+{"name":"user-ca-bundle"}
+[{"mirrors":["mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/mirror-source.hypershift-e2e.invalid/libpod/registry"],"source":"mirror-source.hypershift-e2e.invalid/libpod/registry"},{"mirrors":["mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/quay.io/libpod/registry"],"source":"quay.io/libpod/registry"}]
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926)</code></pre></details>
+<h4 id="s3-ev-step-3-hc-nodepool-status">Step 3 — HC / NodePool status</h4>
+<pre class="highlight"><code class="language-text">(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) k -n "$HC_NS" wait hostedcluster/"$HC_NAME" --for=condition=Available --timeout=30m
+hostedcluster.hypershift.openshift.io/mirror-reach condition met
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) k -n "$HC_NS" get hostedcluster,nodepool
+NAME                                                 VERSION   KUBECONFIG                      PROGRESS   AVAILABLE   PROGRESSING   MESSAGE
+hostedcluster.hypershift.openshift.io/mirror-reach             mirror-reach-admin-kubeconfig   Partial    True        False         The hosted control plane is available
+
+NAME                                                       CLUSTER        DESIRED NODES   CURRENT NODES   AUTOSCALING   AUTOREPAIR   VERSION   UPDATINGVERSION   UPDATINGCONFIG   MESSAGE
+nodepool.hypershift.openshift.io/mirror-reach-us-east-1a   mirror-reach   2                               False         False                  True              True             Minimum availability requires 2 replicas, current 0 available
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) k -n "$HC_NS" wait nodepool/"${HC_NAME}-${AWS_REGION}a" --for=condition=AllNodesHealthy --timeout=40m
+nodepool.hypershift.openshift.io/mirror-reach-us-east-1a condition met
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) k -n "$HC_NS" get hostedcluster,nodepool
+NAME                                                 VERSION   KUBECONFIG                      PROGRESS   AVAILABLE   PROGRESSING   MESSAGE
+hostedcluster.hypershift.openshift.io/mirror-reach             mirror-reach-admin-kubeconfig   Partial    True        False         The hosted control plane is available
+
+NAME                                                       CLUSTER        DESIRED NODES   CURRENT NODES   AUTOSCALING   AUTOREPAIR   VERSION   UPDATINGVERSION   UPDATINGCONFIG   MESSAGE
+nodepool.hypershift.openshift.io/mirror-reach-us-east-1a   mirror-reach   2               2               False         False        4.20.0    False             False
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926)</code></pre>
+<h4 id="s3-ev-step-4-nodes-clusterversion">Step 4 — nodes, clusterversion</h4>
+<pre class="highlight"><code class="language-text">(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) k -n "$HC_NS" get secret "${HC_NAME}-admin-kubeconfig" -o jsonpath='{.data.kubeconfig}' | base64 -d &gt; "$GUEST_KUBECONFIG"
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) chmod 600 "$GUEST_KUBECONFIG"
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) guest get nodes -o wide
+NAME                           STATUS   ROLES    AGE     VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE                                                KERNEL-VERSION                 CONTAINER-RUNTIME
+ip-10-0-130-125.ec2.internal   Ready    worker   4m21s   v1.33.5   10.0.130.125   &lt;none&gt;        Red Hat Enterprise Linux CoreOS 9.6.20250925-0 (Plow)   5.14.0-570.49.1.el9_6.x86_64   cri-o://1.33.4-4.rhaos4.20.gitc8e7df2.el9
+ip-10-0-134-84.ec2.internal    Ready    worker   4m29s   v1.33.5   10.0.134.84    &lt;none&gt;        Red Hat Enterprise Linux CoreOS 9.6.20250925-0 (Plow)   5.14.0-570.49.1.el9_6.x86_64   cri-o://1.33.4-4.rhaos4.20.gitc8e7df2.el9
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) guest get clusterversion
+NAME      VERSION   AVAILABLE   PROGRESSING   SINCE   STATUS
+version             False       True          7m38s   Unable to apply 4.20.0: the cluster operator monitoring is not available
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926)</code></pre>
+<h4 id="s3-ev-step-5-checksh-guest-idms-spec-registriesconf-excerpt">Step 5 — check.sh guest, IDMS spec, registries.conf excerpt</h4>
+<pre class="highlight"><code class="language-text">(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) .work/cntrlplane-3926/reachability/check.sh guest
+PASS  guest IDMS cluster: mirror-source.hypershift-e2e.invalid/libpod/registry → mirror
+PASS  guest IDMS cluster: quay.io/libpod/registry → mirror
+PASS  guest openshift-config/user-ca-bundle == mirror CA
+INFO  node under test: ip-10-0-130-125.ec2.internal
+PASS  node registries.conf maps mirror-source.hypershift-e2e.invalid/libpod/registry → mirror
+PASS  node registries.conf mirror is digest-only
+PASS  node trust anchor == mirror CA
+PASS  node → https://mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/v2/ with system trust → {} 200
+check guest: 0 failure(s)
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) guest get imagedigestmirrorset cluster -o yaml | yq '.spec'
+imageDigestMirrors:
+  - mirrors:
+      - mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/mirror-source.hypershift-e2e.invalid/libpod/registry
+    source: mirror-source.hypershift-e2e.invalid/libpod/registry
+  - mirrors:
+      - mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/quay.io/libpod/registry
+    source: quay.io/libpod/registry
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) NODE="$(guest get nodes -o jsonpath='{.items[0].metadata.name}')"
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) guest debug -q "node/$NODE" -- chroot /host sh -c 'grep -B2 -A4 "hypershift-e2e.invalid" /etc/containers/registries.conf' 2&gt;/dev/null
+[[registry]]
+  prefix = ""
+  location = "mirror-source.hypershift-e2e.invalid/libpod/registry"
+
+  [[registry.mirror]]
+    location = "mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/mirror-source.hypershift-e2e.invalid/libpod/registry"
+    pull-from-mirror = "digest-only"
+
+[[registry]]
+  prefix = ""
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926)</code></pre>
+<h4 id="s3-ev-step-6-pods-events-logs-imageid-checksh-pods-mirror-log-lines">Step 6 — pods, events, logs, imageID, check.sh pods, mirror log lines</h4>
+<details class="output"><summary>Command output (43 lines) — click to expand</summary><pre class="highlight"><code class="language-text">(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) guest create ns "$GUEST_NS"
+namespace/mirror-reach-check created
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) pod "$POD_DIGEST" "${VIRTUAL_REPO}@${TEST_DIGEST}" | guest apply -f -
+pod/mirror-by-digest created
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) guest -n "$GUEST_NS" wait pod/"$POD_DIGEST" --for=condition=Ready --timeout=5m
+pod/mirror-by-digest condition met
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) pod "$POD_TAG" "${VIRTUAL_REPO}:2.8.2" | guest apply -f -
+pod/mirror-by-tag created
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) sleep 60
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) guest -n "$GUEST_NS" get pods -o wide
+NAME               READY   STATUS         RESTARTS   AGE   IP            NODE                           NOMINATED NODE   READINESS GATES
+mirror-by-digest   1/1     Running        0          87s   10.133.0.25   ip-10-0-130-125.ec2.internal   &lt;none&gt;           &lt;none&gt;
+mirror-by-tag      0/1     ErrImagePull   0          68s   10.133.0.26   ip-10-0-130-125.ec2.internal   &lt;none&gt;           &lt;none&gt;
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) guest -n "$GUEST_NS" get events --sort-by=.lastTimestamp | grep -E 'Pulling|Pulled|Failed|BackOff'
+95s         Normal    Pulling          pod/mirror-by-digest   Pulling image "mirror-source.hypershift-e2e.invalid/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f"
+94s         Normal    Pulled           pod/mirror-by-digest   Successfully pulled image "mirror-source.hypershift-e2e.invalid/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f" in 807ms (807ms including waiting). Image size: 24613466 bytes.
+35s         Normal    Pulling          pod/mirror-by-tag      Pulling image "mirror-source.hypershift-e2e.invalid/libpod/registry:2.8.2"
+35s         Warning   Failed           pod/mirror-by-tag      Failed to pull image "mirror-source.hypershift-e2e.invalid/libpod/registry:2.8.2": unable to pull image or OCI artifact: pull image err: initializing source docker://mirror-source.hypershift-e2e.invalid/libpod/registry:2.8.2: pinging container registry mirror-source.hypershift-e2e.invalid: Get "https://mirror-source.hypershift-e2e.invalid/v2/": dial tcp: lookup mirror-source.hypershift-e2e.invalid on 10.0.0.2:53: no such host; artifact err: get manifest: build image source: pinging container registry mirror-source.hypershift-e2e.invalid: Get "https://mirror-source.hypershift-e2e.invalid/v2/": dial tcp: lookup mirror-source.hypershift-e2e.invalid on 10.0.0.2:53: no such host
+35s         Warning   Failed           pod/mirror-by-tag      Error: ErrImagePull
+7s          Normal    BackOff          pod/mirror-by-tag      Back-off pulling image "mirror-source.hypershift-e2e.invalid/libpod/registry:2.8.2"
+7s          Warning   Failed           pod/mirror-by-tag      Error: ImagePullBackOff
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) guest -n "$GUEST_NS" logs "$POD_DIGEST" | head -5
+time="2026-10-14T13:56:53.875036901Z" level=warning msg="No HTTP secret provided - generated random secret. This may cause problems with uploads if multiple registries are behind a load-balancer. To provide a shared secret, fill in http.secret in the configuration file or set the REGISTRY_HTTP_SECRET environment variable." go.version=go1.19.9 instance.id=10607cec-3f7b-4198-b66a-18e8bff90c16 service=registry version=2.8.2
+time="2026-10-14T13:56:53.875097376Z" level=info msg="redis not configured" go.version=go1.19.9 instance.id=10607cec-3f7b-4198-b66a-18e8bff90c16 service=registry version=2.8.2
+time="2026-10-14T13:56:53.875216686Z" level=info msg="using inmemory blob descriptor cache" go.version=go1.19.9 instance.id=10607cec-3f7b-4198-b66a-18e8bff90c16 service=registry version=2.8.2
+time="2026-10-14T13:56:53.875310111Z" level=info msg="Starting upload purge in 29m0s" go.version=go1.19.9 instance.id=10607cec-3f7b-4198-b66a-18e8bff90c16 service=registry version=2.8.2
+time="2026-10-14T13:56:53.875600019Z" level=info msg="listening on [::]:5000" go.version=go1.19.9 instance.id=10607cec-3f7b-4198-b66a-18e8bff90c16 service=registry version=2.8.2
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) guest -n "$GUEST_NS" get pod "$POD_DIGEST" -o jsonpath='{.spec.nodeName}{"  "}{.status.containerStatuses[0].imageID}{"\n"}'
+ip-10-0-130-125.ec2.internal  mirror-source.hypershift-e2e.invalid/libpod/registry@sha256:da1fbcd13a7ddc77d0d964a5c5c4cb707b5d440a028b0b42fe574b9e99077e27
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) .work/cntrlplane-3926/reachability/check.sh pods
+PASS  pod mirror-by-digest (virtual repo @digest) Ready
+PASS  pod mirror-by-digest image/pullPolicy
+PASS  event Pulled 'Successfully pulled' for mirror-by-digest
+PASS  pod mirror-by-tag (virtual repo :tag) fails to pull
+PASS  mirror log: CRI-O GET mirror-source.hypershift-e2e.invalid/libpod/registry manifests → 200 (4/4 lines)
+PASS  mirror log: no tag lookups (digest-only)
+check pods: 0 failure(s)
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) k -n "$NS" logs "deploy/$NAME" | grep cri-o | grep -F "$VIRTUAL_REPO" | tail -5
+10.132.0.15 - - [14/Oct/2026:13:56:53 +0000] "GET /v2/mirror-source.hypershift-e2e.invalid/libpod/registry/blobs/sha256:121f958bea53668d782691e643e9401ea21dd36c9d81078b51964d2e82b51376 HTTP/1.1" 200 399 "" "cri-o/1.33.4 os/linux arch/amd64"
+time="2026-10-14T13:56:53.061295114Z" level=info msg="response completed" go.version=go1.19.9 http.request.host=mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com http.request.id=22e02872-7575-4220-a29c-da34b1f54000 http.request.method=GET http.request.remoteaddr="10.132.0.15:35742" http.request.uri="/v2/mirror-source.hypershift-e2e.invalid/libpod/registry/blobs/sha256:c4d48a809fc2256f8aa0aeee47998488d64409855adba00a7cb3007ab9f3286e" http.request.useragent="cri-o/1.33.4 os/linux arch/amd64" http.response.contenttype="application/octet-stream" http.response.duration=15.334673ms http.response.status=200 http.response.written=284693
+10.132.0.15 - - [14/Oct/2026:13:56:53 +0000] "GET /v2/mirror-source.hypershift-e2e.invalid/libpod/registry/blobs/sha256:c4d48a809fc2256f8aa0aeee47998488d64409855adba00a7cb3007ab9f3286e HTTP/1.1" 200 284693 "" "cri-o/1.33.4 os/linux arch/amd64"
+time="2026-10-14T13:56:53.072867568Z" level=info msg="response completed" go.version=go1.19.9 http.request.host=mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com http.request.id=1641ec1f-1805-4e24-83b1-707f568fdc57 http.request.method=GET http.request.remoteaddr="10.132.0.15:35744" http.request.uri="/v2/mirror-source.hypershift-e2e.invalid/libpod/registry/blobs/sha256:88b450dec42ebc9659f10c6fd6d2326706fec4ab7aadf0c38973d930c23c546a" http.request.useragent="cri-o/1.33.4 os/linux arch/amd64" http.response.contenttype="application/octet-stream" http.response.duration=33.825875ms http.response.status=200 http.response.written=5908098
+10.132.0.15 - - [14/Oct/2026:13:56:53 +0000] "GET /v2/mirror-source.hypershift-e2e.invalid/libpod/registry/blobs/sha256:88b450dec42ebc9659f10c6fd6d2326706fec4ab7aadf0c38973d930c23c546a HTTP/1.1" 200 5908098 "" "cri-o/1.33.4 os/linux arch/amd64"
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926)</code></pre></details>
+<h4 id="s3-ev-step-7-re-pull-counts-and-events">Step 7 — re-pull counts and events</h4>
+<pre class="highlight"><code class="language-text">(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) NODE="$(guest -n "$GUEST_NS" get pod "$POD_DIGEST" -o jsonpath='{.spec.nodeName}')"
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) before="$(k -n "$NS" logs "deploy/$NAME" | grep cri-o | grep -cF "/v2/$VIRTUAL_REPO/manifests/")"
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) guest -n "$GUEST_NS" delete pod "$POD_DIGEST" --wait
+pod "mirror-by-digest" deleted from mirror-reach-check namespace
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) pod "$POD_DIGEST" "${VIRTUAL_REPO}@${TEST_DIGEST}" | NODE="$NODE" yq '.spec.nodeName = strenv(NODE)' | guest apply -f -
+pod/mirror-by-digest created
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) guest -n "$GUEST_NS" wait pod/"$POD_DIGEST" --for=condition=Ready --timeout=5m
+pod/mirror-by-digest condition met
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) after="$(k -n "$NS" logs "deploy/$NAME" | grep cri-o | grep -cF "/v2/$VIRTUAL_REPO/manifests/")"
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) echo "manifest requests: before=$before after=$after"
+manifest requests: before=4 after=8
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) guest -n "$GUEST_NS" get events --field-selector involvedObject.name="$POD_DIGEST" --sort-by=.lastTimestamp | tail -3
+22s         Normal   Pulled           pod/mirror-by-digest   Successfully pulled image "mirror-source.hypershift-e2e.invalid/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f" in 67ms (67ms including waiting). Image size: 24613466 bytes.
+22s         Normal   Created          pod/mirror-by-digest   Created container: registry
+22s         Normal   Started          pod/mirror-by-digest   Started container registry
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926)</code></pre>
+<h4 id="s3-ev-step-8-destroy-log-tail-leftover-checks-teardown">Step 8 — destroy log (tail), leftover checks, teardown</h4>
+<details class="output"><summary>Command output (91 lines) — click to expand</summary><pre class="highlight"><code class="language-text">(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) echo "INFRA_ID=$INFRA_ID"
+INFRA_ID=mirror-reach-kn775
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) guest delete ns "$GUEST_NS" --wait=false 2&gt;/dev/null
+namespace "mirror-reach-check" deleted
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) hs destroy cluster aws --name "$HC_NAME" --namespace "$HC_NS" \
+  --aws-creds "$AWS_CREDS" --region "$AWS_REGION" 2&gt;&amp;1 | tee "$REACH_OUT/destroy.log"
+Flag --aws-creds has been deprecated, please use '--sts-creds' with '--role-arn' instead
+{"level":"info","ts":"2026-10-14T16:05:57+02:00","msg":"Found hosted cluster","namespace":"clusters","name":"mirror-reach"}
+{"level":"info","ts":"2026-10-14T16:05:57+02:00","msg":"Setting client finalizer for hosted cluster","namespace":"clusters","name":"mirror-reach"}
+{"level":"info","ts":"2026-10-14T16:05:57+02:00","msg":"Marking cleanup of cloud resources for hosted cluster","namespace":"clusters","name":"mirror-reach"}
+{"level":"info","ts":"2026-10-14T16:05:57+02:00","msg":"Updated hosted cluster","namespace":"clusters","name":"mirror-reach"}
+{"level":"info","ts":"2026-10-14T16:05:57+02:00","msg":"Deleting hosted cluster","namespace":"clusters","name":"mirror-reach"}
+{"level":"info","ts":"2026-10-14T16:10:46+02:00","msg":"Destroying infrastructure","infraID":"mirror-reach-kn775"}
+{"level":"info","ts":"2026-10-14T16:10:53+02:00","msg":"Revoked security group ingress permissions","group":"sg-0000000000000000"}
+{"level":"info","ts":"2026-10-14T16:10:53+02:00","msg":"Revoked security group egress permissions","group":"sg-0000000000000000"}
+{"level":"info","ts":"2026-10-14T16:10:54+02:00","msg":"Deleted VPC endpoints","IDs":"vpce-0000000000000000"}
+{"level":"info","ts":"2026-10-14T16:10:54+02:00","msg":"Deleted private hosted zone","id":"Z00000000000000000000","name":"mirror-reach.hypershift.example.com."}
+{"level":"info","ts":"2026-10-14T16:10:55+02:00","msg":"Deleted private hosted zone","id":"Z00000000000000000000","name":"mirror-reach.hypershift.local."}
+{"level":"info","ts":"2026-10-14T16:10:55+02:00","msg":"Deleted route from route table","table":"rtb-0000000000000000","destination":"0.0.0.0/0"}
+{"level":"info","ts":"2026-10-14T16:10:55+02:00","msg":"Removed route table association","table":"rtb-0000000000000000","association":"rtb-0000000000000000"}
+{"level":"info","ts":"2026-10-14T16:10:56+02:00","msg":"Deleted route from route table","table":"rtb-0000000000000000","destination":"0.0.0.0/0"}
+{"level":"info","ts":"2026-10-14T16:10:56+02:00","msg":"Removed route table association","table":"rtb-0000000000000000","association":"rtb-0000000000000000"}
+{"level":"info","ts":"2026-10-14T16:10:56+02:00","msg":"Deleted route table","table":"rtb-0000000000000000"}
+{"level":"info","ts":"2026-10-14T16:10:57+02:00","msg":"Deleted route table","table":"rtb-0000000000000000"}
+{"level":"info","ts":"2026-10-14T16:10:57+02:00","msg":"WARNING: error during destroy, will retry","error":"deleting NAT gateway nat-0000000000000000"}
+{"level":"info","ts":"2026-10-14T16:11:04+02:00","msg":"WARNING: error during destroy, will retry","error":"NAT gateway nat-0000000000000000 still deleting"}
+{"level":"info","ts":"2026-10-14T16:11:11+02:00","msg":"WARNING: error during destroy, will retry","error":"NAT gateway nat-0000000000000000 still deleting"}
+{"level":"info","ts":"2026-10-14T16:11:17+02:00","msg":"WARNING: error during destroy, will retry","error":"NAT gateway nat-0000000000000000 still deleting"}
+{"level":"info","ts":"2026-10-14T16:11:24+02:00","msg":"WARNING: error during destroy, will retry","error":"NAT gateway nat-0000000000000000 still deleting"}
+{"level":"info","ts":"2026-10-14T16:11:30+02:00","msg":"WARNING: error during destroy, will retry","error":"NAT gateway nat-0000000000000000 still deleting"}
+{"level":"info","ts":"2026-10-14T16:11:36+02:00","msg":"WARNING: error during destroy, will retry","error":"NAT gateway nat-0000000000000000 still deleting"}
+{"level":"info","ts":"2026-10-14T16:11:44+02:00","msg":"Deleted subnet","id":"subnet-0000000000000000"}
+{"level":"info","ts":"2026-10-14T16:11:45+02:00","msg":"Deleted subnet","id":"subnet-0000000000000000"}
+{"level":"info","ts":"2026-10-14T16:11:45+02:00","msg":"WARNING: error during destroy, will retry","error":"failed to delete vpc with id vpc-0000000000000000: DependencyViolation: The vpc 'vpc-0000000000000000' has dependencies and cannot be deleted.\n\tstatus code: 400, request id: 37c8e181-bf0a-4f1a-bff3-5fe2f2530d53"}
+{"level":"info","ts":"2026-10-14T16:11:46+02:00","msg":"Detached internet gateway from VPC","gateway id":"igw-0000000000000000","vpc":"vpc-0000000000000000"}
+{"level":"info","ts":"2026-10-14T16:11:47+02:00","msg":"Deleted internet gateway","id":"igw-0000000000000000"}
+{"level":"info","ts":"2026-10-14T16:11:53+02:00","msg":"Deleted VPC","id":"vpc-0000000000000000"}
+{"level":"info","ts":"2026-10-14T16:11:54+02:00","msg":"Deleted EIP","id":"eipalloc-0000000000000000"}
+{"level":"info","ts":"2026-10-14T16:11:55+02:00","msg":"Deleted DHCP options","id":"dopt-0000000000000000"}
+{"level":"info","ts":"2026-10-14T16:11:55+02:00","msg":"Destroying IAM","infraID":"mirror-reach-kn775"}
+{"level":"info","ts":"2026-10-14T16:11:55+02:00","msg":"Deleted OIDC provider","providerARN":"arn:aws:iam::123456789012:oidc-provider/oidc-bucket.s3.us-east-1.amazonaws.com/mirror-reach-kn775"}
+{"level":"info","ts":"2026-10-14T16:11:55+02:00","msg":"Role already deleted!","role":"mirror-reach-kn775-shared-role"}
+{"level":"info","ts":"2026-10-14T16:11:56+02:00","msg":"Deleted role policy","role":"mirror-reach-kn775-openshift-ingress","policy":"mirror-reach-kn775-openshift-ingress"}
+{"level":"info","ts":"2026-10-14T16:11:56+02:00","msg":"Deleted role","role":"mirror-reach-kn775-openshift-ingress"}
+{"level":"info","ts":"2026-10-14T16:11:57+02:00","msg":"Deleted role policy","role":"mirror-reach-kn775-openshift-image-registry","policy":"mirror-reach-kn775-openshift-image-registry"}
+{"level":"info","ts":"2026-10-14T16:11:57+02:00","msg":"Deleted role","role":"mirror-reach-kn775-openshift-image-registry"}
+{"level":"info","ts":"2026-10-14T16:11:58+02:00","msg":"Deleted role policy","role":"mirror-reach-kn775-aws-ebs-csi-driver-controller","policy":"mirror-reach-kn775-aws-ebs-csi-driver-controller"}
+{"level":"info","ts":"2026-10-14T16:11:58+02:00","msg":"Deleted role","role":"mirror-reach-kn775-aws-ebs-csi-driver-controller"}
+{"level":"info","ts":"2026-10-14T16:11:59+02:00","msg":"Deleted role policy","role":"mirror-reach-kn775-cloud-controller","policy":"mirror-reach-kn775-cloud-controller"}
+{"level":"info","ts":"2026-10-14T16:11:59+02:00","msg":"Deleted role","role":"mirror-reach-kn775-cloud-controller"}
+{"level":"info","ts":"2026-10-14T16:12:00+02:00","msg":"Deleted role policy","role":"mirror-reach-kn775-node-pool","policy":"mirror-reach-kn775-node-pool"}
+{"level":"info","ts":"2026-10-14T16:12:00+02:00","msg":"Deleted role","role":"mirror-reach-kn775-node-pool"}
+{"level":"info","ts":"2026-10-14T16:12:00+02:00","msg":"Deleted role policy","role":"mirror-reach-kn775-control-plane-operator","policy":"mirror-reach-kn775-control-plane-operator"}
+{"level":"info","ts":"2026-10-14T16:12:01+02:00","msg":"Deleted role","role":"mirror-reach-kn775-control-plane-operator"}
+{"level":"info","ts":"2026-10-14T16:12:01+02:00","msg":"Deleted role policy","role":"mirror-reach-kn775-cloud-network-config-controller","policy":"mirror-reach-kn775-cloud-network-config-controller"}
+{"level":"info","ts":"2026-10-14T16:12:01+02:00","msg":"Deleted role","role":"mirror-reach-kn775-cloud-network-config-controller"}
+{"level":"info","ts":"2026-10-14T16:12:02+02:00","msg":"Role already deleted!","role":"mirror-reach-kn775-kms-provider"}
+{"level":"info","ts":"2026-10-14T16:12:02+02:00","msg":"Role already deleted!","role":"mirror-reach-kn775-karpenter"}
+{"level":"info","ts":"2026-10-14T16:12:02+02:00","msg":"Removed role from instance profile","profile":"mirror-reach-kn775-worker","role":"mirror-reach-kn775-worker-role"}
+{"level":"info","ts":"2026-10-14T16:12:02+02:00","msg":"Deleted instance profile","profile":"mirror-reach-kn775-worker"}
+{"level":"info","ts":"2026-10-14T16:12:03+02:00","msg":"Deleted role policy","role":"mirror-reach-kn775-worker-role","policy":"mirror-reach-kn775-worker-policy"}
+{"level":"info","ts":"2026-10-14T16:12:03+02:00","msg":"Deleted role","role":"mirror-reach-kn775-worker-role"}
+{"level":"info","ts":"2026-10-14T16:12:03+02:00","msg":"Deleting Secrets","namespace":"clusters"}
+{"level":"info","ts":"2026-10-14T16:12:03+02:00","msg":"Deleted CLI generated secrets"}
+{"level":"info","ts":"2026-10-14T16:12:04+02:00","msg":"Finalized hosted cluster","namespace":"clusters","name":"mirror-reach"}
+{"level":"info","ts":"2026-10-14T16:12:04+02:00","msg":"Successfully destroyed cluster and infrastructure","namespace":"clusters","name":"mirror-reach","infraID":"mirror-reach-kn775"}
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) k -n "$HC_NS" get hostedcluster,nodepool
+No resources found in clusters namespace.
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) k get ns "$HCP_NS"
+Error from server (NotFound): namespaces "clusters-mirror-reach" not found
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) aws ec2 describe-vpcs --region "$AWS_REGION" --filters "Name=tag:kubernetes.io/cluster/${INFRA_ID},Values=owned" \
+  --query 'Vpcs[].VpcId' --output text
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) aws ec2 describe-instances --region "$AWS_REGION" --filters "Name=tag:kubernetes.io/cluster/${INFRA_ID},Values=owned" \
+  "Name=instance-state-name,Values=pending,running,stopping,stopped" --query 'Reservations[].Instances[].InstanceId' --output text
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) k -n "$HC_NS" get secret,cm
+NAME                              TYPE                      DATA   AGE
+secret/builder-dockercfg-7dnkv    kubernetes.io/dockercfg   1      35m
+secret/default-dockercfg-sljps    kubernetes.io/dockercfg   1      35m
+secret/deployer-dockercfg-ggbwv   kubernetes.io/dockercfg   1      35m
+
+NAME                                 DATA   AGE
+configmap/kube-root-ca.crt           1      35m
+configmap/openshift-service-ca.crt   1      35m
+configmap/user-ca-bundle             1      35m
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) k delete ns "$HC_NS"
+namespace "clusters" deleted
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) harness teardown 2&gt;&amp;1 | tee "$REACH_OUT/teardown.log"
+16:14:17 harness: context mgmt → https://api.mgmt.hypershift.example.com:6443
+16:14:38 harness: teardown finished in 21s
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) k get ns "$NS"
+Error from server (NotFound): namespaces "test-mirror-registry" not found
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926)</code></pre></details></div>
+
+</main>
+<footer>
+CNTRLPLANE-3926 — in-cluster mirror registry fixture for HyperShift e2e v2 ·
+<a href="https://github.com/openshift/hypershift/pull/9996">openshift/hypershift#9996</a> · report date 2026-10-15.<br>
+All evidence is sanitized (cluster names, domains, AWS identifiers and local paths replaced; see
+<a href="appendices.html#e-sanitization">appendix E</a>). Cluster commands were run by a human; runbooks, scripts,
+the independent evidence review and this report were prepared with AI assistance (see appendix F).
+</footer>
+</body>
+</html>

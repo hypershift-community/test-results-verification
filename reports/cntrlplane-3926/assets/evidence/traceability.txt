@@ -1,0 +1,108 @@
+$ git range-diff 629dfa6c2e..38342d4965 a325c54776..8d54f7ab32
+ 1:  102b425645 =  1:  9656f904e3 test(e2e): add mirror registry fixture API skeleton
+ 2:  c812d7d1e8 =  2:  2ebf132029 test(e2e): add mirror registry option validation
+ 3:  7e7fe25417 =  3:  e4d77de8e5 test(e2e): generate mirror registry TLS materials
+ 4:  52c8cdd051 =  4:  a4bad66ed5 test(e2e): add mirror registry resource builders
+ 5:  600eb8a3c5 =  5:  b31eae58e7 test(e2e): add job-based mirror registry image copier
+ 6:  583ce6fa05 =  6:  34918df65a test(e2e): clarify mirror registry Setup re-run semantics
+ 7:  96ef6cf22f =  7:  3bba2c5ddb test(e2e): orchestrate mirror registry setup and teardown
+ 8:  2432ffc8af =  8:  5ef41d4148 fix(e2e): persist mirror registry CA across setup calls
+ 9:  38342d4965 !  9:  64ca1b82a7 test(e2e): wire opt-in AWS image mirroring lifecycle
+    @@ test/e2e/v2/lifecycle/aws.go: import (
+      	crclient "sigs.k8s.io/controller-runtime/pkg/client"
+      )
+     @@ test/e2e/v2/lifecycle/aws.go: type AWSPlatformConfig struct {
+    - 	zones          []string
+      	additionalTags []string
+      	sharedDir      string
+    + 	externalOIDC   externalOIDCSetup
+     +	imageMirroring bool
+     +
+     +	newMirrorRegistry func(crclient.Client, mirrorregistry.Options) (mirrorRegistry, error)
+    @@ test/e2e/v2/lifecycle/aws.go: type AWSPlatformConfig struct {
+      
+      func NewAWSPlatformConfig(opts AWSPlatformOptions, sharedDir string) *AWSPlatformConfig {
+     @@ test/e2e/v2/lifecycle/aws.go: func NewAWSPlatformConfig(opts AWSPlatformOptions, sharedDir string) *AWSPlatfor
+    - 		sharedDir:      sharedDir,
+      		additionalTags: tags,
+      		zones:          zones,
+    + 		externalOIDC:   externalOIDCSetup{sharedDir: sharedDir},
+     +		imageMirroring: opts.ImageMirroring,
+     +		newMirrorRegistry: func(cl crclient.Client, opts mirrorregistry.Options) (mirrorRegistry, error) {
+     +			return mirrorregistry.New(cl, opts)
+    @@ test/e2e/v2/lifecycle/aws.go: func NewAWSPlatformConfig(opts AWSPlatformOptions,
+      
+      	log.Printf("AWS platform config: region=%s, zones=%v, additionalTags=%v", cfg.region, cfg.zones, cfg.additionalTags)
+     @@ test/e2e/v2/lifecycle/aws.go: func (a *AWSPlatformConfig) ClusterSpecs(releaseImage, n1Image string) []Cluster
+    - 	if envArgs := os.Getenv("EXTRA_ARGS"); envArgs != "" {
+      		extraArgs = strings.Fields(envArgs)
+      	}
+    + 	oneInitialReplica := 1
+     -	return []ClusterSpec{
+     +	specs := []ClusterSpec{
+      		{
+      			Variant: "public",
+      			ExtraArgs: append(extraArgs, []string{
+     @@ test/e2e/v2/lifecycle/aws.go: func (a *AWSPlatformConfig) ClusterSpecs(releaseImage, n1Image string) []Cluster
+    - 			}...),
+    + 			ExtraArgs:               extraArgs,
+      		},
+      	}
+     +	if a.imageMirroring {
+    @@ test/e2e/v2/lifecycle/aws.go: func (a *AWSPlatformConfig) CreateArgs() []string
+     +// only with a TEST_PLAN selecting image-mirroring: this hook does not receive the
+     +// plan's filtered cluster specs.
+      func (a *AWSPlatformConfig) PreCreate(ctx context.Context, cl crclient.WithWatch, namespace string) error {
+    --	return nil
+    +-	return a.externalOIDC.preCreate(ctx, cl)
+    ++	if err := a.externalOIDC.preCreate(ctx, cl); err != nil {
+    ++		return err
+    ++	}
+    ++	return a.setupImageMirroring(ctx, cl)
+    ++}
+    ++
+    ++func (a *AWSPlatformConfig) setupImageMirroring(ctx context.Context, cl crclient.Client) error {
+     +	if !a.imageMirroring {
+     +		return nil
+     +	}
+    @@ test/e2e/v2/lifecycle/aws_test.go (new)
+     +			dir := t.TempDir()
+     +			cfg := NewAWSPlatformConfig(AWSPlatformOptions{ImageMirroring: tt.enabled}, dir)
+     +			specs := cfg.ClusterSpecs("current", "previous")
+    -+			wantCount := 4
+    ++			wantCount := 6
+     +			if tt.enabled {
+     +				wantCount++
+     +			}
+    @@ test/e2e/v2/lifecycle/aws_test.go (new)
+     +					"--additional-trust-bundle=" + filepath.Join(dir, "mirror-registry-ca.pem"),
+     +					"--image-content-sources=" + filepath.Join(dir, "mirror-registry-ics.yaml"),
+     +				}}
+    -+				if !reflect.DeepEqual(specs[4], want) {
+    -+					t.Fatalf("got %+v, want %+v", specs[4], want)
+    ++				if !reflect.DeepEqual(specs[6], want) {
+    ++					t.Fatalf("got %+v, want %+v", specs[6], want)
+     +				}
+     +				baseline := NewAWSPlatformConfig(AWSPlatformOptions{}, dir)
+    -+				if !reflect.DeepEqual(specs[:4], baseline.ClusterSpecs("current", "previous")) {
+    ++				if !reflect.DeepEqual(specs[:6], baseline.ClusterSpecs("current", "previous")) {
+     +					t.Fatal("existing variants changed")
+     +				}
+     +				if !reflect.DeepEqual(cfg.DefaultTestPlan(), baseline.DefaultTestPlan()) {
+    @@ test/e2e/v2/lifecycle/aws_test.go (new)
+     +			if !tt.missingStream {
+     +				builder.WithObjects(cliStream(testCLIImage))
+     +			}
+    -+			err := cfg.PreCreate(t.Context(), builder.Build(), "clusters")
+    ++			err := cfg.setupImageMirroring(t.Context(), builder.Build())
+     +			if tt.wantError != "" {
+     +				if err == nil || !strings.Contains(err.Error(), tt.wantError) {
+     +					t.Fatalf("got %v, want error containing %q", err, tt.wantError)
+ -:  ---------- > 10:  8d54f7ab32 ci: run mirror registry fixture unit tests in other shard
+
+$ git diff --stat 2432ffc8af 8d54f7ab32 -- test/e2e/v2/util/mirrorregistry/   # T6 commit vs PR head (empty = identical)
+$ git diff --stat 38342d4965 8d54f7ab32 -- test/e2e/v2/util/mirrorregistry/   # T8 commit vs PR head
+
+# Public PR hashes (verifiable on GitHub): mirrorregistry package at 5ef41d4148 (= T6 commit after rebase) vs PR head
+$ git diff --stat 5ef41d4148 8d54f7ab32 -- test/e2e/v2/util/mirrorregistry/   # empty = identical
+$ git diff --stat 64ca1b82a7 8d54f7ab32 -- test/e2e/v2/   # T8-equivalent commit vs PR head (only the CI shard commit follows)

@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scenario 2 — Harness (fixture code on a live cluster) — CNTRLPLANE-3926 verification</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topbar"><div class="brand">CNTRLPLANE-3926 · Verification report</div><nav><a href="index.html">Dashboard</a><a href="scenario-1.html">1 · Smoke</a><a href="scenario-2.html" class="active">2 · Harness</a><a href="scenario-3.html">3 · Reachability</a><a href="automated-tests.html">Automated tests</a><a href="appendices.html">Appendices</a><a href="../../plans/cntrlplane-3926.md">Test plan</a><a href="https://github.com/openshift/hypershift/pull/9996">PR #9996</a></nav></header>
+<main>
+<h1>Scenario 2 — Harness (fixture code on a live cluster)</h1>
+<p class="subtitle">The PR's mirrorregistry package against a real management cluster</p>
+<dl class="kv">
+  <dt>Objective</dt><dd>Prove that the Go fixture does on a real cluster what Scenario 1 did by hand, plus what only the code does:
+  idempotent re-runs, the exposure invariant across re-runs (D4), CA persistence (D3), a caller-supplied CA (use, reuse, rotation) and Teardown</dd>
+  <dt>Code under test</dt><dd><code>test/e2e/v2/util/mirrorregistry</code> at <code>2432ffc8af</code> (byte-identical to the PR head, appendix A),
+  driven by <a href="scripts/harness/main.go"><code>harness/main.go</code></a>: a thin CLI around <code>New</code>, <code>Setup</code> and
+  <code>Teardown</code> that mirrors the test image to its real repository and to the virtual repository</dd>
+  <dt>Tools</dt><dd><a href="scripts/harness/watch.sh"><code>watch.sh</code></a> logs every state change and prints <code>VIOLATION</code> if the Route
+  exists while the registry config is writable. <a href="scripts/harness/verify.sh"><code>verify.sh</code></a> runs 5 PASS/FAIL checks against the
+  public endpoint: anonymous <code>/v2/</code> with the CA, TLS refused without it, digest of both repositories, push rejected</dd>
+  <dt>Environment</dt><dd>Same management cluster as Scenario 1; Part A uses the helper-generated CA, Part B caller-supplied CAs</dd>
+  <dt>Date</dt><dd>2026-10-13</dd>
+  <dt>Verdict</dt><dd><span class="badge pass">PASS</span> Every check matched; no bugs found, no code changes needed</dd>
+</dl>
+<h2 id="test-cases">Test cases</h2>
+<table><thead><tr><th>TC</th><th>Test case</th><th>Runbook steps</th><th>Covers</th><th>Result</th><th>Key evidence</th></tr></thead><tbody><tr id="tc-07"><td><b>TC-07</b></td><td>Setup on a fresh namespace returns a complete Result</td><td>1</td><td>AC1, AC2, AC6</td><td><span class="badge pass">PASS</span></td><td>55 s; copier image by digest from the ImageStream; Host / InternalHost / 2 Images / 2 sorted ICS</td></tr><tr id="tc-08"><td><b>TC-08</b></td><td>Exposure invariant: Route only while read-only (D4)</td><td>1, 3, 9</td><td>D4</td><td><span class="badge pass">PASS</span></td><td>writable → Job Complete → <code>readonly=true</code> → admitted; re-runs withdraw the Route first; no <code>VIOLATION</code></td></tr><tr id="tc-09"><td><b>TC-09</b></td><td>Public endpoint and serving certificate</td><td>2</td><td>AC4</td><td><span class="badge pass">PASS</span></td><td><code>verify.sh</code> 5/5; SANs = Route host + 4 Service names; issuer = fixture CA; no leftover Job/Secret</td></tr><tr id="tc-10"><td><b>TC-10</b></td><td>Idempotent re-run keeps CA and Result</td><td>3</td><td>AC5</td><td><span class="badge pass">PASS</span></td><td>28 s; <code>CA unchanged</code>, <code>Result unchanged</code>; verify 5/5</td></tr><tr id="tc-11"><td><b>TC-11</b></td><td>Teardown and repeated Teardown</td><td>4, 10</td><td>AC5</td><td><span class="badge pass">PASS</span></td><td>21 s, namespace NotFound, PV gone; second Teardown 1 s, nil</td></tr><tr id="tc-12"><td><b>TC-12</b></td><td>Caller-supplied CA: use, reuse, rotation</td><td>6–9</td><td>AC4</td><td><span class="badge pass">PASS</span></td><td>PKCS#8 CA accepted; stored CA reused; rotation to CA2; old CA → curl exit 60</td></tr></tbody></table>
+
+<h2 id="procedure">Procedure</h2>
+<p>The runbook below is the one in the reproduction kit (<a href="scripts/harness/RUNBOOK.md"><code>scripts/harness/RUNBOOK.md</code></a>).
+It is the executed runbook after sanitization, minus the internal workflow notes listed under
+<a href="appendices.html#kit-changes">kit changes</a>.</p>
+<details><summary>Runbook — expected results for every step</summary>
+<div class="evidence"><p>Goal: prove that the Go helper <code>test/e2e/v2/util/mirrorregistry</code> (T1–T5a) does on a real cluster what T0 did
+by hand, plus what only the Go code does: idempotent re-runs, the D4 invariant (Route only while read-only)
+across re-runs, CA persistence (D3), caller-supplied CA, and Teardown. Fill <code>RESULTS.md</code> as you go (each step
+has a <strong>Record</strong> line). Bugs found → one fix commit each, <code>gate.sh</code> must pass, then repeat the failed step.</p>
+<p>Scope and safety:
+- Only context <code>$CTX</code> (default <code>mgmt</code>, see <code>env.sh</code>), only namespace <code>test-mirror-registry</code>
+  (+ cluster-scoped reads of the ingress domain and the <code>openshift/cli</code> ImageStream).
+- No pull secret is used: the test image is public (<code>SourcePullSecret</code> is out of scope for T6).
+- <code>out/</code> holds CA private keys (<code>out/caller-ca*</code>): it stays under <code>.work/</code> (gitignored). Never paste them.
+- Time: ~1 hour. Part A (steps 1–5) is the must-have; Part B (6–10) covers the caller-supplied CA.</p>
+<p>Tools: <code>harness</code> (= <code>go run ./.work/cntrlplane-3926/harness</code>), <code>watch.sh</code> (state transitions + invariant
+check, second terminal), <code>verify.sh</code> (laptop checks, one PASS/FAIL line each). Run from the repository root.</p>
+<hr />
+<h4 id="s2-rb-0-environment-both-terminals">0. Environment (both terminals)</h4>
+<pre class="highlight"><code class="language-bash">source .work/cntrlplane-3926/harness/env.sh
+k get ns "$NS"                                  # expected: NotFound (start clean)
+go build -o /dev/null ./.work/cntrlplane-3926/harness &amp;&amp; echo "harness builds"</code></pre>
+<h3 id="s2-rb-part-a-helper-generated-ca">Part A — helper-generated CA</h3>
+<h4 id="s2-rb-1-first-setup-fresh-namespace">1. First Setup (fresh namespace)</h4>
+<p>Terminal 2:
+<pre class="highlight"><code class="language-bash">.work/cntrlplane-3926/harness/watch.sh "$OUT/watch-run1.log"</code></pre>
+Terminal 1:
+<pre class="highlight"><code class="language-bash">harness setup -out "$OUT/run1" 2&gt;&amp;1 | tee "$OUT/run1.log"</code></pre>
+Expected:
+- <code>harness: copier image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:…</code> (ImageStream lookup works);
+- exit 0, <code>result.json</code> printed with <code>Host == $HOST</code>, <code>InternalHost == mirror-registry.test-mirror-registry.svc:5000</code>,
+  two <code>Images</code> (<code>SourceRef</code> = real and virtual repo, <code>MirrorRef</code> = <code>$HOST/&lt;source repo&gt;@$TEST_DIGEST</code>),
+  two <code>ImageContentSources</code> (sorted: <code>mirror-source…invalid/…</code> then <code>quay.io/…</code>), each with one mirror;
+- watch log order: <code>readonly=false</code>, pod Running, copy Job appears and disappears (cleaned up on success),
+  <code>readonly=true</code> with a new pod, then <code>route=pending</code> → <code>route=admitted</code>; <strong>no <code>VIOLATION</code></strong> line.
+  Stop the watcher (Ctrl-C) after the harness exits.</p>
+<p><strong>Record:</strong> Setup duration, copier image digest, watch log, any error.</p>
+<h4 id="s2-rb-2-verify-from-the-laptop-and-from-the-cluster">2. Verify from the laptop and from the cluster</h4>
+<p><pre class="highlight"><code class="language-bash">.work/cntrlplane-3926/harness/verify.sh "$OUT/run1"
+cat "$OUT/run1/ics.yaml"
+openssl x509 -in "$OUT/run1/ca-only/ca.crt" -noout -subject -enddate
+### Serving cert: SANs, issuer = our CA, short CN
+openssl s_client -connect "${HOST}:443" -servername "$HOST" -CAfile "$OUT/run1/ca-only/ca.crt" &lt;/dev/null 2&gt;/dev/null \
+  | openssl x509 -noout -subject -issuer -ext subjectAltName
+### Stored CA Secret matches the CA returned in Result
+k -n "$NS" get secret "${NAME}-ca" -o jsonpath='{.data.ca\.crt}' | base64 -d | cmp - "$OUT/run1/ca-only/ca.crt" &amp;&amp; echo "stored CA == Result CA"
+### Cluster state: no leftover copy Job/Secret, read-only config, pod under restricted-v2
+k -n "$NS" get job,secret,route,pvc
+k -n "$NS" get cm "${NAME}-config" -o jsonpath='{.data.config\.yml}' | grep -A1 'readonly:'
+k -n "$NS" get pod -l app.kubernetes.io/name="$NAME" -o jsonpath='{.items[0].metadata.annotations.openshift\.io/scc}{"\n"}'</code></pre>
+Expected: <code>verify: 0 failure(s)</code>; SANs contain <code>$HOST</code> and the Service names; issuer = CA subject;
+<code>stored CA == Result CA</code>; only Secrets <code>${NAME}-ca</code> and <code>${NAME}-tls</code> (no <code>*-copy-*</code> Secret, no Job);
+<code>enabled: true</code>; SCC <code>restricted-v2</code>.</p>
+<p><strong>Record:</strong> verify output, SANs, leftovers (should be none).</p>
+<h4 id="s2-rb-3-second-setup-idempotency-route-withdrawn-first-ca-unchanged">3. Second Setup (idempotency, Route withdrawn first, CA unchanged)</h4>
+<p>Terminal 2: <code>.work/cntrlplane-3926/harness/watch.sh "$OUT/watch-run2.log"</code></p>
+<p>Terminal 1:
+<pre class="highlight"><code class="language-bash">harness setup -out "$OUT/run2" 2&gt;&amp;1 | tee "$OUT/run2.log"
+cmp "$OUT/run1/ca-only/ca.crt" "$OUT/run2/ca-only/ca.crt" &amp;&amp; echo "CA unchanged"
+diff "$OUT/run1/result.json" "$OUT/run2/result.json" &amp;&amp; echo "Result unchanged"
+.work/cntrlplane-3926/harness/verify.sh "$OUT/run2"</code></pre>
+Expected:
+- watch log starts with <code>route=admitted readonly=true</code>, then <code>route=none readonly=true</code> <strong>before</strong> any
+  <code>readonly=false</code>; then the same sequence as step 1; <strong>no <code>VIOLATION</code></strong>;
+- <code>CA unchanged</code>, <code>Result unchanged</code>, <code>verify: 0 failure(s)</code>;
+- content is still served (PVC reused; the copy re-pushes the same digests).</p>
+<p><strong>Record:</strong> Setup duration, watch log, CA/Result comparison, verify output.</p>
+<h4 id="s2-rb-4-teardown-and-idempotent-teardown">4. Teardown and idempotent Teardown</h4>
+<p><pre class="highlight"><code class="language-bash">harness teardown 2&gt;&amp;1 | tee "$OUT/teardown1.log"
+k get ns "$NS"                                                   # expected: NotFound
+k get pv | grep "${NS}/${NAME}" || echo "PV gone (reclaimPolicy Delete)"
+curl -sS -o /dev/null -w '%{http_code}\n' --cacert "$OUT/run1/ca-only/ca.crt" "https://${HOST}/v2/"   # expected: exit 60 (no Route: router serves its default cert)
+harness teardown 2&gt;&amp;1 | tee "$OUT/teardown2.log"                 # expected: exit 0 immediately (namespace absent)</code></pre>
+<strong>Record:</strong> durations, NotFound, PV gone, second teardown exit code.</p>
+<h4 id="s2-rb-5-part-a-verdict">5. Part A verdict</h4>
+<p>All of steps 1–4 OK → Part A PASS. On failure: capture the harness error and <code>k -n "$NS" get all,cm,secret,route -o wide</code>
+and <code>k -n "$NS" get events --sort-by=.lastTimestamp | tail -30</code> <strong>before</strong> tearing down.</p>
+<h3 id="s2-rb-part-b-caller-supplied-ca-optionsca">Part B — caller-supplied CA (<code>Options.CA</code>)</h3>
+<h4 id="s2-rb-6-generate-two-cas-locally-pkcs8-keys-as-openssl-3-writes-them">6. Generate two CAs locally (PKCS#8 keys, as OpenSSL 3 writes them)</h4>
+<p><pre class="highlight"><code class="language-bash">for ca in caller-ca caller-ca2; do
+  mkdir -p "$OUT/$ca" &amp;&amp; (
+    cd "$OUT/$ca"
+    openssl genrsa -out ca.key 4096 2&gt;/dev/null
+    openssl req -x509 -new -key ca.key -days 30 -subj "/CN=hypershift-e2e-${ca}" \
+      -addext "basicConstraints=critical,CA:TRUE" -addext "keyUsage=critical,keyCertSign,cRLSign" -out ca.crt
+    head -1 ca.key; openssl x509 -in ca.crt -noout -subject
+  )
+done</code></pre>
+Expected: <code>[PKCS#8 key header line]</code> (PKCS#8 → exercises <code>parsePrivateKey</code>'s PKCS#8 path), two subjects.</p>
+<h4 id="s2-rb-7-setup-with-a-caller-supplied-ca-on-a-fresh-namespace">7. Setup with a caller-supplied CA on a fresh namespace</h4>
+<p><pre class="highlight"><code class="language-bash">harness setup -out "$OUT/runB1" -ca-cert "$OUT/caller-ca/ca.crt" -ca-key "$OUT/caller-ca/ca.key" 2&gt;&amp;1 | tee "$OUT/runB1.log"
+cmp "$OUT/caller-ca/ca.crt" "$OUT/runB1/ca-only/ca.crt" &amp;&amp; echo "Result CA == caller CA"
+k -n "$NS" get secret "${NAME}-ca" -o jsonpath='{.data.ca\.crt}' | base64 -d | cmp - "$OUT/caller-ca/ca.crt" &amp;&amp; echo "stored CA == caller CA"
+.work/cntrlplane-3926/harness/verify.sh "$OUT/runB1"</code></pre>
+Expected: both <code>==</code> lines, <code>verify: 0 failure(s)</code>. (A watcher is optional here.)</p>
+<h4 id="s2-rb-8-setup-without-ca-reuses-the-stored-caller-ca">8. Setup without <code>-ca</code> reuses the stored caller CA</h4>
+<p><pre class="highlight"><code class="language-bash">harness setup -out "$OUT/runB2" 2&gt;&amp;1 | tee "$OUT/runB2.log"
+cmp "$OUT/caller-ca/ca.crt" "$OUT/runB2/ca-only/ca.crt" &amp;&amp; echo "stored caller CA reused"
+.work/cntrlplane-3926/harness/verify.sh "$OUT/runB2"</code></pre>
+Expected: <code>stored caller CA reused</code>, <code>verify: 0 failure(s)</code>.</p>
+<h4 id="s2-rb-9-setup-with-a-different-caller-ca-rotation-withdrawal-uses-the-stored-ca">9. Setup with a different caller CA (rotation; withdrawal uses the stored CA)</h4>
+<p>Terminal 2: <code>.work/cntrlplane-3926/harness/watch.sh "$OUT/watch-runB3.log"</code></p>
+<p><pre class="highlight"><code class="language-bash">harness setup -out "$OUT/runB3" -ca-cert "$OUT/caller-ca2/ca.crt" -ca-key "$OUT/caller-ca2/ca.key" 2&gt;&amp;1 | tee "$OUT/runB3.log"
+cmp "$OUT/caller-ca2/ca.crt" "$OUT/runB3/ca-only/ca.crt" &amp;&amp; echo "Result CA == caller CA2"
+k -n "$NS" get secret "${NAME}-ca" -o jsonpath='{.data.ca\.crt}' | base64 -d | cmp - "$OUT/caller-ca2/ca.crt" &amp;&amp; echo "stored CA replaced by CA2"
+.work/cntrlplane-3926/harness/verify.sh "$OUT/runB3"
+curl -sS -o /dev/null --cacert "$OUT/caller-ca/ca.crt" "https://${HOST}/v2/"; echo "exit=$? (expected 60: old CA no longer trusted)"</code></pre>
+Expected: Setup succeeds (the Route withdrawal check trusted the <em>old</em> CA served by the running pod — this is
+the <code>clientForWithdrawal</code> path), no <code>VIOLATION</code>, both <code>==</code> lines, verify passes with CA2, old CA rejected.</p>
+<p><strong>Record:</strong> outcome, Setup duration, watch log.</p>
+<h4 id="s2-rb-10-teardown">10. Teardown</h4>
+<pre class="highlight"><code class="language-bash">harness teardown 2&gt;&amp;1 | tee "$OUT/teardownB.log"
+k get ns "$NS"                                                   # expected: NotFound
+k get pv | grep "${NS}/${NAME}" || echo "PV gone"</code></pre></div>
+</details>
+<h2 id="results">Results and evidence</h2>
+<p>The text below is the results file from the run, unchanged except for sanitization (raw copy:
+<a href="assets/evidence/harness-RESULTS.md"><code>assets/evidence/harness-RESULTS.md</code></a>).
+Long command outputs are collapsed.</p>
+<div class="evidence"><p>Date: 2026/10/13  Cluster: mgmt (OCP 4.20.0, nested hosted cluster)  Branch/commit: <code>CNTRLPLANE-3926</code> @ <code>2432ffc8af</code>  Run by: @Nirshal</p>
+<p><strong>Verdict: PASS</strong> — every check matched the expected results; no bugs found, no code changes needed.</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Item</th>
+<th>Result</th>
+<th>Notes / exact values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Setup succeeds on a fresh namespace</td>
+<td>OK</td>
+<td>55s (16:18:02 → 16:18:57), exit 0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Copier image from <code>openshift/cli</code> ImageStream</td>
+<td>OK</td>
+<td><code>quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:0a9d58f9…b39a5</code> (T7 lookup approach works)</td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>Result</code> fields (Host, InternalHost, Images, ICS) as expected</td>
+<td>OK</td>
+<td>Host = <code>$HOST</code>, InternalHost <code>mirror-registry.test-mirror-registry.svc:5000</code>, 2 Images (real + virtual SourceRef), 2 ICS sorted, 1 mirror each</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Order: copy while writable → read-only → Route; no VIOLATION</td>
+<td>OK</td>
+<td>writable 16:18:10 → Job Complete 16:18:48 → readonly=true 16:18:52 → admitted 16:18:59; no VIOLATION</td>
+</tr>
+<tr>
+<td>2</td>
+<td>verify.sh (4 checks)</td>
+<td>OK</td>
+<td>5/5 PASS (200 <code>{}</code> with CA, curl exit 60 without, both digests = source, push 405)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Serving cert SANs / issuer / CN</td>
+<td>OK</td>
+<td>CN <code>mirror-registry</code>; SANs Route host + 4 Service names; issuer = CA <code>hypershift-e2e-mirror-registry-ca</code> (valid 1 year)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Stored CA Secret == Result CA</td>
+<td>OK</td>
+<td><code>cmp</code> equal</td>
+</tr>
+<tr>
+<td>2</td>
+<td>No leftover copy Job/Secret; config read-only; SCC restricted-v2</td>
+<td>OK</td>
+<td>no Job, only <code>-ca</code>/<code>-tls</code> Secrets (+ OpenShift SA <code>*-dockercfg-*</code>, not ours); <code>enabled: true</code>; <code>restricted-v2</code>; PVC 20Gi <code>gp3-csi</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td>Second Setup succeeds</td>
+<td>OK</td>
+<td>28s (16:59:32 → 17:00:00)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Route withdrawn before writes re-enabled; no VIOLATION</td>
+<td>OK</td>
+<td>route=none 16:59:37 while readonly=true; readonly=false only at 16:59:40; re-admitted 17:00:01 after read-only rollout</td>
+</tr>
+<tr>
+<td>3</td>
+<td>CA unchanged, Result unchanged</td>
+<td>OK</td>
+<td><code>cmp</code> / <code>diff</code> equal</td>
+</tr>
+<tr>
+<td>3</td>
+<td>verify.sh after re-run</td>
+<td>OK</td>
+<td>5/5 PASS (content served after a 2nd write/read-only cycle on the same PVC)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Teardown: namespace NotFound, PV gone</td>
+<td>OK</td>
+<td>21s; ns NotFound; PV deleted. Post-teardown curl gives exit 60, not 503 (see Surprises)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Second Teardown returns nil</td>
+<td>OK</td>
+<td>1s, no <code>ERROR:</code> line (namespace absent → nil)</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Caller CAs generated (PKCS#8 keys)</td>
+<td>OK</td>
+<td>both <code>[PKCS#8 key header line]</code>, CN <code>hypershift-e2e-caller-ca{,2}</code></td>
+</tr>
+<tr>
+<td>7</td>
+<td>Setup with caller CA: Result CA == stored CA == caller CA; verify</td>
+<td>OK</td>
+<td>41s; both <code>cmp</code> equal; 5/5 PASS (PKCS#8 path accepted)</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Setup without CA reuses stored caller CA; verify</td>
+<td>OK</td>
+<td>42s; Result CA == caller CA; 5/5 PASS</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Setup with different caller CA: rotation works, no VIOLATION, old CA rejected</td>
+<td>OK</td>
+<td>36s; withdrawal under old CA OK; Result/stored CA == CA2; 5/5 PASS; old CA → curl exit 60</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Teardown</td>
+<td>OK</td>
+<td>21s; ns NotFound; PV gone</td>
+</tr>
+</tbody>
+</table>
+<h3 id="s2-ev-bugs-found">Bugs found</h3>
+<p>None.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Step</th>
+<th>Symptom</th>
+<th>Root cause</th>
+<th>Fix commit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="s2-ev-surprises-follow-ups-t7-t8-consuming-stories">Surprises / follow-ups (T7, T8, consuming stories)</h3>
+<ul>
+<li>Step 4: after Teardown, <code>curl --cacert &lt;our CA&gt;</code> fails with exit 60 instead of returning 503. With no
+  passthrough Route matching the SNI, the OpenShift router terminates TLS itself with the default ingress
+  certificate, which our CA does not sign. 503 would only be visible with <code>-k</code>. Not a defect: the runbook
+  expectation was wrong (now corrected). It is also how <code>waitEndpoint(exposed=false)</code> sees withdrawal (TLS
+  failure → not OK).</li>
+<li>Step 3: the old registry pod shows <code>Failed(terminating)</code> during the read-only restart (phase Failed: the
+  registry exits non-zero on SIGTERM). Harmless with <code>Recreate</code> + PVC; content survived (verify passed).</li>
+<li>Step 9: the old-CA curl line had a typo (<code>\;</code> made <code>echo</code> part of curl's arguments). The first curl error
+  (exit 60 on <code>/v2/</code> with the old CA) is still the evidence needed; the extra <code>curl: (6)/(3)</code> lines are from the typo.</li>
+<li>Timings (small image, 2 copies): Setup 28–55s, Route withdrawal ~2s, read-only restart ~5–10s, Teardown 21s.
+  Useful for budgeting T7 <code>PreCreate</code>; the 20-min harness deadline is generous for single images.</li>
+<li>The copy Job name is deterministic (<code>mirror-registry-copy-95da31410c</code>) and identical across re-runs; the
+  previous Job is deleted first and resources are cleaned on success, so no leftovers.</li>
+<li>Harness prints <code>"CABundlePEM": null</code> (the field is nulled on purpose). Cosmetic, harness only.</li>
+</ul>
+<h3 id="s2-ev-evidence">Evidence</h3>
+<h4 id="s2-ev-step-1-harness-output-and-watch-log">Step 1 — harness output and watch log</h4>
+<details class="output"><summary>Command output (48 lines) — click to expand</summary><pre class="highlight"><code class="language-text">From Terminal 1:
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) harness setup -out "$OUT/run1" 2&gt;&amp;1 | tee "$OUT/run1.log"
+16:18:02 harness: context mgmt → https://api.mgmt.hypershift.example.com:6443
+16:18:07 harness: copier image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:0a9d58f9d8dd969c7bd107319a2498a674fe4e6477185a44558f168d994b39a5
+16:18:07 harness: Setup started
+{
+  "Host": "mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com",
+  "InternalHost": "mirror-registry.test-mirror-registry.svc:5000",
+  "CABundlePEM": null,
+  "ImageContentSources": [
+    {
+      "source": "mirror-source.hypershift-e2e.invalid/libpod/registry",
+      "mirrors": [
+        "mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/mirror-source.hypershift-e2e.invalid/libpod/registry"
+      ]
+    },
+    {
+      "source": "quay.io/libpod/registry",
+      "mirrors": [
+        "mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/quay.io/libpod/registry"
+      ]
+    }
+  ],
+  "Images": [
+    {
+      "From": "quay.io/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f",
+      "SourceRef": "quay.io/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f",
+      "MirrorRef": "mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/quay.io/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f"
+    },
+    {
+      "From": "quay.io/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f",
+      "SourceRef": "mirror-source.hypershift-e2e.invalid/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f",
+      "MirrorRef": "mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/mirror-source.hypershift-e2e.invalid/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f"
+    }
+  ]
+}
+16:18:57 harness: setup finished in 55s
+
+From terminal 2:
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) .work/cntrlplane-3926/harness/watch.sh "$OUT/watch-run1.log"
+16:17:33 route=none readonly=- deploy=none pods=[] jobs=[]
+16:18:10 route=none readonly=false deploy=gen1/obs1/avail0 pods=[d5k44:Pending] jobs=[]
+16:18:25 route=none readonly=false deploy=gen1/obs1/avail1 pods=[d5k44:Running] jobs=[]
+16:18:31 route=none readonly=false deploy=gen1/obs1/avail1 pods=[d5k44:Running] jobs=[mirror-registry-copy-95da31410c:Running]
+16:18:48 route=none readonly=false deploy=gen1/obs1/avail1 pods=[d5k44:Running] jobs=[mirror-registry-copy-95da31410c:SuccessCriteriaMet,Complete]
+16:18:52 route=none readonly=true deploy=gen2/obs2/avail0 pods=[2jd2d:Pending] jobs=[]
+16:18:54 route=none readonly=true deploy=gen2/obs2/avail1 pods=[2jd2d:Running] jobs=[]
+16:18:59 route=admitted readonly=true deploy=gen2/obs2/avail1 pods=[2jd2d:Running] jobs=[]
+^C</code></pre></details>
+<h4 id="s2-ev-step-2-verify-and-cluster-checks">Step 2 — verify and cluster checks</h4>
+<details class="output"><summary>Command output (42 lines) — click to expand</summary><pre class="highlight"><code class="language-text">(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) .work/cntrlplane-3926/harness/verify.sh "$OUT/run1"
+PASS  anonymous /v2/ with CA → {} 200
+PASS  TLS refused without CA (curl exit 60)
+PASS  digest preserved quay.io/libpod/registry
+PASS  digest preserved mirror-source.hypershift-e2e.invalid/libpod/registry
+PASS  push via Route rejected (405)
+verify: 0 failure(s)
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) cat "$OUT/run1/ics.yaml"
+- mirrors:
+  - mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/mirror-source.hypershift-e2e.invalid/libpod/registry
+  source: mirror-source.hypershift-e2e.invalid/libpod/registry
+- mirrors:
+  - mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/quay.io/libpod/registry
+  source: quay.io/libpod/registry
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) openssl x509 -in "$OUT/run1/ca-only/ca.crt" -noout -subject -enddate
+subject=OU=hypershift-e2e-mirror-registry, CN=hypershift-e2e-mirror-registry-ca
+notAfter=Oct 13 14:18:07 2027 GMT
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) openssl s_client -connect "${HOST}:443" -servername "$HOST" -CAfile "$OUT/run1/ca-only/ca.crt" &lt;/dev/null 2&gt;/dev/null \
+  | openssl x509 -noout -subject -issuer -ext subjectAltName
+subject=OU=hypershift-e2e-mirror-registry, CN=mirror-registry
+issuer=OU=hypershift-e2e-mirror-registry, CN=hypershift-e2e-mirror-registry-ca
+X509v3 Subject Alternative Name:
+    DNS:mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com, DNS:mirror-registry, DNS:mirror-registry.test-mirror-registry, DNS:mirror-registry.test-mirror-registry.svc, DNS:mirror-registry.test-mirror-registry.svc.cluster.local
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) k -n "$NS" get secret "${NAME}-ca" -o jsonpath='{.data.ca\.crt}' | base64 -d | cmp - "$OUT/run1/ca-only/ca.crt" &amp;&amp; echo "stored CA == Result CA"
+stored CA == Result CA
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) k -n "$NS" get job,secret,route,pvc
+NAME                              TYPE                      DATA   AGE
+secret/builder-dockercfg-pgpcg    kubernetes.io/dockercfg   1      35m
+secret/default-dockercfg-z4qm6    kubernetes.io/dockercfg   1      35m
+secret/deployer-dockercfg-2lhd7   kubernetes.io/dockercfg   1      35m
+secret/mirror-registry-ca         Opaque                    2      35m
+secret/mirror-registry-tls        kubernetes.io/tls         2      35m
+
+NAME                                       HOST/PORT                                                                                            PATH   SERVICES          PORT    TERMINATION        WILDCARD
+route.route.openshift.io/mirror-registry   mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com          mirror-registry   https   passthrough/None   None
+
+NAME                                    STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+persistentvolumeclaim/mirror-registry   Bound    pvc-00ea6683-83e6-41a1-bdf9-338b9f10fe55   20Gi       RWO            gp3-csi        &lt;unset&gt;                 35m
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) k -n "$NS" get cm "${NAME}-config" -o jsonpath='{.data.config\.yml}' | grep -A1 'readonly:'
+    readonly:
+      enabled: true
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) k -n "$NS" get pod -l app.kubernetes.io/name="$NAME" -o jsonpath='{.items[0].metadata.annotations.openshift\.io/scc}{"\n"}'
+restricted-v2</code></pre></details>
+<h4 id="s2-ev-step-3-second-setup-watch-log-comparisons">Step 3 — second Setup, watch log, comparisons</h4>
+<details class="output"><summary>Command output (61 lines) — click to expand</summary><pre class="highlight"><code class="language-text">From terminal 1:
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) harness setup -out "$OUT/run2" 2&gt;&amp;1 | tee "$OUT/run2.log"
+16:59:32 harness: context mgmt → https://api.mgmt.hypershift.example.com:6443
+16:59:35 harness: copier image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:0a9d58f9d8dd969c7bd107319a2498a674fe4e6477185a44558f168d994b39a5
+16:59:35 harness: Setup started
+{
+  "Host": "mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com",
+  "InternalHost": "mirror-registry.test-mirror-registry.svc:5000",
+  "CABundlePEM": null,
+  "ImageContentSources": [
+    {
+      "source": "mirror-source.hypershift-e2e.invalid/libpod/registry",
+      "mirrors": [
+        "mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/mirror-source.hypershift-e2e.invalid/libpod/registry"
+      ]
+    },
+    {
+      "source": "quay.io/libpod/registry",
+      "mirrors": [
+        "mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/quay.io/libpod/registry"
+      ]
+    }
+  ],
+  "Images": [
+    {
+      "From": "quay.io/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f",
+      "SourceRef": "quay.io/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f",
+      "MirrorRef": "mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/quay.io/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f"
+    },
+    {
+      "From": "quay.io/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f",
+      "SourceRef": "mirror-source.hypershift-e2e.invalid/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f",
+      "MirrorRef": "mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/mirror-source.hypershift-e2e.invalid/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f"
+    }
+  ]
+}
+17:00:00 harness: setup finished in 28s
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) cmp "$OUT/run1/ca-only/ca.crt" "$OUT/run2/ca-only/ca.crt" &amp;&amp; echo "CA unchanged"
+CA unchanged
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) diff "$OUT/run1/result.json" "$OUT/run2/result.json" &amp;&amp; echo "Result unchanged"
+Result unchanged
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) .work/cntrlplane-3926/harness/verify.sh "$OUT/run2"
+PASS  anonymous /v2/ with CA → {} 200
+PASS  TLS refused without CA (curl exit 60)
+PASS  digest preserved quay.io/libpod/registry
+PASS  digest preserved mirror-source.hypershift-e2e.invalid/libpod/registry
+PASS  push via Route rejected (405)
+verify: 0 failure(s)
+
+From terminal 2:
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) .work/cntrlplane-3926/harness/watch.sh "$OUT/watch-run2.log"
+16:59:16 route=admitted readonly=true deploy=gen2/obs2/avail1 pods=[2jd2d:Running] jobs=[]
+16:59:37 route=none readonly=true deploy=gen2/obs2/avail1 pods=[2jd2d:Running] jobs=[]
+16:59:40 route=none readonly=false deploy=gen3/obs3/avail0 pods=[pm2q2:Running] jobs=[]
+16:59:42 route=none readonly=false deploy=gen3/obs3/avail1 pods=[pm2q2:Running] jobs=[]
+16:59:44 route=none readonly=false deploy=gen3/obs3/avail1 pods=[pm2q2:Running] jobs=[mirror-registry-copy-95da31410c:Running]
+16:59:48 route=none readonly=false deploy=gen3/obs3/avail1 pods=[pm2q2:Running] jobs=[mirror-registry-copy-95da31410c:SuccessCriteriaMet,Complete]
+16:59:50 route=none readonly=true deploy=gen4/obs4/avail0 pods=[pm2q2:Failed(terminating)] jobs=[]
+16:59:52 route=none readonly=true deploy=gen4/obs4/avail0 pods=[wcrcf:Pending] jobs=[]
+16:59:58 route=none readonly=true deploy=gen4/obs4/avail1 pods=[wcrcf:Running] jobs=[]
+17:00:01 route=admitted readonly=true deploy=gen4/obs4/avail1 pods=[wcrcf:Running] jobs=[]
+^C</code></pre></details>
+<h4 id="s2-ev-step-4-teardown">Step 4 — teardown</h4>
+<details class="output"><summary>Command output (50 lines) — click to expand</summary><pre class="highlight"><code class="language-text">(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) k -n "$NS" get events --sort-by=.lastTimestamp | tail -30
+46m         Normal   SuccessfulCreate         replicaset/mirror-registry-7b568df84        Created pod: mirror-registry-7b568df84-2jd2d
+46m         Normal   ScalingReplicaSet        deployment/mirror-registry                  Scaled up replica set mirror-registry-7b568df84 from 0 to 1
+46m         Normal   Started                  pod/mirror-registry-7b568df84-2jd2d         Started container registry
+46m         Normal   Created                  pod/mirror-registry-7b568df84-2jd2d         Created container: registry
+46m         Normal   AddedInterface           pod/mirror-registry-7b568df84-2jd2d         Add eth0 [10.132.0.155/23] from ovn-kubernetes
+46m         Normal   Pulled                   pod/mirror-registry-7b568df84-2jd2d         Container image "quay.io/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f" already present on machine
+6m13s       Normal   ScalingReplicaSet        deployment/mirror-registry                  Scaled up replica set mirror-registry-6588996598 from 0 to 1
+6m13s       Normal   SuccessfulCreate         replicaset/mirror-registry-6588996598       Created pod: mirror-registry-6588996598-pm2q2
+6m13s       Normal   ScalingReplicaSet        deployment/mirror-registry                  Scaled down replica set mirror-registry-7b568df84 from 1 to 0
+6m13s       Normal   Killing                  pod/mirror-registry-7b568df84-2jd2d         Stopping container registry
+6m13s       Normal   SuccessfulDelete         replicaset/mirror-registry-7b568df84        Deleted pod: mirror-registry-7b568df84-2jd2d
+6m12s       Normal   Started                  pod/mirror-registry-6588996598-pm2q2        Started container registry
+6m12s       Normal   Created                  pod/mirror-registry-6588996598-pm2q2        Created container: registry
+6m12s       Normal   AddedInterface           pod/mirror-registry-6588996598-pm2q2        Add eth0 [10.132.0.156/23] from ovn-kubernetes
+6m12s       Normal   Pulled                   pod/mirror-registry-6588996598-pm2q2        Container image "quay.io/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f" already present on machine
+6m8s        Normal   SuccessfulCreate         job/mirror-registry-copy-95da31410c         Created pod: mirror-registry-copy-95da31410c-srfz9
+6m7s        Normal   Created                  pod/mirror-registry-copy-95da31410c-srfz9   Created container: copy
+6m7s        Normal   Started                  pod/mirror-registry-copy-95da31410c-srfz9   Started container copy
+6m7s        Normal   Pulled                   pod/mirror-registry-copy-95da31410c-srfz9   Container image "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:0a9d58f9d8dd969c7bd107319a2498a674fe4e6477185a44558f168d994b39a5" already present on machine
+6m7s        Normal   AddedInterface           pod/mirror-registry-copy-95da31410c-srfz9   Add eth0 [10.133.0.19/23] from ovn-kubernetes
+6m3s        Normal   Completed                job/mirror-registry-copy-95da31410c         Job completed
+6m2s        Normal   ScalingReplicaSet        deployment/mirror-registry                  Scaled down replica set mirror-registry-6588996598 from 1 to 0
+6m1s        Normal   Killing                  pod/mirror-registry-6588996598-pm2q2        Stopping container registry
+6m1s        Normal   SuccessfulDelete         replicaset/mirror-registry-6588996598       Deleted pod: mirror-registry-6588996598-pm2q2
+6m          Normal   SuccessfulCreate         replicaset/mirror-registry-5c7c797f76       Created pod: mirror-registry-5c7c797f76-wcrcf
+6m          Normal   ScalingReplicaSet        deployment/mirror-registry                  Scaled up replica set mirror-registry-5c7c797f76 from 0 to 1
+5m55s       Normal   Started                  pod/mirror-registry-5c7c797f76-wcrcf        Started container registry
+5m55s       Normal   AddedInterface           pod/mirror-registry-5c7c797f76-wcrcf        Add eth0 [10.132.0.157/23] from ovn-kubernetes
+5m55s       Normal   Pulled                   pod/mirror-registry-5c7c797f76-wcrcf        Container image "quay.io/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f" already present on machine
+5m55s       Normal   Created                  pod/mirror-registry-5c7c797f76-wcrcf        Created container: registry
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) harness teardown 2&gt;&amp;1 | tee "$OUT/teardown1.log"
+17:06:11 harness: context mgmt → https://api.mgmt.hypershift.example.com:6443
+17:06:32 harness: teardown finished in 21s
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) k get ns "$NS"
+Error from server (NotFound): namespaces "test-mirror-registry" not found
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) k get pv | grep "${NS}/${NAME}" || echo "PV gone (reclaimPolicy Delete)"
+No resources found
+PV gone (reclaimPolicy Delete)
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) curl -sS -o /dev/null -w '%{http_code}\n' --cacert "$OUT/run1/ca-only/ca.crt" "https://${HOST}/v2/"
+curl: (60) SSL certificate problem: unable to get local issuer certificate
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+how to fix it, please visit the web page mentioned above.
+000
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) harness teardown 2&gt;&amp;1 | tee "$OUT/teardown2.log"
+17:07:40 harness: context mgmt → https://api.mgmt.hypershift.example.com:6443
+17:07:41 harness: teardown finished in 1s
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926)</code></pre></details>
+<h4 id="s2-ev-steps-69-caller-supplied-ca">Steps 6–9 — caller-supplied CA</h4>
+<details class="output"><summary>Command output (176 lines) — click to expand</summary><pre class="highlight"><code class="language-text">From Terminal 1:
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) for ca in caller-ca caller-ca2; do
+  mkdir -p "$OUT/$ca" &amp;&amp; (
+    cd "$OUT/$ca"
+    openssl genrsa -out ca.key 4096 2&gt;/dev/null
+    openssl req -x509 -new -key ca.key -days 30 -subj "/CN=hypershift-e2e-${ca}" \
+      -addext "basicConstraints=critical,CA:TRUE" -addext "keyUsage=critical,keyCertSign,cRLSign" -out ca.crt
+    head -1 ca.key; openssl x509 -in ca.crt -noout -subject
+  )
+done
+[PKCS#8 key header line]
+subject=CN=hypershift-e2e-caller-ca
+[PKCS#8 key header line]
+subject=CN=hypershift-e2e-caller-ca2
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) harness setup -out "$OUT/runB1" -ca-cert "$OUT/caller-ca/ca.crt" -ca-key "$OUT/caller-ca/ca.key" 2&gt;&amp;1 | tee "$OUT/runB1.log"
+17:12:21 harness: context mgmt → https://api.mgmt.hypershift.example.com:6443
+17:12:22 harness: copier image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:0a9d58f9d8dd969c7bd107319a2498a674fe4e6477185a44558f168d994b39a5
+17:12:22 harness: using caller-supplied CA ~/hypershift/.work/cntrlplane-3926/harness/out/caller-ca/ca.crt
+17:12:22 harness: Setup started
+{
+  "Host": "mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com",
+  "InternalHost": "mirror-registry.test-mirror-registry.svc:5000",
+  "CABundlePEM": null,
+  "ImageContentSources": [
+    {
+      "source": "mirror-source.hypershift-e2e.invalid/libpod/registry",
+      "mirrors": [
+        "mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/mirror-source.hypershift-e2e.invalid/libpod/registry"
+      ]
+    },
+    {
+      "source": "quay.io/libpod/registry",
+      "mirrors": [
+        "mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/quay.io/libpod/registry"
+      ]
+    }
+  ],
+  "Images": [
+    {
+      "From": "quay.io/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f",
+      "SourceRef": "quay.io/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f",
+      "MirrorRef": "mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/quay.io/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f"
+    },
+    {
+      "From": "quay.io/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f",
+      "SourceRef": "mirror-source.hypershift-e2e.invalid/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f",
+      "MirrorRef": "mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/mirror-source.hypershift-e2e.invalid/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f"
+    }
+  ]
+}
+17:13:02 harness: setup finished in 41s
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) cmp "$OUT/caller-ca/ca.crt" "$OUT/runB1/ca-only/ca.crt" &amp;&amp; echo "Result CA == caller CA"
+Result CA == caller CA
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) k -n "$NS" get secret "${NAME}-ca" -o jsonpath='{.data.ca\.crt}' | base64 -d | cmp - "$OUT/caller-ca/ca.crt" &amp;&amp; echo "stored CA == caller CA"
+stored CA == caller CA
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) .work/cntrlplane-3926/harness/verify.sh "$OUT/runB1"
+PASS  anonymous /v2/ with CA → {} 200
+PASS  TLS refused without CA (curl exit 60)
+PASS  digest preserved quay.io/libpod/registry
+PASS  digest preserved mirror-source.hypershift-e2e.invalid/libpod/registry
+PASS  push via Route rejected (405)
+verify: 0 failure(s)
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) harness setup -out "$OUT/runB2" 2&gt;&amp;1 | tee "$OUT/runB2.log"
+17:14:07 harness: context mgmt → https://api.mgmt.hypershift.example.com:6443
+17:14:08 harness: copier image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:0a9d58f9d8dd969c7bd107319a2498a674fe4e6477185a44558f168d994b39a5
+17:14:08 harness: Setup started
+{
+  "Host": "mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com",
+  "InternalHost": "mirror-registry.test-mirror-registry.svc:5000",
+  "CABundlePEM": null,
+  "ImageContentSources": [
+    {
+      "source": "mirror-source.hypershift-e2e.invalid/libpod/registry",
+      "mirrors": [
+        "mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/mirror-source.hypershift-e2e.invalid/libpod/registry"
+      ]
+    },
+    {
+      "source": "quay.io/libpod/registry",
+      "mirrors": [
+        "mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/quay.io/libpod/registry"
+      ]
+    }
+  ],
+  "Images": [
+    {
+      "From": "quay.io/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f",
+      "SourceRef": "quay.io/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f",
+      "MirrorRef": "mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/quay.io/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f"
+    },
+    {
+      "From": "quay.io/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f",
+      "SourceRef": "mirror-source.hypershift-e2e.invalid/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f",
+      "MirrorRef": "mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/mirror-source.hypershift-e2e.invalid/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f"
+    }
+  ]
+}
+17:14:49 harness: setup finished in 42s
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) cmp "$OUT/caller-ca/ca.crt" "$OUT/runB2/ca-only/ca.crt" &amp;&amp; echo "stored caller CA reused"
+stored caller CA reused
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) .work/cntrlplane-3926/harness/verify.sh "$OUT/runB2"
+PASS  anonymous /v2/ with CA → {} 200
+PASS  TLS refused without CA (curl exit 60)
+PASS  digest preserved quay.io/libpod/registry
+PASS  digest preserved mirror-source.hypershift-e2e.invalid/libpod/registry
+PASS  push via Route rejected (405)
+verify: 0 failure(s)
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) harness setup -out "$OUT/runB3" -ca-cert "$OUT/caller-ca2/ca.crt" -ca-key "$OUT/caller-ca2/ca.key" 2&gt;&amp;1 | tee "$OUT/runB3.log"
+17:16:32 harness: context mgmt → https://api.mgmt.hypershift.example.com:6443
+17:16:33 harness: copier image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:0a9d58f9d8dd969c7bd107319a2498a674fe4e6477185a44558f168d994b39a5
+17:16:33 harness: using caller-supplied CA ~/hypershift/.work/cntrlplane-3926/harness/out/caller-ca2/ca.crt
+17:16:33 harness: Setup started
+{
+  "Host": "mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com",
+  "InternalHost": "mirror-registry.test-mirror-registry.svc:5000",
+  "CABundlePEM": null,
+  "ImageContentSources": [
+    {
+      "source": "mirror-source.hypershift-e2e.invalid/libpod/registry",
+      "mirrors": [
+        "mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/mirror-source.hypershift-e2e.invalid/libpod/registry"
+      ]
+    },
+    {
+      "source": "quay.io/libpod/registry",
+      "mirrors": [
+        "mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/quay.io/libpod/registry"
+      ]
+    }
+  ],
+  "Images": [
+    {
+      "From": "quay.io/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f",
+      "SourceRef": "quay.io/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f",
+      "MirrorRef": "mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/quay.io/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f"
+    },
+    {
+      "From": "quay.io/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f",
+      "SourceRef": "mirror-source.hypershift-e2e.invalid/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f",
+      "MirrorRef": "mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com/mirror-source.hypershift-e2e.invalid/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f"
+    }
+  ]
+}
+17:17:09 harness: setup finished in 36s
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) cmp "$OUT/caller-ca2/ca.crt" "$OUT/runB3/ca-only/ca.crt" &amp;&amp; echo "Result CA == caller CA2"
+Result CA == caller CA2
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) k -n "$NS" get secret "${NAME}-ca" -o jsonpath='{.data.ca\.crt}' | base64 -d | cmp - "$OUT/caller-ca2/ca.crt" &amp;&amp; echo "stored CA replaced by CA2"
+stored CA replaced by CA2
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) .work/cntrlplane-3926/harness/verify.sh "$OUT/runB3"
+PASS  anonymous /v2/ with CA → {} 200
+PASS  TLS refused without CA (curl exit 60)
+PASS  digest preserved quay.io/libpod/registry
+PASS  digest preserved mirror-source.hypershift-e2e.invalid/libpod/registry
+PASS  push via Route rejected (405)
+verify: 0 failure(s)
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) curl -sS -o /dev/null --cacert "$OUT/caller-ca/ca.crt" "https://${HOST}/v2/"\; echo "exit=$? (expected 60: old CA no longer trusted)"
+curl: (60) SSL certificate problem: unable to get local issuer certificate
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+how to fix it, please visit the web page mentioned above.
+curl: (6) Could not resolve host: echo
+curl: (3) URL rejected: Malformed input to a URL function
+
+From Terminal 2:
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) .work/cntrlplane-3926/harness/watch.sh "$OUT/watch-runB3.log"
+17:16:23 route=admitted readonly=true deploy=gen4/obs4/avail1 pods=[68cb6:Running] jobs=[]
+17:16:36 route=none readonly=true deploy=gen4/obs4/avail1 pods=[68cb6:Running] jobs=[]
+17:16:38 route=none readonly=false deploy=gen5/obs5/avail0 pods=[g7lbd:Pending] jobs=[]
+17:16:46 route=none readonly=false deploy=gen5/obs5/avail1 pods=[g7lbd:Running] jobs=[]
+17:16:49 route=none readonly=false deploy=gen5/obs5/avail1 pods=[g7lbd:Running] jobs=[mirror-registry-copy-95da31410c:Running]
+17:16:53 route=none readonly=false deploy=gen5/obs5/avail1 pods=[g7lbd:Running] jobs=[mirror-registry-copy-95da31410c:SuccessCriteriaMet,Complete]
+17:16:59 route=none readonly=true deploy=gen6/obs6/avail0 pods=[l2jb8:Pending] jobs=[]
+17:17:07 route=none readonly=true deploy=gen6/obs6/avail1 pods=[l2jb8:Running] jobs=[]
+17:17:10 route=admitted readonly=true deploy=gen6/obs6/avail1 pods=[l2jb8:Running] jobs=[]
+^C</code></pre></details>
+<h4 id="s2-ev-step-10-teardown">Step 10 — teardown</h4>
+<pre class="highlight"><code class="language-text">(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) harness teardown 2&gt;&amp;1 | tee "$OUT/teardownB.log"
+17:19:46 harness: context mgmt → https://api.mgmt.hypershift.example.com:6443
+17:20:07 harness: teardown finished in 21s
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) k get ns "$NS"
+Error from server (NotFound): namespaces "test-mirror-registry" not found
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) k get pv | grep "${NS}/${NAME}" || echo "PV gone"
+No resources found
+PV gone</code></pre></div>
+
+</main>
+<footer>
+CNTRLPLANE-3926 — in-cluster mirror registry fixture for HyperShift e2e v2 ·
+<a href="https://github.com/openshift/hypershift/pull/9996">openshift/hypershift#9996</a> · report date 2026-10-15.<br>
+All evidence is sanitized (cluster names, domains, AWS identifiers and local paths replaced; see
+<a href="appendices.html#e-sanitization">appendix E</a>). Cluster commands were run by a human; runbooks, scripts,
+the independent evidence review and this report were prepared with AI assistance (see appendix F).
+</footer>
+</body>
+</html>

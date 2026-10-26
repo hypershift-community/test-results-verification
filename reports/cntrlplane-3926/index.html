@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard — CNTRLPLANE-3926 verification</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topbar"><div class="brand">CNTRLPLANE-3926 · Verification report</div><nav><a href="index.html" class="active">Dashboard</a><a href="scenario-1.html">1 · Smoke</a><a href="scenario-2.html">2 · Harness</a><a href="scenario-3.html">3 · Reachability</a><a href="automated-tests.html">Automated tests</a><a href="appendices.html">Appendices</a><a href="../../plans/cntrlplane-3926.md">Test plan</a><a href="https://github.com/openshift/hypershift/pull/9996">PR #9996</a></nav></header>
+<main>
+<h1>In-cluster mirror registry fixture for HyperShift e2e v2</h1>
+<p class="subtitle">Verification report for <a href="https://issues.redhat.com/browse/CNTRLPLANE-3926">CNTRLPLANE-3926</a> ·
+PR <a href="https://github.com/openshift/hypershift/pull/9996">openshift/hypershift#9996</a> (head <code>8d54f7ab32</code>) ·
+plan <a href="../../plans/cntrlplane-3926.md">TP-CNTRLPLANE-3926-001</a> · 2026-10-15 · tester @Nirshal</p>
+
+<div class="callout ok"><p><b>Verdict: PASS</b>. All six acceptance criteria are covered by passing test cases.
+Three scenarios ran on a real nested OpenShift management cluster (3/3 pass, Scenario 3 with non-blocking notes),
+and the unit tests pass at the PR head. Caveats: see <a href="#caveats">Caveats</a>.</p></div>
+
+<div class="cards">
+  <div class="card"><div class="num">3 / 3</div><div class="lbl">scenarios passed</div></div>
+  <div class="card"><div class="num">16 + 2</div><div class="lbl">manual test cases passed + discovery cases recorded</div></div>
+  <div class="card"><div class="num">6 / 6</div><div class="lbl">acceptance criteria covered</div></div>
+  <div class="card"><div class="num">60</div><div class="lbl">unit tests (259 incl. subtests), 0 failures</div></div>
+  <div class="card"><div class="num">0</div><div class="lbl">leftover cluster or AWS resources</div></div>
+</div>
+
+<h2 id="what">What is being verified</h2>
+<p>CNTRLPLANE-3926 adds the Go package <code>test/e2e/v2/util/mirrorregistry</code> and opt-in wiring in the v2 AWS
+lifecycle. It is test infrastructure shared by the OCPSTRAT-3316 stories: it provides a registry that hosted-cluster
+nodes can pull from, so later tests can assert image-mirroring behaviour (IDMS, <code>--registry-overrides</code>).
+One <code>Setup</code> call does the following:</p>
+<div class="flow">
+  <div class="step"><b>1 · Deploy</b>registry (TLS, PVC) in an owned namespace, writable, internal only</div><div class="arrow">→</div>
+  <div class="step"><b>2 · Copy</b>images by digest through the internal Service (in-cluster <code>oc</code> Job)</div><div class="arrow">→</div>
+  <div class="step"><b>3 · Lock</b>restart read-only (pushes → 405)</div><div class="arrow">→</div>
+  <div class="step"><b>4 · Expose</b>passthrough Route, anonymous read, verified TLS</div><div class="arrow">→</div>
+  <div class="step"><b>5 · Return</b>host, CA bundle, <code>[]ImageContentSource</code> for <code>hypershift create cluster</code></div>
+</div>
+
+<h2 id="scenarios">Scenarios</h2>
+<table><thead><tr><th>#</th><th>Scenario</th><th>Proves</th><th>Code under test</th><th>Date</th><th>Result</th></tr></thead><tbody>
+<tr><td>1</td><td><a href="scenario-1.html">Smoke</a></td><td>The design works on a real nested OpenShift management cluster (SCC, TLS, digest-preserving copy,
+read-only mode, passthrough Route), and discovery for later stories (payload size, <code>oc</code> in the CI image)</td>
+<td>None: hand-written manifests, before implementation</td><td>2026-10-12</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>2</td><td><a href="scenario-2.html">Harness</a></td><td>The Go fixture provisions, re-runs idempotently, keeps the exposure invariant, persists and rotates the CA,
+and tears down</td><td><code>mirrorregistry</code> package, byte-identical to the PR head</td><td>2026-10-13</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>3</td><td><a href="scenario-3.html">Reachability</a></td><td>Nodes of a HostedCluster created with the fixture outputs pull from the mirror over
+verified TLS, by digest only; independently reviewed</td><td>Fixture + <code>hypershift create cluster aws</code></td><td>2026-10-14</td><td><span class="badge note">PASS (notes)</span></td></tr>
+</tbody></table>
+
+<h2 id="acs">Acceptance criteria coverage</h2>
+<table><thead><tr><th>AC</th><th>CNTRLPLANE-3926 acceptance criterion (abbreviated)</th><th>Test cases</th><th>Status</th></tr></thead>
+<tbody><tr><td><b>AC1</b></td><td>A Go helper deploys a registry as Deployment + Service on the management cluster</td><td><a href="scenario-1.html#tc-01">TC-01</a>, <a href="scenario-2.html#tc-07">TC-07</a>, <a href="automated-tests.html#tc-19">TC-19</a></td><td><span class="badge pass">PASS</span></td></tr><tr><td><b>AC2</b></td><td>A subset of images is mirrored into the in-cluster mirror; specify which images</td><td><a href="scenario-1.html#tc-02">TC-02</a>, <a href="scenario-1.html#tc-05">TC-05</a>, <a href="scenario-2.html#tc-07">TC-07</a>, <a href="automated-tests.html#tc-19">TC-19</a></td><td><span class="badge pass">PASS</span></td></tr><tr><td><b>AC3</b></td><td>The mirror is accessible from hosted cluster nodes</td><td><a href="scenario-1.html#tc-04">TC-04</a>, <a href="scenario-3.html#tc-14">TC-14</a>, <a href="scenario-3.html#tc-15">TC-15</a>, <a href="scenario-3.html#tc-16">TC-16</a></td><td><span class="badge pass">PASS</span></td></tr><tr><td><b>AC4</b></td><td>TLS with a self-signed CA, no <code>--insecure-registry</code></td><td><a href="scenario-1.html#tc-01">TC-01</a>, <a href="scenario-1.html#tc-04">TC-04</a>, <a href="scenario-2.html#tc-09">TC-09</a>, <a href="scenario-2.html#tc-12">TC-12</a>, <a href="scenario-3.html#tc-13">TC-13</a>, <a href="scenario-3.html#tc-14">TC-14</a></td><td><span class="badge pass">PASS</span></td></tr><tr><td><b>AC5</b></td><td>Setup/teardown lifecycle for v2 e2e tests</td><td><a href="scenario-2.html#tc-10">TC-10</a>, <a href="scenario-2.html#tc-11">TC-11</a>, <a href="automated-tests.html#tc-19">TC-19</a>, <a href="automated-tests.html#tc-20">TC-20</a></td><td><span class="badge pass">PASS</span></td></tr><tr><td><b>AC6</b></td><td>Returns the mirror address and the ImageContentSource entries</td><td><a href="scenario-2.html#tc-07">TC-07</a>, <a href="scenario-3.html#tc-13">TC-13</a>, <a href="automated-tests.html#tc-19">TC-19</a></td><td><span class="badge pass">PASS</span></td></tr></tbody></table>
+<p class="small">Deviations from the AC wording (registry image source, which images are mirrored, the insecure alternative,
+"Ginkgo") are agreed design decisions, explained in the <a href="../../plans/cntrlplane-3926.md">test plan §2.3</a> and in
+<a href="appendices.html#c-design-decisions">appendix C</a>.</p>
+
+<h2 id="traceability">Code under test and traceability</h2>
+<dl class="kv">
+  <dt>PR head</dt><dd><code>8d54f7ab32</code>: 10 commits on <code>a325c54776</code></dd>
+  <dt>Scenario 2</dt><dd>ran at pre-rebase commit <code>2432ffc8af</code>, patch-identical (<code>git range-diff</code> “=”) to PR commit <code>5ef41d4148</code>.
+  The <code>mirrorregistry</code> package at <code>5ef41d4148</code> is byte-identical to <code>8d54f7ab32</code></dd>
+  <dt>Scenario 3</dt><dd>ran at pre-rebase commit <code>38342d4965</code> (= PR <code>64ca1b82a7</code>; the rebase only merged upstream
+  <code>PreCreate</code> code). The fixture package is identical; Scenario 3 does not use the lifecycle wiring</dd>
+  <dt>Unit tests</dt><dd>run locally at <code>8d54f7ab32</code> with <code>-race</code></dd>
+</dl>
+<p>Full output: <a href="appendices.html#a-traceability">appendix A</a>.</p>
+
+<h2 id="verify">How to verify independently</h2>
+<ol>
+  <li><b>Desk audit (no cluster):</b> read the evidence on each scenario page and check it against the expected results in its runbook.
+  For Scenario 3, apply the checklist <a href="scripts/reachability/VERIFY.md"><code>VERIFY.md</code></a>. That is what the
+  <a href="appendices.html#d-independent-review">independent review</a> did, and you can compare your findings with it.</li>
+  <li><b>Re-execution:</b> follow <a href="scripts/README.md"><code>scripts/README.md</code></a>. Copy the kit into a hypershift checkout,
+  set <code>CTX</code> (and the AWS variables for Scenario 3), then run the three runbooks. Every check prints
+  <code>PASS</code>/<code>FAIL</code> lines.</li>
+  <li><b>Code:</b> re-run the unit tests (<a href="automated-tests.html">automated tests</a>) and the traceability commands (appendix A) on the PR branch.</li>
+</ol>
+
+<h2 id="caveats">Caveats</h2>
+<ul>
+  <li>The end-to-end <code>create-guests</code> path with the <code>image-mirroring</code> variant is not run by this PR. Scenario 3 created the
+  HostedCluster with the CLI from the harness outputs, which are the same <code>Result</code> fields that the lifecycle writes
+  (covered by unit tests). The first real run is the CNTRLPLANE-3929 job.</li>
+  <li>The PR's GitHub Actions unit-test job does not yet run the new package: the workflow uses the reusable workflow from
+  <code>main</code>, so the new <code>other</code> shard entry only applies after merge. Local <code>-race</code> runs at the PR head are attached instead
+  (<a href="automated-tests.html">details</a>).</li>
+  <li>The fixture supports OpenShift management clusters only (Route, <code>restricted-v2</code> SCC, ImageStream), which matches every current consumer.
+  Full release-payload mirroring (CNTRLPLANE-3931) is covered by unit tests and a dry-run only.</li>
+</ul>
+
+</main>
+<footer>
+CNTRLPLANE-3926 — in-cluster mirror registry fixture for HyperShift e2e v2 ·
+<a href="https://github.com/openshift/hypershift/pull/9996">openshift/hypershift#9996</a> · report date 2026-10-15.<br>
+All evidence is sanitized (cluster names, domains, AWS identifiers and local paths replaced; see
+<a href="appendices.html#e-sanitization">appendix E</a>). Cluster commands were run by a human; runbooks, scripts,
+the independent evidence review and this report were prepared with AI assistance (see appendix F).
+</footer>
+</body>
+</html>

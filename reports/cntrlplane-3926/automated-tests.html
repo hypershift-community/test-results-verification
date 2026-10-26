@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Automated tests — CNTRLPLANE-3926 verification</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topbar"><div class="brand">CNTRLPLANE-3926 · Verification report</div><nav><a href="index.html">Dashboard</a><a href="scenario-1.html">1 · Smoke</a><a href="scenario-2.html">2 · Harness</a><a href="scenario-3.html">3 · Reachability</a><a href="automated-tests.html" class="active">Automated tests</a><a href="appendices.html">Appendices</a><a href="../../plans/cntrlplane-3926.md">Test plan</a><a href="https://github.com/openshift/hypershift/pull/9996">PR #9996</a></nav></header>
+<main>
+<h1>Automated tests</h1>
+<p class="subtitle">Unit tests delivered with the PR (TC-19) and CI checks on the PR (TC-20)</p>
+<table><thead><tr><th>TC</th><th>Test case</th><th>Runbook steps</th><th>Covers</th><th>Result</th><th>Key evidence</th></tr></thead><tbody><tr id="tc-19"><td><b>TC-19</b></td><td>Unit tests (fake clients)</td><td>—</td><td>AC1, AC2, AC5, AC6</td><td><span class="badge pass">PASS</span></td><td><code>mirrorregistry</code>: 42 tests / 180 subtests, 84.8 %; <code>lifecycle</code> (<code>e2ev2</code>): 18 tests, 54.8 %</td></tr><tr id="tc-20"><td><b>TC-20</b></td><td>CI checks on the PR</td><td>—</td><td>AC5</td><td><span class="badge note">PASS (notes)</span></td><td>build, lint, verify, e2e-compile, unit shards green; new shard entry takes effect after merge (see page)</td></tr></tbody></table>
+
+<h2 id="unit">Unit tests at the PR head</h2>
+<table><thead><tr><th>Package</th><th>Command</th><th>Tests</th><th>Coverage</th><th>Result</th></tr></thead><tbody>
+<tr><td><code>test/e2e/v2/util/mirrorregistry</code></td><td><code>go test -race -count=1 -cover -v ./test/e2e/v2/util/mirrorregistry/...</code></td>
+<td>42 tests, 180 subtests</td><td>84.8 %</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td><code>test/e2e/v2/lifecycle</code> (whole package, incl. the new wiring)</td><td><code>go test -tags e2ev2 -race -count=1 -cover -v ./test/e2e/v2/lifecycle/</code></td>
+<td>18 tests, 79 subtests</td><td>54.8 %</td><td><span class="badge pass">PASS</span></td></tr>
+</tbody></table>
+<p>Run on 2026-10-15 at <code>8d54f7ab32</code> (<code>GOWORK=off GOFLAGS=-mod=vendor</code>, go1.26). Raw logs:
+<a href="assets/evidence/unit-mirrorregistry.log"><code>unit-mirrorregistry.log</code></a>,
+<a href="assets/evidence/unit-lifecycle.log"><code>unit-lifecycle.log</code></a>. The fixture uses fake clients for every API interaction,
+so the tests need no cluster.</p>
+<p>What they cover: option defaults and validation (Route label length), TLS (CA generation, serving certificate SANs, CA parsing with
+RSA PKCS#1/PKCS#8 keys), resource builders (Namespace, Secrets, PVC, Service, ConfigMap, Deployment, Route), the copier Job and script (shell quoting,
+deadline, labels disjoint from the registry Service selector, termination-message decoding, transient read retries, cleanup), Setup
+orchestration (read-only before Route, withdrawal before writes on re-runs, CA reuse and rotation, rollout waits), Teardown, and the
+lifecycle wiring (<code>PreCreate</code> opt-in, <code>image-mirroring</code> cluster spec arguments, <code>SHARED_DIR</code> outputs,
+copier image lookup).</p>
+<details><summary>Top-level tests — <code>mirrorregistry</code> (42)</summary><p><code>TestNewJobCopier</code> <code>TestJobDeadlineSeconds</code> <code>TestCopyResourceName</code> <code>TestShellQuote</code> <code>TestCopyScript</code> <code>TestCopierLabels</code> <code>TestCopyReadError</code> <code>TestBuildCopyJob</code> <code>TestJobCopierWaitForResult</code> <code>TestJobCopierCopy</code> <code>TestJobCopierDeleteCopyResources</code> <code>TestWithDefaults</code> <code>TestValidate</code> <code>TestRouteHost</code> <code>TestInternalHost</code> <code>TestServiceDNSNames</code> <code>TestMirrorRepository</code> <code>TestSplitDigestRef</code> <code>TestNew</code> <code>TestBuildCopyRequest</code> <code>TestBuildResult</code> <code>TestResolveCA</code> <code>TestTeardown</code> <code>TestClientForWithdrawal</code> <code>TestDeExpose</code> <code>TestSetup</code> <code>TestBuildNamespace</code> <code>TestBuildCASecret</code> <code>TestBuildTLSSecret</code> <code>TestBuildPVC</code> <code>TestBuildService</code> <code>TestBuildConfigMap</code> <code>TestBuildDeployment</code> <code>TestBuildRoute</code> <code>TestGenerateCA</code> <code>TestServingCert</code> <code>TestTLSMaterial</code> <code>TestParseCA</code> <code>TestParsePrivateKey</code> <code>TestWaitAdmitted</code> <code>TestWaitGone</code> <code>TestConfigure</code></p></details>
+<details><summary>Top-level tests — <code>lifecycle</code> (18)</summary><p><code>TestNewPlatformConfig</code> <code>TestNewAWSPlatformConfig</code> <code>TestAWSPlatformConfigClusterSpecs</code> <code>TestAWSPlatformConfigPreCreate</code> <code>TestManifestRoundTrip</code> <code>TestResolveVariants</code> <code>TestLookupCluster</code> <code>TestCliImage</code> <code>TestWriteMirrorRegistryResult</code> <code>TestTestPlanValidate</code> <code>TestTestMatrixValidate</code> <code>TestTestMatrixVariants</code> <code>TestTestGroupJUnitFile</code> <code>TestTestPlanFilterClusterSpecs</code> <code>TestParseTestPlan</code> <code>TestAzureOAuthLBPrivateExtraArgs</code> <code>TestAzurePlatformConfigClusterSpecs</code> <code>TestExternalOIDCTransitionComplete</code></p></details>
+
+<h2 id="ci">CI checks on PR #9996</h2>
+<p>Status of PR #9996 as of 2026-10-15, head <code>8d54f7ab32</code>. Live status: <a href="https://github.com/openshift/hypershift/pull/9996/checks">PR checks</a>.</p>
+<table><thead><tr><th>Check</th><th>Status</th><th>Notes</th></tr></thead><tbody><tr><td>lint / Lint</td><td><span class="badge pass">PASS</span></td><td>repository-wide <code>golangci-lint</code> (incl. <code>hypershiftlinter</code>)</td></tr><tr><td>verify / Verify</td><td><span class="badge pass">PASS</span></td><td>repository <code>verify</code> target</td></tr><tr><td>e2e-compile / E2E Compile</td><td><span class="badge pass">PASS</span></td><td>builds the <code>e2ev2</code>-tagged lifecycle and test binaries</td></tr><tr><td>gitlint / Gitlint</td><td><span class="badge pass">PASS</span></td><td>conventional commits</td></tr><tr><td>codespell / Codespell</td><td><span class="badge pass">PASS</span></td><td></td></tr><tr><td>test / Unit Tests (other)</td><td><span class="badge pass">PASS</span></td><td><b>did not run the new package</b>: see the note below</td></tr><tr><td>test / Unit Tests (cmd-support, cpo-*, hypershift-operator)</td><td><span class="badge pass">PASS</span></td><td>unrelated shards</td></tr><tr><td>envtest-kube / envtest-ocp</td><td><span class="badge pass">PASS</span></td><td>no API changes; matrix skipped</td></tr><tr><td>Red Hat Konflux builds</td><td><span class="badge pass">PASS</span></td><td>images build</td></tr><tr><td>codecov/patch, codecov/project</td><td><span class="badge pass">PASS</span></td><td>no coverage reported for the new package (not run in CI yet)</td></tr><tr><td>ci/prow/e2e-* (aws, aks, gke, v2-aws, …)</td><td><span class="badge info">PENDING</span></td><td>draft PR; the <code>image-mirroring</code> lane is opt-in and off in every existing job</td></tr></tbody></table>
+<div class="callout warn"><p><b>Why the new package's unit tests did not run in the PR's GitHub Actions job.</b>
+<code>.github/workflows/test.yaml</code> calls <code>openshift/hypershift/.github/workflows/test-reusable.yaml@main</code>. The PR adds
+<code>./test/e2e/v2/util/mirrorregistry/...</code> to the <code>other</code> shard in <code>test-reusable.yaml</code>, but the job runs the copy on
+<code>main</code>. The job log shows the <code>go test</code> package list without the new package. The change takes effect for every PR once merged.
+Until then, the local runs above are the unit-test evidence. The <code>lifecycle</code> tests carry the <code>e2ev2</code> build tag. CI compiles them
+(<code>e2e-compile</code>), but no unit-test target runs this package (<code>make test-e2ev2-unit</code> covers only
+<code>test/e2e/v2/internal</code> and <code>test/e2e/v2/cmd/run-tests</code>), before or after this PR.</p></div>
+
+</main>
+<footer>
+CNTRLPLANE-3926 — in-cluster mirror registry fixture for HyperShift e2e v2 ·
+<a href="https://github.com/openshift/hypershift/pull/9996">openshift/hypershift#9996</a> · report date 2026-10-15.<br>
+All evidence is sanitized (cluster names, domains, AWS identifiers and local paths replaced; see
+<a href="appendices.html#e-sanitization">appendix E</a>). Cluster commands were run by a human; runbooks, scripts,
+the independent evidence review and this report were prepared with AI assistance (see appendix F).
+</footer>
+</body>
+</html>
