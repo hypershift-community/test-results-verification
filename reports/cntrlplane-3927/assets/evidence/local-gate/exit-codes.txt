@@ -1,0 +1,13 @@
+v1: 0
+v2: 0
+v3-analyzer: 0
+v3-lint: 0
+v3-tools: 0
+v4-negative: 0
+v4-positive: 0
+v5-committed-check: 0
+v5-diff-check: 0
+v5-framework: 0
+v5-lifecycle: 0
+v5-mirrorregistry: 0
+v5-stat: 0
