@@ -1,0 +1,1 @@
+Error from server: Get "https://node.example.test:10250/containerLogs/default/test-cntrlplane-4826-t2-verify-20261028t144539z-cfqk6/verify": proxy error from konnectivity-server-local:8090 while dialing 10.0.0.13:10250, code 502: 502 Bad Gateway

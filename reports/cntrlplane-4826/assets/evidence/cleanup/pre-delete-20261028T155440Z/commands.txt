@@ -1,0 +1,12 @@
+kubectl get hostedclusters.hypershift.openshift.io -A -o json
+kubectl get nodepools.hypershift.openshift.io -A -o json
+kubectl get machinedeployments.cluster.x-k8s.io -n clusters-test-cntrlplane-4826-hc -o json
+kubectl get machinesets.cluster.x-k8s.io -n clusters-test-cntrlplane-4826-hc -o json
+kubectl get machines.cluster.x-k8s.io -n clusters-test-cntrlplane-4826-hc -o json
+kubectl get azuremachines.infrastructure.cluster.x-k8s.io -n clusters-test-cntrlplane-4826-hc -o json
+kubectl --kubeconfig /tmp/guest.kubeconfig get nodes -o json
+kubectl --kubeconfig /tmp/guest.kubeconfig get clusterversion version -o json
+kubectl --kubeconfig /tmp/guest.kubeconfig get clusteroperators.config.openshift.io -o json
+NP=test-cntrlplane-4826-unpatched OUT=<BASE>/snapshot-unpatched-20261028T155453Z GUEST_KUBECONFIG=/tmp/guest.kubeconfig /workspace/test-harness/snapshot.sh
+NP=test-cntrlplane-4826-patched OUT=<BASE>/snapshot-patched-20261028T155456Z GUEST_KUBECONFIG=/tmp/guest.kubeconfig /workspace/test-harness/snapshot.sh
+NP=test-cntrlplane-4826-scale OUT=<BASE>/snapshot-scale-20261028T155500Z GUEST_KUBECONFIG=/tmp/guest.kubeconfig /workspace/test-harness/snapshot.sh

@@ -1,0 +1,18 @@
+{
+  "etag": "4f63a88b-ee9b-475e-a88e-0d78b694d0df",
+  "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com",
+  "location": "global",
+  "maxNumberOfRecordSets": 10000,
+  "name": "hcp.example.com",
+  "nameServers": [
+    "ns1-08.azure-dns.com.",
+    "ns2-08.azure-dns.net.",
+    "ns3-08.azure-dns.org.",
+    "ns4-08.azure-dns.info."
+  ],
+  "numberOfRecordSets": 121,
+  "resourceGroup": "shared-resource-group",
+  "tags": {},
+  "type": "Microsoft.Network/dnszones",
+  "zoneType": "Public"
+}

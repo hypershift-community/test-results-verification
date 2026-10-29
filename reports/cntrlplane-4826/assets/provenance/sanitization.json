@@ -1,0 +1,26 @@
+{
+  "jira": "CNTRLPLANE-4826",
+  "pr": "https://github.com/openshift/hypershift/pull/10084",
+  "source_commit": "ff673589287e8f7685435f117cfec1f14c067def",
+  "source_base_commit": "dbe3111415dc623f9d75a99e4afc21e3c73463f9",
+  "pr_head_commit": "ee5691233b08e3271f030ebd24055faa6857fd39",
+  "pr_head_base_commit": "ee327075b155839511edc3779510ceb95c93a658",
+  "report_date": "2026-10-28",
+  "source_evidence_files": 1130,
+  "published_evidence_files": 1062,
+  "sanitized_script_files": 14,
+  "invalidated_original_checksum_manifests": 68,
+  "verdict": "conditional",
+  "scenario_count": 8,
+  "pass_count": 4,
+  "partial_count": 3,
+  "blocked_or_not_tested_count": 1,
+  "transformations": [
+    "Cloud account, tenant and service-principal identifiers replaced",
+    "Environment, cluster, domain, registry namespace and local path literals replaced",
+    "Azure Activity Log claims, HTTP request metadata and caller IPs removed",
+    "Public IP literals replaced with documentation-range placeholders",
+    "Text credentials and bearer values redacted",
+    "Sanitized evidence hashes regenerated"
+  ]
+}

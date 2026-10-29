@@ -1,0 +1,3 @@
+NAME                       READY   STATUS    RESTARTS   AGE    IP             NODE                          NOMINATED NODE   READINESS GATES
+operator-84454f479-ckr42   1/1     Running   0          4h     10.133.4.122   ip-10-0-40-184.ec2.internal   <none>           <none>
+operator-84454f479-kgldp   1/1     Running   0          4h1m   10.135.2.150   ip-10-0-22-184.ec2.internal   <none>           <none>

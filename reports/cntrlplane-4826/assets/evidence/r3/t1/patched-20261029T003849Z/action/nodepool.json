@@ -1,0 +1,233 @@
+{
+  "apiVersion": "hypershift.openshift.io/v1beta1",
+  "kind": "NodePool",
+  "metadata": {
+    "annotations": {
+      "hypershift.openshift.io/canonical-data-plane-images": "true",
+      "hypershift.openshift.io/nodePoolCurrentConfig": "034f9b0a",
+      "hypershift.openshift.io/nodePoolCurrentConfigVersion": "ca3a5447",
+      "hypershift.openshift.io/nodePoolCurrentRolloutConfig": "a9beb588",
+      "hypershift.openshift.io/nodePoolInProgressRolloutConfig": "b219069d",
+      "hypershift.openshift.io/nodePoolPlatformMachineTemplate": "test-cntrlplane-4826-r3-head-776e47ca"
+    },
+    "creationTimestamp": "2026-10-29T00:32:01Z",
+    "finalizers": [
+      "hypershift.openshift.io/finalizer"
+    ],
+    "generation": 2,
+    "name": "test-cntrlplane-4826-r3-head",
+    "namespace": "clusters",
+    "ownerReferences": [
+      {
+        "apiVersion": "hypershift.openshift.io/v1beta1",
+        "kind": "HostedCluster",
+        "name": "test-cntrlplane-4826-hc",
+        "uid": "043ac522-10df-4e2a-bd8f-2f6e19c6cc68"
+      }
+    ],
+    "resourceVersion": "129810503",
+    "uid": "af738976-8538-4b4e-ab61-00f57a9e6ead"
+  },
+  "spec": {
+    "arch": "amd64",
+    "clusterName": "test-cntrlplane-4826-hc",
+    "management": {
+      "autoRepair": false,
+      "replace": {
+        "rollingUpdate": {
+          "maxSurge": 1,
+          "maxUnavailable": 0
+        },
+        "strategy": "RollingUpdate"
+      },
+      "upgradeType": "Replace"
+    },
+    "nodeDrainTimeout": "0s",
+    "nodeVolumeDetachTimeout": "0s",
+    "platform": {
+      "azure": {
+        "encryptionAtHost": "Enabled",
+        "image": {
+          "azureMarketplace": {
+            "imageGeneration": "Gen2",
+            "offer": "aro4",
+            "publisher": "azureopenshift",
+            "sku": "aro_5-0_x64_gen2",
+            "version": "10.2.20260423"
+          },
+          "type": "AzureMarketplace"
+        },
+        "osDisk": {
+          "diskStorageAccountType": "Premium_LRS",
+          "sizeGiB": 120
+        },
+        "subnetID": "/subscriptions/redacted-subscription-id/resourceGroups/test-cntrlplane-4826-hc-vnet-test-cntrlplane-4826/providers/Microsoft.Network/virtualNetworks/test-cntrlplane-4826-hc-test-cntrlplane-4826/subnets/default",
+        "vmSize": "Standard_D4s_v5"
+      },
+      "type": "Azure"
+    },
+    "release": {
+      "image": "quay.io/openshift-release-dev/ocp-release-nightly@sha256:08f0905c06195a76138db7071aa77ae644aea401eb832d51ebbf4fb870698346"
+    },
+    "replicas": 3
+  },
+  "status": {
+    "conditions": [
+      {
+        "lastTransitionTime": "2026-10-29T00:32:01Z",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "False",
+        "type": "AutoscalingEnabled"
+      },
+      {
+        "lastTransitionTime": "2026-10-29T00:32:01Z",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "UpdateManagementEnabled"
+      },
+      {
+        "lastTransitionTime": "2026-10-29T00:32:02Z",
+        "message": "Using release image: quay.io/openshift-release-dev/ocp-release-nightly@sha256:08f0905c06195a76138db7071aa77ae644aea401eb832d51ebbf4fb870698346",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "ValidReleaseImage"
+      },
+      {
+        "lastTransitionTime": "2026-10-29T00:32:02Z",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "ValidArchPlatform"
+      },
+      {
+        "lastTransitionTime": "2026-10-29T00:32:02Z",
+        "message": "Reconciliation active on resource",
+        "observedGeneration": 2,
+        "reason": "ReconciliationActive",
+        "status": "True",
+        "type": "ReconciliationActive"
+      },
+      {
+        "lastTransitionTime": "2026-10-29T00:32:02Z",
+        "message": "Release image version is valid",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "SupportedVersionSkew"
+      },
+      {
+        "lastTransitionTime": "2026-10-29T00:32:02Z",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "ValidMachineConfig"
+      },
+      {
+        "lastTransitionTime": "2026-10-29T00:32:02Z",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "False",
+        "type": "UpdatingConfig"
+      },
+      {
+        "lastTransitionTime": "2026-10-29T00:32:02Z",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "False",
+        "type": "ConfigUpdatePending"
+      },
+      {
+        "lastTransitionTime": "2026-10-29T00:38:59Z",
+        "message": "Updating version in progress. Target version: 5.1.0-0.nightly-multi-2026-10-27-082258",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "UpdatingVersion"
+      },
+      {
+        "lastTransitionTime": "2026-10-29T00:38:59Z",
+        "message": "Unable to get status data from token secret",
+        "observedGeneration": 2,
+        "status": "Unknown",
+        "type": "ValidGeneratedPayload"
+      },
+      {
+        "lastTransitionTime": "2026-10-29T00:38:59Z",
+        "observedGeneration": 2,
+        "reason": "ignitionNotReached",
+        "status": "False",
+        "type": "ReachedIgnitionEndpoint"
+      },
+      {
+        "lastTransitionTime": "2026-10-29T00:38:30Z",
+        "message": "All is well",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "AllMachinesReady"
+      },
+      {
+        "lastTransitionTime": "2026-10-29T00:38:30Z",
+        "message": "All is well",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "AllNodesHealthy"
+      },
+      {
+        "lastTransitionTime": "2026-10-29T00:32:02Z",
+        "message": "All is well",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "ValidPlatformConfig"
+      },
+      {
+        "lastTransitionTime": "2026-10-29T00:32:02Z",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "ValidTuningConfig"
+      },
+      {
+        "lastTransitionTime": "2026-10-29T00:38:31Z",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "False",
+        "type": "UpdatingPlatformMachineTemplate"
+      },
+      {
+        "lastTransitionTime": "2026-10-29T00:32:02Z",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "False",
+        "type": "AutorepairEnabled"
+      },
+      {
+        "lastTransitionTime": "2026-10-29T00:38:30Z",
+        "observedGeneration": 2,
+        "reason": "Ready",
+        "status": "True",
+        "type": "Ready"
+      }
+    ],
+    "nodesInfo": {
+      "nodeVersions": [
+        {
+          "kubeletVersion": "v1.36.5",
+          "ocpVersion": "5.0.0-rc.7",
+          "readyNodeCount": 3,
+          "unreadyNodeCount": 0
+        }
+      ]
+    },
+    "osImageStream": {
+      "name": "rhel-10"
+    },
+    "replicas": 3,
+    "version": "5.0.0-rc.7"
+  }
+}

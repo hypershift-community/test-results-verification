@@ -1,0 +1,1 @@
+quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601

@@ -1,0 +1,1310 @@
+[
+  {
+    "authorization": {
+      "action": "Microsoft.Network/dnsZones/TXT/delete",
+      "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/cname-konnectivity-server-clusters-75915b6267-mgmt-external-dns.apps.management-cluster"
+    },
+    "caller": "redacted-principal-113",
+    "category": {
+      "localizedValue": "Administrative",
+      "value": "Administrative"
+    },
+    "correlationId": "2a0c09d5-31a4-45db-87ae-c892218846a3",
+    "description": "",
+    "eventDataId": "1766b6ed-6c43-4a3f-8b1c-c51ceb623809",
+    "eventName": {
+      "localizedValue": "End request",
+      "value": "EndRequest"
+    },
+    "eventTimestamp": "2026-10-28T16:02:14.1756416Z",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/cname-konnectivity-server-clusters-75915b6267-mgmt-external-dns.apps.management-cluster/events/1766b6ed-6c43-4a3f-8b1c-c51ceb623809/ticks/639288001341756416",
+    "level": "Informational",
+    "operationId": "2a0c09d5-31a4-45db-87ae-c892218846a3",
+    "operationName": {
+      "localizedValue": "Delete record set of type TXT",
+      "value": "Microsoft.Network/dnsZones/TXT/delete"
+    },
+    "properties": {
+      "entity": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/cname-konnectivity-server-clusters-75915b6267-mgmt-external-dns.apps.management-cluster",
+      "eventCategory": "Administrative",
+      "hierarchy": "redacted-tenant-id/redacted-subscription-id",
+      "message": "Microsoft.Network/dnsZones/TXT/delete",
+      "statusCode": "OK"
+    },
+    "resourceGroup": "shared-resource-group",
+    "resourceGroupName": "shared-resource-group",
+    "resourceId": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/cname-konnectivity-server-clusters-75915b6267-mgmt-external-dns.apps.management-cluster",
+    "resourceProviderName": {
+      "localizedValue": "Microsoft.Network",
+      "value": "Microsoft.Network"
+    },
+    "resourceType": {
+      "localizedValue": "Microsoft.Network/dnsZones/TXT",
+      "value": "Microsoft.Network/dnsZones/TXT"
+    },
+    "status": {
+      "localizedValue": "Succeeded",
+      "value": "Succeeded"
+    },
+    "subStatus": {
+      "localizedValue": "OK (HTTP Status Code: 200)",
+      "value": "OK"
+    },
+    "submissionTimestamp": "2026-10-28T16:04:23Z",
+    "subscriptionId": "redacted-subscription-id",
+    "tenantId": "redacted-tenant-id"
+  },
+  {
+    "authorization": {
+      "action": "Microsoft.Network/dnsZones/TXT/delete",
+      "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/cname-konnectivity-server-clusters-75915b6267-mgmt-external-dns.apps.management-cluster"
+    },
+    "caller": "redacted-principal-113",
+    "category": {
+      "localizedValue": "Administrative",
+      "value": "Administrative"
+    },
+    "correlationId": "2a0c09d5-31a4-45db-87ae-c892218846a3",
+    "description": "",
+    "eventDataId": "4c34ed59-5697-49c0-b356-4017bb467afc",
+    "eventName": {
+      "localizedValue": "Begin request",
+      "value": "BeginRequest"
+    },
+    "eventTimestamp": "2026-10-28T16:02:13.7068955Z",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/cname-konnectivity-server-clusters-75915b6267-mgmt-external-dns.apps.management-cluster/events/4c34ed59-5697-49c0-b356-4017bb467afc/ticks/639288001337068955",
+    "level": "Informational",
+    "operationId": "2a0c09d5-31a4-45db-87ae-c892218846a3",
+    "operationName": {
+      "localizedValue": "Delete record set of type TXT",
+      "value": "Microsoft.Network/dnsZones/TXT/delete"
+    },
+    "properties": {
+      "entity": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/cname-konnectivity-server-clusters-75915b6267-mgmt-external-dns.apps.management-cluster",
+      "eventCategory": "Administrative",
+      "hierarchy": "redacted-tenant-id/redacted-subscription-id",
+      "message": "Microsoft.Network/dnsZones/TXT/delete"
+    },
+    "resourceGroup": "shared-resource-group",
+    "resourceGroupName": "shared-resource-group",
+    "resourceId": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/cname-konnectivity-server-clusters-75915b6267-mgmt-external-dns.apps.management-cluster",
+    "resourceProviderName": {
+      "localizedValue": "Microsoft.Network",
+      "value": "Microsoft.Network"
+    },
+    "resourceType": {
+      "localizedValue": "Microsoft.Network/dnsZones/TXT",
+      "value": "Microsoft.Network/dnsZones/TXT"
+    },
+    "status": {
+      "localizedValue": "Started",
+      "value": "Started"
+    },
+    "subStatus": {
+      "localizedValue": "",
+      "value": ""
+    },
+    "submissionTimestamp": "2026-10-28T16:04:23Z",
+    "subscriptionId": "redacted-subscription-id",
+    "tenantId": "redacted-tenant-id"
+  },
+  {
+    "authorization": {
+      "action": "Microsoft.Network/dnsZones/TXT/delete",
+      "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/konnectivity-server-clusters-75915b6267-mgmt-external-dns.apps.management-cluster"
+    },
+    "caller": "redacted-principal-113",
+    "category": {
+      "localizedValue": "Administrative",
+      "value": "Administrative"
+    },
+    "correlationId": "c9a0f9f2-1f3d-4aad-9472-78b936383f17",
+    "description": "",
+    "eventDataId": "0997d41f-f8e8-46cc-9b6f-f7165c65d2e4",
+    "eventName": {
+      "localizedValue": "End request",
+      "value": "EndRequest"
+    },
+    "eventTimestamp": "2026-10-28T16:02:13.6272246Z",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/konnectivity-server-clusters-75915b6267-mgmt-external-dns.apps.management-cluster/events/0997d41f-f8e8-46cc-9b6f-f7165c65d2e4/ticks/639288001336272246",
+    "level": "Informational",
+    "operationId": "c9a0f9f2-1f3d-4aad-9472-78b936383f17",
+    "operationName": {
+      "localizedValue": "Delete record set of type TXT",
+      "value": "Microsoft.Network/dnsZones/TXT/delete"
+    },
+    "properties": {
+      "entity": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/konnectivity-server-clusters-75915b6267-mgmt-external-dns.apps.management-cluster",
+      "eventCategory": "Administrative",
+      "hierarchy": "redacted-tenant-id/redacted-subscription-id",
+      "message": "Microsoft.Network/dnsZones/TXT/delete",
+      "statusCode": "OK"
+    },
+    "resourceGroup": "shared-resource-group",
+    "resourceGroupName": "shared-resource-group",
+    "resourceId": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/konnectivity-server-clusters-75915b6267-mgmt-external-dns.apps.management-cluster",
+    "resourceProviderName": {
+      "localizedValue": "Microsoft.Network",
+      "value": "Microsoft.Network"
+    },
+    "resourceType": {
+      "localizedValue": "Microsoft.Network/dnsZones/TXT",
+      "value": "Microsoft.Network/dnsZones/TXT"
+    },
+    "status": {
+      "localizedValue": "Succeeded",
+      "value": "Succeeded"
+    },
+    "subStatus": {
+      "localizedValue": "OK (HTTP Status Code: 200)",
+      "value": "OK"
+    },
+    "submissionTimestamp": "2026-10-28T16:03:45Z",
+    "subscriptionId": "redacted-subscription-id",
+    "tenantId": "redacted-tenant-id"
+  },
+  {
+    "authorization": {
+      "action": "Microsoft.Network/dnsZones/TXT/delete",
+      "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/konnectivity-server-clusters-75915b6267-mgmt-external-dns.apps.management-cluster"
+    },
+    "caller": "redacted-principal-113",
+    "category": {
+      "localizedValue": "Administrative",
+      "value": "Administrative"
+    },
+    "correlationId": "c9a0f9f2-1f3d-4aad-9472-78b936383f17",
+    "description": "",
+    "eventDataId": "f541adf8-58e2-45b3-82d6-daa1c385681d",
+    "eventName": {
+      "localizedValue": "Begin request",
+      "value": "BeginRequest"
+    },
+    "eventTimestamp": "2026-10-28T16:02:13.1402764Z",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/konnectivity-server-clusters-75915b6267-mgmt-external-dns.apps.management-cluster/events/f541adf8-58e2-45b3-82d6-daa1c385681d/ticks/639288001331402764",
+    "level": "Informational",
+    "operationId": "c9a0f9f2-1f3d-4aad-9472-78b936383f17",
+    "operationName": {
+      "localizedValue": "Delete record set of type TXT",
+      "value": "Microsoft.Network/dnsZones/TXT/delete"
+    },
+    "properties": {
+      "entity": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/konnectivity-server-clusters-75915b6267-mgmt-external-dns.apps.management-cluster",
+      "eventCategory": "Administrative",
+      "hierarchy": "redacted-tenant-id/redacted-subscription-id",
+      "message": "Microsoft.Network/dnsZones/TXT/delete"
+    },
+    "resourceGroup": "shared-resource-group",
+    "resourceGroupName": "shared-resource-group",
+    "resourceId": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/konnectivity-server-clusters-75915b6267-mgmt-external-dns.apps.management-cluster",
+    "resourceProviderName": {
+      "localizedValue": "Microsoft.Network",
+      "value": "Microsoft.Network"
+    },
+    "resourceType": {
+      "localizedValue": "Microsoft.Network/dnsZones/TXT",
+      "value": "Microsoft.Network/dnsZones/TXT"
+    },
+    "status": {
+      "localizedValue": "Started",
+      "value": "Started"
+    },
+    "subStatus": {
+      "localizedValue": "",
+      "value": ""
+    },
+    "submissionTimestamp": "2026-10-28T16:03:45Z",
+    "subscriptionId": "redacted-subscription-id",
+    "tenantId": "redacted-tenant-id"
+  },
+  {
+    "authorization": {
+      "action": "Microsoft.Network/dnsZones/TXT/delete",
+      "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/cname-oauth-clusters-75915b6267-mgmt-external-dns.apps.management-cluster"
+    },
+    "caller": "redacted-principal-113",
+    "category": {
+      "localizedValue": "Administrative",
+      "value": "Administrative"
+    },
+    "correlationId": "63d098f5-13f6-4984-865c-f4fb71f39f97",
+    "description": "",
+    "eventDataId": "8682232e-4739-4e1f-a783-720faecbfd3c",
+    "eventName": {
+      "localizedValue": "End request",
+      "value": "EndRequest"
+    },
+    "eventTimestamp": "2026-10-28T16:02:12.2800872Z",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/cname-oauth-clusters-75915b6267-mgmt-external-dns.apps.management-cluster/events/8682232e-4739-4e1f-a783-720faecbfd3c/ticks/639288001322800872",
+    "level": "Informational",
+    "operationId": "63d098f5-13f6-4984-865c-f4fb71f39f97",
+    "operationName": {
+      "localizedValue": "Delete record set of type TXT",
+      "value": "Microsoft.Network/dnsZones/TXT/delete"
+    },
+    "properties": {
+      "entity": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/cname-oauth-clusters-75915b6267-mgmt-external-dns.apps.management-cluster",
+      "eventCategory": "Administrative",
+      "hierarchy": "redacted-tenant-id/redacted-subscription-id",
+      "message": "Microsoft.Network/dnsZones/TXT/delete",
+      "statusCode": "OK"
+    },
+    "resourceGroup": "shared-resource-group",
+    "resourceGroupName": "shared-resource-group",
+    "resourceId": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/cname-oauth-clusters-75915b6267-mgmt-external-dns.apps.management-cluster",
+    "resourceProviderName": {
+      "localizedValue": "Microsoft.Network",
+      "value": "Microsoft.Network"
+    },
+    "resourceType": {
+      "localizedValue": "Microsoft.Network/dnsZones/TXT",
+      "value": "Microsoft.Network/dnsZones/TXT"
+    },
+    "status": {
+      "localizedValue": "Succeeded",
+      "value": "Succeeded"
+    },
+    "subStatus": {
+      "localizedValue": "OK (HTTP Status Code: 200)",
+      "value": "OK"
+    },
+    "submissionTimestamp": "2026-10-28T16:04:00Z",
+    "subscriptionId": "redacted-subscription-id",
+    "tenantId": "redacted-tenant-id"
+  },
+  {
+    "authorization": {
+      "action": "Microsoft.Network/dnsZones/TXT/delete",
+      "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/cname-oauth-clusters-75915b6267-mgmt-external-dns.apps.management-cluster"
+    },
+    "caller": "redacted-principal-113",
+    "category": {
+      "localizedValue": "Administrative",
+      "value": "Administrative"
+    },
+    "correlationId": "63d098f5-13f6-4984-865c-f4fb71f39f97",
+    "description": "",
+    "eventDataId": "9d9336e9-a94b-4cb2-9999-a7cea62b74f9",
+    "eventName": {
+      "localizedValue": "Begin request",
+      "value": "BeginRequest"
+    },
+    "eventTimestamp": "2026-10-28T16:02:11.8269517Z",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/cname-oauth-clusters-75915b6267-mgmt-external-dns.apps.management-cluster/events/9d9336e9-a94b-4cb2-9999-a7cea62b74f9/ticks/639288001318269517",
+    "level": "Informational",
+    "operationId": "63d098f5-13f6-4984-865c-f4fb71f39f97",
+    "operationName": {
+      "localizedValue": "Delete record set of type TXT",
+      "value": "Microsoft.Network/dnsZones/TXT/delete"
+    },
+    "properties": {
+      "entity": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/cname-oauth-clusters-75915b6267-mgmt-external-dns.apps.management-cluster",
+      "eventCategory": "Administrative",
+      "hierarchy": "redacted-tenant-id/redacted-subscription-id",
+      "message": "Microsoft.Network/dnsZones/TXT/delete"
+    },
+    "resourceGroup": "shared-resource-group",
+    "resourceGroupName": "shared-resource-group",
+    "resourceId": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/cname-oauth-clusters-75915b6267-mgmt-external-dns.apps.management-cluster",
+    "resourceProviderName": {
+      "localizedValue": "Microsoft.Network",
+      "value": "Microsoft.Network"
+    },
+    "resourceType": {
+      "localizedValue": "Microsoft.Network/dnsZones/TXT",
+      "value": "Microsoft.Network/dnsZones/TXT"
+    },
+    "status": {
+      "localizedValue": "Started",
+      "value": "Started"
+    },
+    "subStatus": {
+      "localizedValue": "",
+      "value": ""
+    },
+    "submissionTimestamp": "2026-10-28T16:04:00Z",
+    "subscriptionId": "redacted-subscription-id",
+    "tenantId": "redacted-tenant-id"
+  },
+  {
+    "authorization": {
+      "action": "Microsoft.Network/dnsZones/TXT/delete",
+      "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/oauth-clusters-75915b6267-mgmt-external-dns.apps.management-cluster"
+    },
+    "caller": "redacted-principal-113",
+    "category": {
+      "localizedValue": "Administrative",
+      "value": "Administrative"
+    },
+    "correlationId": "bd98b5df-8428-4cdb-8a8a-fb8e792d4046",
+    "description": "",
+    "eventDataId": "be2120e5-2465-4ee1-9c60-68a04094f4ef",
+    "eventName": {
+      "localizedValue": "End request",
+      "value": "EndRequest"
+    },
+    "eventTimestamp": "2026-10-28T16:02:11.8038757Z",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/oauth-clusters-75915b6267-mgmt-external-dns.apps.management-cluster/events/be2120e5-2465-4ee1-9c60-68a04094f4ef/ticks/639288001318038757",
+    "level": "Informational",
+    "operationId": "bd98b5df-8428-4cdb-8a8a-fb8e792d4046",
+    "operationName": {
+      "localizedValue": "Delete record set of type TXT",
+      "value": "Microsoft.Network/dnsZones/TXT/delete"
+    },
+    "properties": {
+      "entity": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/oauth-clusters-75915b6267-mgmt-external-dns.apps.management-cluster",
+      "eventCategory": "Administrative",
+      "hierarchy": "redacted-tenant-id/redacted-subscription-id",
+      "message": "Microsoft.Network/dnsZones/TXT/delete",
+      "statusCode": "OK"
+    },
+    "resourceGroup": "shared-resource-group",
+    "resourceGroupName": "shared-resource-group",
+    "resourceId": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/oauth-clusters-75915b6267-mgmt-external-dns.apps.management-cluster",
+    "resourceProviderName": {
+      "localizedValue": "Microsoft.Network",
+      "value": "Microsoft.Network"
+    },
+    "resourceType": {
+      "localizedValue": "Microsoft.Network/dnsZones/TXT",
+      "value": "Microsoft.Network/dnsZones/TXT"
+    },
+    "status": {
+      "localizedValue": "Succeeded",
+      "value": "Succeeded"
+    },
+    "subStatus": {
+      "localizedValue": "OK (HTTP Status Code: 200)",
+      "value": "OK"
+    },
+    "submissionTimestamp": "2026-10-28T16:03:43Z",
+    "subscriptionId": "redacted-subscription-id",
+    "tenantId": "redacted-tenant-id"
+  },
+  {
+    "authorization": {
+      "action": "Microsoft.Network/dnsZones/TXT/delete",
+      "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/oauth-clusters-75915b6267-mgmt-external-dns.apps.management-cluster"
+    },
+    "caller": "redacted-principal-113",
+    "category": {
+      "localizedValue": "Administrative",
+      "value": "Administrative"
+    },
+    "correlationId": "bd98b5df-8428-4cdb-8a8a-fb8e792d4046",
+    "description": "",
+    "eventDataId": "23888e10-7f58-4d3f-8501-4d447e3168e3",
+    "eventName": {
+      "localizedValue": "Begin request",
+      "value": "BeginRequest"
+    },
+    "eventTimestamp": "2026-10-28T16:02:11.3976291Z",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/oauth-clusters-75915b6267-mgmt-external-dns.apps.management-cluster/events/23888e10-7f58-4d3f-8501-4d447e3168e3/ticks/639288001313976291",
+    "level": "Informational",
+    "operationId": "bd98b5df-8428-4cdb-8a8a-fb8e792d4046",
+    "operationName": {
+      "localizedValue": "Delete record set of type TXT",
+      "value": "Microsoft.Network/dnsZones/TXT/delete"
+    },
+    "properties": {
+      "entity": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/oauth-clusters-75915b6267-mgmt-external-dns.apps.management-cluster",
+      "eventCategory": "Administrative",
+      "hierarchy": "redacted-tenant-id/redacted-subscription-id",
+      "message": "Microsoft.Network/dnsZones/TXT/delete"
+    },
+    "resourceGroup": "shared-resource-group",
+    "resourceGroupName": "shared-resource-group",
+    "resourceId": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/oauth-clusters-75915b6267-mgmt-external-dns.apps.management-cluster",
+    "resourceProviderName": {
+      "localizedValue": "Microsoft.Network",
+      "value": "Microsoft.Network"
+    },
+    "resourceType": {
+      "localizedValue": "Microsoft.Network/dnsZones/TXT",
+      "value": "Microsoft.Network/dnsZones/TXT"
+    },
+    "status": {
+      "localizedValue": "Started",
+      "value": "Started"
+    },
+    "subStatus": {
+      "localizedValue": "",
+      "value": ""
+    },
+    "submissionTimestamp": "2026-10-28T16:03:43Z",
+    "subscriptionId": "redacted-subscription-id",
+    "tenantId": "redacted-tenant-id"
+  },
+  {
+    "authorization": {
+      "action": "Microsoft.Network/dnsZones/TXT/delete",
+      "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/cname-ignition-server-clusters-75915b6267-mgmt-external-dns.apps.management-cluster"
+    },
+    "caller": "redacted-principal-113",
+    "category": {
+      "localizedValue": "Administrative",
+      "value": "Administrative"
+    },
+    "correlationId": "4c8faa86-7a11-4b1a-992a-811c70ce8d95",
+    "description": "",
+    "eventDataId": "89b2cc99-1fb6-4043-b8cc-a2f4fb4e4c6c",
+    "eventName": {
+      "localizedValue": "End request",
+      "value": "EndRequest"
+    },
+    "eventTimestamp": "2026-10-28T16:02:11.2834375Z",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/cname-ignition-server-clusters-75915b6267-mgmt-external-dns.apps.management-cluster/events/89b2cc99-1fb6-4043-b8cc-a2f4fb4e4c6c/ticks/639288001312834375",
+    "level": "Informational",
+    "operationId": "4c8faa86-7a11-4b1a-992a-811c70ce8d95",
+    "operationName": {
+      "localizedValue": "Delete record set of type TXT",
+      "value": "Microsoft.Network/dnsZones/TXT/delete"
+    },
+    "properties": {
+      "entity": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/cname-ignition-server-clusters-75915b6267-mgmt-external-dns.apps.management-cluster",
+      "eventCategory": "Administrative",
+      "hierarchy": "redacted-tenant-id/redacted-subscription-id",
+      "message": "Microsoft.Network/dnsZones/TXT/delete",
+      "statusCode": "OK"
+    },
+    "resourceGroup": "shared-resource-group",
+    "resourceGroupName": "shared-resource-group",
+    "resourceId": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/cname-ignition-server-clusters-75915b6267-mgmt-external-dns.apps.management-cluster",
+    "resourceProviderName": {
+      "localizedValue": "Microsoft.Network",
+      "value": "Microsoft.Network"
+    },
+    "resourceType": {
+      "localizedValue": "Microsoft.Network/dnsZones/TXT",
+      "value": "Microsoft.Network/dnsZones/TXT"
+    },
+    "status": {
+      "localizedValue": "Succeeded",
+      "value": "Succeeded"
+    },
+    "subStatus": {
+      "localizedValue": "OK (HTTP Status Code: 200)",
+      "value": "OK"
+    },
+    "submissionTimestamp": "2026-10-28T16:04:05Z",
+    "subscriptionId": "redacted-subscription-id",
+    "tenantId": "redacted-tenant-id"
+  },
+  {
+    "authorization": {
+      "action": "Microsoft.Network/dnsZones/TXT/delete",
+      "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/cname-ignition-server-clusters-75915b6267-mgmt-external-dns.apps.management-cluster"
+    },
+    "caller": "redacted-principal-113",
+    "category": {
+      "localizedValue": "Administrative",
+      "value": "Administrative"
+    },
+    "correlationId": "4c8faa86-7a11-4b1a-992a-811c70ce8d95",
+    "description": "",
+    "eventDataId": "6f623b59-f7e9-4f7a-961f-8daa5b5b9ae6",
+    "eventName": {
+      "localizedValue": "Begin request",
+      "value": "BeginRequest"
+    },
+    "eventTimestamp": "2026-10-28T16:02:10.8302649Z",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/cname-ignition-server-clusters-75915b6267-mgmt-external-dns.apps.management-cluster/events/6f623b59-f7e9-4f7a-961f-8daa5b5b9ae6/ticks/639288001308302649",
+    "level": "Informational",
+    "operationId": "4c8faa86-7a11-4b1a-992a-811c70ce8d95",
+    "operationName": {
+      "localizedValue": "Delete record set of type TXT",
+      "value": "Microsoft.Network/dnsZones/TXT/delete"
+    },
+    "properties": {
+      "entity": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/cname-ignition-server-clusters-75915b6267-mgmt-external-dns.apps.management-cluster",
+      "eventCategory": "Administrative",
+      "hierarchy": "redacted-tenant-id/redacted-subscription-id",
+      "message": "Microsoft.Network/dnsZones/TXT/delete"
+    },
+    "resourceGroup": "shared-resource-group",
+    "resourceGroupName": "shared-resource-group",
+    "resourceId": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/cname-ignition-server-clusters-75915b6267-mgmt-external-dns.apps.management-cluster",
+    "resourceProviderName": {
+      "localizedValue": "Microsoft.Network",
+      "value": "Microsoft.Network"
+    },
+    "resourceType": {
+      "localizedValue": "Microsoft.Network/dnsZones/TXT",
+      "value": "Microsoft.Network/dnsZones/TXT"
+    },
+    "status": {
+      "localizedValue": "Started",
+      "value": "Started"
+    },
+    "subStatus": {
+      "localizedValue": "",
+      "value": ""
+    },
+    "submissionTimestamp": "2026-10-28T16:04:05Z",
+    "subscriptionId": "redacted-subscription-id",
+    "tenantId": "redacted-tenant-id"
+  },
+  {
+    "authorization": {
+      "action": "Microsoft.Network/dnsZones/TXT/delete",
+      "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/ignition-server-clusters-75915b6267-mgmt-external-dns.apps.management-cluster"
+    },
+    "caller": "redacted-principal-113",
+    "category": {
+      "localizedValue": "Administrative",
+      "value": "Administrative"
+    },
+    "correlationId": "6c1355be-236b-4455-bbb1-1dd6d51f7d6e",
+    "description": "",
+    "eventDataId": "6906edd3-40f4-48b2-8cfc-11595dd89639",
+    "eventName": {
+      "localizedValue": "End request",
+      "value": "EndRequest"
+    },
+    "eventTimestamp": "2026-10-28T16:02:10.7883324Z",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/ignition-server-clusters-75915b6267-mgmt-external-dns.apps.management-cluster/events/6906edd3-40f4-48b2-8cfc-11595dd89639/ticks/639288001307883324",
+    "level": "Informational",
+    "operationId": "6c1355be-236b-4455-bbb1-1dd6d51f7d6e",
+    "operationName": {
+      "localizedValue": "Delete record set of type TXT",
+      "value": "Microsoft.Network/dnsZones/TXT/delete"
+    },
+    "properties": {
+      "entity": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/ignition-server-clusters-75915b6267-mgmt-external-dns.apps.management-cluster",
+      "eventCategory": "Administrative",
+      "hierarchy": "redacted-tenant-id/redacted-subscription-id",
+      "message": "Microsoft.Network/dnsZones/TXT/delete",
+      "statusCode": "OK"
+    },
+    "resourceGroup": "shared-resource-group",
+    "resourceGroupName": "shared-resource-group",
+    "resourceId": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/ignition-server-clusters-75915b6267-mgmt-external-dns.apps.management-cluster",
+    "resourceProviderName": {
+      "localizedValue": "Microsoft.Network",
+      "value": "Microsoft.Network"
+    },
+    "resourceType": {
+      "localizedValue": "Microsoft.Network/dnsZones/TXT",
+      "value": "Microsoft.Network/dnsZones/TXT"
+    },
+    "status": {
+      "localizedValue": "Succeeded",
+      "value": "Succeeded"
+    },
+    "subStatus": {
+      "localizedValue": "OK (HTTP Status Code: 200)",
+      "value": "OK"
+    },
+    "submissionTimestamp": "2026-10-28T16:04:06Z",
+    "subscriptionId": "redacted-subscription-id",
+    "tenantId": "redacted-tenant-id"
+  },
+  {
+    "authorization": {
+      "action": "Microsoft.Network/dnsZones/TXT/delete",
+      "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/ignition-server-clusters-75915b6267-mgmt-external-dns.apps.management-cluster"
+    },
+    "caller": "redacted-principal-113",
+    "category": {
+      "localizedValue": "Administrative",
+      "value": "Administrative"
+    },
+    "correlationId": "6c1355be-236b-4455-bbb1-1dd6d51f7d6e",
+    "description": "",
+    "eventDataId": "576cf05f-647e-4285-9003-34e62285610f",
+    "eventName": {
+      "localizedValue": "Begin request",
+      "value": "BeginRequest"
+    },
+    "eventTimestamp": "2026-10-28T16:02:10.3664544Z",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/ignition-server-clusters-75915b6267-mgmt-external-dns.apps.management-cluster/events/576cf05f-647e-4285-9003-34e62285610f/ticks/639288001303664544",
+    "level": "Informational",
+    "operationId": "6c1355be-236b-4455-bbb1-1dd6d51f7d6e",
+    "operationName": {
+      "localizedValue": "Delete record set of type TXT",
+      "value": "Microsoft.Network/dnsZones/TXT/delete"
+    },
+    "properties": {
+      "entity": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/ignition-server-clusters-75915b6267-mgmt-external-dns.apps.management-cluster",
+      "eventCategory": "Administrative",
+      "hierarchy": "redacted-tenant-id/redacted-subscription-id",
+      "message": "Microsoft.Network/dnsZones/TXT/delete"
+    },
+    "resourceGroup": "shared-resource-group",
+    "resourceGroupName": "shared-resource-group",
+    "resourceId": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/TXT/ignition-server-clusters-75915b6267-mgmt-external-dns.apps.management-cluster",
+    "resourceProviderName": {
+      "localizedValue": "Microsoft.Network",
+      "value": "Microsoft.Network"
+    },
+    "resourceType": {
+      "localizedValue": "Microsoft.Network/dnsZones/TXT",
+      "value": "Microsoft.Network/dnsZones/TXT"
+    },
+    "status": {
+      "localizedValue": "Started",
+      "value": "Started"
+    },
+    "subStatus": {
+      "localizedValue": "",
+      "value": ""
+    },
+    "submissionTimestamp": "2026-10-28T16:04:06Z",
+    "subscriptionId": "redacted-subscription-id",
+    "tenantId": "redacted-tenant-id"
+  },
+  {
+    "authorization": {
+      "action": "Microsoft.Network/dnsZones/CNAME/delete",
+      "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/CNAME/konnectivity-server-clusters-75915b6267-mgmt.apps.management-cluster"
+    },
+    "caller": "redacted-principal-113",
+    "category": {
+      "localizedValue": "Administrative",
+      "value": "Administrative"
+    },
+    "correlationId": "b7a7ab8b-c62e-455f-b419-d123a6c41e5c",
+    "description": "",
+    "eventDataId": "c81e6e46-6fd0-4ca9-857b-736a889d0d4b",
+    "eventName": {
+      "localizedValue": "End request",
+      "value": "EndRequest"
+    },
+    "eventTimestamp": "2026-10-28T16:02:10.3072879Z",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/CNAME/konnectivity-server-clusters-75915b6267-mgmt.apps.management-cluster/events/c81e6e46-6fd0-4ca9-857b-736a889d0d4b/ticks/639288001303072879",
+    "level": "Informational",
+    "operationId": "b7a7ab8b-c62e-455f-b419-d123a6c41e5c",
+    "operationName": {
+      "localizedValue": "Delete record set of type CNAME",
+      "value": "Microsoft.Network/dnsZones/CNAME/delete"
+    },
+    "properties": {
+      "entity": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/CNAME/konnectivity-server-clusters-75915b6267-mgmt.apps.management-cluster",
+      "eventCategory": "Administrative",
+      "hierarchy": "redacted-tenant-id/redacted-subscription-id",
+      "message": "Microsoft.Network/dnsZones/CNAME/delete",
+      "statusCode": "OK"
+    },
+    "resourceGroup": "shared-resource-group",
+    "resourceGroupName": "shared-resource-group",
+    "resourceId": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/CNAME/konnectivity-server-clusters-75915b6267-mgmt.apps.management-cluster",
+    "resourceProviderName": {
+      "localizedValue": "Microsoft.Network",
+      "value": "Microsoft.Network"
+    },
+    "resourceType": {
+      "localizedValue": "Microsoft.Network/dnsZones/CNAME",
+      "value": "Microsoft.Network/dnsZones/CNAME"
+    },
+    "status": {
+      "localizedValue": "Succeeded",
+      "value": "Succeeded"
+    },
+    "subStatus": {
+      "localizedValue": "OK (HTTP Status Code: 200)",
+      "value": "OK"
+    },
+    "submissionTimestamp": "2026-10-28T16:03:55Z",
+    "subscriptionId": "redacted-subscription-id",
+    "tenantId": "redacted-tenant-id"
+  },
+  {
+    "authorization": {
+      "action": "Microsoft.Network/dnsZones/CNAME/delete",
+      "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/CNAME/konnectivity-server-clusters-75915b6267-mgmt.apps.management-cluster"
+    },
+    "caller": "redacted-principal-113",
+    "category": {
+      "localizedValue": "Administrative",
+      "value": "Administrative"
+    },
+    "correlationId": "b7a7ab8b-c62e-455f-b419-d123a6c41e5c",
+    "description": "",
+    "eventDataId": "bd4d9d74-a512-4aef-b1b6-f2f944cc2461",
+    "eventName": {
+      "localizedValue": "Begin request",
+      "value": "BeginRequest"
+    },
+    "eventTimestamp": "2026-10-28T16:02:09.8072819Z",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/CNAME/konnectivity-server-clusters-75915b6267-mgmt.apps.management-cluster/events/bd4d9d74-a512-4aef-b1b6-f2f944cc2461/ticks/639288001298072819",
+    "level": "Informational",
+    "operationId": "b7a7ab8b-c62e-455f-b419-d123a6c41e5c",
+    "operationName": {
+      "localizedValue": "Delete record set of type CNAME",
+      "value": "Microsoft.Network/dnsZones/CNAME/delete"
+    },
+    "properties": {
+      "entity": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/CNAME/konnectivity-server-clusters-75915b6267-mgmt.apps.management-cluster",
+      "eventCategory": "Administrative",
+      "hierarchy": "redacted-tenant-id/redacted-subscription-id",
+      "message": "Microsoft.Network/dnsZones/CNAME/delete"
+    },
+    "resourceGroup": "shared-resource-group",
+    "resourceGroupName": "shared-resource-group",
+    "resourceId": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/CNAME/konnectivity-server-clusters-75915b6267-mgmt.apps.management-cluster",
+    "resourceProviderName": {
+      "localizedValue": "Microsoft.Network",
+      "value": "Microsoft.Network"
+    },
+    "resourceType": {
+      "localizedValue": "Microsoft.Network/dnsZones/CNAME",
+      "value": "Microsoft.Network/dnsZones/CNAME"
+    },
+    "status": {
+      "localizedValue": "Started",
+      "value": "Started"
+    },
+    "subStatus": {
+      "localizedValue": "",
+      "value": ""
+    },
+    "submissionTimestamp": "2026-10-28T16:03:55Z",
+    "subscriptionId": "redacted-subscription-id",
+    "tenantId": "redacted-tenant-id"
+  },
+  {
+    "authorization": {
+      "action": "Microsoft.Network/dnsZones/CNAME/delete",
+      "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/CNAME/oauth-clusters-75915b6267-mgmt.apps.management-cluster"
+    },
+    "caller": "redacted-principal-113",
+    "category": {
+      "localizedValue": "Administrative",
+      "value": "Administrative"
+    },
+    "correlationId": "78162365-0749-442e-b3a0-5ff4aeac58bc",
+    "description": "",
+    "eventDataId": "f7748f2a-62b5-40ee-8f9c-5f16f34640f4",
+    "eventName": {
+      "localizedValue": "End request",
+      "value": "EndRequest"
+    },
+    "eventTimestamp": "2026-10-28T16:02:09.7453431Z",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/CNAME/oauth-clusters-75915b6267-mgmt.apps.management-cluster/events/f7748f2a-62b5-40ee-8f9c-5f16f34640f4/ticks/639288001297453431",
+    "level": "Informational",
+    "operationId": "78162365-0749-442e-b3a0-5ff4aeac58bc",
+    "operationName": {
+      "localizedValue": "Delete record set of type CNAME",
+      "value": "Microsoft.Network/dnsZones/CNAME/delete"
+    },
+    "properties": {
+      "entity": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/CNAME/oauth-clusters-75915b6267-mgmt.apps.management-cluster",
+      "eventCategory": "Administrative",
+      "hierarchy": "redacted-tenant-id/redacted-subscription-id",
+      "message": "Microsoft.Network/dnsZones/CNAME/delete",
+      "statusCode": "OK"
+    },
+    "resourceGroup": "shared-resource-group",
+    "resourceGroupName": "shared-resource-group",
+    "resourceId": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/CNAME/oauth-clusters-75915b6267-mgmt.apps.management-cluster",
+    "resourceProviderName": {
+      "localizedValue": "Microsoft.Network",
+      "value": "Microsoft.Network"
+    },
+    "resourceType": {
+      "localizedValue": "Microsoft.Network/dnsZones/CNAME",
+      "value": "Microsoft.Network/dnsZones/CNAME"
+    },
+    "status": {
+      "localizedValue": "Succeeded",
+      "value": "Succeeded"
+    },
+    "subStatus": {
+      "localizedValue": "OK (HTTP Status Code: 200)",
+      "value": "OK"
+    },
+    "submissionTimestamp": "2026-10-28T16:03:38Z",
+    "subscriptionId": "redacted-subscription-id",
+    "tenantId": "redacted-tenant-id"
+  },
+  {
+    "authorization": {
+      "action": "Microsoft.Network/dnsZones/CNAME/delete",
+      "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/CNAME/oauth-clusters-75915b6267-mgmt.apps.management-cluster"
+    },
+    "caller": "redacted-principal-113",
+    "category": {
+      "localizedValue": "Administrative",
+      "value": "Administrative"
+    },
+    "correlationId": "78162365-0749-442e-b3a0-5ff4aeac58bc",
+    "description": "",
+    "eventDataId": "a8cae6d9-8a0d-4087-80b5-9220fe3aa896",
+    "eventName": {
+      "localizedValue": "Begin request",
+      "value": "BeginRequest"
+    },
+    "eventTimestamp": "2026-10-28T16:02:09.2454044Z",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/CNAME/oauth-clusters-75915b6267-mgmt.apps.management-cluster/events/a8cae6d9-8a0d-4087-80b5-9220fe3aa896/ticks/639288001292454044",
+    "level": "Informational",
+    "operationId": "78162365-0749-442e-b3a0-5ff4aeac58bc",
+    "operationName": {
+      "localizedValue": "Delete record set of type CNAME",
+      "value": "Microsoft.Network/dnsZones/CNAME/delete"
+    },
+    "properties": {
+      "entity": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/CNAME/oauth-clusters-75915b6267-mgmt.apps.management-cluster",
+      "eventCategory": "Administrative",
+      "hierarchy": "redacted-tenant-id/redacted-subscription-id",
+      "message": "Microsoft.Network/dnsZones/CNAME/delete"
+    },
+    "resourceGroup": "shared-resource-group",
+    "resourceGroupName": "shared-resource-group",
+    "resourceId": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/CNAME/oauth-clusters-75915b6267-mgmt.apps.management-cluster",
+    "resourceProviderName": {
+      "localizedValue": "Microsoft.Network",
+      "value": "Microsoft.Network"
+    },
+    "resourceType": {
+      "localizedValue": "Microsoft.Network/dnsZones/CNAME",
+      "value": "Microsoft.Network/dnsZones/CNAME"
+    },
+    "status": {
+      "localizedValue": "Started",
+      "value": "Started"
+    },
+    "subStatus": {
+      "localizedValue": "",
+      "value": ""
+    },
+    "submissionTimestamp": "2026-10-28T16:03:38Z",
+    "subscriptionId": "redacted-subscription-id",
+    "tenantId": "redacted-tenant-id"
+  },
+  {
+    "authorization": {
+      "action": "Microsoft.Network/dnsZones/CNAME/delete",
+      "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/CNAME/ignition-server-clusters-75915b6267-mgmt.apps.management-cluster"
+    },
+    "caller": "redacted-principal-113",
+    "category": {
+      "localizedValue": "Administrative",
+      "value": "Administrative"
+    },
+    "correlationId": "3670794c-99b7-482d-b787-ab311bb4503a",
+    "description": "",
+    "eventDataId": "56a7f2e8-87ec-4b78-97e3-c8a101cf62bc",
+    "eventName": {
+      "localizedValue": "End request",
+      "value": "EndRequest"
+    },
+    "eventTimestamp": "2026-10-28T16:02:09.1932737Z",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/CNAME/ignition-server-clusters-75915b6267-mgmt.apps.management-cluster/events/56a7f2e8-87ec-4b78-97e3-c8a101cf62bc/ticks/639288001291932737",
+    "level": "Informational",
+    "operationId": "3670794c-99b7-482d-b787-ab311bb4503a",
+    "operationName": {
+      "localizedValue": "Delete record set of type CNAME",
+      "value": "Microsoft.Network/dnsZones/CNAME/delete"
+    },
+    "properties": {
+      "entity": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/CNAME/ignition-server-clusters-75915b6267-mgmt.apps.management-cluster",
+      "eventCategory": "Administrative",
+      "hierarchy": "redacted-tenant-id/redacted-subscription-id",
+      "message": "Microsoft.Network/dnsZones/CNAME/delete",
+      "statusCode": "OK"
+    },
+    "resourceGroup": "shared-resource-group",
+    "resourceGroupName": "shared-resource-group",
+    "resourceId": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/CNAME/ignition-server-clusters-75915b6267-mgmt.apps.management-cluster",
+    "resourceProviderName": {
+      "localizedValue": "Microsoft.Network",
+      "value": "Microsoft.Network"
+    },
+    "resourceType": {
+      "localizedValue": "Microsoft.Network/dnsZones/CNAME",
+      "value": "Microsoft.Network/dnsZones/CNAME"
+    },
+    "status": {
+      "localizedValue": "Succeeded",
+      "value": "Succeeded"
+    },
+    "subStatus": {
+      "localizedValue": "OK (HTTP Status Code: 200)",
+      "value": "OK"
+    },
+    "submissionTimestamp": "2026-10-28T16:03:47Z",
+    "subscriptionId": "redacted-subscription-id",
+    "tenantId": "redacted-tenant-id"
+  },
+  {
+    "authorization": {
+      "action": "Microsoft.Network/dnsZones/CNAME/delete",
+      "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/CNAME/ignition-server-clusters-75915b6267-mgmt.apps.management-cluster"
+    },
+    "caller": "redacted-principal-113",
+    "category": {
+      "localizedValue": "Administrative",
+      "value": "Administrative"
+    },
+    "correlationId": "3670794c-99b7-482d-b787-ab311bb4503a",
+    "description": "",
+    "eventDataId": "a72d9d55-b049-4264-a761-8b4b85fea936",
+    "eventName": {
+      "localizedValue": "Begin request",
+      "value": "BeginRequest"
+    },
+    "eventTimestamp": "2026-10-28T16:02:08.7557694Z",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/CNAME/ignition-server-clusters-75915b6267-mgmt.apps.management-cluster/events/a72d9d55-b049-4264-a761-8b4b85fea936/ticks/639288001287557694",
+    "level": "Informational",
+    "operationId": "3670794c-99b7-482d-b787-ab311bb4503a",
+    "operationName": {
+      "localizedValue": "Delete record set of type CNAME",
+      "value": "Microsoft.Network/dnsZones/CNAME/delete"
+    },
+    "properties": {
+      "entity": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/CNAME/ignition-server-clusters-75915b6267-mgmt.apps.management-cluster",
+      "eventCategory": "Administrative",
+      "hierarchy": "redacted-tenant-id/redacted-subscription-id",
+      "message": "Microsoft.Network/dnsZones/CNAME/delete"
+    },
+    "resourceGroup": "shared-resource-group",
+    "resourceGroupName": "shared-resource-group",
+    "resourceId": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/CNAME/ignition-server-clusters-75915b6267-mgmt.apps.management-cluster",
+    "resourceProviderName": {
+      "localizedValue": "Microsoft.Network",
+      "value": "Microsoft.Network"
+    },
+    "resourceType": {
+      "localizedValue": "Microsoft.Network/dnsZones/CNAME",
+      "value": "Microsoft.Network/dnsZones/CNAME"
+    },
+    "status": {
+      "localizedValue": "Started",
+      "value": "Started"
+    },
+    "subStatus": {
+      "localizedValue": "",
+      "value": ""
+    },
+    "submissionTimestamp": "2026-10-28T16:03:47Z",
+    "subscriptionId": "redacted-subscription-id",
+    "tenantId": "redacted-tenant-id"
+  },
+  {
+    "authorization": {
+      "action": "Microsoft.Network/dnsZones/A/delete",
+      "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/A/*.apps.75915b6267-mgmt"
+    },
+    "caller": "redacted-principal-123",
+    "category": {
+      "localizedValue": "Administrative",
+      "value": "Administrative"
+    },
+    "correlationId": "8f78c18f-6545-4205-98fe-4c0a0269455c",
+    "description": "",
+    "eventDataId": "df0f76f2-2e2b-4e91-a25e-827de23ef777",
+    "eventName": {
+      "localizedValue": "End request",
+      "value": "EndRequest"
+    },
+    "eventTimestamp": "2026-10-28T16:01:49.5440452Z",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/A/*.apps.75915b6267-mgmt/events/df0f76f2-2e2b-4e91-a25e-827de23ef777/ticks/639288001095440452",
+    "level": "Informational",
+    "operationId": "8f78c18f-6545-4205-98fe-4c0a0269455c",
+    "operationName": {
+      "localizedValue": "Delete record set of type A",
+      "value": "Microsoft.Network/dnsZones/A/delete"
+    },
+    "properties": {
+      "entity": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/A/*.apps.75915b6267-mgmt",
+      "eventCategory": "Administrative",
+      "hierarchy": "redacted-tenant-id/redacted-subscription-id",
+      "message": "Microsoft.Network/dnsZones/A/delete",
+      "statusCode": "OK"
+    },
+    "resourceGroup": "shared-resource-group",
+    "resourceGroupName": "shared-resource-group",
+    "resourceId": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/A/*.apps.75915b6267-mgmt",
+    "resourceProviderName": {
+      "localizedValue": "Microsoft.Network",
+      "value": "Microsoft.Network"
+    },
+    "resourceType": {
+      "localizedValue": "Microsoft.Network/dnsZones/A",
+      "value": "Microsoft.Network/dnsZones/A"
+    },
+    "status": {
+      "localizedValue": "Succeeded",
+      "value": "Succeeded"
+    },
+    "subStatus": {
+      "localizedValue": "OK (HTTP Status Code: 200)",
+      "value": "OK"
+    },
+    "submissionTimestamp": "2026-10-28T16:02:48Z",
+    "subscriptionId": "redacted-subscription-id",
+    "tenantId": "redacted-tenant-id"
+  },
+  {
+    "authorization": {
+      "action": "Microsoft.Network/dnsZones/A/delete",
+      "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/A/*.apps.75915b6267-mgmt"
+    },
+    "caller": "redacted-principal-123",
+    "category": {
+      "localizedValue": "Administrative",
+      "value": "Administrative"
+    },
+    "correlationId": "8f78c18f-6545-4205-98fe-4c0a0269455c",
+    "description": "",
+    "eventDataId": "5864723c-705e-44f0-824f-00888b850215",
+    "eventName": {
+      "localizedValue": "Begin request",
+      "value": "BeginRequest"
+    },
+    "eventTimestamp": "2026-10-28T16:01:49.1064039Z",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/A/*.apps.75915b6267-mgmt/events/5864723c-705e-44f0-824f-00888b850215/ticks/639288001091064039",
+    "level": "Informational",
+    "operationId": "8f78c18f-6545-4205-98fe-4c0a0269455c",
+    "operationName": {
+      "localizedValue": "Delete record set of type A",
+      "value": "Microsoft.Network/dnsZones/A/delete"
+    },
+    "properties": {
+      "entity": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/A/*.apps.75915b6267-mgmt",
+      "eventCategory": "Administrative",
+      "hierarchy": "redacted-tenant-id/redacted-subscription-id",
+      "message": "Microsoft.Network/dnsZones/A/delete"
+    },
+    "resourceGroup": "shared-resource-group",
+    "resourceGroupName": "shared-resource-group",
+    "resourceId": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/A/*.apps.75915b6267-mgmt",
+    "resourceProviderName": {
+      "localizedValue": "Microsoft.Network",
+      "value": "Microsoft.Network"
+    },
+    "resourceType": {
+      "localizedValue": "Microsoft.Network/dnsZones/A",
+      "value": "Microsoft.Network/dnsZones/A"
+    },
+    "status": {
+      "localizedValue": "Started",
+      "value": "Started"
+    },
+    "subStatus": {
+      "localizedValue": "",
+      "value": ""
+    },
+    "submissionTimestamp": "2026-10-28T16:02:48Z",
+    "subscriptionId": "redacted-subscription-id",
+    "tenantId": "redacted-tenant-id"
+  },
+  {
+    "authorization": {
+      "action": "Microsoft.Network/dnsZones/A/delete",
+      "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/A/*.apps.898f75f7fa-mgmt"
+    },
+    "caller": "redacted-principal-123",
+    "category": {
+      "localizedValue": "Administrative",
+      "value": "Administrative"
+    },
+    "correlationId": "2ceff45c-05e7-48f4-a19f-987682665a0f",
+    "description": "",
+    "eventDataId": "3cf92974-9c30-4b26-907f-76f7fa876070",
+    "eventName": {
+      "localizedValue": "End request",
+      "value": "EndRequest"
+    },
+    "eventTimestamp": "2026-10-28T15:51:22.0223082Z",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/A/*.apps.898f75f7fa-mgmt/events/3cf92974-9c30-4b26-907f-76f7fa876070/ticks/639287994820223082",
+    "level": "Informational",
+    "operationId": "2ceff45c-05e7-48f4-a19f-987682665a0f",
+    "operationName": {
+      "localizedValue": "Delete record set of type A",
+      "value": "Microsoft.Network/dnsZones/A/delete"
+    },
+    "properties": {
+      "entity": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/A/*.apps.898f75f7fa-mgmt",
+      "eventCategory": "Administrative",
+      "hierarchy": "redacted-tenant-id/redacted-subscription-id",
+      "message": "Microsoft.Network/dnsZones/A/delete",
+      "statusCode": "OK"
+    },
+    "resourceGroup": "shared-resource-group",
+    "resourceGroupName": "shared-resource-group",
+    "resourceId": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/A/*.apps.898f75f7fa-mgmt",
+    "resourceProviderName": {
+      "localizedValue": "Microsoft.Network",
+      "value": "Microsoft.Network"
+    },
+    "resourceType": {
+      "localizedValue": "Microsoft.Network/dnsZones/A",
+      "value": "Microsoft.Network/dnsZones/A"
+    },
+    "status": {
+      "localizedValue": "Succeeded",
+      "value": "Succeeded"
+    },
+    "subStatus": {
+      "localizedValue": "OK (HTTP Status Code: 200)",
+      "value": "OK"
+    },
+    "submissionTimestamp": "2026-10-28T15:53:43Z",
+    "subscriptionId": "redacted-subscription-id",
+    "tenantId": "redacted-tenant-id"
+  },
+  {
+    "authorization": {
+      "action": "Microsoft.Network/dnsZones/A/delete",
+      "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/A/*.apps.898f75f7fa-mgmt"
+    },
+    "caller": "redacted-principal-123",
+    "category": {
+      "localizedValue": "Administrative",
+      "value": "Administrative"
+    },
+    "correlationId": "2ceff45c-05e7-48f4-a19f-987682665a0f",
+    "description": "",
+    "eventDataId": "1c4ee719-8fe9-4246-8a45-a17aca4794a9",
+    "eventName": {
+      "localizedValue": "Begin request",
+      "value": "BeginRequest"
+    },
+    "eventTimestamp": "2026-10-28T15:51:21.5379455Z",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/A/*.apps.898f75f7fa-mgmt/events/1c4ee719-8fe9-4246-8a45-a17aca4794a9/ticks/639287994815379455",
+    "level": "Informational",
+    "operationId": "2ceff45c-05e7-48f4-a19f-987682665a0f",
+    "operationName": {
+      "localizedValue": "Delete record set of type A",
+      "value": "Microsoft.Network/dnsZones/A/delete"
+    },
+    "properties": {
+      "entity": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/A/*.apps.898f75f7fa-mgmt",
+      "eventCategory": "Administrative",
+      "hierarchy": "redacted-tenant-id/redacted-subscription-id",
+      "message": "Microsoft.Network/dnsZones/A/delete"
+    },
+    "resourceGroup": "shared-resource-group",
+    "resourceGroupName": "shared-resource-group",
+    "resourceId": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/A/*.apps.898f75f7fa-mgmt",
+    "resourceProviderName": {
+      "localizedValue": "Microsoft.Network",
+      "value": "Microsoft.Network"
+    },
+    "resourceType": {
+      "localizedValue": "Microsoft.Network/dnsZones/A",
+      "value": "Microsoft.Network/dnsZones/A"
+    },
+    "status": {
+      "localizedValue": "Started",
+      "value": "Started"
+    },
+    "subStatus": {
+      "localizedValue": "",
+      "value": ""
+    },
+    "submissionTimestamp": "2026-10-28T15:53:43Z",
+    "subscriptionId": "redacted-subscription-id",
+    "tenantId": "redacted-tenant-id"
+  },
+  {
+    "authorization": {
+      "action": "Microsoft.Network/dnsZones/A/delete",
+      "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/A/*.apps.63b2c24940-mgmt"
+    },
+    "caller": "redacted-principal-123",
+    "category": {
+      "localizedValue": "Administrative",
+      "value": "Administrative"
+    },
+    "correlationId": "89e0b575-3330-4070-a07e-ce3c8b9cdc3f",
+    "description": "",
+    "eventDataId": "ebe0d934-a4c8-4238-8b54-24a49e945abb",
+    "eventName": {
+      "localizedValue": "End request",
+      "value": "EndRequest"
+    },
+    "eventTimestamp": "2026-10-28T15:50:18.4549815Z",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/A/*.apps.63b2c24940-mgmt/events/ebe0d934-a4c8-4238-8b54-24a49e945abb/ticks/639287994184549815",
+    "level": "Informational",
+    "operationId": "89e0b575-3330-4070-a07e-ce3c8b9cdc3f",
+    "operationName": {
+      "localizedValue": "Delete record set of type A",
+      "value": "Microsoft.Network/dnsZones/A/delete"
+    },
+    "properties": {
+      "entity": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/A/*.apps.63b2c24940-mgmt",
+      "eventCategory": "Administrative",
+      "hierarchy": "redacted-tenant-id/redacted-subscription-id",
+      "message": "Microsoft.Network/dnsZones/A/delete",
+      "statusCode": "OK"
+    },
+    "resourceGroup": "shared-resource-group",
+    "resourceGroupName": "shared-resource-group",
+    "resourceId": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/A/*.apps.63b2c24940-mgmt",
+    "resourceProviderName": {
+      "localizedValue": "Microsoft.Network",
+      "value": "Microsoft.Network"
+    },
+    "resourceType": {
+      "localizedValue": "Microsoft.Network/dnsZones/A",
+      "value": "Microsoft.Network/dnsZones/A"
+    },
+    "status": {
+      "localizedValue": "Succeeded",
+      "value": "Succeeded"
+    },
+    "subStatus": {
+      "localizedValue": "OK (HTTP Status Code: 200)",
+      "value": "OK"
+    },
+    "submissionTimestamp": "2026-10-28T15:52:30Z",
+    "subscriptionId": "redacted-subscription-id",
+    "tenantId": "redacted-tenant-id"
+  },
+  {
+    "authorization": {
+      "action": "Microsoft.Network/dnsZones/A/delete",
+      "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/A/*.apps.63b2c24940-mgmt"
+    },
+    "caller": "redacted-principal-123",
+    "category": {
+      "localizedValue": "Administrative",
+      "value": "Administrative"
+    },
+    "correlationId": "89e0b575-3330-4070-a07e-ce3c8b9cdc3f",
+    "description": "",
+    "eventDataId": "ff1187f6-5d97-4b93-8297-fc905ae94b5b",
+    "eventName": {
+      "localizedValue": "Begin request",
+      "value": "BeginRequest"
+    },
+    "eventTimestamp": "2026-10-28T15:50:17.9862268Z",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/A/*.apps.63b2c24940-mgmt/events/ff1187f6-5d97-4b93-8297-fc905ae94b5b/ticks/639287994179862268",
+    "level": "Informational",
+    "operationId": "89e0b575-3330-4070-a07e-ce3c8b9cdc3f",
+    "operationName": {
+      "localizedValue": "Delete record set of type A",
+      "value": "Microsoft.Network/dnsZones/A/delete"
+    },
+    "properties": {
+      "entity": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/A/*.apps.63b2c24940-mgmt",
+      "eventCategory": "Administrative",
+      "hierarchy": "redacted-tenant-id/redacted-subscription-id",
+      "message": "Microsoft.Network/dnsZones/A/delete"
+    },
+    "resourceGroup": "shared-resource-group",
+    "resourceGroupName": "shared-resource-group",
+    "resourceId": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnsZones/hcp.example.com/A/*.apps.63b2c24940-mgmt",
+    "resourceProviderName": {
+      "localizedValue": "Microsoft.Network",
+      "value": "Microsoft.Network"
+    },
+    "resourceType": {
+      "localizedValue": "Microsoft.Network/dnsZones/A",
+      "value": "Microsoft.Network/dnsZones/A"
+    },
+    "status": {
+      "localizedValue": "Started",
+      "value": "Started"
+    },
+    "subStatus": {
+      "localizedValue": "",
+      "value": ""
+    },
+    "submissionTimestamp": "2026-10-28T15:52:30Z",
+    "subscriptionId": "redacted-subscription-id",
+    "tenantId": "redacted-tenant-id"
+  }
+]

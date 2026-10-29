@@ -1,0 +1,509 @@
+{
+  "apiVersion": "hypershift.openshift.io/v1beta1",
+  "kind": "HostedCluster",
+  "metadata": {
+    "annotations": {
+      "hypershift.openshift.io/HasBeenAvailable": "true",
+      "hypershift.openshift.io/capi-manager-image": "registry.k8s.io/cluster-api/cluster-api-controller:v1.14.3"
+    },
+    "creationTimestamp": "2026-10-28T23:26:44Z",
+    "finalizers": [
+      "hypershift.openshift.io/finalizer"
+    ],
+    "generation": 2,
+    "labels": {
+      "hypershift.openshift.io/auto-created-for-infra": "test-cntrlplane-4826"
+    },
+    "name": "test-cntrlplane-4826-hc",
+    "namespace": "clusters",
+    "resourceVersion": "129801252",
+    "uid": "043ac522-10df-4e2a-bd8f-2f6e19c6cc68"
+  },
+  "spec": {
+    "autoscaling": {
+      "scaling": "ScaleUpAndScaleDown"
+    },
+    "capabilities": {},
+    "clusterID": "808d1ce3-4ccc-46cb-821a-66bd9ec5f2ca",
+    "configuration": {},
+    "controllerAvailabilityPolicy": "SingleReplica",
+    "dns": {
+      "baseDomain": "hcp.example.com",
+      "privateZoneID": "/subscriptions/redacted-subscription-id/resourceGroups/test-cntrlplane-4826-hc-test-cntrlplane-4826/providers/Microsoft.Network/privateDnsZones/test-cntrlplane-4826-hc.hcp.example.com",
+      "publicZoneID": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com"
+    },
+    "etcd": {
+      "managed": {
+        "storage": {
+          "persistentVolume": {
+            "size": "8Gi"
+          },
+          "type": "PersistentVolume"
+        }
+      },
+      "managementType": "Managed"
+    },
+    "fips": false,
+    "infraID": "test-cntrlplane-4826",
+    "infrastructureAvailabilityPolicy": "SingleReplica",
+    "issuerURL": "https://examplesa.blob.core.windows.net/examplesa",
+    "networking": {
+      "clusterNetwork": [
+        {
+          "cidr": "10.132.0.0/14"
+        }
+      ],
+      "networkType": "OVNKubernetes",
+      "serviceNetwork": [
+        {
+          "cidr": "172.31.0.0/16"
+        }
+      ]
+    },
+    "olmCatalogPlacement": "management",
+    "platform": {
+      "azure": {
+        "azureAuthenticationConfig": {
+          "azureAuthenticationConfigType": "WorkloadIdentities",
+          "workloadIdentities": {
+            "cloudProvider": {
+              "clientID": "redacted-principal-105"
+            },
+            "controlPlaneOperator": {
+              "clientID": "redacted-principal-103"
+            },
+            "disk": {
+              "clientID": "redacted-principal-102"
+            },
+            "file": {
+              "clientID": "redacted-principal-106"
+            },
+            "imageRegistry": {
+              "clientID": "redacted-principal-104"
+            },
+            "ingress": {
+              "clientID": "redacted-principal-100"
+            },
+            "network": {
+              "clientID": "redacted-principal-101"
+            },
+            "nodePoolManagement": {
+              "clientID": "redacted-principal-107"
+            }
+          }
+        },
+        "cloud": "AzurePublicCloud",
+        "location": "eastus",
+        "resourceGroup": "test-cntrlplane-4826-hc-test-cntrlplane-4826",
+        "securityGroupID": "/subscriptions/redacted-subscription-id/resourceGroups/test-cntrlplane-4826-hc-nsg-test-cntrlplane-4826/providers/Microsoft.Network/networkSecurityGroups/test-cntrlplane-4826-hc-test-cntrlplane-4826-nsg",
+        "subnetID": "/subscriptions/redacted-subscription-id/resourceGroups/test-cntrlplane-4826-hc-vnet-test-cntrlplane-4826/providers/Microsoft.Network/virtualNetworks/test-cntrlplane-4826-hc-test-cntrlplane-4826/subnets/default",
+        "subscriptionID": "redacted-subscription-id",
+        "tenantID": "redacted-tenant-id",
+        "topology": "Public",
+        "vnetID": "/subscriptions/redacted-subscription-id/resourceGroups/test-cntrlplane-4826-hc-vnet-test-cntrlplane-4826/providers/Microsoft.Network/virtualNetworks/test-cntrlplane-4826-hc-test-cntrlplane-4826"
+      },
+      "type": "Azure"
+    },
+    "pullSecret": {
+      "name": "test-cntrlplane-4826-hc-pull-secret"
+    },
+    "release": {
+      "image": "quay.io/openshift-release-dev/ocp-release-nightly@sha256:08f0905c06195a76138db7071aa77ae644aea401eb832d51ebbf4fb870698346"
+    },
+    "secretEncryption": {
+      "aescbc": {
+        "activeKey": {
+          "name": "test-cntrlplane-4826-hc-etcd-encryption-key"
+        }
+      },
+      "type": "aescbc"
+    },
+    "serviceAccountSigningKey": {
+      "name": "test-cntrlplane-4826-hcsa-token-issuer-key"
+    },
+    "services": [
+      {
+        "service": "APIServer",
+        "servicePublishingStrategy": {
+          "route": {
+            "hostname": "api-test-cntrlplane-4826-hc.test.hcp.example.com"
+          },
+          "type": "Route"
+        }
+      },
+      {
+        "service": "Ignition",
+        "servicePublishingStrategy": {
+          "route": {
+            "hostname": "ignition-test-cntrlplane-4826-hc.test.hcp.example.com"
+          },
+          "type": "Route"
+        }
+      },
+      {
+        "service": "Konnectivity",
+        "servicePublishingStrategy": {
+          "route": {
+            "hostname": "konnectivity-test-cntrlplane-4826-hc.test.hcp.example.com"
+          },
+          "type": "Route"
+        }
+      },
+      {
+        "service": "OAuthServer",
+        "servicePublishingStrategy": {
+          "route": {
+            "hostname": "oauth-test-cntrlplane-4826-hc.test.hcp.example.com"
+          },
+          "type": "Route"
+        }
+      }
+    ],
+    "sshKey": {
+      "name": "test-cntrlplane-4826-hc-ssh-key"
+    }
+  },
+  "status": {
+    "conditions": [
+      {
+        "lastTransitionTime": "2026-10-28T23:31:04Z",
+        "message": "Cluster operator ingress is not available",
+        "observedGeneration": 2,
+        "reason": "ClusterOperatorNotAvailable",
+        "status": "False",
+        "type": "ClusterVersionSucceeding"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T23:30:32Z",
+        "message": "Unable to apply 5.1.0-0.nightly-multi-2026-10-27-082258: the cluster operator ingress is not available",
+        "observedGeneration": 2,
+        "reason": "ClusterOperatorNotAvailable",
+        "status": "True",
+        "type": "ClusterVersionProgressing"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T23:30:32Z",
+        "message": "Payload loaded version=\"5.1.0-0.nightly-multi-2026-10-27-082258\" image=\"quay.io/openshift-release-dev/ocp-release-nightly@sha256:08f0905c06195a76138db7071aa77ae644aea401eb832d51ebbf4fb870698346\" architecture=\"Multi\"",
+        "observedGeneration": 2,
+        "reason": "PayloadLoaded",
+        "status": "True",
+        "type": "ClusterVersionReleaseAccepted"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T23:30:32Z",
+        "message": "An update is already in progress and the details are in the Progressing condition.",
+        "observedGeneration": 2,
+        "reason": "ClusterVersionUpdating",
+        "status": "False",
+        "type": "ClusterVersionUpgradeable"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T23:30:32Z",
+        "message": "",
+        "observedGeneration": 2,
+        "reason": "FromClusterVersion",
+        "status": "False",
+        "type": "ClusterVersionAvailable"
+      },
+      {
+        "lastTransitionTime": "2026-10-29T00:02:33Z",
+        "message": "certified-operators-catalog deployment has 1 unavailable replicas",
+        "observedGeneration": 2,
+        "reason": "UnavailableReplicas",
+        "status": "True",
+        "type": "Degraded"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T23:27:56Z",
+        "message": "",
+        "observedGeneration": 2,
+        "reason": "QuorumAvailable",
+        "status": "True",
+        "type": "EtcdAvailable"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T23:28:48Z",
+        "message": "Kube APIServer deployment is available",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "KubeAPIServerAvailable"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T23:27:13Z",
+        "message": "All is well",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "InfrastructureReady"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T23:32:06Z",
+        "message": "All is well",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "ExternalDNSReachable"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T23:26:50Z",
+        "message": "Configuration passes validation",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "ValidHostedControlPlaneConfiguration"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T23:27:13Z",
+        "message": "All is well",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "ValidReleaseInfo"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T23:27:12Z",
+        "message": "Identity provider configuration is valid",
+        "observedGeneration": 2,
+        "reason": "IDPConfigurationValid",
+        "status": "True",
+        "type": "ValidIDPConfiguration"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T23:26:44Z",
+        "message": "Condition not found in the HCP",
+        "observedGeneration": 2,
+        "reason": "StatusUnknown",
+        "status": "Unknown",
+        "type": "HostedClusterRestoredFromBackup"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T23:44:16Z",
+        "message": "All is well",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "DataPlaneConnectionAvailable"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T23:54:16Z",
+        "message": "All is well",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "ControlPlaneConnectionAvailable"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T23:26:44Z",
+        "message": "Condition not found in the HCP",
+        "observedGeneration": 2,
+        "reason": "StatusUnknown",
+        "status": "Unknown",
+        "type": "EtcdBackupSucceeded"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T23:30:41Z",
+        "message": "All is well",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "ConfigOperatorReconciliationSucceeded"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T23:26:48Z",
+        "message": "No deprecated configuration is in use",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "False",
+        "type": "HostedClusterConfigurationDeprecated"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T23:26:44Z",
+        "message": "AutoNode provisioner is not configured",
+        "observedGeneration": 2,
+        "reason": "AutoNodeNotConfigured",
+        "status": "False",
+        "type": "AutoNodeEnabled"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T23:32:03Z",
+        "message": "The hosted control plane is available",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "Available"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T23:26:44Z",
+        "message": "Configuration passes validation",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "ValidConfiguration"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T23:26:44Z",
+        "message": "HostedCluster is supported by operator configuration",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "SupportedHostedCluster"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T23:26:44Z",
+        "message": "No proxy CA bundle configured",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "ValidProxyConfiguration"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T23:27:16Z",
+        "message": "Ignition server deployment is available",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "IgnitionEndpointAvailable"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T23:26:44Z",
+        "message": "Reconciliation active on resource",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "ReconciliationActive"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T23:26:45Z",
+        "message": "Release image is valid",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "ValidReleaseImage"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T23:26:46Z",
+        "message": "HostedCluster is at expected version",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "False",
+        "type": "Progressing"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T23:26:47Z",
+        "message": "Required platform credentials are found",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "PlatformCredentialsFound"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T23:26:48Z",
+        "message": "Reconciliation completed successfully",
+        "observedGeneration": 2,
+        "reason": "ReconciliatonSucceeded",
+        "status": "True",
+        "type": "ReconciliationSucceeded"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T23:26:50Z",
+        "message": "Azure KMS is not configured",
+        "observedGeneration": 2,
+        "reason": "StatusUnknown",
+        "status": "Unknown",
+        "type": "ValidAzureKMSConfig"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T23:30:18Z",
+        "message": "Encryption key initialized",
+        "observedGeneration": 2,
+        "reason": "ReEncryptionCompleted",
+        "status": "True",
+        "type": "EtcdDataEncryptionUpToDate"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T23:30:32Z",
+        "message": "The update channel has not been configured.",
+        "observedGeneration": 2,
+        "reason": "NoChannel",
+        "status": "False",
+        "type": "ClusterVersionRetrievedUpdates"
+      }
+    ],
+    "configuration": {
+      "authentication": {
+        "integratedOAuthMetadata": {
+          "name": ""
+        },
+        "oidcClients": [
+          {
+            "componentName": "cli",
+            "componentNamespace": "openshift-console"
+          },
+          {
+            "componentName": "console",
+            "componentNamespace": "openshift-console"
+          }
+        ]
+      }
+    },
+    "controlPlaneEndpoint": {
+      "host": "api-test-cntrlplane-4826-hc.test.hcp.example.com",
+      "port": 443
+    },
+    "controlPlaneVersion": {
+      "desired": {
+        "image": "quay.io/openshift-release-dev/ocp-release-nightly@sha256:08f0905c06195a76138db7071aa77ae644aea401eb832d51ebbf4fb870698346",
+        "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+      },
+      "history": [
+        {
+          "completionTime": "2026-10-28T23:33:02Z",
+          "image": "quay.io/openshift-release-dev/ocp-release-nightly@sha256:08f0905c06195a76138db7071aa77ae644aea401eb832d51ebbf4fb870698346",
+          "startedTime": "2026-10-28T23:26:50Z",
+          "state": "Completed",
+          "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+        }
+      ],
+      "observedGeneration": 1
+    },
+    "ignitionEndpoint": "ignition-test-cntrlplane-4826-hc.test.hcp.example.com",
+    "kubeadminPassword": {
+      "name": "test-cntrlplane-4826-hc-kubeadmin-password"
+    },
+    "kubeconfig": {
+      "name": "test-cntrlplane-4826-hc-admin-kubeconfig"
+    },
+    "oauthCallbackURLTemplate": "https://oauth-test-cntrlplane-4826-hc.test.hcp.example.com:443/oauth2callback/[identity-provider-name]",
+    "payloadArch": "Multi",
+    "secretEncryption": {
+      "activeKey": {
+        "aescbc": {
+          "dataHash": "8dd084f3f45922524d11a54b407a3c151010694f85e00ac77d26b6a33f5a4d14",
+          "secret": {
+            "name": "test-cntrlplane-4826-hc-etcd-encryption-key"
+          }
+        },
+        "provider": "AESCBC"
+      }
+    },
+    "version": {
+      "availableUpdates": null,
+      "desired": {
+        "image": "quay.io/openshift-release-dev/ocp-release-nightly@sha256:08f0905c06195a76138db7071aa77ae644aea401eb832d51ebbf4fb870698346",
+        "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+      },
+      "history": [
+        {
+          "completionTime": null,
+          "image": "quay.io/openshift-release-dev/ocp-release-nightly@sha256:08f0905c06195a76138db7071aa77ae644aea401eb832d51ebbf4fb870698346",
+          "startedTime": "2026-10-28T23:29:48Z",
+          "state": "Partial",
+          "verified": false,
+          "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+        }
+      ],
+      "observedGeneration": 1
+    }
+  }
+}

@@ -1,0 +1,36 @@
+=== RUN   TestReconcileMachineDeploymentStatus
+=== RUN   TestReconcileMachineDeploymentStatus/When_MachineDeployment_is_complete,_it_should_update_nodePool_version_and_annotations
+=== RUN   TestReconcileMachineDeploymentStatus/When_MachineDeployment_is_not_complete,_it_should_only_update_replicas
+=== RUN   TestReconcileMachineDeploymentStatus/When_MachineDeployment_has_Ready_condition,_it_should_propagate_it_to_nodePool
+--- PASS: TestReconcileMachineDeploymentStatus (0.04s)
+    --- PASS: TestReconcileMachineDeploymentStatus/When_MachineDeployment_is_complete,_it_should_update_nodePool_version_and_annotations (0.04s)
+    --- PASS: TestReconcileMachineDeploymentStatus/When_MachineDeployment_is_not_complete,_it_should_only_update_replicas (0.00s)
+    --- PASS: TestReconcileMachineDeploymentStatus/When_MachineDeployment_has_Ready_condition,_it_should_propagate_it_to_nodePool (0.00s)
+=== RUN   TestMachineDeploymentComplete
+=== RUN   TestMachineDeploymentComplete/When_all_status_counters_agree_and_the_current_MachineSet_is_fully_rolled_out,_it_should_return_true
+=== RUN   TestMachineDeploymentComplete/When_upToDateReplicas_is_zero_but_the_current_MachineSet_is_fully_rolled_out,_it_should_return_true
+=== RUN   TestMachineDeploymentComplete/When_upToDateReplicas_is_nil_but_the_current_MachineSet_is_fully_rolled_out,_it_should_return_true
+=== RUN   TestMachineDeploymentComplete/When_the_current_MachineSet_is_not_fully_available,_it_should_return_false
+=== RUN   TestMachineDeploymentComplete/When_the_current_MachineSet_has_fewer_replicas_than_desired,_it_should_return_false
+=== RUN   TestMachineDeploymentComplete/When_there_is_no_MachineSet_at_the_current_revision,_it_should_return_false
+=== RUN   TestMachineDeploymentComplete/When_the_desired_replicas_are_zero_and_nothing_is_running,_it_should_return_true
+=== RUN   TestMachineDeploymentComplete/When_counters_look_complete_but_old_MachineSet_still_has_replicas,_it_should_return_false
+=== RUN   TestMachineDeploymentComplete/When_the_MachineDeployment_availableReplicas_does_not_match_spec,_it_should_return_false
+=== RUN   TestMachineDeploymentComplete/When_the_MachineDeployment_replicas_does_not_match_spec,_it_should_return_false
+=== RUN   TestMachineDeploymentComplete/When_the_MachineDeployment_has_not_observed_its_current_generation,_it_should_return_false
+=== RUN   TestMachineDeploymentComplete/When_the_MachineDeployment_availableReplicas_is_nil,_it_should_return_false
+--- PASS: TestMachineDeploymentComplete (0.00s)
+    --- PASS: TestMachineDeploymentComplete/When_all_status_counters_agree_and_the_current_MachineSet_is_fully_rolled_out,_it_should_return_true (0.00s)
+    --- PASS: TestMachineDeploymentComplete/When_upToDateReplicas_is_zero_but_the_current_MachineSet_is_fully_rolled_out,_it_should_return_true (0.00s)
+    --- PASS: TestMachineDeploymentComplete/When_upToDateReplicas_is_nil_but_the_current_MachineSet_is_fully_rolled_out,_it_should_return_true (0.00s)
+    --- PASS: TestMachineDeploymentComplete/When_the_current_MachineSet_is_not_fully_available,_it_should_return_false (0.00s)
+    --- PASS: TestMachineDeploymentComplete/When_the_current_MachineSet_has_fewer_replicas_than_desired,_it_should_return_false (0.00s)
+    --- PASS: TestMachineDeploymentComplete/When_there_is_no_MachineSet_at_the_current_revision,_it_should_return_false (0.00s)
+    --- PASS: TestMachineDeploymentComplete/When_the_desired_replicas_are_zero_and_nothing_is_running,_it_should_return_true (0.00s)
+    --- PASS: TestMachineDeploymentComplete/When_counters_look_complete_but_old_MachineSet_still_has_replicas,_it_should_return_false (0.00s)
+    --- PASS: TestMachineDeploymentComplete/When_the_MachineDeployment_availableReplicas_does_not_match_spec,_it_should_return_false (0.00s)
+    --- PASS: TestMachineDeploymentComplete/When_the_MachineDeployment_replicas_does_not_match_spec,_it_should_return_false (0.00s)
+    --- PASS: TestMachineDeploymentComplete/When_the_MachineDeployment_has_not_observed_its_current_generation,_it_should_return_false (0.00s)
+    --- PASS: TestMachineDeploymentComplete/When_the_MachineDeployment_availableReplicas_is_nil,_it_should_return_false (0.00s)
+PASS
+ok  	github.com/openshift/hypershift/hypershift-operator/controllers/nodepool	1.529s

@@ -1,0 +1,9 @@
+KUBECONFIG=/home/tester/management.kubeconfig kubectl get hostedclusters.hypershift.openshift.io -A -o json
+KUBECONFIG=/home/tester/management.kubeconfig kubectl get nodepools.hypershift.openshift.io -A -o json
+KUBECONFIG=/home/tester/management.kubeconfig kubectl get namespaces -o json
+KUBECONFIG=/home/tester/management.kubeconfig kubectl get nodes -o wide
+KUBECONFIG=/home/tester/management.kubeconfig kubectl -n hypershift get deployment operator -o json
+az group show --subscription redacted-subscription-id -n test-cntrlplane-4826-hc-test-cntrlplane-4826
+az resource list --subscription redacted-subscription-id -g test-cntrlplane-4826-hc-test-cntrlplane-4826
+az network dns zone show --subscription redacted-subscription-id -g shared-resource-group -n hcp.example.com
+az network dns zone show --subscription redacted-subscription-id -g shared-resource-group -n test.hcp.example.com

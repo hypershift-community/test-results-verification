@@ -1,0 +1,106 @@
+{
+  "items": [
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-28T23:56:40Z",
+        "labels": {
+          "app": "operator",
+          "hypershift.openshift.io/operator-component": "operator",
+          "name": "operator",
+          "pod-template-hash": "6884499f9"
+        },
+        "name": "operator-6884499f9-7cgml"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/example/hypershift@sha256:7a2248fdc9d50e99e8b444aa887cea96bdf0023e2e81062f9de21266ddb492a6",
+            "imageID": "quay.io/example/hypershift@sha256:7a2248fdc9d50e99e8b444aa887cea96bdf0023e2e81062f9de21266ddb492a6",
+            "name": "operator",
+            "ready": false,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/example/hypershift@sha256:7a2248fdc9d50e99e8b444aa887cea96bdf0023e2e81062f9de21266ddb492a6",
+            "imageID": "quay.io/example/hypershift@sha256:7a2248fdc9d50e99e8b444aa887cea96bdf0023e2e81062f9de21266ddb492a6",
+            "name": "init-environment",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Succeeded",
+        "startTime": "2026-10-28T23:56:40Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-29T00:01:10Z",
+        "labels": {
+          "app": "operator",
+          "hypershift.openshift.io/operator-component": "operator",
+          "name": "operator",
+          "pod-template-hash": "6cb5f8b659"
+        },
+        "name": "operator-6cb5f8b659-2rjnd"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/example/hypershift@sha256:a8848bd5281ac07a23eb2f583f506e59aaa60702ff6aa0cb4530884479821839",
+            "imageID": "quay.io/example/hypershift@sha256:a8848bd5281ac07a23eb2f583f506e59aaa60702ff6aa0cb4530884479821839",
+            "name": "operator",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/example/hypershift@sha256:a8848bd5281ac07a23eb2f583f506e59aaa60702ff6aa0cb4530884479821839",
+            "imageID": "quay.io/example/hypershift@sha256:a8848bd5281ac07a23eb2f583f506e59aaa60702ff6aa0cb4530884479821839",
+            "name": "init-environment",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-29T00:01:10Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-29T00:00:05Z",
+        "labels": {
+          "app": "operator",
+          "hypershift.openshift.io/operator-component": "operator",
+          "name": "operator",
+          "pod-template-hash": "6cb5f8b659"
+        },
+        "name": "operator-6cb5f8b659-s8m4c"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/example/hypershift@sha256:a8848bd5281ac07a23eb2f583f506e59aaa60702ff6aa0cb4530884479821839",
+            "imageID": "quay.io/example/hypershift@sha256:a8848bd5281ac07a23eb2f583f506e59aaa60702ff6aa0cb4530884479821839",
+            "name": "operator",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/example/hypershift@sha256:a8848bd5281ac07a23eb2f583f506e59aaa60702ff6aa0cb4530884479821839",
+            "imageID": "quay.io/example/hypershift@sha256:a8848bd5281ac07a23eb2f583f506e59aaa60702ff6aa0cb4530884479821839",
+            "name": "init-environment",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-29T00:00:05Z"
+      }
+    }
+  ]
+}

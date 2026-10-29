@@ -1,0 +1,10 @@
+{
+  "items": [
+    {
+      "cluster": "test-cntrlplane-4826-r5-hc",
+      "name": "test-cntrlplane-4826-r5-head",
+      "replicas": 3,
+      "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+    }
+  ]
+}

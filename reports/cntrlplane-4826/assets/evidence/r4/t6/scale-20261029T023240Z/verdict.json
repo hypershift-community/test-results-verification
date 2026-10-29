@@ -1,0 +1,43 @@
+{
+  "scenario": "T6 scale-to-zero and scale-back",
+  "result": "PASS",
+  "checks": [
+    {
+      "name": "scale-to-zero inventory empty",
+      "passed": true,
+      "detail": "replicas=0/0, machines=0, nodes=0"
+    },
+    {
+      "name": "zero-state metadata stable",
+      "passed": true,
+      "detail": "currentMachineSet=test-cntrlplane-4826-r4-scale-9w9jc replicas=0, version/config/platform unchanged"
+    },
+    {
+      "name": "scale-back complete at three replicas",
+      "passed": true,
+      "detail": "replicas=3/3, nodes=3, upToDateReplicas=0"
+    },
+    {
+      "name": "back workers are new identities",
+      "passed": true,
+      "detail": "pre node UIDs=43d5e50d-1fc8-4b6c-bb85-c33cc5dd1696,9588b634-819a-4990-b94e-059a464f11ae,a2736053-633d-4db5-8988-c93dae444b6b; back node UIDs=0095ec54-0ade-4541-bd74-a89e7778f91d,56de4414-32dd-4fd6-951d-7dd9e5af5fe2,d036ec3b-a545-4510-8036-8769ae5c8ba6"
+    },
+    {
+      "name": "workers joined within 12 minutes",
+      "passed": true,
+      "detail": "12-minute join violations=0"
+    },
+    {
+      "name": "head operator image",
+      "passed": true,
+      "detail": "quay.io/example/hypershift@sha256:7a2248fdc9d50e99e8b444aa887cea96bdf0023e2e81062f9de21266ddb492a6"
+    }
+  ],
+  "notes": "Regression check only: no release/config/platform change was in flight. Zero state retained current MachineSet test-cntrlplane-4826-r4-scale-9w9jc at 0 replicas; the desired=0 branch without a current MachineSet is covered only by unit tests. Scale-back nodes replaced identities: true.",
+  "headCommit": "ee5691233b08e3271f030ebd24055faa6857fd39",
+  "baseCommit": "ee327075b155839511edc3779510ceb95c93a658",
+  "operatorImage": "quay.io/example/hypershift@sha256:7a2248fdc9d50e99e8b444aa887cea96bdf0023e2e81062f9de21266ddb492a6",
+  "capiImage": "registry.k8s.io/cluster-api/cluster-api-controller:v1.14.3",
+  "hostedCluster": "clusters/test-cntrlplane-4826-r4-hc",
+  "generatedAt": "2026-10-29T02:39:40Z"
+}

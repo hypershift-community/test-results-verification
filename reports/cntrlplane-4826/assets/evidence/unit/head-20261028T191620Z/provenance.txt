@@ -1,0 +1,8 @@
+captured_utc=2026-10-28T19:16:20Z
+head=ee5691233b08e3271f030ebd24055faa6857fd39
+base=ee327075b155839511edc3779510ceb95c93a658
+branch=CNTRLPLANE-4826
+status:
+?? .test-evidence/
+
+go=go version go1.26.3 darwin/arm64

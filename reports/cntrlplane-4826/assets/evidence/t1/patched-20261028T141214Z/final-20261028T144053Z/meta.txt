@@ -1,0 +1,5 @@
+captured_utc=2026-10-28T14:40:53Z
+nodepool=test-cntrlplane-4826-patched
+patch_utc=2026-10-28T14:12:23Z
+completion_transition_utc=2026-10-28T14:35:21Z
+note=Original runner/listener was interrupted by the user turn; final state captured after completion. Original watch covers through 14:26:04Z.

@@ -1,0 +1,6 @@
+kubectl get hostedclusters.hypershift.openshift.io -A -o json
+kubectl get nodepools.hypershift.openshift.io -A -o json
+kubectl get namespace clusters-test-cntrlplane-4826-hc --ignore-not-found -o json
+kubectl get deployment operator -n hypershift -o json
+kubectl get pods -n hypershift -l name=operator -o json
+kubectl get machinedeployments,machinesets,machines -n clusters-test-cntrlplane-4826-hc -o json

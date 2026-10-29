@@ -1,0 +1,61 @@
+DNS comparison finding (read-only)
+==================================
+Evaluation time: 2026-10-28T15:53:34Z
+Scope: Azure DNS resources in shared-resource-group, plus read-only Azure Activity Log. No writes.
+
+Zone-level stable projections
+-----------------------------
+Parent zone: hcp.example.com
+  preflight record-set count:  109
+  postflight record-set count: 160
+  delta:                       51
+  id/name:                     unchanged
+  etag:                        4f63a88b-ee9b-475e-a88e-0d78b694d0df (unchanged)
+
+Child zone: test.hcp.example.com
+  preflight record-set count:  74
+  postflight record-set count: 74
+  delta:                       0
+  id/name/etag:                unchanged
+
+Role assignments
+----------------
+Parent and child stable projections: unchanged.
+
+Record inventory at 2026-10-28T15:53:34Z
+--------------------------------------------------
+Parent record-set list: 158 records plus implicit apex SOA/NS => 160 reported by zone metadata.
+Child record-set list:  74 records.
+
+Activity Log during the test window (13:03:10Z through postflight)
+-----------------------------------------------------------------
+Parent-zone events: 384
+Child-zone events:  0
+Parent events whose resource ID contains tester OR cntrlplane OR 4826: 0
+Child events whose resource ID contains cntrlplane OR 4826:            0
+
+Parent callers (all are service principals):
+    72 redacted-principal-113	Succeeded
+    72 redacted-principal-113	Started
+    65 redacted-principal-118	Succeeded
+    65 redacted-principal-118	Started
+    45 redacted-principal-138	Succeeded
+    45 redacted-principal-138	Started
+    10 redacted-principal-123	Succeeded
+    10 redacted-principal-123	Started
+
+Parent operation mix:
+   100 Microsoft.Network/dnsZones/A/write
+    96 Microsoft.Network/dnsZones/TXT/write
+    60 Microsoft.Network/dnsZones/TXT/delete
+    50 Microsoft.Network/dnsZones/A/delete
+    48 Microsoft.Network/dnsZones/CNAME/write
+    30 Microsoft.Network/dnsZones/CNAME/delete
+
+Observation
+-----------
+The parent zone record-set count increased by 51, but the Activity Log has zero events for a resource associated with tester, cntrlplane, or 4826. Instead, all 384 parent-zone write/delete events are A, TXT, or CNAME changes made by unrelated CI/external-dns service principals, using names such as *.apps.public-<hash>, *.apps.upgrade-<hash>, *.apps.external-oidc-<hash>, and matching TXT ownership records. The child zone has zero events and unchanged metadata. The shared NS delegation record for tester is present but was not modified during the window.
+
+Conclusion
+----------
+The parent-zone count delta is consistent with concurrent CI/external-dns reconciliation in the shared hcp-sm-azure zone, not with a change made by this HostedCluster test. The pre-test evidence did not retain a full record-by-record parent-zone listing, so an exact reconstructed name-level pre/post diff is not possible; this limitation is stated in the report. No DNS or Azure resource was modified or deleted during this investigation.

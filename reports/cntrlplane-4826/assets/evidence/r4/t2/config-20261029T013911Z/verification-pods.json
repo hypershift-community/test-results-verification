@@ -1,0 +1,882 @@
+{
+  "apiVersion": "v1",
+  "items": [
+    {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "metadata": {
+        "annotations": {
+          "k8s.ovn.org/pod-networks": "{\"default\":{\"ip_addresses\":[\"10.135.0.24/23\"],\"mac_address\":\"0a:58:0a:87:00:18\",\"gateway_ips\":[\"10.135.0.1\"],\"routes\":[{\"dest\":\"10.132.0.0/14\",\"nextHop\":\"10.135.0.1\"},{\"dest\":\"172.31.0.0/16\",\"nextHop\":\"10.135.0.1\"},{\"dest\":\"169.254.0.5/32\",\"nextHop\":\"10.135.0.1\"},{\"dest\":\"100.64.0.0/16\",\"nextHop\":\"10.135.0.1\"}],\"ip_address\":\"10.135.0.24/23\",\"gateway_ip\":\"10.135.0.1\",\"role\":\"primary\"}}",
+          "k8s.v1.cni.cncf.io/network-status": "[{\n    \"name\": \"ovn-kubernetes\",\n    \"interface\": \"eth0\",\n    \"ips\": [\n        \"10.135.0.24\"\n    ],\n    \"mac\": \"0a:58:0a:87:00:18\",\n    \"default\": true,\n    \"dns\": {}\n}]"
+        },
+        "creationTimestamp": "2026-10-29T02:03:50Z",
+        "generateName": "test-cntrlplane-4826-t2-verify-20261029t013911z-",
+        "generation": 1,
+        "labels": {
+          "app": "test-cntrlplane-4826-t2-verify-20261029t013911z",
+          "controller-revision-hash": "d69685b4",
+          "pod-template-generation": "1",
+          "topology.kubernetes.io/region": "eastus",
+          "topology.kubernetes.io/zone": "0"
+        },
+        "name": "test-cntrlplane-4826-t2-verify-20261029t013911z-6tzrz",
+        "namespace": "default",
+        "ownerReferences": [
+          {
+            "apiVersion": "apps/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "DaemonSet",
+            "name": "test-cntrlplane-4826-t2-verify-20261029t013911z",
+            "uid": "cd70cbdc-c77c-4d48-8f85-683adeb0c979"
+          }
+        ],
+        "resourceVersion": "16491",
+        "uid": "144c8e3a-0aff-4ced-9f15-1dcf44fd0abe"
+      },
+      "spec": {
+        "affinity": {
+          "nodeAffinity": {
+            "requiredDuringSchedulingIgnoredDuringExecution": {
+              "nodeSelectorTerms": [
+                {
+                  "matchFields": [
+                    {
+                      "key": "metadata.name",
+                      "operator": "In",
+                      "values": [
+                        "test-cntrlplane-4826-r4-head-mf9vx-n9d8h"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "containers": [
+          {
+            "command": [
+              "/bin/sh",
+              "-c",
+              "cat /host/etc/custom-config; sleep infinity"
+            ],
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601",
+            "imagePullPolicy": "IfNotPresent",
+            "name": "verify",
+            "resources": {},
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "volumeMounts": [
+              {
+                "mountPath": "/host/etc/custom-config",
+                "name": "custom-config",
+                "readOnly": true
+              },
+              {
+                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                "name": "kube-api-access-ls29d",
+                "readOnly": true
+              }
+            ]
+          }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "enableServiceLinks": true,
+        "imagePullSecrets": [
+          {
+            "name": "default-dockercfg-npwlb"
+          }
+        ],
+        "nodeName": "test-cntrlplane-4826-r4-head-mf9vx-n9d8h",
+        "nodeSelector": {
+          "hypershift.openshift.io/nodePool": "test-cntrlplane-4826-r4-head"
+        },
+        "preemptionPolicy": "PreemptLowerPriority",
+        "priority": 0,
+        "restartPolicy": "Always",
+        "schedulerName": "default-scheduler",
+        "securityContext": {},
+        "serviceAccount": "default",
+        "serviceAccountName": "default",
+        "terminationGracePeriodSeconds": 30,
+        "tolerations": [
+          {
+            "operator": "Exists"
+          },
+          {
+            "effect": "NoExecute",
+            "key": "node.kubernetes.io/not-ready",
+            "operator": "Exists"
+          },
+          {
+            "effect": "NoExecute",
+            "key": "node.kubernetes.io/unreachable",
+            "operator": "Exists"
+          },
+          {
+            "effect": "NoSchedule",
+            "key": "node.kubernetes.io/disk-pressure",
+            "operator": "Exists"
+          },
+          {
+            "effect": "NoSchedule",
+            "key": "node.kubernetes.io/memory-pressure",
+            "operator": "Exists"
+          },
+          {
+            "effect": "NoSchedule",
+            "key": "node.kubernetes.io/pid-pressure",
+            "operator": "Exists"
+          },
+          {
+            "effect": "NoSchedule",
+            "key": "node.kubernetes.io/unschedulable",
+            "operator": "Exists"
+          }
+        ],
+        "volumes": [
+          {
+            "hostPath": {
+              "path": "/etc/custom-config",
+              "type": "File"
+            },
+            "name": "custom-config"
+          },
+          {
+            "name": "kube-api-access-ls29d",
+            "projected": {
+              "defaultMode": 420,
+              "sources": [
+                {
+                  "serviceAccountToken": {
+                    "expirationSeconds": 3607,
+                    "path": "token"
+                  }
+                },
+                {
+                  "configMap": {
+                    "items": [
+                      {
+                        "key": "ca.crt",
+                        "path": "ca.crt"
+                      }
+                    ],
+                    "name": "kube-root-ca.crt"
+                  }
+                },
+                {
+                  "downwardAPI": {
+                    "items": [
+                      {
+                        "fieldRef": {
+                          "apiVersion": "v1",
+                          "fieldPath": "metadata.namespace"
+                        },
+                        "path": "namespace"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "configMap": {
+                    "items": [
+                      {
+                        "key": "service-ca.crt",
+                        "path": "service-ca.crt"
+                      }
+                    ],
+                    "name": "openshift-service-ca.crt"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "status": {
+        "conditions": [
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-10-29T02:03:51Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "PodReadyToStartContainers"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-10-29T02:03:50Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "Initialized"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-10-29T02:03:51Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "Ready"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-10-29T02:03:51Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "ContainersReady"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-10-29T02:03:50Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "PodScheduled"
+          }
+        ],
+        "containerStatuses": [
+          {
+            "containerID": "cri-o://ef491693ee8395c6293db4672a01fca76492d054f26c5846e0ff31ddf0d669d8",
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601",
+            "lastState": {},
+            "name": "verify",
+            "ready": true,
+            "resources": {},
+            "restartCount": 0,
+            "started": true,
+            "state": {
+              "running": {
+                "startedAt": "2026-10-29T02:03:51Z"
+              }
+            },
+            "user": {
+              "linux": {
+                "gid": 65534,
+                "supplementalGroups": [
+                  65534
+                ],
+                "uid": 65534
+              }
+            },
+            "volumeMounts": [
+              {
+                "mountPath": "/host/etc/custom-config",
+                "name": "custom-config",
+                "readOnly": true,
+                "recursiveReadOnly": "Disabled"
+              },
+              {
+                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                "name": "kube-api-access-ls29d",
+                "readOnly": true,
+                "recursiveReadOnly": "Disabled"
+              }
+            ]
+          }
+        ],
+        "hostIP": "10.0.0.13",
+        "hostIPs": [
+          {
+            "ip": "10.0.0.13"
+          }
+        ],
+        "observedGeneration": 1,
+        "phase": "Running",
+        "podIP": "10.135.0.24",
+        "podIPs": [
+          {
+            "ip": "10.135.0.24"
+          }
+        ],
+        "qosClass": "BestEffort",
+        "resources": {},
+        "startTime": "2026-10-29T02:03:50Z"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "metadata": {
+        "annotations": {
+          "k8s.ovn.org/pod-networks": "{\"default\":{\"ip_addresses\":[\"10.133.2.15/23\"],\"mac_address\":\"0a:58:0a:85:02:0f\",\"gateway_ips\":[\"10.133.2.1\"],\"routes\":[{\"dest\":\"10.132.0.0/14\",\"nextHop\":\"10.133.2.1\"},{\"dest\":\"172.31.0.0/16\",\"nextHop\":\"10.133.2.1\"},{\"dest\":\"169.254.0.5/32\",\"nextHop\":\"10.133.2.1\"},{\"dest\":\"100.64.0.0/16\",\"nextHop\":\"10.133.2.1\"}],\"ip_address\":\"10.133.2.15/23\",\"gateway_ip\":\"10.133.2.1\",\"role\":\"primary\"}}",
+          "k8s.v1.cni.cncf.io/network-status": "[{\n    \"name\": \"ovn-kubernetes\",\n    \"interface\": \"eth0\",\n    \"ips\": [\n        \"10.133.2.15\"\n    ],\n    \"mac\": \"0a:58:0a:85:02:0f\",\n    \"default\": true,\n    \"dns\": {}\n}]"
+        },
+        "creationTimestamp": "2026-10-29T02:03:50Z",
+        "generateName": "test-cntrlplane-4826-t2-verify-20261029t013911z-",
+        "generation": 1,
+        "labels": {
+          "app": "test-cntrlplane-4826-t2-verify-20261029t013911z",
+          "controller-revision-hash": "d69685b4",
+          "pod-template-generation": "1",
+          "topology.kubernetes.io/region": "eastus",
+          "topology.kubernetes.io/zone": "2"
+        },
+        "name": "test-cntrlplane-4826-t2-verify-20261029t013911z-m9zgq",
+        "namespace": "default",
+        "ownerReferences": [
+          {
+            "apiVersion": "apps/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "DaemonSet",
+            "name": "test-cntrlplane-4826-t2-verify-20261029t013911z",
+            "uid": "cd70cbdc-c77c-4d48-8f85-683adeb0c979"
+          }
+        ],
+        "resourceVersion": "16488",
+        "uid": "4d2b0097-fbd3-4937-9890-c61aaedbd0c3"
+      },
+      "spec": {
+        "affinity": {
+          "nodeAffinity": {
+            "requiredDuringSchedulingIgnoredDuringExecution": {
+              "nodeSelectorTerms": [
+                {
+                  "matchFields": [
+                    {
+                      "key": "metadata.name",
+                      "operator": "In",
+                      "values": [
+                        "test-cntrlplane-4826-r4-head-mf9vx-c9ml8"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "containers": [
+          {
+            "command": [
+              "/bin/sh",
+              "-c",
+              "cat /host/etc/custom-config; sleep infinity"
+            ],
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601",
+            "imagePullPolicy": "IfNotPresent",
+            "name": "verify",
+            "resources": {},
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "volumeMounts": [
+              {
+                "mountPath": "/host/etc/custom-config",
+                "name": "custom-config",
+                "readOnly": true
+              },
+              {
+                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                "name": "kube-api-access-z94dc",
+                "readOnly": true
+              }
+            ]
+          }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "enableServiceLinks": true,
+        "imagePullSecrets": [
+          {
+            "name": "default-dockercfg-npwlb"
+          }
+        ],
+        "nodeName": "test-cntrlplane-4826-r4-head-mf9vx-c9ml8",
+        "nodeSelector": {
+          "hypershift.openshift.io/nodePool": "test-cntrlplane-4826-r4-head"
+        },
+        "preemptionPolicy": "PreemptLowerPriority",
+        "priority": 0,
+        "restartPolicy": "Always",
+        "schedulerName": "default-scheduler",
+        "securityContext": {},
+        "serviceAccount": "default",
+        "serviceAccountName": "default",
+        "terminationGracePeriodSeconds": 30,
+        "tolerations": [
+          {
+            "operator": "Exists"
+          },
+          {
+            "effect": "NoExecute",
+            "key": "node.kubernetes.io/not-ready",
+            "operator": "Exists"
+          },
+          {
+            "effect": "NoExecute",
+            "key": "node.kubernetes.io/unreachable",
+            "operator": "Exists"
+          },
+          {
+            "effect": "NoSchedule",
+            "key": "node.kubernetes.io/disk-pressure",
+            "operator": "Exists"
+          },
+          {
+            "effect": "NoSchedule",
+            "key": "node.kubernetes.io/memory-pressure",
+            "operator": "Exists"
+          },
+          {
+            "effect": "NoSchedule",
+            "key": "node.kubernetes.io/pid-pressure",
+            "operator": "Exists"
+          },
+          {
+            "effect": "NoSchedule",
+            "key": "node.kubernetes.io/unschedulable",
+            "operator": "Exists"
+          }
+        ],
+        "volumes": [
+          {
+            "hostPath": {
+              "path": "/etc/custom-config",
+              "type": "File"
+            },
+            "name": "custom-config"
+          },
+          {
+            "name": "kube-api-access-z94dc",
+            "projected": {
+              "defaultMode": 420,
+              "sources": [
+                {
+                  "serviceAccountToken": {
+                    "expirationSeconds": 3607,
+                    "path": "token"
+                  }
+                },
+                {
+                  "configMap": {
+                    "items": [
+                      {
+                        "key": "ca.crt",
+                        "path": "ca.crt"
+                      }
+                    ],
+                    "name": "kube-root-ca.crt"
+                  }
+                },
+                {
+                  "downwardAPI": {
+                    "items": [
+                      {
+                        "fieldRef": {
+                          "apiVersion": "v1",
+                          "fieldPath": "metadata.namespace"
+                        },
+                        "path": "namespace"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "configMap": {
+                    "items": [
+                      {
+                        "key": "service-ca.crt",
+                        "path": "service-ca.crt"
+                      }
+                    ],
+                    "name": "openshift-service-ca.crt"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "status": {
+        "conditions": [
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-10-29T02:03:51Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "PodReadyToStartContainers"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-10-29T02:03:50Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "Initialized"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-10-29T02:03:51Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "Ready"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-10-29T02:03:51Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "ContainersReady"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-10-29T02:03:50Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "PodScheduled"
+          }
+        ],
+        "containerStatuses": [
+          {
+            "containerID": "cri-o://5a3e8681e6c46ff6431cdfd236a508a39804ca164bb4d215c407b31f9c346d55",
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601",
+            "lastState": {},
+            "name": "verify",
+            "ready": true,
+            "resources": {},
+            "restartCount": 0,
+            "started": true,
+            "state": {
+              "running": {
+                "startedAt": "2026-10-29T02:03:51Z"
+              }
+            },
+            "user": {
+              "linux": {
+                "gid": 65534,
+                "supplementalGroups": [
+                  65534
+                ],
+                "uid": 65534
+              }
+            },
+            "volumeMounts": [
+              {
+                "mountPath": "/host/etc/custom-config",
+                "name": "custom-config",
+                "readOnly": true,
+                "recursiveReadOnly": "Disabled"
+              },
+              {
+                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                "name": "kube-api-access-z94dc",
+                "readOnly": true,
+                "recursiveReadOnly": "Disabled"
+              }
+            ]
+          }
+        ],
+        "hostIP": "10.0.0.11",
+        "hostIPs": [
+          {
+            "ip": "10.0.0.11"
+          }
+        ],
+        "observedGeneration": 1,
+        "phase": "Running",
+        "podIP": "10.133.2.15",
+        "podIPs": [
+          {
+            "ip": "10.133.2.15"
+          }
+        ],
+        "qosClass": "BestEffort",
+        "resources": {},
+        "startTime": "2026-10-29T02:03:50Z"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "metadata": {
+        "annotations": {
+          "k8s.ovn.org/pod-networks": "{\"default\":{\"ip_addresses\":[\"10.132.2.17/23\"],\"mac_address\":\"0a:58:0a:84:02:11\",\"gateway_ips\":[\"10.132.2.1\"],\"routes\":[{\"dest\":\"10.132.0.0/14\",\"nextHop\":\"10.132.2.1\"},{\"dest\":\"172.31.0.0/16\",\"nextHop\":\"10.132.2.1\"},{\"dest\":\"169.254.0.5/32\",\"nextHop\":\"10.132.2.1\"},{\"dest\":\"100.64.0.0/16\",\"nextHop\":\"10.132.2.1\"}],\"ip_address\":\"10.132.2.17/23\",\"gateway_ip\":\"10.132.2.1\",\"role\":\"primary\"}}",
+          "k8s.v1.cni.cncf.io/network-status": "[{\n    \"name\": \"ovn-kubernetes\",\n    \"interface\": \"eth0\",\n    \"ips\": [\n        \"10.132.2.17\"\n    ],\n    \"mac\": \"0a:58:0a:84:02:11\",\n    \"default\": true,\n    \"dns\": {}\n}]"
+        },
+        "creationTimestamp": "2026-10-29T02:03:50Z",
+        "generateName": "test-cntrlplane-4826-t2-verify-20261029t013911z-",
+        "generation": 1,
+        "labels": {
+          "app": "test-cntrlplane-4826-t2-verify-20261029t013911z",
+          "controller-revision-hash": "d69685b4",
+          "pod-template-generation": "1",
+          "topology.kubernetes.io/region": "eastus",
+          "topology.kubernetes.io/zone": "0"
+        },
+        "name": "test-cntrlplane-4826-t2-verify-20261029t013911z-tmmkf",
+        "namespace": "default",
+        "ownerReferences": [
+          {
+            "apiVersion": "apps/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "DaemonSet",
+            "name": "test-cntrlplane-4826-t2-verify-20261029t013911z",
+            "uid": "cd70cbdc-c77c-4d48-8f85-683adeb0c979"
+          }
+        ],
+        "resourceVersion": "16485",
+        "uid": "333ffa0f-ea88-482c-8a91-5336ef4f7385"
+      },
+      "spec": {
+        "affinity": {
+          "nodeAffinity": {
+            "requiredDuringSchedulingIgnoredDuringExecution": {
+              "nodeSelectorTerms": [
+                {
+                  "matchFields": [
+                    {
+                      "key": "metadata.name",
+                      "operator": "In",
+                      "values": [
+                        "test-cntrlplane-4826-r4-head-mf9vx-kv8zz"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "containers": [
+          {
+            "command": [
+              "/bin/sh",
+              "-c",
+              "cat /host/etc/custom-config; sleep infinity"
+            ],
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601",
+            "imagePullPolicy": "IfNotPresent",
+            "name": "verify",
+            "resources": {},
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "volumeMounts": [
+              {
+                "mountPath": "/host/etc/custom-config",
+                "name": "custom-config",
+                "readOnly": true
+              },
+              {
+                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                "name": "kube-api-access-z4vl2",
+                "readOnly": true
+              }
+            ]
+          }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "enableServiceLinks": true,
+        "imagePullSecrets": [
+          {
+            "name": "default-dockercfg-npwlb"
+          }
+        ],
+        "nodeName": "test-cntrlplane-4826-r4-head-mf9vx-kv8zz",
+        "nodeSelector": {
+          "hypershift.openshift.io/nodePool": "test-cntrlplane-4826-r4-head"
+        },
+        "preemptionPolicy": "PreemptLowerPriority",
+        "priority": 0,
+        "restartPolicy": "Always",
+        "schedulerName": "default-scheduler",
+        "securityContext": {},
+        "serviceAccount": "default",
+        "serviceAccountName": "default",
+        "terminationGracePeriodSeconds": 30,
+        "tolerations": [
+          {
+            "operator": "Exists"
+          },
+          {
+            "effect": "NoExecute",
+            "key": "node.kubernetes.io/not-ready",
+            "operator": "Exists"
+          },
+          {
+            "effect": "NoExecute",
+            "key": "node.kubernetes.io/unreachable",
+            "operator": "Exists"
+          },
+          {
+            "effect": "NoSchedule",
+            "key": "node.kubernetes.io/disk-pressure",
+            "operator": "Exists"
+          },
+          {
+            "effect": "NoSchedule",
+            "key": "node.kubernetes.io/memory-pressure",
+            "operator": "Exists"
+          },
+          {
+            "effect": "NoSchedule",
+            "key": "node.kubernetes.io/pid-pressure",
+            "operator": "Exists"
+          },
+          {
+            "effect": "NoSchedule",
+            "key": "node.kubernetes.io/unschedulable",
+            "operator": "Exists"
+          }
+        ],
+        "volumes": [
+          {
+            "hostPath": {
+              "path": "/etc/custom-config",
+              "type": "File"
+            },
+            "name": "custom-config"
+          },
+          {
+            "name": "kube-api-access-z4vl2",
+            "projected": {
+              "defaultMode": 420,
+              "sources": [
+                {
+                  "serviceAccountToken": {
+                    "expirationSeconds": 3607,
+                    "path": "token"
+                  }
+                },
+                {
+                  "configMap": {
+                    "items": [
+                      {
+                        "key": "ca.crt",
+                        "path": "ca.crt"
+                      }
+                    ],
+                    "name": "kube-root-ca.crt"
+                  }
+                },
+                {
+                  "downwardAPI": {
+                    "items": [
+                      {
+                        "fieldRef": {
+                          "apiVersion": "v1",
+                          "fieldPath": "metadata.namespace"
+                        },
+                        "path": "namespace"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "configMap": {
+                    "items": [
+                      {
+                        "key": "service-ca.crt",
+                        "path": "service-ca.crt"
+                      }
+                    ],
+                    "name": "openshift-service-ca.crt"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "status": {
+        "conditions": [
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-10-29T02:03:51Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "PodReadyToStartContainers"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-10-29T02:03:50Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "Initialized"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-10-29T02:03:51Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "Ready"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-10-29T02:03:51Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "ContainersReady"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-10-29T02:03:50Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "PodScheduled"
+          }
+        ],
+        "containerStatuses": [
+          {
+            "containerID": "cri-o://d4cb19d005ac062735eabbbc66b0cca1cd9f7a709510c2e9305f5e032f8a7535",
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601",
+            "lastState": {},
+            "name": "verify",
+            "ready": true,
+            "resources": {},
+            "restartCount": 0,
+            "started": true,
+            "state": {
+              "running": {
+                "startedAt": "2026-10-29T02:03:51Z"
+              }
+            },
+            "user": {
+              "linux": {
+                "gid": 65534,
+                "supplementalGroups": [
+                  65534
+                ],
+                "uid": 65534
+              }
+            },
+            "volumeMounts": [
+              {
+                "mountPath": "/host/etc/custom-config",
+                "name": "custom-config",
+                "readOnly": true,
+                "recursiveReadOnly": "Disabled"
+              },
+              {
+                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                "name": "kube-api-access-z4vl2",
+                "readOnly": true,
+                "recursiveReadOnly": "Disabled"
+              }
+            ]
+          }
+        ],
+        "hostIP": "10.0.0.10",
+        "hostIPs": [
+          {
+            "ip": "10.0.0.10"
+          }
+        ],
+        "observedGeneration": 1,
+        "phase": "Running",
+        "podIP": "10.132.2.17",
+        "podIPs": [
+          {
+            "ip": "10.132.2.17"
+          }
+        ],
+        "qosClass": "BestEffort",
+        "resources": {},
+        "startTime": "2026-10-29T02:03:50Z"
+      }
+    }
+  ],
+  "kind": "List",
+  "metadata": {
+    "resourceVersion": ""
+  }
+}

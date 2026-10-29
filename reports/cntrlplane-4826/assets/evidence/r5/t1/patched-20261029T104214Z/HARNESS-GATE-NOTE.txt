@@ -1,0 +1,17 @@
+The stock run-t1.sh patched mode encodes the CAPI 1.14 stall signature as its
+success gate: physical rollout complete, upToDateReplicas == 0, status.version
+advanced to the target, UpdatingVersion False, and config annotations changed.
+
+On CAPI v1.13.4 the kubelet-version comparison that causes the 1.14 stall does
+not exist, so upToDateReplicas reaches the desired count (3) six seconds after
+the patch and stays there. The gate therefore cannot fire and the runner exits
+1 at its 30-minute deadline even though the rollout completed normally at
+2026-10-29T10:55:47Z.
+
+verdict.json in this directory is the unmodified runner output and records
+verdict=FAIL with expected.upToDateReplicasAtCompletion=0. It is retained as
+raw evidence, not as the scenario verdict.
+
+The verdict authority for this scenario is verify-t8.sh, whose output is in
+verdict-t8.txt. It asserts the pre-1.14 expectations and exits non-zero on any
+failure.

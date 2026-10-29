@@ -1,0 +1,147 @@
+{
+  "after": {
+    "capturedAt": "2026-10-28T15:31:36Z",
+    "config": "86d03f4f",
+    "generation": 3,
+    "machineDeploymentAvailableReplicas": 3,
+    "machineDeploymentReplicas": 3,
+    "machineDeploymentRevision": "1",
+    "machineDeploymentUpToDateReplicas": 0,
+    "machines": [
+      {
+        "name": "test-cntrlplane-4826-scale-j5jqn-5s4lj",
+        "nodeName": "test-cntrlplane-4826-scale-j5jqn-5s4lj",
+        "uid": "16ef2b8b-3e74-4aba-8f7b-4b9be1ed6a29"
+      },
+      {
+        "name": "test-cntrlplane-4826-scale-j5jqn-r9ckz",
+        "nodeName": "test-cntrlplane-4826-scale-j5jqn-r9ckz",
+        "uid": "721b7817-48c1-4ab2-9a53-4097fbc4e9a1"
+      },
+      {
+        "name": "test-cntrlplane-4826-scale-j5jqn-z2prn",
+        "nodeName": "test-cntrlplane-4826-scale-j5jqn-z2prn",
+        "uid": "de472bb0-9a05-4b1f-a920-921c4e1438ec"
+      }
+    ],
+    "nodes": [
+      {
+        "name": "test-cntrlplane-4826-scale-j5jqn-5s4lj",
+        "uid": "16b3dfe8-53e4-464e-ab82-bae3380674dc"
+      },
+      {
+        "name": "test-cntrlplane-4826-scale-j5jqn-r9ckz",
+        "uid": "c8894539-3594-48c6-b188-561fe527e68a"
+      },
+      {
+        "name": "test-cntrlplane-4826-scale-j5jqn-z2prn",
+        "uid": "ee363df8-0f4d-4228-8da5-92d0bfed225b"
+      }
+    ],
+    "platformTemplate": "test-cntrlplane-4826-scale-776e47ca",
+    "ready": "True",
+    "replicas": 3,
+    "updatingConfig": "False",
+    "updatingPlatform": "False",
+    "updatingVersion": "False",
+    "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+  },
+  "assertions": {
+    "allBackJoinsBelow12Minutes": true,
+    "backAvailableReplicas": 3,
+    "backComplete": true,
+    "backGeneration": "2 -> 3",
+    "backMachineDeploymentReplicas": 3,
+    "configStable": true,
+    "platformTemplateStable": true,
+    "versionStable": true,
+    "zeroAvailableReplicas": 0,
+    "zeroComplete": true,
+    "zeroGenerationAdvanced": "1 -> 2",
+    "zeroMachineDeploymentReplicas": 0,
+    "zeroOldSetsActive": 0
+  },
+  "before": {
+    "capturedAt": "2026-10-28T15:24:01Z",
+    "config": "86d03f4f",
+    "generation": 1,
+    "machineDeploymentRevision": "1",
+    "machines": [
+      {
+        "name": "test-cntrlplane-4826-scale-j5jqn-j6smj",
+        "nodeName": "test-cntrlplane-4826-scale-j5jqn-j6smj",
+        "uid": "a65ae389-5ed6-4cfb-b956-349193cce527"
+      },
+      {
+        "name": "test-cntrlplane-4826-scale-j5jqn-kxppf",
+        "nodeName": "test-cntrlplane-4826-scale-j5jqn-kxppf",
+        "uid": "1b6fc553-711a-4d09-8a0a-4f4e2e9c68ee"
+      },
+      {
+        "name": "test-cntrlplane-4826-scale-j5jqn-nvsjv",
+        "nodeName": "test-cntrlplane-4826-scale-j5jqn-nvsjv",
+        "uid": "9e5da4ec-1445-4b3f-a80b-ba14f644f386"
+      }
+    ],
+    "nodes": [
+      {
+        "name": "test-cntrlplane-4826-scale-j5jqn-j6smj",
+        "uid": "3997b316-a031-4975-9ae9-8946b102ff76"
+      },
+      {
+        "name": "test-cntrlplane-4826-scale-j5jqn-kxppf",
+        "uid": "a56eaaf3-9209-4f10-9625-09855c996455"
+      },
+      {
+        "name": "test-cntrlplane-4826-scale-j5jqn-nvsjv",
+        "uid": "ce415bf9-2fd4-4560-85af-83385db9e433"
+      }
+    ],
+    "platformTemplate": "test-cntrlplane-4826-scale-776e47ca",
+    "replicas": 3,
+    "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+  },
+  "joinDurations": [
+    {
+      "ageSeconds": 379,
+      "createdAt": "2026-10-28T15:25:09Z",
+      "name": "test-cntrlplane-4826-scale-j5jqn-5s4lj",
+      "nodeReadyTransition": "2026-10-28T15:31:27Z"
+    },
+    {
+      "ageSeconds": 379,
+      "createdAt": "2026-10-28T15:25:09Z",
+      "name": "test-cntrlplane-4826-scale-j5jqn-r9ckz",
+      "nodeReadyTransition": "2026-10-28T15:31:20Z"
+    },
+    {
+      "ageSeconds": 379,
+      "createdAt": "2026-10-28T15:25:09Z",
+      "name": "test-cntrlplane-4826-scale-j5jqn-z2prn",
+      "nodeReadyTransition": "2026-10-28T15:30:42Z"
+    }
+  ],
+  "meta": "mode=scale\nnodepool=clusters/test-cntrlplane-4826-scale\npreGeneration=1\npreStatusVersion=5.1.0-0.nightly-multi-2026-10-27-082258\npreSpecRelease=quay.io/openshift-release-dev/ocp-release-nightly@sha256:08f0905c06195a76138db7071aa77ae644aea401eb832d51ebbf4fb870698346\npreCurrentConfig=86d03f4f\nprePlatformMachineTemplate=test-cntrlplane-4826-scale-776e47ca\ntargetVersion=5.1.0-0.nightly-multi-2026-10-27-082258\noperatorImage=quay.io/example/hypershift@sha256:7bbfc29f4283a5b76ba9d1ee9f6a74864dc874614b26741520ae52d6a887b4a2\nzeroPatchUtc=2026-10-28T15:24:10Z\nzeroDeadlineUtc=2026-10-28T15:54:10Z\nzeroSuccessEpoch=1793201099\nbackPatchUtc=2026-10-28T15:25:07Z\nbackDeadlineUtc=2026-10-28T15:55:07Z\nbackSuccessEpoch=1793201496\ncompletedUtc=2026-10-28T15:31:39Z",
+  "status": "PASS",
+  "test": "T6 scale-to-zero and scale-back",
+  "verifiedUtc": "2026-10-28T15:39:15Z",
+  "zero": {
+    "capturedAt": "2026-10-28T15:24:59Z",
+    "currentMachineSets": [
+      {
+        "availableReplicas": 0,
+        "name": "test-cntrlplane-4826-scale-j5jqn",
+        "replicas": 0,
+        "revision": "1"
+      }
+    ],
+    "generation": 2,
+    "machineDeploymentAvailableReplicas": 0,
+    "machineDeploymentReplicas": 0,
+    "machineDeploymentUpToDateReplicas": 0,
+    "machines": [],
+    "ready": "True",
+    "replicas": 0,
+    "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+  }
+}

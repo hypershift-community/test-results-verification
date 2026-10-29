@@ -1,0 +1,15 @@
+mode=vm-size
+nodepool=clusters/test-cntrlplane-4826-patched
+targetVmSize=Standard_D4s_v5
+preGeneration=4
+preStatusVersion=5.1.0-0.nightly-multi-2026-10-27-082258
+preSpecRelease=quay.io/openshift-release-dev/ocp-release-nightly@sha256:08f0905c06195a76138db7071aa77ae644aea401eb832d51ebbf4fb870698346
+prePlatformMachineTemplate=test-cntrlplane-4826-patched-e4b9b203
+targetVersion=5.1.0-0.nightly-multi-2026-10-27-082258
+operatorImage=quay.io/example/hypershift@sha256:7bbfc29f4283a5b76ba9d1ee9f6a74864dc874614b26741520ae52d6a887b4a2
+patchUtc=2026-10-28T15:04:16Z
+deadlineUtc=2026-10-28T15:34:16Z
+deadlineSeconds=1800
+successEpoch=1793200430
+completedUtc=2026-10-28T15:13:53Z
+elapsedSeconds=577

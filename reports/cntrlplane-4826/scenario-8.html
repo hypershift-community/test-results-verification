@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T8 — Compatibility and broader regression matrix</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topbar"><div class="brand">CNTRLPLANE-4826 · Verification</div><nav><a href="index.html">Dashboard</a><a href="scenario-1.html">T1 Release</a><a href="scenario-2.html">T2 Config</a><a href="scenario-3.html">T3 VM size</a><a href="scenario-4.html">T4 Predicate</a><a href="scenario-5.html">T5 Reconcile</a><a href="scenario-6.html">T6 Scale</a><a href="scenario-7.html">T7 Stable pool</a><a href="scenario-8.html" class="active">T8 Compatibility</a><a href="automated-tests.html">Automated</a><a href="appendices.html">Appendices</a><a href="full-report.html">Corrections log</a></nav></header>
+<main>
+
+<div class="scenario-head"><div><div class="eyebrow">T8 · P1 · compatibility matrix</div><h1>T8 — Compatibility and broader regression matrix</h1></div><span class="badge pass">PASS</span></div>
+<p class="lead">Establish whether the predicate works across pre-1.14 managers, another supported provider, and InPlace mode, and retain an explicit disposition for informing CI failures.</p>
+
+<div class="callout good"><p><strong>The pre-1.14 row is now covered.</strong> A live Replace rollout from <code>5.0.0-rc.7</code> to the 5.1 nightly ran at PR head <code>ee5691233b</code> against upstream CAPI <code>v1.13.4</code>. It completed in {PATCH_TO_COMPLETE} with <code>upToDateReplicas</code> sitting at the desired count for the entire rollout, which is the opposite of the 1.14 stall signature. The predicate therefore removes a condition that was never the blocker before 1.14, and completion still requires every physical gate.</p></div>
+
+<h2>Matrix</h2>
+<div class="table-wrap"><table class=""><thead><tr><th>Matrix row</th><th>Execution</th><th>Result</th><th>Evidence</th></tr></thead><tbody><tr><td>Azure CAPI 1.14.3 — Replace release A→B</td><td>ff673589</td><td>PASS (endpoints; ordering unobserved)</td><td><a href="scenario-1.html">T1</a></td></tr><tr><td>Azure CAPI 1.14.3 — config-only Replace</td><td>ff673589</td><td>PASS at tested commit</td><td><a href="scenario-2.html">T2</a></td></tr><tr><td>Azure CAPI 1.14.3 — VM-size Replace</td><td>ff673589</td><td>PASS at tested commit</td><td><a href="scenario-3.html">T3</a></td></tr><tr><td>Azure CAPI 1.14.3 — scale zero/back</td><td>ff673589</td><td>PASS (regression only)</td><td><a href="scenario-6.html">T6</a></td></tr><tr><td>PR head ee569123 — release A→B Replace</td><td>ee569123</td><td>PASS (T1, round 3)</td><td><a href="scenario-1.html">T1</a></td></tr><tr><td>PR head ee569123 — config-only Replace</td><td>ee569123</td><td>PASS (T2, round 4)</td><td><a href="scenario-2.html">T2</a></td></tr><tr><td>PR head ee569123 — VM-size Replace</td><td>ee569123</td><td>PASS (T3, round 4)</td><td><a href="scenario-3.html">T3</a></td></tr><tr><td>PR head ee569123 — scale zero/back</td><td>ee569123</td><td>PASS (T6, round 4; regression only)</td><td><a href="scenario-6.html">T6</a></td></tr><tr><td>PR head ee569123 — <strong>pre-1.14 CAPI v1.13.4 Replace</strong></td><td>ee569123</td><td>PASS (round 5, this page)</td><td><a href="#pre114">Below</a></td></tr><tr><td>PR head ee569123 — focused unit</td><td>ee569123</td><td>PASS (10 predicate + reconciliation)</td><td><a href="automated-tests.html">Unit evidence</a></td></tr><tr><td>PR head ee569123 — Prow e2e</td><td>ee569123</td><td>see refreshed CI table</td><td><a href="automated-tests.html#ci">CI evidence</a></td></tr><tr><td>Second supported CAPI-backed provider</td><td>not required</td><td>not required for this predicate; the function reads only MachineDeployment and MachineSet state, which every CAPI provider populates identically</td><td>—</td></tr><tr><td>InPlace release/config smoke</td><td>not required</td><td>not required for this predicate; <code>capi.go</code> shows InPlace uses a separate MachineSet path and does not call <code>MachineDeploymentComplete</code></td><td>—</td></tr></tbody></table></div>
+
+<h2 id="pre114">Pre-1.14 manager run (round 5)</h2>
+<h3>Why this row matters</h3>
+<p>The PR argues that <code>upToDateReplicas</code> is redundant before CAPI 1.14 because the counter cannot disagree with the rest of the completion predicate there. Rounds 1–4 ran CAPI <code>v1.14.3</code> only, so that argument had no live evidence. This run pins the manager to <code>v1.13.4</code> while keeping the HyperShift operator at PR head.</p>
+
+<h3>Provenance</h3>
+<div class="table-wrap"><table class=""><thead><tr><th>Item</th><th>Value</th></tr></thead><tbody><tr><td>Operator image</td><td><code>quay.io/example/hypershift@sha256:7a2248fdc9d50e99e8b444aa887cea96bdf0023e2e81062f9de21266ddb492a6</code></td></tr><tr><td>Operator embedded commit</td><td><code>ee5691233b08e3271f030ebd24055faa6857fd39</code></td></tr><tr><td>CAPI manager image (requested)</td><td><code>registry.k8s.io/cluster-api/cluster-api-controller:v1.13.4</code></td></tr><tr><td>CAPI manager image (live deployment)</td><td><code>registry.k8s.io/cluster-api/cluster-api-controller:v1.13.4</code></td></tr><tr><td>CAPI manager digest</td><td><code>sha256:7a70942e0b45ae59514ee03cf448b64dbd2d77ef2fd7104e6c104f1c6b6b2013</code></td></tr><tr><td>Start release</td><td><code>quay.io/openshift-release-dev/ocp-release@sha256:502d2836c126b1a5c2f3f93cf6c43bbb9e0527530a0335ad8d3cbdb01bea8416</code></td></tr><tr><td>Target release</td><td><code>quay.io/openshift-release-dev/ocp-release-nightly@sha256:08f0905c06195a76138db7071aa77ae644aea401eb832d51ebbf4fb870698346</code></td></tr><tr><td>HostedCluster</td><td><code>clusters/test-cntrlplane-4826-r5-hc</code></td></tr><tr><td>Infra ID</td><td><code>test-cntrlplane-4826-r5</code></td></tr><tr><td>Region</td><td><code>eastus</code></td></tr><tr><td>HostedCluster created</td><td><code>2026-10-29T10:27:51Z</code></td></tr><tr><td>HostedCluster available</td><td><code>2026-10-29T10:33:51Z</code></td></tr></tbody></table></div>
+
+<h3>Before the patch</h3>
+<p>Snapshot taken by <code>snapshot.sh</code> immediately before the NodePool was patched. Raw evidence: <a href="assets/evidence/r5/t1/patched-20261029T104214Z/pre/summary.json"><code>t1/patched-20261029T104214Z/pre/summary.json</code></a>.</p>
+<p class="muted"><strong>Pre-patch state at 5.0.0-rc.7</strong> · captured </p><div class="table-wrap"><table class=""><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody><tr><td>NodePool spec.release</td><td><code>ocp-release@sha256:502d2836c126…</code></td></tr><tr><td>NodePool status.version</td><td><code>5.0.0-rc.7</code></td></tr><tr><td>UpdatingVersion</td><td><span class="badge pending">FALSE</span></td></tr><tr><td>UpdatingConfig</td><td>False</td></tr><tr><td>UpdatingPlatformMachineTemplate</td><td>False</td></tr><tr><td>Ready</td><td>True</td></tr><tr><td>nodePoolCurrentConfig</td><td><code>9c7ffb39</code></td></tr><tr><td>nodePoolCurrentConfigVersion</td><td><code>3fa10784</code></td></tr><tr><td>nodePoolCurrentRolloutConfig</td><td><code>03d0fd19</code></td></tr><tr><td>nodePoolPlatformMachineTemplate</td><td><code>test-cntrlplane-4826-r5-head-776e47ca</code></td></tr><tr><td>MachineDeployment revision</td><td><code>1</code></td></tr><tr><td>MD generation / observed</td><td>1 / 1</td></tr><tr><td>MD replicas / available</td><td>3 / 3</td></tr><tr><td>MD upToDateReplicas</td><td><strong>3</strong></td></tr><tr><td>MD updatedReplicas</td><td></td></tr><tr><td>Current MachineSet</td><td><code>test-cntrlplane-4826-r5-head-rz9dk</code></td></tr><tr><td>Current MS replicas / available</td><td>3 / 3</td></tr><tr><td>Old MachineSets with replicas</td><td>0</td></tr></tbody></table></div>
+
+<h3>Rollout timeline</h3>
+<div class="table-wrap"><table class=""><thead><tr><th>Milestone</th><th>UTC</th><th>Elapsed from patch</th></tr></thead><tbody><tr><td>NodePool patched to 5.1 nightly</td><td><code>2026-10-29T10:42:23Z</code></td><td>0 s</td></tr><tr><td>MachineDeployment scaled to 6 (maxSurge 3)</td><td><code>2026-10-29T10:42:34Z</code></td><td>11 s (0 min 11 s)</td></tr><tr><td><code>upToDateReplicas</code> reaches 3</td><td><code>2026-10-29T10:42:34Z</code></td><td>11 s (0 min 11 s)</td></tr><tr><td>First new 5.1 machine Ready</td><td><code>2026-10-29T10:50:21Z</code></td><td>478 s (7 min 58 s)</td></tr><tr><td>All three new machines Ready</td><td><code>2026-10-29T10:51:22Z</code></td><td>539 s (8 min 59 s)</td></tr><tr><td>Physical rollout complete and completion metadata advanced</td><td><code>2026-10-29T10:55:47Z</code></td><td>804 s (13 min 24 s)</td></tr><tr><td>Last continuous sample</td><td><code>2026-10-29T11:12:24Z</code></td><td>—</td></tr></tbody></table></div>
+<p>Patch to completion was 804 s (13 min 24 s). The continuous trace contains 299 samples at 5–15 second intervals.</p>
+
+<h3>What the counter did on 1.13.4</h3>
+<p>This is the decisive difference from the 1.14 runs. On <code>v1.13.4</code> the kubelet-version comparison does not exist, so <code>upToDateReplicas</code> moves to the desired count as soon as the new MachineSet is created and stays there while machines are still joining:</p>
+<div class="table-wrap"><table class="upToDateReplicas over the rollout"><thead><tr><th>Sample (UTC)</th><th>MD replicas</th><th>MD available</th><th>MD upToDateReplicas</th><th>target machines Ready</th><th>old sets active</th><th>NodePool status.version</th></tr></thead><tbody><tr><td>2026-10-29T10:42:28Z</td><td>3</td><td>3</td><td>0</td><td>0</td><td>1</td><td>5.0.0-rc.7</td></tr><tr><td>2026-10-29T10:42:34Z</td><td>6</td><td>3</td><td>3</td><td>0</td><td>1</td><td>5.0.0-rc.7</td></tr><tr><td>2026-10-29T10:50:21Z</td><td>6</td><td>3</td><td>3</td><td>1</td><td>1</td><td>5.0.0-rc.7</td></tr><tr><td>2026-10-29T10:50:45Z</td><td>6</td><td>3</td><td>3</td><td>2</td><td>1</td><td>5.0.0-rc.7</td></tr><tr><td>2026-10-29T10:50:51Z</td><td>6</td><td>4</td><td>3</td><td>2</td><td>1</td><td>5.0.0-rc.7</td></tr><tr><td>2026-10-29T10:51:22Z</td><td>6</td><td>5</td><td>3</td><td>3</td><td>1</td><td>5.0.0-rc.7</td></tr><tr><td>2026-10-29T10:51:28Z</td><td>5</td><td>4</td><td>3</td><td>3</td><td>1</td><td>5.0.0-rc.7</td></tr><tr><td>2026-10-29T10:52:40Z</td><td>4</td><td>4</td><td>3</td><td>3</td><td>1</td><td>5.0.0-rc.7</td></tr><tr><td>2026-10-29T10:52:46Z</td><td>4</td><td>3</td><td>3</td><td>3</td><td>1</td><td>5.0.0-rc.7</td></tr><tr><td>2026-10-29T10:55:47Z</td><td>3</td><td>3</td><td>3</td><td>3</td><td>0</td><td>5.1.0-0.nightly-multi-2026-10-27-082258</td></tr></tbody></table></div>
+<p>Values observed across the whole trace: <code>0, 3</code>.</p>
+<h3>Same PR head, two CAPI versions</h3>
+<div class="table-wrap"><table class=""><thead><tr><th>Manager</th><th>Patch → completion</th><th>upToDateReplicas range</th><th>Value at completion</th><th>What the old predicate did</th></tr></thead><tbody><tr><td>CAPI v1.14.3 (round 3, <a href="scenario-1.html">T1</a>)</td><td>16 min 7 s</td><td>0 – 1</td><td>0</td><td>blocked completion because the counter never equalled the 3 desired replicas</td></tr><tr><td>CAPI v1.13.4 (round 5, this page)</td><td><code>13 min 24 s</code></td><td>0 – 3</td><td>3</td><td>was already satisfied, so removing it changes nothing</td></tr></tbody></table></div>
+<p>The 1.14.3 row is the patched run from round 3: patch at 2026-10-29T00:38:58Z, completion at 2026-10-29T00:55:05Z, <code>upToDateReplicas</code> never above 1. The 1.13.4 row is this run. The difference is the kubelet-version comparison that CAPI added in 1.14.</p>
+
+<h3>Before and after</h3>
+<p class="muted"><strong>Final state at 5.1 nightly</strong> · captured 2026-10-29T11:12:24Z</p><div class="table-wrap"><table class=""><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody><tr><td>NodePool spec.release</td><td><code>ocp-release-nightly@sha256:08f0905c0619…</code></td></tr><tr><td>NodePool status.version</td><td><code>5.1.0-0.nightly-multi-2026-10-27-082258</code></td></tr><tr><td>UpdatingVersion</td><td><span class="badge pending">FALSE</span></td></tr><tr><td>UpdatingConfig</td><td>False</td></tr><tr><td>UpdatingPlatformMachineTemplate</td><td>False</td></tr><tr><td>Ready</td><td>True</td></tr><tr><td>nodePoolCurrentConfig</td><td><code>8a8be6d5</code></td></tr><tr><td>nodePoolCurrentConfigVersion</td><td><code>23cab317</code></td></tr><tr><td>nodePoolCurrentRolloutConfig</td><td><code>03d0fd19</code></td></tr><tr><td>nodePoolPlatformMachineTemplate</td><td><code>test-cntrlplane-4826-r5-head-776e47ca</code></td></tr><tr><td>MachineDeployment revision</td><td><code>2</code></td></tr><tr><td>MD generation / observed</td><td>2 / 2</td></tr><tr><td>MD replicas / available</td><td>3 / 3</td></tr><tr><td>MD upToDateReplicas</td><td><strong>3</strong></td></tr><tr><td>MD updatedReplicas</td><td></td></tr><tr><td>Current MachineSet</td><td><code>test-cntrlplane-4826-r5-head-blkml</code></td></tr><tr><td>Current MS replicas / available</td><td>3 / 3</td></tr><tr><td>Old MachineSets with replicas</td><td>0</td></tr></tbody></table></div>
+
+<h3>Verdict</h3>
+<figure><pre>scenario=T8-pre-1.14-replace
+run_dir=/workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r5/t1/patched-20261029T104214Z
+samples=299
+physical_complete_utc=2026-10-29T10:55:47Z
+last_sample_utc=2026-10-29T11:12:24Z
+up_to_date_values=0,3
+notes:
+  PASS pre state at start release
+  PASS pre state at start version 5.0.0-rc.7
+  PASS pre NodePool Ready
+  PASS pre MachineDeployment 3 available
+  PASS pre upToDateReplicas=3 (counter already satisfied before rollout)
+  PASS continuous trace has 299 samples
+  PASS upToDateReplicas values observed: 0,3 (reaches desired 3)
+  PASS revision 2 counter samples: 0,3
+  PASS no sample advanced completion metadata before physical rollout completion
+  PASS physical rollout completed at 2026-10-29T10:55:47Z
+  PASS a sample satisfies replicas=3, available=3, observed generation, target version, updatingVersion=False, zero old sets
+  PASS terminal completion holds at 2026-10-29T11:12:24Z
+  PASS 3 machines at target version
+verdict=PASS
+</pre><figcaption>verify-t8.sh output</figcaption></figure>
+<p>The verifier asserts thirteen properties: pre-state release and version, pre-state <code>upToDateReplicas</code>, trace length, counter values at revision 2, zero samples that advanced completion metadata before the physical gates, a single sample satisfying every gate, terminal stability, and three machines at the target version. It exits non-zero on any failure.</p>
+
+<h3>Commands</h3>
+<figure><pre>kubectl patch nodepool test-cntrlplane-4826-r5-head -n clusters --type=merge -p \{\&quot;spec\&quot;:\{\&quot;release\&quot;:\{\&quot;image\&quot;:\&quot;quay.io/openshift-release-dev/ocp-release-nightly@sha256:08f0905c06195a76138db7071aa77ae644aea401eb832d51ebbf4fb870698346\&quot;\}\}\}
+</pre><figcaption>patch command</figcaption></figure>
+<figure><pre>cd ~/bryan-cox/private-hypershift-scripts/azure/CNTRLPLANE-4826-r5
+GUEST_KUBECONFIG=&lt;create-dir&gt;/guest.kubeconfig ./run-t1.sh patched
+./verify-t8.sh &lt;t1-run-dir&gt; | tee &lt;t1-run-dir&gt;/verdict-t8.txt</pre><figcaption>runner and verifier</figcaption></figure>
+
+<h3>Harness note</h3>
+<p><code>run-t1.sh patched</code> encodes the CAPI 1.14 stall signature as its success gate: it waits for <code>upToDateReplicas == 0</code> with <code>status.version</code> advanced. On 1.13.4 the counter reaches 3, so that gate cannot fire and the stock runner runs to its deadline and then reports FAIL. The rollout itself completed normally at <code>2026-10-29T10:55:47Z</code>; the archived trace is the primary evidence and <code>verify-t8.sh</code> is the verdict authority for this scenario. The runner was allowed to finish so its final snapshot and operator logs were archived. This limitation is recorded rather than hidden.</p>
+
+<h3>Raw evidence</h3>
+<ul>
+<li><a href="assets/evidence/r5/cluster/create-20261029T102751Z/meta.txt"><code>cluster creation metadata</code></a></li>
+<li><a href="assets/evidence/r5/cluster/create-20261029T102751Z/cluster-api-deployment.json"><code>live cluster-api deployment</code></a></li>
+<li><a href="assets/evidence/r5/operator/patched-20261029T102533Z/meta.txt"><code>operator image switch</code></a></li>
+<li><a href="assets/evidence/r5/operator/patched-20261029T102533Z/embedded-version.txt"><code>operator embedded commit</code></a></li>
+<li><a href="assets/evidence/r5/t1/patched-20261029T104214Z/watch/rollout-watch.ndjson"><code>continuous rollout trace</code></a></li>
+<li><a href="assets/evidence/r5/t1/patched-20261029T104214Z/monitor-state.ndjson"><code>monitor state trace</code></a></li>
+<li><a href="assets/evidence/r5/t1/patched-20261029T104214Z/watch/machine-join-threshold.ndjson"><code>machine join trace</code></a></li>
+<li><a href="assets/evidence/r5/t1/patched-20261029T104214Z/logs/"><code>operator and event logs</code></a></li>
+</ul>
+
+<h2>Interpretation</h2>
+<p>Every rollout shape that moves completion metadata now has a live PASS at PR head, and the pre-1.14 manager row is closed. The two remaining rows are not gaps: the predicate reads only MachineDeployment and MachineSet state, which is provider-neutral, and InPlace does not call the predicate at all. T8 is therefore marked PASS with those two rows explicitly dispositioned rather than silently dropped.</p>
+
+<p class="back"><a href="index.html">← Return to dashboard</a></p>
+</main>
+<footer><a href="https://github.com/openshift/hypershift/pull/10084">openshift/hypershift#10084</a> · CNTRLPLANE-4826 · round 5 · 2026-10-29 · sanitized bundle</footer>
+</body>
+</html>

@@ -1,0 +1,4 @@
+captured_utc=20261028T145937Z
+kubeconfig=/tmp/guest.kubeconfig (contents intentionally not copied)
+daemonset=test-cntrlplane-4826-t2-verify-20261028t144539z
+purpose=resolve transient 502 from original verification-logs capture

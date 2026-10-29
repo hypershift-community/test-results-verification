@@ -1,0 +1,3 @@
+captured_utc=2026-10-28T15:15:18Z
+subscription=redacted-subscription-id
+resource_group=test-cntrlplane-4826-hc-test-cntrlplane-4826

@@ -1,0 +1,13 @@
+captured_utc=2026-10-28T19:48:07Z
+purpose=read-only correction of the earlier wrong-subscription audit; no Azure mutation
+test_subscription=redacted-subscription-id
+default_subscription_note=the first audit queried subscription 5f99720c; the test resources are in the subscription pinned by the harness
+--- resource groups in test subscription ---
+test-cntrlplane-4826-hc-test-cntrlplane-4826=Succeeded
+test-cntrlplane-4826-hc-vnet-test-cntrlplane-4826=Succeeded
+test-cntrlplane-4826-hc-nsg-test-cntrlplane-4826=Succeeded
+--- shared DNS ---
+hcp.example.com=110 records
+test.hcp.example.com=62 records
+--- OIDC storage ---
+examplesa=Succeeded

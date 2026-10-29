@@ -1,0 +1,30 @@
+{
+  "hcpNamespacePresent": false,
+  "hostedClusters": 0,
+  "nodePools": 0,
+  "operator": {
+    "generation": 31,
+    "images": [
+      {
+        "image": "quay.io/hypershift/hypershift-operator:latest",
+        "name": "operator"
+      }
+    ],
+    "observedGeneration": 31,
+    "pods": [
+      {
+        "image": "quay.io/hypershift/hypershift-operator:latest",
+        "imageID": "quay.io/hypershift/hypershift-operator@sha256:6faaca6c330910570cc0d85b2ce8243454f5ecae894d4d57c59034f59b04b629",
+        "name": "operator-6878fbf488-snr8x",
+        "ready": true
+      },
+      {
+        "image": "quay.io/hypershift/hypershift-operator:latest",
+        "imageID": "quay.io/hypershift/hypershift-operator@sha256:0dbb54a999612d55ae0e363fb7bcadeb92df5252ff598db34dd6e3a8b5613c79",
+        "name": "operator-6878fbf488-xvl6n",
+        "ready": true
+      }
+    ],
+    "readyReplicas": 2
+  }
+}

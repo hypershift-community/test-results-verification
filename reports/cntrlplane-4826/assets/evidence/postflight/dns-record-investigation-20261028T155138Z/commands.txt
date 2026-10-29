@@ -1,0 +1,7 @@
+captured_utc=2026-10-28T15:51:38Z
+purpose=read-only DNS record inventory and Activity Log review; no writes
+az network dns record-set list --subscription redacted-subscription-id --resource-group shared-resource-group --zone-name hcp.example.com -o json > parent-record-sets.json
+az network dns record-set list --subscription redacted-subscription-id --resource-group shared-resource-group --zone-name test.hcp.example.com -o json > child-record-sets.json
+az monitor activity-log list --subscription redacted-subscription-id --resource-id <parent-zone-id> --start-time 2026-10-28T12:50:00Z --end-time <capture-time> -o json > parent-activity-log.json
+az monitor activity-log list --subscription <sub> --resource-id <parent-zone-id> --start-time 2026-10-28T13:03:10Z --end-time <capture-time> --max-events 5000 -o json > parent-activity-log-full.json
+az monitor activity-log list --subscription <sub> --resource-id <child-zone-id> --start-time 2026-10-28T13:03:10Z --end-time <capture-time> --max-events 5000 -o json > child-activity-log-full.json

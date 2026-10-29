@@ -1,0 +1,4 @@
+purpose=supplemental evidence: patched operator catches up stalled baseline status without worker replacement
+started_utc=2026-10-28T14:09:24Z
+operator_switch_completed_utc=2026-10-28T14:11:40Z
+recovered_captured_utc=2026-10-28T14:13:27Z

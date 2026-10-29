@@ -1,0 +1,582 @@
+{
+  "apiVersion": "v1",
+  "items": [
+    {
+      "apiVersion": "cluster.x-k8s.io/v1beta2",
+      "kind": "Machine",
+      "metadata": {
+        "annotations": {
+          "hypershift.openshift.io/nodePool": "clusters/test-cntrlplane-4826-r4-head",
+          "hypershift.openshift.io/nodePoolTaints": "null",
+          "hypershift.openshift.io/release-version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+        },
+        "creationTimestamp": "2026-10-29T01:56:24Z",
+        "finalizers": [
+          "machine.cluster.x-k8s.io"
+        ],
+        "generation": 2,
+        "labels": {
+          "brco-0b64dd62-test-cntrlplane-4826-r4-head": "brco-0b64dd62-test-cntrlplane-4826-r4-head",
+          "cluster.x-k8s.io/cluster-name": "test-cntrlplane-4826-r4",
+          "cluster.x-k8s.io/deployment-name": "test-cntrlplane-4826-r4-head",
+          "cluster.x-k8s.io/set-name": "test-cntrlplane-4826-r4-head-mf9vx",
+          "machine-template-hash": "1135803942-mf9vx",
+          "managed.hypershift.openshift.io.hypershift.openshift.io/nodepool-globalps-enabled": "true"
+        },
+        "name": "test-cntrlplane-4826-r4-head-mf9vx-c9ml8",
+        "namespace": "clusters-test-cntrlplane-4826-r4-hc",
+        "ownerReferences": [
+          {
+            "apiVersion": "cluster.x-k8s.io/v1beta2",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "MachineSet",
+            "name": "test-cntrlplane-4826-r4-head-mf9vx",
+            "uid": "2f95838e-0d58-4067-b29c-66b518b695c9"
+          }
+        ],
+        "resourceVersion": "129836276",
+        "uid": "54c6cb7f-3617-4754-84cf-9ba3a1600472"
+      },
+      "spec": {
+        "bootstrap": {
+          "dataSecretName": "user-data-test-cntrlplane-4826-r4-head-a97c570e"
+        },
+        "clusterName": "test-cntrlplane-4826-r4",
+        "deletion": {
+          "nodeDrainTimeoutSeconds": 0,
+          "nodeVolumeDetachTimeoutSeconds": 0
+        },
+        "infrastructureRef": {
+          "apiGroup": "infrastructure.cluster.x-k8s.io",
+          "kind": "AzureMachine",
+          "name": "test-cntrlplane-4826-r4-head-mf9vx-c9ml8"
+        },
+        "providerID": "azure:///subscriptions/redacted-subscription-id/resourceGroups/test-cntrlplane-4826-hc-test-cntrlplane-4826/providers/Microsoft.Compute/virtualMachines/test-cntrlplane-4826-r4-head-mf9vx-c9ml8",
+        "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+      },
+      "status": {
+        "addresses": [
+          {
+            "address": "test-cntrlplane-4826-r4-head-mf9vx-c9ml8",
+            "type": "InternalDNS"
+          },
+          {
+            "address": "10.0.0.11",
+            "type": "InternalIP"
+          }
+        ],
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-29T02:02:40Z",
+            "message": "",
+            "observedGeneration": 2,
+            "reason": "Available",
+            "status": "True",
+            "type": "Available"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T02:02:40Z",
+            "message": "",
+            "observedGeneration": 2,
+            "reason": "Ready",
+            "status": "True",
+            "type": "Ready"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T02:02:13Z",
+            "message": "* AzureMachine is not up-to-date",
+            "observedGeneration": 2,
+            "reason": "NotUpToDate",
+            "status": "False",
+            "type": "UpToDate"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T01:56:25Z",
+            "message": "",
+            "observedGeneration": 2,
+            "reason": "DataSecretProvided",
+            "status": "True",
+            "type": "BootstrapConfigReady"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T01:57:14Z",
+            "message": "",
+            "observedGeneration": 2,
+            "reason": "Ready",
+            "status": "True",
+            "type": "InfrastructureReady"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T02:02:40Z",
+            "message": "",
+            "observedGeneration": 2,
+            "reason": "NodeHealthy",
+            "status": "True",
+            "type": "NodeHealthy"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T02:02:40Z",
+            "message": "",
+            "observedGeneration": 2,
+            "reason": "NodeReady",
+            "status": "True",
+            "type": "NodeReady"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T01:56:25Z",
+            "message": "",
+            "observedGeneration": 2,
+            "reason": "NotUpdating",
+            "status": "False",
+            "type": "Updating"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T01:56:24Z",
+            "message": "",
+            "observedGeneration": 2,
+            "reason": "NotPaused",
+            "status": "False",
+            "type": "Paused"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T01:56:25Z",
+            "message": "",
+            "observedGeneration": 2,
+            "reason": "NotDeleting",
+            "status": "False",
+            "type": "Deleting"
+          }
+        ],
+        "deprecated": {
+          "v1beta1": {
+            "conditions": [
+              {
+                "lastTransitionTime": "2026-10-29T01:57:14Z",
+                "status": "True",
+                "type": "Ready"
+              },
+              {
+                "lastTransitionTime": "2026-10-29T01:57:14Z",
+                "status": "True",
+                "type": "InfrastructureReady"
+              },
+              {
+                "lastTransitionTime": "2026-10-29T02:02:40Z",
+                "status": "True",
+                "type": "NodeHealthy"
+              }
+            ]
+          }
+        },
+        "initialization": {
+          "infrastructureProvisioned": true
+        },
+        "lastUpdated": "2026-10-29T02:02:13Z",
+        "nodeInfo": {
+          "architecture": "amd64",
+          "bootID": "42cdb29a-0a7b-4f6a-bb63-9c7c66af6ced",
+          "containerRuntimeVersion": "cri-o://1.36.5-202610051813.p2.gc31bc86.assembly.stream.el10",
+          "kernelVersion": "6.12.0-211.67.1.el10_2.x86_64",
+          "kubeProxyVersion": "",
+          "kubeletVersion": "v1.37.1",
+          "machineID": "11dcb11740124526a7960830278eacdc",
+          "operatingSystem": "linux",
+          "osImage": "Red Hat Enterprise Linux CoreOS 10.2.20261022-0 (Coughlan)",
+          "systemUUID": "92733eb9-11b4-4858-ac8c-7c856b8a42a4"
+        },
+        "nodeRef": {
+          "name": "test-cntrlplane-4826-r4-head-mf9vx-c9ml8"
+        },
+        "observedGeneration": 2,
+        "phase": "Running"
+      }
+    },
+    {
+      "apiVersion": "cluster.x-k8s.io/v1beta2",
+      "kind": "Machine",
+      "metadata": {
+        "annotations": {
+          "hypershift.openshift.io/nodePool": "clusters/test-cntrlplane-4826-r4-head",
+          "hypershift.openshift.io/nodePoolTaints": "null",
+          "hypershift.openshift.io/release-version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+        },
+        "creationTimestamp": "2026-10-29T01:46:54Z",
+        "finalizers": [
+          "machine.cluster.x-k8s.io"
+        ],
+        "generation": 2,
+        "labels": {
+          "brco-0b64dd62-test-cntrlplane-4826-r4-head": "brco-0b64dd62-test-cntrlplane-4826-r4-head",
+          "cluster.x-k8s.io/cluster-name": "test-cntrlplane-4826-r4",
+          "cluster.x-k8s.io/deployment-name": "test-cntrlplane-4826-r4-head",
+          "cluster.x-k8s.io/set-name": "test-cntrlplane-4826-r4-head-mf9vx",
+          "machine-template-hash": "1135803942-mf9vx",
+          "managed.hypershift.openshift.io.hypershift.openshift.io/nodepool-globalps-enabled": "true"
+        },
+        "name": "test-cntrlplane-4826-r4-head-mf9vx-kv8zz",
+        "namespace": "clusters-test-cntrlplane-4826-r4-hc",
+        "ownerReferences": [
+          {
+            "apiVersion": "cluster.x-k8s.io/v1beta2",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "MachineSet",
+            "name": "test-cntrlplane-4826-r4-head-mf9vx",
+            "uid": "2f95838e-0d58-4067-b29c-66b518b695c9"
+          }
+        ],
+        "resourceVersion": "129836277",
+        "uid": "987ee104-5de7-4c97-8337-4d1f6e491faf"
+      },
+      "spec": {
+        "bootstrap": {
+          "dataSecretName": "user-data-test-cntrlplane-4826-r4-head-a97c570e"
+        },
+        "clusterName": "test-cntrlplane-4826-r4",
+        "deletion": {
+          "nodeDrainTimeoutSeconds": 0,
+          "nodeVolumeDetachTimeoutSeconds": 0
+        },
+        "infrastructureRef": {
+          "apiGroup": "infrastructure.cluster.x-k8s.io",
+          "kind": "AzureMachine",
+          "name": "test-cntrlplane-4826-r4-head-mf9vx-kv8zz"
+        },
+        "providerID": "azure:///subscriptions/redacted-subscription-id/resourceGroups/test-cntrlplane-4826-hc-test-cntrlplane-4826/providers/Microsoft.Compute/virtualMachines/test-cntrlplane-4826-r4-head-mf9vx-kv8zz",
+        "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+      },
+      "status": {
+        "addresses": [
+          {
+            "address": "test-cntrlplane-4826-r4-head-mf9vx-kv8zz",
+            "type": "InternalDNS"
+          },
+          {
+            "address": "10.0.0.10",
+            "type": "InternalIP"
+          }
+        ],
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-29T01:53:21Z",
+            "message": "",
+            "observedGeneration": 2,
+            "reason": "Available",
+            "status": "True",
+            "type": "Available"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T01:53:21Z",
+            "message": "",
+            "observedGeneration": 2,
+            "reason": "Ready",
+            "status": "True",
+            "type": "Ready"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T01:52:36Z",
+            "message": "* AzureMachine is not up-to-date",
+            "observedGeneration": 2,
+            "reason": "NotUpToDate",
+            "status": "False",
+            "type": "UpToDate"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T01:46:55Z",
+            "message": "",
+            "observedGeneration": 2,
+            "reason": "DataSecretProvided",
+            "status": "True",
+            "type": "BootstrapConfigReady"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T01:47:50Z",
+            "message": "",
+            "observedGeneration": 2,
+            "reason": "Ready",
+            "status": "True",
+            "type": "InfrastructureReady"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T01:53:21Z",
+            "message": "",
+            "observedGeneration": 2,
+            "reason": "NodeHealthy",
+            "status": "True",
+            "type": "NodeHealthy"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T01:53:21Z",
+            "message": "",
+            "observedGeneration": 2,
+            "reason": "NodeReady",
+            "status": "True",
+            "type": "NodeReady"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T01:46:55Z",
+            "message": "",
+            "observedGeneration": 2,
+            "reason": "NotUpdating",
+            "status": "False",
+            "type": "Updating"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T01:46:54Z",
+            "message": "",
+            "observedGeneration": 2,
+            "reason": "NotPaused",
+            "status": "False",
+            "type": "Paused"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T01:46:55Z",
+            "message": "",
+            "observedGeneration": 2,
+            "reason": "NotDeleting",
+            "status": "False",
+            "type": "Deleting"
+          }
+        ],
+        "deprecated": {
+          "v1beta1": {
+            "conditions": [
+              {
+                "lastTransitionTime": "2026-10-29T01:47:50Z",
+                "status": "True",
+                "type": "Ready"
+              },
+              {
+                "lastTransitionTime": "2026-10-29T01:47:50Z",
+                "status": "True",
+                "type": "InfrastructureReady"
+              },
+              {
+                "lastTransitionTime": "2026-10-29T01:53:21Z",
+                "status": "True",
+                "type": "NodeHealthy"
+              }
+            ]
+          }
+        },
+        "initialization": {
+          "infrastructureProvisioned": true
+        },
+        "lastUpdated": "2026-10-29T01:52:36Z",
+        "nodeInfo": {
+          "architecture": "amd64",
+          "bootID": "1b4e384d-ea38-478b-a35b-ef08759a5b99",
+          "containerRuntimeVersion": "cri-o://1.36.5-202610051813.p2.gc31bc86.assembly.stream.el10",
+          "kernelVersion": "6.12.0-211.67.1.el10_2.x86_64",
+          "kubeProxyVersion": "",
+          "kubeletVersion": "v1.37.1",
+          "machineID": "f77c94f7f6244192a7f1dcf50a8cce93",
+          "operatingSystem": "linux",
+          "osImage": "Red Hat Enterprise Linux CoreOS 10.2.20261022-0 (Coughlan)",
+          "systemUUID": "05e94d90-9eb3-4023-a2f0-de09e5dd7aab"
+        },
+        "nodeRef": {
+          "name": "test-cntrlplane-4826-r4-head-mf9vx-kv8zz"
+        },
+        "observedGeneration": 2,
+        "phase": "Running"
+      }
+    },
+    {
+      "apiVersion": "cluster.x-k8s.io/v1beta2",
+      "kind": "Machine",
+      "metadata": {
+        "annotations": {
+          "hypershift.openshift.io/nodePool": "clusters/test-cntrlplane-4826-r4-head",
+          "hypershift.openshift.io/nodePoolTaints": "null",
+          "hypershift.openshift.io/release-version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+        },
+        "creationTimestamp": "2026-10-29T01:39:23Z",
+        "finalizers": [
+          "machine.cluster.x-k8s.io"
+        ],
+        "generation": 2,
+        "labels": {
+          "brco-0b64dd62-test-cntrlplane-4826-r4-head": "brco-0b64dd62-test-cntrlplane-4826-r4-head",
+          "cluster.x-k8s.io/cluster-name": "test-cntrlplane-4826-r4",
+          "cluster.x-k8s.io/deployment-name": "test-cntrlplane-4826-r4-head",
+          "cluster.x-k8s.io/set-name": "test-cntrlplane-4826-r4-head-mf9vx",
+          "machine-template-hash": "1135803942-mf9vx",
+          "managed.hypershift.openshift.io.hypershift.openshift.io/nodepool-globalps-enabled": "true"
+        },
+        "name": "test-cntrlplane-4826-r4-head-mf9vx-n9d8h",
+        "namespace": "clusters-test-cntrlplane-4826-r4-hc",
+        "ownerReferences": [
+          {
+            "apiVersion": "cluster.x-k8s.io/v1beta2",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "MachineSet",
+            "name": "test-cntrlplane-4826-r4-head-mf9vx",
+            "uid": "2f95838e-0d58-4067-b29c-66b518b695c9"
+          }
+        ],
+        "resourceVersion": "129836275",
+        "uid": "9658da3a-0feb-4452-a6e0-42c87c17e408"
+      },
+      "spec": {
+        "bootstrap": {
+          "dataSecretName": "user-data-test-cntrlplane-4826-r4-head-a97c570e"
+        },
+        "clusterName": "test-cntrlplane-4826-r4",
+        "deletion": {
+          "nodeDrainTimeoutSeconds": 0,
+          "nodeVolumeDetachTimeoutSeconds": 0
+        },
+        "infrastructureRef": {
+          "apiGroup": "infrastructure.cluster.x-k8s.io",
+          "kind": "AzureMachine",
+          "name": "test-cntrlplane-4826-r4-head-mf9vx-n9d8h"
+        },
+        "providerID": "azure:///subscriptions/redacted-subscription-id/resourceGroups/test-cntrlplane-4826-hc-test-cntrlplane-4826/providers/Microsoft.Compute/virtualMachines/test-cntrlplane-4826-r4-head-mf9vx-n9d8h",
+        "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+      },
+      "status": {
+        "addresses": [
+          {
+            "address": "test-cntrlplane-4826-r4-head-mf9vx-n9d8h",
+            "type": "InternalDNS"
+          },
+          {
+            "address": "10.0.0.13",
+            "type": "InternalIP"
+          }
+        ],
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-29T01:45:31Z",
+            "message": "",
+            "observedGeneration": 2,
+            "reason": "Available",
+            "status": "True",
+            "type": "Available"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T01:45:31Z",
+            "message": "",
+            "observedGeneration": 2,
+            "reason": "Ready",
+            "status": "True",
+            "type": "Ready"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T01:45:05Z",
+            "message": "* AzureMachine is not up-to-date",
+            "observedGeneration": 2,
+            "reason": "NotUpToDate",
+            "status": "False",
+            "type": "UpToDate"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T01:39:24Z",
+            "message": "",
+            "observedGeneration": 2,
+            "reason": "DataSecretProvided",
+            "status": "True",
+            "type": "BootstrapConfigReady"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T01:40:01Z",
+            "message": "",
+            "observedGeneration": 2,
+            "reason": "Ready",
+            "status": "True",
+            "type": "InfrastructureReady"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T01:45:31Z",
+            "message": "",
+            "observedGeneration": 2,
+            "reason": "NodeHealthy",
+            "status": "True",
+            "type": "NodeHealthy"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T01:45:31Z",
+            "message": "",
+            "observedGeneration": 2,
+            "reason": "NodeReady",
+            "status": "True",
+            "type": "NodeReady"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T01:39:24Z",
+            "message": "",
+            "observedGeneration": 2,
+            "reason": "NotUpdating",
+            "status": "False",
+            "type": "Updating"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T01:39:23Z",
+            "message": "",
+            "observedGeneration": 2,
+            "reason": "NotPaused",
+            "status": "False",
+            "type": "Paused"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T01:39:24Z",
+            "message": "",
+            "observedGeneration": 2,
+            "reason": "NotDeleting",
+            "status": "False",
+            "type": "Deleting"
+          }
+        ],
+        "deprecated": {
+          "v1beta1": {
+            "conditions": [
+              {
+                "lastTransitionTime": "2026-10-29T01:40:01Z",
+                "status": "True",
+                "type": "Ready"
+              },
+              {
+                "lastTransitionTime": "2026-10-29T01:40:01Z",
+                "status": "True",
+                "type": "InfrastructureReady"
+              },
+              {
+                "lastTransitionTime": "2026-10-29T01:45:31Z",
+                "status": "True",
+                "type": "NodeHealthy"
+              }
+            ]
+          }
+        },
+        "initialization": {
+          "infrastructureProvisioned": true
+        },
+        "lastUpdated": "2026-10-29T01:45:05Z",
+        "nodeInfo": {
+          "architecture": "amd64",
+          "bootID": "ff1392d7-dfc1-477d-8091-94c9eeb50622",
+          "containerRuntimeVersion": "cri-o://1.36.5-202610051813.p2.gc31bc86.assembly.stream.el10",
+          "kernelVersion": "6.12.0-211.67.1.el10_2.x86_64",
+          "kubeProxyVersion": "",
+          "kubeletVersion": "v1.37.1",
+          "machineID": "31a360f963b34d8ba23075b5c2f4b390",
+          "operatingSystem": "linux",
+          "osImage": "Red Hat Enterprise Linux CoreOS 10.2.20261022-0 (Coughlan)",
+          "systemUUID": "0dcfb153-33f2-4b9a-b38f-43673455a906"
+        },
+        "nodeRef": {
+          "name": "test-cntrlplane-4826-r4-head-mf9vx-n9d8h"
+        },
+        "observedGeneration": 2,
+        "phase": "Running"
+      }
+    }
+  ],
+  "kind": "List",
+  "metadata": {
+    "resourceVersion": ""
+  }
+}

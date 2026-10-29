@@ -1,0 +1,8 @@
+maxSurge_before=1
+maxSurge_after=3
+generation_before=2
+generation_after=3
+machine_uids_unchanged=true
+machineset_uids_unchanged=true
+md_revision_after=2
+completed_utc=2026-10-28T14:42:39Z

@@ -1,0 +1,44 @@
+[
+  {
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/test-cntrlplane-4826-hc-test-cntrlplane-4826",
+    "location": "eastus",
+    "managedBy": null,
+    "name": "test-cntrlplane-4826-hc-test-cntrlplane-4826",
+    "properties": {
+      "provisioningState": "Succeeded"
+    },
+    "tags": {
+      "openshift_creationDate": "2026-10-27T19:20:58.914181+00:00",
+      "openshift_expiryDate": "2026-11-30"
+    },
+    "type": "Microsoft.Resources/resourceGroups"
+  },
+  {
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/test-cntrlplane-4826-hc-nsg-test-cntrlplane-4826",
+    "location": "eastus",
+    "managedBy": null,
+    "name": "test-cntrlplane-4826-hc-nsg-test-cntrlplane-4826",
+    "properties": {
+      "provisioningState": "Succeeded"
+    },
+    "tags": {
+      "openshift_creationDate": "2026-10-27T19:20:58.914181+00:00",
+      "openshift_expiryDate": "2026-11-30"
+    },
+    "type": "Microsoft.Resources/resourceGroups"
+  },
+  {
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/test-cntrlplane-4826-hc-vnet-test-cntrlplane-4826",
+    "location": "eastus",
+    "managedBy": null,
+    "name": "test-cntrlplane-4826-hc-vnet-test-cntrlplane-4826",
+    "properties": {
+      "provisioningState": "Succeeded"
+    },
+    "tags": {
+      "openshift_creationDate": "2026-10-27T19:20:58.914181+00:00",
+      "openshift_expiryDate": "2026-11-30"
+    },
+    "type": "Microsoft.Resources/resourceGroups"
+  }
+]

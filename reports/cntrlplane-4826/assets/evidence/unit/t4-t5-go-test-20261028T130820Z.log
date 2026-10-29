@@ -1,0 +1,8 @@
+ok  	github.com/openshift/hypershift/hypershift-operator/controllers/nodepool	2.974s
+ok  	github.com/openshift/hypershift/hypershift-operator/controllers/nodepool/apiserver-haproxy	2.053s [no tests to run]
+?   	github.com/openshift/hypershift/hypershift-operator/controllers/nodepool/instancetype	[no test files]
+ok  	github.com/openshift/hypershift/hypershift-operator/controllers/nodepool/instancetype/aws	1.502s [no tests to run]
+ok  	github.com/openshift/hypershift/hypershift-operator/controllers/nodepool/instancetype/azure	1.215s [no tests to run]
+ok  	github.com/openshift/hypershift/hypershift-operator/controllers/nodepool/kubevirt	2.158s [no tests to run]
+ok  	github.com/openshift/hypershift/hypershift-operator/controllers/nodepool/metrics	2.463s [no tests to run]
+ok  	github.com/openshift/hypershift/hypershift-operator/controllers/nodepool/openstack	1.734s [no tests to run]

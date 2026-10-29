@@ -1,0 +1,316 @@
+{
+  "apiVersion": "apps/v1",
+  "kind": "Deployment",
+  "metadata": {
+    "annotations": {
+      "deployment.kubernetes.io/revision": "32",
+      "hypershift.openshift.io/install-cli-version": "openshift/hypershift: d1790a739bfc51d115968f11a93e66e87dc5ec7c. Latest supported OCP: 5.1.0"
+    },
+    "creationTimestamp": "2026-01-05T14:41:27Z",
+    "generation": 33,
+    "name": "operator",
+    "namespace": "hypershift",
+    "resourceVersion": "129729718",
+    "uid": "21cdbcf1-2b12-422a-9406-bf92bfeebf06"
+  },
+  "spec": {
+    "progressDeadlineSeconds": 600,
+    "replicas": 2,
+    "revisionHistoryLimit": 10,
+    "selector": {
+      "matchLabels": {
+        "name": "operator"
+      }
+    },
+    "strategy": {
+      "rollingUpdate": {
+        "maxSurge": "25%",
+        "maxUnavailable": "25%"
+      },
+      "type": "RollingUpdate"
+    },
+    "template": {
+      "metadata": {
+        "annotations": {
+          "kubectl.kubernetes.io/restartedAt": "2026-10-28T15:20:55-04:00"
+        },
+        "labels": {
+          "app": "operator",
+          "hypershift.openshift.io/operator-component": "operator",
+          "name": "operator"
+        }
+      },
+      "spec": {
+        "affinity": {
+          "podAntiAffinity": {
+            "preferredDuringSchedulingIgnoredDuringExecution": [
+              {
+                "podAffinityTerm": {
+                  "labelSelector": {
+                    "matchExpressions": [
+                      {
+                        "key": "name",
+                        "operator": "In",
+                        "values": [
+                          "operator"
+                        ]
+                      }
+                    ]
+                  },
+                  "topologyKey": "kubernetes.io/hostname"
+                },
+                "weight": 10
+              }
+            ]
+          }
+        },
+        "containers": [
+          {
+            "args": [
+              "run",
+              "--namespace=$(MY_NAMESPACE)",
+              "--pod-name=$(MY_NAME)",
+              "--metrics-addr=:9000",
+              "--enable-dedicated-request-serving-isolation=true",
+              "--enable-ocp-cluster-monitoring=false",
+              "--enable-ci-debug-output=false",
+              "--private-platform=None",
+              "--cert-dir=/var/run/secrets/serving-cert",
+              "--oidc-storage-provider-s3-bucket-name=tester-dev",
+              "--oidc-storage-provider-s3-region=us-east-1",
+              "--oidc-storage-provider-s3-credentials=/etc/oidc-storage-provider-s3-creds/credentials"
+            ],
+            "command": [
+              "/usr/bin/hypershift-operator"
+            ],
+            "env": [
+              {
+                "name": "MY_NAMESPACE",
+                "valueFrom": {
+                  "fieldRef": {
+                    "apiVersion": "v1",
+                    "fieldPath": "metadata.namespace"
+                  }
+                }
+              },
+              {
+                "name": "MY_NAME",
+                "valueFrom": {
+                  "fieldRef": {
+                    "apiVersion": "v1",
+                    "fieldPath": "metadata.name"
+                  }
+                }
+              },
+              {
+                "name": "METRICS_SET",
+                "value": "Telemetry"
+              },
+              {
+                "name": "CERT_ROTATION_SCALE",
+                "value": "24h0m0s"
+              },
+              {
+                "name": "KUBE_FEATURE_WatchListClient",
+                "value": "false"
+              },
+              {
+                "name": "ENABLE_ETCD_RECOVERY",
+                "value": "1"
+              },
+              {
+                "name": "CAPI_STORAGE_VERSION",
+                "value": "v1beta2"
+              },
+              {
+                "name": "PLATFORMS_INSTALLED",
+                "value": "AWS"
+              }
+            ],
+            "image": "quay.io/acm-d/rhtap-hypershift-operator@sha256:d7eb652dbbfac8ae9866b413c7125c86961a5cfb46396eb31774e0b3e171a3a5",
+            "imagePullPolicy": "IfNotPresent",
+            "livenessProbe": {
+              "failureThreshold": 5,
+              "httpGet": {
+                "path": "/healthz",
+                "port": 8081,
+                "scheme": "HTTP"
+              },
+              "initialDelaySeconds": 60,
+              "periodSeconds": 60,
+              "successThreshold": 1,
+              "timeoutSeconds": 5
+            },
+            "name": "operator",
+            "ports": [
+              {
+                "containerPort": 9000,
+                "name": "metrics",
+                "protocol": "TCP"
+              },
+              {
+                "containerPort": 9443,
+                "name": "manager",
+                "protocol": "TCP"
+              },
+              {
+                "containerPort": 8081,
+                "name": "health",
+                "protocol": "TCP"
+              }
+            ],
+            "readinessProbe": {
+              "failureThreshold": 3,
+              "httpGet": {
+                "path": "/readyz",
+                "port": 8081,
+                "scheme": "HTTP"
+              },
+              "initialDelaySeconds": 15,
+              "periodSeconds": 60,
+              "successThreshold": 1,
+              "timeoutSeconds": 5
+            },
+            "resources": {
+              "requests": {
+                "cpu": "10m",
+                "memory": "150Mi"
+              }
+            },
+            "securityContext": {
+              "allowPrivilegeEscalation": false,
+              "capabilities": {
+                "drop": [
+                  "ALL"
+                ]
+              },
+              "privileged": false,
+              "readOnlyRootFilesystem": true,
+              "runAsUser": 1000,
+              "seccompProfile": {
+                "type": "RuntimeDefault"
+              }
+            },
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "FallbackToLogsOnError",
+            "volumeMounts": [
+              {
+                "mountPath": "/var/run/secrets/serving-cert",
+                "name": "serving-cert"
+              },
+              {
+                "mountPath": "/etc/oidc-storage-provider-s3-creds",
+                "name": "oidc-storage-provider-s3-creds"
+              },
+              {
+                "mountPath": "/etc/pki/ca-trust/extracted/pem",
+                "name": "trusted-ca-bundle",
+                "readOnly": true
+              }
+            ]
+          }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "initContainers": [
+          {
+            "args": [
+              "init"
+            ],
+            "command": [
+              "/usr/bin/hypershift-operator"
+            ],
+            "image": "quay.io/acm-d/rhtap-hypershift-operator@sha256:d7eb652dbbfac8ae9866b413c7125c86961a5cfb46396eb31774e0b3e171a3a5",
+            "imagePullPolicy": "IfNotPresent",
+            "name": "init-environment",
+            "resources": {},
+            "securityContext": {
+              "privileged": false,
+              "readOnlyRootFilesystem": true,
+              "runAsUser": 1000
+            },
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "FallbackToLogsOnError",
+            "volumeMounts": [
+              {
+                "mountPath": "/var/run/ca-trust",
+                "name": "openshift-config-managed-trusted-ca-bundle",
+                "readOnly": true
+              },
+              {
+                "mountPath": "/trust-bundle",
+                "name": "trusted-ca-bundle"
+              }
+            ]
+          }
+        ],
+        "priorityClassName": "hypershift-operator",
+        "restartPolicy": "Always",
+        "schedulerName": "default-scheduler",
+        "securityContext": {},
+        "serviceAccount": "operator",
+        "serviceAccountName": "operator",
+        "terminationGracePeriodSeconds": 30,
+        "volumes": [
+          {
+            "name": "serving-cert",
+            "secret": {
+              "defaultMode": 420,
+              "optional": true,
+              "secretName": "manager-serving-cert"
+            }
+          },
+          {
+            "name": "oidc-storage-provider-s3-creds",
+            "secret": {
+              "defaultMode": 420,
+              "secretName": "hypershift-operator-oidc-provider-s3-credentials"
+            }
+          },
+          {
+            "configMap": {
+              "defaultMode": 420,
+              "items": [
+                {
+                  "key": "ca-bundle.crt",
+                  "path": "tls-ca-bundle.pem"
+                }
+              ],
+              "name": "openshift-config-managed-trusted-ca-bundle",
+              "optional": true
+            },
+            "name": "openshift-config-managed-trusted-ca-bundle"
+          },
+          {
+            "emptyDir": {},
+            "name": "trusted-ca-bundle"
+          }
+        ]
+      }
+    }
+  },
+  "status": {
+    "availableReplicas": 2,
+    "conditions": [
+      {
+        "lastTransitionTime": "2026-10-23T10:33:17Z",
+        "lastUpdateTime": "2026-10-23T10:33:17Z",
+        "message": "Deployment has minimum availability.",
+        "reason": "MinimumReplicasAvailable",
+        "status": "True",
+        "type": "Available"
+      },
+      {
+        "lastTransitionTime": "2026-07-22T15:58:10Z",
+        "lastUpdateTime": "2026-10-28T19:23:26Z",
+        "message": "ReplicaSet \"operator-84454f479\" has successfully progressed.",
+        "reason": "NewReplicaSetAvailable",
+        "status": "True",
+        "type": "Progressing"
+      }
+    ],
+    "observedGeneration": 33,
+    "readyReplicas": 2,
+    "replicas": 2,
+    "updatedReplicas": 2
+  }
+}

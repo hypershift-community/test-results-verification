@@ -1,0 +1,10 @@
+11bfd7ec73c98dc75cc108c1e46070c976bb73d7e614b00c798386ea2635891c  .test-evidence/CNTRLPLANE-4826-20261028-r2/cleanup/20261028T155605Z/final-kubernetes-state/operator-deployment.json
+202481be62bf9756d883369b9b7cd8f68716a1fbe7a71b21a63d0e8e3f9333ec  .test-evidence/CNTRLPLANE-4826-20261028-r2/cleanup/20261028T155605Z/final-kubernetes-state/meta.txt
+678f62ef975f154928bca2f6b799babcfac7d0eb53ef2e6834fce5f05c1f50b6  .test-evidence/CNTRLPLANE-4826-20261028-r2/cleanup/20261028T155605Z/final-kubernetes-state/operator-pods-sanitized.json
+7a779468a2dde976a9b896541df1e4ef805e813093bd5edb40ef1a6eea588edf  .test-evidence/CNTRLPLANE-4826-20261028-r2/cleanup/20261028T155605Z/final-kubernetes-state/capi-leftovers.json
+7a779468a2dde976a9b896541df1e4ef805e813093bd5edb40ef1a6eea588edf  .test-evidence/CNTRLPLANE-4826-20261028-r2/cleanup/20261028T155605Z/final-kubernetes-state/hostedclusters.json
+7a779468a2dde976a9b896541df1e4ef805e813093bd5edb40ef1a6eea588edf  .test-evidence/CNTRLPLANE-4826-20261028-r2/cleanup/20261028T155605Z/final-kubernetes-state/nodepools.json
+c0b90e2bd4b152ac8e0cbbf9c041b42822fb8af7b1dec80e1d74951d40f057c0  .test-evidence/CNTRLPLANE-4826-20261028-r2/cleanup/20261028T155605Z/final-kubernetes-state/commands.txt
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  .test-evidence/CNTRLPLANE-4826-20261028-r2/cleanup/20261028T155605Z/final-kubernetes-state/capi-query.stderr
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  .test-evidence/CNTRLPLANE-4826-20261028-r2/cleanup/20261028T155605Z/final-kubernetes-state/hcp-namespace.json
+f74f9bce7aeca431157d4cffd66a3dafe141075e819bcb82f6b553b376096fca  .test-evidence/CNTRLPLANE-4826-20261028-r2/cleanup/20261028T155605Z/final-kubernetes-state/summary.json

@@ -1,0 +1,5 @@
+{
+  "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com",
+  "name": "test.hcp.example.com",
+  "recordSetCount": 62
+}

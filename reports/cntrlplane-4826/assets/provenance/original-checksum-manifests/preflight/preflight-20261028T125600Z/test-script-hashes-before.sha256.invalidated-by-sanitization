@@ -1,0 +1,10 @@
+01af5258affc18dfaab449b6a2c3a079919e79f9aea7c6b61c3760fb156f9616  /workspace/test-harness/watch-machine-join.sh
+0e8c146e0e9e30c96c8a9c552cbde98451f741a57006f8c91b0bc245e193868b  /workspace/test-harness/README.md
+1e8f21dd1792eb6c81abfb53db42dfcbf06d6cbbe0c16c75fb7c198642aada94  /workspace/test-harness/nodepool-create.sh
+3b81162a5c5db35ccdbd9bde7d2f9dfe3c3c61511c2708657468569002780691  /workspace/test-harness/wait-nodepool-ready.sh
+40e52c609ec623a3d845a49e5f7af3209b1e943caa54fff50fd0bd22a9639b4b  /workspace/test-harness/preflight.sh
+57d45422911435ccb2aa3b6811035a4b037d6e9c1239445d2f0c07fafdd654c0  /workspace/test-harness/cleanup.sh
+59df5a40d840137ec598a4428fbd48844fd4323849a5d0ec064732b1aa6073bf  /workspace/test-harness/common.sh
+986ea302df004b8f4f40d6ad3c002f42dd56de624ab19c35062f5b64c1ac9226  /workspace/test-harness/watch-rollout.sh
+9aafee57bee0983926f24b682ec364b34325ed40848b908d688eb8d195ca2920  /workspace/test-harness/operator-image.sh
+f2beebef9bacd8a8866531fa023487312c345d4fb07813d42341af86b88c6af5  /workspace/test-harness/snapshot.sh

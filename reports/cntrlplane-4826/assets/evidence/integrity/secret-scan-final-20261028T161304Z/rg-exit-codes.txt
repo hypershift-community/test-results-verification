@@ -1,0 +1,3 @@
+private_key_scan_rc=1
+kubeconfig_field_scan_rc=1
+bearer_scan_rc=0

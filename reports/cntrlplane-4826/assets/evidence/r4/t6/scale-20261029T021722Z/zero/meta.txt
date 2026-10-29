@@ -1,0 +1,3 @@
+KUBECONFIG=/home/tester/management.kubeconfig
+NP=test-cntrlplane-4826-r4-scale
+captured_at=2026-10-29T02:25:02Z

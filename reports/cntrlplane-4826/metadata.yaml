@@ -1,0 +1,22 @@
+# Report metadata — see docs/format.md#html-bundle-metadata
+plan: ""
+jira_key: CNTRLPLANE-4826
+format: html-bundle
+date: 2026-10-29
+verdict: pass
+scenario_count: 8
+pass_count: 8
+ci_verified: false
+has_derived_markdown: false
+pr:
+  repo: openshift/hypershift
+  number: 10084
+  url: https://github.com/openshift/hypershift/pull/10084
+tester: "Bryan Cox (@bryan-cox)"
+tags:
+  - hypershift
+  - nodepool
+  - replace
+  - capi
+  - azure
+  - cntrlplane-4826

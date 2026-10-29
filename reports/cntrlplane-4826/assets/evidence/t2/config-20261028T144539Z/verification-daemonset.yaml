@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: test-cntrlplane-4826-t2-verify-20261028t144539z
+  namespace: default
+  labels:
+    app: test-cntrlplane-4826-t2-verify-20261028t144539z
+spec:
+  selector:
+    matchLabels:
+      app: test-cntrlplane-4826-t2-verify-20261028t144539z
+  template:
+    metadata:
+      labels:
+        app: test-cntrlplane-4826-t2-verify-20261028t144539z
+    spec:
+      nodeSelector:
+        hypershift.openshift.io/nodePool: test-cntrlplane-4826-patched
+      containers:
+      - name: verify
+        image: quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601
+        command: ["/bin/sh", "-c", "cat /host/etc/custom-config; sleep infinity"]
+        volumeMounts:
+        - name: custom-config
+          mountPath: /host/etc/custom-config
+          readOnly: true
+      volumes:
+      - name: custom-config
+        hostPath:
+          path: /etc/custom-config
+          type: File

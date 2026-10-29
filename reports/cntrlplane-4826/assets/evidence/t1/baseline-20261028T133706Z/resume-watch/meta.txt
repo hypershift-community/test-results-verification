@@ -1,0 +1,4 @@
+resume_started_utc=2026-10-28T14:01:55Z
+original_patch_utc=2026-10-28T13:37:15Z
+fixed_deadline_utc=2026-10-28T14:07:15Z
+reason=runner interrupted after stall was detected; continue read-only observation to original deadline

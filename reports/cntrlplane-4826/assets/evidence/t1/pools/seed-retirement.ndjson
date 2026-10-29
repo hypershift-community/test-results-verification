@@ -1,0 +1,13 @@
+{"azureMachines":3,"guestNodes":3,"machineDeploymentExists":true,"machines":3,"nodepoolExists":true,"timestamp":"2026-10-28T13:22:37Z"}
+{"azureMachines":3,"guestNodes":3,"machineDeploymentExists":true,"machines":3,"nodepoolExists":true,"timestamp":"2026-10-28T13:22:53Z"}
+{"azureMachines":3,"guestNodes":3,"machineDeploymentExists":true,"machines":3,"nodepoolExists":true,"timestamp":"2026-10-28T13:23:09Z"}
+{"azureMachines":2,"guestNodes":2,"machineDeploymentExists":true,"machines":2,"nodepoolExists":true,"timestamp":"2026-10-28T13:23:24Z"}
+{"azureMachines":1,"guestNodes":1,"machineDeploymentExists":true,"machines":1,"nodepoolExists":true,"timestamp":"2026-10-28T13:23:40Z"}
+{"azureMachines":1,"guestNodes":1,"machineDeploymentExists":true,"machines":1,"nodepoolExists":true,"timestamp":"2026-10-28T13:23:56Z"}
+{"azureMachines":1,"guestNodes":1,"machineDeploymentExists":true,"machines":1,"nodepoolExists":true,"timestamp":"2026-10-28T13:24:11Z"}
+{"azureMachines":1,"guestNodes":1,"machineDeploymentExists":true,"machines":1,"nodepoolExists":true,"timestamp":"2026-10-28T13:24:27Z"}
+{"azureMachines":1,"guestNodes":1,"machineDeploymentExists":true,"machines":1,"nodepoolExists":true,"timestamp":"2026-10-28T13:24:43Z"}
+{"azureMachines":1,"guestNodes":1,"machineDeploymentExists":true,"machines":1,"nodepoolExists":true,"timestamp":"2026-10-28T13:24:59Z"}
+{"azureMachines":1,"guestNodes":1,"machineDeploymentExists":true,"machines":1,"nodepoolExists":true,"timestamp":"2026-10-28T13:25:14Z"}
+{"azureMachines":0,"guestNodes":0,"machineDeploymentExists":true,"machines":0,"nodepoolExists":false,"timestamp":"2026-10-28T13:25:30Z"}
+{"azureMachines":0,"guestNodes":0,"machineDeploymentExists":false,"machines":0,"nodepoolExists":false,"timestamp":"2026-10-28T13:25:46Z"}

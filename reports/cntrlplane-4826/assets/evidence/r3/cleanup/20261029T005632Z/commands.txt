@@ -1,0 +1,2 @@
+2026-10-29T00:56:32Z kubectl delete nodepool test-cntrlplane-4826-r3-base -n clusters --wait=false
+2026-10-29T00:56:32Z kubectl delete nodepool test-cntrlplane-4826-r3-head -n clusters --wait=false

@@ -1,0 +1,1 @@
+nodepools=0 machinedeployments=0 machinesets=0 machines=0 guest_nodes=0

@@ -1,0 +1,687 @@
+{
+  "apiVersion": "v1",
+  "items": [
+    {
+      "apiVersion": "infrastructure.cluster.x-k8s.io/v1beta1",
+      "kind": "AzureMachine",
+      "metadata": {
+        "annotations": {
+          "cluster-api-provider-azure": "true",
+          "cluster.x-k8s.io/cloned-from-groupkind": "AzureMachineTemplate.infrastructure.cluster.x-k8s.io",
+          "cluster.x-k8s.io/cloned-from-name": "test-cntrlplane-4826-r3-base-776e47ca",
+          "clusterctl.cluster.x-k8s.io/block-move": "true",
+          "hypershift.openshift.io/nodePool": "clusters/test-cntrlplane-4826-r3-base",
+          "hypershift.openshift.io/release-version": "5.1.0-0.nightly-multi-2026-10-27-082258",
+          "sigs.k8s.io/cluster-api-provider-azure-last-applied-tags-vm": "{\"kubernetes.io_cluster_test-cntrlplane-4826\":\"owned\"}"
+        },
+        "creationTimestamp": "2026-10-29T00:09:32Z",
+        "finalizers": [
+          "azuremachine.infrastructure.cluster.x-k8s.io"
+        ],
+        "generation": 3,
+        "labels": {
+          "brco-f6265508-test-cntrlplane-4826-r3-base": "brco-f6265508-test-cntrlplane-4826-r3-base",
+          "cluster.x-k8s.io/cluster-name": "test-cntrlplane-4826",
+          "cluster.x-k8s.io/deployment-name": "test-cntrlplane-4826-r3-base",
+          "cluster.x-k8s.io/set-name": "test-cntrlplane-4826-r3-base-csfx6",
+          "machine-template-hash": "284482286-csfx6"
+        },
+        "name": "test-cntrlplane-4826-r3-base-csfx6-5dx75",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "ownerReferences": [
+          {
+            "apiVersion": "cluster.x-k8s.io/v1beta2",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Machine",
+            "name": "test-cntrlplane-4826-r3-base-csfx6-5dx75",
+            "uid": "022dac79-c542-4436-a832-82f37d3ee6f4"
+          }
+        ],
+        "resourceVersion": "129803394",
+        "uid": "50cf052d-9267-4117-88ec-194e271b6a13"
+      },
+      "spec": {
+        "image": {
+          "marketplace": {
+            "offer": "aro4",
+            "publisher": "azureopenshift",
+            "sku": "aro_5-0_x64_gen2",
+            "thirdPartyImage": false,
+            "version": "10.2.20260423"
+          }
+        },
+        "networkInterfaces": [
+          {
+            "privateIPConfigs": 1,
+            "subnetName": "default"
+          }
+        ],
+        "osDisk": {
+          "cachingType": "None",
+          "diskSizeGB": 120,
+          "managedDisk": {
+            "storageAccountType": "Premium_LRS"
+          },
+          "osType": ""
+        },
+        "providerID": "azure:///subscriptions/redacted-subscription-id/resourceGroups/test-cntrlplane-4826-hc-test-cntrlplane-4826/providers/Microsoft.Compute/virtualMachines/test-cntrlplane-4826-r3-base-csfx6-5dx75",
+        "securityProfile": {
+          "encryptionAtHost": true
+        },
+        "sshPublicKey": "c3NoLXJzYSBBQUFBQjNOemFDMXljMkVBQUFBREFRQUJBQUFCQVFDTGFjOTR4dUE4QjkyMEtjejhKNjhUdmZCRjQyR2UwUllXSUx3Lzd6dDhUQlU5ell5Q0Q2K0ZlekFwWndLRjB1V3luMGVBQmlBWVdIV0tKbENxS0VIT2hOQmV2Mkx3S0dnZHFqM0dvcHV2N3RpZFVqSVpqYi9DVWtjQVRZUWhMWkxVTCs3eWkzRThKNHdhYkxEMWVNS1p1U3ZmMUsxT0RwVUFXYTkwbWVmR0FBOVdIVEhMcnF1UUpWdC9JT0JKN1ROZFNwMDVuM0Ywa29xZlE2empwRlFYMk8zaWJUc29yR3ZEekdhYS9yUENxQWhTSjRJaEhnMDNVb3FBbVlraW51NTFvVEcxRlRXaTh2b00vRVJ4TlduamNUSElET1JmYmo2bFVyZ3Zkci9MZGtqc2dFcENiNEMxUS9IbW5MRHVpTEdPM2tNZ2cyOHFzZ0ZmTHloUjl3ay8K",
+        "vmSize": "Standard_D4s_v5"
+      },
+      "status": {
+        "addresses": [
+          {
+            "address": "test-cntrlplane-4826-r3-base-csfx6-5dx75",
+            "type": "InternalDNS"
+          },
+          {
+            "address": "10.0.0.12",
+            "type": "InternalIP"
+          }
+        ],
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-29T00:10:27Z",
+            "status": "True",
+            "type": "Ready"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T00:09:44Z",
+            "status": "True",
+            "type": "AvailabilitySetReady"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T00:10:27Z",
+            "status": "True",
+            "type": "DisksReady"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T00:09:44Z",
+            "status": "True",
+            "type": "NetworkInterfacesReady"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T00:10:27Z",
+            "status": "True",
+            "type": "VMRunning"
+          }
+        ],
+        "ready": true,
+        "vmState": "Succeeded"
+      }
+    },
+    {
+      "apiVersion": "infrastructure.cluster.x-k8s.io/v1beta1",
+      "kind": "AzureMachine",
+      "metadata": {
+        "annotations": {
+          "cluster-api-provider-azure": "true",
+          "cluster.x-k8s.io/cloned-from-groupkind": "AzureMachineTemplate.infrastructure.cluster.x-k8s.io",
+          "cluster.x-k8s.io/cloned-from-name": "test-cntrlplane-4826-r3-base-776e47ca",
+          "clusterctl.cluster.x-k8s.io/block-move": "true",
+          "hypershift.openshift.io/nodePool": "clusters/test-cntrlplane-4826-r3-base",
+          "hypershift.openshift.io/release-version": "5.1.0-0.nightly-multi-2026-10-27-082258",
+          "sigs.k8s.io/cluster-api-provider-azure-last-applied-tags-vm": "{\"kubernetes.io_cluster_test-cntrlplane-4826\":\"owned\"}"
+        },
+        "creationTimestamp": "2026-10-29T00:16:49Z",
+        "finalizers": [
+          "azuremachine.infrastructure.cluster.x-k8s.io"
+        ],
+        "generation": 3,
+        "labels": {
+          "brco-f6265508-test-cntrlplane-4826-r3-base": "brco-f6265508-test-cntrlplane-4826-r3-base",
+          "cluster.x-k8s.io/cluster-name": "test-cntrlplane-4826",
+          "cluster.x-k8s.io/deployment-name": "test-cntrlplane-4826-r3-base",
+          "cluster.x-k8s.io/set-name": "test-cntrlplane-4826-r3-base-csfx6",
+          "machine-template-hash": "284482286-csfx6"
+        },
+        "name": "test-cntrlplane-4826-r3-base-csfx6-jjbc7",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "ownerReferences": [
+          {
+            "apiVersion": "cluster.x-k8s.io/v1beta2",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Machine",
+            "name": "test-cntrlplane-4826-r3-base-csfx6-jjbc7",
+            "uid": "551fe690-74cd-4169-9c95-b7e7a4e1dce2"
+          }
+        ],
+        "resourceVersion": "129805336",
+        "uid": "8f9cd2f7-cb03-4b54-8e2c-3a9164e08d30"
+      },
+      "spec": {
+        "image": {
+          "marketplace": {
+            "offer": "aro4",
+            "publisher": "azureopenshift",
+            "sku": "aro_5-0_x64_gen2",
+            "thirdPartyImage": false,
+            "version": "10.2.20260423"
+          }
+        },
+        "networkInterfaces": [
+          {
+            "privateIPConfigs": 1,
+            "subnetName": "default"
+          }
+        ],
+        "osDisk": {
+          "cachingType": "None",
+          "diskSizeGB": 120,
+          "managedDisk": {
+            "storageAccountType": "Premium_LRS"
+          },
+          "osType": ""
+        },
+        "providerID": "azure:///subscriptions/redacted-subscription-id/resourceGroups/test-cntrlplane-4826-hc-test-cntrlplane-4826/providers/Microsoft.Compute/virtualMachines/test-cntrlplane-4826-r3-base-csfx6-jjbc7",
+        "securityProfile": {
+          "encryptionAtHost": true
+        },
+        "sshPublicKey": "c3NoLXJzYSBBQUFBQjNOemFDMXljMkVBQUFBREFRQUJBQUFCQVFDTGFjOTR4dUE4QjkyMEtjejhKNjhUdmZCRjQyR2UwUllXSUx3Lzd6dDhUQlU5ell5Q0Q2K0ZlekFwWndLRjB1V3luMGVBQmlBWVdIV0tKbENxS0VIT2hOQmV2Mkx3S0dnZHFqM0dvcHV2N3RpZFVqSVpqYi9DVWtjQVRZUWhMWkxVTCs3eWkzRThKNHdhYkxEMWVNS1p1U3ZmMUsxT0RwVUFXYTkwbWVmR0FBOVdIVEhMcnF1UUpWdC9JT0JKN1ROZFNwMDVuM0Ywa29xZlE2empwRlFYMk8zaWJUc29yR3ZEekdhYS9yUENxQWhTSjRJaEhnMDNVb3FBbVlraW51NTFvVEcxRlRXaTh2b00vRVJ4TlduamNUSElET1JmYmo2bFVyZ3Zkci9MZGtqc2dFcENiNEMxUS9IbW5MRHVpTEdPM2tNZ2cyOHFzZ0ZmTHloUjl3ay8K",
+        "vmSize": "Standard_D4s_v5"
+      },
+      "status": {
+        "addresses": [
+          {
+            "address": "test-cntrlplane-4826-r3-base-csfx6-jjbc7",
+            "type": "InternalDNS"
+          },
+          {
+            "address": "10.0.0.11",
+            "type": "InternalIP"
+          }
+        ],
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-29T00:17:45Z",
+            "status": "True",
+            "type": "Ready"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T00:17:01Z",
+            "status": "True",
+            "type": "AvailabilitySetReady"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T00:17:45Z",
+            "status": "True",
+            "type": "DisksReady"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T00:17:01Z",
+            "status": "True",
+            "type": "NetworkInterfacesReady"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T00:17:45Z",
+            "status": "True",
+            "type": "VMRunning"
+          }
+        ],
+        "ready": true,
+        "vmState": "Succeeded"
+      }
+    },
+    {
+      "apiVersion": "infrastructure.cluster.x-k8s.io/v1beta1",
+      "kind": "AzureMachine",
+      "metadata": {
+        "annotations": {
+          "cluster-api-provider-azure": "true",
+          "cluster.x-k8s.io/cloned-from-groupkind": "AzureMachineTemplate.infrastructure.cluster.x-k8s.io",
+          "cluster.x-k8s.io/cloned-from-name": "test-cntrlplane-4826-r3-base-776e47ca",
+          "clusterctl.cluster.x-k8s.io/block-move": "true",
+          "hypershift.openshift.io/nodePool": "clusters/test-cntrlplane-4826-r3-base",
+          "hypershift.openshift.io/release-version": "5.1.0-0.nightly-multi-2026-10-27-082258",
+          "sigs.k8s.io/cluster-api-provider-azure-last-applied-tags-vm": "{\"kubernetes.io_cluster_test-cntrlplane-4826\":\"owned\"}"
+        },
+        "creationTimestamp": "2026-10-29T00:02:40Z",
+        "finalizers": [
+          "azuremachine.infrastructure.cluster.x-k8s.io"
+        ],
+        "generation": 3,
+        "labels": {
+          "brco-f6265508-test-cntrlplane-4826-r3-base": "brco-f6265508-test-cntrlplane-4826-r3-base",
+          "cluster.x-k8s.io/cluster-name": "test-cntrlplane-4826",
+          "cluster.x-k8s.io/deployment-name": "test-cntrlplane-4826-r3-base",
+          "cluster.x-k8s.io/set-name": "test-cntrlplane-4826-r3-base-csfx6",
+          "machine-template-hash": "284482286-csfx6"
+        },
+        "name": "test-cntrlplane-4826-r3-base-csfx6-v29zk",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "ownerReferences": [
+          {
+            "apiVersion": "cluster.x-k8s.io/v1beta2",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Machine",
+            "name": "test-cntrlplane-4826-r3-base-csfx6-v29zk",
+            "uid": "38b9d1ab-3834-443c-8bb0-a603c9160761"
+          }
+        ],
+        "resourceVersion": "129801821",
+        "uid": "6591be56-095c-414c-b2fc-a3df8c7b7060"
+      },
+      "spec": {
+        "image": {
+          "marketplace": {
+            "offer": "aro4",
+            "publisher": "azureopenshift",
+            "sku": "aro_5-0_x64_gen2",
+            "thirdPartyImage": false,
+            "version": "10.2.20260423"
+          }
+        },
+        "networkInterfaces": [
+          {
+            "privateIPConfigs": 1,
+            "subnetName": "default"
+          }
+        ],
+        "osDisk": {
+          "cachingType": "None",
+          "diskSizeGB": 120,
+          "managedDisk": {
+            "storageAccountType": "Premium_LRS"
+          },
+          "osType": ""
+        },
+        "providerID": "azure:///subscriptions/redacted-subscription-id/resourceGroups/test-cntrlplane-4826-hc-test-cntrlplane-4826/providers/Microsoft.Compute/virtualMachines/test-cntrlplane-4826-r3-base-csfx6-v29zk",
+        "securityProfile": {
+          "encryptionAtHost": true
+        },
+        "sshPublicKey": "c3NoLXJzYSBBQUFBQjNOemFDMXljMkVBQUFBREFRQUJBQUFCQVFDTGFjOTR4dUE4QjkyMEtjejhKNjhUdmZCRjQyR2UwUllXSUx3Lzd6dDhUQlU5ell5Q0Q2K0ZlekFwWndLRjB1V3luMGVBQmlBWVdIV0tKbENxS0VIT2hOQmV2Mkx3S0dnZHFqM0dvcHV2N3RpZFVqSVpqYi9DVWtjQVRZUWhMWkxVTCs3eWkzRThKNHdhYkxEMWVNS1p1U3ZmMUsxT0RwVUFXYTkwbWVmR0FBOVdIVEhMcnF1UUpWdC9JT0JKN1ROZFNwMDVuM0Ywa29xZlE2empwRlFYMk8zaWJUc29yR3ZEekdhYS9yUENxQWhTSjRJaEhnMDNVb3FBbVlraW51NTFvVEcxRlRXaTh2b00vRVJ4TlduamNUSElET1JmYmo2bFVyZ3Zkci9MZGtqc2dFcENiNEMxUS9IbW5MRHVpTEdPM2tNZ2cyOHFzZ0ZmTHloUjl3ay8K",
+        "vmSize": "Standard_D4s_v5"
+      },
+      "status": {
+        "addresses": [
+          {
+            "address": "test-cntrlplane-4826-r3-base-csfx6-v29zk",
+            "type": "InternalDNS"
+          },
+          {
+            "address": "10.0.0.13",
+            "type": "InternalIP"
+          }
+        ],
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-29T00:04:30Z",
+            "status": "True",
+            "type": "Ready"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T00:02:52Z",
+            "status": "True",
+            "type": "AvailabilitySetReady"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T00:04:30Z",
+            "status": "True",
+            "type": "DisksReady"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T00:02:52Z",
+            "status": "True",
+            "type": "NetworkInterfacesReady"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T00:04:30Z",
+            "status": "True",
+            "type": "VMRunning"
+          }
+        ],
+        "ready": true,
+        "vmState": "Succeeded"
+      }
+    },
+    {
+      "apiVersion": "infrastructure.cluster.x-k8s.io/v1beta1",
+      "kind": "AzureMachine",
+      "metadata": {
+        "annotations": {
+          "cluster-api-provider-azure": "true",
+          "cluster.x-k8s.io/cloned-from-groupkind": "AzureMachineTemplate.infrastructure.cluster.x-k8s.io",
+          "cluster.x-k8s.io/cloned-from-name": "test-cntrlplane-4826-r3-head-776e47ca",
+          "clusterctl.cluster.x-k8s.io/block-move": "true",
+          "hypershift.openshift.io/nodePool": "clusters/test-cntrlplane-4826-r3-head",
+          "hypershift.openshift.io/release-version": "5.1.0-0.nightly-multi-2026-10-27-082258",
+          "sigs.k8s.io/cluster-api-provider-azure-last-applied-tags-vm": "{\"kubernetes.io_cluster_test-cntrlplane-4826\":\"owned\"}"
+        },
+        "creationTimestamp": "2026-10-29T00:49:44Z",
+        "finalizers": [
+          "azuremachine.infrastructure.cluster.x-k8s.io"
+        ],
+        "generation": 3,
+        "labels": {
+          "brco-f6265508-test-cntrlplane-4826-r3-head": "brco-f6265508-test-cntrlplane-4826-r3-head",
+          "cluster.x-k8s.io/cluster-name": "test-cntrlplane-4826",
+          "cluster.x-k8s.io/deployment-name": "test-cntrlplane-4826-r3-head",
+          "cluster.x-k8s.io/set-name": "test-cntrlplane-4826-r3-head-kgrf8",
+          "machine-template-hash": "2085996066-kgrf8"
+        },
+        "name": "test-cntrlplane-4826-r3-head-kgrf8-5dw7z",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "ownerReferences": [
+          {
+            "apiVersion": "cluster.x-k8s.io/v1beta2",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Machine",
+            "name": "test-cntrlplane-4826-r3-head-kgrf8-5dw7z",
+            "uid": "6f666bee-dd83-4cf1-b8d2-55c4aea9a527"
+          }
+        ],
+        "resourceVersion": "129813420",
+        "uid": "e5684c46-3a95-45a1-aa5c-0bd181ed7785"
+      },
+      "spec": {
+        "image": {
+          "marketplace": {
+            "offer": "aro4",
+            "publisher": "azureopenshift",
+            "sku": "aro_5-0_x64_gen2",
+            "thirdPartyImage": false,
+            "version": "10.2.20260423"
+          }
+        },
+        "networkInterfaces": [
+          {
+            "privateIPConfigs": 1,
+            "subnetName": "default"
+          }
+        ],
+        "osDisk": {
+          "cachingType": "None",
+          "diskSizeGB": 120,
+          "managedDisk": {
+            "storageAccountType": "Premium_LRS"
+          },
+          "osType": ""
+        },
+        "providerID": "azure:///subscriptions/redacted-subscription-id/resourceGroups/test-cntrlplane-4826-hc-test-cntrlplane-4826/providers/Microsoft.Compute/virtualMachines/test-cntrlplane-4826-r3-head-kgrf8-5dw7z",
+        "securityProfile": {
+          "encryptionAtHost": true
+        },
+        "sshPublicKey": "c3NoLXJzYSBBQUFBQjNOemFDMXljMkVBQUFBREFRQUJBQUFCQVFDTGFjOTR4dUE4QjkyMEtjejhKNjhUdmZCRjQyR2UwUllXSUx3Lzd6dDhUQlU5ell5Q0Q2K0ZlekFwWndLRjB1V3luMGVBQmlBWVdIV0tKbENxS0VIT2hOQmV2Mkx3S0dnZHFqM0dvcHV2N3RpZFVqSVpqYi9DVWtjQVRZUWhMWkxVTCs3eWkzRThKNHdhYkxEMWVNS1p1U3ZmMUsxT0RwVUFXYTkwbWVmR0FBOVdIVEhMcnF1UUpWdC9JT0JKN1ROZFNwMDVuM0Ywa29xZlE2empwRlFYMk8zaWJUc29yR3ZEekdhYS9yUENxQWhTSjRJaEhnMDNVb3FBbVlraW51NTFvVEcxRlRXaTh2b00vRVJ4TlduamNUSElET1JmYmo2bFVyZ3Zkci9MZGtqc2dFcENiNEMxUS9IbW5MRHVpTEdPM2tNZ2cyOHFzZ0ZmTHloUjl3ay8K",
+        "vmSize": "Standard_D4s_v5"
+      },
+      "status": {
+        "addresses": [
+          {
+            "address": "test-cntrlplane-4826-r3-head-kgrf8-5dw7z",
+            "type": "InternalDNS"
+          },
+          {
+            "address": "10.0.0.14",
+            "type": "InternalIP"
+          }
+        ],
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-29T00:50:41Z",
+            "status": "True",
+            "type": "Ready"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T00:49:57Z",
+            "status": "True",
+            "type": "AvailabilitySetReady"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T00:50:41Z",
+            "status": "True",
+            "type": "DisksReady"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T00:49:56Z",
+            "status": "True",
+            "type": "NetworkInterfacesReady"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T00:50:41Z",
+            "status": "True",
+            "type": "VMRunning"
+          }
+        ],
+        "ready": true,
+        "vmState": "Succeeded"
+      }
+    },
+    {
+      "apiVersion": "infrastructure.cluster.x-k8s.io/v1beta1",
+      "kind": "AzureMachine",
+      "metadata": {
+        "annotations": {
+          "cluster-api-provider-azure": "true",
+          "cluster.x-k8s.io/cloned-from-groupkind": "AzureMachineTemplate.infrastructure.cluster.x-k8s.io",
+          "cluster.x-k8s.io/cloned-from-name": "test-cntrlplane-4826-r3-head-776e47ca",
+          "clusterctl.cluster.x-k8s.io/block-move": "true",
+          "hypershift.openshift.io/nodePool": "clusters/test-cntrlplane-4826-r3-head",
+          "hypershift.openshift.io/release-version": "5.1.0-0.nightly-multi-2026-10-27-082258",
+          "sigs.k8s.io/cluster-api-provider-azure-last-applied-tags-vm": "{\"kubernetes.io_cluster_test-cntrlplane-4826\":\"owned\"}"
+        },
+        "creationTimestamp": "2026-10-29T00:44:33Z",
+        "finalizers": [
+          "azuremachine.infrastructure.cluster.x-k8s.io"
+        ],
+        "generation": 3,
+        "labels": {
+          "brco-f6265508-test-cntrlplane-4826-r3-head": "brco-f6265508-test-cntrlplane-4826-r3-head",
+          "cluster.x-k8s.io/cluster-name": "test-cntrlplane-4826",
+          "cluster.x-k8s.io/deployment-name": "test-cntrlplane-4826-r3-head",
+          "cluster.x-k8s.io/set-name": "test-cntrlplane-4826-r3-head-kgrf8",
+          "machine-template-hash": "2085996066-kgrf8"
+        },
+        "name": "test-cntrlplane-4826-r3-head-kgrf8-nzf27",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "ownerReferences": [
+          {
+            "apiVersion": "cluster.x-k8s.io/v1beta2",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Machine",
+            "name": "test-cntrlplane-4826-r3-head-kgrf8-nzf27",
+            "uid": "c2db796a-00e3-43a2-a47e-efcba1e0ed12"
+          }
+        ],
+        "resourceVersion": "129812107",
+        "uid": "6c433948-daa5-4be9-82b6-7d9027470764"
+      },
+      "spec": {
+        "image": {
+          "marketplace": {
+            "offer": "aro4",
+            "publisher": "azureopenshift",
+            "sku": "aro_5-0_x64_gen2",
+            "thirdPartyImage": false,
+            "version": "10.2.20260423"
+          }
+        },
+        "networkInterfaces": [
+          {
+            "privateIPConfigs": 1,
+            "subnetName": "default"
+          }
+        ],
+        "osDisk": {
+          "cachingType": "None",
+          "diskSizeGB": 120,
+          "managedDisk": {
+            "storageAccountType": "Premium_LRS"
+          },
+          "osType": ""
+        },
+        "providerID": "azure:///subscriptions/redacted-subscription-id/resourceGroups/test-cntrlplane-4826-hc-test-cntrlplane-4826/providers/Microsoft.Compute/virtualMachines/test-cntrlplane-4826-r3-head-kgrf8-nzf27",
+        "securityProfile": {
+          "encryptionAtHost": true
+        },
+        "sshPublicKey": "c3NoLXJzYSBBQUFBQjNOemFDMXljMkVBQUFBREFRQUJBQUFCQVFDTGFjOTR4dUE4QjkyMEtjejhKNjhUdmZCRjQyR2UwUllXSUx3Lzd6dDhUQlU5ell5Q0Q2K0ZlekFwWndLRjB1V3luMGVBQmlBWVdIV0tKbENxS0VIT2hOQmV2Mkx3S0dnZHFqM0dvcHV2N3RpZFVqSVpqYi9DVWtjQVRZUWhMWkxVTCs3eWkzRThKNHdhYkxEMWVNS1p1U3ZmMUsxT0RwVUFXYTkwbWVmR0FBOVdIVEhMcnF1UUpWdC9JT0JKN1ROZFNwMDVuM0Ywa29xZlE2empwRlFYMk8zaWJUc29yR3ZEekdhYS9yUENxQWhTSjRJaEhnMDNVb3FBbVlraW51NTFvVEcxRlRXaTh2b00vRVJ4TlduamNUSElET1JmYmo2bFVyZ3Zkci9MZGtqc2dFcENiNEMxUS9IbW5MRHVpTEdPM2tNZ2cyOHFzZ0ZmTHloUjl3ay8K",
+        "vmSize": "Standard_D4s_v5"
+      },
+      "status": {
+        "addresses": [
+          {
+            "address": "test-cntrlplane-4826-r3-head-kgrf8-nzf27",
+            "type": "InternalDNS"
+          },
+          {
+            "address": "10.0.0.4",
+            "type": "InternalIP"
+          }
+        ],
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-29T00:45:11Z",
+            "status": "True",
+            "type": "Ready"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T00:44:45Z",
+            "status": "True",
+            "type": "AvailabilitySetReady"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T00:45:11Z",
+            "status": "True",
+            "type": "DisksReady"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T00:44:44Z",
+            "status": "True",
+            "type": "NetworkInterfacesReady"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T00:45:11Z",
+            "status": "True",
+            "type": "VMRunning"
+          }
+        ],
+        "ready": true,
+        "vmState": "Succeeded"
+      }
+    },
+    {
+      "apiVersion": "infrastructure.cluster.x-k8s.io/v1beta1",
+      "kind": "AzureMachine",
+      "metadata": {
+        "annotations": {
+          "cluster-api-provider-azure": "true",
+          "cluster.x-k8s.io/cloned-from-groupkind": "AzureMachineTemplate.infrastructure.cluster.x-k8s.io",
+          "cluster.x-k8s.io/cloned-from-name": "test-cntrlplane-4826-r3-head-776e47ca",
+          "clusterctl.cluster.x-k8s.io/block-move": "true",
+          "hypershift.openshift.io/nodePool": "clusters/test-cntrlplane-4826-r3-head",
+          "hypershift.openshift.io/release-version": "5.1.0-0.nightly-multi-2026-10-27-082258",
+          "sigs.k8s.io/cluster-api-provider-azure-last-applied-tags-vm": "{\"kubernetes.io_cluster_test-cntrlplane-4826\":\"owned\"}"
+        },
+        "creationTimestamp": "2026-10-29T00:39:01Z",
+        "finalizers": [
+          "azuremachine.infrastructure.cluster.x-k8s.io"
+        ],
+        "generation": 3,
+        "labels": {
+          "brco-f6265508-test-cntrlplane-4826-r3-head": "brco-f6265508-test-cntrlplane-4826-r3-head",
+          "cluster.x-k8s.io/cluster-name": "test-cntrlplane-4826",
+          "cluster.x-k8s.io/deployment-name": "test-cntrlplane-4826-r3-head",
+          "cluster.x-k8s.io/set-name": "test-cntrlplane-4826-r3-head-kgrf8",
+          "machine-template-hash": "2085996066-kgrf8"
+        },
+        "name": "test-cntrlplane-4826-r3-head-kgrf8-sjvh2",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "ownerReferences": [
+          {
+            "apiVersion": "cluster.x-k8s.io/v1beta2",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Machine",
+            "name": "test-cntrlplane-4826-r3-head-kgrf8-sjvh2",
+            "uid": "fa27d3b8-63fa-4bd9-b494-f43f8115699e"
+          }
+        ],
+        "resourceVersion": "129810845",
+        "uid": "302fa0f6-9725-4e96-92ca-c4bb98499a20"
+      },
+      "spec": {
+        "image": {
+          "marketplace": {
+            "offer": "aro4",
+            "publisher": "azureopenshift",
+            "sku": "aro_5-0_x64_gen2",
+            "thirdPartyImage": false,
+            "version": "10.2.20260423"
+          }
+        },
+        "networkInterfaces": [
+          {
+            "privateIPConfigs": 1,
+            "subnetName": "default"
+          }
+        ],
+        "osDisk": {
+          "cachingType": "None",
+          "diskSizeGB": 120,
+          "managedDisk": {
+            "storageAccountType": "Premium_LRS"
+          },
+          "osType": ""
+        },
+        "providerID": "azure:///subscriptions/redacted-subscription-id/resourceGroups/test-cntrlplane-4826-hc-test-cntrlplane-4826/providers/Microsoft.Compute/virtualMachines/test-cntrlplane-4826-r3-head-kgrf8-sjvh2",
+        "securityProfile": {
+          "encryptionAtHost": true
+        },
+        "sshPublicKey": "c3NoLXJzYSBBQUFBQjNOemFDMXljMkVBQUFBREFRQUJBQUFCQVFDTGFjOTR4dUE4QjkyMEtjejhKNjhUdmZCRjQyR2UwUllXSUx3Lzd6dDhUQlU5ell5Q0Q2K0ZlekFwWndLRjB1V3luMGVBQmlBWVdIV0tKbENxS0VIT2hOQmV2Mkx3S0dnZHFqM0dvcHV2N3RpZFVqSVpqYi9DVWtjQVRZUWhMWkxVTCs3eWkzRThKNHdhYkxEMWVNS1p1U3ZmMUsxT0RwVUFXYTkwbWVmR0FBOVdIVEhMcnF1UUpWdC9JT0JKN1ROZFNwMDVuM0Ywa29xZlE2empwRlFYMk8zaWJUc29yR3ZEekdhYS9yUENxQWhTSjRJaEhnMDNVb3FBbVlraW51NTFvVEcxRlRXaTh2b00vRVJ4TlduamNUSElET1JmYmo2bFVyZ3Zkci9MZGtqc2dFcENiNEMxUS9IbW5MRHVpTEdPM2tNZ2cyOHFzZ0ZmTHloUjl3ay8K",
+        "vmSize": "Standard_D4s_v5"
+      },
+      "status": {
+        "addresses": [
+          {
+            "address": "test-cntrlplane-4826-r3-head-kgrf8-sjvh2",
+            "type": "InternalDNS"
+          },
+          {
+            "address": "10.0.0.5",
+            "type": "InternalIP"
+          }
+        ],
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-29T00:39:57Z",
+            "status": "True",
+            "type": "Ready"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T00:39:13Z",
+            "status": "True",
+            "type": "AvailabilitySetReady"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T00:39:57Z",
+            "status": "True",
+            "type": "DisksReady"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T00:39:13Z",
+            "status": "True",
+            "type": "NetworkInterfacesReady"
+          },
+          {
+            "lastTransitionTime": "2026-10-29T00:39:57Z",
+            "status": "True",
+            "type": "VMRunning"
+          }
+        ],
+        "ready": true,
+        "vmState": "Succeeded"
+      }
+    }
+  ],
+  "kind": "List",
+  "metadata": {
+    "resourceVersion": ""
+  }
+}

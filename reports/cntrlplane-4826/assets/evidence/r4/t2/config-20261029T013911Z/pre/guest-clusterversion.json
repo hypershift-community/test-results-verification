@@ -1,0 +1,146 @@
+{
+  "apiVersion": "config.openshift.io/v1",
+  "kind": "ClusterVersion",
+  "metadata": {
+    "annotations": {
+      "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"config.openshift.io/v1\",\"kind\":\"ClusterVersion\",\"metadata\":{\"annotations\":{},\"name\":\"version\"},\"spec\":{\"capabilities\":{\"additionalEnabledCapabilities\":[\"Build\",\"CSISnapshot\",\"CloudControllerManager\",\"CloudCredential\",\"Console\",\"DeploymentConfig\",\"ImageRegistry\",\"Ingress\",\"Insights\",\"MachineAPI\",\"NodeTuning\",\"OperatorLifecycleManager\",\"OperatorLifecycleManagerV1\",\"Storage\",\"marketplace\",\"openshift-samples\"],\"baselineCapabilitySet\":\"None\"},\"clusterID\":\"123d4147-0436-4a4c-bacf-8b5950864037\",\"signatureStores\":null},\"status\":{\"availableUpdates\":null,\"capabilities\":{},\"desired\":{\"image\":\"\",\"version\":\"\"},\"observedGeneration\":0,\"versionHash\":\"\"}}\n"
+    },
+    "creationTimestamp": "2026-10-29T01:28:52Z",
+    "generation": 1,
+    "name": "version",
+    "resourceVersion": "6670",
+    "uid": "1605a75e-1c63-4ab6-9474-e9a3a37e6bd8"
+  },
+  "spec": {
+    "capabilities": {
+      "additionalEnabledCapabilities": [
+        "Build",
+        "CSISnapshot",
+        "CloudControllerManager",
+        "CloudCredential",
+        "Console",
+        "DeploymentConfig",
+        "ImageRegistry",
+        "Ingress",
+        "Insights",
+        "MachineAPI",
+        "NodeTuning",
+        "OperatorLifecycleManager",
+        "OperatorLifecycleManagerV1",
+        "Storage",
+        "marketplace",
+        "openshift-samples"
+      ],
+      "baselineCapabilitySet": "None"
+    },
+    "clusterID": "123d4147-0436-4a4c-bacf-8b5950864037"
+  },
+  "status": {
+    "availableUpdates": null,
+    "capabilities": {
+      "enabledCapabilities": [
+        "Build",
+        "CSISnapshot",
+        "CloudControllerManager",
+        "CloudCredential",
+        "Console",
+        "DeploymentConfig",
+        "ImageRegistry",
+        "Ingress",
+        "Insights",
+        "MachineAPI",
+        "NodeTuning",
+        "OperatorLifecycleManager",
+        "OperatorLifecycleManagerV1",
+        "Storage",
+        "marketplace",
+        "openshift-samples"
+      ],
+      "knownCapabilities": [
+        "Build",
+        "CSISnapshot",
+        "CloudControllerManager",
+        "CloudCredential",
+        "Console",
+        "DeploymentConfig",
+        "ImageRegistry",
+        "Ingress",
+        "Insights",
+        "MachineAPI",
+        "NodeTuning",
+        "OperatorLifecycleManager",
+        "OperatorLifecycleManagerV1",
+        "Storage",
+        "baremetal",
+        "marketplace",
+        "openshift-samples"
+      ]
+    },
+    "conditions": [
+      {
+        "lastTransitionTime": "2026-10-29T01:29:07Z",
+        "message": "The update channel has not been configured.",
+        "reason": "NoChannel",
+        "status": "False",
+        "type": "RetrievedUpdates"
+      },
+      {
+        "lastTransitionTime": "2026-10-29T01:29:07Z",
+        "message": "Capabilities match configured spec",
+        "reason": "AsExpected",
+        "status": "False",
+        "type": "ImplicitlyEnabledCapabilities"
+      },
+      {
+        "lastTransitionTime": "2026-10-29T01:29:07Z",
+        "message": "Payload loaded version=\"5.1.0-0.nightly-multi-2026-10-27-082258\" image=\"quay.io/openshift-release-dev/ocp-release-nightly@sha256:08f0905c06195a76138db7071aa77ae644aea401eb832d51ebbf4fb870698346\" architecture=\"Multi\"",
+        "reason": "PayloadLoaded",
+        "status": "True",
+        "type": "ReleaseAccepted"
+      },
+      {
+        "lastTransitionTime": "2026-10-29T01:29:07Z",
+        "status": "False",
+        "type": "Available"
+      },
+      {
+        "lastTransitionTime": "2026-10-29T01:29:52Z",
+        "message": "Cluster operators console, dns, image-registry, ingress, insights, monitoring, openshift-samples, service-ca, storage are not available",
+        "reason": "ClusterOperatorsNotAvailable",
+        "status": "True",
+        "type": "Failing"
+      },
+      {
+        "lastTransitionTime": "2026-10-29T01:29:07Z",
+        "message": "Unable to apply 5.1.0-0.nightly-multi-2026-10-27-082258: some cluster operators are not available",
+        "reason": "ClusterOperatorsNotAvailable",
+        "status": "True",
+        "type": "Progressing"
+      },
+      {
+        "lastTransitionTime": "2026-10-29T01:29:07Z",
+        "message": "An update is already in progress and the details are in the Progressing condition.",
+        "reason": "ClusterVersionUpdating",
+        "status": "False",
+        "type": "Upgradeable"
+      }
+    ],
+    "desired": {
+      "architecture": "Multi",
+      "image": "quay.io/openshift-release-dev/ocp-release-nightly@sha256:08f0905c06195a76138db7071aa77ae644aea401eb832d51ebbf4fb870698346",
+      "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+    },
+    "history": [
+      {
+        "completionTime": null,
+        "image": "quay.io/openshift-release-dev/ocp-release-nightly@sha256:08f0905c06195a76138db7071aa77ae644aea401eb832d51ebbf4fb870698346",
+        "startedTime": "2026-10-29T01:29:07Z",
+        "state": "Partial",
+        "verified": false,
+        "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+      }
+    ],
+    "observedGeneration": 1,
+    "versionHash": "cHW-lou_Cb4="
+  }
+}

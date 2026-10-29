@@ -1,0 +1,6 @@
+captured_utc=2026-10-28T15:46:59Z
+subscription=redacted-subscription-id
+resource_group=shared-resource-group
+parent_zone=hcp.example.com
+child_zone=test.hcp.example.com
+purpose=read-only post-test comparison; no writes

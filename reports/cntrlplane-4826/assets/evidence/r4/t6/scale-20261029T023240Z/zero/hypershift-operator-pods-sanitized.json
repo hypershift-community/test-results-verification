@@ -1,0 +1,72 @@
+{
+  "items": [
+    {
+      "metadata": {
+        "name": "operator-6884499f9-nbldl",
+        "labels": {
+          "app": "operator",
+          "hypershift.openshift.io/operator-component": "operator",
+          "name": "operator",
+          "pod-template-hash": "6884499f9"
+        },
+        "creationTimestamp": "2026-10-29T01:16:23Z"
+      },
+      "status": {
+        "phase": "Running",
+        "startTime": "2026-10-29T01:16:23Z",
+        "containerStatuses": [
+          {
+            "name": "operator",
+            "image": "quay.io/example/hypershift@sha256:7a2248fdc9d50e99e8b444aa887cea96bdf0023e2e81062f9de21266ddb492a6",
+            "imageID": "quay.io/example/hypershift@sha256:7a2248fdc9d50e99e8b444aa887cea96bdf0023e2e81062f9de21266ddb492a6",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "name": "init-environment",
+            "image": "quay.io/example/hypershift@sha256:7a2248fdc9d50e99e8b444aa887cea96bdf0023e2e81062f9de21266ddb492a6",
+            "imageID": "quay.io/example/hypershift@sha256:7a2248fdc9d50e99e8b444aa887cea96bdf0023e2e81062f9de21266ddb492a6",
+            "ready": true,
+            "restartCount": 0
+          }
+        ]
+      }
+    },
+    {
+      "metadata": {
+        "name": "operator-6884499f9-s96gd",
+        "labels": {
+          "app": "operator",
+          "hypershift.openshift.io/operator-component": "operator",
+          "name": "operator",
+          "pod-template-hash": "6884499f9"
+        },
+        "creationTimestamp": "2026-10-29T01:15:20Z"
+      },
+      "status": {
+        "phase": "Running",
+        "startTime": "2026-10-29T01:15:20Z",
+        "containerStatuses": [
+          {
+            "name": "operator",
+            "image": "quay.io/example/hypershift@sha256:7a2248fdc9d50e99e8b444aa887cea96bdf0023e2e81062f9de21266ddb492a6",
+            "imageID": "quay.io/example/hypershift@sha256:7a2248fdc9d50e99e8b444aa887cea96bdf0023e2e81062f9de21266ddb492a6",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "name": "init-environment",
+            "image": "quay.io/example/hypershift@sha256:7a2248fdc9d50e99e8b444aa887cea96bdf0023e2e81062f9de21266ddb492a6",
+            "imageID": "quay.io/example/hypershift@sha256:7a2248fdc9d50e99e8b444aa887cea96bdf0023e2e81062f9de21266ddb492a6",
+            "ready": true,
+            "restartCount": 0
+          }
+        ]
+      }
+    }
+  ]
+}

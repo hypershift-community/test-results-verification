@@ -1,0 +1,2 @@
+captured_utc=2026-10-28T16:04:19Z
+purpose=final Kubernetes state after Kubernetes-only HostedCluster cleanup

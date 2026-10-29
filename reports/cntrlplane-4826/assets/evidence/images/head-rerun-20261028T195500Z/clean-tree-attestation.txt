@@ -1,0 +1,10 @@
+captured_utc=2026-10-28T19:39:25Z
+head=ee5691233b08e3271f030ebd24055faa6857fd39
+base=ba33ffdda58c1d6c3d4f83c04e4ad85e172166b1
+--- tracked status ---
+--- diff stat ---
+--- HEAD commit ---
+ee5691233b08e3271f030ebd24055faa6857fd39
+ee327075b155839511edc3779510ceb95c93a658
+2026-10-28 14:15:04 -0400
+fix(hypershift-operator): stop gating NodePool rollout completion on upToDateReplicas

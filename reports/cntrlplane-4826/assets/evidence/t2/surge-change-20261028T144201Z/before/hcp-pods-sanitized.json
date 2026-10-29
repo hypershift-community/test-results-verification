@@ -1,0 +1,2045 @@
+{
+  "items": [
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:11:23Z",
+        "labels": {
+          "app": "cloud-controller-manager",
+          "hypershift.openshift.io/control-plane-component": "azure-cloud-controller-manager",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "pod-template-hash": "b99cb5789"
+        },
+        "name": "azure-cloud-controller-manager-b99cb5789-l4wh8",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:195dbb1916964b3663a5480c7f61c01c1ba818826c1a843c2c882becde8665c6",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:195dbb1916964b3663a5480c7f61c01c1ba818826c1a843c2c882becde8665c6",
+            "name": "cloud-controller-manager",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "cloud-token-minter",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:11:24Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:13:55Z",
+        "labels": {
+          "app": "azure-disk-csi-driver-controller",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "openshift.storage.network-policy.all-egress": "allow",
+          "openshift.storage.network-policy.api-server": "allow",
+          "openshift.storage.network-policy.dns": "allow",
+          "openshift.storage.network-policy.metrics-range": "allow",
+          "pod-template-hash": "c6894fd89"
+        },
+        "name": "azure-disk-csi-driver-controller-c6894fd89-g587g",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601",
+            "name": "attacher-kube-rbac-proxy",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:fe4bfed420e458f457ddfa418acf0f30d0d0e309d36ba4fc631ef2621b98bc6d",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:96e613912c33a80007703fd1153bda37fe262b3d038b49e0fb3b704abad0ee68",
+            "name": "csi-attacher",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:e8827bd1d6cb992bae35f16cc7438ce0660eda871b45c25b8382601ad4bddc33",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1f4aa0f96724401542ca074a38d95812c88137d1b86e28eec24ce21fc877720e",
+            "name": "csi-driver",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:00956682879e8802b44af4c15f41efb4c491e8e01b9615e2886ff98da4fb7879",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:00956682879e8802b44af4c15f41efb4c491e8e01b9615e2886ff98da4fb7879",
+            "name": "csi-liveness-probe",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:c0f65b2be0985376a63ac345cd8ddb051964607bd7e887df0cea2f2eaa6d7017",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:4843b87ffd34d3b165a63e778bf54deccc80f0be90bc2644ef396826205f438c",
+            "name": "csi-provisioner",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:adbe05a5194d6ffce59bc39e2d2aba50ddbc40fb4488e72f608fcfbbddb45a45",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:0224288b4424b2e7ff7935e57fcdf5e415ac625969a6c690c96e92276d07ecb3",
+            "name": "csi-resizer",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:0de27b5aebbf21519042397998a53543629340075b1b7dc32540b8c67d8842a9",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:0de27b5aebbf21519042397998a53543629340075b1b7dc32540b8c67d8842a9",
+            "name": "csi-snapshotter",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601",
+            "name": "kube-rbac-proxy-8201",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601",
+            "name": "provisioner-kube-rbac-proxy",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601",
+            "name": "resizer-kube-rbac-proxy",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601",
+            "name": "snapshotter-kube-rbac-proxy",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "token-minter",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:13:55Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:13:41Z",
+        "labels": {
+          "app": "azure-disk-csi-driver-operator",
+          "hypershift.openshift.io/need-management-kas-access": "true",
+          "name": "azure-disk-csi-driver-operator",
+          "openshift.storage.network-policy.all-egress": "allow",
+          "openshift.storage.network-policy.api-server": "allow",
+          "openshift.storage.network-policy.dns": "allow",
+          "openshift.storage.network-policy.operator-metrics-range": "allow",
+          "pod-template-hash": "68999cb495"
+        },
+        "name": "azure-disk-csi-driver-operator-68999cb495-qtcwj",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:7f74db65a8aeb212bce886d4343c449bb6e1d3ece2eaaa748bba5d895eae344b",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:45f4d266db403e1e1c4a53f8da32a43d3adf40992a7468459dcd85bcb9aeacb2",
+            "name": "azure-disk-csi-driver-operator",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:13:41Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:13:55Z",
+        "labels": {
+          "app": "azure-file-csi-driver-controller",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "openshift.storage.network-policy.all-egress": "allow",
+          "openshift.storage.network-policy.api-server": "allow",
+          "openshift.storage.network-policy.dns": "allow",
+          "openshift.storage.network-policy.metrics-range": "allow",
+          "pod-template-hash": "75c485d655"
+        },
+        "name": "azure-file-csi-driver-controller-75c485d655-z7r44",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601",
+            "name": "attacher-kube-rbac-proxy",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:fe4bfed420e458f457ddfa418acf0f30d0d0e309d36ba4fc631ef2621b98bc6d",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:96e613912c33a80007703fd1153bda37fe262b3d038b49e0fb3b704abad0ee68",
+            "name": "csi-attacher",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:9205cb5a5f3420c073beac6410f04f0f1fab4e543d82834725e1afab53ae9f6f",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:28d806f6514b0156d25edcb9764f977efb4317b6ee174826a35b090f192a5338",
+            "name": "csi-driver",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:00956682879e8802b44af4c15f41efb4c491e8e01b9615e2886ff98da4fb7879",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:00956682879e8802b44af4c15f41efb4c491e8e01b9615e2886ff98da4fb7879",
+            "name": "csi-liveness-probe",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:c0f65b2be0985376a63ac345cd8ddb051964607bd7e887df0cea2f2eaa6d7017",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:4843b87ffd34d3b165a63e778bf54deccc80f0be90bc2644ef396826205f438c",
+            "name": "csi-provisioner",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:adbe05a5194d6ffce59bc39e2d2aba50ddbc40fb4488e72f608fcfbbddb45a45",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:0224288b4424b2e7ff7935e57fcdf5e415ac625969a6c690c96e92276d07ecb3",
+            "name": "csi-resizer",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:0de27b5aebbf21519042397998a53543629340075b1b7dc32540b8c67d8842a9",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:0de27b5aebbf21519042397998a53543629340075b1b7dc32540b8c67d8842a9",
+            "name": "csi-snapshotter",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601",
+            "name": "kube-rbac-proxy-8211",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601",
+            "name": "provisioner-kube-rbac-proxy",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601",
+            "name": "resizer-kube-rbac-proxy",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601",
+            "name": "snapshotter-kube-rbac-proxy",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "token-minter",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:13:55Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:13:41Z",
+        "labels": {
+          "app": "azure-file-csi-driver-operator",
+          "hypershift.openshift.io/need-management-kas-access": "true",
+          "name": "azure-file-csi-driver-operator",
+          "openshift.storage.network-policy.all-egress": "allow",
+          "openshift.storage.network-policy.api-server": "allow",
+          "openshift.storage.network-policy.dns": "allow",
+          "openshift.storage.network-policy.operator-metrics-range": "allow",
+          "pod-template-hash": "7677b567bd"
+        },
+        "name": "azure-file-csi-driver-operator-7677b567bd-c4gbp",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:13e50ce01f5a34d4d8feeda0561f627b7ec3a2925d6d1b446978597d9a6d447b",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:0b2485b4e288a45473ce1acd5b1f5151b6ea492bc7da9e48fa04904953cdf1f2",
+            "name": "azure-file-csi-driver-operator",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:13:42Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:08:22Z",
+        "labels": {
+          "app": "capi-provider-controller-manager",
+          "control-plane": "capi-provider-controller-manager",
+          "hypershift.openshift.io/control-plane-component": "capi-provider",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "hypershift.openshift.io/need-management-kas-access": "true",
+          "pod-template-hash": "7d6c766ffd"
+        },
+        "name": "capi-provider-7d6c766ffd-rc7vl",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "cloud-token-minter",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:f0057eba569e14c18331c021bf58a9ca1d747566d887675bd7e55653184121a6",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:2bdfc94692614fc74ce231eafe8d89ce48fc55b76401a520178634d000e2752e",
+            "name": "manager",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "availability-prober",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:08:22Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:11:22Z",
+        "labels": {
+          "app": "catalog-operator",
+          "hypershift.openshift.io/control-plane-component": "catalog-operator",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "pod-template-hash": "79d6c9956c"
+        },
+        "name": "catalog-operator-79d6c9956c-fkjkz",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:67ea3adb9079621aa1198f94a725c0f5a0d4667ab2db7390b985f7faa417eca5",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:67ea3adb9079621aa1198f94a725c0f5a0d4667ab2db7390b985f7faa417eca5",
+            "name": "catalog-operator",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "konnectivity-proxy-socks5",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "availability-prober",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:11:22Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-28T12:43:46Z",
+        "labels": {
+          "app": "certified-operators-catalog",
+          "hypershift.openshift.io/control-plane-component": "certified-operators-catalog",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "olm.catalogSource": "certified-operators",
+          "pod-template-hash": "659bdf8d99"
+        },
+        "name": "certified-operators-catalog-659bdf8d99-l8brj",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "image-registry.openshift-image-registry.service:5000/clusters-test-cntrlplane-4826-hc/catalogs@sha256:31ec12ccc338bb445989d6127fc6b6910a92581f7708fe610437900896fb6a6f",
+            "imageID": "image-registry.openshift-image-registry.service:5000/clusters-test-cntrlplane-4826-hc/catalogs@sha256:31ec12ccc338bb445989d6127fc6b6910a92581f7708fe610437900896fb6a6f",
+            "name": "registry",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:67ea3adb9079621aa1198f94a725c0f5a0d4667ab2db7390b985f7faa417eca5",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:67ea3adb9079621aa1198f94a725c0f5a0d4667ab2db7390b985f7faa417eca5",
+            "name": "extract-utilities",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "image-registry.openshift-image-registry.service:5000/clusters-test-cntrlplane-4826-hc/catalogs@sha256:31ec12ccc338bb445989d6127fc6b6910a92581f7708fe610437900896fb6a6f",
+            "imageID": "image-registry.openshift-image-registry.service:5000/clusters-test-cntrlplane-4826-hc/catalogs@sha256:31ec12ccc338bb445989d6127fc6b6910a92581f7708fe610437900896fb6a6f",
+            "name": "extract-content",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-28T12:43:46Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:15:33Z",
+        "labels": {
+          "app": "cloud-network-config-controller",
+          "component": "network",
+          "hypershift.openshift.io/control-plane": "true",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "openshift.io/component": "network",
+          "pod-template-hash": "77dd694df",
+          "type": "infra"
+        },
+        "name": "cloud-network-config-controller-77dd694df-kpljw",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "cloud-token",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:ac7f6c66a4088d269184a16bab833c49220647b04d99700089bb16b0bd07d5e4",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:ac7f6c66a4088d269184a16bab833c49220647b04d99700089bb16b0bd07d5e4",
+            "name": "controller",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "hosted-cluster-token",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:af99b382f52126b650770c3b8951948a7289f521cb3233ea8b58b608f808f439",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:2819d82240494dff9bd73d58ae55456117d8add7e8a08849f6b4f15a0ac0bb00",
+            "name": "hosted-cluster-kubecfg-setup",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:15:33Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:08:22Z",
+        "labels": {
+          "app": "cluster-api",
+          "hypershift.openshift.io/control-plane-component": "cluster-api",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "hypershift.openshift.io/need-management-kas-access": "true",
+          "name": "cluster-api",
+          "pod-template-hash": "5b5cfd44df"
+        },
+        "name": "cluster-api-5b5cfd44df-pgfgr",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "registry.k8s.io/cluster-api/cluster-api-controller:v1.14.3",
+            "imageID": "registry.k8s.io/cluster-api/cluster-api-controller@sha256:1110ddb0f4a9cfc1b557f305199e2d56911fe442edef6361e12e5cc4b11e23fd",
+            "name": "manager",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:08:22Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:12:53Z",
+        "labels": {
+          "app": "cluster-image-registry-operator",
+          "hypershift.openshift.io/control-plane-component": "cluster-image-registry-operator",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "name": "cluster-image-registry-operator",
+          "pod-template-hash": "794f559cd7"
+        },
+        "name": "cluster-image-registry-operator-794f559cd7-b8hnr",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:2a818ff13fea1a3dea3f097fcf0d4be2a707b01070c2def4f679e9537dfa30f9",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:2a818ff13fea1a3dea3f097fcf0d4be2a707b01070c2def4f679e9537dfa30f9",
+            "name": "cluster-image-registry-operator",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "cloud-token-minter",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "apiserver-token-minter",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:12:53Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:12:46Z",
+        "labels": {
+          "app": "cluster-network-operator",
+          "hypershift.openshift.io/control-plane-component": "cluster-network-operator",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "hypershift.openshift.io/need-management-kas-access": "true",
+          "name": "cluster-network-operator",
+          "pod-template-hash": "777bc94b8d"
+        },
+        "name": "cluster-network-operator-777bc94b8d-lqbsb",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "client-token-minter",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:76efc360cecb74f76732c11cb082f5a63a137bd0e35bf930e72f4feda18cf559",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1016d309d1744c7bbf1888a370157457f8d1ecaea9c4f09b447d7e64209f6173",
+            "name": "cluster-network-operator",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "konnectivity-proxy-socks5",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "availability-prober",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:af99b382f52126b650770c3b8951948a7289f521cb3233ea8b58b608f808f439",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:2819d82240494dff9bd73d58ae55456117d8add7e8a08849f6b4f15a0ac0bb00",
+            "name": "remove-old-cno",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "init-client-token-minter",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:af99b382f52126b650770c3b8951948a7289f521cb3233ea8b58b608f808f439",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:2819d82240494dff9bd73d58ae55456117d8add7e8a08849f6b4f15a0ac0bb00",
+            "name": "rewrite-config",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:12:46Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:12:46Z",
+        "labels": {
+          "app": "cluster-node-tuning-operator",
+          "hypershift.openshift.io/control-plane-component": "cluster-node-tuning-operator",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "hypershift.openshift.io/need-management-kas-access": "true",
+          "name": "cluster-node-tuning-operator",
+          "pod-template-hash": "5bcdcbd6f4"
+        },
+        "name": "cluster-node-tuning-operator-5bcdcbd6f4-ckttf",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:5f9c15c5e65509deb3a71e5bfb291de75c711bb43b8001cc5a1e6b2dc89e0c7d",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:5f9c15c5e65509deb3a71e5bfb291de75c711bb43b8001cc5a1e6b2dc89e0c7d",
+            "name": "cluster-node-tuning-operator",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:12:46Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:12:44Z",
+        "labels": {
+          "app": "cluster-policy-controller",
+          "hypershift.openshift.io/control-plane-component": "cluster-policy-controller",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "pod-template-hash": "78ff95b659"
+        },
+        "name": "cluster-policy-controller-78ff95b659-4crzf",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:4be51c5bb9d4f02fc50d24dcb0417b3612eb3cce6e76542bcd582d7ca487fd6a",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:3e90915703b53e6a871b55eec406477f96f73af4530ade941889f7d3e88cebe0",
+            "name": "cluster-policy-controller",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "availability-prober",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:12:44Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:12:44Z",
+        "labels": {
+          "app": "cluster-storage-operator",
+          "hypershift.openshift.io/control-plane-component": "cluster-storage-operator",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "hypershift.openshift.io/need-management-kas-access": "true",
+          "name": "cluster-storage-operator",
+          "pod-template-hash": "5458cddfd8"
+        },
+        "name": "cluster-storage-operator-5458cddfd8-nbjqq",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:866b83172f6cedccc2fcde9578ccb7c240e0f38e96add8402617c1bbc591dee1",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:3b57ba75889ddb87fa0761022d5e4cbc50f70e5ec5f7b5a41bd1dd4de31f5eef",
+            "name": "cluster-storage-operator",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "availability-prober",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:12:44Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:12:42Z",
+        "labels": {
+          "app": "cluster-version-operator",
+          "hypershift.openshift.io/control-plane-component": "cluster-version-operator",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "k8s-app": "cluster-version-operator",
+          "pod-template-hash": "65489cf997"
+        },
+        "name": "cluster-version-operator-65489cf997-28mh4",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1474eae06734809bb1d2e1f32d33fec73a7044e9fce229b1efd67d45746f051e",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1474eae06734809bb1d2e1f32d33fec73a7044e9fce229b1efd67d45746f051e",
+            "name": "cluster-version-operator",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "availability-prober",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-release-nightly@sha256:08f0905c06195a76138db7071aa77ae644aea401eb832d51ebbf4fb870698346",
+            "imageID": "quay.io/openshift-release-dev/ocp-release-nightly@sha256:08f0905c06195a76138db7071aa77ae644aea401eb832d51ebbf4fb870698346",
+            "name": "prepare-payload",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:af99b382f52126b650770c3b8951948a7289f521cb3233ea8b58b608f808f439",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:2819d82240494dff9bd73d58ae55456117d8add7e8a08849f6b4f15a0ac0bb00",
+            "name": "bootstrap",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:12:42Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:13:46Z",
+        "labels": {
+          "app": "community-operators-catalog",
+          "hypershift.openshift.io/control-plane-component": "community-operators-catalog",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "olm.catalogSource": "community-operators",
+          "pod-template-hash": "685849f997"
+        },
+        "name": "community-operators-catalog-685849f997-mc8rr",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "image-registry.openshift-image-registry.service:5000/clusters-test-cntrlplane-4826-hc/catalogs@sha256:28bff057b83328ff0cd8336db295d47ed70e46d2f03a253826e145119c6cdfa0",
+            "imageID": "image-registry.openshift-image-registry.service:5000/clusters-test-cntrlplane-4826-hc/catalogs@sha256:28bff057b83328ff0cd8336db295d47ed70e46d2f03a253826e145119c6cdfa0",
+            "name": "registry",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:67ea3adb9079621aa1198f94a725c0f5a0d4667ab2db7390b985f7faa417eca5",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:67ea3adb9079621aa1198f94a725c0f5a0d4667ab2db7390b985f7faa417eca5",
+            "name": "extract-utilities",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "image-registry.openshift-image-registry.service:5000/clusters-test-cntrlplane-4826-hc/catalogs@sha256:28bff057b83328ff0cd8336db295d47ed70e46d2f03a253826e145119c6cdfa0",
+            "imageID": "image-registry.openshift-image-registry.service:5000/clusters-test-cntrlplane-4826-hc/catalogs@sha256:28bff057b83328ff0cd8336db295d47ed70e46d2f03a253826e145119c6cdfa0",
+            "name": "extract-content",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-28T13:13:46Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:08:22Z",
+        "labels": {
+          "app": "control-plane-operator",
+          "hypershift.openshift.io/control-plane-component": "control-plane-operator",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "hypershift.openshift.io/need-management-kas-access": "true",
+          "name": "control-plane-operator",
+          "pod-template-hash": "77b948bbb9"
+        },
+        "name": "control-plane-operator-77b948bbb9-xbdkk",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "cloud-token-minter",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "control-plane-operator",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:08:22Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:11:26Z",
+        "labels": {
+          "app": "control-plane-pki-operator",
+          "hypershift.openshift.io/control-plane-component": "control-plane-pki-operator",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "hypershift.openshift.io/need-management-kas-access": "true",
+          "pod-template-hash": "64bb6d4d64"
+        },
+        "name": "control-plane-pki-operator-64bb6d4d64-m8fjj",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "control-plane-pki-operator",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:11:26Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:14:46Z",
+        "labels": {
+          "app": "csi-snapshot-controller",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "openshift.storage.network-policy.all-egress": "allow",
+          "openshift.storage.network-policy.api-server": "allow",
+          "openshift.storage.network-policy.dns": "allow",
+          "pod-template-hash": "676cc8f468"
+        },
+        "name": "csi-snapshot-controller-676cc8f468-kb6zg",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:77ea740080153c23b65301c9c0e39be55dcf63618d2bf0efc40b5cd46010d8eb",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:77ea740080153c23b65301c9c0e39be55dcf63618d2bf0efc40b5cd46010d8eb",
+            "name": "snapshot-controller",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:14:46Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:12:49Z",
+        "labels": {
+          "app": "csi-snapshot-controller-operator",
+          "hypershift.openshift.io/control-plane-component": "csi-snapshot-controller-operator",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "hypershift.openshift.io/need-management-kas-access": "true",
+          "pod-template-hash": "69ffcb4567"
+        },
+        "name": "csi-snapshot-controller-operator-69ffcb4567-h5krp",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:97fa42cdbd9496ad831df0062c855e7e9aa48451796eb96c8d866294da4de2b9",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:97fa42cdbd9496ad831df0062c855e7e9aa48451796eb96c8d866294da4de2b9",
+            "name": "csi-snapshot-controller-operator",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "availability-prober",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:12:50Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:12:47Z",
+        "labels": {
+          "app": "dns-operator",
+          "hypershift.openshift.io/control-plane-component": "dns-operator",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "name": "dns-operator",
+          "pod-template-hash": "856bf9f6dd"
+        },
+        "name": "dns-operator-856bf9f6dd-j4r9x",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:5e23ef17abc111979bdf1f18a8fd996d9cc43b128edff16307c452c0a53844bf",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:255f0ce473af88fac541093efe91b3e4ac9022c43f13bfe1d20d544a90ef0978",
+            "name": "dns-operator",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "availability-prober",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:12:48Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:09:35Z",
+        "labels": {
+          "app": "etcd",
+          "apps.kubernetes.io/pod-index": "0",
+          "controller-revision-hash": "etcd-f87c76d8d",
+          "hypershift.openshift.io/control-plane-component": "etcd",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "hypershift.openshift.io/need-management-kas-access": "true",
+          "statefulset.kubernetes.io/pod-name": "etcd-0"
+        },
+        "name": "etcd-0",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:a944b7708cc453796074dd7e55a45d5490ea245449896d18031626f30985d66a",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:5cfc0e4da4dcf0c7d7ba6fcd54d835f74794115961e916f367e2dd3ac7fca788",
+            "name": "etcd",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:a944b7708cc453796074dd7e55a45d5490ea245449896d18031626f30985d66a",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:5cfc0e4da4dcf0c7d7ba6fcd54d835f74794115961e916f367e2dd3ac7fca788",
+            "name": "etcd-metrics",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:f0962d6f3de1b0d14c9894a4d00d372d70d1cae979c3f680acf7d3a6d2d10cc1",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:5426b56b4705cd257d6d36ba2052c1748c093b29e6169a85ee5840075bb01847",
+            "name": "healthz",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "ensure-dns",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:a944b7708cc453796074dd7e55a45d5490ea245449896d18031626f30985d66a",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:5cfc0e4da4dcf0c7d7ba6fcd54d835f74794115961e916f367e2dd3ac7fca788",
+            "name": "reset-member",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:09:35Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:09:13Z",
+        "labels": {
+          "app": "featuregate-generator",
+          "batch.kubernetes.io/controller-uid": "5537f8cb-e482-4840-aca9-06705f47ed83",
+          "batch.kubernetes.io/job-name": "featuregate-generator",
+          "controller-uid": "5537f8cb-e482-4840-aca9-06705f47ed83",
+          "hypershift.openshift.io/control-plane-component": "featuregate-generator",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "hypershift.openshift.io/need-management-kas-access": "true",
+          "job-name": "featuregate-generator"
+        },
+        "name": "featuregate-generator-q7k6j",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "apply",
+            "ready": false,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:3ae74da5dbe2e0bb1e12dcb8cc496607ff9d058508dd3c7a6769786f7446f3db",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:3ae74da5dbe2e0bb1e12dcb8cc496607ff9d058508dd3c7a6769786f7446f3db",
+            "name": "render-feature-gates",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Succeeded",
+        "startTime": "2026-10-27T20:09:13Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:11:21Z",
+        "labels": {
+          "app": "hosted-cluster-config-operator",
+          "hypershift.openshift.io/control-plane-component": "hosted-cluster-config-operator",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "hypershift.openshift.io/need-management-kas-access": "true",
+          "pod-template-hash": "6568fc87cb"
+        },
+        "name": "hosted-cluster-config-operator-6568fc87cb-mhn65",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "hosted-cluster-config-operator",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "availability-prober",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:11:21Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:09:08Z",
+        "labels": {
+          "app": "ignition-server",
+          "hypershift.openshift.io/control-plane-component": "ignition-server",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "hypershift.openshift.io/need-management-kas-access": "true",
+          "pod-template-hash": "65cd894d9f"
+        },
+        "name": "ignition-server-65cd894d9f-zth6h",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "ignition-server",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:3ae74da5dbe2e0bb1e12dcb8cc496607ff9d058508dd3c7a6769786f7446f3db",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:3ae74da5dbe2e0bb1e12dcb8cc496607ff9d058508dd3c7a6769786f7446f3db",
+            "name": "fetch-feature-gate",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:09:08Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:09:17Z",
+        "labels": {
+          "app": "ignition-server-proxy",
+          "hypershift.openshift.io/control-plane-component": "ignition-server-proxy",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "hypershift.openshift.io/request-serving-component": "true",
+          "pod-template-hash": "77f4bcf585"
+        },
+        "name": "ignition-server-proxy-77f4bcf585-r5mgk",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:cf5e130a5cd7937d2ec76019ebaa9de94a40189c7221d22ad6a752793c7ca714",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:05669754ad422a6126c6d366644130d83d88d0e4ca8af577dad72cd11a28231f",
+            "name": "haproxy",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:09:17Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:12:50Z",
+        "labels": {
+          "app": "ingress-operator",
+          "hypershift.openshift.io/control-plane-component": "ingress-operator",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "name": "ingress-operator",
+          "pod-template-hash": "cfd459b67"
+        },
+        "name": "ingress-operator-cfd459b67-lsg2q",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:95af541830b5af401435618744b3068d3e16364f02991acc1e7d48f790112a1e",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:30d9700869d13de469a447f8bb94524539233bbee7efc937d4a446b6cdd1c7e2",
+            "name": "ingress-operator",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "konnectivity-proxy-https",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "availability-prober",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "cloud-token-minter",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:12:50Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:11:21Z",
+        "labels": {
+          "app": "konnectivity-agent",
+          "hypershift.openshift.io/control-plane-component": "konnectivity-agent",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "pod-template-hash": "666bc4fcd4"
+        },
+        "name": "konnectivity-agent-666bc4fcd4-t2gvz",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:790a63d3ed375931b051fb5581196f954e22f953d3d48c7cd5b16bee009652c6",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:790a63d3ed375931b051fb5581196f954e22f953d3d48c7cd5b16bee009652c6",
+            "name": "konnectivity-agent",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:11:21Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:10:17Z",
+        "labels": {
+          "app": "kube-apiserver",
+          "hypershift.openshift.io/control-plane-component": "kube-apiserver",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "hypershift.openshift.io/request-serving-component": "true",
+          "pod-template-hash": "5c5c8b9945"
+        },
+        "name": "kube-apiserver-5c5c8b9945-vghck",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:af99b382f52126b650770c3b8951948a7289f521cb3233ea8b58b608f808f439",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:2819d82240494dff9bd73d58ae55456117d8add7e8a08849f6b4f15a0ac0bb00",
+            "name": "audit-logs",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:2bdd42738143e434ffd920829ad37c42140f729624bdc8d9ca2188957496bbd2",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:2bdd42738143e434ffd920829ad37c42140f729624bdc8d9ca2188957496bbd2",
+            "name": "azure-workload-identity-webhook",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "bootstrap",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:790a63d3ed375931b051fb5581196f954e22f953d3d48c7cd5b16bee009652c6",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:790a63d3ed375931b051fb5581196f954e22f953d3d48c7cd5b16bee009652c6",
+            "name": "konnectivity-server",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:6a2f4efbf2069a75e7da6d7c14c17e64e81508709282a0e663dcfacb566a2755",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:6a2f4efbf2069a75e7da6d7c14c17e64e81508709282a0e663dcfacb566a2755",
+            "name": "kube-apiserver",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:6a2f4efbf2069a75e7da6d7c14c17e64e81508709282a0e663dcfacb566a2755",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:6a2f4efbf2069a75e7da6d7c14c17e64e81508709282a0e663dcfacb566a2755",
+            "name": "pre-pull-image-kube-apiserver",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:3ae74da5dbe2e0bb1e12dcb8cc496607ff9d058508dd3c7a6769786f7446f3db",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:3ae74da5dbe2e0bb1e12dcb8cc496607ff9d058508dd3c7a6769786f7446f3db",
+            "name": "init-bootstrap-render",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:e97c0dd9eb7e1d61389c425404e61fd8f5f4f7f891d0d10a9aed390ec4416011",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:11bbd16480eb09c1396abc35632153c86ffc3ce16a808572451e80ba4c740da7",
+            "name": "init-auth-bootstrap-render",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:af99b382f52126b650770c3b8951948a7289f521cb3233ea8b58b608f808f439",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:2819d82240494dff9bd73d58ae55456117d8add7e8a08849f6b4f15a0ac0bb00",
+            "name": "wait-for-etcd",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:10:17Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:11:28Z",
+        "labels": {
+          "app": "kube-controller-manager",
+          "hypershift.openshift.io/control-plane-component": "kube-controller-manager",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "pod-template-hash": "84b759ff74"
+        },
+        "name": "kube-controller-manager-84b759ff74-zrx67",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:6a2f4efbf2069a75e7da6d7c14c17e64e81508709282a0e663dcfacb566a2755",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:6a2f4efbf2069a75e7da6d7c14c17e64e81508709282a0e663dcfacb566a2755",
+            "name": "kube-controller-manager",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "availability-prober",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:11:28Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:11:20Z",
+        "labels": {
+          "app": "kube-scheduler",
+          "hypershift.openshift.io/control-plane-component": "kube-scheduler",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "pod-template-hash": "966bbf869"
+        },
+        "name": "kube-scheduler-966bbf869-wrc6n",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:6a2f4efbf2069a75e7da6d7c14c17e64e81508709282a0e663dcfacb566a2755",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:6a2f4efbf2069a75e7da6d7c14c17e64e81508709282a0e663dcfacb566a2755",
+            "name": "kube-scheduler",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "availability-prober",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:11:20Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:11:22Z",
+        "labels": {
+          "app": "kube-storage-version-migrator",
+          "hypershift.openshift.io/control-plane-component": "kube-storage-version-migrator",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "pod-template-hash": "85cfbf4df9"
+        },
+        "name": "kube-storage-version-migrator-85cfbf4df9-6nxvh",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:89d5230e312e091dba272a96a92c2297ced09123ae07120f87f5ad089c7a0418",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:6454c70938e35e3eb2fc178d43f0441f1b494149399349fc71b5efe8bd6d6e27",
+            "name": "migrator",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:11:22Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:11:21Z",
+        "labels": {
+          "app": "machine-approver",
+          "hypershift.openshift.io/control-plane-component": "machine-approver",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "hypershift.openshift.io/need-management-kas-access": "true",
+          "pod-template-hash": "65b67dcf47"
+        },
+        "name": "machine-approver-65b67dcf47-r2q5s",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:a94e5e29f836cbb4567fa28b7c305e790b3f8d08cdcf1dba7d2011bda8fa138f",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:4ed2458cbff03ea6651efc81302a3b9c3b6ad4c24d254fc3000726f4105a9d53",
+            "name": "machine-approver",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "availability-prober",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:11:21Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:15:42Z",
+        "labels": {
+          "app": "multus-admission-controller",
+          "component": "network",
+          "hypershift.openshift.io/control-plane": "true",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "namespace": "clusters-test-cntrlplane-4826-hc",
+          "openshift.io/component": "network",
+          "pod-template-hash": "6f56ccf6d5",
+          "type": "infra"
+        },
+        "name": "multus-admission-controller-6f56ccf6d5-qz9jc",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "hosted-cluster-token",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:461e275f19675b7b3abd36074cefdc1506aa709285597372cdaca8054c7713b2",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:12435f662f8aafdde28423c09e0e65bd60f4e8a27dd35f02585760b12e745ed0",
+            "name": "multus-admission-controller",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:af99b382f52126b650770c3b8951948a7289f521cb3233ea8b58b608f808f439",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:2819d82240494dff9bd73d58ae55456117d8add7e8a08849f6b4f15a0ac0bb00",
+            "name": "hosted-cluster-kubecfg-setup",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:15:42Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:15:57Z",
+        "labels": {
+          "app": "network-node-identity",
+          "component": "network",
+          "hypershift.openshift.io/control-plane": "true",
+          "hypershift.openshift.io/control-plane-component": "network-node-identity",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "kubernetes.io/os": "linux",
+          "openshift.io/component": "network",
+          "pod-template-hash": "55598455f",
+          "type": "infra"
+        },
+        "name": "network-node-identity-55598455f-dlrgw",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:8fa366359643f16ce5ee6c5d00d730dadc70db502a8433e2b31a91265983158c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:5d5b90b9c827e57ae8d4a024a5a4a919e565a7cd189dc3a12ee9cfefc8fce26a",
+            "name": "approver",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "token-minter",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:8fa366359643f16ce5ee6c5d00d730dadc70db502a8433e2b31a91265983158c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:5d5b90b9c827e57ae8d4a024a5a4a919e565a7cd189dc3a12ee9cfefc8fce26a",
+            "name": "webhook",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:af99b382f52126b650770c3b8951948a7289f521cb3233ea8b58b608f808f439",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:2819d82240494dff9bd73d58ae55456117d8add7e8a08849f6b4f15a0ac0bb00",
+            "name": "hosted-cluster-kubecfg-setup",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:15:57Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:12:43Z",
+        "labels": {
+          "app": "oauth-openshift",
+          "hypershift.openshift.io/control-plane-component": "oauth-openshift",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "hypershift.openshift.io/request-serving-component": "true",
+          "pod-template-hash": "5784fd7bd"
+        },
+        "name": "oauth-openshift-5784fd7bd-jv97w",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:af99b382f52126b650770c3b8951948a7289f521cb3233ea8b58b608f808f439",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:2819d82240494dff9bd73d58ae55456117d8add7e8a08849f6b4f15a0ac0bb00",
+            "name": "audit-logs",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "konnectivity-proxy-https",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "konnectivity-proxy-socks5",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:60d0b5b2f18b44fb8c9a985f6be42abf6f4e858b517754ca2b52c552f7f49c3e",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:2fb642d11b52191164456a8116c07f06e95fcc37ea223ed4d6afbbe65ce483f6",
+            "name": "oauth-openshift",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "availability-prober",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:12:43Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:11:22Z",
+        "labels": {
+          "app": "olm-operator",
+          "hypershift.openshift.io/control-plane-component": "olm-operator",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "pod-template-hash": "88f4589bf"
+        },
+        "name": "olm-operator-88f4589bf-jm57t",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "konnectivity-proxy-socks5",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:67ea3adb9079621aa1198f94a725c0f5a0d4667ab2db7390b985f7faa417eca5",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:67ea3adb9079621aa1198f94a725c0f5a0d4667ab2db7390b985f7faa417eca5",
+            "name": "olm-operator",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "availability-prober",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:11:22Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:11:21Z",
+        "labels": {
+          "app": "openshift-apiserver",
+          "hypershift.openshift.io/control-plane-component": "openshift-apiserver",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "pod-template-hash": "86756c794f"
+        },
+        "name": "openshift-apiserver-86756c794f-z4qf5",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:af99b382f52126b650770c3b8951948a7289f521cb3233ea8b58b608f808f439",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:2819d82240494dff9bd73d58ae55456117d8add7e8a08849f6b4f15a0ac0bb00",
+            "name": "audit-logs",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:af99b382f52126b650770c3b8951948a7289f521cb3233ea8b58b608f808f439",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:2819d82240494dff9bd73d58ae55456117d8add7e8a08849f6b4f15a0ac0bb00",
+            "name": "kas-readiness-check",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "konnectivity-proxy-https",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:939442cac427af845401f3382b06073d9a94f60323c423b3c4a974e8489f972d",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1634b6da547ccea876a29071730572a26be39b37f6f72741cd4a7af019b4cc6f",
+            "name": "openshift-apiserver",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "availability-prober",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:939442cac427af845401f3382b06073d9a94f60323c423b3c4a974e8489f972d",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1634b6da547ccea876a29071730572a26be39b37f6f72741cd4a7af019b4cc6f",
+            "name": "oas-trust-anchor-generator",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:11:21Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:12:42Z",
+        "labels": {
+          "app": "openshift-controller-manager",
+          "hypershift.openshift.io/control-plane-component": "openshift-controller-manager",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "pod-template-hash": "6d4bbd8bc6"
+        },
+        "name": "openshift-controller-manager-6d4bbd8bc6-bzdjh",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:c85c9802d593ad50f56bfcc514bdb0666755f300b8aeeba94635afcd43f88733",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:9f77a61f65e39d1ccea3d7140105d497166e1e4789546a640825a638cf01c537",
+            "name": "openshift-controller-manager",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:12:42Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:12:42Z",
+        "labels": {
+          "app": "openshift-oauth-apiserver",
+          "hypershift.openshift.io/control-plane-component": "openshift-oauth-apiserver",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "pod-template-hash": "6595cdd846"
+        },
+        "name": "openshift-oauth-apiserver-6595cdd846-6c6rm",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:af99b382f52126b650770c3b8951948a7289f521cb3233ea8b58b608f808f439",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:2819d82240494dff9bd73d58ae55456117d8add7e8a08849f6b4f15a0ac0bb00",
+            "name": "audit-logs",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:af99b382f52126b650770c3b8951948a7289f521cb3233ea8b58b608f808f439",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:2819d82240494dff9bd73d58ae55456117d8add7e8a08849f6b4f15a0ac0bb00",
+            "name": "kas-readiness-check",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "konnectivity-proxy-socks5",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:48e6a44664ccba415b27cff07e3b9699de11787beda11bef7a9294507280553a",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:48e6a44664ccba415b27cff07e3b9699de11787beda11bef7a9294507280553a",
+            "name": "openshift-oauth-apiserver",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "availability-prober",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:af99b382f52126b650770c3b8951948a7289f521cb3233ea8b58b608f808f439",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:2819d82240494dff9bd73d58ae55456117d8add7e8a08849f6b4f15a0ac0bb00",
+            "name": "wait-for-etcd",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:12:42Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:12:43Z",
+        "labels": {
+          "app": "openshift-route-controller-manager",
+          "hypershift.openshift.io/control-plane-component": "openshift-route-controller-manager",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "pod-template-hash": "656c7dfc84"
+        },
+        "name": "openshift-route-controller-manager-656c7dfc84-x6ncr",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:281c2b42194bcc1e2052999b3b9c9e67702e0479ae477a5874bb9007b5e4a661",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:281c2b42194bcc1e2052999b3b9c9e67702e0479ae477a5874bb9007b5e4a661",
+            "name": "openshift-route-controller-manager",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:12:44Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:23:14Z",
+        "labels": {
+          "app": "ovnkube-control-plane",
+          "component": "network",
+          "hypershift.openshift.io/control-plane": "true",
+          "hypershift.openshift.io/control-plane-component": "ovnkube-control-plane",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "kubernetes.io/os": "linux",
+          "openshift.io/component": "network",
+          "pod-template-hash": "59f5f499c",
+          "type": "infra"
+        },
+        "name": "ovnkube-control-plane-59f5f499c-czjh5",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:8fa366359643f16ce5ee6c5d00d730dadc70db502a8433e2b31a91265983158c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:5d5b90b9c827e57ae8d4a024a5a4a919e565a7cd189dc3a12ee9cfefc8fce26a",
+            "name": "ovnkube-control-plane",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "socks-proxy",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "token-minter",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:8fa366359643f16ce5ee6c5d00d730dadc70db502a8433e2b31a91265983158c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:5d5b90b9c827e57ae8d4a024a5a4a919e565a7cd189dc3a12ee9cfefc8fce26a",
+            "name": "init-ip",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:23:14Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:11:22Z",
+        "labels": {
+          "app": "packageserver",
+          "hypershift.openshift.io/control-plane-component": "packageserver",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "pod-template-hash": "85b444557d"
+        },
+        "name": "packageserver-85b444557d-8tc7x",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:af99b382f52126b650770c3b8951948a7289f521cb3233ea8b58b608f808f439",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:2819d82240494dff9bd73d58ae55456117d8add7e8a08849f6b4f15a0ac0bb00",
+            "name": "kas-readiness-check",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "konnectivity-proxy-socks5",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:67ea3adb9079621aa1198f94a725c0f5a0d4667ab2db7390b985f7faa417eca5",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:67ea3adb9079621aa1198f94a725c0f5a0d4667ab2db7390b985f7faa417eca5",
+            "name": "packageserver",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+            "name": "availability-prober",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:11:22Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:43:46Z",
+        "labels": {
+          "app": "redhat-operators-catalog",
+          "hypershift.openshift.io/control-plane-component": "redhat-operators-catalog",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "olm.catalogSource": "redhat-operators",
+          "pod-template-hash": "556999ffdc"
+        },
+        "name": "redhat-operators-catalog-556999ffdc-vstf4",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "image-registry.openshift-image-registry.service:5000/clusters-test-cntrlplane-4826-hc/catalogs@sha256:311d22980638dddba4ee5993d9603a3b29540ab763f969b9f186b52d4d1a8b5f",
+            "imageID": "image-registry.openshift-image-registry.service:5000/clusters-test-cntrlplane-4826-hc/catalogs@sha256:240127875c97d8d79d9e79203185fcbce87870f19018635856dba5c1fa9cdd6e",
+            "name": "registry",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:67ea3adb9079621aa1198f94a725c0f5a0d4667ab2db7390b985f7faa417eca5",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:67ea3adb9079621aa1198f94a725c0f5a0d4667ab2db7390b985f7faa417eca5",
+            "name": "extract-utilities",
+            "ready": true,
+            "restartCount": 0
+          },
+          {
+            "image": "image-registry.openshift-image-registry.service:5000/clusters-test-cntrlplane-4826-hc/catalogs@sha256:311d22980638dddba4ee5993d9603a3b29540ab763f969b9f186b52d4d1a8b5f",
+            "imageID": "image-registry.openshift-image-registry.service:5000/clusters-test-cntrlplane-4826-hc/catalogs@sha256:240127875c97d8d79d9e79203185fcbce87870f19018635856dba5c1fa9cdd6e",
+            "name": "extract-content",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-28T13:43:46Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:09:13Z",
+        "labels": {
+          "app": "private-router",
+          "hypershift.openshift.io/control-plane-component": "router",
+          "hypershift.openshift.io/hosted-control-plane": "clusters-test-cntrlplane-4826-hc",
+          "hypershift.openshift.io/request-serving-component": "true",
+          "pod-template-hash": "5697588545"
+        },
+        "name": "router-5697588545-znv7h",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:cf5e130a5cd7937d2ec76019ebaa9de94a40189c7221d22ad6a752793c7ca714",
+            "imageID": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:05669754ad422a6126c6d366644130d83d88d0e4ca8af577dad72cd11a28231f",
+            "name": "router",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [],
+        "phase": "Running",
+        "startTime": "2026-10-27T20:09:13Z"
+      }
+    }
+  ]
+}

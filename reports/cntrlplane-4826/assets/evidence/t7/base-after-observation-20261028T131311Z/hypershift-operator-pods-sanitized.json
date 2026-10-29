@@ -1,0 +1,72 @@
+{
+  "items": [
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:05:54Z",
+        "labels": {
+          "app": "operator",
+          "hypershift.openshift.io/operator-component": "operator",
+          "name": "operator",
+          "pod-template-hash": "795bfbc546"
+        },
+        "name": "operator-795bfbc546-4zfdj"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/example/hypershift:cntrlplane-4826-base-full-dbe3111415",
+            "imageID": "quay.io/example/hypershift@sha256:e848d7a892cbc144bfe0032ddeaccecde94a7c5e2d84f56c2953fb9e5e535834",
+            "name": "operator",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/example/hypershift:cntrlplane-4826-base-full-dbe3111415",
+            "imageID": "quay.io/example/hypershift@sha256:e848d7a892cbc144bfe0032ddeaccecde94a7c5e2d84f56c2953fb9e5e535834",
+            "name": "init-environment",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-28T13:05:54Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:04:49Z",
+        "labels": {
+          "app": "operator",
+          "hypershift.openshift.io/operator-component": "operator",
+          "name": "operator",
+          "pod-template-hash": "795bfbc546"
+        },
+        "name": "operator-795bfbc546-t77jz"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/example/hypershift:cntrlplane-4826-base-full-dbe3111415",
+            "imageID": "quay.io/example/hypershift@sha256:e848d7a892cbc144bfe0032ddeaccecde94a7c5e2d84f56c2953fb9e5e535834",
+            "name": "operator",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/example/hypershift:cntrlplane-4826-base-full-dbe3111415",
+            "imageID": "quay.io/example/hypershift@sha256:e848d7a892cbc144bfe0032ddeaccecde94a7c5e2d84f56c2953fb9e5e535834",
+            "name": "init-environment",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-28T13:04:49Z"
+      }
+    }
+  ]
+}

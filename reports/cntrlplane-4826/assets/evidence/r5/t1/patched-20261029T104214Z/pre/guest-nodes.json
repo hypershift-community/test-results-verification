@@ -1,0 +1,992 @@
+{
+  "apiVersion": "v1",
+  "items": [
+    {
+      "apiVersion": "v1",
+      "kind": "Node",
+      "metadata": {
+        "annotations": {
+          "cloud.network.openshift.io/egress-ipconfig": "[{\"interface\":\"test-cntrlplane-4826-r5-head-rz9dk-7r852-nic\",\"ifaddr\":{\"ipv4\":\"10.0.0.0/24\"},\"capacity\":{\"ip\":255}}]",
+          "cluster.x-k8s.io/annotations-from-machine": "",
+          "cluster.x-k8s.io/cluster-name": "test-cntrlplane-4826-r5",
+          "cluster.x-k8s.io/cluster-namespace": "clusters-test-cntrlplane-4826-r5-hc",
+          "cluster.x-k8s.io/labels-from-machine": "",
+          "cluster.x-k8s.io/machine": "test-cntrlplane-4826-r5-head-rz9dk-7r852",
+          "cluster.x-k8s.io/owner-kind": "MachineSet",
+          "cluster.x-k8s.io/owner-name": "test-cntrlplane-4826-r5-head-rz9dk",
+          "csi.volume.kubernetes.io/nodeid": "{\"file.csi.azure.com\":\"test-cntrlplane-4826-r5-head-rz9dk-7r852\"}",
+          "hypershift.openshift.io/labelsSynced": "808782b0fa4563aa",
+          "k8s.ovn.org/host-cidrs": "[\"10.0.0.10/24\",\"172.20.0.1/32\"]",
+          "k8s.ovn.org/l3-gateway-config": "{\"default\":{\"mode\":\"shared\",\"bridge-id\":\"br-ex\",\"interface-id\":\"br-ex_test-cntrlplane-4826-r5-head-rz9dk-7r852\",\"mac-address\":\"7c:ed:8d:d9:be:af\",\"ip-addresses\":[\"10.0.0.10/24\"],\"ip-address\":\"10.0.0.10/24\",\"next-hops\":[\"10.0.0.1\"],\"next-hop\":\"10.0.0.1\",\"node-port-enable\":\"true\",\"vlan-id\":\"0\"}}",
+          "k8s.ovn.org/layer2-topology-version": "2.0",
+          "k8s.ovn.org/node-chassis-id": "121319fe-6328-43a4-a1c2-a557f6d2df73",
+          "k8s.ovn.org/node-encap-ips": "[\"10.0.0.10\"]",
+          "k8s.ovn.org/node-id": "3",
+          "k8s.ovn.org/node-masquerade-subnet": "{\"ipv4\":\"169.254.0.0/17\",\"ipv6\":\"fd69::/112\"}",
+          "k8s.ovn.org/node-primary-ifaddr": "{\"ipv4\":\"10.0.0.10/24\"}",
+          "k8s.ovn.org/node-subnets": "{\"default\":[\"10.133.0.0/23\"]}",
+          "k8s.ovn.org/node-transit-switch-port-ifaddr": "{\"ipv4\":\"100.88.0.3/16\"}",
+          "tuned.openshift.io/bootcmdline": "",
+          "tuned.openshift.io/bootcmdline-deps": "5.1.0-0.nightly-multi-2026-10-27-082258,default:1",
+          "volumes.kubernetes.io/controller-managed-attach-detach": "true"
+        },
+        "creationTimestamp": "2026-10-29T10:40:13Z",
+        "labels": {
+          "beta.kubernetes.io/arch": "amd64",
+          "beta.kubernetes.io/instance-type": "Standard_D4s_v5",
+          "beta.kubernetes.io/os": "linux",
+          "failure-domain.beta.kubernetes.io/region": "eastus",
+          "failure-domain.beta.kubernetes.io/zone": "0",
+          "hypershift.openshift.io/managed": "true",
+          "hypershift.openshift.io/nodePool": "test-cntrlplane-4826-r5-head",
+          "hypershift.openshift.io/nodepool-globalps-enabled": "true",
+          "kubernetes.io/arch": "amd64",
+          "kubernetes.io/hostname": "test-cntrlplane-4826-r5-head-rz9dk-7r852",
+          "kubernetes.io/os": "linux",
+          "node-role.kubernetes.io/worker": "",
+          "node.kubernetes.io/instance-type": "Standard_D4s_v5",
+          "node.openshift.io/os_id": "rhel",
+          "topology.kubernetes.io/region": "eastus",
+          "topology.kubernetes.io/zone": "0"
+        },
+        "name": "test-cntrlplane-4826-r5-head-rz9dk-7r852",
+        "resourceVersion": "7001",
+        "uid": "b15fb3d9-737e-4266-a8e8-83a4246f3914"
+      },
+      "spec": {
+        "providerID": "azure:///subscriptions/redacted-subscription-id/resourceGroups/test-cntrlplane-4826-hc-test-cntrlplane-4826/providers/Microsoft.Compute/virtualMachines/test-cntrlplane-4826-r5-head-rz9dk-7r852"
+      },
+      "status": {
+        "addresses": [
+          {
+            "address": "10.0.0.10",
+            "type": "InternalIP"
+          },
+          {
+            "address": "test-cntrlplane-4826-r5-head-rz9dk-7r852",
+            "type": "Hostname"
+          }
+        ],
+        "allocatable": {
+          "cpu": "3500m",
+          "ephemeral-storage": "114345831029",
+          "hugepages-1Gi": "0",
+          "hugepages-2Mi": "0",
+          "memory": "15212428Ki",
+          "pods": "250"
+        },
+        "capacity": {
+          "cpu": "4",
+          "ephemeral-storage": "125238252Ki",
+          "hugepages-1Gi": "0",
+          "hugepages-2Mi": "0",
+          "memory": "16363404Ki",
+          "pods": "250"
+        },
+        "conditions": [
+          {
+            "lastHeartbeatTime": "2026-10-29T10:41:45Z",
+            "lastTransitionTime": "2026-10-29T10:40:13Z",
+            "message": "kubelet has sufficient memory available",
+            "reason": "KubeletHasSufficientMemory",
+            "status": "False",
+            "type": "MemoryPressure"
+          },
+          {
+            "lastHeartbeatTime": "2026-10-29T10:41:45Z",
+            "lastTransitionTime": "2026-10-29T10:40:13Z",
+            "message": "kubelet has no disk pressure",
+            "reason": "KubeletHasNoDiskPressure",
+            "status": "False",
+            "type": "DiskPressure"
+          },
+          {
+            "lastHeartbeatTime": "2026-10-29T10:41:45Z",
+            "lastTransitionTime": "2026-10-29T10:40:13Z",
+            "message": "kubelet has sufficient PID available",
+            "reason": "KubeletHasSufficientPID",
+            "status": "False",
+            "type": "PIDPressure"
+          },
+          {
+            "lastHeartbeatTime": "2026-10-29T10:41:45Z",
+            "lastTransitionTime": "2026-10-29T10:41:22Z",
+            "message": "kubelet is posting ready status",
+            "reason": "KubeletReady",
+            "status": "True",
+            "type": "Ready"
+          }
+        ],
+        "daemonEndpoints": {
+          "kubeletEndpoint": {
+            "Port": 10250
+          }
+        },
+        "declaredFeatures": [
+          "ExtendWebSocketsToKubelet",
+          "InPlacePodLevelResourcesVerticalScaling",
+          "InPlacePodVerticalScalingInitContainers",
+          "RestartAllContainersOnContainerExits"
+        ],
+        "features": {
+          "supplementalGroupsPolicy": true
+        },
+        "images": [
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:6703be7be069ac72faca05bf1e35167e47eefe973c15255c203f38b8ac5f9169",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:8ca2e13239d433d896fe5c66d5f3edd970c21a41ceeacf8fc1e55488ec2f2e3d"
+            ],
+            "sizeBytes": 2011772044
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:5d5b90b9c827e57ae8d4a024a5a4a919e565a7cd189dc3a12ee9cfefc8fce26a",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:8fa366359643f16ce5ee6c5d00d730dadc70db502a8433e2b31a91265983158c"
+            ],
+            "sizeBytes": 1217044022
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:703442653456f4fe5e1fca964c58a2f7580929abd9a58c2a2e2a98b11c185acc",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:d0fbf880471493b39510a24f8e7a2e169b8158d537806832c94471d93e348170"
+            ],
+            "sizeBytes": 906506285
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:509f6e1ad83d2180bbfbe9e853325ecc0d8a5237b23ffa1e16663805180b9c98"
+            ],
+            "sizeBytes": 675998937
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:33dc9bcd50f2d9e6d08595d1fb6373c66de61bd7040bc30c50388c17271c5823",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:b544527228d008fe0acca167dfb13abe67c7a5afa6015a4ccc515d2fe4ebd6f2"
+            ],
+            "sizeBytes": 576534761
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:5f9c15c5e65509deb3a71e5bfb291de75c711bb43b8001cc5a1e6b2dc89e0c7d",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:adca06377fa80a5be7e9fa859788822cf6eca96b37befafc84ad125af8231219"
+            ],
+            "sizeBytes": 523051314
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:30d9700869d13de469a447f8bb94524539233bbee7efc937d4a446b6cdd1c7e2",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:95af541830b5af401435618744b3068d3e16364f02991acc1e7d48f790112a1e"
+            ],
+            "sizeBytes": 476548470
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:28d806f6514b0156d25edcb9764f977efb4317b6ee174826a35b090f192a5338",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:9205cb5a5f3420c073beac6410f04f0f1fab4e543d82834725e1afab53ae9f6f"
+            ],
+            "sizeBytes": 459209890
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:2a818ff13fea1a3dea3f097fcf0d4be2a707b01070c2def4f679e9537dfa30f9",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:7c298c315d5e13872d084e84cb48d80f78048f9ccc767dbf7721f23bb0652a6e"
+            ],
+            "sizeBytes": 458754163
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:4f102111a7b6698c50ba39f918371cfda43fcee51f3f8c6ba63a8909ff91380d",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:a99214eb3cce2ad87836760d45fa65e53a6ff6e6d272d111daaf1c1f31dbfa81"
+            ],
+            "sizeBytes": 447136076
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:2819d82240494dff9bd73d58ae55456117d8add7e8a08849f6b4f15a0ac0bb00",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:af99b382f52126b650770c3b8951948a7289f521cb3233ea8b58b608f808f439"
+            ],
+            "sizeBytes": 443390502
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:790a63d3ed375931b051fb5581196f954e22f953d3d48c7cd5b16bee009652c6",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:8e13319753bf6e92dec220c3e924144806c93d521346d09dc55edd2bbcf75c85"
+            ],
+            "sizeBytes": 356192770
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:560c333212a69e78abb83df241843b3ec1da580424edc30f5acca7fd5ce7265d",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:be84a8f77f9fa8614c54abc1c8bfae47187c21632d23429a8f78a90f7e677a01"
+            ],
+            "sizeBytes": 344302147
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:915bf4d952db2290a40862cfc25d7c3cb655e06642cd55916cfd6443a730edfb",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:f673b3b7e6b6ce473b606c7055fad8283ed3b71af474ed4dbea2d70f5d4571d3"
+            ],
+            "sizeBytes": 342809227
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:8988a311c29724e70070658d485a7aee65f85a54910be9d7557fbe3be151741b",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:9ef9a8242f94da2a53af7d7eec6ea0d1bb25f938c43efb6b122c47f6b0f92185"
+            ],
+            "sizeBytes": 312689125
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:822cb66361b4d02d551be7bbfc4b94b4f408a455b8843850bf9972f8e232c82a",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:bcd88ad437747a50a7300779ea528c73a580b0a50ef6511046e99d9767d2bfa9"
+            ],
+            "sizeBytes": 302078402
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:31505c91721765063e63ca93834f52a5a580b53d8aa96601d8bc118c0051754f",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:7d732469da87bda1a23081a9d696a51a1cc8c8e46f88a2682edb1a9ba8fd4e28"
+            ],
+            "sizeBytes": 289270168
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:8334001c70efb6ff09679636c0d9ea846597f548f12c6628a9630f5fac949872"
+            ],
+            "sizeBytes": 264495512
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:00956682879e8802b44af4c15f41efb4c491e8e01b9615e2886ff98da4fb7879",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:78e96f7f506f50f46416adbf901879e4180e391ce4f92fe408be6dbbd027c0fa"
+            ],
+            "sizeBytes": 241180531
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:248948de3228b0c497877222de6de0f43eb354f270dbb0c50b97e315c2a6f81d",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:d8861b2f30fcea6de14cf9b973e2425cf6ddee01286232b07de93889468869c1"
+            ],
+            "sizeBytes": 240885639
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:a343e6f1a3a50a442b3d118d06fe392f56644a0590a24e25c0fb72dfdc55c03f",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:facbe6da7b6b58e00c386ce1f7500c2e1cc57661a741db42c38b4fd9cb331bd3"
+            ],
+            "sizeBytes": 217657036
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:a52e8f21b9ea3d30d0c37004c214a8bb405dfede54ba588511454f66089d2c81",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:ff147b933ba3fb1d9cd8383e334544cb3b67ef73449506cf23168cde0d4afe95"
+            ],
+            "sizeBytes": 216304150
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:05e0084c74702f79d4bea90e4852e1f970ccdafeb8d58fd575db03721839d88b",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:b8bcc19a4e022721841dc0aa8903b41ab632a0d227b3c2dff47f7dd509627c11"
+            ],
+            "sizeBytes": 215686882
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:beb347810978d779c168ef754aa41ff91a59e0b3c23cd4a26fd956cadc4fc30c",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:d7e645be2b66ec5eba2b093ebf10e1406c3d910a3207881aeb54b227d65d1ff7"
+            ],
+            "sizeBytes": 923854
+          }
+        ],
+        "nodeInfo": {
+          "architecture": "amd64",
+          "bootID": "16942a0d-bc30-4d51-9409-d1c20602c554",
+          "containerRuntimeVersion": "cri-o://1.36.6-202610142339.p2.g4f5848d.assembly.stream.el10",
+          "kernelVersion": "6.12.0-211.66.1.el10_2.x86_64",
+          "kubeProxyVersion": "",
+          "kubeletVersion": "v1.36.5",
+          "machineID": "88d78c621bd6454eb1b91f2591915ff1",
+          "operatingSystem": "linux",
+          "osImage": "Red Hat Enterprise Linux CoreOS 10.2.20261015-0 (Coughlan)",
+          "systemUUID": "5dfedabd-16e0-41bc-9263-49dd05c870fa"
+        },
+        "runtimeHandlers": [
+          {
+            "features": {
+              "recursiveReadOnlyMounts": true,
+              "userNamespaces": true
+            },
+            "name": ""
+          },
+          {
+            "features": {
+              "recursiveReadOnlyMounts": true,
+              "userNamespaces": true
+            },
+            "name": "crun"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Node",
+      "metadata": {
+        "annotations": {
+          "cloud.network.openshift.io/egress-ipconfig": "[{\"interface\":\"test-cntrlplane-4826-r5-head-rz9dk-fq9t8-nic\",\"ifaddr\":{\"ipv4\":\"10.0.0.0/24\"},\"capacity\":{\"ip\":255}}]",
+          "cluster.x-k8s.io/annotations-from-machine": "",
+          "cluster.x-k8s.io/cluster-name": "test-cntrlplane-4826-r5",
+          "cluster.x-k8s.io/cluster-namespace": "clusters-test-cntrlplane-4826-r5-hc",
+          "cluster.x-k8s.io/labels-from-machine": "",
+          "cluster.x-k8s.io/machine": "test-cntrlplane-4826-r5-head-rz9dk-fq9t8",
+          "cluster.x-k8s.io/owner-kind": "MachineSet",
+          "cluster.x-k8s.io/owner-name": "test-cntrlplane-4826-r5-head-rz9dk",
+          "csi.volume.kubernetes.io/nodeid": "{\"file.csi.azure.com\":\"test-cntrlplane-4826-r5-head-rz9dk-fq9t8\"}",
+          "hypershift.openshift.io/labelsSynced": "808782b0fa4563aa",
+          "k8s.ovn.org/host-cidrs": "[\"10.0.0.11/24\",\"172.20.0.1/32\"]",
+          "k8s.ovn.org/l3-gateway-config": "{\"default\":{\"mode\":\"shared\",\"bridge-id\":\"br-ex\",\"interface-id\":\"br-ex_test-cntrlplane-4826-r5-head-rz9dk-fq9t8\",\"mac-address\":\"7c:1e:52:64:4e:79\",\"ip-addresses\":[\"10.0.0.11/24\"],\"ip-address\":\"10.0.0.11/24\",\"next-hops\":[\"10.0.0.1\"],\"next-hop\":\"10.0.0.1\",\"node-port-enable\":\"true\",\"vlan-id\":\"0\"}}",
+          "k8s.ovn.org/layer2-topology-version": "2.0",
+          "k8s.ovn.org/node-chassis-id": "75aaa001-a60a-4f86-9522-3d061dcd5fe1",
+          "k8s.ovn.org/node-encap-ips": "[\"10.0.0.11\"]",
+          "k8s.ovn.org/node-id": "4",
+          "k8s.ovn.org/node-masquerade-subnet": "{\"ipv4\":\"169.254.0.0/17\",\"ipv6\":\"fd69::/112\"}",
+          "k8s.ovn.org/node-primary-ifaddr": "{\"ipv4\":\"10.0.0.11/24\"}",
+          "k8s.ovn.org/node-subnets": "{\"default\":[\"10.134.0.0/23\"]}",
+          "k8s.ovn.org/node-transit-switch-port-ifaddr": "{\"ipv4\":\"100.88.0.4/16\"}",
+          "tuned.openshift.io/bootcmdline": "",
+          "tuned.openshift.io/bootcmdline-deps": "5.1.0-0.nightly-multi-2026-10-27-082258,default:1",
+          "volumes.kubernetes.io/controller-managed-attach-detach": "true"
+        },
+        "creationTimestamp": "2026-10-29T10:40:33Z",
+        "labels": {
+          "beta.kubernetes.io/arch": "amd64",
+          "beta.kubernetes.io/instance-type": "Standard_D4s_v5",
+          "beta.kubernetes.io/os": "linux",
+          "failure-domain.beta.kubernetes.io/region": "eastus",
+          "failure-domain.beta.kubernetes.io/zone": "1",
+          "hypershift.openshift.io/managed": "true",
+          "hypershift.openshift.io/nodePool": "test-cntrlplane-4826-r5-head",
+          "hypershift.openshift.io/nodepool-globalps-enabled": "true",
+          "kubernetes.io/arch": "amd64",
+          "kubernetes.io/hostname": "test-cntrlplane-4826-r5-head-rz9dk-fq9t8",
+          "kubernetes.io/os": "linux",
+          "node-role.kubernetes.io/worker": "",
+          "node.kubernetes.io/instance-type": "Standard_D4s_v5",
+          "node.openshift.io/os_id": "rhel",
+          "topology.kubernetes.io/region": "eastus",
+          "topology.kubernetes.io/zone": "1"
+        },
+        "name": "test-cntrlplane-4826-r5-head-rz9dk-fq9t8",
+        "resourceVersion": "7264",
+        "uid": "30a64207-da21-416b-97c4-209d442bcf95"
+      },
+      "spec": {
+        "providerID": "azure:///subscriptions/redacted-subscription-id/resourceGroups/test-cntrlplane-4826-hc-test-cntrlplane-4826/providers/Microsoft.Compute/virtualMachines/test-cntrlplane-4826-r5-head-rz9dk-fq9t8"
+      },
+      "status": {
+        "addresses": [
+          {
+            "address": "10.0.0.11",
+            "type": "InternalIP"
+          },
+          {
+            "address": "test-cntrlplane-4826-r5-head-rz9dk-fq9t8",
+            "type": "Hostname"
+          }
+        ],
+        "allocatable": {
+          "cpu": "3500m",
+          "ephemeral-storage": "114345831029",
+          "hugepages-1Gi": "0",
+          "hugepages-2Mi": "0",
+          "memory": "15212428Ki",
+          "pods": "250"
+        },
+        "capacity": {
+          "cpu": "4",
+          "ephemeral-storage": "125238252Ki",
+          "hugepages-1Gi": "0",
+          "hugepages-2Mi": "0",
+          "memory": "16363404Ki",
+          "pods": "250"
+        },
+        "conditions": [
+          {
+            "lastHeartbeatTime": "2026-10-29T10:42:15Z",
+            "lastTransitionTime": "2026-10-29T10:40:33Z",
+            "message": "kubelet has sufficient memory available",
+            "reason": "KubeletHasSufficientMemory",
+            "status": "False",
+            "type": "MemoryPressure"
+          },
+          {
+            "lastHeartbeatTime": "2026-10-29T10:42:15Z",
+            "lastTransitionTime": "2026-10-29T10:40:33Z",
+            "message": "kubelet has no disk pressure",
+            "reason": "KubeletHasNoDiskPressure",
+            "status": "False",
+            "type": "DiskPressure"
+          },
+          {
+            "lastHeartbeatTime": "2026-10-29T10:42:15Z",
+            "lastTransitionTime": "2026-10-29T10:40:33Z",
+            "message": "kubelet has sufficient PID available",
+            "reason": "KubeletHasSufficientPID",
+            "status": "False",
+            "type": "PIDPressure"
+          },
+          {
+            "lastHeartbeatTime": "2026-10-29T10:42:15Z",
+            "lastTransitionTime": "2026-10-29T10:41:59Z",
+            "message": "kubelet is posting ready status",
+            "reason": "KubeletReady",
+            "status": "True",
+            "type": "Ready"
+          }
+        ],
+        "daemonEndpoints": {
+          "kubeletEndpoint": {
+            "Port": 10250
+          }
+        },
+        "declaredFeatures": [
+          "ExtendWebSocketsToKubelet",
+          "InPlacePodLevelResourcesVerticalScaling",
+          "InPlacePodVerticalScalingInitContainers",
+          "RestartAllContainersOnContainerExits"
+        ],
+        "features": {
+          "supplementalGroupsPolicy": true
+        },
+        "images": [
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:6703be7be069ac72faca05bf1e35167e47eefe973c15255c203f38b8ac5f9169",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:8ca2e13239d433d896fe5c66d5f3edd970c21a41ceeacf8fc1e55488ec2f2e3d"
+            ],
+            "sizeBytes": 2011772044
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:5d5b90b9c827e57ae8d4a024a5a4a919e565a7cd189dc3a12ee9cfefc8fce26a",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:8fa366359643f16ce5ee6c5d00d730dadc70db502a8433e2b31a91265983158c"
+            ],
+            "sizeBytes": 1217044022
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:703442653456f4fe5e1fca964c58a2f7580929abd9a58c2a2e2a98b11c185acc",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:d0fbf880471493b39510a24f8e7a2e169b8158d537806832c94471d93e348170"
+            ],
+            "sizeBytes": 906506285
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:33dc9bcd50f2d9e6d08595d1fb6373c66de61bd7040bc30c50388c17271c5823",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:b544527228d008fe0acca167dfb13abe67c7a5afa6015a4ccc515d2fe4ebd6f2"
+            ],
+            "sizeBytes": 576534761
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:5f9c15c5e65509deb3a71e5bfb291de75c711bb43b8001cc5a1e6b2dc89e0c7d",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:adca06377fa80a5be7e9fa859788822cf6eca96b37befafc84ad125af8231219"
+            ],
+            "sizeBytes": 523051314
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:30d9700869d13de469a447f8bb94524539233bbee7efc937d4a446b6cdd1c7e2",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:95af541830b5af401435618744b3068d3e16364f02991acc1e7d48f790112a1e"
+            ],
+            "sizeBytes": 476548470
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:28d806f6514b0156d25edcb9764f977efb4317b6ee174826a35b090f192a5338",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:9205cb5a5f3420c073beac6410f04f0f1fab4e543d82834725e1afab53ae9f6f"
+            ],
+            "sizeBytes": 459209890
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:2a818ff13fea1a3dea3f097fcf0d4be2a707b01070c2def4f679e9537dfa30f9",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:7c298c315d5e13872d084e84cb48d80f78048f9ccc767dbf7721f23bb0652a6e"
+            ],
+            "sizeBytes": 458754163
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:4f102111a7b6698c50ba39f918371cfda43fcee51f3f8c6ba63a8909ff91380d",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:a99214eb3cce2ad87836760d45fa65e53a6ff6e6d272d111daaf1c1f31dbfa81"
+            ],
+            "sizeBytes": 447136076
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:2819d82240494dff9bd73d58ae55456117d8add7e8a08849f6b4f15a0ac0bb00",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:af99b382f52126b650770c3b8951948a7289f521cb3233ea8b58b608f808f439"
+            ],
+            "sizeBytes": 443390502
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:790a63d3ed375931b051fb5581196f954e22f953d3d48c7cd5b16bee009652c6",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:8e13319753bf6e92dec220c3e924144806c93d521346d09dc55edd2bbcf75c85"
+            ],
+            "sizeBytes": 356192770
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:560c333212a69e78abb83df241843b3ec1da580424edc30f5acca7fd5ce7265d",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:be84a8f77f9fa8614c54abc1c8bfae47187c21632d23429a8f78a90f7e677a01"
+            ],
+            "sizeBytes": 344302147
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:915bf4d952db2290a40862cfc25d7c3cb655e06642cd55916cfd6443a730edfb",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:f673b3b7e6b6ce473b606c7055fad8283ed3b71af474ed4dbea2d70f5d4571d3"
+            ],
+            "sizeBytes": 342809227
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:8988a311c29724e70070658d485a7aee65f85a54910be9d7557fbe3be151741b",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:9ef9a8242f94da2a53af7d7eec6ea0d1bb25f938c43efb6b122c47f6b0f92185"
+            ],
+            "sizeBytes": 312689125
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:822cb66361b4d02d551be7bbfc4b94b4f408a455b8843850bf9972f8e232c82a",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:bcd88ad437747a50a7300779ea528c73a580b0a50ef6511046e99d9767d2bfa9"
+            ],
+            "sizeBytes": 302078402
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:31505c91721765063e63ca93834f52a5a580b53d8aa96601d8bc118c0051754f",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:7d732469da87bda1a23081a9d696a51a1cc8c8e46f88a2682edb1a9ba8fd4e28"
+            ],
+            "sizeBytes": 289270168
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:8334001c70efb6ff09679636c0d9ea846597f548f12c6628a9630f5fac949872"
+            ],
+            "sizeBytes": 264495512
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:00956682879e8802b44af4c15f41efb4c491e8e01b9615e2886ff98da4fb7879",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:78e96f7f506f50f46416adbf901879e4180e391ce4f92fe408be6dbbd027c0fa"
+            ],
+            "sizeBytes": 241180531
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:248948de3228b0c497877222de6de0f43eb354f270dbb0c50b97e315c2a6f81d",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:d8861b2f30fcea6de14cf9b973e2425cf6ddee01286232b07de93889468869c1"
+            ],
+            "sizeBytes": 240885639
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:a343e6f1a3a50a442b3d118d06fe392f56644a0590a24e25c0fb72dfdc55c03f",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:facbe6da7b6b58e00c386ce1f7500c2e1cc57661a741db42c38b4fd9cb331bd3"
+            ],
+            "sizeBytes": 217657036
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:a52e8f21b9ea3d30d0c37004c214a8bb405dfede54ba588511454f66089d2c81",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:ff147b933ba3fb1d9cd8383e334544cb3b67ef73449506cf23168cde0d4afe95"
+            ],
+            "sizeBytes": 216304150
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:05e0084c74702f79d4bea90e4852e1f970ccdafeb8d58fd575db03721839d88b",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:b8bcc19a4e022721841dc0aa8903b41ab632a0d227b3c2dff47f7dd509627c11"
+            ],
+            "sizeBytes": 215686882
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:beb347810978d779c168ef754aa41ff91a59e0b3c23cd4a26fd956cadc4fc30c",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:d7e645be2b66ec5eba2b093ebf10e1406c3d910a3207881aeb54b227d65d1ff7"
+            ],
+            "sizeBytes": 923854
+          }
+        ],
+        "nodeInfo": {
+          "architecture": "amd64",
+          "bootID": "1558a352-1e6d-4956-beec-4a92357559a7",
+          "containerRuntimeVersion": "cri-o://1.36.6-202610142339.p2.g4f5848d.assembly.stream.el10",
+          "kernelVersion": "6.12.0-211.66.1.el10_2.x86_64",
+          "kubeProxyVersion": "",
+          "kubeletVersion": "v1.36.5",
+          "machineID": "178d203081144e67ba5169492c2e511f",
+          "operatingSystem": "linux",
+          "osImage": "Red Hat Enterprise Linux CoreOS 10.2.20261015-0 (Coughlan)",
+          "systemUUID": "87102c77-08ad-4543-b28c-da2be6d3c8df"
+        },
+        "runtimeHandlers": [
+          {
+            "features": {
+              "recursiveReadOnlyMounts": true,
+              "userNamespaces": true
+            },
+            "name": ""
+          },
+          {
+            "features": {
+              "recursiveReadOnlyMounts": true,
+              "userNamespaces": true
+            },
+            "name": "crun"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Node",
+      "metadata": {
+        "annotations": {
+          "cloud.network.openshift.io/egress-ipconfig": "[{\"interface\":\"test-cntrlplane-4826-r5-head-rz9dk-w9bbb-nic\",\"ifaddr\":{\"ipv4\":\"10.0.0.0/24\"},\"capacity\":{\"ip\":255}}]",
+          "cluster.x-k8s.io/annotations-from-machine": "",
+          "cluster.x-k8s.io/cluster-name": "test-cntrlplane-4826-r5",
+          "cluster.x-k8s.io/cluster-namespace": "clusters-test-cntrlplane-4826-r5-hc",
+          "cluster.x-k8s.io/labels-from-machine": "",
+          "cluster.x-k8s.io/machine": "test-cntrlplane-4826-r5-head-rz9dk-w9bbb",
+          "cluster.x-k8s.io/owner-kind": "MachineSet",
+          "cluster.x-k8s.io/owner-name": "test-cntrlplane-4826-r5-head-rz9dk",
+          "csi.volume.kubernetes.io/nodeid": "{\"file.csi.azure.com\":\"test-cntrlplane-4826-r5-head-rz9dk-w9bbb\"}",
+          "hypershift.openshift.io/labelsSynced": "808782b0fa4563aa",
+          "k8s.ovn.org/host-cidrs": "[\"10.0.0.12/24\",\"172.20.0.1/32\"]",
+          "k8s.ovn.org/l3-gateway-config": "{\"default\":{\"mode\":\"shared\",\"bridge-id\":\"br-ex\",\"interface-id\":\"br-ex_test-cntrlplane-4826-r5-head-rz9dk-w9bbb\",\"mac-address\":\"7c:1e:52:64:43:7a\",\"ip-addresses\":[\"10.0.0.12/24\"],\"ip-address\":\"10.0.0.12/24\",\"next-hops\":[\"10.0.0.1\"],\"next-hop\":\"10.0.0.1\",\"node-port-enable\":\"true\",\"vlan-id\":\"0\"}}",
+          "k8s.ovn.org/layer2-topology-version": "2.0",
+          "k8s.ovn.org/node-chassis-id": "d4309376-9a60-422d-a4d8-a9dc0c7f9893",
+          "k8s.ovn.org/node-encap-ips": "[\"10.0.0.12\"]",
+          "k8s.ovn.org/node-id": "2",
+          "k8s.ovn.org/node-masquerade-subnet": "{\"ipv4\":\"169.254.0.0/17\",\"ipv6\":\"fd69::/112\"}",
+          "k8s.ovn.org/node-primary-ifaddr": "{\"ipv4\":\"10.0.0.12/24\"}",
+          "k8s.ovn.org/node-subnets": "{\"default\":[\"10.132.0.0/23\"]}",
+          "k8s.ovn.org/node-transit-switch-port-ifaddr": "{\"ipv4\":\"100.88.0.2/16\"}",
+          "tuned.openshift.io/bootcmdline": "",
+          "tuned.openshift.io/bootcmdline-deps": "5.1.0-0.nightly-multi-2026-10-27-082258,default:1",
+          "volumes.kubernetes.io/controller-managed-attach-detach": "true"
+        },
+        "creationTimestamp": "2026-10-29T10:39:52Z",
+        "labels": {
+          "beta.kubernetes.io/arch": "amd64",
+          "beta.kubernetes.io/instance-type": "Standard_D4s_v5",
+          "beta.kubernetes.io/os": "linux",
+          "failure-domain.beta.kubernetes.io/region": "eastus",
+          "failure-domain.beta.kubernetes.io/zone": "2",
+          "hypershift.openshift.io/managed": "true",
+          "hypershift.openshift.io/nodePool": "test-cntrlplane-4826-r5-head",
+          "hypershift.openshift.io/nodepool-globalps-enabled": "true",
+          "kubernetes.io/arch": "amd64",
+          "kubernetes.io/hostname": "test-cntrlplane-4826-r5-head-rz9dk-w9bbb",
+          "kubernetes.io/os": "linux",
+          "node-role.kubernetes.io/worker": "",
+          "node.kubernetes.io/instance-type": "Standard_D4s_v5",
+          "node.openshift.io/os_id": "rhel",
+          "topology.kubernetes.io/region": "eastus",
+          "topology.kubernetes.io/zone": "2"
+        },
+        "name": "test-cntrlplane-4826-r5-head-rz9dk-w9bbb",
+        "resourceVersion": "7213",
+        "uid": "937a4a27-0a51-44ae-8d7c-845e7d107893"
+      },
+      "spec": {
+        "providerID": "azure:///subscriptions/redacted-subscription-id/resourceGroups/test-cntrlplane-4826-hc-test-cntrlplane-4826/providers/Microsoft.Compute/virtualMachines/test-cntrlplane-4826-r5-head-rz9dk-w9bbb"
+      },
+      "status": {
+        "addresses": [
+          {
+            "address": "10.0.0.12",
+            "type": "InternalIP"
+          },
+          {
+            "address": "test-cntrlplane-4826-r5-head-rz9dk-w9bbb",
+            "type": "Hostname"
+          }
+        ],
+        "allocatable": {
+          "cpu": "3500m",
+          "ephemeral-storage": "114345831029",
+          "hugepages-1Gi": "0",
+          "hugepages-2Mi": "0",
+          "memory": "15212424Ki",
+          "pods": "250"
+        },
+        "capacity": {
+          "cpu": "4",
+          "ephemeral-storage": "125238252Ki",
+          "hugepages-1Gi": "0",
+          "hugepages-2Mi": "0",
+          "memory": "16363400Ki",
+          "pods": "250"
+        },
+        "conditions": [
+          {
+            "lastHeartbeatTime": "2026-10-29T10:42:05Z",
+            "lastTransitionTime": "2026-10-29T10:39:52Z",
+            "message": "kubelet has sufficient memory available",
+            "reason": "KubeletHasSufficientMemory",
+            "status": "False",
+            "type": "MemoryPressure"
+          },
+          {
+            "lastHeartbeatTime": "2026-10-29T10:42:05Z",
+            "lastTransitionTime": "2026-10-29T10:39:52Z",
+            "message": "kubelet has no disk pressure",
+            "reason": "KubeletHasNoDiskPressure",
+            "status": "False",
+            "type": "DiskPressure"
+          },
+          {
+            "lastHeartbeatTime": "2026-10-29T10:42:05Z",
+            "lastTransitionTime": "2026-10-29T10:39:52Z",
+            "message": "kubelet has sufficient PID available",
+            "reason": "KubeletHasSufficientPID",
+            "status": "False",
+            "type": "PIDPressure"
+          },
+          {
+            "lastHeartbeatTime": "2026-10-29T10:42:05Z",
+            "lastTransitionTime": "2026-10-29T10:41:03Z",
+            "message": "kubelet is posting ready status",
+            "reason": "KubeletReady",
+            "status": "True",
+            "type": "Ready"
+          }
+        ],
+        "daemonEndpoints": {
+          "kubeletEndpoint": {
+            "Port": 10250
+          }
+        },
+        "declaredFeatures": [
+          "ExtendWebSocketsToKubelet",
+          "InPlacePodLevelResourcesVerticalScaling",
+          "InPlacePodVerticalScalingInitContainers",
+          "RestartAllContainersOnContainerExits"
+        ],
+        "features": {
+          "supplementalGroupsPolicy": true
+        },
+        "images": [
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:6703be7be069ac72faca05bf1e35167e47eefe973c15255c203f38b8ac5f9169",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:8ca2e13239d433d896fe5c66d5f3edd970c21a41ceeacf8fc1e55488ec2f2e3d"
+            ],
+            "sizeBytes": 2011772044
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:5d5b90b9c827e57ae8d4a024a5a4a919e565a7cd189dc3a12ee9cfefc8fce26a",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:8fa366359643f16ce5ee6c5d00d730dadc70db502a8433e2b31a91265983158c"
+            ],
+            "sizeBytes": 1217044022
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:703442653456f4fe5e1fca964c58a2f7580929abd9a58c2a2e2a98b11c185acc",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:d0fbf880471493b39510a24f8e7a2e169b8158d537806832c94471d93e348170"
+            ],
+            "sizeBytes": 906506285
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:1b93353f8b2e47b62ae89f68e5bfb61e9e5322627bc2da60cd67604b6aaa4d1c",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:509f6e1ad83d2180bbfbe9e853325ecc0d8a5237b23ffa1e16663805180b9c98"
+            ],
+            "sizeBytes": 675998937
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:33dc9bcd50f2d9e6d08595d1fb6373c66de61bd7040bc30c50388c17271c5823",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:b544527228d008fe0acca167dfb13abe67c7a5afa6015a4ccc515d2fe4ebd6f2"
+            ],
+            "sizeBytes": 576534761
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:5f9c15c5e65509deb3a71e5bfb291de75c711bb43b8001cc5a1e6b2dc89e0c7d",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:adca06377fa80a5be7e9fa859788822cf6eca96b37befafc84ad125af8231219"
+            ],
+            "sizeBytes": 523051314
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:30d9700869d13de469a447f8bb94524539233bbee7efc937d4a446b6cdd1c7e2",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:95af541830b5af401435618744b3068d3e16364f02991acc1e7d48f790112a1e"
+            ],
+            "sizeBytes": 476548470
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:28d806f6514b0156d25edcb9764f977efb4317b6ee174826a35b090f192a5338",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:9205cb5a5f3420c073beac6410f04f0f1fab4e543d82834725e1afab53ae9f6f"
+            ],
+            "sizeBytes": 459209890
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:2a818ff13fea1a3dea3f097fcf0d4be2a707b01070c2def4f679e9537dfa30f9",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:7c298c315d5e13872d084e84cb48d80f78048f9ccc767dbf7721f23bb0652a6e"
+            ],
+            "sizeBytes": 458754163
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:4f102111a7b6698c50ba39f918371cfda43fcee51f3f8c6ba63a8909ff91380d",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:a99214eb3cce2ad87836760d45fa65e53a6ff6e6d272d111daaf1c1f31dbfa81"
+            ],
+            "sizeBytes": 447136076
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:2819d82240494dff9bd73d58ae55456117d8add7e8a08849f6b4f15a0ac0bb00",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:af99b382f52126b650770c3b8951948a7289f521cb3233ea8b58b608f808f439"
+            ],
+            "sizeBytes": 443390502
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:790a63d3ed375931b051fb5581196f954e22f953d3d48c7cd5b16bee009652c6",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:8e13319753bf6e92dec220c3e924144806c93d521346d09dc55edd2bbcf75c85"
+            ],
+            "sizeBytes": 356192770
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:560c333212a69e78abb83df241843b3ec1da580424edc30f5acca7fd5ce7265d",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:be84a8f77f9fa8614c54abc1c8bfae47187c21632d23429a8f78a90f7e677a01"
+            ],
+            "sizeBytes": 344302147
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:915bf4d952db2290a40862cfc25d7c3cb655e06642cd55916cfd6443a730edfb",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:f673b3b7e6b6ce473b606c7055fad8283ed3b71af474ed4dbea2d70f5d4571d3"
+            ],
+            "sizeBytes": 342809227
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:8988a311c29724e70070658d485a7aee65f85a54910be9d7557fbe3be151741b",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:9ef9a8242f94da2a53af7d7eec6ea0d1bb25f938c43efb6b122c47f6b0f92185"
+            ],
+            "sizeBytes": 312689125
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:822cb66361b4d02d551be7bbfc4b94b4f408a455b8843850bf9972f8e232c82a",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:bcd88ad437747a50a7300779ea528c73a580b0a50ef6511046e99d9767d2bfa9"
+            ],
+            "sizeBytes": 302078402
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:31505c91721765063e63ca93834f52a5a580b53d8aa96601d8bc118c0051754f",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:7d732469da87bda1a23081a9d696a51a1cc8c8e46f88a2682edb1a9ba8fd4e28"
+            ],
+            "sizeBytes": 289270168
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:8334001c70efb6ff09679636c0d9ea846597f548f12c6628a9630f5fac949872"
+            ],
+            "sizeBytes": 264495512
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:00956682879e8802b44af4c15f41efb4c491e8e01b9615e2886ff98da4fb7879",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:78e96f7f506f50f46416adbf901879e4180e391ce4f92fe408be6dbbd027c0fa"
+            ],
+            "sizeBytes": 241180531
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:248948de3228b0c497877222de6de0f43eb354f270dbb0c50b97e315c2a6f81d",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:d8861b2f30fcea6de14cf9b973e2425cf6ddee01286232b07de93889468869c1"
+            ],
+            "sizeBytes": 240885639
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:a343e6f1a3a50a442b3d118d06fe392f56644a0590a24e25c0fb72dfdc55c03f",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:facbe6da7b6b58e00c386ce1f7500c2e1cc57661a741db42c38b4fd9cb331bd3"
+            ],
+            "sizeBytes": 217657036
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:a52e8f21b9ea3d30d0c37004c214a8bb405dfede54ba588511454f66089d2c81",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:ff147b933ba3fb1d9cd8383e334544cb3b67ef73449506cf23168cde0d4afe95"
+            ],
+            "sizeBytes": 216304150
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:05e0084c74702f79d4bea90e4852e1f970ccdafeb8d58fd575db03721839d88b",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:b8bcc19a4e022721841dc0aa8903b41ab632a0d227b3c2dff47f7dd509627c11"
+            ],
+            "sizeBytes": 215686882
+          },
+          {
+            "names": [
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:beb347810978d779c168ef754aa41ff91a59e0b3c23cd4a26fd956cadc4fc30c",
+              "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:d7e645be2b66ec5eba2b093ebf10e1406c3d910a3207881aeb54b227d65d1ff7"
+            ],
+            "sizeBytes": 923854
+          }
+        ],
+        "nodeInfo": {
+          "architecture": "amd64",
+          "bootID": "ad316af9-33e8-4e6c-a95b-bd0563aad513",
+          "containerRuntimeVersion": "cri-o://1.36.6-202610142339.p2.g4f5848d.assembly.stream.el10",
+          "kernelVersion": "6.12.0-211.66.1.el10_2.x86_64",
+          "kubeProxyVersion": "",
+          "kubeletVersion": "v1.36.5",
+          "machineID": "49315ca774224be0a3026a7a2fe6f569",
+          "operatingSystem": "linux",
+          "osImage": "Red Hat Enterprise Linux CoreOS 10.2.20261015-0 (Coughlan)",
+          "systemUUID": "0c717e98-0339-42f2-84f4-844c9057b84b"
+        },
+        "runtimeHandlers": [
+          {
+            "features": {
+              "recursiveReadOnlyMounts": true,
+              "userNamespaces": true
+            },
+            "name": ""
+          },
+          {
+            "features": {
+              "recursiveReadOnlyMounts": true,
+              "userNamespaces": true
+            },
+            "name": "crun"
+          }
+        ]
+      }
+    }
+  ],
+  "kind": "List",
+  "metadata": {
+    "resourceVersion": ""
+  }
+}

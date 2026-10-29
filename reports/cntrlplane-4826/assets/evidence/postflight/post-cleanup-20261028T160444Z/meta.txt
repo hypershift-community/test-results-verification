@@ -1,0 +1,6 @@
+captured_utc=2026-10-28T16:04:44Z
+subscription=redacted-subscription-id
+resource_group=shared-resource-group
+parent_zone=hcp.example.com
+child_zone=test.hcp.example.com
+purpose=read-only post-cleanup Azure/DNS comparison; no writes

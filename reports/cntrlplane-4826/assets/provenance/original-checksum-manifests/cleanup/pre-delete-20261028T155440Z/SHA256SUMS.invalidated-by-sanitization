@@ -1,0 +1,15 @@
+081d181ed9197746c64cb0310fbca08e1b14b926515739390391ccb16e46272d  /workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/cleanup/pre-delete-20261028T155440Z/summary.txt
+0b60bbba04be3d811f1ed9a048dda45b812449cfa385737f997fcd6803cd4d44  /workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/cleanup/pre-delete-20261028T155440Z/hostedclusters-all.json
+0dcd390e0f859a95816c7ae2bd46a4a709e7f33d1cfc2d7133508d52afe8077e  /workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/cleanup/pre-delete-20261028T155440Z/machines-all.json
+2817066c64fcc9580382a74f0cce0d6f121c8570a950f74b90d28fff636e18cc  /workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/cleanup/pre-delete-20261028T155440Z/guest-nodes.txt
+41d56030f72eaa5d0e1c97304c6c0e68812ef0b3254a182bc586866b12c63eca  /workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/cleanup/pre-delete-20261028T155440Z/machinesets-all.json
+427bc55448da635cff1c4c3bc6ca67d274082b7501e6d3b1a53d9af34343baad  /workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/cleanup/pre-delete-20261028T155440Z/guest-nodes.json
+576ee396d0f07c3ae2441d6c3661a0effdd13956ab8bef256e70f8be0e120eaf  /workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/cleanup/pre-delete-20261028T155440Z/nodepools-all.json
+636f18952728393ad6bf095b357f9c4f58051c82b7a396fdf572903056d03b8c  /workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/cleanup/pre-delete-20261028T155440Z/azuremachines-all.json
+6a6b01a331295079e78a7070380c820074fa5715841947cfa1de819a376b1bf1  /workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/cleanup/pre-delete-20261028T155440Z/machinedeployments-all.json
+7427f76481229ed89a91f0968255570d5ba345eea26a3b29ed5f03151c99c98b  /workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/cleanup/pre-delete-20261028T155440Z/nodepools.txt
+764e9a6d0c253f288e0c9e7d2358b92f642db60af479728757be952c3bd24abe  /workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/cleanup/pre-delete-20261028T155440Z/guest-clusteroperators.json
+9724020d9c867db5041bd431b4dd23765eca9ca729b0a53a7b09aa9abf57eb2e  /workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/cleanup/pre-delete-20261028T155440Z/guest-clusterversion.json
+d191e40e766013b2ac72cfd2613c63c33caea6d179ad945dbf0c739d71cb1e7d  /workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/cleanup/pre-delete-20261028T155440Z/commands.txt
+dc24a99557010d2fb0bcfea608d7300e0cd571537a98db61bed8ae69d7c338af  /workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/cleanup/pre-delete-20261028T155440Z/meta.txt
+e57fa0a5995bb14a98cc6ccd9117ce21b4a33e9a3128bb3df38d218ebf1b5dd3  /workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/cleanup/pre-delete-20261028T155440Z/clusteroperators.txt

@@ -1,0 +1,13 @@
+Final evidence credential scan
+==============================
+private_key_files=0
+kubeconfig_key_field_files=0
+bearer_literal_forms=1
+parsed_json_files=665
+secret_objects_with_data=0
+evidence_files_named_kubeconfig=6
+guest_kubeconfig_now=absent
+
+Interpretation
+--------------
+No PEM private-key header, kubeconfig credential field, or JSON Secret object carrying data was found. The only Bearer form is the literal shell expression "Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" embedded in captured Deployment command scripts; it has no concrete token. The 6 evidence files named kubeconfig are preflight-sanitized context/server records with no users or credential fields. The temporary guest kubeconfig was deleted in the preceding scan and is absent. Generated report and scan artifacts were excluded so the regex did not self-match its own documentation.

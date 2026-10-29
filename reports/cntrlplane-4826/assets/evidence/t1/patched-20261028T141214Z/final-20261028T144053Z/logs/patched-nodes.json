@@ -1,0 +1,55 @@
+{
+  "items": [
+    {
+      "conditions": [
+        {
+          "lastHeartbeatTime": "2026-10-28T14:35:16Z",
+          "lastTransitionTime": "2026-10-28T14:34:19Z",
+          "message": "kubelet is posting ready status",
+          "reason": "KubeletReady",
+          "status": "True",
+          "type": "Ready"
+        }
+      ],
+      "creationTimestamp": "2026-10-28T14:32:22Z",
+      "kubeletVersion": "v1.37.1",
+      "name": "test-cntrlplane-4826-patched-2jxvf-2jg5c",
+      "providerID": "azure:///subscriptions/redacted-subscription-id/resourceGroups/test-cntrlplane-4826-hc-test-cntrlplane-4826/providers/Microsoft.Compute/virtualMachines/test-cntrlplane-4826-patched-2jxvf-2jg5c",
+      "uid": "806f0727-789b-4e69-bfc3-654a4f46fb69"
+    },
+    {
+      "conditions": [
+        {
+          "lastHeartbeatTime": "2026-10-28T14:38:39Z",
+          "lastTransitionTime": "2026-10-28T14:26:47Z",
+          "message": "kubelet is posting ready status",
+          "reason": "KubeletReady",
+          "status": "True",
+          "type": "Ready"
+        }
+      ],
+      "creationTimestamp": "2026-10-28T14:25:33Z",
+      "kubeletVersion": "v1.37.1",
+      "name": "test-cntrlplane-4826-patched-2jxvf-h4mpp",
+      "providerID": "azure:///subscriptions/redacted-subscription-id/resourceGroups/test-cntrlplane-4826-hc-test-cntrlplane-4826/providers/Microsoft.Compute/virtualMachines/test-cntrlplane-4826-patched-2jxvf-h4mpp",
+      "uid": "5a9aba8d-dd25-4a21-bf06-d68a9fba47fb"
+    },
+    {
+      "conditions": [
+        {
+          "lastHeartbeatTime": "2026-10-28T14:39:16Z",
+          "lastTransitionTime": "2026-10-28T14:17:51Z",
+          "message": "kubelet is posting ready status",
+          "reason": "KubeletReady",
+          "status": "True",
+          "type": "Ready"
+        }
+      ],
+      "creationTimestamp": "2026-10-28T14:16:49Z",
+      "kubeletVersion": "v1.37.1",
+      "name": "test-cntrlplane-4826-patched-2jxvf-rrchj",
+      "providerID": "azure:///subscriptions/redacted-subscription-id/resourceGroups/test-cntrlplane-4826-hc-test-cntrlplane-4826/providers/Microsoft.Compute/virtualMachines/test-cntrlplane-4826-patched-2jxvf-rrchj",
+      "uid": "f4ed8f36-dcad-40cc-a4ba-e4ede8e7c014"
+    }
+  ]
+}

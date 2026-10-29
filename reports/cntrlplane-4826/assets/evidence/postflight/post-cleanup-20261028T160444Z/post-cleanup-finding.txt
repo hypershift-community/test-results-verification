@@ -1,0 +1,45 @@
+Post-cleanup Kubernetes and Azure/DNS finding
+=============================================
+Evaluation time: 2026-10-28T16:06:03Z
+Scope: read-only Azure queries after deleting only the test NodePools and HostedCluster through Kubernetes. No Azure resource was manually deleted or modified.
+
+Kubernetes
+----------
+HostedClusters remaining: 0
+NodePools remaining:       0
+Hosted control-plane namespace clusters-test-cntrlplane-4826-hc: absent
+Operator deployment: generation 31 / observed 31, ready 2/2, image quay.io/hypershift/hypershift-operator:latest
+
+Shared DNS resources
+--------------------
+shared-resource-group resource group stable projection: MATCH to preflight (SHA-256 319aeb9f...).
+Parent zone hcp.example.com: exists; count 147 after cleanup versus 109 preflight.
+Child zone test.hcp.example.com: exists; count 62 after cleanup versus 74 preflight.
+Parent role assignments: MATCH (hash unchanged).
+Child role assignments:  MATCH (hash unchanged).
+Shared delegation NS tester in parent: present, unchanged etag d74a834a-7dc4-4b0b-bde2-a313c49ba0c3.
+
+Test-owned DNS records
+----------------------
+The child zone lost exactly 12 record sets after HostedCluster deletion. Every removed name contains test-cntrlplane-4826-hc. No test-named records remain in either the parent or child zone. The removed names are in child-records-removed.txt.
+
+Concurrent CI activity
+----------------------
+Parent-zone Activity Log from 15:46:59Z through 2026-10-28T16:06:03Z: 24 events.
+Parent events whose resource ID contains tester/cntrlplane/4826: 0.
+Child-zone Activity Log in the same window: 24 events, all 12 test-owned record deletions
+(12 Started + 12 Succeeded), caller redacted-principal-139. All child event
+resource IDs contain test-cntrlplane-4826-hc.
+The parent-zone count remains a shared-CI metric, not a test-owned metric. Its changes are attributable to external-dns operations for unrelated cluster hashes; the test's own DNS records were the 12 child-zone names enumerated above.
+
+Azure infrastructure retained
+-----------------------------
+Test-prefixed Azure resource groups remaining after Kubernetes cleanup: 3.
+- test-cntrlplane-4826-hc-test-cntrlplane-4826 (eastus)
+- test-cntrlplane-4826-hc-nsg-test-cntrlplane-4826 (eastus)
+- test-cntrlplane-4826-hc-vnet-test-cntrlplane-4826 (eastus)
+These groups were created 2026-10-27T19:20:58Z, before this test, and were intentionally not deleted because the user directed that no Azure infrastructure be manually destroyed. No deletion command was issued against them.
+
+Conclusion
+----------
+Kubernetes cleanup is complete. All test-owned DNS records were removed by the HostedCluster lifecycle. The shared parent and child zones, their NS delegation, and all role assignments remain intact. The remaining Azure infrastructure resource groups were not manually touched, per instruction.

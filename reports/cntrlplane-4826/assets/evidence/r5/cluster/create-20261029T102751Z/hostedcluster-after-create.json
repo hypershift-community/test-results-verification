@@ -1,0 +1,161 @@
+{
+  "apiVersion": "hypershift.openshift.io/v1beta1",
+  "kind": "HostedCluster",
+  "metadata": {
+    "annotations": {
+      "hypershift.openshift.io/capi-manager-image": "registry.k8s.io/cluster-api/cluster-api-controller:v1.13.4"
+    },
+    "creationTimestamp": "2026-10-29T10:28:59Z",
+    "generation": 1,
+    "labels": {
+      "hypershift.openshift.io/auto-created-for-infra": "test-cntrlplane-4826-r5"
+    },
+    "name": "test-cntrlplane-4826-r5-hc",
+    "namespace": "clusters",
+    "resourceVersion": "129924238",
+    "uid": "2597f914-9e42-4764-a62d-efc785022ffc"
+  },
+  "spec": {
+    "autoscaling": {
+      "scaling": "ScaleUpAndScaleDown"
+    },
+    "capabilities": {},
+    "configuration": {},
+    "controllerAvailabilityPolicy": "SingleReplica",
+    "dns": {
+      "baseDomain": "hcp.example.com",
+      "privateZoneID": "/subscriptions/redacted-subscription-id/resourceGroups/test-cntrlplane-4826-hc-test-cntrlplane-4826/providers/Microsoft.Network/privateDnsZones/test-cntrlplane-4826-r5-hc.hcp.example.com",
+      "publicZoneID": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com"
+    },
+    "etcd": {
+      "managed": {
+        "storage": {
+          "persistentVolume": {
+            "size": "8Gi"
+          },
+          "type": "PersistentVolume"
+        }
+      },
+      "managementType": "Managed"
+    },
+    "fips": false,
+    "infraID": "test-cntrlplane-4826-r5",
+    "infrastructureAvailabilityPolicy": "SingleReplica",
+    "issuerURL": "https://examplesa.blob.core.windows.net/examplesa",
+    "networking": {
+      "clusterNetwork": [
+        {
+          "cidr": "10.132.0.0/14"
+        }
+      ],
+      "networkType": "OVNKubernetes",
+      "serviceNetwork": [
+        {
+          "cidr": "172.31.0.0/16"
+        }
+      ]
+    },
+    "olmCatalogPlacement": "management",
+    "platform": {
+      "azure": {
+        "azureAuthenticationConfig": {
+          "azureAuthenticationConfigType": "WorkloadIdentities",
+          "workloadIdentities": {
+            "cloudProvider": {
+              "clientID": "redacted-principal-105"
+            },
+            "controlPlaneOperator": {
+              "clientID": "redacted-principal-103"
+            },
+            "disk": {
+              "clientID": "redacted-principal-102"
+            },
+            "file": {
+              "clientID": "redacted-principal-106"
+            },
+            "imageRegistry": {
+              "clientID": "redacted-principal-104"
+            },
+            "ingress": {
+              "clientID": "redacted-principal-100"
+            },
+            "network": {
+              "clientID": "redacted-principal-101"
+            },
+            "nodePoolManagement": {
+              "clientID": "redacted-principal-107"
+            }
+          }
+        },
+        "cloud": "AzurePublicCloud",
+        "location": "eastus",
+        "resourceGroup": "test-cntrlplane-4826-hc-test-cntrlplane-4826",
+        "securityGroupID": "/subscriptions/redacted-subscription-id/resourceGroups/test-cntrlplane-4826-hc-nsg-test-cntrlplane-4826/providers/Microsoft.Network/networkSecurityGroups/test-cntrlplane-4826-hc-test-cntrlplane-4826-nsg",
+        "subnetID": "/subscriptions/redacted-subscription-id/resourceGroups/test-cntrlplane-4826-hc-vnet-test-cntrlplane-4826/providers/Microsoft.Network/virtualNetworks/test-cntrlplane-4826-hc-test-cntrlplane-4826/subnets/default",
+        "subscriptionID": "redacted-subscription-id",
+        "tenantID": "redacted-tenant-id",
+        "topology": "Public",
+        "vnetID": "/subscriptions/redacted-subscription-id/resourceGroups/test-cntrlplane-4826-hc-vnet-test-cntrlplane-4826/providers/Microsoft.Network/virtualNetworks/test-cntrlplane-4826-hc-test-cntrlplane-4826"
+      },
+      "type": "Azure"
+    },
+    "pullSecret": {
+      "name": "test-cntrlplane-4826-r5-hc-pull-secret"
+    },
+    "release": {
+      "image": "quay.io/openshift-release-dev/ocp-release-nightly@sha256:08f0905c06195a76138db7071aa77ae644aea401eb832d51ebbf4fb870698346"
+    },
+    "secretEncryption": {
+      "aescbc": {
+        "activeKey": {
+          "name": "test-cntrlplane-4826-r5-hc-etcd-encryption-key"
+        }
+      },
+      "type": "aescbc"
+    },
+    "serviceAccountSigningKey": {
+      "name": "test-cntrlplane-4826-r5-hcsa-token-issuer-key"
+    },
+    "services": [
+      {
+        "service": "APIServer",
+        "servicePublishingStrategy": {
+          "route": {
+            "hostname": "api-test-cntrlplane-4826-r5-hc.test.hcp.example.com"
+          },
+          "type": "Route"
+        }
+      },
+      {
+        "service": "Ignition",
+        "servicePublishingStrategy": {
+          "route": {
+            "hostname": "ignition-test-cntrlplane-4826-r5-hc.test.hcp.example.com"
+          },
+          "type": "Route"
+        }
+      },
+      {
+        "service": "Konnectivity",
+        "servicePublishingStrategy": {
+          "route": {
+            "hostname": "konnectivity-test-cntrlplane-4826-r5-hc.test.hcp.example.com"
+          },
+          "type": "Route"
+        }
+      },
+      {
+        "service": "OAuthServer",
+        "servicePublishingStrategy": {
+          "route": {
+            "hostname": "oauth-test-cntrlplane-4826-r5-hc.test.hcp.example.com"
+          },
+          "type": "Route"
+        }
+      }
+    ],
+    "sshKey": {
+      "name": "test-cntrlplane-4826-r5-hc-ssh-key"
+    }
+  }
+}

@@ -1,0 +1,1 @@
+kubectl patch nodepool test-cntrlplane-4826-unpatched -n clusters --type=merge -p \{\"spec\":\{\"release\":\{\"image\":\"quay.io/openshift-release-dev/ocp-release-nightly@sha256:08f0905c06195a76138db7071aa77ae644aea401eb832d51ebbf4fb870698346\"\}\}\}

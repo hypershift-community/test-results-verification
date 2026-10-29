@@ -1,0 +1,19 @@
+{
+  "items": [
+    {
+      "metadata": {
+        "name": "cluster-api-5b5cfd44df-pgfgr"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "registry.k8s.io/cluster-api/cluster-api-controller:v1.14.3",
+            "imageID": "registry.k8s.io/cluster-api/cluster-api-controller@sha256:1110ddb0f4a9cfc1b557f305199e2d56911fe442edef6361e12e5cc4b11e23fd",
+            "ready": true
+          }
+        ],
+        "phase": "Running"
+      }
+    }
+  ]
+}

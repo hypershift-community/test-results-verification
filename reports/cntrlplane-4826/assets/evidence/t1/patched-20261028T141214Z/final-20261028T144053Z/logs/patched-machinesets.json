@@ -1,0 +1,20 @@
+{
+  "items": [
+    {
+      "availableReplicas": 3,
+      "name": "test-cntrlplane-4826-patched-2jxvf",
+      "readyReplicas": 3,
+      "replicas": 3,
+      "revision": "2",
+      "uid": "1d141ec4-856d-4a3a-96a2-2690ee3bbd9e"
+    },
+    {
+      "availableReplicas": 0,
+      "name": "test-cntrlplane-4826-patched-bkf55",
+      "readyReplicas": 0,
+      "replicas": 0,
+      "revision": "1",
+      "uid": "35ff4ec1-5d7e-45b6-9ba4-10f3bc6a623b"
+    }
+  ]
+}

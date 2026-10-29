@@ -1,0 +1,12 @@
+0e966ea6569836347812a8688c49f6afae03f06b94eec03c691516429fa9006d  /workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/postflight/azure-dns-20261028T154659Z/azure-dns-parent-role-assignments-stable.json
+1cdd92fa12d6f8925e5197b8b905b0d00ecc4a8f83f1a85502763f6bd961c015  /workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/postflight/azure-dns-20261028T154659Z/azure-dns-child-zone-stable.json
+28a98a1f9053695b3a25db868ba5615c9ec77e2802a83608af84a818629a4873  /workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/postflight/azure-dns-20261028T154659Z/azure-dns-parent-zone.json
+319aeb9f904b518df080bfac75d8f0da6870cc04b46808b8ab248ce51bd1f21f  /workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/postflight/azure-dns-20261028T154659Z/azure-rg-shared-resource-group-stable.json
+3ea1d138103adc2d55cea5f8c7fab9874731e21c0c1fba99bd08121efb6b76fb  /workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/postflight/azure-dns-20261028T154659Z/azure-dns-parent-role-assignments.json
+4266c3559a72a39fd93f7415be8e86382e76c46bc642b85defd6b4ab6459c92d  /workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/postflight/azure-dns-20261028T154659Z/meta.txt
+4d3a72e95c4f8d558498bc06ec628859dea4cec158d8c3aeee636c15052256f7  /workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/postflight/azure-dns-20261028T154659Z/azure-rg-shared-resource-group.json
+a170e45fb0ceb3fdde91fffecafdf2a4ee5149c7326bd68097a6917c9d237879  /workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/postflight/azure-dns-20261028T154659Z/azure-dns-child-zone.json
+a242f6b97d047ffe8854479b4d44b10a535b975908e148a360f09693b874e214  /workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/postflight/azure-dns-20261028T154659Z/azure-dns-child-role-assignments.json
+b7a38f95831c8b4472bc3ef3330769d7a739b5b8ae14c9c87b196a2ba1c1da2e  /workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/postflight/azure-dns-20261028T154659Z/azure-dns-child-role-assignments-stable.json
+c4470a7ed2a6ac258207c836f9815aadd8feffd565a9d021fcd98ae1485589ab  /workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/postflight/azure-dns-20261028T154659Z/azure-dns-parent-zone-stable.json
+e6982db8394f3ec4d62f562c3af8ff56e60f477dbdc38bfcc6c0d55e24c73833  /workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/postflight/azure-dns-20261028T154659Z/azure-dns-stable.sha256

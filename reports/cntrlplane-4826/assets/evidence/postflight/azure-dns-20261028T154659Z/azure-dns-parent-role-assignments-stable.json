@@ -1,0 +1,284 @@
+[
+  {
+    "id": "/providers/Microsoft.Authorization/roleAssignments/245219ab-4431-4cf6-bac3-b5041157a48f",
+    "principalId": "redacted-principal-135",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/18d7d88d-d35e-4fb5-a5c3-7773c20a72d9",
+    "scope": "/"
+  },
+  {
+    "id": "/providers/Microsoft.Authorization/roleAssignments/25613a23-a50b-4c0d-8811-ad940bc2a26e",
+    "principalId": "redacted-principal-109",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/18d7d88d-d35e-4fb5-a5c3-7773c20a72d9",
+    "scope": "/"
+  },
+  {
+    "id": "/providers/Microsoft.Authorization/roleAssignments/25d0bb72-f7aa-4181-9f79-f6eb7d3be940",
+    "principalId": "redacted-principal-146",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/18d7d88d-d35e-4fb5-a5c3-7773c20a72d9",
+    "scope": "/"
+  },
+  {
+    "id": "/providers/Microsoft.Authorization/roleAssignments/3dffcbb2-47be-4778-b21a-e726a5a150ae",
+    "principalId": "redacted-principal-128",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/18d7d88d-d35e-4fb5-a5c3-7773c20a72d9",
+    "scope": "/"
+  },
+  {
+    "id": "/providers/Microsoft.Authorization/roleAssignments/503f70e1-8f81-4924-8377-86214fc79019",
+    "principalId": "redacted-principal-129",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/18d7d88d-d35e-4fb5-a5c3-7773c20a72d9",
+    "scope": "/"
+  },
+  {
+    "id": "/providers/Microsoft.Authorization/roleAssignments/64cc96de-12d7-4327-a03d-f16c19051a22",
+    "principalId": "redacted-principal-119",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/18d7d88d-d35e-4fb5-a5c3-7773c20a72d9",
+    "scope": "/"
+  },
+  {
+    "id": "/providers/Microsoft.Authorization/roleAssignments/9ce474e7-e51b-49cc-ade8-4e4294526f16",
+    "principalId": "redacted-principal-101",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/18d7d88d-d35e-4fb5-a5c3-7773c20a72d9",
+    "scope": "/"
+  },
+  {
+    "id": "/providers/Microsoft.Authorization/roleAssignments/de92bd42-7e43-481e-a9e6-a1bd94e90280",
+    "principalId": "redacted-principal-120",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/18d7d88d-d35e-4fb5-a5c3-7773c20a72d9",
+    "scope": "/"
+  },
+  {
+    "id": "/providers/Microsoft.Management/managementGroups/redacted-tenant-id/providers/Microsoft.Authorization/roleAssignments/221447c4-f94c-47ed-8c5d-0affce4ec419",
+    "principalId": "redacted-principal-101",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635",
+    "scope": "/providers/Microsoft.Management/managementGroups/redacted-tenant-id"
+  },
+  {
+    "id": "/providers/Microsoft.Management/managementGroups/redacted-tenant-id/providers/Microsoft.Authorization/roleAssignments/6208a4b4-c6ef-4fcb-bf09-40c352bab430",
+    "principalId": "redacted-principal-148",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/acdd72a7-3385-48ef-bd42-f606fba81ae7",
+    "scope": "/providers/Microsoft.Management/managementGroups/redacted-tenant-id"
+  },
+  {
+    "id": "/providers/Microsoft.Management/managementGroups/redacted-tenant-id/providers/Microsoft.Authorization/roleAssignments/6da85481-2cd7-4a4d-a13b-b114bcd86a49",
+    "principalId": "redacted-principal-142",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/60bd99ae-12e1-4040-a1da-74c0f8b83422",
+    "scope": "/providers/Microsoft.Management/managementGroups/redacted-tenant-id"
+  },
+  {
+    "id": "/providers/Microsoft.Management/managementGroups/redacted-tenant-id/providers/Microsoft.Authorization/roleAssignments/786d50c0-b6cf-456c-9648-f1828badf81f",
+    "principalId": "redacted-principal-112",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/acdd72a7-3385-48ef-bd42-f606fba81ae7",
+    "scope": "/providers/Microsoft.Management/managementGroups/redacted-tenant-id"
+  },
+  {
+    "id": "/providers/Microsoft.Management/managementGroups/redacted-tenant-id/providers/Microsoft.Authorization/roleAssignments/79a32fba-5d55-4507-a3ea-0b845a20877e",
+    "principalId": "redacted-principal-136",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/acdd72a7-3385-48ef-bd42-f606fba81ae7",
+    "scope": "/providers/Microsoft.Management/managementGroups/redacted-tenant-id"
+  },
+  {
+    "id": "/providers/Microsoft.Management/managementGroups/redacted-tenant-id/providers/Microsoft.Authorization/roleAssignments/7cc32087-4dab-1395-2cfb-a68a1c3411bd",
+    "principalId": "redacted-principal-141",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/15a07b13-81d8-852e-9658-1ec251510c91",
+    "scope": "/providers/Microsoft.Management/managementGroups/redacted-tenant-id"
+  },
+  {
+    "id": "/providers/Microsoft.Management/managementGroups/redacted-tenant-id/providers/Microsoft.Authorization/roleAssignments/b6ccc5bb-a51a-4b56-8fae-ee892e5546ac",
+    "principalId": "redacted-principal-150",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635",
+    "scope": "/providers/Microsoft.Management/managementGroups/redacted-tenant-id"
+  },
+  {
+    "id": "/providers/Microsoft.Management/managementGroups/redacted-tenant-id/providers/Microsoft.Authorization/roleAssignments/ba6416bc-fde6-4a9c-b1bc-7b36c715dd1b",
+    "principalId": "redacted-principal-125",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/acdd72a7-3385-48ef-bd42-f606fba81ae7",
+    "scope": "/providers/Microsoft.Management/managementGroups/redacted-tenant-id"
+  },
+  {
+    "id": "/providers/Microsoft.Management/managementGroups/redacted-tenant-id/providers/Microsoft.Authorization/roleAssignments/c6126684-a7a0-3fd4-5b2d-34cde2376427",
+    "principalId": "redacted-principal-141",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/21090545-7ca7-4776-b22c-e363652d74d2",
+    "scope": "/providers/Microsoft.Management/managementGroups/redacted-tenant-id"
+  },
+  {
+    "id": "/providers/Microsoft.Management/managementGroups/redacted-tenant-id/providers/Microsoft.Authorization/roleAssignments/d5f2aa5e-1025-4d1a-91b7-3eca6279a525",
+    "principalId": "redacted-principal-120",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635",
+    "scope": "/providers/Microsoft.Management/managementGroups/redacted-tenant-id"
+  },
+  {
+    "id": "/providers/Microsoft.Management/managementGroups/redacted-tenant-id/providers/Microsoft.Authorization/roleAssignments/e54d6daf-a139-df6b-c39d-f3477317696b",
+    "principalId": "redacted-principal-141",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/acdd72a7-3385-48ef-bd42-f606fba81ae7",
+    "scope": "/providers/Microsoft.Management/managementGroups/redacted-tenant-id"
+  },
+  {
+    "id": "/providers/Microsoft.Management/managementGroups/redacted-tenant-id/providers/Microsoft.Authorization/roleAssignments/eac5265a-fdf3-466b-b11e-b2f1b2cb4a4b",
+    "principalId": "redacted-principal-149",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/acdd72a7-3385-48ef-bd42-f606fba81ae7",
+    "scope": "/providers/Microsoft.Management/managementGroups/redacted-tenant-id"
+  },
+  {
+    "id": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleAssignments/03faae2f-6be4-4c1b-9885-7286aec20d6f",
+    "principalId": "redacted-principal-138",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c",
+    "scope": "/subscriptions/redacted-subscription-id"
+  },
+  {
+    "id": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleAssignments/363319a5-73fa-4c07-9af6-3b9a315bb01a",
+    "principalId": "redacted-principal-102",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c",
+    "scope": "/subscriptions/redacted-subscription-id"
+  },
+  {
+    "id": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleAssignments/3d26828f-9c99-4b57-9903-7f8b226ce83b",
+    "principalId": "redacted-principal-128",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635",
+    "scope": "/subscriptions/redacted-subscription-id"
+  },
+  {
+    "id": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleAssignments/51bd24d8-d6d7-4a7b-b05e-b3839d48f113",
+    "principalId": "redacted-principal-131",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/18d7d88d-d35e-4fb5-a5c3-7773c20a72d9",
+    "scope": "/subscriptions/redacted-subscription-id"
+  },
+  {
+    "id": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleAssignments/7a7f954f-6fbc-45da-b6c7-d89c00a8727e",
+    "principalId": "redacted-principal-115",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c",
+    "scope": "/subscriptions/redacted-subscription-id"
+  },
+  {
+    "id": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleAssignments/7ac1767a-8413-4f7a-96c9-e98a47bb32f1",
+    "principalId": "redacted-principal-102",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/18d7d88d-d35e-4fb5-a5c3-7773c20a72d9",
+    "scope": "/subscriptions/redacted-subscription-id"
+  },
+  {
+    "id": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleAssignments/aed6b77b-2a20-45da-9ff1-c277b99a6512",
+    "principalId": "redacted-principal-134",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635",
+    "scope": "/subscriptions/redacted-subscription-id"
+  },
+  {
+    "id": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleAssignments/bab6c5cf-2a23-420f-b325-274fb57aa2a7",
+    "principalId": "redacted-principal-115",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/18d7d88d-d35e-4fb5-a5c3-7773c20a72d9",
+    "scope": "/subscriptions/redacted-subscription-id"
+  },
+  {
+    "id": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleAssignments/cc0f4ebe-998d-44e6-bf00-06d28de9bff6",
+    "principalId": "redacted-principal-138",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/18d7d88d-d35e-4fb5-a5c3-7773c20a72d9",
+    "scope": "/subscriptions/redacted-subscription-id"
+  },
+  {
+    "id": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleAssignments/d61db8be-197a-42e2-939e-fa1a24cc8115",
+    "principalId": "redacted-principal-126",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/22da4fc7-28ad-4f49-8ff6-e9d3cc52e8e0",
+    "scope": "/subscriptions/redacted-subscription-id"
+  },
+  {
+    "id": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleAssignments/dc92a4b6-6d61-47ec-9ef9-34bf8f89e5c9",
+    "principalId": "redacted-principal-104",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/18d7d88d-d35e-4fb5-a5c3-7773c20a72d9",
+    "scope": "/subscriptions/redacted-subscription-id"
+  },
+  {
+    "id": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleAssignments/e4ecbaa3-633b-4a5a-9ddd-faf37e3fb7fd",
+    "principalId": "redacted-principal-104",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c",
+    "scope": "/subscriptions/redacted-subscription-id"
+  },
+  {
+    "id": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleAssignments/f9ca14c6-efd0-44e8-a9d9-1197ecda3d95",
+    "principalId": "redacted-principal-131",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c",
+    "scope": "/subscriptions/redacted-subscription-id"
+  },
+  {
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Authorization/roleAssignments/0c94fe9b-a270-5eff-9d3c-cc6afabc7b02",
+    "principalId": "redacted-principal-105",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/0336e1d3-7a87-462b-b6db-342b63f7802c",
+    "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group"
+  },
+  {
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Authorization/roleAssignments/32feb4a6-0795-5ea0-bde2-a13f3a3add50",
+    "principalId": "redacted-principal-117",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/0336e1d3-7a87-462b-b6db-342b63f7802c",
+    "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group"
+  },
+  {
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Authorization/roleAssignments/410458ba-f9a3-5b80-b332-23a4536ab4ea",
+    "principalId": "redacted-principal-137",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/0336e1d3-7a87-462b-b6db-342b63f7802c",
+    "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group"
+  },
+  {
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Authorization/roleAssignments/53175ead-efd1-57e6-8d4a-c70935fd2ca7",
+    "principalId": "redacted-principal-143",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/0336e1d3-7a87-462b-b6db-342b63f7802c",
+    "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group"
+  },
+  {
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Authorization/roleAssignments/5fa44d7a-de4a-5bb1-a9bd-dbab2df1273a",
+    "principalId": "redacted-principal-144",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/0336e1d3-7a87-462b-b6db-342b63f7802c",
+    "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group"
+  },
+  {
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Authorization/roleAssignments/6dd65351-b969-5769-a3dd-8dd6fd830d85",
+    "principalId": "redacted-principal-130",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/0336e1d3-7a87-462b-b6db-342b63f7802c",
+    "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group"
+  },
+  {
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Authorization/roleAssignments/75e08fb3-e7e4-5532-aa6f-81e058d137ad",
+    "principalId": "redacted-principal-111",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/0336e1d3-7a87-462b-b6db-342b63f7802c",
+    "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group"
+  },
+  {
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Authorization/roleAssignments/aac19814-7d6b-5df1-bdce-c083c6cc1e55",
+    "principalId": "redacted-principal-103",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/0336e1d3-7a87-462b-b6db-342b63f7802c",
+    "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group"
+  },
+  {
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Authorization/roleAssignments/ae0920ca-71af-48f5-b4c2-76d87db98e49",
+    "principalId": "redacted-principal-113",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/befefa01-2a29-4197-83a8-272ff33ce314",
+    "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group"
+  },
+  {
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Authorization/roleAssignments/af51c018-1de6-57f6-bf4e-f0e1ecd172d1",
+    "principalId": "redacted-principal-123",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/0336e1d3-7a87-462b-b6db-342b63f7802c",
+    "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group"
+  },
+  {
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Authorization/roleAssignments/bd98487e-63f6-4191-ba25-e0ee3baa64a9",
+    "principalId": "redacted-principal-108",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/4633458b-17de-408a-b874-0445c86b69e6",
+    "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group"
+  },
+  {
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Authorization/roleAssignments/e378b86d-9c2e-538c-9bf2-405277284eb4",
+    "principalId": "redacted-principal-121",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/0336e1d3-7a87-462b-b6db-342b63f7802c",
+    "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group"
+  },
+  {
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Authorization/roleAssignments/f101eb67-97c1-5568-9f08-f7362d7e4e7a",
+    "principalId": "redacted-principal-118",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/0336e1d3-7a87-462b-b6db-342b63f7802c",
+    "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group"
+  },
+  {
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/providers/Microsoft.Authorization/roleAssignments/f6f09e0e-50ae-4745-a6a0-0afc0662912c",
+    "principalId": "redacted-principal-114",
+    "roleDefinitionId": "/subscriptions/redacted-subscription-id/providers/Microsoft.Authorization/roleDefinitions/0336e1d3-7a87-462b-b6db-342b63f7802c",
+    "scope": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com"
+  }
+]

@@ -1,0 +1,18 @@
+base_image_inspect_utc=2026-10-28T13:03:03Z
+{
+  "Architecture": "amd64",
+  "Created": "2026-10-27T18:36:02.738703404Z",
+  "Digest": "sha256:e848d7a892cbc144bfe0032ddeaccecde94a7c5e2d84f56c2953fb9e5e535834",
+  "Os": "linux"
+}
+base_commit_utc=2026-10-28T13:03:04Z
+Client Version: openshift/hypershift: dbe3111415dc623f9d75a99e4afc21e3c73463f9. Latest supported OCP: 5.1.0
+patched_image_inspect_utc=2026-10-28T13:03:05Z
+{
+  "Architecture": "amd64",
+  "Created": "2026-10-27T18:36:08.045097666Z",
+  "Digest": "sha256:7bbfc29f4283a5b76ba9d1ee9f6a74864dc874614b26741520ae52d6a887b4a2",
+  "Os": "linux"
+}
+patched_commit_utc=2026-10-28T13:03:07Z
+Client Version: openshift/hypershift: ff673589287e8f7685435f117cfec1f14c067def. Latest supported OCP: 5.1.0

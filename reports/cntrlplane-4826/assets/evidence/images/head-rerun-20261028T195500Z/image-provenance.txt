@@ -1,0 +1,11 @@
+captured_utc=2026-10-28T19:56:04Z
+purpose=images prepared for a possible live head rerun; not used by any live evidence in this bundle
+base_tag=quay.io/example/hypershift:cntrlplane-4826-base-ee327075b1
+base_commit=ee327075b155839511edc3779510ceb95c93a658
+base_local_id=e7a4666529828722a9661324db37238e4fcf0aa187c520b7e17d32e4f83e907b
+base_push_digest=sha256:a8848bd5281ac07a23eb2f583f506e59aaa60702ff6aa0cb4530884479821839
+head_tag=quay.io/example/hypershift:cntrlplane-4826-head-ee5691233b
+head_commit=ee5691233b08e3271f030ebd24055faa6857fd39
+head_local_id=f733b378548940ebf11d930ad906270e7f853114743a4dfc6a87e4fc37c238a4
+head_push_digest=sha256:7a2248fdc9d50e99e8b444aa887cea96bdf0023e2e81062f9de21266ddb492a6
+embedded_commit_check=hypershift version first line matched the requested base and head commit

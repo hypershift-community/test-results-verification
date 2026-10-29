@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Corrections log</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topbar"><div class="brand">CNTRLPLANE-4826 · Verification</div><nav><a href="index.html">Dashboard</a><a href="scenario-1.html">T1 Release</a><a href="scenario-2.html">T2 Config</a><a href="scenario-3.html">T3 VM size</a><a href="scenario-4.html">T4 Predicate</a><a href="scenario-5.html">T5 Reconcile</a><a href="scenario-6.html">T6 Scale</a><a href="scenario-7.html">T7 Stable pool</a><a href="scenario-8.html">T8 Compatibility</a><a href="automated-tests.html">Automated</a><a href="appendices.html">Appendices</a><a href="full-report.html" class="active">Corrections log</a></nav></header>
+<main>
+<div class="scenario-head"><div><div class="eyebrow">Corrections log</div><h1>Corrections log — rounds 1 to 4</h1></div><span class="badge pending">UNKNOWN</span></div><p class="lead">What changed between the original bundle and each retest.</p>
+<h2>Round 4 (this bundle)</h2>
+<ul>
+  <li>T2, T3 and T6 were rerun at PR head <code>ee5691233b</code> on a fresh Azure self-managed HostedCluster with the upstream CAPI <code>v1.14.3</code> manager; their pages are no longer historical.</li>
+  <li>Every round-4 page is generated from <code>verdict.json</code>, <code>meta.txt</code> and the archived snapshots, so the tables cannot drift from the raw data.</li>
+  <li>Before, immediately-after-patch and final snapshots are shown side by side, plus continuous observation summaries and negative-check files.</li>
+  <li>Scenarios remain ordered T1 through T8, with T1 first.</li>
+  <li>The first T6 run was discarded after review: its node-inventory check counted every guest Node instead of only the scale pool&rsquo;s. The helper was fixed and T6 was rerun; the superseded run is retained in the bundle.</li>
+</ul>
+<h2>Round 3</h2>
+<ul>
+  <li>Live evidence moved to PR head <code>ee5691233b</code> and head's own base <code>ee327075b1</code>; round 2 used <code>ff673589287e</code> on <code>dbe3111415</code>.</li>
+  <li>T1 was rerun with continuous 5-second observations; the baseline stall and the patched completion are both explicit verdicts.</li>
+  <li>T4 and T5 were rerun at head; the four formerly vacuous predicate cases now pass through the counters and generation guards.</li>
+  <li>The old commit's red <code>ci/prow/unit</code> and <code>ci/prow/e2e-aks</code> results are disclosed in <a href="automated-tests.html">Automated tests</a>.</li>
+</ul>
+<h2>Round 2 corrections retained</h2>
+<ul>
+  <li>Removed escaped HTML so dashboard badges and evidence links render as markup.</li>
+  <li>Corrected the T2/T3 field extraction so conditions and current-MachineSet values come from the right object level.</li>
+  <li>Replaced the endpoint-only T1 narrative with a continuous-ordering statement and explicit limitations.</li>
+</ul>
+<h2>Known gaps</h2>
+<ul>
+  <li>T8 has no pre-1.14 manager, second-provider or InPlace run.</li>
+  <li>The downstream CAPI rebase in the HyperShift fork is not exercised by any live run.</li>
+  <li>T6 does not exercise the zero-desired branch without a current MachineSet; that branch is covered only by unit tests.</li>
+</ul>
+
+<p class="back"><a href="index.html">← Return to dashboard</a></p>
+</main>
+<footer><a href="https://github.com/openshift/hypershift/pull/10084">openshift/hypershift#10084</a> · CNTRLPLANE-4826 · round 5 · 2026-10-29 · sanitized bundle</footer>
+</body>
+</html>

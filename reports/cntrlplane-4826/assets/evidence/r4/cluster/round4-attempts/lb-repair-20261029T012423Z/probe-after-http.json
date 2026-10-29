@@ -1,0 +1,24 @@
+{
+  "etag": "W/\"8b0765c8-b881-4f55-a1d3-0b2253e49324\"",
+  "id": "/subscriptions/redacted-subscription-id/resourceGroups/test-cntrlplane-4826-hc-test-cntrlplane-4826/providers/Microsoft.Network/loadBalancers/test-cntrlplane-4826/probes/aa865908822fb44cba23557e2b8bc89e-TCP-31627",
+  "intervalInSeconds": 5,
+  "loadBalancingRules": [
+    {
+      "id": "/subscriptions/redacted-subscription-id/resourceGroups/test-cntrlplane-4826-hc-test-cntrlplane-4826/providers/Microsoft.Network/loadBalancers/test-cntrlplane-4826/loadBalancingRules/aa865908822fb44cba23557e2b8bc89e-TCP-80",
+      "resourceGroup": "test-cntrlplane-4826-hc-test-cntrlplane-4826"
+    },
+    {
+      "id": "/subscriptions/redacted-subscription-id/resourceGroups/test-cntrlplane-4826-hc-test-cntrlplane-4826/providers/Microsoft.Network/loadBalancers/test-cntrlplane-4826/loadBalancingRules/aa865908822fb44cba23557e2b8bc89e-TCP-443",
+      "resourceGroup": "test-cntrlplane-4826-hc-test-cntrlplane-4826"
+    }
+  ],
+  "name": "aa865908822fb44cba23557e2b8bc89e-TCP-31627",
+  "numberOfProbes": 2,
+  "port": 31627,
+  "probeThreshold": 2,
+  "protocol": "Http",
+  "provisioningState": "Succeeded",
+  "requestPath": "/healthz",
+  "resourceGroup": "test-cntrlplane-4826-hc-test-cntrlplane-4826",
+  "type": "Microsoft.Network/loadBalancers/probes"
+}

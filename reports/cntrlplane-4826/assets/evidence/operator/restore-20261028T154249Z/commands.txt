@@ -1,0 +1,1 @@
+kubectl -n hypershift set image deployment/operator operator=quay.io/hypershift/hypershift-operator:latest init-environment=quay.io/hypershift/hypershift-operator:latest

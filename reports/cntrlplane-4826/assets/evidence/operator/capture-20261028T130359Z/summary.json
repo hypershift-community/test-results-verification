@@ -1,0 +1,15 @@
+{
+  "generation": 26,
+  "images": [
+    {
+      "image": "quay.io/hypershift/hypershift-operator:latest",
+      "name": "operator"
+    },
+    {
+      "image": "quay.io/hypershift/hypershift-operator:latest",
+      "name": "init-environment"
+    }
+  ],
+  "observedGeneration": 26,
+  "readyReplicas": 2
+}

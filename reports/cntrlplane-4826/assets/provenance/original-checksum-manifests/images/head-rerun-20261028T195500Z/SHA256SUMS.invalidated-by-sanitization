@@ -1,0 +1,4 @@
+96dfc77aa8aedc959a97a3360c0cf323e546bf7794d610cab174ae251f4e02de  .test-evidence/CNTRLPLANE-4826-20261028-r2/images/head-rerun-20261028T195500Z/base-build.log
+be8c3fe955ffb8320e714a055615763e229e78dbf6a106422d3b8338a77a8ce2  .test-evidence/CNTRLPLANE-4826-20261028-r2/images/head-rerun-20261028T195500Z/clean-tree-attestation.txt
+52c1917d7beb91c2f46251b0b23058e1431ed0e10dfaff04d74f2e75c8484e4e  .test-evidence/CNTRLPLANE-4826-20261028-r2/images/head-rerun-20261028T195500Z/head-build.log
+1ff1dd698f2f037f09ca6e88edd63f1b6447dfc6fa340fefabc610abad2de06c  .test-evidence/CNTRLPLANE-4826-20261028-r2/images/head-rerun-20261028T195500Z/image-provenance.txt

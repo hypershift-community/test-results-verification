@@ -1,0 +1,3012 @@
+{
+  "apiVersion": "v1",
+  "items": [
+    {
+      "apiVersion": "config.openshift.io/v1",
+      "kind": "ClusterOperator",
+      "metadata": {
+        "annotations": {
+          "capability.openshift.io/name": "Console",
+          "include.release.openshift.io/hypershift": "true",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true"
+        },
+        "creationTimestamp": "2026-10-27T19:37:37Z",
+        "generation": 1,
+        "name": "console",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "c176eb5c-f054-49ac-bb34-b07ae381ce01"
+          }
+        ],
+        "resourceVersion": "19083",
+        "uid": "8f63de14-5693-4354-86dd-0dd2c946062a"
+      },
+      "spec": {},
+      "status": {
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-27T19:43:18Z",
+            "message": "All is well",
+            "reason": "AsExpected",
+            "status": "False",
+            "type": "Degraded"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T20:18:36Z",
+            "message": "All is well",
+            "reason": "AsExpected",
+            "status": "False",
+            "type": "Progressing"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:43:54Z",
+            "message": "All is well",
+            "reason": "AsExpected",
+            "status": "True",
+            "type": "Available"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T20:12:50Z",
+            "message": "All is well",
+            "reason": "AsExpected",
+            "status": "True",
+            "type": "Upgradeable"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:43:18Z",
+            "reason": "NoData",
+            "status": "Unknown",
+            "type": "EvaluationConditionsDetected"
+          }
+        ],
+        "extension": null,
+        "relatedObjects": [
+          {
+            "group": "console.openshift.io",
+            "name": "monitoring-plugin",
+            "resource": "consoleplugins"
+          },
+          {
+            "group": "",
+            "name": "openshift-monitoring",
+            "resource": "namespaces"
+          },
+          {
+            "group": "console.openshift.io",
+            "name": "networking-console-plugin",
+            "resource": "consoleplugins"
+          },
+          {
+            "group": "",
+            "name": "openshift-network-console",
+            "resource": "namespaces"
+          },
+          {
+            "group": "oauth.openshift.io",
+            "name": "console",
+            "resource": "oauthclients"
+          },
+          {
+            "group": "operator.openshift.io",
+            "name": "cluster",
+            "resource": "consoles"
+          },
+          {
+            "group": "config.openshift.io",
+            "name": "cluster",
+            "resource": "consoles"
+          },
+          {
+            "group": "config.openshift.io",
+            "name": "cluster",
+            "resource": "infrastructures"
+          },
+          {
+            "group": "config.openshift.io",
+            "name": "cluster",
+            "resource": "proxies"
+          },
+          {
+            "group": "config.openshift.io",
+            "name": "cluster",
+            "resource": "oauths"
+          },
+          {
+            "group": "",
+            "name": "openshift-console-operator",
+            "resource": "namespaces"
+          },
+          {
+            "group": "",
+            "name": "openshift-console",
+            "resource": "namespaces"
+          },
+          {
+            "group": "",
+            "name": "console-public",
+            "namespace": "openshift-config-managed",
+            "resource": "configmaps"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "console-operator",
+            "resource": "clusterroles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "console",
+            "resource": "clusterroles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "helm-chartrepos-viewer",
+            "resource": "clusterroles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "project-helm-chartrepository-editor",
+            "resource": "clusterroles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "console-extensions-reader",
+            "resource": "clusterroles"
+          }
+        ],
+        "versions": [
+          {
+            "name": "operator",
+            "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "config.openshift.io/v1",
+      "kind": "ClusterOperator",
+      "metadata": {
+        "annotations": {
+          "capability.openshift.io/name": "CSISnapshot",
+          "include.release.openshift.io/hypershift": "true",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true"
+        },
+        "creationTimestamp": "2026-10-27T19:37:37Z",
+        "generation": 1,
+        "name": "csi-snapshot-controller",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "c176eb5c-f054-49ac-bb34-b07ae381ce01"
+          }
+        ],
+        "resourceVersion": "15240",
+        "uid": "5676b999-c48b-47cf-bedb-5c82dc819723"
+      },
+      "spec": {},
+      "status": {
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-27T19:37:45Z",
+            "message": "All is well",
+            "reason": "AsExpected",
+            "status": "False",
+            "type": "Degraded"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T20:14:53Z",
+            "message": "CSISnapshotControllerProgressing: Deployment is not progressing",
+            "reason": "AsExpected",
+            "status": "False",
+            "type": "Progressing"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T20:14:53Z",
+            "message": "CSISnapshotControllerAvailable: Deployment is available",
+            "reason": "AsExpected",
+            "status": "True",
+            "type": "Available"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:37:47Z",
+            "message": "All is well",
+            "reason": "AsExpected",
+            "status": "True",
+            "type": "Upgradeable"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:37:45Z",
+            "reason": "NoData",
+            "status": "Unknown",
+            "type": "EvaluationConditionsDetected"
+          }
+        ],
+        "extension": null,
+        "relatedObjects": [
+          {
+            "group": "",
+            "name": "openshift-cluster-storage-operator",
+            "resource": "namespaces"
+          },
+          {
+            "group": "operator.openshift.io",
+            "name": "cluster",
+            "resource": "csisnapshotcontrollers"
+          },
+          {
+            "group": "",
+            "name": "csi-snapshot-controller-operator",
+            "namespace": "openshift-cluster-storage-operator",
+            "resource": "serviceaccounts"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "openshift-csi-snapshot-controller-runner",
+            "resource": "clusterroles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "csi-snapshot-controller-operator-clusterrole",
+            "resource": "clusterroles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "system:openshift:aggregate-snapshots-to-admin",
+            "resource": "clusterroles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "system:openshift:aggregate-snapshots-to-view",
+            "resource": "clusterroles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "system:openshift:aggregate-snapshots-to-basic-user",
+            "resource": "clusterroles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "system:openshift:aggregate-snapshots-to-storage-admin",
+            "resource": "clusterroles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "csi-snapshot-controller-operator-clusterrole",
+            "resource": "clusterrolebindings"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "csi-snapshot-controller-runner-operator",
+            "resource": "clusterrolebindings"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "csi-snapshot-controller-operator-role",
+            "namespace": "openshift-cluster-storage-operator",
+            "resource": "roles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "csi-snapshot-controller-operator-role",
+            "namespace": "openshift-cluster-storage-operator",
+            "resource": "rolebindings"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "extension-apiserver-authentication-reader",
+            "namespace": "kube-system",
+            "resource": "roles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "csi-snapshot-controller-operator-authentication-reader",
+            "namespace": "kube-system",
+            "resource": "rolebindings"
+          }
+        ],
+        "versions": [
+          {
+            "name": "operator",
+            "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+          },
+          {
+            "name": "csi-snapshot-controller",
+            "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "config.openshift.io/v1",
+      "kind": "ClusterOperator",
+      "metadata": {
+        "annotations": {
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true"
+        },
+        "creationTimestamp": "2026-10-27T19:37:37Z",
+        "generation": 1,
+        "name": "dns",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "c176eb5c-f054-49ac-bb34-b07ae381ce01"
+          }
+        ],
+        "resourceVersion": "15712",
+        "uid": "35c6ec4a-a103-49a8-9827-69dff3a563fa"
+      },
+      "spec": {},
+      "status": {
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-27T19:43:39Z",
+            "message": "DNS \"default\" is available.",
+            "reason": "AsExpected",
+            "status": "True",
+            "type": "Available"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T20:15:21Z",
+            "message": "Desired and current number of DNSes are equal",
+            "reason": "AsExpected",
+            "status": "False",
+            "type": "Progressing"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:37:58Z",
+            "reason": "DNSNotDegraded",
+            "status": "False",
+            "type": "Degraded"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:37:58Z",
+            "message": "DNS default is upgradeable: DNS Operator can be upgraded",
+            "reason": "DNSUpgradeable",
+            "status": "True",
+            "type": "Upgradeable"
+          }
+        ],
+        "extension": null,
+        "relatedObjects": [
+          {
+            "group": "",
+            "name": "openshift-dns-operator",
+            "resource": "namespaces"
+          },
+          {
+            "group": "operator.openshift.io",
+            "name": "default",
+            "resource": "dnses"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "openshift-dns-operator",
+            "resource": "clusterroles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "openshift-dns-operator",
+            "resource": "clusterrolebindings"
+          },
+          {
+            "group": "networking.k8s.io",
+            "name": "",
+            "namespace": "openshift-dns-operator",
+            "resource": "networkpolicies"
+          },
+          {
+            "group": "",
+            "name": "openshift-dns",
+            "resource": "namespaces"
+          },
+          {
+            "group": "networking.k8s.io",
+            "name": "",
+            "namespace": "openshift-dns",
+            "resource": "networkpolicies"
+          }
+        ],
+        "versions": [
+          {
+            "name": "operator",
+            "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+          },
+          {
+            "name": "coredns",
+            "version": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:6bc88e9af1665ce79489411c63fcbbac2d2d27041b756a721211ab649979dd29"
+          },
+          {
+            "name": "openshift-cli",
+            "version": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:af99b382f52126b650770c3b8951948a7289f521cb3233ea8b58b608f808f439"
+          },
+          {
+            "name": "kube-rbac-proxy",
+            "version": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "config.openshift.io/v1",
+      "kind": "ClusterOperator",
+      "metadata": {
+        "annotations": {
+          "capability.openshift.io/name": "ImageRegistry",
+          "include.release.openshift.io/hypershift": "true",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true"
+        },
+        "creationTimestamp": "2026-10-27T19:37:37Z",
+        "generation": 1,
+        "name": "image-registry",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "c176eb5c-f054-49ac-bb34-b07ae381ce01"
+          }
+        ],
+        "resourceVersion": "185066",
+        "uid": "75cb277e-48cd-4b54-92eb-426e1dd89fad"
+      },
+      "spec": {},
+      "status": {
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-28T15:13:00Z",
+            "message": "Available: The registry is ready\nNodeCADaemonAvailable: The daemon set node-ca has available replicas\nImagePrunerAvailable: Pruner CronJob has been created",
+            "reason": "Ready",
+            "status": "True",
+            "type": "Available"
+          },
+          {
+            "lastTransitionTime": "2026-10-28T13:33:19Z",
+            "message": "Progressing: The registry is ready\nNodeCADaemonProgressing: The daemon set node-ca is deployed",
+            "reason": "Ready",
+            "status": "False",
+            "type": "Progressing"
+          },
+          {
+            "lastTransitionTime": "2026-10-28T13:33:19Z",
+            "reason": "AsExpected",
+            "status": "False",
+            "type": "Degraded"
+          }
+        ],
+        "extension": null,
+        "relatedObjects": [
+          {
+            "group": "imageregistry.operator.openshift.io",
+            "name": "cluster",
+            "resource": "configs"
+          },
+          {
+            "group": "imageregistry.operator.openshift.io",
+            "name": "cluster",
+            "resource": "imagepruners"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "system:registry",
+            "resource": "clusterroles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "registry-registry-role",
+            "resource": "clusterrolebindings"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "openshift-image-registry-pruner",
+            "resource": "clusterrolebindings"
+          },
+          {
+            "group": "",
+            "name": "openshift-image-registry",
+            "resource": "namespaces"
+          }
+        ],
+        "versions": [
+          {
+            "name": "operator",
+            "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "config.openshift.io/v1",
+      "kind": "ClusterOperator",
+      "metadata": {
+        "annotations": {
+          "capability.openshift.io/name": "Ingress",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true"
+        },
+        "creationTimestamp": "2026-10-27T19:37:37Z",
+        "generation": 1,
+        "name": "ingress",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "c176eb5c-f054-49ac-bb34-b07ae381ce01"
+          }
+        ],
+        "resourceVersion": "163880",
+        "uid": "813018bf-6905-4915-bdd3-ec649e799259"
+      },
+      "spec": {},
+      "status": {
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-28T13:50:54Z",
+            "message": "The \"default\" ingress controller reports Available=True.",
+            "reason": "IngressAvailable",
+            "status": "True",
+            "type": "Available"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T20:15:45Z",
+            "message": "desired and current number of IngressControllers are equal",
+            "reason": "AsExpected",
+            "status": "False",
+            "type": "Progressing"
+          },
+          {
+            "lastTransitionTime": "2026-10-28T13:34:03Z",
+            "message": "The \"default\" ingress controller reports Degraded=False.",
+            "reason": "IngressNotDegraded",
+            "status": "False",
+            "type": "Degraded"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:39:22Z",
+            "reason": "IngressControllersUpgradeable",
+            "status": "True",
+            "type": "Upgradeable"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:39:22Z",
+            "reason": "AsExpected",
+            "status": "False",
+            "type": "EvaluationConditionsDetected"
+          }
+        ],
+        "extension": null,
+        "relatedObjects": [
+          {
+            "group": "",
+            "name": "openshift-ingress-operator",
+            "resource": "namespaces"
+          },
+          {
+            "group": "operator.openshift.io",
+            "name": "",
+            "namespace": "openshift-ingress-operator",
+            "resource": "ingresscontrollers"
+          },
+          {
+            "group": "ingress.operator.openshift.io",
+            "name": "",
+            "namespace": "openshift-ingress-operator",
+            "resource": "dnsrecords"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "openshift-ingress-operator",
+            "resource": "clusterroles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "openshift-ingress-operator",
+            "resource": "clusterrolebindings"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "ingress-operator",
+            "namespace": "openshift-ingress-operator",
+            "resource": "roles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "ingress-operator",
+            "namespace": "openshift-ingress-operator",
+            "resource": "rolebindings"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "ingress-operator",
+            "namespace": "openshift-config",
+            "resource": "roles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "ingress-operator",
+            "namespace": "openshift-config",
+            "resource": "rolebindings"
+          },
+          {
+            "group": "",
+            "name": "openshift-ingress",
+            "resource": "namespaces"
+          },
+          {
+            "group": "ingress.operator.openshift.io",
+            "name": "",
+            "namespace": "openshift-ingress",
+            "resource": "dnsrecords"
+          },
+          {
+            "group": "autoscaling",
+            "name": "",
+            "namespace": "openshift-ingress",
+            "resource": "horizontalpodautoscalers"
+          },
+          {
+            "group": "",
+            "name": "openshift-ingress-canary",
+            "resource": "namespaces"
+          },
+          {
+            "group": "gateway.networking.k8s.io",
+            "name": "",
+            "resource": "gatewayclasses"
+          },
+          {
+            "group": "gateway.networking.k8s.io",
+            "name": "",
+            "resource": "gateways"
+          }
+        ],
+        "versions": [
+          {
+            "name": "operator",
+            "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+          },
+          {
+            "name": "ingress-controller",
+            "version": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:cf5e130a5cd7937d2ec76019ebaa9de94a40189c7221d22ad6a752793c7ca714"
+          },
+          {
+            "name": "canary-server",
+            "version": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:95af541830b5af401435618744b3068d3e16364f02991acc1e7d48f790112a1e"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "config.openshift.io/v1",
+      "kind": "ClusterOperator",
+      "metadata": {
+        "annotations": {
+          "capability.openshift.io/name": "Insights",
+          "exclude.release.openshift.io/internal-openshift-hosted": "true",
+          "include.release.openshift.io/hypershift": "true",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true"
+        },
+        "creationTimestamp": "2026-10-27T19:37:37Z",
+        "generation": 1,
+        "name": "insights",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "c176eb5c-f054-49ac-bb34-b07ae381ce01"
+          }
+        ],
+        "resourceVersion": "16767",
+        "uid": "b3eef36a-726a-45aa-b2a4-b7069cb0aeee"
+      },
+      "spec": {},
+      "status": {
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-27T19:42:44Z",
+            "message": "Insights works as expected",
+            "reason": "AsExpected",
+            "status": "True",
+            "type": "Available"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:53:25Z",
+            "message": "no available cluster transfer",
+            "reason": "NoClusterTransfer",
+            "status": "False",
+            "type": "ClusterTransferAvailable"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:42:44Z",
+            "message": "Insights works as expected",
+            "reason": "AsExpected",
+            "status": "False",
+            "type": "Degraded"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:42:44Z",
+            "reason": "AsExpected",
+            "status": "False",
+            "type": "Disabled"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:42:44Z",
+            "message": "Gathering is enabled",
+            "reason": "AsExpected",
+            "status": "False",
+            "type": "GatheringDisabled"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T20:15:50Z",
+            "message": "Monitoring the cluster",
+            "reason": "AsExpected",
+            "status": "False",
+            "type": "Progressing"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T20:01:32Z",
+            "reason": "Succeeded",
+            "status": "True",
+            "type": "RemoteConfigurationAvailable"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T20:01:32Z",
+            "reason": "Succeeded",
+            "status": "True",
+            "type": "RemoteConfigurationValid"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:53:25Z",
+            "message": "SCA certs successfully updated",
+            "reason": "Updated",
+            "status": "True",
+            "type": "SCAAvailable"
+          }
+        ],
+        "extension": {
+          "lastReportTime": null
+        },
+        "relatedObjects": [
+          {
+            "group": "",
+            "name": "openshift-insights",
+            "resource": "namespaces"
+          },
+          {
+            "group": "apps",
+            "name": "insights-operator",
+            "namespace": "openshift-insights",
+            "resource": "deployments"
+          },
+          {
+            "group": "",
+            "name": "pull-secret",
+            "namespace": "openshift-config",
+            "resource": "secrets"
+          },
+          {
+            "group": "",
+            "name": "support",
+            "namespace": "openshift-config",
+            "resource": "secrets"
+          },
+          {
+            "group": "",
+            "name": "gather",
+            "namespace": "openshift-insights",
+            "resource": "serviceaccounts"
+          },
+          {
+            "group": "",
+            "name": "operator",
+            "namespace": "openshift-insights",
+            "resource": "serviceaccounts"
+          },
+          {
+            "group": "",
+            "name": "metrics",
+            "namespace": "openshift-insights",
+            "resource": "services"
+          },
+          {
+            "group": "",
+            "name": "service-ca-bundle",
+            "namespace": "openshift-insights",
+            "resource": "configmaps"
+          },
+          {
+            "group": "operator.openshift.io",
+            "name": "cluster",
+            "resource": "insightsoperators"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "insights-operator",
+            "resource": "clusterroles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "insights-operator-gather",
+            "resource": "clusterroles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "insights-runtime-extractor-role",
+            "resource": "clusterroles"
+          }
+        ],
+        "versions": [
+          {
+            "name": "operator",
+            "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "config.openshift.io/v1",
+      "kind": "ClusterOperator",
+      "metadata": {
+        "creationTimestamp": "2026-10-27T19:38:07Z",
+        "generation": 1,
+        "labels": {
+          "hypershift.openshift.io/managed": "true"
+        },
+        "name": "kube-apiserver",
+        "resourceVersion": "13497",
+        "uid": "f2b8003d-5d72-4343-ad7c-d82e1301995e"
+      },
+      "spec": {},
+      "status": {
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-27T19:38:07Z",
+            "reason": "AsExpected",
+            "status": "True",
+            "type": "Available"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:38:07Z",
+            "reason": "AsExpected",
+            "status": "False",
+            "type": "Progressing"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:38:07Z",
+            "reason": "AsExpected",
+            "status": "False",
+            "type": "Degraded"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:38:07Z",
+            "reason": "AsExpected",
+            "status": "True",
+            "type": "Upgradeable"
+          }
+        ],
+        "extension": null,
+        "relatedObjects": [
+          {
+            "group": "operator.openshift.io",
+            "name": "cluster",
+            "resource": "kubeapiservers"
+          },
+          {
+            "group": "apiextensions.k8s.io",
+            "name": "",
+            "resource": "customresourcedefinitions"
+          },
+          {
+            "group": "",
+            "name": "openshift-config",
+            "resource": "namespaces"
+          },
+          {
+            "group": "",
+            "name": "openshift-config-managed",
+            "resource": "namespaces"
+          },
+          {
+            "group": "",
+            "name": "openshift-kube-apiserver-operator",
+            "resource": "namespaces"
+          },
+          {
+            "group": "",
+            "name": "openshift-kube-apiserver",
+            "resource": "namespaces"
+          }
+        ],
+        "versions": [
+          {
+            "name": "kube-apiserver",
+            "version": "1.37.1"
+          },
+          {
+            "name": "operator",
+            "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+          },
+          {
+            "name": "raw-internal",
+            "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "config.openshift.io/v1",
+      "kind": "ClusterOperator",
+      "metadata": {
+        "creationTimestamp": "2026-10-27T19:38:07Z",
+        "generation": 1,
+        "labels": {
+          "hypershift.openshift.io/managed": "true"
+        },
+        "name": "kube-controller-manager",
+        "resourceVersion": "13498",
+        "uid": "8d92142e-e297-44c0-9332-3e9b15c4fa0e"
+      },
+      "spec": {},
+      "status": {
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-27T19:38:07Z",
+            "reason": "AsExpected",
+            "status": "True",
+            "type": "Available"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:38:07Z",
+            "reason": "AsExpected",
+            "status": "False",
+            "type": "Progressing"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:38:07Z",
+            "reason": "AsExpected",
+            "status": "False",
+            "type": "Degraded"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:38:07Z",
+            "reason": "AsExpected",
+            "status": "True",
+            "type": "Upgradeable"
+          }
+        ],
+        "extension": null,
+        "relatedObjects": [
+          {
+            "group": "",
+            "name": "openshift-config",
+            "resource": "namespaces"
+          },
+          {
+            "group": "",
+            "name": "openshift-config-managed",
+            "resource": "namespaces"
+          },
+          {
+            "group": "",
+            "name": "openshift-kube-controller-manager",
+            "resource": "namespaces"
+          },
+          {
+            "group": "",
+            "name": "openshift-kube-controller-manager-operator",
+            "resource": "namespaces"
+          },
+          {
+            "group": "operator.openshift.io",
+            "name": "cluster",
+            "resource": "kubecontrollermanagers"
+          }
+        ],
+        "versions": [
+          {
+            "name": "kube-controller-manager",
+            "version": "1.37.1"
+          },
+          {
+            "name": "operator",
+            "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+          },
+          {
+            "name": "raw-internal",
+            "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "config.openshift.io/v1",
+      "kind": "ClusterOperator",
+      "metadata": {
+        "creationTimestamp": "2026-10-27T19:38:07Z",
+        "generation": 1,
+        "labels": {
+          "hypershift.openshift.io/managed": "true"
+        },
+        "name": "kube-scheduler",
+        "resourceVersion": "13499",
+        "uid": "06012866-ecd6-44ef-b9d1-132857e9d049"
+      },
+      "spec": {},
+      "status": {
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-27T19:38:07Z",
+            "reason": "AsExpected",
+            "status": "True",
+            "type": "Available"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:38:07Z",
+            "reason": "AsExpected",
+            "status": "False",
+            "type": "Progressing"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:38:07Z",
+            "reason": "AsExpected",
+            "status": "False",
+            "type": "Degraded"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:38:07Z",
+            "reason": "AsExpected",
+            "status": "True",
+            "type": "Upgradeable"
+          }
+        ],
+        "extension": null,
+        "relatedObjects": [
+          {
+            "group": "operator.openshift.io",
+            "name": "cluster",
+            "resource": "kubeschedulers"
+          },
+          {
+            "group": "",
+            "name": "openshift-config",
+            "resource": "namespaces"
+          },
+          {
+            "group": "",
+            "name": "openshift-kube-scheduler",
+            "resource": "namespaces"
+          },
+          {
+            "group": "",
+            "name": "openshift-kube-scheduler-operator",
+            "resource": "namespaces"
+          }
+        ],
+        "versions": [
+          {
+            "name": "kube-scheduler",
+            "version": "1.37.1"
+          },
+          {
+            "name": "operator",
+            "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+          },
+          {
+            "name": "raw-internal",
+            "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "config.openshift.io/v1",
+      "kind": "ClusterOperator",
+      "metadata": {
+        "annotations": {
+          "include.release.openshift.io/hypershift": "true",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true"
+        },
+        "creationTimestamp": "2026-10-27T19:37:37Z",
+        "generation": 1,
+        "name": "kube-storage-version-migrator",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "c176eb5c-f054-49ac-bb34-b07ae381ce01"
+          }
+        ],
+        "resourceVersion": "13415",
+        "uid": "7014eef7-30e3-48ff-b9ef-2ca5a49b9c4a"
+      },
+      "spec": {},
+      "status": {
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-27T19:42:50Z",
+            "message": "All is well",
+            "reason": "AsExpected",
+            "status": "False",
+            "type": "Degraded"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:43:31Z",
+            "message": "KubeStorageVersionMigratorProgressing: Deployment is not progressing",
+            "reason": "AsExpected",
+            "status": "False",
+            "type": "Progressing"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:43:31Z",
+            "message": "KubeStorageVersionMigratorAvailable: Deployment is available",
+            "reason": "AsExpected",
+            "status": "True",
+            "type": "Available"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:42:50Z",
+            "message": "All is well",
+            "reason": "AsExpected",
+            "status": "True",
+            "type": "Upgradeable"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:42:50Z",
+            "reason": "NoData",
+            "status": "Unknown",
+            "type": "EvaluationConditionsDetected"
+          }
+        ],
+        "extension": null,
+        "relatedObjects": [
+          {
+            "group": "operator.openshift.io",
+            "name": "cluster",
+            "resource": "kubestorageversionmigrators"
+          },
+          {
+            "group": "migration.k8s.io",
+            "name": "",
+            "resource": "storageversionmigrations"
+          },
+          {
+            "group": "",
+            "name": "openshift-kube-storage-version-migrator",
+            "resource": "namespaces"
+          },
+          {
+            "group": "",
+            "name": "openshift-kube-storage-version-migrator-operator",
+            "resource": "namespaces"
+          }
+        ],
+        "versions": [
+          {
+            "name": "operator",
+            "version": "5.0.0-rc.7"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "config.openshift.io/v1",
+      "kind": "ClusterOperator",
+      "metadata": {
+        "annotations": {
+          "include.release.openshift.io/hypershift": "true",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true"
+        },
+        "creationTimestamp": "2026-10-27T19:37:37Z",
+        "generation": 1,
+        "name": "monitoring",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "c176eb5c-f054-49ac-bb34-b07ae381ce01"
+          }
+        ],
+        "resourceVersion": "18894",
+        "uid": "8f1b6f0e-64a4-432d-9c47-e317528492f7"
+      },
+      "spec": {},
+      "status": {
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-27T19:49:45Z",
+            "message": "Successfully rolled out the stack.",
+            "reason": "RollOutDone",
+            "status": "True",
+            "type": "Available"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T20:15:30Z",
+            "message": "Prometheus is running without persistent storage which can lead to data loss during upgrades and cluster disruptions. Please refer to the official documentation to see how to configure storage for Prometheus: https://docs.openshift.com/container-platform/5.1/observability/monitoring/configuring-the-monitoring-stack.html",
+            "reason": "PrometheusDataPersistenceNotConfigured",
+            "status": "False",
+            "type": "Degraded"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T20:18:04Z",
+            "status": "False",
+            "type": "Progressing"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:43:17Z",
+            "status": "True",
+            "type": "Upgradeable"
+          }
+        ],
+        "extension": null,
+        "relatedObjects": [
+          {
+            "group": "",
+            "name": "openshift-monitoring",
+            "resource": "namespaces"
+          },
+          {
+            "group": "",
+            "name": "openshift-user-workload-monitoring",
+            "resource": "namespaces"
+          },
+          {
+            "group": "monitoring.coreos.com",
+            "name": "",
+            "resource": "servicemonitors"
+          },
+          {
+            "group": "monitoring.coreos.com",
+            "name": "",
+            "resource": "podmonitors"
+          },
+          {
+            "group": "monitoring.coreos.com",
+            "name": "",
+            "resource": "prometheusrules"
+          },
+          {
+            "group": "monitoring.coreos.com",
+            "name": "",
+            "resource": "alertmanagers"
+          },
+          {
+            "group": "monitoring.coreos.com",
+            "name": "",
+            "resource": "prometheuses"
+          },
+          {
+            "group": "monitoring.coreos.com",
+            "name": "",
+            "resource": "thanosrulers"
+          },
+          {
+            "group": "monitoring.coreos.com",
+            "name": "",
+            "resource": "alertmanagerconfigs"
+          }
+        ],
+        "versions": [
+          {
+            "name": "operator",
+            "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "config.openshift.io/v1",
+      "kind": "ClusterOperator",
+      "metadata": {
+        "annotations": {
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true",
+          "network.operator.openshift.io/last-seen-state": "{\"DaemonsetStates\":[],\"DeploymentStates\":[],\"StatefulsetStates\":[],\"InstallComplete\":true}",
+          "network.operator.openshift.io/relatedClusterObjects": "management//configmaps/clusters-test-cntrlplane-4826-hc/cloud-network-config-controller-kube-cloud-config,management/apps/deployments/clusters-test-cntrlplane-4826-hc/cloud-network-config-controller,management//services/clusters-test-cntrlplane-4826-hc/multus-admission-controller,management/apps/deployments/clusters-test-cntrlplane-4826-hc/multus-admission-controller,management/monitoring.coreos.com/servicemonitors/clusters-test-cntrlplane-4826-hc/monitor-multus-admission-controller,management/monitoring.coreos.com/prometheusrules/clusters-test-cntrlplane-4826-hc/prometheus-k8s-rules,management//configmaps/clusters-test-cntrlplane-4826-hc/ovnkube-config,management//secrets/clusters-test-cntrlplane-4826-hc/ovn-cert,management//configmaps/clusters-test-cntrlplane-4826-hc/ovn-ca,management/monitoring.coreos.com/prometheusrules/clusters-test-cntrlplane-4826-hc/master-rules,management/monitoring.coreos.com/servicemonitors/clusters-test-cntrlplane-4826-hc/monitor-ovn-control-plane-metrics,management//services/clusters-test-cntrlplane-4826-hc/ovn-kubernetes-control-plane,management/apps/deployments/clusters-test-cntrlplane-4826-hc/ovnkube-control-plane,management//configmaps/clusters-test-cntrlplane-4826-hc/ovnkube-identity-cm,management//services/clusters-test-cntrlplane-4826-hc/network-node-identity,management/apps/deployments/clusters-test-cntrlplane-4826-hc/network-node-identity"
+        },
+        "creationTimestamp": "2026-10-27T19:37:37Z",
+        "generation": 1,
+        "name": "network",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "c176eb5c-f054-49ac-bb34-b07ae381ce01"
+          }
+        ],
+        "resourceVersion": "184489",
+        "uid": "9c96de44-5aa4-414f-b5c8-1a0c6b8e1966"
+      },
+      "spec": {},
+      "status": {
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-27T19:38:58Z",
+            "status": "False",
+            "type": "Degraded"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:38:58Z",
+            "status": "True",
+            "type": "Upgradeable"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:38:59Z",
+            "status": "False",
+            "type": "ManagementStateDegraded"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T20:23:40Z",
+            "status": "False",
+            "type": "Progressing"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:39:05Z",
+            "status": "True",
+            "type": "Available"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T20:15:17Z",
+            "message": "NetworkObservabilityInstall feature gate is not enabled",
+            "reason": "FeatureGateDisabled",
+            "status": "False",
+            "type": "NetworkObservabilityInstalledByCNO"
+          }
+        ],
+        "extension": null,
+        "relatedObjects": [
+          {
+            "group": "",
+            "name": "applied-cluster",
+            "namespace": "openshift-network-operator",
+            "resource": "configmaps"
+          },
+          {
+            "group": "apiextensions.k8s.io",
+            "name": "cloudprivateipconfigs.cloud.network.openshift.io",
+            "resource": "customresourcedefinitions"
+          },
+          {
+            "group": "",
+            "name": "cloud-network-config-controller",
+            "namespace": "openshift-cloud-network-config-controller",
+            "resource": "serviceaccounts"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "cloud-network-config-controller",
+            "resource": "clusterroles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "cloud-network-config-controller",
+            "namespace": "openshift-cloud-network-config-controller",
+            "resource": "roles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "cloud-network-config-controller",
+            "resource": "clusterrolebindings"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "cloud-network-config-controller-rb",
+            "namespace": "openshift-cloud-network-config-controller",
+            "resource": "rolebindings"
+          },
+          {
+            "group": "apiextensions.k8s.io",
+            "name": "network-attachment-definitions.k8s.cni.cncf.io",
+            "resource": "customresourcedefinitions"
+          },
+          {
+            "group": "apiextensions.k8s.io",
+            "name": "ippools.whereabouts.cni.cncf.io",
+            "resource": "customresourcedefinitions"
+          },
+          {
+            "group": "apiextensions.k8s.io",
+            "name": "overlappingrangeipreservations.whereabouts.cni.cncf.io",
+            "resource": "customresourcedefinitions"
+          },
+          {
+            "group": "apiextensions.k8s.io",
+            "name": "nodeslicepools.whereabouts.cni.cncf.io",
+            "resource": "customresourcedefinitions"
+          },
+          {
+            "group": "",
+            "name": "openshift-multus",
+            "resource": "namespaces"
+          },
+          {
+            "group": "networking.k8s.io",
+            "name": "default-deny",
+            "namespace": "openshift-multus",
+            "resource": "networkpolicies"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "multus",
+            "resource": "clusterroles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "multus-ancillary-tools",
+            "resource": "clusterroles"
+          },
+          {
+            "group": "",
+            "name": "multus",
+            "namespace": "openshift-multus",
+            "resource": "serviceaccounts"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "multus-transient",
+            "resource": "clusterrolebindings"
+          },
+          {
+            "group": "",
+            "name": "multus-node-identity",
+            "namespace": "openshift-multus",
+            "resource": "serviceaccounts"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "multus-group",
+            "resource": "clusterrolebindings"
+          },
+          {
+            "group": "",
+            "name": "multus-ancillary-tools",
+            "namespace": "openshift-multus",
+            "resource": "serviceaccounts"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "multus-ancillary-tools",
+            "resource": "clusterrolebindings"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "multus-cluster-readers",
+            "resource": "clusterrolebindings"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "multus-whereabouts",
+            "resource": "clusterrolebindings"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "multus-whereabouts",
+            "namespace": "openshift-multus",
+            "resource": "rolebindings"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "whereabouts-cni",
+            "resource": "clusterroles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "whereabouts-cni",
+            "namespace": "openshift-multus",
+            "resource": "roles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "net-attach-def-project",
+            "resource": "clusterroles"
+          },
+          {
+            "group": "",
+            "name": "default-cni-sysctl-allowlist",
+            "namespace": "openshift-multus",
+            "resource": "configmaps"
+          },
+          {
+            "group": "",
+            "name": "cni-copy-resources",
+            "namespace": "openshift-multus",
+            "resource": "configmaps"
+          },
+          {
+            "group": "",
+            "name": "whereabouts-flatfile-config",
+            "namespace": "openshift-multus",
+            "resource": "configmaps"
+          },
+          {
+            "group": "",
+            "name": "multus-daemon-config",
+            "namespace": "openshift-multus",
+            "resource": "configmaps"
+          },
+          {
+            "group": "apps",
+            "name": "multus",
+            "namespace": "openshift-multus",
+            "resource": "daemonsets"
+          },
+          {
+            "group": "apps",
+            "name": "multus-additional-cni-plugins",
+            "namespace": "openshift-multus",
+            "resource": "daemonsets"
+          },
+          {
+            "group": "",
+            "name": "metrics-daemon-sa",
+            "namespace": "openshift-multus",
+            "resource": "serviceaccounts"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "metrics-daemon-role",
+            "resource": "clusterroles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "metrics-daemon-sa-rolebinding",
+            "resource": "clusterrolebindings"
+          },
+          {
+            "group": "apps",
+            "name": "network-metrics-daemon",
+            "namespace": "openshift-multus",
+            "resource": "daemonsets"
+          },
+          {
+            "group": "monitoring.coreos.com",
+            "name": "monitor-network",
+            "namespace": "openshift-multus",
+            "resource": "servicemonitors"
+          },
+          {
+            "group": "",
+            "name": "network-metrics-service",
+            "namespace": "openshift-multus",
+            "resource": "services"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "prometheus-k8s",
+            "namespace": "openshift-multus",
+            "resource": "roles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "prometheus-k8s",
+            "namespace": "openshift-multus",
+            "resource": "rolebindings"
+          },
+          {
+            "group": "networking.k8s.io",
+            "name": "network-metrics",
+            "namespace": "openshift-multus",
+            "resource": "networkpolicies"
+          },
+          {
+            "group": "",
+            "name": "multus-ac",
+            "namespace": "openshift-multus",
+            "resource": "serviceaccounts"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "multus-admission-controller-webhook",
+            "resource": "clusterroles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "multus-admission-controller-webhook",
+            "resource": "clusterrolebindings"
+          },
+          {
+            "group": "admissionregistration.k8s.io",
+            "name": "multus.openshift.io",
+            "resource": "validatingwebhookconfigurations"
+          },
+          {
+            "group": "networking.k8s.io",
+            "name": "multus-admission-controller",
+            "namespace": "openshift-multus",
+            "resource": "networkpolicies"
+          },
+          {
+            "group": "",
+            "name": "openshift-ovn-kubernetes",
+            "resource": "namespaces"
+          },
+          {
+            "group": "networking.k8s.io",
+            "name": "default-deny",
+            "namespace": "openshift-ovn-kubernetes",
+            "resource": "networkpolicies"
+          },
+          {
+            "group": "apiextensions.k8s.io",
+            "name": "egressfirewalls.k8s.ovn.org",
+            "resource": "customresourcedefinitions"
+          },
+          {
+            "group": "apiextensions.k8s.io",
+            "name": "egressips.k8s.ovn.org",
+            "resource": "customresourcedefinitions"
+          },
+          {
+            "group": "apiextensions.k8s.io",
+            "name": "egressqoses.k8s.ovn.org",
+            "resource": "customresourcedefinitions"
+          },
+          {
+            "group": "apiextensions.k8s.io",
+            "name": "adminpolicybasedexternalroutes.k8s.ovn.org",
+            "resource": "customresourcedefinitions"
+          },
+          {
+            "group": "apiextensions.k8s.io",
+            "name": "egressservices.k8s.ovn.org",
+            "resource": "customresourcedefinitions"
+          },
+          {
+            "group": "apiextensions.k8s.io",
+            "name": "adminnetworkpolicies.policy.networking.k8s.io",
+            "resource": "customresourcedefinitions"
+          },
+          {
+            "group": "apiextensions.k8s.io",
+            "name": "baselineadminnetworkpolicies.policy.networking.k8s.io",
+            "resource": "customresourcedefinitions"
+          },
+          {
+            "group": "apiextensions.k8s.io",
+            "name": "ipamclaims.k8s.cni.cncf.io",
+            "resource": "customresourcedefinitions"
+          },
+          {
+            "group": "apiextensions.k8s.io",
+            "name": "userdefinednetworks.k8s.ovn.org",
+            "resource": "customresourcedefinitions"
+          },
+          {
+            "group": "apiextensions.k8s.io",
+            "name": "clusteruserdefinednetworks.k8s.ovn.org",
+            "resource": "customresourcedefinitions"
+          },
+          {
+            "group": "",
+            "name": "ovn-kubernetes-node",
+            "namespace": "openshift-ovn-kubernetes",
+            "resource": "serviceaccounts"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "openshift-ovn-kubernetes-node-limited",
+            "namespace": "openshift-ovn-kubernetes",
+            "resource": "roles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "openshift-ovn-kubernetes-nodes-identity-limited",
+            "namespace": "openshift-ovn-kubernetes",
+            "resource": "rolebindings"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "openshift-ovn-kubernetes-node-limited",
+            "resource": "clusterroles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "openshift-ovn-kubernetes-node-identity-limited",
+            "resource": "clusterrolebindings"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "openshift-ovn-kubernetes-kube-rbac-proxy",
+            "resource": "clusterroles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "openshift-ovn-kubernetes-node-kube-rbac-proxy",
+            "resource": "clusterrolebindings"
+          },
+          {
+            "group": "",
+            "name": "ovnkube-config",
+            "namespace": "openshift-ovn-kubernetes",
+            "resource": "configmaps"
+          },
+          {
+            "group": "",
+            "name": "ovn-kubernetes-control-plane",
+            "namespace": "openshift-ovn-kubernetes",
+            "resource": "serviceaccounts"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "openshift-ovn-kubernetes-control-plane-limited",
+            "resource": "clusterroles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "openshift-ovn-kubernetes-control-plane-limited",
+            "resource": "clusterrolebindings"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "openshift-ovn-kubernetes-control-plane-limited",
+            "namespace": "openshift-ovn-kubernetes",
+            "resource": "roles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "openshift-ovn-kubernetes-control-plane-limited",
+            "namespace": "openshift-ovn-kubernetes",
+            "resource": "rolebindings"
+          },
+          {
+            "group": "network.operator.openshift.io",
+            "name": "ovn",
+            "namespace": "openshift-ovn-kubernetes",
+            "resource": "operatorpkis"
+          },
+          {
+            "group": "network.operator.openshift.io",
+            "name": "signer",
+            "namespace": "openshift-ovn-kubernetes",
+            "resource": "operatorpkis"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "openshift-ovn-kubernetes-cluster-reader",
+            "resource": "clusterroles"
+          },
+          {
+            "group": "",
+            "name": "ovnkube-script-lib",
+            "namespace": "openshift-ovn-kubernetes",
+            "resource": "configmaps"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "openshift-ovn-kubernetes-udn-editor",
+            "resource": "clusterroles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "openshift-ovn-kubernetes-udn-viewer",
+            "resource": "clusterroles"
+          },
+          {
+            "group": "monitoring.coreos.com",
+            "name": "networking-rules",
+            "namespace": "openshift-ovn-kubernetes",
+            "resource": "prometheusrules"
+          },
+          {
+            "group": "",
+            "name": "openshift-network-features",
+            "namespace": "openshift-config-managed",
+            "resource": "configmaps"
+          },
+          {
+            "group": "admissionregistration.k8s.io",
+            "name": "default-network-annotation",
+            "resource": "validatingadmissionpolicies"
+          },
+          {
+            "group": "admissionregistration.k8s.io",
+            "name": "default-network-annotation-binding",
+            "resource": "validatingadmissionpolicybindings"
+          },
+          {
+            "group": "admissionregistration.k8s.io",
+            "name": "egressip-mark-annotation-validation",
+            "resource": "validatingadmissionpolicies"
+          },
+          {
+            "group": "admissionregistration.k8s.io",
+            "name": "egressip-mark-annotation-validation-binding",
+            "resource": "validatingadmissionpolicybindings"
+          },
+          {
+            "group": "monitoring.coreos.com",
+            "name": "monitor-ovn-node",
+            "namespace": "openshift-ovn-kubernetes",
+            "resource": "servicemonitors"
+          },
+          {
+            "group": "",
+            "name": "ovn-kubernetes-node",
+            "namespace": "openshift-ovn-kubernetes",
+            "resource": "services"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "prometheus-k8s",
+            "namespace": "openshift-ovn-kubernetes",
+            "resource": "roles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "prometheus-k8s",
+            "namespace": "openshift-ovn-kubernetes",
+            "resource": "rolebindings"
+          },
+          {
+            "group": "",
+            "name": "openshift-host-network",
+            "resource": "namespaces"
+          },
+          {
+            "group": "networking.k8s.io",
+            "name": "default-deny",
+            "namespace": "openshift-host-network",
+            "resource": "networkpolicies"
+          },
+          {
+            "group": "",
+            "name": "host-network-namespace-quotas",
+            "namespace": "openshift-host-network",
+            "resource": "resourcequotas"
+          },
+          {
+            "group": "apps",
+            "name": "ovnkube-node",
+            "namespace": "openshift-ovn-kubernetes",
+            "resource": "daemonsets"
+          },
+          {
+            "group": "admissionregistration.k8s.io",
+            "name": "user-defined-networks-namespace-label",
+            "resource": "validatingadmissionpolicies"
+          },
+          {
+            "group": "admissionregistration.k8s.io",
+            "name": "user-defined-networks-namespace-label-binding",
+            "resource": "validatingadmissionpolicybindings"
+          },
+          {
+            "group": "",
+            "name": "openshift-network-diagnostics",
+            "resource": "namespaces"
+          },
+          {
+            "group": "networking.k8s.io",
+            "name": "default-deny",
+            "namespace": "openshift-network-diagnostics",
+            "resource": "networkpolicies"
+          },
+          {
+            "group": "",
+            "name": "network-diagnostics",
+            "namespace": "openshift-network-diagnostics",
+            "resource": "serviceaccounts"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "network-diagnostics",
+            "namespace": "openshift-network-diagnostics",
+            "resource": "roles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "network-diagnostics",
+            "namespace": "openshift-network-diagnostics",
+            "resource": "rolebindings"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "network-diagnostics",
+            "resource": "clusterroles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "network-diagnostics",
+            "resource": "clusterrolebindings"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "network-diagnostics",
+            "namespace": "kube-system",
+            "resource": "rolebindings"
+          },
+          {
+            "group": "",
+            "name": "network-check-target",
+            "namespace": "openshift-network-diagnostics",
+            "resource": "serviceaccounts"
+          },
+          {
+            "group": "apps",
+            "name": "network-check-source",
+            "namespace": "openshift-network-diagnostics",
+            "resource": "deployments"
+          },
+          {
+            "group": "",
+            "name": "network-check-source",
+            "namespace": "openshift-network-diagnostics",
+            "resource": "services"
+          },
+          {
+            "group": "monitoring.coreos.com",
+            "name": "network-check-source",
+            "namespace": "openshift-network-diagnostics",
+            "resource": "servicemonitors"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "prometheus-k8s",
+            "namespace": "openshift-network-diagnostics",
+            "resource": "roles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "prometheus-k8s",
+            "namespace": "openshift-network-diagnostics",
+            "resource": "rolebindings"
+          },
+          {
+            "group": "apps",
+            "name": "network-check-target",
+            "namespace": "openshift-network-diagnostics",
+            "resource": "daemonsets"
+          },
+          {
+            "group": "",
+            "name": "network-check-target",
+            "namespace": "openshift-network-diagnostics",
+            "resource": "services"
+          },
+          {
+            "group": "networking.k8s.io",
+            "name": "network-check-source",
+            "namespace": "openshift-network-diagnostics",
+            "resource": "networkpolicies"
+          },
+          {
+            "group": "networking.k8s.io",
+            "name": "network-check-target",
+            "namespace": "openshift-network-diagnostics",
+            "resource": "networkpolicies"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "openshift-network-public-role",
+            "namespace": "openshift-config-managed",
+            "resource": "roles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "openshift-network-public-role-binding",
+            "namespace": "openshift-config-managed",
+            "resource": "rolebindings"
+          },
+          {
+            "group": "",
+            "name": "openshift-network-node-identity",
+            "resource": "namespaces"
+          },
+          {
+            "group": "networking.k8s.io",
+            "name": "default-deny",
+            "namespace": "openshift-network-node-identity",
+            "resource": "networkpolicies"
+          },
+          {
+            "group": "",
+            "name": "network-node-identity",
+            "namespace": "openshift-network-node-identity",
+            "resource": "serviceaccounts"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "network-node-identity",
+            "resource": "clusterrolebindings"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "network-node-identity",
+            "resource": "clusterroles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "network-node-identity-leases",
+            "namespace": "openshift-network-node-identity",
+            "resource": "rolebindings"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "network-node-identity-leases",
+            "namespace": "openshift-network-node-identity",
+            "resource": "roles"
+          },
+          {
+            "group": "admissionregistration.k8s.io",
+            "name": "network-node-identity.openshift.io",
+            "resource": "validatingwebhookconfigurations"
+          },
+          {
+            "group": "monitoring.coreos.com",
+            "name": "openshift-network-operator-ipsec-rules",
+            "namespace": "openshift-network-operator",
+            "resource": "prometheusrules"
+          },
+          {
+            "group": "admissionregistration.k8s.io",
+            "name": "servicecidrs.openshift.io",
+            "resource": "validatingadmissionpolicies"
+          },
+          {
+            "group": "admissionregistration.k8s.io",
+            "name": "servicecidrs-binding",
+            "resource": "validatingadmissionpolicybindings"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "openshift-iptables-alerter",
+            "resource": "clusterroles"
+          },
+          {
+            "group": "",
+            "name": "iptables-alerter",
+            "namespace": "openshift-network-operator",
+            "resource": "serviceaccounts"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "openshift-iptables-alerter",
+            "resource": "clusterrolebindings"
+          },
+          {
+            "group": "",
+            "name": "iptables-alerter-script",
+            "namespace": "openshift-network-operator",
+            "resource": "configmaps"
+          },
+          {
+            "group": "apps",
+            "name": "iptables-alerter",
+            "namespace": "openshift-network-operator",
+            "resource": "daemonsets"
+          },
+          {
+            "group": "networking.k8s.io",
+            "name": "iptables-alerter",
+            "namespace": "openshift-network-operator",
+            "resource": "networkpolicies"
+          },
+          {
+            "group": "",
+            "name": "openshift-network-console",
+            "resource": "namespaces"
+          },
+          {
+            "group": "networking.k8s.io",
+            "name": "default-deny",
+            "namespace": "openshift-network-console",
+            "resource": "networkpolicies"
+          },
+          {
+            "group": "",
+            "name": "networking-console-plugin",
+            "namespace": "openshift-network-console",
+            "resource": "serviceaccounts"
+          },
+          {
+            "group": "",
+            "name": "networking-console-plugin",
+            "namespace": "openshift-network-console",
+            "resource": "configmaps"
+          },
+          {
+            "group": "apps",
+            "name": "networking-console-plugin",
+            "namespace": "openshift-network-console",
+            "resource": "deployments"
+          },
+          {
+            "group": "",
+            "name": "networking-console-plugin",
+            "namespace": "openshift-network-console",
+            "resource": "services"
+          },
+          {
+            "group": "console.openshift.io",
+            "name": "networking-console-plugin",
+            "resource": "consoleplugins"
+          },
+          {
+            "group": "networking.k8s.io",
+            "name": "networking-console-plugin",
+            "namespace": "openshift-network-console",
+            "resource": "networkpolicies"
+          },
+          {
+            "group": "",
+            "name": "openshift-network-operator",
+            "resource": "namespaces"
+          },
+          {
+            "group": "operator.openshift.io",
+            "name": "cluster",
+            "resource": "networks"
+          },
+          {
+            "group": "",
+            "name": "openshift-cloud-network-config-controller",
+            "resource": "namespaces"
+          }
+        ],
+        "versions": [
+          {
+            "name": "operator",
+            "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "config.openshift.io/v1",
+      "kind": "ClusterOperator",
+      "metadata": {
+        "annotations": {
+          "capability.openshift.io/name": "NodeTuning",
+          "include.release.openshift.io/hypershift": "true",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true"
+        },
+        "creationTimestamp": "2026-10-27T19:37:37Z",
+        "generation": 1,
+        "name": "node-tuning",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "c176eb5c-f054-49ac-bb34-b07ae381ce01"
+          }
+        ],
+        "resourceVersion": "185174",
+        "uid": "5a291fb1-108f-471c-acdf-569c5a6984de"
+      },
+      "spec": {},
+      "status": {
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-28T15:13:15Z",
+            "message": "Cluster has deployed 7/7 \"5.1.0-0.nightly-multi-2026-10-27-082258\" operands",
+            "reason": "AsExpected",
+            "status": "True",
+            "type": "Available"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T20:13:57Z",
+            "message": "Cluster version is \"5.1.0-0.nightly-multi-2026-10-27-082258\"",
+            "reason": "AsExpected",
+            "status": "False",
+            "type": "Progressing"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:38:03Z",
+            "message": "DaemonSet \"tuned\" available",
+            "reason": "AsExpected",
+            "status": "False",
+            "type": "Degraded"
+          }
+        ],
+        "extension": null,
+        "relatedObjects": [
+          {
+            "group": "",
+            "name": "openshift-cluster-node-tuning-operator",
+            "resource": "namespaces"
+          },
+          {
+            "group": "",
+            "name": "cluster-node-tuning-operator",
+            "namespace": "openshift-cluster-node-tuning-operator",
+            "resource": "serviceaccounts"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "cluster-node-tuning-operator",
+            "resource": "clusterroles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "cluster-node-tuning-operator",
+            "resource": "clusterrolebindings"
+          },
+          {
+            "group": "tuned.openshift.io",
+            "name": "",
+            "namespace": "openshift-cluster-node-tuning-operator",
+            "resource": "profiles"
+          },
+          {
+            "group": "tuned.openshift.io",
+            "name": "",
+            "namespace": "openshift-cluster-node-tuning-operator",
+            "resource": "tuneds"
+          },
+          {
+            "group": "apps",
+            "name": "tuned",
+            "namespace": "openshift-cluster-node-tuning-operator",
+            "resource": "daemonsets"
+          }
+        ],
+        "versions": [
+          {
+            "name": "ocp-tuned",
+            "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+          },
+          {
+            "name": "operator",
+            "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "config.openshift.io/v1",
+      "kind": "ClusterOperator",
+      "metadata": {
+        "creationTimestamp": "2026-10-27T19:38:07Z",
+        "generation": 1,
+        "labels": {
+          "hypershift.openshift.io/managed": "true"
+        },
+        "name": "openshift-apiserver",
+        "resourceVersion": "13495",
+        "uid": "fcaa6e2d-5093-4ed1-a8ee-98890e7d197e"
+      },
+      "spec": {},
+      "status": {
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-27T19:38:07Z",
+            "reason": "AsExpected",
+            "status": "True",
+            "type": "Available"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:38:07Z",
+            "reason": "AsExpected",
+            "status": "False",
+            "type": "Progressing"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:38:07Z",
+            "reason": "AsExpected",
+            "status": "False",
+            "type": "Degraded"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:38:07Z",
+            "reason": "AsExpected",
+            "status": "True",
+            "type": "Upgradeable"
+          }
+        ],
+        "extension": null,
+        "relatedObjects": [
+          {
+            "group": "operator.openshift.io",
+            "name": "cluster",
+            "resource": "openshiftapiservers"
+          },
+          {
+            "group": "",
+            "name": "openshift-config",
+            "resource": "namespaces"
+          },
+          {
+            "group": "",
+            "name": "openshift-config-managed",
+            "resource": "namespaces"
+          },
+          {
+            "group": "",
+            "name": "openshift-apiserver-operator",
+            "resource": "namespaces"
+          },
+          {
+            "group": "",
+            "name": "openshift-apiserver",
+            "resource": "namespaces"
+          },
+          {
+            "group": "apiregistration.k8s.io",
+            "name": "v1.apps.openshift.io",
+            "resource": "apiservices"
+          },
+          {
+            "group": "apiregistration.k8s.io",
+            "name": "v1.authorization.openshift.io",
+            "resource": "apiservices"
+          },
+          {
+            "group": "apiregistration.k8s.io",
+            "name": "v1.build.openshift.io",
+            "resource": "apiservices"
+          },
+          {
+            "group": "apiregistration.k8s.io",
+            "name": "v1.image.openshift.io",
+            "resource": "apiservices"
+          },
+          {
+            "group": "apiregistration.k8s.io",
+            "name": "v1.oauth.openshift.io",
+            "resource": "apiservices"
+          },
+          {
+            "group": "apiregistration.k8s.io",
+            "name": "v1.project.openshift.io",
+            "resource": "apiservices"
+          },
+          {
+            "group": "apiregistration.k8s.io",
+            "name": "v1.quota.openshift.io",
+            "resource": "apiservices"
+          },
+          {
+            "group": "apiregistration.k8s.io",
+            "name": "v1.route.openshift.io",
+            "resource": "apiservices"
+          },
+          {
+            "group": "apiregistration.k8s.io",
+            "name": "v1.security.openshift.io",
+            "resource": "apiservices"
+          },
+          {
+            "group": "apiregistration.k8s.io",
+            "name": "v1.template.openshift.io",
+            "resource": "apiservices"
+          },
+          {
+            "group": "apiregistration.k8s.io",
+            "name": "v1.user.openshift.io",
+            "resource": "apiservices"
+          }
+        ],
+        "versions": [
+          {
+            "name": "openshift-apiserver",
+            "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+          },
+          {
+            "name": "operator",
+            "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "config.openshift.io/v1",
+      "kind": "ClusterOperator",
+      "metadata": {
+        "creationTimestamp": "2026-10-27T19:38:07Z",
+        "generation": 1,
+        "labels": {
+          "hypershift.openshift.io/managed": "true"
+        },
+        "name": "openshift-controller-manager",
+        "resourceVersion": "13496",
+        "uid": "f895099b-ac16-444b-adef-bc9f8504bad2"
+      },
+      "spec": {},
+      "status": {
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-27T19:38:07Z",
+            "reason": "AsExpected",
+            "status": "True",
+            "type": "Available"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:38:07Z",
+            "reason": "AsExpected",
+            "status": "False",
+            "type": "Progressing"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:38:07Z",
+            "reason": "AsExpected",
+            "status": "False",
+            "type": "Degraded"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:38:07Z",
+            "reason": "AsExpected",
+            "status": "True",
+            "type": "Upgradeable"
+          }
+        ],
+        "extension": null,
+        "relatedObjects": [
+          {
+            "group": "operator.openshift.io",
+            "name": "cluster",
+            "resource": "openshiftcontrollermanagers"
+          },
+          {
+            "group": "",
+            "name": "openshift-config",
+            "resource": "namespaces"
+          },
+          {
+            "group": "",
+            "name": "openshift-config-managed",
+            "resource": "namespaces"
+          },
+          {
+            "group": "",
+            "name": "openshift-controller-manager-operator",
+            "resource": "namespaces"
+          },
+          {
+            "group": "",
+            "name": "openshift-controller-manager",
+            "resource": "namespaces"
+          }
+        ],
+        "versions": [
+          {
+            "name": "openshift-controller-manager",
+            "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+          },
+          {
+            "name": "operator",
+            "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "config.openshift.io/v1",
+      "kind": "ClusterOperator",
+      "metadata": {
+        "annotations": {
+          "capability.openshift.io/name": "openshift-samples",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true"
+        },
+        "creationTimestamp": "2026-10-27T19:37:37Z",
+        "generation": 1,
+        "name": "openshift-samples",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "c176eb5c-f054-49ac-bb34-b07ae381ce01"
+          }
+        ],
+        "resourceVersion": "160570",
+        "uid": "894573c9-5cda-4c4e-bb28-7b0e6d655d47"
+      },
+      "spec": {},
+      "status": {
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-27T19:43:59Z",
+            "status": "False",
+            "type": "Degraded"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:44:33Z",
+            "message": "Samples installation successful at 5.1.0-0.nightly-multi-2026-10-27-082258",
+            "status": "True",
+            "type": "Available"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:43:59Z",
+            "message": "Samples installation successful at 5.1.0-0.nightly-multi-2026-10-27-082258",
+            "status": "False",
+            "type": "Progressing"
+          }
+        ],
+        "extension": null,
+        "relatedObjects": [
+          {
+            "group": "samples.operator.openshift.io",
+            "name": "cluster",
+            "resource": "configs"
+          },
+          {
+            "group": "",
+            "name": "openshift-cluster-samples-operator",
+            "resource": "namespaces"
+          },
+          {
+            "group": "template.openshift.io",
+            "name": "",
+            "namespace": "openshift",
+            "resource": "templates"
+          },
+          {
+            "group": "image.openshift.io",
+            "name": "",
+            "namespace": "openshift",
+            "resource": "imagestreams"
+          }
+        ],
+        "versions": [
+          {
+            "name": "operator",
+            "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "config.openshift.io/v1",
+      "kind": "ClusterOperator",
+      "metadata": {
+        "creationTimestamp": "2026-10-27T19:38:01Z",
+        "generation": 1,
+        "name": "operator-lifecycle-manager",
+        "resourceVersion": "13538",
+        "uid": "ed787c77-62da-41ff-8873-08d8dc865e5b"
+      },
+      "spec": {},
+      "status": {
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-27T19:38:01Z",
+            "status": "True",
+            "type": "Available"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:38:01Z",
+            "status": "False",
+            "type": "Degraded"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:38:01Z",
+            "status": "True",
+            "type": "Upgradeable"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T20:11:41Z",
+            "message": "Deployed 5.1.0-202610262325.p2.g191c02f.assembly.stream.el9-191c02f",
+            "status": "False",
+            "type": "Progressing"
+          }
+        ],
+        "extension": null,
+        "versions": [
+          {
+            "name": "operator",
+            "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+          },
+          {
+            "name": "operator-lifecycle-manager",
+            "version": "5.1.0-202610262325.p2.g191c02f.assembly.stream.el9-191c02f"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "config.openshift.io/v1",
+      "kind": "ClusterOperator",
+      "metadata": {
+        "creationTimestamp": "2026-10-27T19:38:00Z",
+        "generation": 1,
+        "name": "operator-lifecycle-manager-catalog",
+        "resourceVersion": "14048",
+        "uid": "f2bc91da-4340-4335-aa76-d42a3f0a95a0"
+      },
+      "spec": {},
+      "status": {
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-27T19:38:00Z",
+            "status": "False",
+            "type": "Degraded"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T20:13:00Z",
+            "message": "Deployed 5.1.0-202610262325.p2.g191c02f.assembly.stream.el9-191c02f",
+            "status": "False",
+            "type": "Progressing"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:38:00Z",
+            "status": "True",
+            "type": "Available"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:38:00Z",
+            "status": "True",
+            "type": "Upgradeable"
+          }
+        ],
+        "extension": null,
+        "relatedObjects": [
+          {
+            "group": "",
+            "name": "openshift-operator-lifecycle-manager",
+            "resource": "namespaces"
+          }
+        ],
+        "versions": [
+          {
+            "name": "operator",
+            "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+          },
+          {
+            "name": "operator-lifecycle-manager",
+            "version": "5.1.0-202610262325.p2.g191c02f.assembly.stream.el9-191c02f"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "config.openshift.io/v1",
+      "kind": "ClusterOperator",
+      "metadata": {
+        "creationTimestamp": "2026-10-27T19:38:07Z",
+        "generation": 1,
+        "labels": {
+          "hypershift.openshift.io/managed": "true"
+        },
+        "name": "operator-lifecycle-manager-packageserver",
+        "resourceVersion": "13500",
+        "uid": "95ea76f4-9c77-4a6b-895d-2b3a7570866b"
+      },
+      "spec": {},
+      "status": {
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-27T19:38:07Z",
+            "reason": "AsExpected",
+            "status": "True",
+            "type": "Available"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:38:07Z",
+            "reason": "AsExpected",
+            "status": "False",
+            "type": "Progressing"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:38:07Z",
+            "reason": "AsExpected",
+            "status": "False",
+            "type": "Degraded"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:38:07Z",
+            "reason": "AsExpected",
+            "status": "True",
+            "type": "Upgradeable"
+          }
+        ],
+        "extension": null,
+        "relatedObjects": [
+          {
+            "group": "",
+            "name": "openshift-operator-lifecycle-manager",
+            "resource": "namespaces"
+          }
+        ],
+        "versions": [
+          {
+            "name": "operator",
+            "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "config.openshift.io/v1",
+      "kind": "ClusterOperator",
+      "metadata": {
+        "annotations": {
+          "include.release.openshift.io/hypershift": "true",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true"
+        },
+        "creationTimestamp": "2026-10-27T19:37:37Z",
+        "generation": 1,
+        "name": "service-ca",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "c176eb5c-f054-49ac-bb34-b07ae381ce01"
+          }
+        ],
+        "resourceVersion": "184158",
+        "uid": "c67c4af7-ff6b-4a75-a252-5f5db7119ba8"
+      },
+      "spec": {},
+      "status": {
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-27T19:42:50Z",
+            "message": "All is well",
+            "reason": "AsExpected",
+            "status": "False",
+            "type": "Degraded"
+          },
+          {
+            "lastTransitionTime": "2026-10-28T15:09:53Z",
+            "message": "Progressing: All service-ca-operator deployments updated",
+            "reason": "AsExpected",
+            "status": "False",
+            "type": "Progressing"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:42:52Z",
+            "message": "All is well",
+            "reason": "AsExpected",
+            "status": "True",
+            "type": "Available"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:42:52Z",
+            "message": "All is well",
+            "reason": "AsExpected",
+            "status": "True",
+            "type": "Upgradeable"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:42:50Z",
+            "reason": "NoData",
+            "status": "Unknown",
+            "type": "EvaluationConditionsDetected"
+          }
+        ],
+        "extension": null,
+        "relatedObjects": [
+          {
+            "group": "operator.openshift.io",
+            "name": "cluster",
+            "resource": "servicecas"
+          },
+          {
+            "group": "",
+            "name": "openshift-config",
+            "resource": "namespaces"
+          },
+          {
+            "group": "",
+            "name": "openshift-config-managed",
+            "resource": "namespaces"
+          },
+          {
+            "group": "",
+            "name": "openshift-service-ca-operator",
+            "resource": "namespaces"
+          },
+          {
+            "group": "",
+            "name": "openshift-service-ca",
+            "resource": "namespaces"
+          }
+        ],
+        "versions": [
+          {
+            "name": "operator",
+            "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "config.openshift.io/v1",
+      "kind": "ClusterOperator",
+      "metadata": {
+        "annotations": {
+          "capability.openshift.io/name": "Storage",
+          "include.release.openshift.io/hypershift": "true",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true"
+        },
+        "creationTimestamp": "2026-10-27T19:37:37Z",
+        "generation": 1,
+        "name": "storage",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "c176eb5c-f054-49ac-bb34-b07ae381ce01"
+          }
+        ],
+        "resourceVersion": "155422",
+        "uid": "c5bb5298-76a3-473e-b676-c69f318742db"
+      },
+      "spec": {},
+      "status": {
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-27T19:37:52Z",
+            "message": "AzureDiskCSIDriverOperatorCRDegraded: All is well\nAzureFileCSIDriverOperatorCRDegraded: All is well",
+            "reason": "AsExpected",
+            "status": "False",
+            "type": "Degraded"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T20:15:14Z",
+            "message": "AzureDiskCSIDriverOperatorCRProgressing: AzureDiskDriverNodeServiceControllerProgressing: DaemonSet is not progressing\nAzureDiskCSIDriverOperatorCRProgressing: AzureDiskDriverControllerServiceControllerProgressing: Deployment is not progressing\nAzureFileCSIDriverOperatorCRProgressing: AzureFileDriverNodeServiceControllerProgressing: DaemonSet is not progressing\nAzureFileCSIDriverOperatorCRProgressing: AzureFileDriverControllerServiceControllerProgressing: Deployment is not progressing\nVolumeDataSourceValidatorDeploymentControllerProgressing: Deployment is not progressing",
+            "reason": "AsExpected",
+            "status": "False",
+            "type": "Progressing"
+          },
+          {
+            "lastTransitionTime": "2026-10-28T13:32:07Z",
+            "message": "DefaultStorageClassControllerAvailable: StorageClass provided by supplied CSI Driver instead of the cluster-storage-operator\nAzureDiskCSIDriverOperatorCRAvailable: AzureDiskDriverNodeServiceControllerAvailable: DaemonSet is available\nAzureDiskCSIDriverOperatorCRAvailable: AzureDiskDriverControllerServiceControllerAvailable: Deployment is available\nAzureFileCSIDriverOperatorCRAvailable: AzureFileDriverNodeServiceControllerAvailable: DaemonSet is available\nAzureFileCSIDriverOperatorCRAvailable: AzureFileDriverControllerServiceControllerAvailable: Deployment is available",
+            "reason": "AsExpected",
+            "status": "True",
+            "type": "Available"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:37:51Z",
+            "message": "All is well",
+            "reason": "AsExpected",
+            "status": "True",
+            "type": "Upgradeable"
+          },
+          {
+            "lastTransitionTime": "2026-10-27T19:37:51Z",
+            "reason": "NoData",
+            "status": "Unknown",
+            "type": "EvaluationConditionsDetected"
+          }
+        ],
+        "extension": null,
+        "relatedObjects": [
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "azure-disk-csi-driver-operator-clusterrole",
+            "resource": "clusterroles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "azure-disk-csi-driver-operator-clusterrolebinding",
+            "resource": "clusterrolebindings"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "azure-disk-csi-driver-operator-role",
+            "namespace": "openshift-cluster-csi-drivers",
+            "resource": "roles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "azure-disk-csi-driver-operator-rolebinding",
+            "namespace": "openshift-cluster-csi-drivers",
+            "resource": "rolebindings"
+          },
+          {
+            "group": "",
+            "name": "azure-disk-csi-driver-operator",
+            "namespace": "openshift-cluster-csi-drivers",
+            "resource": "serviceaccounts"
+          },
+          {
+            "group": "operator.openshift.io",
+            "name": "disk.csi.azure.com",
+            "resource": "clustercsidrivers"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "azure-file-csi-driver-operator-clusterrole",
+            "resource": "clusterroles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "azure-file-csi-driver-operator-clusterrolebinding",
+            "resource": "clusterrolebindings"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "azure-file-csi-driver-operator-role",
+            "namespace": "openshift-cluster-csi-drivers",
+            "resource": "roles"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "azure-file-csi-driver-operator-rolebinding",
+            "namespace": "openshift-cluster-csi-drivers",
+            "resource": "rolebindings"
+          },
+          {
+            "group": "",
+            "name": "azure-file-csi-driver-operator",
+            "namespace": "openshift-cluster-csi-drivers",
+            "resource": "serviceaccounts"
+          },
+          {
+            "group": "operator.openshift.io",
+            "name": "file.csi.azure.com",
+            "resource": "clustercsidrivers"
+          },
+          {
+            "group": "",
+            "name": "openshift-cluster-storage-operator",
+            "resource": "namespaces"
+          },
+          {
+            "group": "",
+            "name": "openshift-cluster-csi-drivers",
+            "resource": "namespaces"
+          },
+          {
+            "group": "operator.openshift.io",
+            "name": "cluster",
+            "resource": "storages"
+          },
+          {
+            "group": "rbac.authorization.k8s.io",
+            "name": "cluster-storage-operator-role",
+            "resource": "clusterrolebindings"
+          }
+        ],
+        "versions": [
+          {
+            "name": "operator",
+            "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+          }
+        ]
+      }
+    }
+  ],
+  "kind": "List",
+  "metadata": {
+    "resourceVersion": ""
+  }
+}

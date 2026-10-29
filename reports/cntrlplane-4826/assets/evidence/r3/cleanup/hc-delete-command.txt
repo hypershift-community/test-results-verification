@@ -1,0 +1,2 @@
+2026-10-29T00:59:55Z kubectl delete hostedcluster test-cntrlplane-4826-hc -n clusters --wait=false
+hostedcluster.hypershift.openshift.io "test-cntrlplane-4826-hc" deleted

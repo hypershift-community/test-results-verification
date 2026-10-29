@@ -1,0 +1,26 @@
+{
+  "cloudProvider": {
+    "clientID": "redacted-principal-105"
+  },
+  "controlPlaneOperator": {
+    "clientID": "redacted-principal-103"
+  },
+  "disk": {
+    "clientID": "redacted-principal-102"
+  },
+  "file": {
+    "clientID": "redacted-principal-106"
+  },
+  "imageRegistry": {
+    "clientID": "redacted-principal-104"
+  },
+  "ingress": {
+    "clientID": "redacted-principal-100"
+  },
+  "network": {
+    "clientID": "redacted-principal-101"
+  },
+  "nodePoolManagement": {
+    "clientID": "redacted-principal-107"
+  }
+}

@@ -1,0 +1,1 @@
+/workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r4/nodepools/test-cntrlplane-4826-r4-scale-create-20261029T021723Z

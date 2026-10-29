@@ -1,0 +1,3 @@
+nodepool.hypershift.openshift.io "test-cntrlplane-4826-unpatched" deleted
+nodepool.hypershift.openshift.io "test-cntrlplane-4826-patched" deleted
+nodepool.hypershift.openshift.io "test-cntrlplane-4826-scale" deleted

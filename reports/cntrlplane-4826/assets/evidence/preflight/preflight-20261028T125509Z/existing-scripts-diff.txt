@@ -1,0 +1,20 @@
+--- /workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/preflight/preflight-20261028T125509Z/existing-scripts-before.sha256	2026-10-28 08:55:12
++++ /workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/preflight/preflight-20261028T125509Z/existing-scripts-live-before.sha256	2026-10-28 08:55:12
+@@ -1,9 +1,11 @@
+-bba8a4fb74ba95ad12cf46c0cadd1d661e178bca4bb11adc55ccaaf0d5fa79e6  /workspace/private-hypershift-scripts/azure/custom-ingress/create_hc.sh
+-fcc767ca2e6bdd7351765bfe976171c93ce85ad90ea608883a7921ff5f898004  /workspace/private-hypershift-scripts/azure/custom-ingress/create_iam.sh
++0e4140ca6fb4e91b75550e47417095a908137fe7963065f787dc977bb0b74871  /workspace/private-hypershift-scripts/azure/custom-ingress/README.md
++23a6e222fe23acd17c1f1fd92449b1ff73ac95b13624f0ae04a0806d868d555d  /workspace/private-hypershift-scripts/azure/custom-ingress/run_ingress_test.sh
++248b1ced6a3e9a51001f1231884324d9a41582b3d2091f92a78d1bafe266676f  /workspace/private-hypershift-scripts/azure/custom-ingress/install_ho.sh
+ 24d54fed86255404f2596ea8a1f282d69269e9ebb4d81f4a880af6f19153bcf7  /workspace/private-hypershift-scripts/azure/custom-ingress/create_infra.sh
++363c4053dce5fad6e824efe5abb762238e747a215331ba260423bd1d37a20dea  /workspace/private-hypershift-scripts/azure/custom-ingress/tester-sm-custom-ingress-workload-identities.json
++a1c7df3cb61db3367d44983afd1fcc2efac105801abcd2c5ca8e7c7ed2e7fcab  /workspace/private-hypershift-scripts/azure/custom-ingress/revoke_dns_role.sh
++bba8a4fb74ba95ad12cf46c0cadd1d661e178bca4bb11adc55ccaaf0d5fa79e6  /workspace/private-hypershift-scripts/azure/custom-ingress/create_hc.sh
++be17f39dcde83093a61bf9f55dab19e3711bc544521a25adac9a77ee0b459d0a  /workspace/private-hypershift-scripts/azure/custom-ingress/tester-sm-custom-ingress-infra-output.yaml
+ c6304245a2452f6436447b12894eb1c84960a796fc2aff26d3ba70dae5c089f7  /workspace/private-hypershift-scripts/azure/custom-ingress/destroy_hc.sh
+ e0fbdd0afdd99414804cf7d5595bbbc351ab90c835b10b351f4b5444fa8cb3f8  /workspace/private-hypershift-scripts/azure/custom-ingress/grant_dns_role.sh
+-248b1ced6a3e9a51001f1231884324d9a41582b3d2091f92a78d1bafe266676f  /workspace/private-hypershift-scripts/azure/custom-ingress/install_ho.sh
+-a1c7df3cb61db3367d44983afd1fcc2efac105801abcd2c5ca8e7c7ed2e7fcab  /workspace/private-hypershift-scripts/azure/custom-ingress/revoke_dns_role.sh
+-23a6e222fe23acd17c1f1fd92449b1ff73ac95b13624f0ae04a0806d868d555d  /workspace/private-hypershift-scripts/azure/custom-ingress/run_ingress_test.sh
+-0e4140ca6fb4e91b75550e47417095a908137fe7963065f787dc977bb0b74871  /workspace/private-hypershift-scripts/azure/custom-ingress/README.md
++fcc767ca2e6bdd7351765bfe976171c93ce85ad90ea608883a7921ff5f898004  /workspace/private-hypershift-scripts/azure/custom-ingress/create_iam.sh

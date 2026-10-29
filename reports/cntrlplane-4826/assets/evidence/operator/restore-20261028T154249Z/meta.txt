@@ -1,0 +1,4 @@
+started_utc=2026-10-28T15:42:49Z
+operator_image=quay.io/hypershift/hypershift-operator:latest
+init_image=quay.io/hypershift/hypershift-operator:latest
+completed_utc=2026-10-28T15:45:21Z

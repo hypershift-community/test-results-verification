@@ -1,0 +1,7 @@
+{
+  "location": "eastus",
+  "name": "test-cntrlplane-4826-patched-4dklb-lwmg6",
+  "osType": "Linux",
+  "provisioningState": "Succeeded",
+  "vmSize": "Standard_D4s_v5"
+}

@@ -1,0 +1,12 @@
+11bfd7ec73c98dc75cc108c1e46070c976bb73d7e614b00c798386ea2635891c  .test-evidence/CNTRLPLANE-4826-20261028-r2/operator/restore-20261028T154249Z/deployment-after.json
+30f698348e67ae4ab8736d86f5a426c25dab375bb6fbcc6501cc1b68281710fc  .test-evidence/CNTRLPLANE-4826-20261028-r2/operator/restore-20261028T154249Z/wait-available.out
+332a377e9b24124431b90244b6ffa127b9162cdb69ae0c7f22c3b0dfb7237bab  .test-evidence/CNTRLPLANE-4826-20261028-r2/operator/restore-20261028T154249Z/pods-before-sanitized.json
+4e9aba5c58fab8404e73c11d4d1670a2cfa756ed07c95a63e336ff31455f57d5  .test-evidence/CNTRLPLANE-4826-20261028-r2/operator/restore-20261028T154249Z/meta.txt
+678f62ef975f154928bca2f6b799babcfac7d0eb53ef2e6834fce5f05c1f50b6  .test-evidence/CNTRLPLANE-4826-20261028-r2/operator/restore-20261028T154249Z/pods-after-sanitized.json
+95ab72825b1e6d686d3f27f621db9c2787a6510b59a276901b8ff24bb9674ad9  .test-evidence/CNTRLPLANE-4826-20261028-r2/operator/restore-20261028T154249Z/commands.txt
+99a8cd7e9a12fbc4467e07d29cb0c4bc818dd49982c543a3d1c4ef39ee741a45  .test-evidence/CNTRLPLANE-4826-20261028-r2/operator/restore-20261028T154249Z/set-image.out
+a151c4eba30771a1e7920383b7319a4316b7a6869d22cd30da061ee1aac0183f  .test-evidence/CNTRLPLANE-4826-20261028-r2/operator/restore-20261028T154249Z/rollout-status.out
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  .test-evidence/CNTRLPLANE-4826-20261028-r2/operator/restore-20261028T154249Z/pre-test-vs-restored-semantic.diff
+ebed5e8d0c1c7701dde33ed131d6dfaaeb6cda462ab96c37d703ea96b4d401e1  .test-evidence/CNTRLPLANE-4826-20261028-r2/operator/restore-20261028T154249Z/manifest-comparison.sha256
+edce31e21eb21b08ea05dfd6a310b99a97c8d8d96cb69c6c327c1aa59bc59b62  .test-evidence/CNTRLPLANE-4826-20261028-r2/operator/restore-20261028T154249Z/deployment-before.json
+fb77e7f54ec23ac16b09495e14be112d2ea4bba51779b9fcc7c406dba27b4c47  .test-evidence/CNTRLPLANE-4826-20261028-r2/operator/restore-20261028T154249Z/restore-verification.txt

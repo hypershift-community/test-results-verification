@@ -1,0 +1,2 @@
+{"timestamp":"2026-10-28T13:26:11Z","event":"watch-start","nodepool":"test-cntrlplane-4826-unpatched","thresholdSeconds":720}
+{"machinedeployment":null,"machines":[],"nodepool":"test-cntrlplane-4826-unpatched","thresholdSeconds":720,"timestamp":"2026-10-28T13:26:11Z","violations":[],"warningSeconds":600,"warnings":[]}

@@ -1,0 +1,4 @@
+captured_utc=2026-10-28T15:54:40Z
+KUBECONFIG=/home/tester/management.kubeconfig
+guest_kubeconfig=/tmp/guest.kubeconfig
+purpose=pre-delete final inventory

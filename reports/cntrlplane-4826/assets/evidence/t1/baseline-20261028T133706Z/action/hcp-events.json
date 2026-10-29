@@ -1,0 +1,3524 @@
+{
+  "apiVersion": "v1",
+  "items": [
+    {
+      "action": "Binding",
+      "apiVersion": "v1",
+      "eventTime": "2026-10-28T11:58:47.519722Z",
+      "firstTimestamp": null,
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "community-operators-catalog-cff5769cf-jssxj",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129632895",
+        "uid": "a12d33b9-2519-4323-a7ec-f98dfa6a232f"
+      },
+      "kind": "Event",
+      "lastTimestamp": null,
+      "message": "Successfully assigned clusters-test-cntrlplane-4826-hc/community-operators-catalog-cff5769cf-jssxj to ip-10-0-11-221.ec2.internal",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T11:58:47Z",
+        "name": "community-operators-catalog-cff5769cf-jssxj.18e2afa59f0c5907",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129632903",
+        "uid": "93fb845a-0220-4c4b-be4d-f08efb361c25"
+      },
+      "reason": "Scheduled",
+      "reportingComponent": "default-scheduler",
+      "reportingInstance": "default-scheduler-kube-scheduler-5bf4d9dc6f-nr94d",
+      "source": {},
+      "type": "Normal"
+    },
+    {
+      "action": "Binding",
+      "apiVersion": "v1",
+      "eventTime": "2026-10-28T12:43:46.755233Z",
+      "firstTimestamp": null,
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "certified-operators-catalog-659bdf8d99-l8brj",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129642992",
+        "uid": "e36cf68a-e320-4802-afa5-c68c9a5c3121"
+      },
+      "kind": "Event",
+      "lastTimestamp": null,
+      "message": "Successfully assigned clusters-test-cntrlplane-4826-hc/certified-operators-catalog-659bdf8d99-l8brj to ip-10-0-11-221.ec2.internal",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T12:43:47Z",
+        "name": "certified-operators-catalog-659bdf8d99-l8brj.18e2b21a1605baeb",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129643000",
+        "uid": "cd5ccf1f-18d0-4a60-99db-a656a2141549"
+      },
+      "reason": "Scheduled",
+      "reportingComponent": "default-scheduler",
+      "reportingInstance": "default-scheduler-kube-scheduler-5bf4d9dc6f-nr94d",
+      "source": {},
+      "type": "Normal"
+    },
+    {
+      "action": "Binding",
+      "apiVersion": "v1",
+      "eventTime": "2026-10-28T13:13:46.960460Z",
+      "firstTimestamp": null,
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "community-operators-catalog-685849f997-mc8rr",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650017",
+        "uid": "1a2f9e29-95c7-4d5d-849f-27976771c9d5"
+      },
+      "kind": "Event",
+      "lastTimestamp": null,
+      "message": "Successfully assigned clusters-test-cntrlplane-4826-hc/community-operators-catalog-685849f997-mc8rr to ip-10-0-11-221.ec2.internal",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:13:46Z",
+        "name": "community-operators-catalog-685849f997-mc8rr.18e2b3bd3a9d8d31",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650021",
+        "uid": "f03a0cd2-9ab0-4ace-af84-c46f3075eefe"
+      },
+      "reason": "Scheduled",
+      "reportingComponent": "default-scheduler",
+      "reportingInstance": "default-scheduler-kube-scheduler-5bf4d9dc6f-nr94d",
+      "source": {},
+      "type": "Normal"
+    },
+    {
+      "action": "Binding",
+      "apiVersion": "v1",
+      "eventTime": "2026-10-28T10:43:46.677675Z",
+      "firstTimestamp": null,
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "community-operators-catalog-7864b8776f-xws8l",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616140",
+        "uid": "30906ad8-6043-4405-ad22-f5cea4b9452b"
+      },
+      "kind": "Event",
+      "lastTimestamp": null,
+      "message": "Successfully assigned clusters-test-cntrlplane-4826-hc/community-operators-catalog-7864b8776f-xws8l to ip-10-0-11-221.ec2.internal",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T10:43:46Z",
+        "name": "community-operators-catalog-7864b8776f-xws8l.18e2ab8daff50ae8",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616146",
+        "uid": "a3ed56b6-c249-4b28-8a75-efdd626f1683"
+      },
+      "reason": "Scheduled",
+      "reportingComponent": "default-scheduler",
+      "reportingInstance": "default-scheduler-kube-scheduler-5bf4d9dc6f-nr94d",
+      "source": {},
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T10:43:46Z",
+      "involvedObject": {
+        "apiVersion": "apps/v1",
+        "kind": "ReplicaSet",
+        "name": "community-operators-catalog-7864b8776f",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616136",
+        "uid": "d43e8c15-c204-4d00-a7fd-4d6fbe60a566"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T10:43:46Z",
+      "message": "Created pod: community-operators-catalog-7864b8776f-xws8l",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T10:43:46Z",
+        "name": "community-operators-catalog-7864b8776f.18e2ab8dadcdef8a",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616141",
+        "uid": "a444881a-26fd-425a-85f4-4ac4569659ba"
+      },
+      "reason": "SuccessfulCreate",
+      "reportingComponent": "replicaset-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "replicaset-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T10:43:46Z",
+      "involvedObject": {
+        "apiVersion": "apps/v1",
+        "kind": "Deployment",
+        "name": "community-operators-catalog",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616134",
+        "uid": "7f472aa6-4ab1-454e-a687-45bdb583e4b4"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T10:43:46Z",
+      "message": "Scaled up replica set community-operators-catalog-7864b8776f from 0 to 1",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T10:43:46Z",
+        "name": "community-operators-catalog.18e2ab8dabd80950",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616137",
+        "uid": "6f3aeb61-4bc6-445e-ad94-e63639908819"
+      },
+      "reason": "ScalingReplicaSet",
+      "reportingComponent": "deployment-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "deployment-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T10:43:47Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{extract-utilities}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-7864b8776f-xws8l",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616145",
+        "uid": "30906ad8-6043-4405-ad22-f5cea4b9452b"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T10:43:47Z",
+      "message": "Container image \"quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:67ea3adb9079621aa1198f94a725c0f5a0d4667ab2db7390b985f7faa417eca5\" already present on machine",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T10:43:47Z",
+        "name": "community-operators-catalog-7864b8776f-xws8l.18e2ab8ddf8bd6e8",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616151",
+        "uid": "ed0cd089-2753-45ef-8e49-edd38001eca9"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T10:43:47Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{extract-utilities}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-7864b8776f-xws8l",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616145",
+        "uid": "30906ad8-6043-4405-ad22-f5cea4b9452b"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T10:43:47Z",
+      "message": "Created container: extract-utilities",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T10:43:47Z",
+        "name": "community-operators-catalog-7864b8776f-xws8l.18e2ab8de56577bf",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616153",
+        "uid": "4d6e3936-a839-4d83-a7c9-21374ecd025a"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T10:43:47Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{extract-utilities}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-7864b8776f-xws8l",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616145",
+        "uid": "30906ad8-6043-4405-ad22-f5cea4b9452b"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T10:43:47Z",
+      "message": "Started container extract-utilities",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T10:43:47Z",
+        "name": "community-operators-catalog-7864b8776f-xws8l.18e2ab8de64e68f0",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616154",
+        "uid": "3f61706d-96cc-4b2a-b64a-8834bfe47645"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T10:43:47Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "community-operators-catalog-7864b8776f-xws8l",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616148",
+        "uid": "30906ad8-6043-4405-ad22-f5cea4b9452b"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T10:43:47Z",
+      "message": "Add eth0 [10.132.6.252/23] from ovn-kubernetes",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T10:43:47Z",
+        "name": "community-operators-catalog-7864b8776f-xws8l.18e2ab8ddd293094",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616149",
+        "uid": "e364ecac-66ce-4542-bb8e-3fa7970574a5"
+      },
+      "reason": "AddedInterface",
+      "reportingComponent": "multus",
+      "reportingInstance": "",
+      "source": {
+        "component": "multus"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T10:43:48Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{extract-content}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-7864b8776f-xws8l",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616145",
+        "uid": "30906ad8-6043-4405-ad22-f5cea4b9452b"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T10:43:48Z",
+      "message": "Pulling image \"image-registry.openshift-image-registry.service:5000/clusters-test-cntrlplane-4826-hc/catalogs@sha256:eb8daf50c33836ca77f339d46241bd5f1b8667b7619c2402cd231ed96de908b9\"",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T10:43:48Z",
+        "name": "community-operators-catalog-7864b8776f-xws8l.18e2ab8e0021d86a",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616156",
+        "uid": "df4026ae-2c3d-4f6b-99ab-fb42c9f15a71"
+      },
+      "reason": "Pulling",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T10:43:55Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{extract-content}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-7864b8776f-xws8l",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616145",
+        "uid": "30906ad8-6043-4405-ad22-f5cea4b9452b"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T10:43:55Z",
+      "message": "Created container: extract-content",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T10:43:55Z",
+        "name": "community-operators-catalog-7864b8776f-xws8l.18e2ab8fc5d6c46c",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616194",
+        "uid": "c571fa43-df98-46d6-b696-c718833d633a"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T10:43:55Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{extract-content}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-7864b8776f-xws8l",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616145",
+        "uid": "30906ad8-6043-4405-ad22-f5cea4b9452b"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T10:43:55Z",
+      "message": "Started container extract-content",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T10:43:55Z",
+        "name": "community-operators-catalog-7864b8776f-xws8l.18e2ab8fc71fa784",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616195",
+        "uid": "75ecc406-6756-457e-8cb8-7d3b0d473199"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T10:43:55Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{extract-content}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-7864b8776f-xws8l",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616145",
+        "uid": "30906ad8-6043-4405-ad22-f5cea4b9452b"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T10:43:55Z",
+      "message": "Successfully pulled image \"image-registry.openshift-image-registry.service:5000/clusters-test-cntrlplane-4826-hc/catalogs@sha256:eb8daf50c33836ca77f339d46241bd5f1b8667b7619c2402cd231ed96de908b9\" in 7.51s (7.51s including waiting). Image size: 1100166583 bytes.",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T10:43:55Z",
+        "name": "community-operators-catalog-7864b8776f-xws8l.18e2ab8fbfceb10f",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616193",
+        "uid": "bb744744-3be9-4bf0-816d-5b3ab22eb715"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T10:43:58Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{registry}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-7864b8776f-xws8l",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616145",
+        "uid": "30906ad8-6043-4405-ad22-f5cea4b9452b"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T10:43:58Z",
+      "message": "Container image \"image-registry.openshift-image-registry.service:5000/clusters-test-cntrlplane-4826-hc/catalogs@sha256:eb8daf50c33836ca77f339d46241bd5f1b8667b7619c2402cd231ed96de908b9\" already present on machine",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T10:43:58Z",
+        "name": "community-operators-catalog-7864b8776f-xws8l.18e2ab905b280adb",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616206",
+        "uid": "c151b256-5a42-4951-bc13-526264c54b44"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T10:43:58Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{registry}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-7864b8776f-xws8l",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616145",
+        "uid": "30906ad8-6043-4405-ad22-f5cea4b9452b"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T10:43:58Z",
+      "message": "Created container: registry",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T10:43:58Z",
+        "name": "community-operators-catalog-7864b8776f-xws8l.18e2ab906285b6c6",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616208",
+        "uid": "ad768394-9d6d-43e0-b809-9dff06722ee4"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T10:43:58Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{registry}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-7864b8776f-xws8l",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616145",
+        "uid": "30906ad8-6043-4405-ad22-f5cea4b9452b"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T10:43:58Z",
+      "message": "Started container registry",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T10:43:58Z",
+        "name": "community-operators-catalog-7864b8776f-xws8l.18e2ab90636b1f00",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616209",
+        "uid": "bb8b30a2-a14a-4b19-a5b3-4890b53fcb49"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T10:44:07Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{registry}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-7864b8776f-xws8l",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616145",
+        "uid": "30906ad8-6043-4405-ad22-f5cea4b9452b"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T10:44:07Z",
+      "message": "Startup probe failed: command timed out",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T10:44:07Z",
+        "name": "community-operators-catalog-7864b8776f-xws8l.18e2ab92a0f89c48",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616239",
+        "uid": "38c2803b-785b-4c64-b167-7bd9d044b886"
+      },
+      "reason": "Unhealthy",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Warning"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T10:44:17Z",
+      "involvedObject": {
+        "apiVersion": "apps/v1",
+        "kind": "Deployment",
+        "name": "community-operators-catalog",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616163",
+        "uid": "7f472aa6-4ab1-454e-a687-45bdb583e4b4"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T10:44:17Z",
+      "message": "Scaled down replica set community-operators-catalog-868cb5f4b9 from 1 to 0",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T10:44:17Z",
+        "name": "community-operators-catalog.18e2ab94c6e419b3",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616283",
+        "uid": "25692721-792a-4fa1-8c86-c2dac24a1012"
+      },
+      "reason": "ScalingReplicaSet",
+      "reportingComponent": "deployment-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "deployment-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T10:44:17Z",
+      "involvedObject": {
+        "apiVersion": "apps/v1",
+        "kind": "ReplicaSet",
+        "name": "community-operators-catalog-868cb5f4b9",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616280",
+        "uid": "0b2070d8-1345-42ba-b519-7744690643eb"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T10:44:17Z",
+      "message": "Deleted pod: community-operators-catalog-868cb5f4b9-bkxq6",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T10:44:17Z",
+        "name": "community-operators-catalog-868cb5f4b9.18e2ab94c6d5f5e3",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616282",
+        "uid": "11f431b3-3ab2-48bb-b806-961c36efb68a"
+      },
+      "reason": "SuccessfulDelete",
+      "reportingComponent": "replicaset-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "replicaset-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T10:44:17Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{registry}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-868cb5f4b9-bkxq6",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129599384",
+        "uid": "9a4f8799-7a25-4092-b2be-f099485ed7c2"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T10:44:17Z",
+      "message": "Readiness probe failed: ",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T10:44:17Z",
+        "name": "community-operators-catalog-868cb5f4b9-bkxq6.18e2ab94d971b0dd",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616293",
+        "uid": "66329de4-4e1a-4c69-adfd-6cffae1b3660"
+      },
+      "reason": "Unhealthy",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Warning"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T10:44:17Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{registry}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-868cb5f4b9-bkxq6",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129599384",
+        "uid": "9a4f8799-7a25-4092-b2be-f099485ed7c2"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T10:44:17Z",
+      "message": "Stopping container registry",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T10:44:17Z",
+        "name": "community-operators-catalog-868cb5f4b9-bkxq6.18e2ab94c73d101a",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616288",
+        "uid": "da2ef4b7-459f-4506-bc7e-133e6d599c17"
+      },
+      "reason": "Killing",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T11:58:47Z",
+      "involvedObject": {
+        "apiVersion": "apps/v1",
+        "kind": "ReplicaSet",
+        "name": "community-operators-catalog-cff5769cf",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129632891",
+        "uid": "7489ff7a-bcfe-41cf-a3e9-906cf8a2db6c"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T11:58:47Z",
+      "message": "Created pod: community-operators-catalog-cff5769cf-jssxj",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T11:58:47Z",
+        "name": "community-operators-catalog-cff5769cf.18e2afa59094be16",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129632896",
+        "uid": "a638373e-decd-40ee-a95c-108f8b837708"
+      },
+      "reason": "SuccessfulCreate",
+      "reportingComponent": "replicaset-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "replicaset-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T11:58:47Z",
+      "involvedObject": {
+        "apiVersion": "apps/v1",
+        "kind": "Deployment",
+        "name": "community-operators-catalog",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129632890",
+        "uid": "7f472aa6-4ab1-454e-a687-45bdb583e4b4"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T11:58:47Z",
+      "message": "Scaled up replica set community-operators-catalog-cff5769cf from 0 to 1",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T11:58:47Z",
+        "name": "community-operators-catalog.18e2afa5817301e1",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129632892",
+        "uid": "fe0747c1-c2b7-4b53-8be8-2500980e5f00"
+      },
+      "reason": "ScalingReplicaSet",
+      "reportingComponent": "deployment-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "deployment-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T11:58:48Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{extract-utilities}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-cff5769cf-jssxj",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129632900",
+        "uid": "a12d33b9-2519-4323-a7ec-f98dfa6a232f"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T11:58:48Z",
+      "message": "Created container: extract-utilities",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T11:58:48Z",
+        "name": "community-operators-catalog-cff5769cf-jssxj.18e2afa5f1e1532e",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129632920",
+        "uid": "b320ffef-07b9-4c62-b618-e60bc01e950d"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T11:58:48Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "community-operators-catalog-cff5769cf-jssxj",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129632900",
+        "uid": "a12d33b9-2519-4323-a7ec-f98dfa6a232f"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T11:58:48Z",
+      "message": "Add eth0 [10.132.6.253/23] from ovn-kubernetes",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T11:58:48Z",
+        "name": "community-operators-catalog-cff5769cf-jssxj.18e2afa5e4aa128e",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129632914",
+        "uid": "d92a04c3-3bd5-40ea-a971-015a1d4826c2"
+      },
+      "reason": "AddedInterface",
+      "reportingComponent": "multus",
+      "reportingInstance": "",
+      "source": {
+        "component": "multus"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T11:58:48Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{extract-utilities}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-cff5769cf-jssxj",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129632900",
+        "uid": "a12d33b9-2519-4323-a7ec-f98dfa6a232f"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T11:58:48Z",
+      "message": "Container image \"quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:67ea3adb9079621aa1198f94a725c0f5a0d4667ab2db7390b985f7faa417eca5\" already present on machine",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T11:58:48Z",
+        "name": "community-operators-catalog-cff5769cf-jssxj.18e2afa5e8a29863",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129632917",
+        "uid": "a980c021-ec84-41ac-9a0a-0fb9c3e8f9da"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T11:58:48Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{extract-utilities}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-cff5769cf-jssxj",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129632900",
+        "uid": "a12d33b9-2519-4323-a7ec-f98dfa6a232f"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T11:58:48Z",
+      "message": "Started container extract-utilities",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T11:58:48Z",
+        "name": "community-operators-catalog-cff5769cf-jssxj.18e2afa5f2e521bf",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129632921",
+        "uid": "a3d282ba-a136-49a8-bb3a-aaf56ebdb1f1"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T11:58:49Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{extract-content}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-cff5769cf-jssxj",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129632900",
+        "uid": "a12d33b9-2519-4323-a7ec-f98dfa6a232f"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T11:58:49Z",
+      "message": "Pulling image \"image-registry.openshift-image-registry.service:5000/clusters-test-cntrlplane-4826-hc/catalogs@sha256:5ad2d0c7aa90c82f7b0fd2aacfaf321d8e666b14f96d048088eb19dab8d64bad\"",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T11:58:49Z",
+        "name": "community-operators-catalog-cff5769cf-jssxj.18e2afa611c8aa5b",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129632924",
+        "uid": "90c1f0e2-5c13-45d4-a65a-823bcb0e74ea"
+      },
+      "reason": "Pulling",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T11:58:56Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{extract-content}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-cff5769cf-jssxj",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129632900",
+        "uid": "a12d33b9-2519-4323-a7ec-f98dfa6a232f"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T11:58:56Z",
+      "message": "Successfully pulled image \"image-registry.openshift-image-registry.service:5000/clusters-test-cntrlplane-4826-hc/catalogs@sha256:5ad2d0c7aa90c82f7b0fd2aacfaf321d8e666b14f96d048088eb19dab8d64bad\" in 6.84s (6.84s including waiting). Image size: 1100164022 bytes.",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T11:58:56Z",
+        "name": "community-operators-catalog-cff5769cf-jssxj.18e2afa7a97c43e9",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129632948",
+        "uid": "7314123e-3f2c-4bdb-8a57-142b9564c1fd"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T11:58:56Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{extract-content}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-cff5769cf-jssxj",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129632900",
+        "uid": "a12d33b9-2519-4323-a7ec-f98dfa6a232f"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T11:58:56Z",
+      "message": "Created container: extract-content",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T11:58:56Z",
+        "name": "community-operators-catalog-cff5769cf-jssxj.18e2afa7b2289929",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129632951",
+        "uid": "53dc7e67-c2b3-44b7-be88-aa9741ee1393"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T11:58:56Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{extract-content}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-cff5769cf-jssxj",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129632900",
+        "uid": "a12d33b9-2519-4323-a7ec-f98dfa6a232f"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T11:58:56Z",
+      "message": "Started container extract-content",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T11:58:56Z",
+        "name": "community-operators-catalog-cff5769cf-jssxj.18e2afa7b2f1144b",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129632952",
+        "uid": "77947c61-5ab8-4295-aef2-6973a24cf8e0"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T11:58:58Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{registry}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-cff5769cf-jssxj",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129632900",
+        "uid": "a12d33b9-2519-4323-a7ec-f98dfa6a232f"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T11:58:58Z",
+      "message": "Container image \"image-registry.openshift-image-registry.service:5000/clusters-test-cntrlplane-4826-hc/catalogs@sha256:5ad2d0c7aa90c82f7b0fd2aacfaf321d8e666b14f96d048088eb19dab8d64bad\" already present on machine",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T11:58:58Z",
+        "name": "community-operators-catalog-cff5769cf-jssxj.18e2afa831381c72",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129632959",
+        "uid": "5c348f1a-52a8-4b28-91a3-ca8946235b6a"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T11:58:58Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{registry}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-cff5769cf-jssxj",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129632900",
+        "uid": "a12d33b9-2519-4323-a7ec-f98dfa6a232f"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T11:58:58Z",
+      "message": "Started container registry",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T11:58:58Z",
+        "name": "community-operators-catalog-cff5769cf-jssxj.18e2afa841985231",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129632962",
+        "uid": "11c1ee52-a547-4ade-9aa3-9a1d260696fb"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T11:58:58Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{registry}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-cff5769cf-jssxj",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129632900",
+        "uid": "a12d33b9-2519-4323-a7ec-f98dfa6a232f"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T11:58:58Z",
+      "message": "Created container: registry",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T11:58:58Z",
+        "name": "community-operators-catalog-cff5769cf-jssxj.18e2afa83fc7c999",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129632961",
+        "uid": "ca139849-809b-4864-8738-5e55307b60b8"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T11:59:08Z",
+      "involvedObject": {
+        "apiVersion": "apps/v1",
+        "kind": "Deployment",
+        "name": "community-operators-catalog",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129632907",
+        "uid": "7f472aa6-4ab1-454e-a687-45bdb583e4b4"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T11:59:08Z",
+      "message": "Scaled down replica set community-operators-catalog-7864b8776f from 1 to 0",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T11:59:08Z",
+        "name": "community-operators-catalog.18e2afaa8e571858",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129633002",
+        "uid": "43cd88ee-1586-49a0-8972-4c323c564817"
+      },
+      "reason": "ScalingReplicaSet",
+      "reportingComponent": "deployment-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "deployment-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T11:59:08Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{registry}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-7864b8776f-xws8l",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129616145",
+        "uid": "30906ad8-6043-4405-ad22-f5cea4b9452b"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T11:59:08Z",
+      "message": "Stopping container registry",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T11:59:08Z",
+        "name": "community-operators-catalog-7864b8776f-xws8l.18e2afaa8fb578a8",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129633010",
+        "uid": "30fccee9-e1c4-454b-9971-884a58d08105"
+      },
+      "reason": "Killing",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T11:59:08Z",
+      "involvedObject": {
+        "apiVersion": "apps/v1",
+        "kind": "ReplicaSet",
+        "name": "community-operators-catalog-7864b8776f",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129633001",
+        "uid": "d43e8c15-c204-4d00-a7fd-4d6fbe60a566"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T11:59:08Z",
+      "message": "Deleted pod: community-operators-catalog-7864b8776f-xws8l",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T11:59:08Z",
+        "name": "community-operators-catalog-7864b8776f.18e2afaa8eefa30f",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129633005",
+        "uid": "b8f287a7-1a02-4520-b917-c317ffc4fb58"
+      },
+      "reason": "SuccessfulDelete",
+      "reportingComponent": "replicaset-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "replicaset-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T12:43:46Z",
+      "involvedObject": {
+        "apiVersion": "apps/v1",
+        "kind": "ReplicaSet",
+        "name": "certified-operators-catalog-659bdf8d99",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129642988",
+        "uid": "408adbc7-97ea-4142-961a-db67af5db7a7"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T12:43:46Z",
+      "message": "Created pod: certified-operators-catalog-659bdf8d99-l8brj",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T12:43:46Z",
+        "name": "certified-operators-catalog-659bdf8d99.18e2b21a10aa683d",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129642993",
+        "uid": "97c67e12-9aab-4247-9e99-9e0d08b9c626"
+      },
+      "reason": "SuccessfulCreate",
+      "reportingComponent": "replicaset-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "replicaset-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T12:43:46Z",
+      "involvedObject": {
+        "apiVersion": "apps/v1",
+        "kind": "Deployment",
+        "name": "certified-operators-catalog",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129642987",
+        "uid": "78f494ae-cb4f-404c-aec1-4f09767e64c5"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T12:43:46Z",
+      "message": "Scaled up replica set certified-operators-catalog-659bdf8d99 from 0 to 1",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T12:43:46Z",
+        "name": "certified-operators-catalog.18e2b21a0e8a7805",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129642990",
+        "uid": "383d125d-ef70-41e7-8132-b6cb89f5a387"
+      },
+      "reason": "ScalingReplicaSet",
+      "reportingComponent": "deployment-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "deployment-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T12:43:47Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{extract-utilities}",
+        "kind": "Pod",
+        "name": "certified-operators-catalog-659bdf8d99-l8brj",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129642997",
+        "uid": "e36cf68a-e320-4802-afa5-c68c9a5c3121"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T12:43:47Z",
+      "message": "Started container extract-utilities",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T12:43:47Z",
+        "name": "certified-operators-catalog-659bdf8d99-l8brj.18e2b21a4d0bd50b",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129643009",
+        "uid": "654784c9-df78-4a3b-92aa-9ea2b3225523"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T12:43:47Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "certified-operators-catalog-659bdf8d99-l8brj",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129642999",
+        "uid": "e36cf68a-e320-4802-afa5-c68c9a5c3121"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T12:43:47Z",
+      "message": "Add eth0 [10.132.6.254/23] from ovn-kubernetes",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T12:43:47Z",
+        "name": "certified-operators-catalog-659bdf8d99-l8brj.18e2b21a43a0967d",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129643003",
+        "uid": "50184ed0-2ff0-4305-a444-2ac53f772bf7"
+      },
+      "reason": "AddedInterface",
+      "reportingComponent": "multus",
+      "reportingInstance": "",
+      "source": {
+        "component": "multus"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T12:43:47Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{extract-utilities}",
+        "kind": "Pod",
+        "name": "certified-operators-catalog-659bdf8d99-l8brj",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129642997",
+        "uid": "e36cf68a-e320-4802-afa5-c68c9a5c3121"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T12:43:47Z",
+      "message": "Container image \"quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:67ea3adb9079621aa1198f94a725c0f5a0d4667ab2db7390b985f7faa417eca5\" already present on machine",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T12:43:47Z",
+        "name": "certified-operators-catalog-659bdf8d99-l8brj.18e2b21a45ba9b03",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129643006",
+        "uid": "d06be3a5-a132-4f92-9c33-11d46de2bfb9"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T12:43:47Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{extract-utilities}",
+        "kind": "Pod",
+        "name": "certified-operators-catalog-659bdf8d99-l8brj",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129642997",
+        "uid": "e36cf68a-e320-4802-afa5-c68c9a5c3121"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T12:43:47Z",
+      "message": "Created container: extract-utilities",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T12:43:47Z",
+        "name": "certified-operators-catalog-659bdf8d99-l8brj.18e2b21a4bb72ad1",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129643008",
+        "uid": "ec061aaf-761c-4652-9929-ce887b7971e6"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T12:43:48Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{extract-content}",
+        "kind": "Pod",
+        "name": "certified-operators-catalog-659bdf8d99-l8brj",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129642997",
+        "uid": "e36cf68a-e320-4802-afa5-c68c9a5c3121"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T12:43:48Z",
+      "message": "Pulling image \"image-registry.openshift-image-registry.service:5000/clusters-test-cntrlplane-4826-hc/catalogs@sha256:31ec12ccc338bb445989d6127fc6b6910a92581f7708fe610437900896fb6a6f\"",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T12:43:48Z",
+        "name": "certified-operators-catalog-659bdf8d99-l8brj.18e2b21a6cb83713",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129643015",
+        "uid": "5ce90c8e-c310-4021-977a-46ec4ed9ca6d"
+      },
+      "reason": "Pulling",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T12:43:56Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{extract-content}",
+        "kind": "Pod",
+        "name": "certified-operators-catalog-659bdf8d99-l8brj",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129642997",
+        "uid": "e36cf68a-e320-4802-afa5-c68c9a5c3121"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T12:43:56Z",
+      "message": "Started container extract-content",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T12:43:56Z",
+        "name": "certified-operators-catalog-659bdf8d99-l8brj.18e2b21c48b1fc5d",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129643049",
+        "uid": "94b6291b-d39e-4ff9-ac36-177d4c20bb8f"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T12:43:56Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{extract-content}",
+        "kind": "Pod",
+        "name": "certified-operators-catalog-659bdf8d99-l8brj",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129642997",
+        "uid": "e36cf68a-e320-4802-afa5-c68c9a5c3121"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T12:43:56Z",
+      "message": "Successfully pulled image \"image-registry.openshift-image-registry.service:5000/clusters-test-cntrlplane-4826-hc/catalogs@sha256:31ec12ccc338bb445989d6127fc6b6910a92581f7708fe610437900896fb6a6f\" in 7.869s (7.869s including waiting). Image size: 1076089786 bytes.",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T12:43:56Z",
+        "name": "certified-operators-catalog-659bdf8d99-l8brj.18e2b21c41c9a6a3",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129643046",
+        "uid": "bf33c952-661d-4872-b99a-785f56499f86"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T12:43:56Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{extract-content}",
+        "kind": "Pod",
+        "name": "certified-operators-catalog-659bdf8d99-l8brj",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129642997",
+        "uid": "e36cf68a-e320-4802-afa5-c68c9a5c3121"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T12:43:56Z",
+      "message": "Created container: extract-content",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T12:43:56Z",
+        "name": "certified-operators-catalog-659bdf8d99-l8brj.18e2b21c4808a3c0",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129643047",
+        "uid": "637566ca-9ba6-469f-8f33-d6e1209c06a7"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T12:43:58Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{registry}",
+        "kind": "Pod",
+        "name": "certified-operators-catalog-659bdf8d99-l8brj",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129642997",
+        "uid": "e36cf68a-e320-4802-afa5-c68c9a5c3121"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T12:43:58Z",
+      "message": "Container image \"image-registry.openshift-image-registry.service:5000/clusters-test-cntrlplane-4826-hc/catalogs@sha256:31ec12ccc338bb445989d6127fc6b6910a92581f7708fe610437900896fb6a6f\" already present on machine",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T12:43:58Z",
+        "name": "certified-operators-catalog-659bdf8d99-l8brj.18e2b21cc7a85a69",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129643060",
+        "uid": "42e32ffe-06d0-4a27-94b3-2984f23672df"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T12:43:58Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{registry}",
+        "kind": "Pod",
+        "name": "certified-operators-catalog-659bdf8d99-l8brj",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129642997",
+        "uid": "e36cf68a-e320-4802-afa5-c68c9a5c3121"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T12:43:58Z",
+      "message": "Created container: registry",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T12:43:58Z",
+        "name": "certified-operators-catalog-659bdf8d99-l8brj.18e2b21ccf4354d1",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129643062",
+        "uid": "2b9533ae-9952-4677-ae5a-e5ca581b4143"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T12:43:58Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{registry}",
+        "kind": "Pod",
+        "name": "certified-operators-catalog-659bdf8d99-l8brj",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129642997",
+        "uid": "e36cf68a-e320-4802-afa5-c68c9a5c3121"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T12:43:58Z",
+      "message": "Started container registry",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T12:43:58Z",
+        "name": "certified-operators-catalog-659bdf8d99-l8brj.18e2b21cd0654f7f",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129643063",
+        "uid": "4822b56a-1b89-479d-95b4-60f3261bff99"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T12:44:07Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{registry}",
+        "kind": "Pod",
+        "name": "certified-operators-catalog-659bdf8d99-l8brj",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129642997",
+        "uid": "e36cf68a-e320-4802-afa5-c68c9a5c3121"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T12:44:07Z",
+      "message": "Startup probe failed: command timed out",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T12:44:07Z",
+        "name": "certified-operators-catalog-659bdf8d99-l8brj.18e2b21f026786ae",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129643092",
+        "uid": "8df2e3b5-496d-4dfe-b82c-1f7745ad8d12"
+      },
+      "reason": "Unhealthy",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Warning"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T12:44:17Z",
+      "involvedObject": {
+        "apiVersion": "apps/v1",
+        "kind": "Deployment",
+        "name": "certified-operators-catalog",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129643014",
+        "uid": "78f494ae-cb4f-404c-aec1-4f09767e64c5"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T12:44:17Z",
+      "message": "Scaled down replica set certified-operators-catalog-7b789c4d6f from 1 to 0",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T12:44:17Z",
+        "name": "certified-operators-catalog.18e2b2212b7aac7d",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129643130",
+        "uid": "e65f0532-7aa0-4ab4-9725-8b72909379bb"
+      },
+      "reason": "ScalingReplicaSet",
+      "reportingComponent": "deployment-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "deployment-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T12:44:17Z",
+      "involvedObject": {
+        "apiVersion": "apps/v1",
+        "kind": "ReplicaSet",
+        "name": "certified-operators-catalog-7b789c4d6f",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129643129",
+        "uid": "f7f55cf2-371d-4ccc-81ac-3befdf6a3585"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T12:44:17Z",
+      "message": "Deleted pod: certified-operators-catalog-7b789c4d6f-lbf28",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T12:44:17Z",
+        "name": "certified-operators-catalog-7b789c4d6f.18e2b2212bd1c0ce",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129643133",
+        "uid": "37aedac2-b9ce-4879-9d2c-68c2d42b0848"
+      },
+      "reason": "SuccessfulDelete",
+      "reportingComponent": "replicaset-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "replicaset-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T12:44:17Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{registry}",
+        "kind": "Pod",
+        "name": "certified-operators-catalog-7b789c4d6f-lbf28",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129480802",
+        "uid": "742cde0f-b3c3-4beb-bc97-5c5516cfb9d7"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T12:44:17Z",
+      "message": "Stopping container registry",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T12:44:17Z",
+        "name": "certified-operators-catalog-7b789c4d6f-lbf28.18e2b2212c2aaa9e",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129643137",
+        "uid": "fee5728e-bf6c-445d-a850-e848d1f86892"
+      },
+      "reason": "Killing",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-40-184.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-40-184.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:13:46Z",
+      "involvedObject": {
+        "apiVersion": "apps/v1",
+        "kind": "Deployment",
+        "name": "community-operators-catalog",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650011",
+        "uid": "7f472aa6-4ab1-454e-a687-45bdb583e4b4"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:13:46Z",
+      "message": "Scaled up replica set community-operators-catalog-685849f997 from 0 to 1",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:13:46Z",
+        "name": "community-operators-catalog.18e2b3bd3464aec0",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650013",
+        "uid": "af0b9cc4-25f9-4aa4-ac79-b4bf5fc24e63"
+      },
+      "reason": "ScalingReplicaSet",
+      "reportingComponent": "deployment-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "deployment-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:13:46Z",
+      "involvedObject": {
+        "apiVersion": "apps/v1",
+        "kind": "ReplicaSet",
+        "name": "community-operators-catalog-685849f997",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650012",
+        "uid": "b576bf09-6447-4c79-9c8c-05e6bfeae836"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:13:46Z",
+      "message": "Created pod: community-operators-catalog-685849f997-mc8rr",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:13:46Z",
+        "name": "community-operators-catalog-685849f997.18e2b3bd3a17c6a8",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650018",
+        "uid": "c9550c51-3905-46f7-95bc-341a4612fb7d"
+      },
+      "reason": "SuccessfulCreate",
+      "reportingComponent": "replicaset-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "replicaset-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:13:47Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{extract-utilities}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-685849f997-mc8rr",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650019",
+        "uid": "1a2f9e29-95c7-4d5d-849f-27976771c9d5"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:13:47Z",
+      "message": "Created container: extract-utilities",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:13:47Z",
+        "name": "community-operators-catalog-685849f997-mc8rr.18e2b3bd7599f207",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650037",
+        "uid": "388113cf-1c43-4ead-9269-bc0027e30507"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:13:47Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{extract-utilities}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-685849f997-mc8rr",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650019",
+        "uid": "1a2f9e29-95c7-4d5d-849f-27976771c9d5"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:13:47Z",
+      "message": "Started container extract-utilities",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:13:47Z",
+        "name": "community-operators-catalog-685849f997-mc8rr.18e2b3bd768e81d3",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650038",
+        "uid": "b95df163-86be-4ea6-9e53-b9280ad6064e"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:13:47Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{extract-utilities}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-685849f997-mc8rr",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650019",
+        "uid": "1a2f9e29-95c7-4d5d-849f-27976771c9d5"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:13:47Z",
+      "message": "Container image \"quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:67ea3adb9079621aa1198f94a725c0f5a0d4667ab2db7390b985f7faa417eca5\" already present on machine",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:13:47Z",
+        "name": "community-operators-catalog-685849f997-mc8rr.18e2b3bd6bf8e8c5",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650035",
+        "uid": "e65e59bf-cbb7-4e6f-8144-bf07523831c3"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:13:47Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "community-operators-catalog-685849f997-mc8rr",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650025",
+        "uid": "1a2f9e29-95c7-4d5d-849f-27976771c9d5"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:13:47Z",
+      "message": "Add eth0 [10.132.6.255/23] from ovn-kubernetes",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:13:47Z",
+        "name": "community-operators-catalog-685849f997-mc8rr.18e2b3bd68f8e5c4",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650033",
+        "uid": "bcb1ecdf-919c-4fd1-b47f-7d8de97f5a6a"
+      },
+      "reason": "AddedInterface",
+      "reportingComponent": "multus",
+      "reportingInstance": "",
+      "source": {
+        "component": "multus"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:13:48Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{extract-content}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-685849f997-mc8rr",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650019",
+        "uid": "1a2f9e29-95c7-4d5d-849f-27976771c9d5"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:13:48Z",
+      "message": "Pulling image \"image-registry.openshift-image-registry.service:5000/clusters-test-cntrlplane-4826-hc/catalogs@sha256:28bff057b83328ff0cd8336db295d47ed70e46d2f03a253826e145119c6cdfa0\"",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:13:48Z",
+        "name": "community-operators-catalog-685849f997-mc8rr.18e2b3bd9836b59b",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650045",
+        "uid": "858a4010-70a9-4e45-82f8-88a812d97c20"
+      },
+      "reason": "Pulling",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:13:57Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{extract-content}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-685849f997-mc8rr",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650019",
+        "uid": "1a2f9e29-95c7-4d5d-849f-27976771c9d5"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:13:57Z",
+      "message": "Successfully pulled image \"image-registry.openshift-image-registry.service:5000/clusters-test-cntrlplane-4826-hc/catalogs@sha256:28bff057b83328ff0cd8336db295d47ed70e46d2f03a253826e145119c6cdfa0\" in 8.74s (8.74s including waiting). Image size: 1100166069 bytes.",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:13:57Z",
+        "name": "community-operators-catalog-685849f997-mc8rr.18e2b3bfa134120a",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650083",
+        "uid": "a94cd549-6770-4373-90d3-f07455e61a59"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:13:57Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{extract-content}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-685849f997-mc8rr",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650019",
+        "uid": "1a2f9e29-95c7-4d5d-849f-27976771c9d5"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:13:57Z",
+      "message": "Started container extract-content",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:13:57Z",
+        "name": "community-operators-catalog-685849f997-mc8rr.18e2b3bfa9739d7d",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650085",
+        "uid": "09a9a678-199e-47e1-bb9a-d01b1be02cea"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:13:57Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{extract-content}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-685849f997-mc8rr",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650019",
+        "uid": "1a2f9e29-95c7-4d5d-849f-27976771c9d5"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:13:57Z",
+      "message": "Created container: extract-content",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:13:57Z",
+        "name": "community-operators-catalog-685849f997-mc8rr.18e2b3bfa83cb2f8",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650084",
+        "uid": "6750ed64-8899-4753-aad9-68c6e3455e2a"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:13:58Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{registry}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-685849f997-mc8rr",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650019",
+        "uid": "1a2f9e29-95c7-4d5d-849f-27976771c9d5"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:13:58Z",
+      "message": "Started container registry",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:13:58Z",
+        "name": "community-operators-catalog-685849f997-mc8rr.18e2b3c005cbece6",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650096",
+        "uid": "a405e5f3-d5f2-4b7e-9af8-0e63b72603f9"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:13:58Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{registry}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-685849f997-mc8rr",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650019",
+        "uid": "1a2f9e29-95c7-4d5d-849f-27976771c9d5"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:13:58Z",
+      "message": "Created container: registry",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:13:58Z",
+        "name": "community-operators-catalog-685849f997-mc8rr.18e2b3c0048b4233",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650095",
+        "uid": "c93e0b4f-d989-414c-99f5-9a22fe0e171d"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:13:58Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{registry}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-685849f997-mc8rr",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650019",
+        "uid": "1a2f9e29-95c7-4d5d-849f-27976771c9d5"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:13:58Z",
+      "message": "Container image \"image-registry.openshift-image-registry.service:5000/clusters-test-cntrlplane-4826-hc/catalogs@sha256:28bff057b83328ff0cd8336db295d47ed70e46d2f03a253826e145119c6cdfa0\" already present on machine",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:13:58Z",
+        "name": "community-operators-catalog-685849f997-mc8rr.18e2b3bff623b7a2",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650091",
+        "uid": "5dd75ebb-1414-40cb-9cd1-a170f5ba3bad"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:14:08Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{registry}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-685849f997-mc8rr",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650019",
+        "uid": "1a2f9e29-95c7-4d5d-849f-27976771c9d5"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:14:08Z",
+      "message": "Startup probe failed: timeout: failed to connect service \":50051\" within 1s\n",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:14:08Z",
+        "name": "community-operators-catalog-685849f997-mc8rr.18e2b3c23599ff74",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650129",
+        "uid": "f6aeb118-3864-42c7-a7ab-1c560a9d488e"
+      },
+      "reason": "Unhealthy",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Warning"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:14:17Z",
+      "involvedObject": {
+        "apiVersion": "apps/v1",
+        "kind": "ReplicaSet",
+        "name": "community-operators-catalog-cff5769cf",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650169",
+        "uid": "7489ff7a-bcfe-41cf-a3e9-906cf8a2db6c"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:14:17Z",
+      "message": "Deleted pod: community-operators-catalog-cff5769cf-jssxj",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:14:17Z",
+        "name": "community-operators-catalog-cff5769cf.18e2b3c4532425a5",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650174",
+        "uid": "e49027e3-4a31-49c3-af6c-1325b824da93"
+      },
+      "reason": "SuccessfulDelete",
+      "reportingComponent": "replicaset-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "replicaset-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:14:17Z",
+      "involvedObject": {
+        "apiVersion": "apps/v1",
+        "kind": "Deployment",
+        "name": "community-operators-catalog",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650053",
+        "uid": "7f472aa6-4ab1-454e-a687-45bdb583e4b4"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:14:17Z",
+      "message": "Scaled down replica set community-operators-catalog-cff5769cf from 1 to 0",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:14:17Z",
+        "name": "community-operators-catalog.18e2b3c452c86d8b",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650170",
+        "uid": "665c65fa-29c2-467c-ba6d-b7f2b351a982"
+      },
+      "reason": "ScalingReplicaSet",
+      "reportingComponent": "deployment-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "deployment-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:14:17Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{registry}",
+        "kind": "Pod",
+        "name": "community-operators-catalog-cff5769cf-jssxj",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129632900",
+        "uid": "a12d33b9-2519-4323-a7ec-f98dfa6a232f"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:14:17Z",
+      "message": "Stopping container registry",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:14:17Z",
+        "name": "community-operators-catalog-cff5769cf-jssxj.18e2b3c453a941b4",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129650178",
+        "uid": "73768990-f04a-43a9-950d-dcf6f7c0d09b"
+      },
+      "reason": "Killing",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "ip-10-0-11-221.ec2.internal",
+      "source": {
+        "component": "kubelet",
+        "host": "ip-10-0-11-221.ec2.internal"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:23:07Z",
+      "involvedObject": {
+        "apiVersion": "cluster.x-k8s.io/v1beta2",
+        "kind": "Machine",
+        "name": "test-cntrlplane-4826-hc-cvww6-pgcjc",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129652193",
+        "uid": "a4f6f553-2370-4ffe-86c2-5fb8b6195e53"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:23:07Z",
+      "message": "success waiting for node volumes detaching Machine's node \"test-cntrlplane-4826-hc-cvww6-pgcjc\"",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:23:07Z",
+        "name": "test-cntrlplane-4826-hc-cvww6-pgcjc.18e2b43fc4944e30",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129652264",
+        "uid": "28a8080a-8605-43b7-9ef7-e03f6de16b53"
+      },
+      "reason": "NodeVolumesDetached",
+      "reportingComponent": "machine-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "machine-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:23:07Z",
+      "involvedObject": {
+        "apiVersion": "cluster.x-k8s.io/v1beta2",
+        "kind": "Machine",
+        "name": "test-cntrlplane-4826-hc-cvww6-pgcjc",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129652193",
+        "uid": "a4f6f553-2370-4ffe-86c2-5fb8b6195e53"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:23:07Z",
+      "message": "success draining Machine's node \"test-cntrlplane-4826-hc-cvww6-pgcjc\"",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:23:07Z",
+        "name": "test-cntrlplane-4826-hc-cvww6-pgcjc.18e2b43fc425397b",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129652263",
+        "uid": "572f6b2b-5a04-4097-95b9-18e9dd670e68"
+      },
+      "reason": "SuccessfulDrainNode",
+      "reportingComponent": "machine-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "machine-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:23:12Z",
+      "involvedObject": {
+        "apiVersion": "cluster.x-k8s.io/v1beta2",
+        "kind": "Machine",
+        "name": "test-cntrlplane-4826-hc-cvww6-fcpft",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129652211",
+        "uid": "8ff0d1c9-0e92-42c9-8ae2-37814247b5b4"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:23:12Z",
+      "message": "success draining Machine's node \"test-cntrlplane-4826-hc-cvww6-fcpft\"",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:23:12Z",
+        "name": "test-cntrlplane-4826-hc-cvww6-fcpft.18e2b440fa76d900",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129652302",
+        "uid": "5036a463-05ec-45b8-bcb4-51e0c0000f7b"
+      },
+      "reason": "SuccessfulDrainNode",
+      "reportingComponent": "machine-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "machine-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:23:12Z",
+      "involvedObject": {
+        "apiVersion": "cluster.x-k8s.io/v1beta2",
+        "kind": "Machine",
+        "name": "test-cntrlplane-4826-hc-cvww6-fcpft",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129652211",
+        "uid": "8ff0d1c9-0e92-42c9-8ae2-37814247b5b4"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:23:12Z",
+      "message": "success waiting for node volumes detaching Machine's node \"test-cntrlplane-4826-hc-cvww6-fcpft\"",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:23:12Z",
+        "name": "test-cntrlplane-4826-hc-cvww6-fcpft.18e2b440fae5406b",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129652303",
+        "uid": "629451e7-b0a7-4eb4-b78d-2c7acdc3e58d"
+      },
+      "reason": "NodeVolumesDetached",
+      "reportingComponent": "machine-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "machine-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:25:10Z",
+      "involvedObject": {
+        "apiVersion": "cluster.x-k8s.io/v1beta2",
+        "kind": "Machine",
+        "name": "test-cntrlplane-4826-hc-cvww6-hv4lx",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129652411",
+        "uid": "6f54479b-87b8-423a-bf27-ef3787e4d645"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:25:10Z",
+      "message": "success waiting for node volumes detaching Machine's node \"test-cntrlplane-4826-hc-cvww6-hv4lx\"",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:25:10Z",
+        "name": "test-cntrlplane-4826-hc-cvww6-hv4lx.18e2b45c653e1462",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129652765",
+        "uid": "ac2df733-68ef-4518-ae8b-713c934daa2b"
+      },
+      "reason": "NodeVolumesDetached",
+      "reportingComponent": "machine-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "machine-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:25:10Z",
+      "involvedObject": {
+        "apiVersion": "cluster.x-k8s.io/v1beta2",
+        "kind": "Machine",
+        "name": "test-cntrlplane-4826-hc-cvww6-hv4lx",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129652411",
+        "uid": "6f54479b-87b8-423a-bf27-ef3787e4d645"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:25:10Z",
+      "message": "success draining Machine's node \"test-cntrlplane-4826-hc-cvww6-hv4lx\"",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:25:10Z",
+        "name": "test-cntrlplane-4826-hc-cvww6-hv4lx.18e2b45c64c00367",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129652764",
+        "uid": "b613da11-742d-4365-a55c-aefd4aa6a6e7"
+      },
+      "reason": "SuccessfulDrainNode",
+      "reportingComponent": "machine-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "machine-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:26:14Z",
+      "involvedObject": {
+        "apiVersion": "cluster.x-k8s.io/v1beta2",
+        "kind": "MachineDeployment",
+        "name": "test-cntrlplane-4826-unpatched",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653057",
+        "uid": "6eac54bc-8b89-4e0c-bed1-09a81aec8542"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:26:14Z",
+      "message": "Created MachineSet clusters-test-cntrlplane-4826-hc/test-cntrlplane-4826-unpatched-zftgr with 3 replicas",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:26:14Z",
+        "name": "test-cntrlplane-4826-unpatched.18e2b46b46b3e325",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653070",
+        "uid": "7d679a60-631d-4566-92d5-906a13e193a0"
+      },
+      "reason": "SuccessfulCreate",
+      "reportingComponent": "machinedeployment-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "machinedeployment-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:26:14Z",
+      "involvedObject": {
+        "apiVersion": "cluster.x-k8s.io/v1beta2",
+        "kind": "MachineDeployment",
+        "name": "test-cntrlplane-4826-patched",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653060",
+        "uid": "f2adcde0-7e6f-44c0-833a-d18b6486a868"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:26:14Z",
+      "message": "Created MachineSet clusters-test-cntrlplane-4826-hc/test-cntrlplane-4826-patched-bkf55 with 3 replicas",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:26:14Z",
+        "name": "test-cntrlplane-4826-patched.18e2b46b4ec60cab",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653082",
+        "uid": "0ff19afc-d87b-4aed-b4a8-6a26eccfc9b5"
+      },
+      "reason": "SuccessfulCreate",
+      "reportingComponent": "machinedeployment-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "machinedeployment-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:26:16Z",
+      "involvedObject": {
+        "apiVersion": "infrastructure.cluster.x-k8s.io/v1beta1",
+        "kind": "AzureMachine",
+        "name": "test-cntrlplane-4826-patched-bkf55-fjnb8",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653114",
+        "uid": "0cab88e0-44f3-4c33-a0ba-2fa54c6cc151"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:26:16Z",
+      "message": "Machine Controller has not yet set OwnerRef",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:26:16Z",
+        "name": "test-cntrlplane-4826-patched-bkf55-fjnb8.18e2b46bc7216923",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653117",
+        "uid": "4b36816f-1e75-456a-a16e-81caaae96a67"
+      },
+      "reason": "Machine controller dependency not yet met",
+      "reportingComponent": "azuremachine-reconciler",
+      "reportingInstance": "",
+      "source": {
+        "component": "azuremachine-reconciler"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:26:16Z",
+      "involvedObject": {
+        "apiVersion": "infrastructure.cluster.x-k8s.io/v1beta1",
+        "kind": "AzureMachine",
+        "name": "test-cntrlplane-4826-patched-bkf55-gzcfm",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653126",
+        "uid": "128b4f84-d34f-4fd5-af31-aa26b339d773"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:26:16Z",
+      "message": "Machine Controller has not yet set OwnerRef",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:26:16Z",
+        "name": "test-cntrlplane-4826-patched-bkf55-gzcfm.18e2b46bca91a742",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653129",
+        "uid": "ab876c4b-f12d-4c32-8907-add6826b63a5"
+      },
+      "reason": "Machine controller dependency not yet met",
+      "reportingComponent": "azuremachine-reconciler",
+      "reportingInstance": "",
+      "source": {
+        "component": "azuremachine-reconciler"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:26:16Z",
+      "involvedObject": {
+        "apiVersion": "infrastructure.cluster.x-k8s.io/v1beta1",
+        "kind": "AzureMachine",
+        "name": "test-cntrlplane-4826-unpatched-zftgr-lc8kw",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653107",
+        "uid": "24cdd580-5d3a-49a1-bdc6-882eee53081b"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:26:16Z",
+      "message": "Machine Controller has not yet set OwnerRef",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:26:16Z",
+        "name": "test-cntrlplane-4826-unpatched-zftgr-lc8kw.18e2b46bc37ec3a2",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653108",
+        "uid": "4a0540c3-b3fa-4841-99e9-e7f25edf7adf"
+      },
+      "reason": "Machine controller dependency not yet met",
+      "reportingComponent": "azuremachine-reconciler",
+      "reportingInstance": "",
+      "source": {
+        "component": "azuremachine-reconciler"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:26:16Z",
+      "involvedObject": {
+        "apiVersion": "infrastructure.cluster.x-k8s.io/v1beta1",
+        "kind": "AzureMachine",
+        "name": "test-cntrlplane-4826-unpatched-zftgr-kxhkm",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653112",
+        "uid": "41949b7a-0cfd-4b5b-82dd-7ff0c9690059"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:26:16Z",
+      "message": "Machine Controller has not yet set OwnerRef",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:26:16Z",
+        "name": "test-cntrlplane-4826-unpatched-zftgr-kxhkm.18e2b46bc666be6c",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653115",
+        "uid": "6144b852-23fa-40d9-b70a-48843de49195"
+      },
+      "reason": "Machine controller dependency not yet met",
+      "reportingComponent": "azuremachine-reconciler",
+      "reportingInstance": "",
+      "source": {
+        "component": "azuremachine-reconciler"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:26:16Z",
+      "involvedObject": {
+        "apiVersion": "cluster.x-k8s.io/v1beta2",
+        "kind": "MachineSet",
+        "name": "test-cntrlplane-4826-patched-bkf55",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653096",
+        "uid": "35ff4ec1-5d7e-45b6-9ba4-10f3bc6a623b"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:26:16Z",
+      "message": "Created Machine \"test-cntrlplane-4826-patched-bkf55-7lzbt\"",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:26:16Z",
+        "name": "test-cntrlplane-4826-patched-bkf55.18e2b46bcfe693ed",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653143",
+        "uid": "38f9bd6a-27c6-4425-a81e-12772ec04985"
+      },
+      "reason": "SuccessfulCreate",
+      "reportingComponent": "machineset-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "machineset-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:26:16Z",
+      "involvedObject": {
+        "apiVersion": "cluster.x-k8s.io/v1beta2",
+        "kind": "MachineSet",
+        "name": "test-cntrlplane-4826-patched-bkf55",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653096",
+        "uid": "35ff4ec1-5d7e-45b6-9ba4-10f3bc6a623b"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:26:16Z",
+      "message": "Created Machine \"test-cntrlplane-4826-patched-bkf55-gzcfm\"",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:26:16Z",
+        "name": "test-cntrlplane-4826-patched-bkf55.18e2b46bcda931e0",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653137",
+        "uid": "3a1a4bea-c174-4ef2-aa35-ab943e698153"
+      },
+      "reason": "SuccessfulCreate",
+      "reportingComponent": "machineset-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "machineset-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:26:16Z",
+      "involvedObject": {
+        "apiVersion": "cluster.x-k8s.io/v1beta2",
+        "kind": "MachineSet",
+        "name": "test-cntrlplane-4826-patched-bkf55",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653096",
+        "uid": "35ff4ec1-5d7e-45b6-9ba4-10f3bc6a623b"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:26:16Z",
+      "message": "Created Machine \"test-cntrlplane-4826-patched-bkf55-fjnb8\"",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:26:16Z",
+        "name": "test-cntrlplane-4826-patched-bkf55.18e2b46bc8a8fe56",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653124",
+        "uid": "1afab6c2-8584-4bf5-af2e-f65362bf0832"
+      },
+      "reason": "SuccessfulCreate",
+      "reportingComponent": "machineset-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "machineset-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:26:16Z",
+      "involvedObject": {
+        "apiVersion": "cluster.x-k8s.io/v1beta2",
+        "kind": "MachineSet",
+        "name": "test-cntrlplane-4826-unpatched-zftgr",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653092",
+        "uid": "dfe75226-51b2-4f2f-a9a0-194fa01c6ae4"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:26:16Z",
+      "message": "Created Machine \"test-cntrlplane-4826-unpatched-zftgr-kxhkm\"",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:26:16Z",
+        "name": "test-cntrlplane-4826-unpatched-zftgr.18e2b46bc7f94762",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653121",
+        "uid": "3cafc961-75c2-4a7b-845d-b4a56c2f4e4f"
+      },
+      "reason": "SuccessfulCreate",
+      "reportingComponent": "machineset-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "machineset-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:26:16Z",
+      "involvedObject": {
+        "apiVersion": "infrastructure.cluster.x-k8s.io/v1beta1",
+        "kind": "AzureMachine",
+        "name": "test-cntrlplane-4826-patched-bkf55-7lzbt",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653136",
+        "uid": "98a03f42-5eb8-4a25-b4ab-6a6bf165da6a"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:26:16Z",
+      "message": "Machine Controller has not yet set OwnerRef",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:26:16Z",
+        "name": "test-cntrlplane-4826-patched-bkf55-7lzbt.18e2b46bce5e129d",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653139",
+        "uid": "6aad105c-139e-4298-bebd-270d815d02b9"
+      },
+      "reason": "Machine controller dependency not yet met",
+      "reportingComponent": "azuremachine-reconciler",
+      "reportingInstance": "",
+      "source": {
+        "component": "azuremachine-reconciler"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:26:16Z",
+      "involvedObject": {
+        "apiVersion": "infrastructure.cluster.x-k8s.io/v1beta1",
+        "kind": "AzureMachine",
+        "name": "test-cntrlplane-4826-unpatched-zftgr-t59jc",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653101",
+        "uid": "f06a32e9-98f1-4c46-ab51-0055c0a61b38"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:26:16Z",
+      "message": "Machine Controller has not yet set OwnerRef",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:26:16Z",
+        "name": "test-cntrlplane-4826-unpatched-zftgr-t59jc.18e2b46bbf9b13c9",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653102",
+        "uid": "e6da72bc-ad06-4c99-b420-2fb5808c0b10"
+      },
+      "reason": "Machine controller dependency not yet met",
+      "reportingComponent": "azuremachine-reconciler",
+      "reportingInstance": "",
+      "source": {
+        "component": "azuremachine-reconciler"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:26:16Z",
+      "involvedObject": {
+        "apiVersion": "cluster.x-k8s.io/v1beta2",
+        "kind": "MachineSet",
+        "name": "test-cntrlplane-4826-unpatched-zftgr",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653092",
+        "uid": "dfe75226-51b2-4f2f-a9a0-194fa01c6ae4"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:26:16Z",
+      "message": "Created Machine \"test-cntrlplane-4826-unpatched-zftgr-lc8kw\"",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:26:16Z",
+        "name": "test-cntrlplane-4826-unpatched-zftgr.18e2b46bc5de2da0",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653111",
+        "uid": "18384ec1-8999-4315-97d4-e13e491f81f7"
+      },
+      "reason": "SuccessfulCreate",
+      "reportingComponent": "machineset-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "machineset-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:26:16Z",
+      "involvedObject": {
+        "apiVersion": "cluster.x-k8s.io/v1beta2",
+        "kind": "MachineSet",
+        "name": "test-cntrlplane-4826-unpatched-zftgr",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653092",
+        "uid": "dfe75226-51b2-4f2f-a9a0-194fa01c6ae4"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:26:16Z",
+      "message": "Created Machine \"test-cntrlplane-4826-unpatched-zftgr-t59jc\"",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:26:16Z",
+        "name": "test-cntrlplane-4826-unpatched-zftgr.18e2b46bc0bf7860",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653105",
+        "uid": "1fa3109a-1049-4933-9c46-27bedea10107"
+      },
+      "reason": "SuccessfulCreate",
+      "reportingComponent": "machineset-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "machineset-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 3,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:26:55Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Secret",
+        "name": "token-test-cntrlplane-4826-unpatched-b229e3aa",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:27:01Z",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:26:55Z",
+        "name": "token-test-cntrlplane-4826-unpatched-b229e3aa.18e2b474e7dcf8ea",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653425",
+        "uid": "280076f3-a7c9-4218-b8a5-9ec7731f7bbc"
+      },
+      "reason": "GetPayload",
+      "reportingComponent": "ignition-server",
+      "reportingInstance": "",
+      "source": {
+        "component": "ignition-server"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 25,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:26:56Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Secret",
+        "name": "token-test-cntrlplane-4826-patched-b229e3aa",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:27:21Z",
+      "message": "Token not found in cache",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:26:56Z",
+        "name": "token-test-cntrlplane-4826-patched-b229e3aa.18e2b47510a2430f",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653551",
+        "uid": "c77a60de-fa87-4aa0-8da6-b0457e6be623"
+      },
+      "reason": "GetPayloadFailed",
+      "reportingComponent": "ignition-server",
+      "reportingInstance": "",
+      "source": {
+        "component": "ignition-server"
+      },
+      "type": "Warning"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 3,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:27:39Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Secret",
+        "name": "token-test-cntrlplane-4826-patched-b229e3aa",
+        "namespace": "clusters-test-cntrlplane-4826-hc"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:27:41Z",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:27:39Z",
+        "name": "token-test-cntrlplane-4826-patched-b229e3aa.18e2b47ef60f8743",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653631",
+        "uid": "091b8c3d-70d4-4dd7-bd93-958233b403d7"
+      },
+      "reason": "GetPayload",
+      "reportingComponent": "ignition-server",
+      "reportingInstance": "",
+      "source": {
+        "component": "ignition-server"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:27:59Z",
+      "involvedObject": {
+        "apiVersion": "infrastructure.cluster.x-k8s.io/v1beta1",
+        "kind": "AzureMachine",
+        "name": "test-cntrlplane-4826-patched-bkf55-gzcfm",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653348",
+        "uid": "128b4f84-d34f-4fd5-af31-aa26b339d773"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:27:59Z",
+      "message": "failed to reconcile AzureMachine: failed to reconcile AzureMachine service virtualmachine: failed to fetch VM addresses: context deadline exceeded",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:27:59Z",
+        "name": "test-cntrlplane-4826-patched-bkf55-gzcfm.18e2b483a31e16e8",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653719",
+        "uid": "d2ea633c-b6b8-458d-a559-09ffc4a5c0d1"
+      },
+      "reason": "ReconcileError",
+      "reportingComponent": "azuremachine-reconciler",
+      "reportingInstance": "",
+      "source": {
+        "component": "azuremachine-reconciler"
+      },
+      "type": "Warning"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:31:53Z",
+      "involvedObject": {
+        "apiVersion": "cluster.x-k8s.io/v1beta2",
+        "kind": "Machine",
+        "name": "test-cntrlplane-4826-unpatched-zftgr-lc8kw",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653518",
+        "uid": "4b07e44e-7fbb-4629-905d-31c2598358cf"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:31:53Z",
+      "message": "test-cntrlplane-4826-unpatched-zftgr-lc8kw",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:31:53Z",
+        "name": "test-cntrlplane-4826-unpatched-zftgr-lc8kw.18e2b4ba2c22a1c8",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129654937",
+        "uid": "68785fc5-3b24-4097-bd80-904240c48e75"
+      },
+      "reason": "SuccessfulSetNodeRef",
+      "reportingComponent": "machine-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "machine-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:32:18Z",
+      "involvedObject": {
+        "apiVersion": "cluster.x-k8s.io/v1beta2",
+        "kind": "Machine",
+        "name": "test-cntrlplane-4826-unpatched-zftgr-t59jc",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653516",
+        "uid": "511c6893-e2fe-4648-8b52-d1b453cb9216"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:32:18Z",
+      "message": "test-cntrlplane-4826-unpatched-zftgr-t59jc",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:32:18Z",
+        "name": "test-cntrlplane-4826-unpatched-zftgr-t59jc.18e2b4c017382fc5",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129655105",
+        "uid": "0fb9f9e1-8e97-4859-abb1-b00d103604dc"
+      },
+      "reason": "SuccessfulSetNodeRef",
+      "reportingComponent": "machine-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "machine-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:32:25Z",
+      "involvedObject": {
+        "apiVersion": "cluster.x-k8s.io/v1beta2",
+        "kind": "Machine",
+        "name": "test-cntrlplane-4826-unpatched-zftgr-kxhkm",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653510",
+        "uid": "c49e7ab8-1990-4f6c-81ed-e7c7f1946666"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:32:25Z",
+      "message": "test-cntrlplane-4826-unpatched-zftgr-kxhkm",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:32:25Z",
+        "name": "test-cntrlplane-4826-unpatched-zftgr-kxhkm.18e2b4c1c5744218",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129655142",
+        "uid": "2937d9a3-b0b7-4b84-b4d5-8793b433a27c"
+      },
+      "reason": "SuccessfulSetNodeRef",
+      "reportingComponent": "machine-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "machine-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:32:38Z",
+      "involvedObject": {
+        "apiVersion": "cluster.x-k8s.io/v1beta2",
+        "kind": "Machine",
+        "name": "test-cntrlplane-4826-patched-bkf55-gzcfm",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653747",
+        "uid": "70b744e9-f6a8-46d8-9f3e-81d28328378e"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:32:38Z",
+      "message": "test-cntrlplane-4826-patched-bkf55-gzcfm",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:32:38Z",
+        "name": "test-cntrlplane-4826-patched-bkf55-gzcfm.18e2b4c4aa96c065",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129655232",
+        "uid": "0e548e98-cc3b-4c36-978c-62aef625b4e2"
+      },
+      "reason": "SuccessfulSetNodeRef",
+      "reportingComponent": "machine-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "machine-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:32:47Z",
+      "involvedObject": {
+        "apiVersion": "cluster.x-k8s.io/v1beta2",
+        "kind": "Machine",
+        "name": "test-cntrlplane-4826-patched-bkf55-7lzbt",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653685",
+        "uid": "52fd7932-24ff-4bf6-a8a7-c89bf5bbcda4"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:32:47Z",
+      "message": "test-cntrlplane-4826-patched-bkf55-7lzbt",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:32:47Z",
+        "name": "test-cntrlplane-4826-patched-bkf55-7lzbt.18e2b4c6c8c81704",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129655279",
+        "uid": "528547d0-db0d-4790-866d-1efcc1db6f2c"
+      },
+      "reason": "SuccessfulSetNodeRef",
+      "reportingComponent": "machine-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "machine-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:33:08Z",
+      "involvedObject": {
+        "apiVersion": "cluster.x-k8s.io/v1beta2",
+        "kind": "Machine",
+        "name": "test-cntrlplane-4826-patched-bkf55-fjnb8",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129653689",
+        "uid": "eeb74a6f-6434-4ed0-867a-b5d6d85ed0c2"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:33:08Z",
+      "message": "test-cntrlplane-4826-patched-bkf55-fjnb8",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:33:08Z",
+        "name": "test-cntrlplane-4826-patched-bkf55-fjnb8.18e2b4cbb73bdbba",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129655360",
+        "uid": "fdf6b349-9ef8-4e07-9c9c-5f4d966e1c02"
+      },
+      "reason": "SuccessfulSetNodeRef",
+      "reportingComponent": "machine-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "machine-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 3,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T01:34:41Z",
+      "involvedObject": {
+        "apiVersion": "apps/v1",
+        "kind": "Deployment",
+        "name": "control-plane-pki-operator",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "uid": "cca60717-2a03-41ff-80ca-3d80cc20f028"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:34:41Z",
+      "message": "Updated Secret/customer-system-admin-client-cert-key -n clusters-test-cntrlplane-4826-hc because it changed",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:34:41Z",
+        "name": "control-plane-pki-operator.18e28d970e123371",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129655756",
+        "uid": "e467d481-6c83-48a3-956e-204e39572b96"
+      },
+      "reason": "SecretUpdated",
+      "reportingComponent": "control-plane-pki-operator",
+      "reportingInstance": "",
+      "source": {
+        "component": "control-plane-pki-operator"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:34:41Z",
+      "involvedObject": {
+        "apiVersion": "apps/v1",
+        "kind": "Deployment",
+        "name": "control-plane-pki-operator",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "uid": "cca60717-2a03-41ff-80ca-3d80cc20f028"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:34:41Z",
+      "message": "\"customer-system-admin-client-cert-key\" in \"clusters-test-cntrlplane-4826-hc\" requires a new target cert/key pair: past its refresh time 2026-10-28 13:34:40 +0000 UTC",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:34:41Z",
+        "name": "control-plane-pki-operator.18e2b4e14dfc4e96",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129655751",
+        "uid": "fca2cb09-4c4a-407a-8eae-d8fafe65b554"
+      },
+      "reason": "TargetUpdateRequired",
+      "reportingComponent": "control-plane-pki-operator",
+      "reportingInstance": "",
+      "source": {
+        "component": "control-plane-pki-operator"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:35:41Z",
+      "involvedObject": {
+        "apiVersion": "apps/v1",
+        "kind": "Deployment",
+        "name": "control-plane-pki-operator",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "uid": "cca60717-2a03-41ff-80ca-3d80cc20f028"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:35:41Z",
+      "message": "\"sre-system-admin-client-cert-key\" in \"clusters-test-cntrlplane-4826-hc\" requires a new target cert/key pair: past its refresh time 2026-10-28 13:34:42 +0000 UTC",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:35:41Z",
+        "name": "control-plane-pki-operator.18e2b4ef417596bf",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129655978",
+        "uid": "cb8873a2-2579-4dd4-9ec6-9bd44f1fb66b"
+      },
+      "reason": "TargetUpdateRequired",
+      "reportingComponent": "control-plane-pki-operator",
+      "reportingInstance": "",
+      "source": {
+        "component": "control-plane-pki-operator"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 3,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T01:34:41Z",
+      "involvedObject": {
+        "apiVersion": "apps/v1",
+        "kind": "Deployment",
+        "name": "control-plane-pki-operator",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "uid": "cca60717-2a03-41ff-80ca-3d80cc20f028"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:35:41Z",
+      "message": "Updated Secret/sre-system-admin-client-cert-key -n clusters-test-cntrlplane-4826-hc because it changed",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:35:41Z",
+        "name": "control-plane-pki-operator.18e28d96fd0caae9",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129655983",
+        "uid": "f56a4780-312a-494f-920e-6481e5c391d4"
+      },
+      "reason": "SecretUpdated",
+      "reportingComponent": "control-plane-pki-operator",
+      "reportingInstance": "",
+      "source": {
+        "component": "control-plane-pki-operator"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 6378,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-27T20:11:40Z",
+      "involvedObject": {
+        "apiVersion": "apps/v1",
+        "kind": "Deployment",
+        "name": "control-plane-pki-operator",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "uid": "cca60717-2a03-41ff-80ca-3d80cc20f028"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:37:15Z",
+      "message": "loaded certificate",
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:11:40Z",
+        "name": "control-plane-pki-operator.18e27bf684a9d635",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129656386",
+        "uid": "d0801d74-42be-479a-a9e9-73fb2bbf3332"
+      },
+      "reason": "CertificateLoadingSucceeded",
+      "reportingComponent": "control-plane-pki-operator-certificate-loading-controller-certificateloadingcontroller",
+      "reportingInstance": "",
+      "source": {
+        "component": "control-plane-pki-operator-certificate-loading-controller-certificateloadingcontroller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 6760,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-27T20:11:40Z",
+      "involvedObject": {
+        "apiVersion": "apps/v1",
+        "kind": "Deployment",
+        "name": "control-plane-pki-operator",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "uid": "cca60717-2a03-41ff-80ca-3d80cc20f028"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:37:15Z",
+      "message": "loaded certificate",
+      "metadata": {
+        "creationTimestamp": "2026-10-27T20:11:40Z",
+        "name": "control-plane-pki-operator.18e27bf682739464",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129656384",
+        "uid": "4d7dcfc6-acdd-4521-88cf-ac5390a23587"
+      },
+      "reason": "CertificateLoadingSucceeded",
+      "reportingComponent": "control-plane-pki-operator-certificate-loading-controller-certificateloadingcontroller",
+      "reportingInstance": "",
+      "source": {
+        "component": "control-plane-pki-operator-certificate-loading-controller-certificateloadingcontroller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:37:15Z",
+      "involvedObject": {
+        "apiVersion": "cluster.x-k8s.io/v1beta2",
+        "kind": "MachineDeployment",
+        "name": "test-cntrlplane-4826-unpatched",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129656383",
+        "uid": "6eac54bc-8b89-4e0c-bed1-09a81aec8542"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:37:15Z",
+      "message": "Created MachineSet clusters-test-cntrlplane-4826-hc/test-cntrlplane-4826-unpatched-dslll with 1 replicas",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:37:15Z",
+        "name": "test-cntrlplane-4826-unpatched.18e2b505269f9887",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129656391",
+        "uid": "9640533f-343b-4c06-89a1-42feab526c06"
+      },
+      "reason": "SuccessfulCreate",
+      "reportingComponent": "machinedeployment-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "machinedeployment-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:37:17Z",
+      "involvedObject": {
+        "apiVersion": "cluster.x-k8s.io/v1beta2",
+        "kind": "MachineSet",
+        "name": "test-cntrlplane-4826-unpatched-dslll",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129656407",
+        "uid": "7b58dc56-3183-47c9-9fe8-4dd2da3bb2a4"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:37:17Z",
+      "message": "Created Machine \"test-cntrlplane-4826-unpatched-dslll-p6w65\"",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:37:17Z",
+        "name": "test-cntrlplane-4826-unpatched-dslll.18e2b505a36a0fdc",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129656427",
+        "uid": "7e82af18-bba4-4189-ab73-4af5ba7ae6bb"
+      },
+      "reason": "SuccessfulCreate",
+      "reportingComponent": "machineset-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "machineset-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T13:37:17Z",
+      "involvedObject": {
+        "apiVersion": "infrastructure.cluster.x-k8s.io/v1beta1",
+        "kind": "AzureMachine",
+        "name": "test-cntrlplane-4826-unpatched-dslll-p6w65",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129656423",
+        "uid": "05907759-64ab-4821-8e7d-8d8889b32cab"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T13:37:17Z",
+      "message": "Machine Controller has not yet set OwnerRef",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T13:37:17Z",
+        "name": "test-cntrlplane-4826-unpatched-dslll-p6w65.18e2b505a252a302",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "resourceVersion": "129656424",
+        "uid": "a282c8cd-a378-4cb2-8ba8-c2cb7c7cad54"
+      },
+      "reason": "Machine controller dependency not yet met",
+      "reportingComponent": "azuremachine-reconciler",
+      "reportingInstance": "",
+      "source": {
+        "component": "azuremachine-reconciler"
+      },
+      "type": "Normal"
+    }
+  ],
+  "kind": "List",
+  "metadata": {
+    "resourceVersion": ""
+  }
+}

@@ -1,0 +1,385 @@
+{
+  "apiVersion": "v1",
+  "items": [
+    {
+      "apiVersion": "cluster.x-k8s.io/v1beta2",
+      "kind": "MachineDeployment",
+      "metadata": {
+        "annotations": {
+          "cluster.x-k8s.io/cluster-api-autoscaler-node-group-max-size": "0",
+          "cluster.x-k8s.io/cluster-api-autoscaler-node-group-min-size": "0",
+          "hypershift.openshift.io/nodePool": "clusters/test-cntrlplane-4826-patched",
+          "machinedeployment.clusters.x-k8s.io/revision": "4"
+        },
+        "creationTimestamp": "2026-10-28T13:26:12Z",
+        "finalizers": [
+          "cluster.x-k8s.io/machinedeployment"
+        ],
+        "generation": 5,
+        "labels": {
+          "cluster.x-k8s.io/cluster-name": "test-cntrlplane-4826"
+        },
+        "name": "test-cntrlplane-4826-patched",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "ownerReferences": [
+          {
+            "apiVersion": "cluster.x-k8s.io/v1beta2",
+            "kind": "Cluster",
+            "name": "test-cntrlplane-4826",
+            "uid": "e9113f62-a34c-4051-a97d-080c0d2593d0"
+          }
+        ],
+        "resourceVersion": "129677493",
+        "uid": "f2adcde0-7e6f-44c0-833a-d18b6486a868"
+      },
+      "spec": {
+        "clusterName": "test-cntrlplane-4826",
+        "replicas": 3,
+        "rollout": {
+          "strategy": {
+            "rollingUpdate": {
+              "maxSurge": 3,
+              "maxUnavailable": 0
+            },
+            "type": "RollingUpdate"
+          }
+        },
+        "selector": {
+          "matchLabels": {
+            "brco-f6265508-test-cntrlplane-4826-patched": "brco-f6265508-test-cntrlplane-4826-patched",
+            "cluster.x-k8s.io/cluster-name": "test-cntrlplane-4826"
+          }
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "hypershift.openshift.io/nodePool": "clusters/test-cntrlplane-4826-patched",
+              "hypershift.openshift.io/release-version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+            },
+            "labels": {
+              "brco-f6265508-test-cntrlplane-4826-patched": "brco-f6265508-test-cntrlplane-4826-patched",
+              "cluster.x-k8s.io/cluster-name": "test-cntrlplane-4826"
+            }
+          },
+          "spec": {
+            "bootstrap": {
+              "dataSecretName": "user-data-test-cntrlplane-4826-patched-e7ebf8df"
+            },
+            "clusterName": "test-cntrlplane-4826",
+            "deletion": {
+              "nodeDrainTimeoutSeconds": 0,
+              "nodeVolumeDetachTimeoutSeconds": 0
+            },
+            "infrastructureRef": {
+              "apiGroup": "infrastructure.cluster.x-k8s.io",
+              "kind": "AzureMachineTemplate",
+              "name": "test-cntrlplane-4826-patched-776e47ca"
+            },
+            "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+          }
+        }
+      },
+      "status": {
+        "availableReplicas": 3,
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-28T13:33:43Z",
+            "message": "",
+            "observedGeneration": 5,
+            "reason": "Available",
+            "status": "True",
+            "type": "Available"
+          },
+          {
+            "lastTransitionTime": "2026-10-28T13:32:38Z",
+            "message": "Rolling out 3 not up-to-date replicas\n* AzureMachine is not up-to-date",
+            "observedGeneration": 5,
+            "reason": "RollingOut",
+            "status": "True",
+            "type": "RollingOut"
+          },
+          {
+            "lastTransitionTime": "2026-10-28T13:26:14Z",
+            "message": "",
+            "observedGeneration": 5,
+            "reason": "NotRemediating",
+            "status": "False",
+            "type": "Remediating"
+          },
+          {
+            "lastTransitionTime": "2026-10-28T14:56:07Z",
+            "message": "",
+            "observedGeneration": 5,
+            "reason": "NotScalingDown",
+            "status": "False",
+            "type": "ScalingDown"
+          },
+          {
+            "lastTransitionTime": "2026-10-28T13:26:18Z",
+            "message": "",
+            "observedGeneration": 5,
+            "reason": "NotScalingUp",
+            "status": "False",
+            "type": "ScalingUp"
+          },
+          {
+            "lastTransitionTime": "2026-10-28T14:56:06Z",
+            "message": "",
+            "observedGeneration": 5,
+            "reason": "Ready",
+            "status": "True",
+            "type": "MachinesReady"
+          },
+          {
+            "lastTransitionTime": "2026-10-28T13:32:38Z",
+            "message": "* Machines test-cntrlplane-4826-patched-ctnbv-27hw8, test-cntrlplane-4826-patched-ctnbv-j74st, test-cntrlplane-4826-patched-ctnbv-k4dr5:\n  * AzureMachine is not up-to-date",
+            "observedGeneration": 5,
+            "reason": "NotUpToDate",
+            "status": "False",
+            "type": "MachinesUpToDate"
+          },
+          {
+            "lastTransitionTime": "2026-10-28T13:26:13Z",
+            "message": "",
+            "observedGeneration": 5,
+            "reason": "NotPaused",
+            "status": "False",
+            "type": "Paused"
+          },
+          {
+            "lastTransitionTime": "2026-10-28T13:26:14Z",
+            "message": "",
+            "observedGeneration": 5,
+            "reason": "NotDeleting",
+            "status": "False",
+            "type": "Deleting"
+          }
+        ],
+        "deprecated": {
+          "v1beta1": {
+            "availableReplicas": 3,
+            "conditions": [
+              {
+                "lastTransitionTime": "2026-10-28T13:33:42Z",
+                "status": "True",
+                "type": "Ready"
+              },
+              {
+                "lastTransitionTime": "2026-10-28T13:33:42Z",
+                "status": "True",
+                "type": "Available"
+              },
+              {
+                "lastTransitionTime": "2026-10-28T15:04:16Z",
+                "reason": "WaitingForMachineSet",
+                "severity": "Info",
+                "status": "False",
+                "type": "MachineSetReady"
+              }
+            ],
+            "readyReplicas": 3,
+            "unavailableReplicas": 3,
+            "updatedReplicas": 0
+          }
+        },
+        "observedGeneration": 5,
+        "phase": "Running",
+        "readyReplicas": 3,
+        "replicas": 3,
+        "selector": "brco-f6265508-test-cntrlplane-4826-patched=brco-f6265508-test-cntrlplane-4826-patched,cluster.x-k8s.io/cluster-name=test-cntrlplane-4826",
+        "upToDateReplicas": 0
+      }
+    },
+    {
+      "apiVersion": "cluster.x-k8s.io/v1beta2",
+      "kind": "MachineDeployment",
+      "metadata": {
+        "annotations": {
+          "cluster.x-k8s.io/cluster-api-autoscaler-node-group-max-size": "0",
+          "cluster.x-k8s.io/cluster-api-autoscaler-node-group-min-size": "0",
+          "hypershift.openshift.io/nodePool": "clusters/test-cntrlplane-4826-unpatched",
+          "machinedeployment.clusters.x-k8s.io/revision": "2"
+        },
+        "creationTimestamp": "2026-10-28T13:26:12Z",
+        "finalizers": [
+          "cluster.x-k8s.io/machinedeployment"
+        ],
+        "generation": 2,
+        "labels": {
+          "cluster.x-k8s.io/cluster-name": "test-cntrlplane-4826"
+        },
+        "name": "test-cntrlplane-4826-unpatched",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "ownerReferences": [
+          {
+            "apiVersion": "cluster.x-k8s.io/v1beta2",
+            "kind": "Cluster",
+            "name": "test-cntrlplane-4826",
+            "uid": "e9113f62-a34c-4051-a97d-080c0d2593d0"
+          }
+        ],
+        "resourceVersion": "129661950",
+        "uid": "6eac54bc-8b89-4e0c-bed1-09a81aec8542"
+      },
+      "spec": {
+        "clusterName": "test-cntrlplane-4826",
+        "replicas": 3,
+        "rollout": {
+          "strategy": {
+            "rollingUpdate": {
+              "maxSurge": 1,
+              "maxUnavailable": 0
+            },
+            "type": "RollingUpdate"
+          }
+        },
+        "selector": {
+          "matchLabels": {
+            "br-f6265508-test-cntrlplane-4826-unpatched": "br-f6265508-test-cntrlplane-4826-unpatched",
+            "cluster.x-k8s.io/cluster-name": "test-cntrlplane-4826"
+          }
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "hypershift.openshift.io/nodePool": "clusters/test-cntrlplane-4826-unpatched",
+              "hypershift.openshift.io/release-version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+            },
+            "labels": {
+              "br-f6265508-test-cntrlplane-4826-unpatched": "br-f6265508-test-cntrlplane-4826-unpatched",
+              "cluster.x-k8s.io/cluster-name": "test-cntrlplane-4826"
+            }
+          },
+          "spec": {
+            "bootstrap": {
+              "dataSecretName": "user-data-test-cntrlplane-4826-unpatched-fc563e6b"
+            },
+            "clusterName": "test-cntrlplane-4826",
+            "deletion": {
+              "nodeDrainTimeoutSeconds": 0,
+              "nodeVolumeDetachTimeoutSeconds": 0
+            },
+            "infrastructureRef": {
+              "apiGroup": "infrastructure.cluster.x-k8s.io",
+              "kind": "AzureMachineTemplate",
+              "name": "test-cntrlplane-4826-unpatched-e4b9b203"
+            },
+            "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+          }
+        }
+      },
+      "status": {
+        "availableReplicas": 3,
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-28T14:00:36Z",
+            "message": "",
+            "observedGeneration": 2,
+            "reason": "Available",
+            "status": "True",
+            "type": "Available"
+          },
+          {
+            "lastTransitionTime": "2026-10-28T13:31:53Z",
+            "message": "Rolling out 3 not up-to-date replicas\n* Node.status.nodeInfo.kubeletVersion v1.37.1, 5.1.0-0.nightly-multi-2026-10-27-082258 required",
+            "observedGeneration": 2,
+            "reason": "RollingOut",
+            "status": "True",
+            "type": "RollingOut"
+          },
+          {
+            "lastTransitionTime": "2026-10-28T13:26:14Z",
+            "message": "",
+            "observedGeneration": 2,
+            "reason": "NotRemediating",
+            "status": "False",
+            "type": "Remediating"
+          },
+          {
+            "lastTransitionTime": "2026-10-28T13:59:55Z",
+            "message": "",
+            "observedGeneration": 2,
+            "reason": "NotScalingDown",
+            "status": "False",
+            "type": "ScalingDown"
+          },
+          {
+            "lastTransitionTime": "2026-10-28T13:26:18Z",
+            "message": "",
+            "observedGeneration": 2,
+            "reason": "NotScalingUp",
+            "status": "False",
+            "type": "ScalingUp"
+          },
+          {
+            "lastTransitionTime": "2026-10-28T14:00:35Z",
+            "message": "",
+            "observedGeneration": 2,
+            "reason": "Ready",
+            "status": "True",
+            "type": "MachinesReady"
+          },
+          {
+            "lastTransitionTime": "2026-10-28T13:31:53Z",
+            "message": "* Machines test-cntrlplane-4826-unpatched-dslll-f62jw, test-cntrlplane-4826-unpatched-dslll-hlb8s, test-cntrlplane-4826-unpatched-dslll-p6w65:\n  * Node.status.nodeInfo.kubeletVersion v1.37.1, 5.1.0-0.nightly-multi-2026-10-27-082258 required",
+            "observedGeneration": 2,
+            "reason": "NotUpToDate",
+            "status": "False",
+            "type": "MachinesUpToDate"
+          },
+          {
+            "lastTransitionTime": "2026-10-28T13:26:13Z",
+            "message": "",
+            "observedGeneration": 2,
+            "reason": "NotPaused",
+            "status": "False",
+            "type": "Paused"
+          },
+          {
+            "lastTransitionTime": "2026-10-28T13:26:14Z",
+            "message": "",
+            "observedGeneration": 2,
+            "reason": "NotDeleting",
+            "status": "False",
+            "type": "Deleting"
+          }
+        ],
+        "deprecated": {
+          "v1beta1": {
+            "availableReplicas": 3,
+            "conditions": [
+              {
+                "lastTransitionTime": "2026-10-28T13:33:17Z",
+                "status": "True",
+                "type": "Ready"
+              },
+              {
+                "lastTransitionTime": "2026-10-28T13:33:17Z",
+                "status": "True",
+                "type": "Available"
+              },
+              {
+                "lastTransitionTime": "2026-10-28T14:00:35Z",
+                "status": "True",
+                "type": "MachineSetReady"
+              }
+            ],
+            "readyReplicas": 3,
+            "unavailableReplicas": 0,
+            "updatedReplicas": 3
+          }
+        },
+        "observedGeneration": 2,
+        "phase": "Running",
+        "readyReplicas": 3,
+        "replicas": 3,
+        "selector": "br-f6265508-test-cntrlplane-4826-unpatched=br-f6265508-test-cntrlplane-4826-unpatched,cluster.x-k8s.io/cluster-name=test-cntrlplane-4826",
+        "upToDateReplicas": 0
+      }
+    }
+  ],
+  "kind": "List",
+  "metadata": {
+    "resourceVersion": ""
+  }
+}

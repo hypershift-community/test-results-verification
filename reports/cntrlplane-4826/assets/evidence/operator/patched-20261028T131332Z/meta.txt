@@ -1,0 +1,4 @@
+started_utc=2026-10-28T13:13:32Z
+operator_image=quay.io/example/hypershift@sha256:7bbfc29f4283a5b76ba9d1ee9f6a74864dc874614b26741520ae52d6a887b4a2
+init_image=quay.io/example/hypershift@sha256:7bbfc29f4283a5b76ba9d1ee9f6a74864dc874614b26741520ae52d6a887b4a2
+completed_utc=2026-10-28T13:16:08Z

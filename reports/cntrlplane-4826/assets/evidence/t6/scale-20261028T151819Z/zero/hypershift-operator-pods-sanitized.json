@@ -1,0 +1,72 @@
+{
+  "items": [
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-28T14:09:29Z",
+        "labels": {
+          "app": "operator",
+          "hypershift.openshift.io/operator-component": "operator",
+          "name": "operator",
+          "pod-template-hash": "5d799f666b"
+        },
+        "name": "operator-5d799f666b-zb9ws"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/example/hypershift@sha256:7bbfc29f4283a5b76ba9d1ee9f6a74864dc874614b26741520ae52d6a887b4a2",
+            "imageID": "quay.io/example/hypershift@sha256:7bbfc29f4283a5b76ba9d1ee9f6a74864dc874614b26741520ae52d6a887b4a2",
+            "name": "operator",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/example/hypershift@sha256:7bbfc29f4283a5b76ba9d1ee9f6a74864dc874614b26741520ae52d6a887b4a2",
+            "imageID": "quay.io/example/hypershift@sha256:7bbfc29f4283a5b76ba9d1ee9f6a74864dc874614b26741520ae52d6a887b4a2",
+            "name": "init-environment",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-28T14:09:29Z"
+      }
+    },
+    {
+      "metadata": {
+        "creationTimestamp": "2026-10-28T14:10:33Z",
+        "labels": {
+          "app": "operator",
+          "hypershift.openshift.io/operator-component": "operator",
+          "name": "operator",
+          "pod-template-hash": "5d799f666b"
+        },
+        "name": "operator-5d799f666b-znfr4"
+      },
+      "status": {
+        "containerStatuses": [
+          {
+            "image": "quay.io/example/hypershift@sha256:7bbfc29f4283a5b76ba9d1ee9f6a74864dc874614b26741520ae52d6a887b4a2",
+            "imageID": "quay.io/example/hypershift@sha256:7bbfc29f4283a5b76ba9d1ee9f6a74864dc874614b26741520ae52d6a887b4a2",
+            "name": "operator",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "initContainerStatuses": [
+          {
+            "image": "quay.io/example/hypershift@sha256:7bbfc29f4283a5b76ba9d1ee9f6a74864dc874614b26741520ae52d6a887b4a2",
+            "imageID": "quay.io/example/hypershift@sha256:7bbfc29f4283a5b76ba9d1ee9f6a74864dc874614b26741520ae52d6a887b4a2",
+            "name": "init-environment",
+            "ready": true,
+            "restartCount": 0
+          }
+        ],
+        "phase": "Running",
+        "startTime": "2026-10-28T14:10:33Z"
+      }
+    }
+  ]
+}

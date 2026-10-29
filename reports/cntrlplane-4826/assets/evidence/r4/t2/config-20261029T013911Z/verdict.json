@@ -1,0 +1,68 @@
+{
+  "baseCommit": "ee327075b155839511edc3779510ceb95c93a658",
+  "capiImage": "registry.k8s.io/cluster-api/cluster-api-controller:v1.14.3",
+  "checks": [
+    {
+      "detail": "generation 1 -> 2",
+      "name": "NodePool generation advanced by one",
+      "passed": true
+    },
+    {
+      "detail": "1e0283bf/7ae0b013 -> 125f5cfc/a97c570e",
+      "name": "config and config-version annotations advanced",
+      "passed": true
+    },
+    {
+      "detail": "UpdatingConfig=False",
+      "name": "UpdatingConfig cleared",
+      "passed": true
+    },
+    {
+      "detail": "status.version=5.1.0-0.nightly-multi-2026-10-27-082258, guest=5.1.0-0.nightly-multi-2026-10-27-082258, changedObservations=0",
+      "name": "release version unchanged",
+      "passed": true
+    },
+    {
+      "detail": "platform template test-cntrlplane-4826-r4-head-776e47ca -> test-cntrlplane-4826-r4-head-776e47ca, changedObservations=0",
+      "name": "platform template unchanged",
+      "passed": true
+    },
+    {
+      "detail": "physicalRolloutComplete=true",
+      "name": "physical rollout complete",
+      "passed": true
+    },
+    {
+      "detail": "upToDateReplicas=0",
+      "name": "upToDateReplicas zero",
+      "passed": true
+    },
+    {
+      "detail": "premature observations=0, max consecutive=0",
+      "name": "no premature completion metadata",
+      "passed": true
+    },
+    {
+      "detail": "marker present on 3 of 3 workers",
+      "name": "marker verified on every worker",
+      "passed": true
+    },
+    {
+      "detail": "quay.io/example/hypershift@sha256:7a2248fdc9d50e99e8b444aa887cea96bdf0023e2e81062f9de21266ddb492a6",
+      "name": "head operator image",
+      "passed": true
+    },
+    {
+      "detail": "quay.io/openshift-release-dev/ocp-release-nightly@sha256:08f0905c06195a76138db7071aa77ae644aea401eb832d51ebbf4fb870698346",
+      "name": "release B fixed",
+      "passed": true
+    }
+  ],
+  "generatedAt": "2026-10-29T02:03:54Z",
+  "headCommit": "ee5691233b08e3271f030ebd24055faa6857fd39",
+  "hostedCluster": "clusters/test-cntrlplane-4826-r4-hc",
+  "notes": "Config-only MachineConfig rollout on the head operator. 0 premature annotation observation(s), max consecutive 0. Marker verified on 3 of 3 workers. upToDateReplicas=0.",
+  "operatorImage": "quay.io/example/hypershift@sha256:7a2248fdc9d50e99e8b444aa887cea96bdf0023e2e81062f9de21266ddb492a6",
+  "result": "PASS",
+  "scenario": "T2 config-only Replace rollout"
+}

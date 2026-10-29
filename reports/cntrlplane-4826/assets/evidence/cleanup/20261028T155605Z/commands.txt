@@ -1,0 +1,3 @@
+2026-10-28T15:56:05Z kubectl delete nodepool test-cntrlplane-4826-unpatched -n clusters --wait=false
+2026-10-28T15:56:05Z kubectl delete nodepool test-cntrlplane-4826-patched -n clusters --wait=false
+2026-10-28T15:56:06Z kubectl delete nodepool test-cntrlplane-4826-scale -n clusters --wait=false

@@ -1,0 +1,5 @@
+deadline_epoch=1793193686
+deadline_utc=2026-10-28T13:21:26Z
+nodepool=test-cntrlplane-4826-hc
+operator=patched
+expected_seconds=300

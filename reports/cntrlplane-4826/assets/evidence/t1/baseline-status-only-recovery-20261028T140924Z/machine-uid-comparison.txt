@@ -1,0 +1,3 @@
+machine_uids_unchanged=true
+recovered_version=5.1.0-0.nightly-multi-2026-10-27-082258
+updating_version=False

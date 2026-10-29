@@ -1,0 +1,77 @@
+{
+  "apiVersion": "v1",
+  "items": [
+    {
+      "apiVersion": "infrastructure.cluster.x-k8s.io/v1beta1",
+      "kind": "AzureMachineTemplate",
+      "metadata": {
+        "annotations": {
+          "hypershift.openshift.io/desired-state-hash": "d023b9c3ede996892c443207c297da0078e326cab423313a7421b497ceb97e5d",
+          "hypershift.openshift.io/nodePool": "clusters/test-cntrlplane-4826-r4-head"
+        },
+        "creationTimestamp": "2026-10-29T01:31:15Z",
+        "generation": 1,
+        "name": "test-cntrlplane-4826-r4-head-776e47ca",
+        "namespace": "clusters-test-cntrlplane-4826-r4-hc",
+        "ownerReferences": [
+          {
+            "apiVersion": "cluster.x-k8s.io/v1beta2",
+            "kind": "Cluster",
+            "name": "test-cntrlplane-4826-r4",
+            "uid": "12e62c46-97cd-45d7-9cb6-7c75ee2053f5"
+          }
+        ],
+        "resourceVersion": "129827419",
+        "uid": "7a504994-7c92-4194-bd51-d792415d97f2"
+      },
+      "spec": {
+        "template": {
+          "metadata": {},
+          "spec": {
+            "image": {
+              "marketplace": {
+                "offer": "aro4",
+                "publisher": "azureopenshift",
+                "sku": "aro_5-0_x64_gen2",
+                "thirdPartyImage": false,
+                "version": "10.2.20260423"
+              }
+            },
+            "networkInterfaces": [
+              {
+                "subnetName": "default"
+              }
+            ],
+            "osDisk": {
+              "cachingType": "None",
+              "diskSizeGB": 120,
+              "managedDisk": {
+                "storageAccountType": "Premium_LRS"
+              },
+              "osType": ""
+            },
+            "securityProfile": {
+              "encryptionAtHost": true
+            },
+            "sshPublicKey": "c3NoLXJzYSBBQUFBQjNOemFDMXljMkVBQUFBREFRQUJBQUFCQVFDTGFjOTR4dUE4QjkyMEtjejhKNjhUdmZCRjQyR2UwUllXSUx3Lzd6dDhUQlU5ell5Q0Q2K0ZlekFwWndLRjB1V3luMGVBQmlBWVdIV0tKbENxS0VIT2hOQmV2Mkx3S0dnZHFqM0dvcHV2N3RpZFVqSVpqYi9DVWtjQVRZUWhMWkxVTCs3eWkzRThKNHdhYkxEMWVNS1p1U3ZmMUsxT0RwVUFXYTkwbWVmR0FBOVdIVEhMcnF1UUpWdC9JT0JKN1ROZFNwMDVuM0Ywa29xZlE2empwRlFYMk8zaWJUc29yR3ZEekdhYS9yUENxQWhTSjRJaEhnMDNVb3FBbVlraW51NTFvVEcxRlRXaTh2b00vRVJ4TlduamNUSElET1JmYmo2bFVyZ3Zkci9MZGtqc2dFcENiNEMxUS9IbW5MRHVpTEdPM2tNZ2cyOHFzZ0ZmTHloUjl3ay8K",
+            "vmSize": "Standard_D4s_v5"
+          }
+        }
+      },
+      "status": {
+        "capacity": {
+          "cpu": "4",
+          "memory": "16Gi"
+        },
+        "nodeInfo": {
+          "architecture": "amd64",
+          "operatingSystem": "linux"
+        }
+      }
+    }
+  ],
+  "kind": "List",
+  "metadata": {
+    "resourceVersion": ""
+  }
+}

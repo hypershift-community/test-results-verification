@@ -1,0 +1,2491 @@
+{
+  "apiVersion": "v1",
+  "items": [
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "openshift.io/sa.scc.mcs": "s0:c25,c15",
+          "openshift.io/sa.scc.supplemental-groups": "1000630000/10000",
+          "openshift.io/sa.scc.uid-range": "1000630000/10000",
+          "security.openshift.io/MinimallySufficientPodSecurityStandard": "restricted"
+        },
+        "creationTimestamp": "2026-05-13T17:56:53Z",
+        "labels": {
+          "hypershift.openshift.io/auto-created-for-infra": "test-cntrlplane-4826",
+          "kubernetes.io/metadata.name": "clusters",
+          "pod-security.kubernetes.io/audit": "restricted",
+          "pod-security.kubernetes.io/audit-version": "latest",
+          "pod-security.kubernetes.io/enforce": "restricted",
+          "pod-security.kubernetes.io/enforce-version": "latest",
+          "pod-security.kubernetes.io/warn": "restricted",
+          "pod-security.kubernetes.io/warn-version": "latest"
+        },
+        "name": "clusters",
+        "resourceVersion": "129377467",
+        "uid": "e56dd13f-2246-4644-a5b9-b159753fa909"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "openshift.io/sa.scc.mcs": "s0:c1,c0",
+          "openshift.io/sa.scc.supplemental-groups": "1000000000/10000",
+          "openshift.io/sa.scc.uid-range": "1000000000/10000"
+        },
+        "creationTimestamp": "2026-01-05T13:50:53Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "default",
+          "pod-security.kubernetes.io/audit": "privileged",
+          "pod-security.kubernetes.io/enforce": "privileged",
+          "pod-security.kubernetes.io/warn": "privileged"
+        },
+        "name": "default",
+        "resourceVersion": "2283",
+        "uid": "40c73335-570e-4a7d-b4af-1c6f6f5354be"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "openshift.io/sa.scc.mcs": "s0:c25,c10",
+          "openshift.io/sa.scc.supplemental-groups": "1000620000/10000",
+          "openshift.io/sa.scc.uid-range": "1000620000/10000",
+          "security.openshift.io/MinimallySufficientPodSecurityStandard": "privileged"
+        },
+        "creationTimestamp": "2026-01-05T14:41:26Z",
+        "labels": {
+          "hypershift.openshift.io/component": "operator",
+          "hypershift.openshift.io/monitoring": "true",
+          "kubernetes.io/metadata.name": "hypershift",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true",
+          "pod-security.kubernetes.io/audit": "privileged",
+          "pod-security.kubernetes.io/audit-version": "latest",
+          "pod-security.kubernetes.io/enforce": "privileged",
+          "pod-security.kubernetes.io/enforce-version": "latest",
+          "pod-security.kubernetes.io/warn": "privileged",
+          "pod-security.kubernetes.io/warn-version": "latest"
+        },
+        "name": "hypershift",
+        "resourceVersion": "129376649",
+        "uid": "2275c5a8-b6d6-4e02-abfd-220dba583420"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "openshift.io/sa.scc.mcs": "s0:c3,c2",
+          "openshift.io/sa.scc.supplemental-groups": "1000010000/10000",
+          "openshift.io/sa.scc.uid-range": "1000010000/10000"
+        },
+        "creationTimestamp": "2026-01-05T13:50:53Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "kube-node-lease"
+        },
+        "name": "kube-node-lease",
+        "resourceVersion": "2286",
+        "uid": "b6583284-76a4-4c04-8c00-0deb98d68c80"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "openshift.io/sa.scc.mcs": "s0:c5,c0",
+          "openshift.io/sa.scc.supplemental-groups": "1000020000/10000",
+          "openshift.io/sa.scc.uid-range": "1000020000/10000"
+        },
+        "creationTimestamp": "2026-01-05T13:50:53Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "kube-public",
+          "pod-security.kubernetes.io/audit": "privileged",
+          "pod-security.kubernetes.io/enforce": "privileged",
+          "pod-security.kubernetes.io/warn": "privileged"
+        },
+        "name": "kube-public",
+        "resourceVersion": "2290",
+        "uid": "c231c583-5058-4547-99b3-b183b1c5c7f0"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "openshift.io/sa.scc.mcs": "s0:c6,c0",
+          "openshift.io/sa.scc.supplemental-groups": "1000030000/10000",
+          "openshift.io/sa.scc.uid-range": "1000030000/10000"
+        },
+        "creationTimestamp": "2026-01-05T13:50:53Z",
+        "labels": {
+          "hypershift.openshift.io/managed": "true",
+          "kubernetes.io/metadata.name": "kube-system",
+          "pod-security.kubernetes.io/audit": "privileged",
+          "pod-security.kubernetes.io/enforce": "privileged",
+          "pod-security.kubernetes.io/warn": "privileged",
+          "security.openshift.io/scc.podSecurityLabelSync": "false"
+        },
+        "name": "kube-system",
+        "resourceVersion": "2293",
+        "uid": "3816fde9-41d0-407f-aff9-356c7df000cb"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "openshift.io/sa.scc.mcs": "s0:c6,c5",
+          "openshift.io/sa.scc.supplemental-groups": "1000040000/10000",
+          "openshift.io/sa.scc.uid-range": "1000040000/10000"
+        },
+        "creationTimestamp": "2026-01-05T13:51:06Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift"
+        },
+        "name": "openshift",
+        "resourceVersion": "2296",
+        "uid": "d5f59c0e-d58b-4f12-ae17-aa81545733f7"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "openshift.io/sa.scc.mcs": "s0:c7,c4",
+          "openshift.io/sa.scc.supplemental-groups": "1000050000/10000",
+          "openshift.io/sa.scc.uid-range": "1000050000/10000"
+        },
+        "creationTimestamp": "2026-01-05T13:51:43Z",
+        "labels": {
+          "hypershift.openshift.io/managed": "true",
+          "kubernetes.io/metadata.name": "openshift-apiserver"
+        },
+        "name": "openshift-apiserver",
+        "resourceVersion": "2299",
+        "uid": "896b4a3a-0abb-4e6e-86ad-5ea4df75ac50"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "include.release.openshift.io/hypershift": "true",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c8,c2",
+          "openshift.io/sa.scc.supplemental-groups": "1000060000/10000",
+          "openshift.io/sa.scc.uid-range": "1000060000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:23Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-apiserver-operator",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true",
+          "openshift.io/run-level": ""
+        },
+        "name": "openshift-apiserver-operator",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "f1015720-9dbb-49d6-a1da-58d6e4ce2f42"
+          }
+        ],
+        "resourceVersion": "2302",
+        "uid": "db3bf174-5518-48c1-bf40-8ea1bb33379c"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "openshift.io/sa.scc.mcs": "s0:c8,c7",
+          "openshift.io/sa.scc.supplemental-groups": "1000070000/10000",
+          "openshift.io/sa.scc.uid-range": "1000070000/10000"
+        },
+        "creationTimestamp": "2026-01-05T13:51:43Z",
+        "labels": {
+          "hypershift.openshift.io/managed": "true",
+          "kubernetes.io/metadata.name": "openshift-authentication"
+        },
+        "name": "openshift-authentication",
+        "resourceVersion": "2305",
+        "uid": "f8d338eb-f38d-422a-96e2-665465030cb6"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c9,c4",
+          "openshift.io/sa.scc.supplemental-groups": "1000080000/10000",
+          "openshift.io/sa.scc.uid-range": "1000080000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:23Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-authentication-operator",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true",
+          "pod-security.kubernetes.io/audit": "baseline",
+          "pod-security.kubernetes.io/enforce": "baseline",
+          "pod-security.kubernetes.io/warn": "baseline"
+        },
+        "name": "openshift-authentication-operator",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "f1015720-9dbb-49d6-a1da-58d6e4ce2f42"
+          }
+        ],
+        "resourceVersion": "2312",
+        "uid": "8e060a65-3cec-47bb-bde4-6c11c1f9d62d"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "openshift.io/sa.scc.mcs": "s0:c10,c0",
+          "openshift.io/sa.scc.supplemental-groups": "1000090000/10000",
+          "openshift.io/sa.scc.uid-range": "1000090000/10000"
+        },
+        "creationTimestamp": "2026-01-05T13:51:43Z",
+        "labels": {
+          "hypershift.openshift.io/managed": "true",
+          "kubernetes.io/metadata.name": "openshift-cloud-controller-manager"
+        },
+        "name": "openshift-cloud-controller-manager",
+        "resourceVersion": "2318",
+        "uid": "7bc02595-2e1c-46ea-b23e-44764cfd733c"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "capability.openshift.io/name": "CloudCredential",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c10,c5",
+          "openshift.io/sa.scc.supplemental-groups": "1000100000/10000",
+          "openshift.io/sa.scc.uid-range": "1000100000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:23Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-cloud-credential-operator",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true",
+          "openshift.io/run-level": ""
+        },
+        "name": "openshift-cloud-credential-operator",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "f1015720-9dbb-49d6-a1da-58d6e4ce2f42"
+          }
+        ],
+        "resourceVersion": "2331",
+        "uid": "6faeebca-ce7d-4ef1-8b9c-02b57be90848"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true",
+          "openshift.io/description": "OpenShift cloud network config controller namespace - a controller used to manage cloud-level network configuration",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c11,c0",
+          "openshift.io/sa.scc.supplemental-groups": "1000110000/10000",
+          "openshift.io/sa.scc.uid-range": "1000110000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:24Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-cloud-network-config-controller",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true"
+        },
+        "name": "openshift-cloud-network-config-controller",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "f1015720-9dbb-49d6-a1da-58d6e4ce2f42"
+          }
+        ],
+        "resourceVersion": "2337",
+        "uid": "152f94a3-257a-4f1a-8435-e09508bea10d"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "capability.openshift.io/name": "Storage",
+          "include.release.openshift.io/hypershift": "true",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c11,c5",
+          "openshift.io/sa.scc.supplemental-groups": "1000120000/10000",
+          "openshift.io/sa.scc.uid-range": "1000120000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:25Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-cluster-csi-drivers",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true",
+          "pod-security.kubernetes.io/audit": "privileged",
+          "pod-security.kubernetes.io/enforce": "privileged",
+          "pod-security.kubernetes.io/warn": "privileged"
+        },
+        "name": "openshift-cluster-csi-drivers",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "f1015720-9dbb-49d6-a1da-58d6e4ce2f42"
+          }
+        ],
+        "resourceVersion": "2351",
+        "uid": "5220139e-f95f-4206-afb2-47c781c726e0"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "include.release.openshift.io/hypershift": "true",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c11,c10",
+          "openshift.io/sa.scc.supplemental-groups": "1000130000/10000",
+          "openshift.io/sa.scc.uid-range": "1000130000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:24Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-cluster-machine-approver",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true",
+          "openshift.io/run-level": "0",
+          "pod-security.kubernetes.io/audit": "privileged",
+          "pod-security.kubernetes.io/enforce": "privileged",
+          "pod-security.kubernetes.io/warn": "privileged"
+        },
+        "name": "openshift-cluster-machine-approver",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "f1015720-9dbb-49d6-a1da-58d6e4ce2f42"
+          }
+        ],
+        "resourceVersion": "2364",
+        "uid": "d51faf6f-bd5c-4b67-9094-3aa69dc2896e"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "capability.openshift.io/name": "NodeTuning",
+          "include.release.openshift.io/hypershift": "true",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c12,c4",
+          "openshift.io/sa.scc.supplemental-groups": "1000140000/10000",
+          "openshift.io/sa.scc.uid-range": "1000140000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:25Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-cluster-node-tuning-operator",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true",
+          "pod-security.kubernetes.io/audit": "privileged",
+          "pod-security.kubernetes.io/enforce": "privileged",
+          "pod-security.kubernetes.io/warn": "privileged"
+        },
+        "name": "openshift-cluster-node-tuning-operator",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "f1015720-9dbb-49d6-a1da-58d6e4ce2f42"
+          }
+        ],
+        "resourceVersion": "2371",
+        "uid": "37a86232-c088-49a4-bd93-f44966fb12b4"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "capability.openshift.io/name": "openshift-samples",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c12,c9",
+          "openshift.io/sa.scc.supplemental-groups": "1000150000/10000",
+          "openshift.io/sa.scc.uid-range": "1000150000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:27Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-cluster-samples-operator",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true"
+        },
+        "name": "openshift-cluster-samples-operator",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "f1015720-9dbb-49d6-a1da-58d6e4ce2f42"
+          }
+        ],
+        "resourceVersion": "2378",
+        "uid": "f2d67e97-bdbd-4c29-98c4-a46a8a1620a3"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "include.release.openshift.io/hypershift": "true",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c13,c2",
+          "openshift.io/sa.scc.supplemental-groups": "1000160000/10000",
+          "openshift.io/sa.scc.uid-range": "1000160000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:23Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-cluster-storage-operator",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true"
+        },
+        "name": "openshift-cluster-storage-operator",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "f1015720-9dbb-49d6-a1da-58d6e4ce2f42"
+          }
+        ],
+        "resourceVersion": "2387",
+        "uid": "733b1971-d684-4327-9e8f-05f3ea484420"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Namespace\",\"metadata\":{\"annotations\":{\"include.release.openshift.io/self-managed-high-availability\":\"true\",\"kubernetes.io/description\":\"The cluster-version operator manages OpenShift updates and reconciles core resources and cluster operators.\",\"openshift.io/node-selector\":\"\",\"workload.openshift.io/allowed\":\"management\"},\"labels\":{\"name\":\"openshift-cluster-version\",\"openshift.io/cluster-monitoring\":\"true\",\"openshift.io/run-level\":\"\",\"pod-security.kubernetes.io/audit\":\"privileged\",\"pod-security.kubernetes.io/enforce\":\"privileged\",\"pod-security.kubernetes.io/warn\":\"privileged\"},\"name\":\"openshift-cluster-version\"}}\n",
+          "kubernetes.io/description": "The cluster-version operator manages OpenShift updates and reconciles core resources and cluster operators.",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c13,c7",
+          "openshift.io/sa.scc.supplemental-groups": "1000170000/10000",
+          "openshift.io/sa.scc.uid-range": "1000170000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:20Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-cluster-version",
+          "name": "openshift-cluster-version",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true",
+          "openshift.io/run-level": "",
+          "pod-security.kubernetes.io/audit": "privileged",
+          "pod-security.kubernetes.io/enforce": "privileged",
+          "pod-security.kubernetes.io/warn": "privileged"
+        },
+        "name": "openshift-cluster-version",
+        "resourceVersion": "2391",
+        "uid": "6a443de7-3271-44fb-892e-139359cbef72"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "include.release.openshift.io/hypershift": "true",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c13,c12",
+          "openshift.io/sa.scc.supplemental-groups": "1000180000/10000",
+          "openshift.io/sa.scc.uid-range": "1000180000/10000"
+        },
+        "creationTimestamp": "2026-01-05T13:51:17Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-config",
+          "openshift.io/run-level": "0",
+          "pod-security.kubernetes.io/audit": "privileged",
+          "pod-security.kubernetes.io/enforce": "privileged",
+          "pod-security.kubernetes.io/warn": "privileged"
+        },
+        "name": "openshift-config",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "f1015720-9dbb-49d6-a1da-58d6e4ce2f42"
+          }
+        ],
+        "resourceVersion": "2397",
+        "uid": "606bf1b6-bfe6-44c0-80fb-d22de488ba58"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "include.release.openshift.io/hypershift": "true",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c14,c4",
+          "openshift.io/sa.scc.supplemental-groups": "1000190000/10000",
+          "openshift.io/sa.scc.uid-range": "1000190000/10000"
+        },
+        "creationTimestamp": "2026-01-05T13:51:17Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-config-managed",
+          "openshift.io/run-level": "0"
+        },
+        "name": "openshift-config-managed",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "f1015720-9dbb-49d6-a1da-58d6e4ce2f42"
+          }
+        ],
+        "resourceVersion": "2402",
+        "uid": "8ef34403-a90f-4a49-a38d-d0443ce07d67"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "include.release.openshift.io/hypershift": "true",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c14,c9",
+          "openshift.io/sa.scc.supplemental-groups": "1000200000/10000",
+          "openshift.io/sa.scc.uid-range": "1000200000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:23Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-config-operator",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true"
+        },
+        "name": "openshift-config-operator",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "f1015720-9dbb-49d6-a1da-58d6e4ce2f42"
+          }
+        ],
+        "resourceVersion": "2411",
+        "uid": "c86846db-548b-4e56-8fcf-01fa2d463f2d"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "capability.openshift.io/name": "Console",
+          "include.release.openshift.io/hypershift": "true",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c15,c0",
+          "openshift.io/sa.scc.supplemental-groups": "1000210000/10000",
+          "openshift.io/sa.scc.uid-range": "1000210000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:40Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-console",
+          "network.openshift.io/policy-group": "console",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true"
+        },
+        "name": "openshift-console",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "f1015720-9dbb-49d6-a1da-58d6e4ce2f42"
+          }
+        ],
+        "resourceVersion": "2416",
+        "uid": "ff3595f8-e8bb-41b9-8dcb-32e360337c87"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "capability.openshift.io/name": "Console",
+          "include.release.openshift.io/hypershift": "true",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c15,c5",
+          "openshift.io/sa.scc.supplemental-groups": "1000220000/10000",
+          "openshift.io/sa.scc.uid-range": "1000220000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:41Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-console-operator",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true"
+        },
+        "name": "openshift-console-operator",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "f1015720-9dbb-49d6-a1da-58d6e4ce2f42"
+          }
+        ],
+        "resourceVersion": "2421",
+        "uid": "5f04c86f-39f2-4bec-9bd9-8c0b387f576b"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "capability.openshift.io/name": "Console",
+          "include.release.openshift.io/hypershift": "true",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c15,c10",
+          "openshift.io/sa.scc.supplemental-groups": "1000230000/10000",
+          "openshift.io/sa.scc.uid-range": "1000230000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:42Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-console-user-settings"
+        },
+        "name": "openshift-console-user-settings",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "f1015720-9dbb-49d6-a1da-58d6e4ce2f42"
+          }
+        ],
+        "resourceVersion": "2425",
+        "uid": "96b6ad9d-d6e4-4750-bbc5-e111ef6edc49"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "openshift.io/sa.scc.mcs": "s0:c16,c0",
+          "openshift.io/sa.scc.supplemental-groups": "1000240000/10000",
+          "openshift.io/sa.scc.uid-range": "1000240000/10000"
+        },
+        "creationTimestamp": "2026-01-05T13:51:43Z",
+        "labels": {
+          "hypershift.openshift.io/managed": "true",
+          "kubernetes.io/metadata.name": "openshift-controller-manager"
+        },
+        "name": "openshift-controller-manager",
+        "resourceVersion": "2431",
+        "uid": "b5cde0e9-fd5e-46a6-8d70-96a02a349c8c"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "include.release.openshift.io/hypershift": "true",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c16,c5",
+          "openshift.io/sa.scc.supplemental-groups": "1000250000/10000",
+          "openshift.io/sa.scc.uid-range": "1000250000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:24Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-controller-manager-operator",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true",
+          "openshift.io/run-level": ""
+        },
+        "name": "openshift-controller-manager-operator",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "f1015720-9dbb-49d6-a1da-58d6e4ce2f42"
+          }
+        ],
+        "resourceVersion": "2435",
+        "uid": "1e066fce-9ab1-4ecd-9c9e-c1c0fec571f6"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c16,c10",
+          "openshift.io/sa.scc.supplemental-groups": "1000260000/10000",
+          "openshift.io/sa.scc.uid-range": "1000260000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:36Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-dns",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true",
+          "openshift.io/run-level": "0",
+          "pod-security.kubernetes.io/audit": "privileged",
+          "pod-security.kubernetes.io/enforce": "privileged",
+          "pod-security.kubernetes.io/warn": "privileged"
+        },
+        "name": "openshift-dns",
+        "resourceVersion": "2441",
+        "uid": "81c300e0-22c7-48c3-8b9d-a25bba20795c"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c16,c15",
+          "openshift.io/sa.scc.supplemental-groups": "1000270000/10000",
+          "openshift.io/sa.scc.uid-range": "1000270000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:27Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-dns-operator",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true",
+          "openshift.io/run-level": "0"
+        },
+        "name": "openshift-dns-operator",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "f1015720-9dbb-49d6-a1da-58d6e4ce2f42"
+          }
+        ],
+        "resourceVersion": "2447",
+        "uid": "47ee1105-ec54-44ec-93b0-3a66a0669dca"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "openshift.io/sa.scc.mcs": "s0:c17,c4",
+          "openshift.io/sa.scc.supplemental-groups": "1000280000/10000",
+          "openshift.io/sa.scc.uid-range": "1000280000/10000"
+        },
+        "creationTimestamp": "2026-01-05T13:51:43Z",
+        "labels": {
+          "hypershift.openshift.io/managed": "true",
+          "kubernetes.io/metadata.name": "openshift-etcd"
+        },
+        "name": "openshift-etcd",
+        "resourceVersion": "2453",
+        "uid": "7cfbf121-7a46-45c4-8a04-b085b7955a95"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "openshift.io/description": "Namespace for enabling network policy specification for host network traffic. Can be used to allow access to or from host network components",
+          "openshift.io/sa.scc.mcs": "s0:c23,c22",
+          "openshift.io/sa.scc.supplemental-groups": "1000550000/10000",
+          "openshift.io/sa.scc.uid-range": "1000550000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:52:13Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-host-network",
+          "policy-group.network.openshift.io/host-network": ""
+        },
+        "name": "openshift-host-network",
+        "ownerReferences": [
+          {
+            "apiVersion": "operator.openshift.io/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Network",
+            "name": "cluster",
+            "uid": "71699cf1-1119-413e-8a1c-2e6daf307a6c"
+          }
+        ],
+        "resourceVersion": "2845",
+        "uid": "8643ed72-1356-4cb7-a5c8-df47ed764bad"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "capability.openshift.io/name": "ImageRegistry",
+          "include.release.openshift.io/hypershift": "true",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c17,c9",
+          "openshift.io/sa.scc.supplemental-groups": "1000290000/10000",
+          "openshift.io/sa.scc.uid-range": "1000290000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:27Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-image-registry",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true",
+          "pod-security.kubernetes.io/audit": "privileged",
+          "pod-security.kubernetes.io/enforce": "privileged",
+          "pod-security.kubernetes.io/warn": "privileged"
+        },
+        "name": "openshift-image-registry",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "f1015720-9dbb-49d6-a1da-58d6e4ce2f42"
+          }
+        ],
+        "resourceVersion": "2457",
+        "uid": "26bfb4c3-5617-47a8-ae41-6c92c4c0e27a"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "openshift.io/sa.scc.mcs": "s0:c17,c14",
+          "openshift.io/sa.scc.supplemental-groups": "1000300000/10000",
+          "openshift.io/sa.scc.uid-range": "1000300000/10000"
+        },
+        "creationTimestamp": "2026-01-05T13:51:43Z",
+        "labels": {
+          "hypershift.openshift.io/managed": "true",
+          "kubernetes.io/metadata.name": "openshift-infra",
+          "pod-security.kubernetes.io/audit": "privileged",
+          "pod-security.kubernetes.io/enforce": "privileged",
+          "pod-security.kubernetes.io/warn": "privileged"
+        },
+        "name": "openshift-infra",
+        "resourceVersion": "2463",
+        "uid": "3e3a9b94-74f8-4c05-9023-2b3a261e6192"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "openshift.io/sa.scc.mcs": "s0:c18,c2",
+          "openshift.io/sa.scc.supplemental-groups": "1000310000/10000",
+          "openshift.io/sa.scc.uid-range": "1000310000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:43Z",
+        "labels": {
+          "hypershift.openshift.io/managed": "true",
+          "kubernetes.io/metadata.name": "openshift-ingress",
+          "name": "openshift-ingress",
+          "network.openshift.io/policy-group": "ingress",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true",
+          "pod-security.kubernetes.io/audit": "privileged",
+          "pod-security.kubernetes.io/enforce": "privileged",
+          "pod-security.kubernetes.io/warn": "privileged",
+          "policy-group.network.openshift.io/ingress": ""
+        },
+        "name": "openshift-ingress",
+        "resourceVersion": "2470",
+        "uid": "50521ba8-b28a-4998-80f5-5aebbe5db580"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c18,c7",
+          "openshift.io/sa.scc.supplemental-groups": "1000320000/10000",
+          "openshift.io/sa.scc.uid-range": "1000320000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:50Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-ingress-canary"
+        },
+        "name": "openshift-ingress-canary",
+        "resourceVersion": "2477",
+        "uid": "a2eacee2-4f57-468c-a244-27ee585f93c5"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "capability.openshift.io/name": "Ingress",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c18,c12",
+          "openshift.io/sa.scc.supplemental-groups": "1000330000/10000",
+          "openshift.io/sa.scc.uid-range": "1000330000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:39Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-ingress-operator",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true"
+        },
+        "name": "openshift-ingress-operator",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "f1015720-9dbb-49d6-a1da-58d6e4ce2f42"
+          }
+        ],
+        "resourceVersion": "2486",
+        "uid": "4aebda9f-1afb-4a6d-9a3a-d5533d3293ac"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "capability.openshift.io/name": "Insights",
+          "include.release.openshift.io/hypershift": "true",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c18,c17",
+          "openshift.io/sa.scc.supplemental-groups": "1000340000/10000",
+          "openshift.io/sa.scc.uid-range": "1000340000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:25Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-insights",
+          "name": "openshift-insights",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true",
+          "openshift.io/run-level": "",
+          "pod-security.kubernetes.io/audit": "privileged",
+          "pod-security.kubernetes.io/enforce": "privileged",
+          "pod-security.kubernetes.io/warn": "privileged"
+        },
+        "name": "openshift-insights",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "f1015720-9dbb-49d6-a1da-58d6e4ce2f42"
+          }
+        ],
+        "resourceVersion": "2594",
+        "uid": "c66c8b04-4084-450c-b7a7-bb751cdcf294"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "openshift.io/sa.scc.mcs": "s0:c19,c4",
+          "openshift.io/sa.scc.supplemental-groups": "1000350000/10000",
+          "openshift.io/sa.scc.uid-range": "1000350000/10000"
+        },
+        "creationTimestamp": "2026-01-05T13:51:43Z",
+        "labels": {
+          "hypershift.openshift.io/managed": "true",
+          "kubernetes.io/metadata.name": "openshift-kube-apiserver",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true"
+        },
+        "name": "openshift-kube-apiserver",
+        "resourceVersion": "2667",
+        "uid": "abb6a3b7-2f14-42d7-b6b9-d110765a7e86"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c19,c9",
+          "openshift.io/sa.scc.supplemental-groups": "1000360000/10000",
+          "openshift.io/sa.scc.uid-range": "1000360000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:42Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-kube-apiserver-operator",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true",
+          "openshift.io/run-level": "0",
+          "pod-security.kubernetes.io/audit": "restricted",
+          "pod-security.kubernetes.io/enforce": "restricted",
+          "pod-security.kubernetes.io/warn": "restricted"
+        },
+        "name": "openshift-kube-apiserver-operator",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "f1015720-9dbb-49d6-a1da-58d6e4ce2f42"
+          }
+        ],
+        "resourceVersion": "2679",
+        "uid": "3eb78ed6-861d-455d-b5bc-9aac29901ae2"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "openshift.io/sa.scc.mcs": "s0:c19,c14",
+          "openshift.io/sa.scc.supplemental-groups": "1000370000/10000",
+          "openshift.io/sa.scc.uid-range": "1000370000/10000"
+        },
+        "creationTimestamp": "2026-01-05T13:51:43Z",
+        "labels": {
+          "hypershift.openshift.io/managed": "true",
+          "kubernetes.io/metadata.name": "openshift-kube-controller-manager"
+        },
+        "name": "openshift-kube-controller-manager",
+        "resourceVersion": "2690",
+        "uid": "30a4ea83-fa59-4256-9f0c-4d5743aebe54"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "include.release.openshift.io/hypershift": "true",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c20,c0",
+          "openshift.io/sa.scc.supplemental-groups": "1000380000/10000",
+          "openshift.io/sa.scc.uid-range": "1000380000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:23Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-kube-controller-manager-operator",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true",
+          "openshift.io/run-level": "0"
+        },
+        "name": "openshift-kube-controller-manager-operator",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "f1015720-9dbb-49d6-a1da-58d6e4ce2f42"
+          }
+        ],
+        "resourceVersion": "2696",
+        "uid": "d2fcff14-d8cb-423e-b123-5368c73176e7"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "openshift.io/sa.scc.mcs": "s0:c20,c5",
+          "openshift.io/sa.scc.supplemental-groups": "1000390000/10000",
+          "openshift.io/sa.scc.uid-range": "1000390000/10000"
+        },
+        "creationTimestamp": "2026-01-05T13:51:43Z",
+        "labels": {
+          "hypershift.openshift.io/managed": "true",
+          "kubernetes.io/metadata.name": "openshift-kube-scheduler"
+        },
+        "name": "openshift-kube-scheduler",
+        "resourceVersion": "2700",
+        "uid": "a3f68c0f-9adf-453c-8b39-6f11a7874815"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "include.release.openshift.io/hypershift": "true",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c20,c10",
+          "openshift.io/sa.scc.supplemental-groups": "1000400000/10000",
+          "openshift.io/sa.scc.uid-range": "1000400000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:23Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-kube-scheduler-operator",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true",
+          "openshift.io/run-level": "0",
+          "pod-security.kubernetes.io/audit": "restricted",
+          "pod-security.kubernetes.io/enforce": "restricted",
+          "pod-security.kubernetes.io/warn": "restricted"
+        },
+        "name": "openshift-kube-scheduler-operator",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "f1015720-9dbb-49d6-a1da-58d6e4ce2f42"
+          }
+        ],
+        "resourceVersion": "2712",
+        "uid": "4595aa8d-87df-45a2-912e-d40076f97ffe"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "openshift.io/sa.scc.mcs": "s0:c25,c0",
+          "openshift.io/sa.scc.supplemental-groups": "1000600000/10000",
+          "openshift.io/sa.scc.uid-range": "1000600000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T14:02:19Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-kube-storage-version-migrator",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true"
+        },
+        "name": "openshift-kube-storage-version-migrator",
+        "resourceVersion": "11002",
+        "uid": "c3a5815c-30d3-451b-9e96-1c829ba238b7"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "include.release.openshift.io/hypershift": "true",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c20,c15",
+          "openshift.io/sa.scc.supplemental-groups": "1000410000/10000",
+          "openshift.io/sa.scc.uid-range": "1000410000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:29Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-kube-storage-version-migrator-operator",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true"
+        },
+        "name": "openshift-kube-storage-version-migrator-operator",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "f1015720-9dbb-49d6-a1da-58d6e4ce2f42"
+          }
+        ],
+        "resourceVersion": "2719",
+        "uid": "09348d40-910b-490d-880b-46b18bbc5d01"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "include.release.openshift.io/hypershift": "true",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c21,c0",
+          "openshift.io/sa.scc.supplemental-groups": "1000420000/10000",
+          "openshift.io/sa.scc.uid-range": "1000420000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:23Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-machine-api",
+          "name": "openshift-machine-api",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true",
+          "openshift.io/run-level": "",
+          "pod-security.kubernetes.io/audit": "privileged",
+          "pod-security.kubernetes.io/enforce": "privileged",
+          "pod-security.kubernetes.io/warn": "privileged"
+        },
+        "name": "openshift-machine-api",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "f1015720-9dbb-49d6-a1da-58d6e4ce2f42"
+          }
+        ],
+        "resourceVersion": "2727",
+        "uid": "59baab5d-1d5b-4aac-8528-48a12820f9f2"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c21,c5",
+          "openshift.io/sa.scc.supplemental-groups": "1000430000/10000",
+          "openshift.io/sa.scc.uid-range": "1000430000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:26Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-machine-config-operator",
+          "name": "openshift-machine-config-operator",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true",
+          "openshift.io/run-level": "",
+          "pod-security.kubernetes.io/audit": "privileged",
+          "pod-security.kubernetes.io/enforce": "privileged",
+          "pod-security.kubernetes.io/warn": "privileged"
+        },
+        "name": "openshift-machine-config-operator",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "f1015720-9dbb-49d6-a1da-58d6e4ce2f42"
+          }
+        ],
+        "resourceVersion": "2735",
+        "uid": "f0c8e9ba-2eed-4940-a4f8-367f556a075c"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "capability.openshift.io/name": "marketplace",
+          "include.release.openshift.io/hypershift": "true",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c21,c10",
+          "openshift.io/sa.scc.supplemental-groups": "1000440000/10000",
+          "openshift.io/sa.scc.uid-range": "1000440000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:23Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-marketplace",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true",
+          "pod-security.kubernetes.io/audit": "baseline",
+          "pod-security.kubernetes.io/audit-version": "latest",
+          "pod-security.kubernetes.io/enforce": "baseline",
+          "pod-security.kubernetes.io/enforce-version": "latest",
+          "pod-security.kubernetes.io/warn": "baseline",
+          "pod-security.kubernetes.io/warn-version": "latest"
+        },
+        "name": "openshift-marketplace",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "f1015720-9dbb-49d6-a1da-58d6e4ce2f42"
+          }
+        ],
+        "resourceVersion": "2752",
+        "uid": "4007cc0d-5419-4059-88a6-29b0b56be148"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "include.release.openshift.io/hypershift": "true",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c21,c15",
+          "openshift.io/sa.scc.supplemental-groups": "1000450000/10000",
+          "openshift.io/sa.scc.uid-range": "1000450000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:38Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-monitoring",
+          "name": "openshift-monitoring",
+          "network.openshift.io/policy-group": "monitoring",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true",
+          "pod-security.kubernetes.io/audit": "privileged",
+          "pod-security.kubernetes.io/enforce": "privileged",
+          "pod-security.kubernetes.io/warn": "privileged"
+        },
+        "name": "openshift-monitoring",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "f1015720-9dbb-49d6-a1da-58d6e4ce2f42"
+          }
+        ],
+        "resourceVersion": "2763",
+        "uid": "74e89ae4-0fa4-4720-9b2e-b3132db5ee2b"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "openshift.io/description": "Multus network plugin components",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c21,c20",
+          "openshift.io/sa.scc.supplemental-groups": "1000460000/10000",
+          "openshift.io/sa.scc.uid-range": "1000460000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:59Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-multus",
+          "name": "openshift-multus",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true",
+          "openshift.io/run-level": "0",
+          "pod-security.kubernetes.io/audit": "privileged",
+          "pod-security.kubernetes.io/enforce": "privileged",
+          "pod-security.kubernetes.io/warn": "privileged"
+        },
+        "name": "openshift-multus",
+        "ownerReferences": [
+          {
+            "apiVersion": "operator.openshift.io/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Network",
+            "name": "cluster",
+            "uid": "71699cf1-1119-413e-8a1c-2e6daf307a6c"
+          }
+        ],
+        "resourceVersion": "2771",
+        "uid": "8b5fb90e-0203-4351-9d31-4c512fd56b45"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "openshift.io/description": "Namespace for running the networking-console-plugin pods that enables the Networking console section",
+          "openshift.io/sa.scc.mcs": "s0:c24,c14",
+          "openshift.io/sa.scc.supplemental-groups": "1000580000/10000",
+          "openshift.io/sa.scc.uid-range": "1000580000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:52:43Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-network-console",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true"
+        },
+        "name": "openshift-network-console",
+        "ownerReferences": [
+          {
+            "apiVersion": "operator.openshift.io/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Network",
+            "name": "cluster",
+            "uid": "71699cf1-1119-413e-8a1c-2e6daf307a6c"
+          }
+        ],
+        "resourceVersion": "5452",
+        "uid": "b83812ca-7eba-4cae-a34c-203879f5e0e4"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c24,c4",
+          "openshift.io/sa.scc.supplemental-groups": "1000560000/10000",
+          "openshift.io/sa.scc.uid-range": "1000560000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:52:14Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-network-diagnostics",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true"
+        },
+        "name": "openshift-network-diagnostics",
+        "ownerReferences": [
+          {
+            "apiVersion": "operator.openshift.io/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Network",
+            "name": "cluster",
+            "uid": "71699cf1-1119-413e-8a1c-2e6daf307a6c"
+          }
+        ],
+        "resourceVersion": "5451",
+        "uid": "99248578-fbcb-4099-bf30-40e416b8a2d1"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true",
+          "openshift.io/description": "OpenShift network node identity namespace - a controller used to manage node identity components",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c24,c9",
+          "openshift.io/sa.scc.supplemental-groups": "1000570000/10000",
+          "openshift.io/sa.scc.uid-range": "1000570000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:52:17Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-network-node-identity",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true",
+          "pod-security.kubernetes.io/audit": "privileged",
+          "pod-security.kubernetes.io/enforce": "privileged",
+          "pod-security.kubernetes.io/warn": "privileged"
+        },
+        "name": "openshift-network-node-identity",
+        "ownerReferences": [
+          {
+            "apiVersion": "operator.openshift.io/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Network",
+            "name": "cluster",
+            "uid": "71699cf1-1119-413e-8a1c-2e6daf307a6c"
+          }
+        ],
+        "resourceVersion": "5454",
+        "uid": "2d26f612-94d0-4676-a7f1-84758b74fa3f"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c22,c4",
+          "openshift.io/sa.scc.supplemental-groups": "1000470000/10000",
+          "openshift.io/sa.scc.uid-range": "1000470000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:25Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-network-operator",
+          "name": "openshift-network-operator",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true",
+          "openshift.io/run-level": "0",
+          "pod-security.kubernetes.io/audit": "privileged",
+          "pod-security.kubernetes.io/enforce": "privileged",
+          "pod-security.kubernetes.io/warn": "privileged"
+        },
+        "name": "openshift-network-operator",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "f1015720-9dbb-49d6-a1da-58d6e4ce2f42"
+          }
+        ],
+        "resourceVersion": "2786",
+        "uid": "77c0a2ed-13dc-4e7f-9589-9b7866dd8158"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "openshift.io/sa.scc.mcs": "s0:c22,c9",
+          "openshift.io/sa.scc.supplemental-groups": "1000480000/10000",
+          "openshift.io/sa.scc.uid-range": "1000480000/10000"
+        },
+        "creationTimestamp": "2026-01-05T13:51:06Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-node"
+        },
+        "name": "openshift-node",
+        "resourceVersion": "2795",
+        "uid": "35061145-47f7-41ec-b071-4e56e8cd07d9"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "capability.openshift.io/name": "OperatorLifecycleManager",
+          "include.release.openshift.io/hypershift": "true",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c22,c14",
+          "openshift.io/sa.scc.supplemental-groups": "1000490000/10000",
+          "openshift.io/sa.scc.uid-range": "1000490000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:29Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-operator-lifecycle-manager",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "olm.operatorgroup.uid/663989dd-60c5-472e-8ec9-2212b11ad5e2": "",
+          "openshift.io/cluster-monitoring": "true",
+          "openshift.io/scc": "",
+          "pod-security.kubernetes.io/enforce": "restricted",
+          "pod-security.kubernetes.io/enforce-version": "latest"
+        },
+        "name": "openshift-operator-lifecycle-manager",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "f1015720-9dbb-49d6-a1da-58d6e4ce2f42"
+          }
+        ],
+        "resourceVersion": "2800",
+        "uid": "9e3f13c1-3c8e-484f-b3da-f6aa38540a3d"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "capability.openshift.io/name": "OperatorLifecycleManager",
+          "include.release.openshift.io/hypershift": "true",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c22,c19",
+          "openshift.io/sa.scc.supplemental-groups": "1000500000/10000",
+          "openshift.io/sa.scc.uid-range": "1000500000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:31Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-operators",
+          "openshift.io/scc": "",
+          "pod-security.kubernetes.io/enforce": "privileged",
+          "pod-security.kubernetes.io/enforce-version": "latest"
+        },
+        "name": "openshift-operators",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "f1015720-9dbb-49d6-a1da-58d6e4ce2f42"
+          }
+        ],
+        "resourceVersion": "2809",
+        "uid": "1bb3a5cf-ac96-452d-a578-a237311b56fe"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "openshift.io/description": "OVN Kubernetes components",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c23,c17",
+          "openshift.io/sa.scc.supplemental-groups": "1000540000/10000",
+          "openshift.io/sa.scc.uid-range": "1000540000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:52:05Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-ovn-kubernetes",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true",
+          "openshift.io/run-level": "0",
+          "pod-security.kubernetes.io/audit": "privileged",
+          "pod-security.kubernetes.io/enforce": "privileged",
+          "pod-security.kubernetes.io/warn": "privileged"
+        },
+        "name": "openshift-ovn-kubernetes",
+        "ownerReferences": [
+          {
+            "apiVersion": "operator.openshift.io/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Network",
+            "name": "cluster",
+            "uid": "71699cf1-1119-413e-8a1c-2e6daf307a6c"
+          }
+        ],
+        "resourceVersion": "5453",
+        "uid": "28f7779c-ef58-4e22-9f44-bf32d4605b75"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "openshift.io/sa.scc.mcs": "s0:c23,c2",
+          "openshift.io/sa.scc.supplemental-groups": "1000510000/10000",
+          "openshift.io/sa.scc.uid-range": "1000510000/10000"
+        },
+        "creationTimestamp": "2026-01-05T13:51:43Z",
+        "labels": {
+          "hypershift.openshift.io/managed": "true",
+          "kubernetes.io/metadata.name": "openshift-route-controller-manager"
+        },
+        "name": "openshift-route-controller-manager",
+        "resourceVersion": "2813",
+        "uid": "b2062a9f-2075-4b27-a9c4-9d97e3a20920"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c24,c19",
+          "openshift.io/sa.scc.supplemental-groups": "1000590000/10000",
+          "openshift.io/sa.scc.uid-range": "1000590000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T14:02:17Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-service-ca"
+        },
+        "name": "openshift-service-ca",
+        "resourceVersion": "9119",
+        "uid": "603cf385-385e-4dd7-a066-f4d088d58922"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "include.release.openshift.io/hypershift": "true",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c23,c7",
+          "openshift.io/sa.scc.supplemental-groups": "1000520000/10000",
+          "openshift.io/sa.scc.uid-range": "1000520000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:27Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-service-ca-operator",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true",
+          "openshift.io/run-level": ""
+        },
+        "name": "openshift-service-ca-operator",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "f1015720-9dbb-49d6-a1da-58d6e4ce2f42"
+          }
+        ],
+        "resourceVersion": "2818",
+        "uid": "b7ce6be3-2c4c-4752-adec-53f41bdced77"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "include.release.openshift.io/hypershift": "true",
+          "include.release.openshift.io/ibm-cloud-managed": "true",
+          "include.release.openshift.io/self-managed-high-availability": "true",
+          "include.release.openshift.io/single-node-developer": "true",
+          "openshift.io/node-selector": "",
+          "openshift.io/sa.scc.mcs": "s0:c23,c12",
+          "openshift.io/sa.scc.supplemental-groups": "1000530000/10000",
+          "openshift.io/sa.scc.uid-range": "1000530000/10000",
+          "workload.openshift.io/allowed": "management"
+        },
+        "creationTimestamp": "2026-01-05T13:51:39Z",
+        "labels": {
+          "kubernetes.io/metadata.name": "openshift-user-workload-monitoring",
+          "name": "openshift-user-workload-monitoring",
+          "network.openshift.io/policy-group": "monitoring",
+          "olm.operatorgroup.uid/085634e2-9d81-471e-aaee-9cf18738381c": "",
+          "openshift.io/cluster-monitoring": "true"
+        },
+        "name": "openshift-user-workload-monitoring",
+        "ownerReferences": [
+          {
+            "apiVersion": "config.openshift.io/v1",
+            "controller": true,
+            "kind": "ClusterVersion",
+            "name": "version",
+            "uid": "f1015720-9dbb-49d6-a1da-58d6e4ce2f42"
+          }
+        ],
+        "resourceVersion": "2822",
+        "uid": "6b5b7df0-c33f-46c4-a066-eed4dd263315"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Namespace",
+      "metadata": {
+        "annotations": {
+          "openshift.io/sa.scc.mcs": "s0:c25,c5",
+          "openshift.io/sa.scc.supplemental-groups": "1000610000/10000",
+          "openshift.io/sa.scc.uid-range": "1000610000/10000",
+          "security.openshift.io/MinimallySufficientPodSecurityStandard": "restricted"
+        },
+        "creationTimestamp": "2026-10-28T19:15:46Z",
+        "labels": {
+          "hypershift.openshift.io/auto-created-for-infra": "startup-roadmap-aws-87pvz",
+          "kubernetes.io/metadata.name": "startup-roadmap-aws",
+          "pod-security.kubernetes.io/audit": "restricted",
+          "pod-security.kubernetes.io/audit-version": "latest",
+          "pod-security.kubernetes.io/enforce": "restricted",
+          "pod-security.kubernetes.io/enforce-version": "latest",
+          "pod-security.kubernetes.io/warn": "restricted",
+          "pod-security.kubernetes.io/warn-version": "latest"
+        },
+        "name": "startup-roadmap-aws",
+        "resourceVersion": "129760415",
+        "uid": "a358ad07-a9fe-45c1-9175-9df5130042f6"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    }
+  ],
+  "kind": "List",
+  "metadata": {
+    "resourceVersion": ""
+  }
+}

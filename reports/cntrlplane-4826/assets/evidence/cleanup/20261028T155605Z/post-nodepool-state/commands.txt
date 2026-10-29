@@ -1,0 +1,6 @@
+kubectl get nodepools.hypershift.openshift.io -n clusters -o json
+kubectl get machinedeployments.cluster.x-k8s.io -n clusters-test-cntrlplane-4826-hc -o json
+kubectl get machinesets.cluster.x-k8s.io -n clusters-test-cntrlplane-4826-hc -o json
+kubectl get machines.cluster.x-k8s.io -n clusters-test-cntrlplane-4826-hc -o json
+kubectl get hostedcluster test-cntrlplane-4826-hc -n clusters -o json
+kubectl --kubeconfig /tmp/guest.kubeconfig get nodes -o json

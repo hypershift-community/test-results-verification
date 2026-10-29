@@ -1,0 +1,9 @@
+started_utc=2026-10-29T01:25:45Z
+hostedcluster=clusters/test-cntrlplane-4826-r4-hc
+infra_id=test-cntrlplane-4826-r4
+managed_resource_group=test-cntrlplane-4826-hc-test-cntrlplane-4826
+operator_image=quay.io/example/hypershift@sha256:7a2248fdc9d50e99e8b444aa887cea96bdf0023e2e81062f9de21266ddb492a6
+release=quay.io/openshift-release-dev/ocp-release-nightly@sha256:08f0905c06195a76138db7071aa77ae644aea401eb832d51ebbf4fb870698346
+capi_image=registry.k8s.io/cluster-api/cluster-api-controller:v1.14.3
+completed_utc=2026-10-29T01:30:43Z
+cluster_api_image=registry.k8s.io/cluster-api/cluster-api-controller:v1.14.3

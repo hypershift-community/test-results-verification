@@ -1,0 +1,77 @@
+[
+  {
+    "location": "eastus",
+    "name": "test-cntrlplane-4826-hc-disk-test-cntrlplane-4826",
+    "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+  },
+  {
+    "location": "eastus",
+    "name": "test-cntrlplane-4826-hc-file-test-cntrlplane-4826",
+    "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+  },
+  {
+    "location": "eastus",
+    "name": "test-cntrlplane-4826-hc-image-registry-test-cntrlplane-4826",
+    "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+  },
+  {
+    "location": "eastus",
+    "name": "test-cntrlplane-4826-hc-ingress-test-cntrlplane-4826",
+    "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+  },
+  {
+    "location": "eastus",
+    "name": "test-cntrlplane-4826-hc-cloud-provider-test-cntrlplane-4826",
+    "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+  },
+  {
+    "location": "eastus",
+    "name": "test-cntrlplane-4826-hc-node-pool-mgmt-test-cntrlplane-4826",
+    "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+  },
+  {
+    "location": "eastus",
+    "name": "test-cntrlplane-4826-hc-network-test-cntrlplane-4826",
+    "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+  },
+  {
+    "location": "eastus",
+    "name": "test-cntrlplane-4826-hc-control-plane-operator-test-cntrlplane-4826",
+    "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+  },
+  {
+    "location": "global",
+    "name": "test-cntrlplane-4826-hc.hcp.example.com",
+    "type": "Microsoft.Network/privateDnsZones"
+  },
+  {
+    "location": "global",
+    "name": "test-cntrlplane-4826-hc.hcp.example.com/test-cntrlplane-4826-hc-test-cntrlplane-4826",
+    "type": "Microsoft.Network/privateDnsZones/virtualNetworkLinks"
+  },
+  {
+    "location": "eastus",
+    "name": "test-cntrlplane-4826",
+    "type": "Microsoft.Network/publicIPAddresses"
+  },
+  {
+    "location": "eastus",
+    "name": "test-cntrlplane-4826",
+    "type": "Microsoft.Network/loadBalancers"
+  },
+  {
+    "location": "eastus",
+    "name": "imageregistrytesterc9npjx",
+    "type": "Microsoft.Storage/storageAccounts"
+  },
+  {
+    "location": "eastus",
+    "name": "test-cntrlplane-4826-internal",
+    "type": "Microsoft.Network/loadBalancers"
+  },
+  {
+    "location": "eastus",
+    "name": "imageregistrytestercc4mbz",
+    "type": "Microsoft.Storage/storageAccounts"
+  }
+]

@@ -1,0 +1,29 @@
+captured_utc=2026-10-28T19:31:57Z
+command=KUBECONFIG=/home/tester/management.kubeconfig kubectl get hostedclusters.hypershift.openshift.io -A -o json
+result=
+{
+  "count": 1,
+  "hostedClusters": [
+    {
+      "name": "startup-roadmap-aws",
+      "namespace": "startup-roadmap-aws",
+      "platform": "AWS"
+    }
+  ]
+}
+
+command=KUBECONFIG=/home/tester/management.kubeconfig kubectl get nodepools.hypershift.openshift.io -A -o json
+result=
+{
+  "count": 1,
+  "nodePools": [
+    {
+      "name": "startup-roadmap-aws-us-east-1a",
+      "namespace": "startup-roadmap-aws"
+    }
+  ]
+}
+
+command=KUBECONFIG=/home/tester/management.kubeconfig kubectl get ns clusters-test-cntrlplane-4826-hc -o name
+result=
+Error from server (NotFound): namespaces "clusters-test-cntrlplane-4826-hc" not found

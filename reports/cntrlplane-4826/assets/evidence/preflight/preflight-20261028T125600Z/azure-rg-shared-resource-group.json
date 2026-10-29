@@ -1,0 +1,30 @@
+{
+  "id": "/subscriptions/redacted-subscription-3ba1199216a4/resourceGroups/shared-resource-group",
+  "location": "centralus",
+  "managedBy": null,
+  "name": "shared-resource-group",
+  "properties": {
+    "provisioningState": "Succeeded"
+  },
+  "tags": {
+    "openshift.io_cloud-credential-operator_agarcial": "owned",
+    "openshift.io_cloud-credential-operator_aglmanagement": "owned",
+    "openshift.io_cloud-credential-operator_akse2estorageaccount": "owned",
+    "openshift.io_cloud-credential-operator_testerselfwi": "owned",
+    "openshift.io_cloud-credential-operator_testersmwi": "owned",
+    "openshift.io_cloud-credential-operator_testerwi": "owned",
+    "openshift.io_cloud-credential-operator_glipceanoidc": "owned",
+    "openshift.io_cloud-credential-operator_glipceantestoidc": "owned",
+    "openshift.io_cloud-credential-operator_jparrilldevmanagement": "owned",
+    "openshift.io_cloud-credential-operator_jparrillwi": "owned",
+    "openshift.io_cloud-credential-operator_mraeemanagement": "owned",
+    "openshift.io_cloud-credential-operator_mraeeoidc": "owned",
+    "openshift.io_cloud-credential-operator_pstefansstorageaccount": "owned",
+    "openshift.io_cloud-credential-operator_sjenning": "owned",
+    "openshift.io_cloud-credential-operator_smazuree2e": "owned",
+    "openshift.io_cloud-credential-operator_smazuree2emc": "owned",
+    "openshift.io_cloud-credential-operator_wiodic": "owned",
+    "openshift_creationDate": "2023-06-21T03:28:01.986708+00:00"
+  },
+  "type": "Microsoft.Resources/resourceGroups"
+}

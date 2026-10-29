@@ -1,0 +1,58 @@
+{
+  "apiVersion": "hypershift.openshift.io/v1beta1",
+  "kind": "NodePool",
+  "metadata": {
+    "creationTimestamp": "2026-10-29T01:31:15Z",
+    "finalizers": [
+      "hypershift.openshift.io/finalizer"
+    ],
+    "generation": 1,
+    "name": "test-cntrlplane-4826-r4-head",
+    "namespace": "clusters",
+    "resourceVersion": "129827318",
+    "uid": "46b7dc63-0e60-4288-9287-579a69fd3b3c"
+  },
+  "spec": {
+    "arch": "amd64",
+    "clusterName": "test-cntrlplane-4826-r4-hc",
+    "management": {
+      "autoRepair": false,
+      "replace": {
+        "rollingUpdate": {
+          "maxSurge": 1,
+          "maxUnavailable": 0
+        },
+        "strategy": "RollingUpdate"
+      },
+      "upgradeType": "Replace"
+    },
+    "nodeDrainTimeout": "0s",
+    "nodeVolumeDetachTimeout": "0s",
+    "platform": {
+      "azure": {
+        "encryptionAtHost": "Enabled",
+        "image": {
+          "azureMarketplace": {
+            "imageGeneration": "Gen2",
+            "offer": "aro4",
+            "publisher": "azureopenshift",
+            "sku": "aro_5-0_x64_gen2",
+            "version": "10.2.20260423"
+          },
+          "type": "AzureMarketplace"
+        },
+        "osDisk": {
+          "diskStorageAccountType": "Premium_LRS",
+          "sizeGiB": 120
+        },
+        "subnetID": "/subscriptions/redacted-subscription-id/resourceGroups/test-cntrlplane-4826-hc-vnet-test-cntrlplane-4826/providers/Microsoft.Network/virtualNetworks/test-cntrlplane-4826-hc-test-cntrlplane-4826/subnets/default",
+        "vmSize": "Standard_D4s_v5"
+      },
+      "type": "Azure"
+    },
+    "release": {
+      "image": "quay.io/openshift-release-dev/ocp-release-nightly@sha256:08f0905c06195a76138db7071aa77ae644aea401eb832d51ebbf4fb870698346"
+    },
+    "replicas": 3
+  }
+}

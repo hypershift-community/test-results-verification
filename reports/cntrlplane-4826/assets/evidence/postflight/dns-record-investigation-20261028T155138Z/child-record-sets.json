@@ -1,0 +1,1353 @@
+[
+  {
+    "NSRecords": [
+      {
+        "nsdname": "ns1-09.azure-dns.com."
+      },
+      {
+        "nsdname": "ns2-09.azure-dns.net."
+      },
+      {
+        "nsdname": "ns3-09.azure-dns.org."
+      },
+      {
+        "nsdname": "ns4-09.azure-dns.info."
+      }
+    ],
+    "TTL": 172800,
+    "etag": "0d0cd73e-f886-4ccc-9417-aef07627c1ad",
+    "fqdn": "test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/NS/@",
+    "name": "@",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/NS"
+  },
+  {
+    "SOARecord": {
+      "email": "azuredns-hostmaster.microsoft.com",
+      "expireTime": 2419200,
+      "host": "ns1-09.azure-dns.com.",
+      "minimumTTL": 300,
+      "refreshTime": 3600,
+      "retryTime": 300,
+      "serialNumber": 1
+    },
+    "TTL": 3600,
+    "etag": "9cef4cc7-762e-47b9-9eb0-a1950baeadec",
+    "fqdn": "test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/SOA/@",
+    "name": "@",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/SOA"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=a329e28c-28dd-4a4d-b7c8-6e6549e435db,external-dns/resource=route/clusters-tester-88531-hc/kube-apiserver\""
+        ]
+      }
+    ],
+    "etag": "697b6038-3798-4fa8-b2e2-d67f40783468",
+    "fqdn": "a-api-tester-88531-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/a-api-tester-88531-hc-external-dns",
+    "name": "a-api-tester-88531-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=e56d9b8a-5e55-4aa2-b3fb-7dd690b8413e,external-dns/resource=route/clusters-tester-sm-custom-ingress-hc/kube-apiserver\""
+        ]
+      }
+    ],
+    "etag": "5d3ae92e-3a32-4241-b148-cf1fd6ba2020",
+    "fqdn": "a-api-tester-sm-custom-ingress-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/a-api-tester-sm-custom-ingress-hc-external-dns",
+    "name": "a-api-tester-sm-custom-ingress-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=27085a2e-d0aa-44bf-9405-e1fae819d1a4,external-dns/resource=route/clusters-tester-sm-kms-hc/kube-apiserver\""
+        ]
+      }
+    ],
+    "etag": "be4b38c0-6fc3-442f-9c51-6766695a3d36",
+    "fqdn": "a-api-tester-sm-kms-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/a-api-tester-sm-kms-hc-external-dns",
+    "name": "a-api-tester-sm-kms-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=ac4fac3e-85ad-447d-a23f-94faba992723,external-dns/resource=route/clusters-tester-sm-pub-hc/kube-apiserver\""
+        ]
+      }
+    ],
+    "etag": "3253490c-db7c-4d96-858e-1255174dc0a3",
+    "fqdn": "a-api-tester-sm-pub-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/a-api-tester-sm-pub-hc-external-dns",
+    "name": "a-api-tester-sm-pub-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=a329e28c-28dd-4a4d-b7c8-6e6549e435db,external-dns/resource=route/clusters-tester-88531-hc/ignition-server\""
+        ]
+      }
+    ],
+    "etag": "36d649ac-ff03-4f3e-82bc-5402dfa687b2",
+    "fqdn": "a-ignition-tester-88531-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/a-ignition-tester-88531-hc-external-dns",
+    "name": "a-ignition-tester-88531-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=e56d9b8a-5e55-4aa2-b3fb-7dd690b8413e,external-dns/resource=route/clusters-tester-sm-custom-ingress-hc/ignition-server\""
+        ]
+      }
+    ],
+    "etag": "16c44e35-518f-4578-a3aa-0bc447fbdace",
+    "fqdn": "a-ignition-tester-sm-custom-ingress-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/a-ignition-tester-sm-custom-ingress-hc-external-dns",
+    "name": "a-ignition-tester-sm-custom-ingress-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=27085a2e-d0aa-44bf-9405-e1fae819d1a4,external-dns/resource=route/clusters-tester-sm-kms-hc/ignition-server\""
+        ]
+      }
+    ],
+    "etag": "85d2cdb7-1853-41f0-a6ca-e1aa810a1464",
+    "fqdn": "a-ignition-tester-sm-kms-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/a-ignition-tester-sm-kms-hc-external-dns",
+    "name": "a-ignition-tester-sm-kms-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=ac4fac3e-85ad-447d-a23f-94faba992723,external-dns/resource=route/clusters-tester-sm-pub-hc/ignition-server\""
+        ]
+      }
+    ],
+    "etag": "b09831bc-11f0-4694-9ccf-b01bdf1f9ed6",
+    "fqdn": "a-ignition-tester-sm-pub-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/a-ignition-tester-sm-pub-hc-external-dns",
+    "name": "a-ignition-tester-sm-pub-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=a329e28c-28dd-4a4d-b7c8-6e6549e435db,external-dns/resource=route/clusters-tester-88531-hc/konnectivity-server\""
+        ]
+      }
+    ],
+    "etag": "cad38c8b-c130-4ff1-9555-d231ac733809",
+    "fqdn": "a-konnectivity-tester-88531-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/a-konnectivity-tester-88531-hc-external-dns",
+    "name": "a-konnectivity-tester-88531-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=e56d9b8a-5e55-4aa2-b3fb-7dd690b8413e,external-dns/resource=route/clusters-tester-sm-custom-ingress-hc/konnectivity-server\""
+        ]
+      }
+    ],
+    "etag": "35c14856-c76a-40a6-b175-6e76b9c03b33",
+    "fqdn": "a-konnectivity-tester-sm-custom-ingress-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/a-konnectivity-tester-sm-custom-ingress-hc-external-dns",
+    "name": "a-konnectivity-tester-sm-custom-ingress-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=27085a2e-d0aa-44bf-9405-e1fae819d1a4,external-dns/resource=route/clusters-tester-sm-kms-hc/konnectivity-server\""
+        ]
+      }
+    ],
+    "etag": "5ecab3e6-4cda-45a2-82ac-f43fcbc6cdaa",
+    "fqdn": "a-konnectivity-tester-sm-kms-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/a-konnectivity-tester-sm-kms-hc-external-dns",
+    "name": "a-konnectivity-tester-sm-kms-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=ac4fac3e-85ad-447d-a23f-94faba992723,external-dns/resource=route/clusters-tester-sm-pub-hc/konnectivity-server\""
+        ]
+      }
+    ],
+    "etag": "89daaebd-9b5d-42ef-82f8-f385197a9dd5",
+    "fqdn": "a-konnectivity-tester-sm-pub-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/a-konnectivity-tester-sm-pub-hc-external-dns",
+    "name": "a-konnectivity-tester-sm-pub-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=a329e28c-28dd-4a4d-b7c8-6e6549e435db,external-dns/resource=route/clusters-tester-88531-hc/oauth\""
+        ]
+      }
+    ],
+    "etag": "e2501b09-c7cc-4e0e-b79d-2f6f5c19886e",
+    "fqdn": "a-oauth-tester-88531-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/a-oauth-tester-88531-hc-external-dns",
+    "name": "a-oauth-tester-88531-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=e56d9b8a-5e55-4aa2-b3fb-7dd690b8413e,external-dns/resource=route/clusters-tester-sm-custom-ingress-hc/oauth\""
+        ]
+      }
+    ],
+    "etag": "0c0dc6eb-ab76-4d47-8e1f-14a966fd97b4",
+    "fqdn": "a-oauth-tester-sm-custom-ingress-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/a-oauth-tester-sm-custom-ingress-hc-external-dns",
+    "name": "a-oauth-tester-sm-custom-ingress-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=27085a2e-d0aa-44bf-9405-e1fae819d1a4,external-dns/resource=route/clusters-tester-sm-kms-hc/oauth\""
+        ]
+      }
+    ],
+    "etag": "aaa4adfb-ebd0-4d3b-82a5-e6012b61c580",
+    "fqdn": "a-oauth-tester-sm-kms-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/a-oauth-tester-sm-kms-hc-external-dns",
+    "name": "a-oauth-tester-sm-kms-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=ac4fac3e-85ad-447d-a23f-94faba992723,external-dns/resource=route/clusters-tester-sm-pub-hc/oauth\""
+        ]
+      }
+    ],
+    "etag": "f553a30e-6b5f-4610-861d-60555783fc15",
+    "fqdn": "a-oauth-tester-sm-pub-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/a-oauth-tester-sm-pub-hc-external-dns",
+    "name": "a-oauth-tester-sm-pub-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.39"
+      }
+    ],
+    "TTL": 300,
+    "etag": "13e11044-1db7-4d1d-8c5a-50b9fe8bdc85",
+    "fqdn": "api-tester-88531-hc.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/A/api-tester-88531-hc",
+    "name": "api-tester-88531-hc",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=a329e28c-28dd-4a4d-b7c8-6e6549e435db,external-dns/resource=route/clusters-tester-88531-hc/kube-apiserver\""
+        ]
+      }
+    ],
+    "etag": "eb99b86c-359c-4751-aaf8-92e2b6a27300",
+    "fqdn": "api-tester-88531-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/api-tester-88531-hc-external-dns",
+    "name": "api-tester-88531-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "ac954f72b85724e169029dc4121794d3-1178241324.us-east-1.elb.amazonaws.com"
+    },
+    "TTL": 300,
+    "etag": "2532baa1-714c-4edb-aa79-56b697153d43",
+    "fqdn": "api-tester-azure-dev-hc.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/CNAME/api-tester-azure-dev-hc",
+    "name": "api-tester-azure-dev-hc",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=be6c2b6b-f1d9-4d12-8fba-fc14c2a84bf6,external-dns/resource=route/clusters-tester-azure-dev-hc/kube-apiserver\""
+        ]
+      }
+    ],
+    "etag": "7cc21232-d50f-46a8-822c-4f398f1db201",
+    "fqdn": "api-tester-azure-dev-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/api-tester-azure-dev-hc-external-dns",
+    "name": "api-tester-azure-dev-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "aa5e46d2b548144828ebac99a62a4922-1367524332.us-east-1.elb.amazonaws.com"
+    },
+    "TTL": 300,
+    "etag": "83329af3-7677-4175-8be3-431541886680",
+    "fqdn": "api-test-cntrlplane-4826-hc.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/CNAME/api-test-cntrlplane-4826-hc",
+    "name": "api-test-cntrlplane-4826-hc",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=0a2eb876-d860-4533-9ab6-29e4ac1a92cd,external-dns/resource=route/clusters-test-cntrlplane-4826-hc/kube-apiserver\""
+        ]
+      }
+    ],
+    "etag": "8bafa806-0c93-4d82-af51-50af3d40b1b5",
+    "fqdn": "api-test-cntrlplane-4826-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/api-test-cntrlplane-4826-hc-external-dns",
+    "name": "api-test-cntrlplane-4826-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.38"
+      }
+    ],
+    "TTL": 300,
+    "etag": "a033253d-f5de-4ede-b4f0-339c2b3c78aa",
+    "fqdn": "api-tester-sm-custom-ingress-hc.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/A/api-tester-sm-custom-ingress-hc",
+    "name": "api-tester-sm-custom-ingress-hc",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=e56d9b8a-5e55-4aa2-b3fb-7dd690b8413e,external-dns/resource=route/clusters-tester-sm-custom-ingress-hc/kube-apiserver\""
+        ]
+      }
+    ],
+    "etag": "67494572-b2e4-4c9c-b44a-d605d574a44f",
+    "fqdn": "api-tester-sm-custom-ingress-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/api-tester-sm-custom-ingress-hc-external-dns",
+    "name": "api-tester-sm-custom-ingress-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.36"
+      }
+    ],
+    "TTL": 300,
+    "etag": "222c19e2-b8bd-408d-8ff6-c9ab98b7713d",
+    "fqdn": "api-tester-sm-kms-hc.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/A/api-tester-sm-kms-hc",
+    "name": "api-tester-sm-kms-hc",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=27085a2e-d0aa-44bf-9405-e1fae819d1a4,external-dns/resource=route/clusters-tester-sm-kms-hc/kube-apiserver\""
+        ]
+      }
+    ],
+    "etag": "2a81926d-f6ad-4741-b756-5597e45039d2",
+    "fqdn": "api-tester-sm-kms-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/api-tester-sm-kms-hc-external-dns",
+    "name": "api-tester-sm-kms-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.46"
+      }
+    ],
+    "TTL": 300,
+    "etag": "f2bce5ac-5b77-454d-8cdb-92633d78862b",
+    "fqdn": "api-tester-sm-pub-hc.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/A/api-tester-sm-pub-hc",
+    "name": "api-tester-sm-pub-hc",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=ac4fac3e-85ad-447d-a23f-94faba992723,external-dns/resource=route/clusters-tester-sm-pub-hc/kube-apiserver\""
+        ]
+      }
+    ],
+    "etag": "4b44a929-382d-46f1-a77f-ee6f25f2d0b9",
+    "fqdn": "api-tester-sm-pub-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/api-tester-sm-pub-hc-external-dns",
+    "name": "api-tester-sm-pub-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=be6c2b6b-f1d9-4d12-8fba-fc14c2a84bf6,external-dns/resource=route/clusters-tester-azure-dev-hc/kube-apiserver\""
+        ]
+      }
+    ],
+    "etag": "fbebfc57-9cb0-4c37-bb47-898c78a66dca",
+    "fqdn": "cname-api-tester-azure-dev-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/cname-api-tester-azure-dev-hc-external-dns",
+    "name": "cname-api-tester-azure-dev-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=0a2eb876-d860-4533-9ab6-29e4ac1a92cd,external-dns/resource=route/clusters-test-cntrlplane-4826-hc/kube-apiserver\""
+        ]
+      }
+    ],
+    "etag": "a6c10ad9-e009-41e4-afc4-df3a400dd8e8",
+    "fqdn": "cname-api-test-cntrlplane-4826-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/cname-api-test-cntrlplane-4826-hc-external-dns",
+    "name": "cname-api-test-cntrlplane-4826-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=be6c2b6b-f1d9-4d12-8fba-fc14c2a84bf6,external-dns/resource=route/clusters-tester-azure-dev-hc/ignition-server\""
+        ]
+      }
+    ],
+    "etag": "d159ee3b-2209-4931-8a5e-1a7a753c6051",
+    "fqdn": "cname-ignition-tester-azure-dev-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/cname-ignition-tester-azure-dev-hc-external-dns",
+    "name": "cname-ignition-tester-azure-dev-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=0a2eb876-d860-4533-9ab6-29e4ac1a92cd,external-dns/resource=route/clusters-test-cntrlplane-4826-hc/ignition-server\""
+        ]
+      }
+    ],
+    "etag": "8163ac21-dad3-489f-a6fa-37b696737571",
+    "fqdn": "cname-ignition-test-cntrlplane-4826-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/cname-ignition-test-cntrlplane-4826-hc-external-dns",
+    "name": "cname-ignition-test-cntrlplane-4826-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=be6c2b6b-f1d9-4d12-8fba-fc14c2a84bf6,external-dns/resource=route/clusters-tester-azure-dev-hc/konnectivity-server\""
+        ]
+      }
+    ],
+    "etag": "8929db2d-0e84-4b7b-870f-868bb2c54de3",
+    "fqdn": "cname-konnectivity-tester-azure-dev-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/cname-konnectivity-tester-azure-dev-hc-external-dns",
+    "name": "cname-konnectivity-tester-azure-dev-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=0a2eb876-d860-4533-9ab6-29e4ac1a92cd,external-dns/resource=route/clusters-test-cntrlplane-4826-hc/konnectivity-server\""
+        ]
+      }
+    ],
+    "etag": "76d8082e-19cf-4777-b7b6-781927a0789d",
+    "fqdn": "cname-konnectivity-test-cntrlplane-4826-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/cname-konnectivity-test-cntrlplane-4826-hc-external-dns",
+    "name": "cname-konnectivity-test-cntrlplane-4826-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=be6c2b6b-f1d9-4d12-8fba-fc14c2a84bf6,external-dns/resource=route/clusters-tester-azure-dev-hc/oauth\""
+        ]
+      }
+    ],
+    "etag": "03aadc62-5830-4ba9-859c-ac547c8ba845",
+    "fqdn": "cname-oauth-tester-azure-dev-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/cname-oauth-tester-azure-dev-hc-external-dns",
+    "name": "cname-oauth-tester-azure-dev-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=0a2eb876-d860-4533-9ab6-29e4ac1a92cd,external-dns/resource=route/clusters-test-cntrlplane-4826-hc/oauth\""
+        ]
+      }
+    ],
+    "etag": "88f1cd75-aee5-4514-9a42-8f4ec7bb86cc",
+    "fqdn": "cname-oauth-test-cntrlplane-4826-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/cname-oauth-test-cntrlplane-4826-hc-external-dns",
+    "name": "cname-oauth-test-cntrlplane-4826-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.39"
+      }
+    ],
+    "TTL": 300,
+    "etag": "66d578d7-f441-48b8-b3de-09d13e04933e",
+    "fqdn": "ignition-tester-88531-hc.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/A/ignition-tester-88531-hc",
+    "name": "ignition-tester-88531-hc",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=a329e28c-28dd-4a4d-b7c8-6e6549e435db,external-dns/resource=route/clusters-tester-88531-hc/ignition-server\""
+        ]
+      }
+    ],
+    "etag": "f6dae0eb-3d73-48e5-a842-04b6ed1aeabe",
+    "fqdn": "ignition-tester-88531-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/ignition-tester-88531-hc-external-dns",
+    "name": "ignition-tester-88531-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "ac954f72b85724e169029dc4121794d3-1178241324.us-east-1.elb.amazonaws.com"
+    },
+    "TTL": 300,
+    "etag": "bc7662b4-34b9-4e69-a276-f5608167e8ba",
+    "fqdn": "ignition-tester-azure-dev-hc.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/CNAME/ignition-tester-azure-dev-hc",
+    "name": "ignition-tester-azure-dev-hc",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=be6c2b6b-f1d9-4d12-8fba-fc14c2a84bf6,external-dns/resource=route/clusters-tester-azure-dev-hc/ignition-server\""
+        ]
+      }
+    ],
+    "etag": "accee044-e9f3-463f-918a-a30a59420c30",
+    "fqdn": "ignition-tester-azure-dev-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/ignition-tester-azure-dev-hc-external-dns",
+    "name": "ignition-tester-azure-dev-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "aa5e46d2b548144828ebac99a62a4922-1367524332.us-east-1.elb.amazonaws.com"
+    },
+    "TTL": 300,
+    "etag": "777000a0-039f-4d96-8fc9-c6bc7b1c2fbd",
+    "fqdn": "ignition-test-cntrlplane-4826-hc.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/CNAME/ignition-test-cntrlplane-4826-hc",
+    "name": "ignition-test-cntrlplane-4826-hc",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=0a2eb876-d860-4533-9ab6-29e4ac1a92cd,external-dns/resource=route/clusters-test-cntrlplane-4826-hc/ignition-server\""
+        ]
+      }
+    ],
+    "etag": "fcea1fae-9d22-406c-9af8-322ac9066820",
+    "fqdn": "ignition-test-cntrlplane-4826-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/ignition-test-cntrlplane-4826-hc-external-dns",
+    "name": "ignition-test-cntrlplane-4826-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.38"
+      }
+    ],
+    "TTL": 300,
+    "etag": "f88913b2-5df8-43b4-902b-3ef870f989b5",
+    "fqdn": "ignition-tester-sm-custom-ingress-hc.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/A/ignition-tester-sm-custom-ingress-hc",
+    "name": "ignition-tester-sm-custom-ingress-hc",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=e56d9b8a-5e55-4aa2-b3fb-7dd690b8413e,external-dns/resource=route/clusters-tester-sm-custom-ingress-hc/ignition-server\""
+        ]
+      }
+    ],
+    "etag": "c3737277-a3a8-48a1-a020-44c0803f7631",
+    "fqdn": "ignition-tester-sm-custom-ingress-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/ignition-tester-sm-custom-ingress-hc-external-dns",
+    "name": "ignition-tester-sm-custom-ingress-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.36"
+      }
+    ],
+    "TTL": 300,
+    "etag": "c395e98e-57b9-4714-a446-a4555614640f",
+    "fqdn": "ignition-tester-sm-kms-hc.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/A/ignition-tester-sm-kms-hc",
+    "name": "ignition-tester-sm-kms-hc",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=27085a2e-d0aa-44bf-9405-e1fae819d1a4,external-dns/resource=route/clusters-tester-sm-kms-hc/ignition-server\""
+        ]
+      }
+    ],
+    "etag": "92b2d4f3-849a-4a0c-be69-b29c0a5d3935",
+    "fqdn": "ignition-tester-sm-kms-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/ignition-tester-sm-kms-hc-external-dns",
+    "name": "ignition-tester-sm-kms-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.46"
+      }
+    ],
+    "TTL": 300,
+    "etag": "68c10934-d027-45e1-992b-1787957a0ab4",
+    "fqdn": "ignition-tester-sm-pub-hc.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/A/ignition-tester-sm-pub-hc",
+    "name": "ignition-tester-sm-pub-hc",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=ac4fac3e-85ad-447d-a23f-94faba992723,external-dns/resource=route/clusters-tester-sm-pub-hc/ignition-server\""
+        ]
+      }
+    ],
+    "etag": "bbe41807-7964-4e11-9474-925e867d8d1c",
+    "fqdn": "ignition-tester-sm-pub-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/ignition-tester-sm-pub-hc-external-dns",
+    "name": "ignition-tester-sm-pub-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.39"
+      }
+    ],
+    "TTL": 300,
+    "etag": "1a3920ac-0937-4a05-9a1c-cac3927a62dc",
+    "fqdn": "konnectivity-tester-88531-hc.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/A/konnectivity-tester-88531-hc",
+    "name": "konnectivity-tester-88531-hc",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=a329e28c-28dd-4a4d-b7c8-6e6549e435db,external-dns/resource=route/clusters-tester-88531-hc/konnectivity-server\""
+        ]
+      }
+    ],
+    "etag": "51788e94-e754-4290-a5ff-aceff6bbb84a",
+    "fqdn": "konnectivity-tester-88531-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/konnectivity-tester-88531-hc-external-dns",
+    "name": "konnectivity-tester-88531-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "ac954f72b85724e169029dc4121794d3-1178241324.us-east-1.elb.amazonaws.com"
+    },
+    "TTL": 300,
+    "etag": "4a3fe789-7625-4c87-add9-b1482a0f94a3",
+    "fqdn": "konnectivity-tester-azure-dev-hc.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/CNAME/konnectivity-tester-azure-dev-hc",
+    "name": "konnectivity-tester-azure-dev-hc",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=be6c2b6b-f1d9-4d12-8fba-fc14c2a84bf6,external-dns/resource=route/clusters-tester-azure-dev-hc/konnectivity-server\""
+        ]
+      }
+    ],
+    "etag": "b9c9b07d-e54d-4e99-8a3c-1e2fe2c7b6a9",
+    "fqdn": "konnectivity-tester-azure-dev-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/konnectivity-tester-azure-dev-hc-external-dns",
+    "name": "konnectivity-tester-azure-dev-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "aa5e46d2b548144828ebac99a62a4922-1367524332.us-east-1.elb.amazonaws.com"
+    },
+    "TTL": 300,
+    "etag": "7ff44be5-c013-45b8-bbb3-8fa7bdb6e3c5",
+    "fqdn": "konnectivity-test-cntrlplane-4826-hc.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/CNAME/konnectivity-test-cntrlplane-4826-hc",
+    "name": "konnectivity-test-cntrlplane-4826-hc",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=0a2eb876-d860-4533-9ab6-29e4ac1a92cd,external-dns/resource=route/clusters-test-cntrlplane-4826-hc/konnectivity-server\""
+        ]
+      }
+    ],
+    "etag": "fae08f50-6d48-42d4-bd27-38326e7a4366",
+    "fqdn": "konnectivity-test-cntrlplane-4826-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/konnectivity-test-cntrlplane-4826-hc-external-dns",
+    "name": "konnectivity-test-cntrlplane-4826-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.38"
+      }
+    ],
+    "TTL": 300,
+    "etag": "f0511728-2ef2-4be5-bac8-473e2e04535c",
+    "fqdn": "konnectivity-tester-sm-custom-ingress-hc.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/A/konnectivity-tester-sm-custom-ingress-hc",
+    "name": "konnectivity-tester-sm-custom-ingress-hc",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=e56d9b8a-5e55-4aa2-b3fb-7dd690b8413e,external-dns/resource=route/clusters-tester-sm-custom-ingress-hc/konnectivity-server\""
+        ]
+      }
+    ],
+    "etag": "9c7a2a05-5d67-439a-bf38-c437bfa2dd3f",
+    "fqdn": "konnectivity-tester-sm-custom-ingress-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/konnectivity-tester-sm-custom-ingress-hc-external-dns",
+    "name": "konnectivity-tester-sm-custom-ingress-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.36"
+      }
+    ],
+    "TTL": 300,
+    "etag": "98bee966-971d-4f26-9fcd-3cdd0689ddd0",
+    "fqdn": "konnectivity-tester-sm-kms-hc.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/A/konnectivity-tester-sm-kms-hc",
+    "name": "konnectivity-tester-sm-kms-hc",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=27085a2e-d0aa-44bf-9405-e1fae819d1a4,external-dns/resource=route/clusters-tester-sm-kms-hc/konnectivity-server\""
+        ]
+      }
+    ],
+    "etag": "98cdb1f2-c86a-4293-b5dd-a47ca3302915",
+    "fqdn": "konnectivity-tester-sm-kms-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/konnectivity-tester-sm-kms-hc-external-dns",
+    "name": "konnectivity-tester-sm-kms-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.46"
+      }
+    ],
+    "TTL": 300,
+    "etag": "46af78e7-fad9-40f8-ac27-44d84fed1230",
+    "fqdn": "konnectivity-tester-sm-pub-hc.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/A/konnectivity-tester-sm-pub-hc",
+    "name": "konnectivity-tester-sm-pub-hc",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=ac4fac3e-85ad-447d-a23f-94faba992723,external-dns/resource=route/clusters-tester-sm-pub-hc/konnectivity-server\""
+        ]
+      }
+    ],
+    "etag": "bc15bbf0-ea9e-423a-a0f2-e17e497d035e",
+    "fqdn": "konnectivity-tester-sm-pub-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/konnectivity-tester-sm-pub-hc-external-dns",
+    "name": "konnectivity-tester-sm-pub-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.39"
+      }
+    ],
+    "TTL": 300,
+    "etag": "3f60d4b4-cb93-4132-b92a-f802e9a805f2",
+    "fqdn": "oauth-tester-88531-hc.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/A/oauth-tester-88531-hc",
+    "name": "oauth-tester-88531-hc",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=a329e28c-28dd-4a4d-b7c8-6e6549e435db,external-dns/resource=route/clusters-tester-88531-hc/oauth\""
+        ]
+      }
+    ],
+    "etag": "10c571b8-e6c5-4adc-a7df-df2177c724f4",
+    "fqdn": "oauth-tester-88531-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/oauth-tester-88531-hc-external-dns",
+    "name": "oauth-tester-88531-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "ac954f72b85724e169029dc4121794d3-1178241324.us-east-1.elb.amazonaws.com"
+    },
+    "TTL": 300,
+    "etag": "11568117-636b-4b72-8af5-864518e1b137",
+    "fqdn": "oauth-tester-azure-dev-hc.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/CNAME/oauth-tester-azure-dev-hc",
+    "name": "oauth-tester-azure-dev-hc",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=be6c2b6b-f1d9-4d12-8fba-fc14c2a84bf6,external-dns/resource=route/clusters-tester-azure-dev-hc/oauth\""
+        ]
+      }
+    ],
+    "etag": "10947109-44fb-4abb-bfd8-2133d9f0b18b",
+    "fqdn": "oauth-tester-azure-dev-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/oauth-tester-azure-dev-hc-external-dns",
+    "name": "oauth-tester-azure-dev-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "aa5e46d2b548144828ebac99a62a4922-1367524332.us-east-1.elb.amazonaws.com"
+    },
+    "TTL": 300,
+    "etag": "19d87115-a8e7-4a26-af2e-85fc1e7e180f",
+    "fqdn": "oauth-test-cntrlplane-4826-hc.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/CNAME/oauth-test-cntrlplane-4826-hc",
+    "name": "oauth-test-cntrlplane-4826-hc",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=0a2eb876-d860-4533-9ab6-29e4ac1a92cd,external-dns/resource=route/clusters-test-cntrlplane-4826-hc/oauth\""
+        ]
+      }
+    ],
+    "etag": "9fc294e4-450c-42dc-8af8-a8833ebe6efa",
+    "fqdn": "oauth-test-cntrlplane-4826-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/oauth-test-cntrlplane-4826-hc-external-dns",
+    "name": "oauth-test-cntrlplane-4826-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.38"
+      }
+    ],
+    "TTL": 300,
+    "etag": "5df693b4-f769-4254-8334-8168cca9a1dc",
+    "fqdn": "oauth-tester-sm-custom-ingress-hc.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/A/oauth-tester-sm-custom-ingress-hc",
+    "name": "oauth-tester-sm-custom-ingress-hc",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=e56d9b8a-5e55-4aa2-b3fb-7dd690b8413e,external-dns/resource=route/clusters-tester-sm-custom-ingress-hc/oauth\""
+        ]
+      }
+    ],
+    "etag": "00b6dab0-ba42-4371-915d-e3895d57b506",
+    "fqdn": "oauth-tester-sm-custom-ingress-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/oauth-tester-sm-custom-ingress-hc-external-dns",
+    "name": "oauth-tester-sm-custom-ingress-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.36"
+      }
+    ],
+    "TTL": 300,
+    "etag": "cc7db068-f305-4a37-9de2-ce0b58341b06",
+    "fqdn": "oauth-tester-sm-kms-hc.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/A/oauth-tester-sm-kms-hc",
+    "name": "oauth-tester-sm-kms-hc",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=27085a2e-d0aa-44bf-9405-e1fae819d1a4,external-dns/resource=route/clusters-tester-sm-kms-hc/oauth\""
+        ]
+      }
+    ],
+    "etag": "aa0c695f-07f0-4954-9d29-a336d6b36ce3",
+    "fqdn": "oauth-tester-sm-kms-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/oauth-tester-sm-kms-hc-external-dns",
+    "name": "oauth-tester-sm-kms-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.46"
+      }
+    ],
+    "TTL": 300,
+    "etag": "cfd12675-dbdc-4afc-9d2b-d2297852c464",
+    "fqdn": "oauth-tester-sm-pub-hc.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/A/oauth-tester-sm-pub-hc",
+    "name": "oauth-tester-sm-pub-hc",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=ac4fac3e-85ad-447d-a23f-94faba992723,external-dns/resource=route/clusters-tester-sm-pub-hc/oauth\""
+        ]
+      }
+    ],
+    "etag": "c7120ef6-e065-49e1-8bfe-310ff166532d",
+    "fqdn": "oauth-tester-sm-pub-hc-external-dns.test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/test.hcp.example.com/TXT/oauth-tester-sm-pub-hc-external-dns",
+    "name": "oauth-tester-sm-pub-hc-external-dns",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  }
+]

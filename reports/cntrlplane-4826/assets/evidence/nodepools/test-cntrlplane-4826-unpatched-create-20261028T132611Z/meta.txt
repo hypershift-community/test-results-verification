@@ -1,0 +1,6 @@
+created_utc=2026-10-28T13:26:11Z
+name=test-cntrlplane-4826-unpatched
+release=quay.io/openshift-release-dev/ocp-release@sha256:502d2836c126b1a5c2f3f93cf6c43bbb9e0527530a0335ad8d3cbdb01bea8416
+release_label=A
+replicas=3
+upgrade_type=REPLACE

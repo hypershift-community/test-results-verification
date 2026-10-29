@@ -1,0 +1,73 @@
+{
+  "scenario": "T3 infrastructure-template-only Replace rollout",
+  "result": "PASS",
+  "checks": [
+    {
+      "name": "NodePool generation advanced by one",
+      "passed": true,
+      "detail": "generation 3 -> 4"
+    },
+    {
+      "name": "platform-template annotation advanced",
+      "passed": true,
+      "detail": "platform template test-cntrlplane-4826-r4-head-776e47ca -> test-cntrlplane-4826-r4-head-e4b9b203"
+    },
+    {
+      "name": "UpdatingPlatformMachineTemplate cleared",
+      "passed": true,
+      "detail": "UpdatingPlatformMachineTemplate=False"
+    },
+    {
+      "name": "config and config version unchanged",
+      "passed": true,
+      "detail": "config 125f5cfc/a97c570e -> 125f5cfc/a97c570e, changedObservations=0"
+    },
+    {
+      "name": "release version unchanged",
+      "passed": true,
+      "detail": "status.version=5.1.0-0.nightly-multi-2026-10-27-082258, guest=5.1.0-0.nightly-multi-2026-10-27-082258, changedObservations=0"
+    },
+    {
+      "name": "physical rollout complete",
+      "passed": true,
+      "detail": "physicalRolloutComplete=true"
+    },
+    {
+      "name": "upToDateReplicas zero",
+      "passed": true,
+      "detail": "upToDateReplicas=0"
+    },
+    {
+      "name": "no premature platform metadata",
+      "passed": true,
+      "detail": "premature observations=0, max consecutive=0"
+    },
+    {
+      "name": "MachineDeployment template uses target VM size",
+      "passed": true,
+      "detail": "MachineDeployment test-cntrlplane-4826-r4-head -> test-cntrlplane-4826-r4-head-e4b9b203 vmSize=Standard_D4s_v4"
+    },
+    {
+      "name": "actual Azure VMs use target VM size",
+      "passed": true,
+      "detail": "Azure VM hardwareProfile verified=3, failed=0, target=Standard_D4s_v4"
+    },
+    {
+      "name": "workers joined within 12 minutes",
+      "passed": true,
+      "detail": "12-minute join violations=0"
+    },
+    {
+      "name": "head operator image",
+      "passed": true,
+      "detail": "quay.io/example/hypershift@sha256:7a2248fdc9d50e99e8b444aa887cea96bdf0023e2e81062f9de21266ddb492a6"
+    }
+  ],
+  "notes": "Azure VM-size-only Replace rollout on the head operator: Standard_D4s_v5 -> Standard_D4s_v4. 0 premature platform-annotation observation(s), max consecutive 0. Actual Azure VM hardwareProfile.vmSize verified for 3 of 3 workers.",
+  "headCommit": "ee5691233b08e3271f030ebd24055faa6857fd39",
+  "baseCommit": "ee327075b155839511edc3779510ceb95c93a658",
+  "operatorImage": "quay.io/example/hypershift@sha256:7a2248fdc9d50e99e8b444aa887cea96bdf0023e2e81062f9de21266ddb492a6",
+  "capiImage": "registry.k8s.io/cluster-api/cluster-api-controller:v1.14.3",
+  "hostedCluster": "clusters/test-cntrlplane-4826-r4-hc",
+  "generatedAt": "2026-10-29T02:17:02Z"
+}

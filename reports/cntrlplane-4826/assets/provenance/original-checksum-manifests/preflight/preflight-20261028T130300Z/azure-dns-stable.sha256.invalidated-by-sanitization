@@ -1,0 +1,5 @@
+319aeb9f904b518df080bfac75d8f0da6870cc04b46808b8ab248ce51bd1f21f  /workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/preflight/preflight-20261028T130300Z/azure-rg-shared-resource-group-stable.json
+c5aee565cb4a7ea5cb78abadf892e16f2102f0ce990c3f516da3b71173a3589f  /workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/preflight/preflight-20261028T130300Z/azure-dns-parent-zone-stable.json
+1cdd92fa12d6f8925e5197b8b905b0d00ecc4a8f83f1a85502763f6bd961c015  /workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/preflight/preflight-20261028T130300Z/azure-dns-child-zone-stable.json
+b7a38f95831c8b4472bc3ef3330769d7a739b5b8ae14c9c87b196a2ba1c1da2e  /workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/preflight/preflight-20261028T130300Z/azure-dns-child-role-assignments-stable.json
+0e966ea6569836347812a8688c49f6afae03f06b94eec03c691516429fa9006d  /workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/preflight/preflight-20261028T130300Z/azure-dns-parent-role-assignments-stable.json

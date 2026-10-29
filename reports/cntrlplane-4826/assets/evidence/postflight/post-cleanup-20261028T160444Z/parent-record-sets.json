@@ -1,0 +1,2753 @@
+[
+  {
+    "NSRecords": [
+      {
+        "nsdname": "ns1-08.azure-dns.com."
+      },
+      {
+        "nsdname": "ns2-08.azure-dns.net."
+      },
+      {
+        "nsdname": "ns3-08.azure-dns.org."
+      },
+      {
+        "nsdname": "ns4-08.azure-dns.info."
+      }
+    ],
+    "TTL": 172800,
+    "etag": "cc9b4cd5-c577-4caf-a4e6-b165efd13823",
+    "fqdn": "hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/NS/@",
+    "name": "@",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/NS"
+  },
+  {
+    "SOARecord": {
+      "email": "azuredns-hostmaster.microsoft.com",
+      "expireTime": 2419200,
+      "host": "ns1-08.azure-dns.com.",
+      "minimumTTL": 300,
+      "refreshTime": 3600,
+      "retryTime": 300,
+      "serialNumber": 1
+    },
+    "TTL": 60,
+    "etag": "06b05059-9322-4592-ab64-682a98b0f610",
+    "fqdn": "hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/SOA/@",
+    "name": "@",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/SOA"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.17"
+      }
+    ],
+    "TTL": 30,
+    "etag": "6831f1f9-0728-4cc9-88ac-e0fdbbd92af1",
+    "fqdn": "*.apps.0bffba2bf5-mgmt.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.0bffba2bf5-mgmt",
+    "metadata": {
+      "kubernetes.io_cluster.0bffba2bf5-mgmt": "owned"
+    },
+    "name": "*.apps.0bffba2bf5-mgmt",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.7"
+      }
+    ],
+    "TTL": 30,
+    "etag": "8e53c2b9-41d0-4551-a4bb-c4011ce8bcc0",
+    "fqdn": "*.apps.1325d595a7-mgmt.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.1325d595a7-mgmt",
+    "metadata": {
+      "kubernetes.io_cluster.1325d595a7-mgmt": "owned"
+    },
+    "name": "*.apps.1325d595a7-mgmt",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.64"
+      }
+    ],
+    "TTL": 30,
+    "etag": "92fef4b1-7f08-435b-a1b4-cfcaadacfb5c",
+    "fqdn": "*.apps.45efc8bd67-mgmt.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.45efc8bd67-mgmt",
+    "metadata": {
+      "kubernetes.io_cluster.45efc8bd67-mgmt": "owned"
+    },
+    "name": "*.apps.45efc8bd67-mgmt",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.11"
+      }
+    ],
+    "TTL": 30,
+    "etag": "e501498b-54af-423f-9f7e-2809959d195b",
+    "fqdn": "*.apps.7dcfa1e21a-mgmt.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.7dcfa1e21a-mgmt",
+    "metadata": {
+      "kubernetes.io_cluster.7dcfa1e21a-mgmt": "owned"
+    },
+    "name": "*.apps.7dcfa1e21a-mgmt",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.5"
+      }
+    ],
+    "TTL": 30,
+    "etag": "ba1210a6-ecc9-4a38-ab36-bbe8af8fb12f",
+    "fqdn": "*.apps.autoscaling-9lm7c.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.autoscaling-9lm7c",
+    "metadata": {
+      "kubernetes.io_cluster.autoscaling-9lm7c": "owned"
+    },
+    "name": "*.apps.autoscaling-9lm7c",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.53"
+      }
+    ],
+    "TTL": 30,
+    "etag": "1b6e9793-7da4-4448-a201-a95febeba557",
+    "fqdn": "*.apps.autoscaling-gdltj.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.autoscaling-gdltj",
+    "metadata": {
+      "kubernetes.io_cluster.autoscaling-gdltj": "owned"
+    },
+    "name": "*.apps.autoscaling-gdltj",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.29"
+      }
+    ],
+    "TTL": 30,
+    "etag": "36915571-ae8e-42dc-8811-f66ae06171a8",
+    "fqdn": "*.apps.autoscaling-kh8w6.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.autoscaling-kh8w6",
+    "metadata": {
+      "kubernetes.io_cluster.autoscaling-kh8w6": "owned"
+    },
+    "name": "*.apps.autoscaling-kh8w6",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.35"
+      }
+    ],
+    "TTL": 30,
+    "etag": "b9839acb-497c-442d-ae6a-2cd7a33a49cf",
+    "fqdn": "*.apps.autoscaling-mclgj.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.autoscaling-mclgj",
+    "metadata": {
+      "kubernetes.io_cluster.autoscaling-mclgj": "owned"
+    },
+    "name": "*.apps.autoscaling-mclgj",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.66"
+      }
+    ],
+    "TTL": 30,
+    "etag": "88e7306d-896e-4886-b013-e6f6a4e1b602",
+    "fqdn": "*.apps.azure-oauth-lb-bsqkb.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.azure-oauth-lb-bsqkb",
+    "metadata": {
+      "kubernetes.io_cluster.azure-oauth-lb-bsqkb": "owned"
+    },
+    "name": "*.apps.azure-oauth-lb-bsqkb",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.65"
+      }
+    ],
+    "TTL": 30,
+    "etag": "42b00e87-4516-4305-af84-44ab45a614ed",
+    "fqdn": "*.apps.azure-oauth-lb-p7jqz.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.azure-oauth-lb-p7jqz",
+    "metadata": {
+      "kubernetes.io_cluster.azure-oauth-lb-p7jqz": "owned"
+    },
+    "name": "*.apps.azure-oauth-lb-p7jqz",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "10.0.0.7"
+      }
+    ],
+    "TTL": 30,
+    "etag": "8e690b14-1d44-4d6b-ae3b-8ac147f0551a",
+    "fqdn": "*.apps.azure-private-topology-fhlm2.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.azure-private-topology-fhlm2",
+    "metadata": {
+      "kubernetes.io_cluster.azure-private-topology-fhlm2": "owned"
+    },
+    "name": "*.apps.azure-private-topology-fhlm2",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "NSRecords": [
+      {
+        "nsdname": "ns1-09.azure-dns.com."
+      },
+      {
+        "nsdname": "ns2-09.azure-dns.net."
+      },
+      {
+        "nsdname": "ns3-09.azure-dns.org."
+      },
+      {
+        "nsdname": "ns4-09.azure-dns.info."
+      }
+    ],
+    "TTL": 3600,
+    "etag": "d74a834a-7dc4-4b0b-bde2-a313c49ba0c3",
+    "fqdn": "test.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/NS/tester",
+    "name": "tester",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/NS"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.54"
+      }
+    ],
+    "TTL": 30,
+    "etag": "cc55ada0-39c9-4f95-aa47-30962dd25c82",
+    "fqdn": "*.apps.tester-88531-hc.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.tester-88531-hc",
+    "metadata": {
+      "kubernetes.io_cluster.tester-88531-hc-hx6sl": "owned"
+    },
+    "name": "*.apps.tester-88531-hc",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.55"
+      }
+    ],
+    "TTL": 30,
+    "etag": "6471a798-795e-4044-8588-65668e72f5f6",
+    "fqdn": "*.apps.tester-azure-dev-hc.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.tester-azure-dev-hc",
+    "metadata": {
+      "kubernetes.io_cluster.tester-azure-dev-hc-mm46n": "owned"
+    },
+    "name": "*.apps.tester-azure-dev-hc",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "10.0.0.10"
+      }
+    ],
+    "TTL": 30,
+    "etag": "557df7bc-0300-459f-bc39-4fb2f51f38cd",
+    "fqdn": "*.apps.tester-sm-custom-ingress-hc.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.tester-sm-custom-ingress-hc",
+    "metadata": {
+      "kubernetes.io_cluster.tester-sm-custom-ingress": "owned"
+    },
+    "name": "*.apps.tester-sm-custom-ingress-hc",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.47"
+      }
+    ],
+    "TTL": 30,
+    "etag": "ed9b5e00-1967-440c-8724-86570f52fb7c",
+    "fqdn": "*.apps.tester-sm-dev-hc.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.tester-sm-dev-hc",
+    "metadata": {
+      "kubernetes.io_cluster.tester-sm-dev-hc-rj9f4": "owned"
+    },
+    "name": "*.apps.tester-sm-dev-hc",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.57"
+      }
+    ],
+    "TTL": 30,
+    "etag": "185868fa-79d7-49eb-b982-cb086525ae10",
+    "fqdn": "*.apps.tester-sm-dev-public-hc.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.tester-sm-dev-public-hc",
+    "metadata": {
+      "kubernetes.io_cluster.tester-sm-dev-public-h-n8rzl": "owned"
+    },
+    "name": "*.apps.tester-sm-dev-public-hc",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.19"
+      }
+    ],
+    "TTL": 30,
+    "etag": "c6853558-b356-4179-acba-b80843854fcb",
+    "fqdn": "*.apps.tester-sm-kms-hc.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.tester-sm-kms-hc",
+    "metadata": {
+      "kubernetes.io_cluster.tester-sm-kms-hc-djkqm": "owned"
+    },
+    "name": "*.apps.tester-sm-kms-hc",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.26"
+      }
+    ],
+    "TTL": 30,
+    "etag": "28092754-74a7-46e7-b4fa-481603a44e10",
+    "fqdn": "*.apps.tester-sm-pub-hc.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.tester-sm-pub-hc",
+    "metadata": {
+      "kubernetes.io_cluster.tester-sm-pub-hc-pvbdk": "owned"
+    },
+    "name": "*.apps.tester-sm-pub-hc",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "NSRecords": [
+      {
+        "nsdname": "ns1-04.azure-dns.com."
+      },
+      {
+        "nsdname": "ns2-04.azure-dns.net."
+      },
+      {
+        "nsdname": "ns3-04.azure-dns.org."
+      },
+      {
+        "nsdname": "ns4-04.azure-dns.info."
+      }
+    ],
+    "TTL": 3600,
+    "etag": "766abc01-3b21-463c-bc4d-c2758ed7db52",
+    "fqdn": "cewong.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/NS/cewong",
+    "name": "cewong",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/NS"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.27"
+      }
+    ],
+    "TTL": 30,
+    "etag": "aede99e6-62f2-4535-94fc-f4fae02b9041",
+    "fqdn": "*.apps.control-plane-upgrade-2wsx8.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.control-plane-upgrade-2wsx8",
+    "metadata": {
+      "kubernetes.io_cluster.control-plane-upgrade-2wsx8": "owned"
+    },
+    "name": "*.apps.control-plane-upgrade-2wsx8",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.23"
+      }
+    ],
+    "TTL": 30,
+    "etag": "b62b4d8e-4ee5-4377-8c5d-b2a9799e21dd",
+    "fqdn": "*.apps.control-plane-upgrade-kh77h.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.control-plane-upgrade-kh77h",
+    "metadata": {
+      "kubernetes.io_cluster.control-plane-upgrade-kh77h": "owned"
+    },
+    "name": "*.apps.control-plane-upgrade-kh77h",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.10"
+      }
+    ],
+    "TTL": 30,
+    "etag": "5da48394-589a-47c3-9a70-907b6eafa66f",
+    "fqdn": "*.apps.control-plane-upgrade-wb85z.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.control-plane-upgrade-wb85z",
+    "metadata": {
+      "kubernetes.io_cluster.control-plane-upgrade-wb85z": "owned"
+    },
+    "name": "*.apps.control-plane-upgrade-wb85z",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "10.0.0.6"
+      }
+    ],
+    "TTL": 30,
+    "etag": "1dbba1ee-5763-4144-bfd7-028067ed5902",
+    "fqdn": "*.apps.create-cluster-4bpnw.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.create-cluster-4bpnw",
+    "metadata": {
+      "kubernetes.io_cluster.create-cluster-4bpnw": "owned"
+    },
+    "name": "*.apps.create-cluster-4bpnw",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "10.0.0.6"
+      }
+    ],
+    "TTL": 30,
+    "etag": "788e3a4d-c1cd-4d48-856e-141f08a9e437",
+    "fqdn": "*.apps.create-cluster-n74tt.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.create-cluster-n74tt",
+    "metadata": {
+      "kubernetes.io_cluster.create-cluster-n74tt": "owned"
+    },
+    "name": "*.apps.create-cluster-n74tt",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.2"
+      }
+    ],
+    "TTL": 30,
+    "etag": "45423727-d3a0-4133-bf4d-11da1e404dc5",
+    "fqdn": "*.apps.external-oidc-0bffba2bf5.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.external-oidc-0bffba2bf5",
+    "metadata": {
+      "kubernetes.io_cluster.external-oidc-0bffba2bf5": "owned"
+    },
+    "name": "*.apps.external-oidc-0bffba2bf5",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.12"
+      }
+    ],
+    "TTL": 30,
+    "etag": "ecba7af8-76bc-4a3f-8d17-7b20270f6e79",
+    "fqdn": "*.apps.external-oidc-45efc8bd67.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.external-oidc-45efc8bd67",
+    "metadata": {
+      "kubernetes.io_cluster.external-oidc-45efc8bd67": "owned"
+    },
+    "name": "*.apps.external-oidc-45efc8bd67",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.48"
+      }
+    ],
+    "TTL": 30,
+    "etag": "ca9f4523-8b3b-45d8-8611-afde05193005",
+    "fqdn": "*.apps.external-oidc-7dcfa1e21a.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.external-oidc-7dcfa1e21a",
+    "metadata": {
+      "kubernetes.io_cluster.external-oidc-7dcfa1e21a": "owned"
+    },
+    "name": "*.apps.external-oidc-7dcfa1e21a",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "NSRecords": [
+      {
+        "nsdname": "ns1-03.azure-dns.com."
+      },
+      {
+        "nsdname": "ns2-03.azure-dns.net."
+      },
+      {
+        "nsdname": "ns3-03.azure-dns.org."
+      },
+      {
+        "nsdname": "ns4-03.azure-dns.info."
+      }
+    ],
+    "TTL": 3600,
+    "etag": "cf81f203-b759-4e94-8faf-e1254247491e",
+    "fqdn": "glipcean-management.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/NS/glipcean-management",
+    "name": "glipcean-management",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/NS"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.40"
+      }
+    ],
+    "TTL": 30,
+    "etag": "6a34aa50-8397-4e7f-ab76-00e1e59c409e",
+    "fqdn": "*.apps.node-pool-bcxj9.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.node-pool-bcxj9",
+    "metadata": {
+      "kubernetes.io_cluster.node-pool-bcxj9": "owned"
+    },
+    "name": "*.apps.node-pool-bcxj9",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.18"
+      }
+    ],
+    "TTL": 30,
+    "etag": "89f6dfa2-01e6-4736-8c9d-e5a798a9788e",
+    "fqdn": "*.apps.node-pool-chclf.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.node-pool-chclf",
+    "metadata": {
+      "kubernetes.io_cluster.node-pool-chclf": "owned"
+    },
+    "name": "*.apps.node-pool-chclf",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.51"
+      }
+    ],
+    "TTL": 30,
+    "etag": "1aa8fa82-1bd3-4d30-8bdc-eaa44d84a440",
+    "fqdn": "*.apps.node-pool-f2ln9.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.node-pool-f2ln9",
+    "metadata": {
+      "kubernetes.io_cluster.node-pool-f2ln9": "owned"
+    },
+    "name": "*.apps.node-pool-f2ln9",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.63"
+      }
+    ],
+    "TTL": 30,
+    "etag": "a779910b-758b-4510-9720-6bb2f6edba44",
+    "fqdn": "*.apps.node-pool-jj9b7.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.node-pool-jj9b7",
+    "metadata": {
+      "kubernetes.io_cluster.node-pool-jj9b7": "owned"
+    },
+    "name": "*.apps.node-pool-jj9b7",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.30"
+      }
+    ],
+    "TTL": 30,
+    "etag": "2cd4e231-a398-40f5-8321-190418fb8fe5",
+    "fqdn": "*.apps.node-pool-ndlvx.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.node-pool-ndlvx",
+    "metadata": {
+      "kubernetes.io_cluster.node-pool-ndlvx": "owned"
+    },
+    "name": "*.apps.node-pool-ndlvx",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.37"
+      }
+    ],
+    "TTL": 30,
+    "etag": "1759c009-95a6-43ea-9f35-e756ef4446f5",
+    "fqdn": "*.apps.node-pool-z265h.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.node-pool-z265h",
+    "metadata": {
+      "kubernetes.io_cluster.node-pool-z265h": "owned"
+    },
+    "name": "*.apps.node-pool-z265h",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.60"
+      }
+    ],
+    "TTL": 30,
+    "etag": "998d3cf6-69a4-46ac-8972-155bdc7eb971",
+    "fqdn": "*.apps.oauth-lb-0bffba2bf5.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.oauth-lb-0bffba2bf5",
+    "metadata": {
+      "kubernetes.io_cluster.oauth-lb-0bffba2bf5": "owned"
+    },
+    "name": "*.apps.oauth-lb-0bffba2bf5",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.31"
+      }
+    ],
+    "TTL": 30,
+    "etag": "0a496e6a-1a5d-40cc-ac87-3ce0feb60dea",
+    "fqdn": "*.apps.oauth-lb-45efc8bd67.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.oauth-lb-45efc8bd67",
+    "metadata": {
+      "kubernetes.io_cluster.oauth-lb-45efc8bd67": "owned"
+    },
+    "name": "*.apps.oauth-lb-45efc8bd67",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.50"
+      }
+    ],
+    "TTL": 30,
+    "etag": "522fabef-170c-4fff-8b22-d36421061ba4",
+    "fqdn": "*.apps.oauth-lb-7dcfa1e21a.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.oauth-lb-7dcfa1e21a",
+    "metadata": {
+      "kubernetes.io_cluster.oauth-lb-7dcfa1e21a": "owned"
+    },
+    "name": "*.apps.oauth-lb-7dcfa1e21a",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "10.0.0.7"
+      }
+    ],
+    "TTL": 30,
+    "etag": "1dcc762c-b2af-4466-b027-5d3b18eb8b76",
+    "fqdn": "*.apps.oauth-lb-private-0bffba2bf5.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.oauth-lb-private-0bffba2bf5",
+    "metadata": {
+      "kubernetes.io_cluster.oauth-lb-private-0bffba2bf5": "owned"
+    },
+    "name": "*.apps.oauth-lb-private-0bffba2bf5",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "10.0.0.7"
+      }
+    ],
+    "TTL": 30,
+    "etag": "75660e50-7cb4-42ed-a64f-c0bd89724b28",
+    "fqdn": "*.apps.oauth-lb-private-45efc8bd67.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.oauth-lb-private-45efc8bd67",
+    "metadata": {
+      "kubernetes.io_cluster.oauth-lb-private-45efc8bd67": "owned"
+    },
+    "name": "*.apps.oauth-lb-private-45efc8bd67",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "10.0.0.7"
+      }
+    ],
+    "TTL": 30,
+    "etag": "c756cd97-1bd7-4511-a9b2-7563cc3f846e",
+    "fqdn": "*.apps.oauth-lb-private-7dcfa1e21a.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.oauth-lb-private-7dcfa1e21a",
+    "metadata": {
+      "kubernetes.io_cluster.oauth-lb-private-7dcfa1e21a": "owned"
+    },
+    "name": "*.apps.oauth-lb-private-7dcfa1e21a",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "10.0.0.6"
+      }
+    ],
+    "TTL": 30,
+    "etag": "8536c53c-d28c-4ebc-82e8-4d68630011b1",
+    "fqdn": "*.apps.private-0bffba2bf5.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.private-0bffba2bf5",
+    "metadata": {
+      "kubernetes.io_cluster.private-0bffba2bf5": "owned"
+    },
+    "name": "*.apps.private-0bffba2bf5",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "10.0.0.6"
+      }
+    ],
+    "TTL": 30,
+    "etag": "a5ea4338-e8db-4ef8-a457-1651a9c791b0",
+    "fqdn": "*.apps.private-45efc8bd67.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.private-45efc8bd67",
+    "metadata": {
+      "kubernetes.io_cluster.private-45efc8bd67": "owned"
+    },
+    "name": "*.apps.private-45efc8bd67",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "10.0.0.6"
+      }
+    ],
+    "TTL": 30,
+    "etag": "a61468c2-db1d-4999-993f-e10d808f5dca",
+    "fqdn": "*.apps.private-7dcfa1e21a.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.private-7dcfa1e21a",
+    "metadata": {
+      "kubernetes.io_cluster.private-7dcfa1e21a": "owned"
+    },
+    "name": "*.apps.private-7dcfa1e21a",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "10.0.0.6"
+      }
+    ],
+    "TTL": 30,
+    "etag": "c1a2c7cd-3ff1-406d-bfc4-9ceb08b6b7fe",
+    "fqdn": "*.apps.public-0bffba2bf5.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.public-0bffba2bf5",
+    "metadata": {
+      "kubernetes.io_cluster.public-0bffba2bf5": "owned"
+    },
+    "name": "*.apps.public-0bffba2bf5",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "10.0.0.6"
+      }
+    ],
+    "TTL": 30,
+    "etag": "177d54ab-5302-4c0c-9c48-308b7a5e1c19",
+    "fqdn": "*.apps.public-45efc8bd67.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.public-45efc8bd67",
+    "metadata": {
+      "kubernetes.io_cluster.public-45efc8bd67": "owned"
+    },
+    "name": "*.apps.public-45efc8bd67",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "10.0.0.6"
+      }
+    ],
+    "TTL": 30,
+    "etag": "9ab798c2-6acc-4c5d-aabf-dd0c875b2387",
+    "fqdn": "*.apps.public-7dcfa1e21a.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.public-7dcfa1e21a",
+    "metadata": {
+      "kubernetes.io_cluster.public-7dcfa1e21a": "owned"
+    },
+    "name": "*.apps.public-7dcfa1e21a",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.44"
+      }
+    ],
+    "TTL": 30,
+    "etag": "eb25dc09-4531-41bb-8327-6bedcd19cd55",
+    "fqdn": "*.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.management-cluster",
+    "name": "*.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "router-default.apps.management-cluster.hcp.example.com"
+    },
+    "TTL": 300,
+    "etag": "0072ef2a-70d2-4733-8cca-a10853173366",
+    "fqdn": "alertmanager-main-openshift-monitoring.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/CNAME/alertmanager-main-openshift-monitoring.apps.management-cluster",
+    "name": "alertmanager-main-openshift-monitoring.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=7e47bb1e-53d5-43b9-aeb0-69464524b362,external-dns/resource=route/openshift-monitoring/alertmanager-main\""
+        ]
+      }
+    ],
+    "etag": "bff66069-587e-4405-bc24-e4e9d562d5c7",
+    "fqdn": "alertmanager-main-openshift-monitoring-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/alertmanager-main-openshift-monitoring-external-dns.apps.management-cluster",
+    "name": "alertmanager-main-openshift-monitoring-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "router-default.apps.management-cluster.hcp.example.com"
+    },
+    "TTL": 300,
+    "etag": "7c8d15f0-71b6-410b-a95f-114b74484df3",
+    "fqdn": "canary-openshift-ingress-canary.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/CNAME/canary-openshift-ingress-canary.apps.management-cluster",
+    "name": "canary-openshift-ingress-canary.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=7e47bb1e-53d5-43b9-aeb0-69464524b362,external-dns/resource=route/openshift-ingress-canary/canary\""
+        ]
+      }
+    ],
+    "etag": "e78aaae9-d757-43ac-b7ed-1e9d81cd8104",
+    "fqdn": "canary-openshift-ingress-canary-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/canary-openshift-ingress-canary-external-dns.apps.management-cluster",
+    "name": "canary-openshift-ingress-canary-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=7e47bb1e-53d5-43b9-aeb0-69464524b362,external-dns/resource=route/openshift-monitoring/alertmanager-main\""
+        ]
+      }
+    ],
+    "etag": "d65b0540-acc9-42c5-b7ee-c630bdda24dd",
+    "fqdn": "cname-alertmanager-main-openshift-monitoring-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/cname-alertmanager-main-openshift-monitoring-external-dns.apps.management-cluster",
+    "name": "cname-alertmanager-main-openshift-monitoring-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=7e47bb1e-53d5-43b9-aeb0-69464524b362,external-dns/resource=route/openshift-ingress-canary/canary\""
+        ]
+      }
+    ],
+    "etag": "d6e96cca-c619-446c-86d4-8ede675060db",
+    "fqdn": "cname-canary-openshift-ingress-canary-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/cname-canary-openshift-ingress-canary-external-dns.apps.management-cluster",
+    "name": "cname-canary-openshift-ingress-canary-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=7e47bb1e-53d5-43b9-aeb0-69464524b362,external-dns/resource=route/openshift-console/console\""
+        ]
+      }
+    ],
+    "etag": "be5b87af-f839-42ed-bead-c1deec7e3dca",
+    "fqdn": "cname-console-openshift-console-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/cname-console-openshift-console-external-dns.apps.management-cluster",
+    "name": "cname-console-openshift-console-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=7e47bb1e-53d5-43b9-aeb0-69464524b362,external-dns/resource=route/openshift-console/downloads\""
+        ]
+      }
+    ],
+    "etag": "5edfc7ee-6c0a-4562-8522-99fd6ddd99ad",
+    "fqdn": "cname-downloads-openshift-console-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/cname-downloads-openshift-console-external-dns.apps.management-cluster",
+    "name": "cname-downloads-openshift-console-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=992cfa0e-01c4-4067-a04d-d5cf5b34d469,external-dns/resource=route/cewong-cewong-dev/ignition-server\""
+        ]
+      }
+    ],
+    "etag": "a893f2ed-97a7-456f-a74a-429aaaad4deb",
+    "fqdn": "cname-ignition-server-cewong-cewong-dev-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/cname-ignition-server-cewong-cewong-dev-external-dns.apps.management-cluster",
+    "name": "cname-ignition-server-cewong-cewong-dev-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=5cade94a-485c-4f77-906c-c7112c720a89,external-dns/resource=route/clusters-0bffba2bf5-mgmt/ignition-server\""
+        ]
+      }
+    ],
+    "etag": "05e2ba37-40a6-4fad-bc3a-8e0968758dd8",
+    "fqdn": "cname-ignition-server-clusters-0bffba2bf5-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/cname-ignition-server-clusters-0bffba2bf5-mgmt-external-dns.apps.management-cluster",
+    "name": "cname-ignition-server-clusters-0bffba2bf5-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=032bf5cb-7856-48df-a85b-f2768922ee91,external-dns/resource=route/clusters-1325d595a7-mgmt/ignition-server\""
+        ]
+      }
+    ],
+    "etag": "ea3c58ab-0e5b-4e3d-ab78-65c3de8a2a39",
+    "fqdn": "cname-ignition-server-clusters-1325d595a7-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/cname-ignition-server-clusters-1325d595a7-mgmt-external-dns.apps.management-cluster",
+    "name": "cname-ignition-server-clusters-1325d595a7-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=5cade94a-485c-4f77-906c-c7112c720a89,external-dns/resource=route/clusters-45efc8bd67-mgmt/ignition-server\""
+        ]
+      }
+    ],
+    "etag": "c530bf12-9f85-4225-ad69-0c8705f10b3a",
+    "fqdn": "cname-ignition-server-clusters-45efc8bd67-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/cname-ignition-server-clusters-45efc8bd67-mgmt-external-dns.apps.management-cluster",
+    "name": "cname-ignition-server-clusters-45efc8bd67-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=032bf5cb-7856-48df-a85b-f2768922ee91,external-dns/resource=route/clusters-63b2c24940-mgmt/ignition-server\""
+        ]
+      }
+    ],
+    "etag": "85ef9a95-8fd3-456f-859b-ba945d510e85",
+    "fqdn": "cname-ignition-server-clusters-63b2c24940-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/cname-ignition-server-clusters-63b2c24940-mgmt-external-dns.apps.management-cluster",
+    "name": "cname-ignition-server-clusters-63b2c24940-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=032bf5cb-7856-48df-a85b-f2768922ee91,external-dns/resource=route/clusters-7dcfa1e21a-mgmt/ignition-server\""
+        ]
+      }
+    ],
+    "etag": "fa00990c-a1d2-4658-a2cd-f18c54995acf",
+    "fqdn": "cname-ignition-server-clusters-7dcfa1e21a-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/cname-ignition-server-clusters-7dcfa1e21a-mgmt-external-dns.apps.management-cluster",
+    "name": "cname-ignition-server-clusters-7dcfa1e21a-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=032bf5cb-7856-48df-a85b-f2768922ee91,external-dns/resource=route/clusters-898f75f7fa-mgmt/ignition-server\""
+        ]
+      }
+    ],
+    "etag": "18d73a10-c550-44fa-a209-3b1f68ec2a5f",
+    "fqdn": "cname-ignition-server-clusters-898f75f7fa-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/cname-ignition-server-clusters-898f75f7fa-mgmt-external-dns.apps.management-cluster",
+    "name": "cname-ignition-server-clusters-898f75f7fa-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=032bf5cb-7856-48df-a85b-f2768922ee91,external-dns/resource=route/clusters-ae7a65e4df-mgmt/ignition-server\""
+        ]
+      }
+    ],
+    "etag": "a7212d0a-5058-4a8e-994d-2a0c1701a1ae",
+    "fqdn": "cname-ignition-server-clusters-ae7a65e4df-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/cname-ignition-server-clusters-ae7a65e4df-mgmt-external-dns.apps.management-cluster",
+    "name": "cname-ignition-server-clusters-ae7a65e4df-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=992cfa0e-01c4-4067-a04d-d5cf5b34d469,external-dns/resource=route/cewong-cewong-dev/konnectivity-server\""
+        ]
+      }
+    ],
+    "etag": "0614c4e8-d491-43ee-83f4-b90cdbeebda7",
+    "fqdn": "cname-konnectivity-server-cewong-cewong-dev-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/cname-konnectivity-server-cewong-cewong-dev-external-dns.apps.management-cluster",
+    "name": "cname-konnectivity-server-cewong-cewong-dev-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=5cade94a-485c-4f77-906c-c7112c720a89,external-dns/resource=route/clusters-0bffba2bf5-mgmt/konnectivity-server\""
+        ]
+      }
+    ],
+    "etag": "2e0dab84-e0ab-4983-8011-f807fba38357",
+    "fqdn": "cname-konnectivity-server-clusters-0bffba2bf5-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/cname-konnectivity-server-clusters-0bffba2bf5-mgmt-external-dns.apps.management-cluster",
+    "name": "cname-konnectivity-server-clusters-0bffba2bf5-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=032bf5cb-7856-48df-a85b-f2768922ee91,external-dns/resource=route/clusters-1325d595a7-mgmt/konnectivity-server\""
+        ]
+      }
+    ],
+    "etag": "56d82a54-ee3c-4f0e-a62e-edce1ca7b725",
+    "fqdn": "cname-konnectivity-server-clusters-1325d595a7-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/cname-konnectivity-server-clusters-1325d595a7-mgmt-external-dns.apps.management-cluster",
+    "name": "cname-konnectivity-server-clusters-1325d595a7-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=5cade94a-485c-4f77-906c-c7112c720a89,external-dns/resource=route/clusters-45efc8bd67-mgmt/konnectivity-server\""
+        ]
+      }
+    ],
+    "etag": "157cad12-0661-4e10-9fbb-660c5db2f1d6",
+    "fqdn": "cname-konnectivity-server-clusters-45efc8bd67-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/cname-konnectivity-server-clusters-45efc8bd67-mgmt-external-dns.apps.management-cluster",
+    "name": "cname-konnectivity-server-clusters-45efc8bd67-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=032bf5cb-7856-48df-a85b-f2768922ee91,external-dns/resource=route/clusters-63b2c24940-mgmt/konnectivity-server\""
+        ]
+      }
+    ],
+    "etag": "0c673601-4b74-41a6-945e-a9d2454aa03a",
+    "fqdn": "cname-konnectivity-server-clusters-63b2c24940-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/cname-konnectivity-server-clusters-63b2c24940-mgmt-external-dns.apps.management-cluster",
+    "name": "cname-konnectivity-server-clusters-63b2c24940-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=032bf5cb-7856-48df-a85b-f2768922ee91,external-dns/resource=route/clusters-7dcfa1e21a-mgmt/konnectivity-server\""
+        ]
+      }
+    ],
+    "etag": "3d6cca99-1398-45a0-83ad-6ae58f5c0f2f",
+    "fqdn": "cname-konnectivity-server-clusters-7dcfa1e21a-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/cname-konnectivity-server-clusters-7dcfa1e21a-mgmt-external-dns.apps.management-cluster",
+    "name": "cname-konnectivity-server-clusters-7dcfa1e21a-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=032bf5cb-7856-48df-a85b-f2768922ee91,external-dns/resource=route/clusters-898f75f7fa-mgmt/konnectivity-server\""
+        ]
+      }
+    ],
+    "etag": "1da0347a-a6df-46d7-9e7e-f73d945187cf",
+    "fqdn": "cname-konnectivity-server-clusters-898f75f7fa-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/cname-konnectivity-server-clusters-898f75f7fa-mgmt-external-dns.apps.management-cluster",
+    "name": "cname-konnectivity-server-clusters-898f75f7fa-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=032bf5cb-7856-48df-a85b-f2768922ee91,external-dns/resource=route/clusters-ae7a65e4df-mgmt/konnectivity-server\""
+        ]
+      }
+    ],
+    "etag": "69ae48dd-9d4f-499f-96e3-90d0531a9982",
+    "fqdn": "cname-konnectivity-server-clusters-ae7a65e4df-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/cname-konnectivity-server-clusters-ae7a65e4df-mgmt-external-dns.apps.management-cluster",
+    "name": "cname-konnectivity-server-clusters-ae7a65e4df-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=992cfa0e-01c4-4067-a04d-d5cf5b34d469,external-dns/resource=route/cewong-cewong-dev/oauth\""
+        ]
+      }
+    ],
+    "etag": "6363617f-a6c3-4371-af08-a4b9ae0d18c2",
+    "fqdn": "cname-oauth-cewong-cewong-dev-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/cname-oauth-cewong-cewong-dev-external-dns.apps.management-cluster",
+    "name": "cname-oauth-cewong-cewong-dev-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=5cade94a-485c-4f77-906c-c7112c720a89,external-dns/resource=route/clusters-0bffba2bf5-mgmt/oauth\""
+        ]
+      }
+    ],
+    "etag": "ba777cc1-fa2d-457e-88e6-8edb767cbc58",
+    "fqdn": "cname-oauth-clusters-0bffba2bf5-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/cname-oauth-clusters-0bffba2bf5-mgmt-external-dns.apps.management-cluster",
+    "name": "cname-oauth-clusters-0bffba2bf5-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=032bf5cb-7856-48df-a85b-f2768922ee91,external-dns/resource=route/clusters-1325d595a7-mgmt/oauth\""
+        ]
+      }
+    ],
+    "etag": "b9620180-8113-49f0-9085-62570056073d",
+    "fqdn": "cname-oauth-clusters-1325d595a7-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/cname-oauth-clusters-1325d595a7-mgmt-external-dns.apps.management-cluster",
+    "name": "cname-oauth-clusters-1325d595a7-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=5cade94a-485c-4f77-906c-c7112c720a89,external-dns/resource=route/clusters-45efc8bd67-mgmt/oauth\""
+        ]
+      }
+    ],
+    "etag": "5e11a8bb-24d8-4c19-8bce-297ec86142a2",
+    "fqdn": "cname-oauth-clusters-45efc8bd67-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/cname-oauth-clusters-45efc8bd67-mgmt-external-dns.apps.management-cluster",
+    "name": "cname-oauth-clusters-45efc8bd67-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=032bf5cb-7856-48df-a85b-f2768922ee91,external-dns/resource=route/clusters-63b2c24940-mgmt/oauth\""
+        ]
+      }
+    ],
+    "etag": "54b01608-baf0-4225-888b-9aadbd7eb56a",
+    "fqdn": "cname-oauth-clusters-63b2c24940-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/cname-oauth-clusters-63b2c24940-mgmt-external-dns.apps.management-cluster",
+    "name": "cname-oauth-clusters-63b2c24940-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=032bf5cb-7856-48df-a85b-f2768922ee91,external-dns/resource=route/clusters-7dcfa1e21a-mgmt/oauth\""
+        ]
+      }
+    ],
+    "etag": "287eb449-d9d5-49cf-8154-b2b345f6acf4",
+    "fqdn": "cname-oauth-clusters-7dcfa1e21a-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/cname-oauth-clusters-7dcfa1e21a-mgmt-external-dns.apps.management-cluster",
+    "name": "cname-oauth-clusters-7dcfa1e21a-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=032bf5cb-7856-48df-a85b-f2768922ee91,external-dns/resource=route/clusters-898f75f7fa-mgmt/oauth\""
+        ]
+      }
+    ],
+    "etag": "33d03ccf-fb9a-4b5d-8f5e-0a844362347b",
+    "fqdn": "cname-oauth-clusters-898f75f7fa-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/cname-oauth-clusters-898f75f7fa-mgmt-external-dns.apps.management-cluster",
+    "name": "cname-oauth-clusters-898f75f7fa-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=032bf5cb-7856-48df-a85b-f2768922ee91,external-dns/resource=route/clusters-ae7a65e4df-mgmt/oauth\""
+        ]
+      }
+    ],
+    "etag": "1b1943a2-9dea-40e1-a099-296c5c12d08f",
+    "fqdn": "cname-oauth-clusters-ae7a65e4df-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/cname-oauth-clusters-ae7a65e4df-mgmt-external-dns.apps.management-cluster",
+    "name": "cname-oauth-clusters-ae7a65e4df-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=7e47bb1e-53d5-43b9-aeb0-69464524b362,external-dns/resource=route/openshift-monitoring/prometheus-k8s-federate\""
+        ]
+      }
+    ],
+    "etag": "793c5245-9421-4e7b-8968-7aadc819ba0b",
+    "fqdn": "cname-prometheus-k8s-federate-openshift-monitoring-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/cname-prometheus-k8s-federate-openshift-monitoring-external-dns.apps.management-cluster",
+    "name": "cname-prometheus-k8s-federate-openshift-monitoring-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=7e47bb1e-53d5-43b9-aeb0-69464524b362,external-dns/resource=route/openshift-monitoring/prometheus-k8s\""
+        ]
+      }
+    ],
+    "etag": "923da0e2-d2e8-42b6-b36e-f929b1189701",
+    "fqdn": "cname-prometheus-k8s-openshift-monitoring-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/cname-prometheus-k8s-openshift-monitoring-external-dns.apps.management-cluster",
+    "name": "cname-prometheus-k8s-openshift-monitoring-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=7e47bb1e-53d5-43b9-aeb0-69464524b362,external-dns/resource=route/openshift-monitoring/thanos-querier\""
+        ]
+      }
+    ],
+    "etag": "8da69ac1-c94a-4dde-a696-4f74d0e4985b",
+    "fqdn": "cname-thanos-querier-openshift-monitoring-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/cname-thanos-querier-openshift-monitoring-external-dns.apps.management-cluster",
+    "name": "cname-thanos-querier-openshift-monitoring-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "router-default.apps.management-cluster.hcp.example.com"
+    },
+    "TTL": 300,
+    "etag": "0a7f232f-0225-4e98-97b5-d5b4dba5c94f",
+    "fqdn": "console-openshift-console.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/CNAME/console-openshift-console.apps.management-cluster",
+    "name": "console-openshift-console.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=7e47bb1e-53d5-43b9-aeb0-69464524b362,external-dns/resource=route/openshift-console/console\""
+        ]
+      }
+    ],
+    "etag": "89d77410-5236-464c-b237-5c3e4af5eb10",
+    "fqdn": "console-openshift-console-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/console-openshift-console-external-dns.apps.management-cluster",
+    "name": "console-openshift-console-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "router-default.apps.management-cluster.hcp.example.com"
+    },
+    "TTL": 300,
+    "etag": "9bb87abc-1744-4611-a493-8cd22630b32f",
+    "fqdn": "downloads-openshift-console.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/CNAME/downloads-openshift-console.apps.management-cluster",
+    "name": "downloads-openshift-console.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=7e47bb1e-53d5-43b9-aeb0-69464524b362,external-dns/resource=route/openshift-console/downloads\""
+        ]
+      }
+    ],
+    "etag": "b706d054-b7fd-4183-94fd-ea5ee94e185f",
+    "fqdn": "downloads-openshift-console-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/downloads-openshift-console-external-dns.apps.management-cluster",
+    "name": "downloads-openshift-console-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "router-default.apps.management-cluster.hcp.example.com"
+    },
+    "TTL": 300,
+    "etag": "88cce412-53a2-4d41-bad8-dc243eb938f0",
+    "fqdn": "ignition-server-cewong-cewong-dev.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/CNAME/ignition-server-cewong-cewong-dev.apps.management-cluster",
+    "name": "ignition-server-cewong-cewong-dev.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=992cfa0e-01c4-4067-a04d-d5cf5b34d469,external-dns/resource=route/cewong-cewong-dev/ignition-server\""
+        ]
+      }
+    ],
+    "etag": "56732888-18d0-437c-af64-a6415ec26000",
+    "fqdn": "ignition-server-cewong-cewong-dev-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/ignition-server-cewong-cewong-dev-external-dns.apps.management-cluster",
+    "name": "ignition-server-cewong-cewong-dev-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "router-default.apps.management-cluster.hcp.example.com"
+    },
+    "TTL": 300,
+    "etag": "e4187c8e-7bdc-445a-9985-6c1e403e4884",
+    "fqdn": "ignition-server-clusters-0bffba2bf5-mgmt.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/CNAME/ignition-server-clusters-0bffba2bf5-mgmt.apps.management-cluster",
+    "name": "ignition-server-clusters-0bffba2bf5-mgmt.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=5cade94a-485c-4f77-906c-c7112c720a89,external-dns/resource=route/clusters-0bffba2bf5-mgmt/ignition-server\""
+        ]
+      }
+    ],
+    "etag": "db926837-c279-43c4-bb68-9ba67c3085c5",
+    "fqdn": "ignition-server-clusters-0bffba2bf5-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/ignition-server-clusters-0bffba2bf5-mgmt-external-dns.apps.management-cluster",
+    "name": "ignition-server-clusters-0bffba2bf5-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "router-default.apps.management-cluster.hcp.example.com"
+    },
+    "TTL": 300,
+    "etag": "72aabe3f-4bfb-4de1-a5ce-1846204b443b",
+    "fqdn": "ignition-server-clusters-1325d595a7-mgmt.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/CNAME/ignition-server-clusters-1325d595a7-mgmt.apps.management-cluster",
+    "name": "ignition-server-clusters-1325d595a7-mgmt.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=032bf5cb-7856-48df-a85b-f2768922ee91,external-dns/resource=route/clusters-1325d595a7-mgmt/ignition-server\""
+        ]
+      }
+    ],
+    "etag": "9545551a-88f1-4766-8fba-e5f0a48c01b5",
+    "fqdn": "ignition-server-clusters-1325d595a7-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/ignition-server-clusters-1325d595a7-mgmt-external-dns.apps.management-cluster",
+    "name": "ignition-server-clusters-1325d595a7-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "router-default.apps.management-cluster.hcp.example.com"
+    },
+    "TTL": 300,
+    "etag": "ab147298-b05a-4f76-af7f-424b2f0b5400",
+    "fqdn": "ignition-server-clusters-45efc8bd67-mgmt.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/CNAME/ignition-server-clusters-45efc8bd67-mgmt.apps.management-cluster",
+    "name": "ignition-server-clusters-45efc8bd67-mgmt.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=5cade94a-485c-4f77-906c-c7112c720a89,external-dns/resource=route/clusters-45efc8bd67-mgmt/ignition-server\""
+        ]
+      }
+    ],
+    "etag": "bc38f8a5-4c04-41c6-b102-6b269c3c1da5",
+    "fqdn": "ignition-server-clusters-45efc8bd67-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/ignition-server-clusters-45efc8bd67-mgmt-external-dns.apps.management-cluster",
+    "name": "ignition-server-clusters-45efc8bd67-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "router-default.apps.management-cluster.hcp.example.com"
+    },
+    "TTL": 300,
+    "etag": "c9aff8c3-8cee-420a-8728-920a92d1c2ac",
+    "fqdn": "ignition-server-clusters-63b2c24940-mgmt.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/CNAME/ignition-server-clusters-63b2c24940-mgmt.apps.management-cluster",
+    "name": "ignition-server-clusters-63b2c24940-mgmt.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=032bf5cb-7856-48df-a85b-f2768922ee91,external-dns/resource=route/clusters-63b2c24940-mgmt/ignition-server\""
+        ]
+      }
+    ],
+    "etag": "74682912-3d7c-464a-b6a1-4701bcf88bb3",
+    "fqdn": "ignition-server-clusters-63b2c24940-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/ignition-server-clusters-63b2c24940-mgmt-external-dns.apps.management-cluster",
+    "name": "ignition-server-clusters-63b2c24940-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "router-default.apps.management-cluster.hcp.example.com"
+    },
+    "TTL": 300,
+    "etag": "8853dce7-0774-4624-b2e3-18e7dd8ceda0",
+    "fqdn": "ignition-server-clusters-7dcfa1e21a-mgmt.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/CNAME/ignition-server-clusters-7dcfa1e21a-mgmt.apps.management-cluster",
+    "name": "ignition-server-clusters-7dcfa1e21a-mgmt.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=032bf5cb-7856-48df-a85b-f2768922ee91,external-dns/resource=route/clusters-7dcfa1e21a-mgmt/ignition-server\""
+        ]
+      }
+    ],
+    "etag": "dd31ddf4-6999-4a0a-8574-1fbfa8154f52",
+    "fqdn": "ignition-server-clusters-7dcfa1e21a-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/ignition-server-clusters-7dcfa1e21a-mgmt-external-dns.apps.management-cluster",
+    "name": "ignition-server-clusters-7dcfa1e21a-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "router-default.apps.management-cluster.hcp.example.com"
+    },
+    "TTL": 300,
+    "etag": "ea30c06e-7094-4035-b293-531e264854dd",
+    "fqdn": "ignition-server-clusters-898f75f7fa-mgmt.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/CNAME/ignition-server-clusters-898f75f7fa-mgmt.apps.management-cluster",
+    "name": "ignition-server-clusters-898f75f7fa-mgmt.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=032bf5cb-7856-48df-a85b-f2768922ee91,external-dns/resource=route/clusters-898f75f7fa-mgmt/ignition-server\""
+        ]
+      }
+    ],
+    "etag": "09dd2fbf-e8ea-4f62-8b43-8c46e6b79b4f",
+    "fqdn": "ignition-server-clusters-898f75f7fa-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/ignition-server-clusters-898f75f7fa-mgmt-external-dns.apps.management-cluster",
+    "name": "ignition-server-clusters-898f75f7fa-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "router-default.apps.management-cluster.hcp.example.com"
+    },
+    "TTL": 300,
+    "etag": "72cda392-d26c-47c6-8c53-a8b828c61b95",
+    "fqdn": "ignition-server-clusters-ae7a65e4df-mgmt.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/CNAME/ignition-server-clusters-ae7a65e4df-mgmt.apps.management-cluster",
+    "name": "ignition-server-clusters-ae7a65e4df-mgmt.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=032bf5cb-7856-48df-a85b-f2768922ee91,external-dns/resource=route/clusters-ae7a65e4df-mgmt/ignition-server\""
+        ]
+      }
+    ],
+    "etag": "f62edbd7-7f73-4a24-bf57-4839ef314732",
+    "fqdn": "ignition-server-clusters-ae7a65e4df-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/ignition-server-clusters-ae7a65e4df-mgmt-external-dns.apps.management-cluster",
+    "name": "ignition-server-clusters-ae7a65e4df-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "router-default.apps.management-cluster.hcp.example.com"
+    },
+    "TTL": 300,
+    "etag": "dfdfcaba-a9f0-4565-8332-afe23a1e02ee",
+    "fqdn": "konnectivity-server-cewong-cewong-dev.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/CNAME/konnectivity-server-cewong-cewong-dev.apps.management-cluster",
+    "name": "konnectivity-server-cewong-cewong-dev.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=992cfa0e-01c4-4067-a04d-d5cf5b34d469,external-dns/resource=route/cewong-cewong-dev/konnectivity-server\""
+        ]
+      }
+    ],
+    "etag": "85c68110-898c-4ffb-a6eb-d1ed1519ddef",
+    "fqdn": "konnectivity-server-cewong-cewong-dev-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/konnectivity-server-cewong-cewong-dev-external-dns.apps.management-cluster",
+    "name": "konnectivity-server-cewong-cewong-dev-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "router-default.apps.management-cluster.hcp.example.com"
+    },
+    "TTL": 300,
+    "etag": "d928cab7-bf31-48a4-8791-a03cf01457e3",
+    "fqdn": "konnectivity-server-clusters-0bffba2bf5-mgmt.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/CNAME/konnectivity-server-clusters-0bffba2bf5-mgmt.apps.management-cluster",
+    "name": "konnectivity-server-clusters-0bffba2bf5-mgmt.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=5cade94a-485c-4f77-906c-c7112c720a89,external-dns/resource=route/clusters-0bffba2bf5-mgmt/konnectivity-server\""
+        ]
+      }
+    ],
+    "etag": "a8d22b25-c3c7-4e3c-b9fb-1d14632acb39",
+    "fqdn": "konnectivity-server-clusters-0bffba2bf5-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/konnectivity-server-clusters-0bffba2bf5-mgmt-external-dns.apps.management-cluster",
+    "name": "konnectivity-server-clusters-0bffba2bf5-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "router-default.apps.management-cluster.hcp.example.com"
+    },
+    "TTL": 300,
+    "etag": "fea3f50b-30c0-4c18-8fee-40750e38f4bb",
+    "fqdn": "konnectivity-server-clusters-1325d595a7-mgmt.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/CNAME/konnectivity-server-clusters-1325d595a7-mgmt.apps.management-cluster",
+    "name": "konnectivity-server-clusters-1325d595a7-mgmt.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=032bf5cb-7856-48df-a85b-f2768922ee91,external-dns/resource=route/clusters-1325d595a7-mgmt/konnectivity-server\""
+        ]
+      }
+    ],
+    "etag": "5de6d91f-2a40-4369-a7d8-92185a8ccebd",
+    "fqdn": "konnectivity-server-clusters-1325d595a7-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/konnectivity-server-clusters-1325d595a7-mgmt-external-dns.apps.management-cluster",
+    "name": "konnectivity-server-clusters-1325d595a7-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "router-default.apps.management-cluster.hcp.example.com"
+    },
+    "TTL": 300,
+    "etag": "76174db3-41dc-4321-822f-33688633a79c",
+    "fqdn": "konnectivity-server-clusters-45efc8bd67-mgmt.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/CNAME/konnectivity-server-clusters-45efc8bd67-mgmt.apps.management-cluster",
+    "name": "konnectivity-server-clusters-45efc8bd67-mgmt.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=5cade94a-485c-4f77-906c-c7112c720a89,external-dns/resource=route/clusters-45efc8bd67-mgmt/konnectivity-server\""
+        ]
+      }
+    ],
+    "etag": "95bd1fd4-46b9-4b54-91c1-10a7b557b65e",
+    "fqdn": "konnectivity-server-clusters-45efc8bd67-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/konnectivity-server-clusters-45efc8bd67-mgmt-external-dns.apps.management-cluster",
+    "name": "konnectivity-server-clusters-45efc8bd67-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "router-default.apps.management-cluster.hcp.example.com"
+    },
+    "TTL": 300,
+    "etag": "99eae837-46c8-4eb7-9229-20b26a2310a0",
+    "fqdn": "konnectivity-server-clusters-63b2c24940-mgmt.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/CNAME/konnectivity-server-clusters-63b2c24940-mgmt.apps.management-cluster",
+    "name": "konnectivity-server-clusters-63b2c24940-mgmt.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=032bf5cb-7856-48df-a85b-f2768922ee91,external-dns/resource=route/clusters-63b2c24940-mgmt/konnectivity-server\""
+        ]
+      }
+    ],
+    "etag": "ea6ce839-f373-4c56-961e-88e0e7cfab43",
+    "fqdn": "konnectivity-server-clusters-63b2c24940-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/konnectivity-server-clusters-63b2c24940-mgmt-external-dns.apps.management-cluster",
+    "name": "konnectivity-server-clusters-63b2c24940-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "router-default.apps.management-cluster.hcp.example.com"
+    },
+    "TTL": 300,
+    "etag": "9c79bee7-bd41-47eb-8ada-1564c2b9f88f",
+    "fqdn": "konnectivity-server-clusters-7dcfa1e21a-mgmt.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/CNAME/konnectivity-server-clusters-7dcfa1e21a-mgmt.apps.management-cluster",
+    "name": "konnectivity-server-clusters-7dcfa1e21a-mgmt.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=032bf5cb-7856-48df-a85b-f2768922ee91,external-dns/resource=route/clusters-7dcfa1e21a-mgmt/konnectivity-server\""
+        ]
+      }
+    ],
+    "etag": "a4e031fe-4e21-4046-b087-05ce87ce93b6",
+    "fqdn": "konnectivity-server-clusters-7dcfa1e21a-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/konnectivity-server-clusters-7dcfa1e21a-mgmt-external-dns.apps.management-cluster",
+    "name": "konnectivity-server-clusters-7dcfa1e21a-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "router-default.apps.management-cluster.hcp.example.com"
+    },
+    "TTL": 300,
+    "etag": "1e1b5bd1-fd16-4834-b4b7-9fa65b316921",
+    "fqdn": "konnectivity-server-clusters-898f75f7fa-mgmt.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/CNAME/konnectivity-server-clusters-898f75f7fa-mgmt.apps.management-cluster",
+    "name": "konnectivity-server-clusters-898f75f7fa-mgmt.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=032bf5cb-7856-48df-a85b-f2768922ee91,external-dns/resource=route/clusters-898f75f7fa-mgmt/konnectivity-server\""
+        ]
+      }
+    ],
+    "etag": "0d431c9d-42a9-4818-99fc-1a8deeec88ae",
+    "fqdn": "konnectivity-server-clusters-898f75f7fa-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/konnectivity-server-clusters-898f75f7fa-mgmt-external-dns.apps.management-cluster",
+    "name": "konnectivity-server-clusters-898f75f7fa-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "router-default.apps.management-cluster.hcp.example.com"
+    },
+    "TTL": 300,
+    "etag": "46530e2d-6be2-4d2c-9a58-4735a4b8c714",
+    "fqdn": "konnectivity-server-clusters-ae7a65e4df-mgmt.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/CNAME/konnectivity-server-clusters-ae7a65e4df-mgmt.apps.management-cluster",
+    "name": "konnectivity-server-clusters-ae7a65e4df-mgmt.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=032bf5cb-7856-48df-a85b-f2768922ee91,external-dns/resource=route/clusters-ae7a65e4df-mgmt/konnectivity-server\""
+        ]
+      }
+    ],
+    "etag": "a0d88e05-0bee-4565-b59c-d6acc07f4ffc",
+    "fqdn": "konnectivity-server-clusters-ae7a65e4df-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/konnectivity-server-clusters-ae7a65e4df-mgmt-external-dns.apps.management-cluster",
+    "name": "konnectivity-server-clusters-ae7a65e4df-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "router-default.apps.management-cluster.hcp.example.com"
+    },
+    "TTL": 300,
+    "etag": "f8a4d003-ed23-45c7-a8b8-4fb928c26a41",
+    "fqdn": "oauth-cewong-cewong-dev.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/CNAME/oauth-cewong-cewong-dev.apps.management-cluster",
+    "name": "oauth-cewong-cewong-dev.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=992cfa0e-01c4-4067-a04d-d5cf5b34d469,external-dns/resource=route/cewong-cewong-dev/oauth\""
+        ]
+      }
+    ],
+    "etag": "de102608-6d5e-4e67-93d1-141bb36b3638",
+    "fqdn": "oauth-cewong-cewong-dev-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/oauth-cewong-cewong-dev-external-dns.apps.management-cluster",
+    "name": "oauth-cewong-cewong-dev-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "router-default.apps.management-cluster.hcp.example.com"
+    },
+    "TTL": 300,
+    "etag": "42d5afd7-ce02-4832-a056-6f446122b42e",
+    "fqdn": "oauth-clusters-0bffba2bf5-mgmt.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/CNAME/oauth-clusters-0bffba2bf5-mgmt.apps.management-cluster",
+    "name": "oauth-clusters-0bffba2bf5-mgmt.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=5cade94a-485c-4f77-906c-c7112c720a89,external-dns/resource=route/clusters-0bffba2bf5-mgmt/oauth\""
+        ]
+      }
+    ],
+    "etag": "d0fb2e88-f8ea-4b9b-99f7-41e7fb79ffd2",
+    "fqdn": "oauth-clusters-0bffba2bf5-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/oauth-clusters-0bffba2bf5-mgmt-external-dns.apps.management-cluster",
+    "name": "oauth-clusters-0bffba2bf5-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "router-default.apps.management-cluster.hcp.example.com"
+    },
+    "TTL": 300,
+    "etag": "c40a8ba2-735d-4712-91a8-91e5c5cc0c0e",
+    "fqdn": "oauth-clusters-1325d595a7-mgmt.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/CNAME/oauth-clusters-1325d595a7-mgmt.apps.management-cluster",
+    "name": "oauth-clusters-1325d595a7-mgmt.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=032bf5cb-7856-48df-a85b-f2768922ee91,external-dns/resource=route/clusters-1325d595a7-mgmt/oauth\""
+        ]
+      }
+    ],
+    "etag": "3e3db742-769a-40f3-8264-840d4f7bc461",
+    "fqdn": "oauth-clusters-1325d595a7-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/oauth-clusters-1325d595a7-mgmt-external-dns.apps.management-cluster",
+    "name": "oauth-clusters-1325d595a7-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "router-default.apps.management-cluster.hcp.example.com"
+    },
+    "TTL": 300,
+    "etag": "930b970d-85bb-4a2b-8ab7-ef976dd1a7db",
+    "fqdn": "oauth-clusters-45efc8bd67-mgmt.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/CNAME/oauth-clusters-45efc8bd67-mgmt.apps.management-cluster",
+    "name": "oauth-clusters-45efc8bd67-mgmt.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=5cade94a-485c-4f77-906c-c7112c720a89,external-dns/resource=route/clusters-45efc8bd67-mgmt/oauth\""
+        ]
+      }
+    ],
+    "etag": "e7ad9a4f-d717-4e4a-9329-f212fde210e7",
+    "fqdn": "oauth-clusters-45efc8bd67-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/oauth-clusters-45efc8bd67-mgmt-external-dns.apps.management-cluster",
+    "name": "oauth-clusters-45efc8bd67-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "router-default.apps.management-cluster.hcp.example.com"
+    },
+    "TTL": 300,
+    "etag": "0fa2c362-c935-43ff-913b-bd98f9e99b23",
+    "fqdn": "oauth-clusters-63b2c24940-mgmt.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/CNAME/oauth-clusters-63b2c24940-mgmt.apps.management-cluster",
+    "name": "oauth-clusters-63b2c24940-mgmt.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=032bf5cb-7856-48df-a85b-f2768922ee91,external-dns/resource=route/clusters-63b2c24940-mgmt/oauth\""
+        ]
+      }
+    ],
+    "etag": "8cd20d65-5540-4670-bdde-fa559b76199d",
+    "fqdn": "oauth-clusters-63b2c24940-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/oauth-clusters-63b2c24940-mgmt-external-dns.apps.management-cluster",
+    "name": "oauth-clusters-63b2c24940-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "router-default.apps.management-cluster.hcp.example.com"
+    },
+    "TTL": 300,
+    "etag": "1829a70d-579b-4c4f-96d6-de0461615845",
+    "fqdn": "oauth-clusters-7dcfa1e21a-mgmt.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/CNAME/oauth-clusters-7dcfa1e21a-mgmt.apps.management-cluster",
+    "name": "oauth-clusters-7dcfa1e21a-mgmt.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=032bf5cb-7856-48df-a85b-f2768922ee91,external-dns/resource=route/clusters-7dcfa1e21a-mgmt/oauth\""
+        ]
+      }
+    ],
+    "etag": "ac6df8ec-7067-41b1-b6c0-ed46289ab19a",
+    "fqdn": "oauth-clusters-7dcfa1e21a-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/oauth-clusters-7dcfa1e21a-mgmt-external-dns.apps.management-cluster",
+    "name": "oauth-clusters-7dcfa1e21a-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "router-default.apps.management-cluster.hcp.example.com"
+    },
+    "TTL": 300,
+    "etag": "795e041f-1e3d-4ed0-9cbb-183148f3c46c",
+    "fqdn": "oauth-clusters-898f75f7fa-mgmt.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/CNAME/oauth-clusters-898f75f7fa-mgmt.apps.management-cluster",
+    "name": "oauth-clusters-898f75f7fa-mgmt.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=032bf5cb-7856-48df-a85b-f2768922ee91,external-dns/resource=route/clusters-898f75f7fa-mgmt/oauth\""
+        ]
+      }
+    ],
+    "etag": "c7ba3a8d-bc6f-4752-9f7f-e8066087da76",
+    "fqdn": "oauth-clusters-898f75f7fa-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/oauth-clusters-898f75f7fa-mgmt-external-dns.apps.management-cluster",
+    "name": "oauth-clusters-898f75f7fa-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "router-default.apps.management-cluster.hcp.example.com"
+    },
+    "TTL": 300,
+    "etag": "7ef82b44-08c1-4211-977b-421d8e55f1f2",
+    "fqdn": "oauth-clusters-ae7a65e4df-mgmt.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/CNAME/oauth-clusters-ae7a65e4df-mgmt.apps.management-cluster",
+    "name": "oauth-clusters-ae7a65e4df-mgmt.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=032bf5cb-7856-48df-a85b-f2768922ee91,external-dns/resource=route/clusters-ae7a65e4df-mgmt/oauth\""
+        ]
+      }
+    ],
+    "etag": "901a4eb3-f1c7-44f1-a32a-7c0e020f0876",
+    "fqdn": "oauth-clusters-ae7a65e4df-mgmt-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/oauth-clusters-ae7a65e4df-mgmt-external-dns.apps.management-cluster",
+    "name": "oauth-clusters-ae7a65e4df-mgmt-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "router-default.apps.management-cluster.hcp.example.com"
+    },
+    "TTL": 300,
+    "etag": "6172a433-f4e4-4f0d-9029-83b4c5c7e460",
+    "fqdn": "prometheus-k8s-federate-openshift-monitoring.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/CNAME/prometheus-k8s-federate-openshift-monitoring.apps.management-cluster",
+    "name": "prometheus-k8s-federate-openshift-monitoring.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=7e47bb1e-53d5-43b9-aeb0-69464524b362,external-dns/resource=route/openshift-monitoring/prometheus-k8s-federate\""
+        ]
+      }
+    ],
+    "etag": "0aa2528c-8c0e-406e-a090-add7cb675d32",
+    "fqdn": "prometheus-k8s-federate-openshift-monitoring-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/prometheus-k8s-federate-openshift-monitoring-external-dns.apps.management-cluster",
+    "name": "prometheus-k8s-federate-openshift-monitoring-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "router-default.apps.management-cluster.hcp.example.com"
+    },
+    "TTL": 300,
+    "etag": "6a2e8e3c-fff0-4493-87b9-d8a2c43585bc",
+    "fqdn": "prometheus-k8s-openshift-monitoring.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/CNAME/prometheus-k8s-openshift-monitoring.apps.management-cluster",
+    "name": "prometheus-k8s-openshift-monitoring.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=7e47bb1e-53d5-43b9-aeb0-69464524b362,external-dns/resource=route/openshift-monitoring/prometheus-k8s\""
+        ]
+      }
+    ],
+    "etag": "334bfb66-f131-4aba-ae33-a544c8d3dc5d",
+    "fqdn": "prometheus-k8s-openshift-monitoring-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/prometheus-k8s-openshift-monitoring-external-dns.apps.management-cluster",
+    "name": "prometheus-k8s-openshift-monitoring-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "CNAMERecord": {
+      "cname": "router-default.apps.management-cluster.hcp.example.com"
+    },
+    "TTL": 300,
+    "etag": "4915d7e1-48bd-48ce-bc10-15a0fd152a0d",
+    "fqdn": "thanos-querier-openshift-monitoring.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/CNAME/thanos-querier-openshift-monitoring.apps.management-cluster",
+    "name": "thanos-querier-openshift-monitoring.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/CNAME"
+  },
+  {
+    "TTL": 300,
+    "TXTRecords": [
+      {
+        "value": [
+          "\"heritage=external-dns,external-dns/owner=7e47bb1e-53d5-43b9-aeb0-69464524b362,external-dns/resource=route/openshift-monitoring/thanos-querier\""
+        ]
+      }
+    ],
+    "etag": "e97c3609-dd95-4c99-be33-a9c525af0a32",
+    "fqdn": "thanos-querier-openshift-monitoring-external-dns.apps.management-cluster.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/TXT/thanos-querier-openshift-monitoring-external-dns.apps.management-cluster",
+    "name": "thanos-querier-openshift-monitoring-external-dns.apps.management-cluster",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/TXT"
+  },
+  {
+    "NSRecords": [
+      {
+        "nsdname": "ns1-01.azure-dns.com."
+      },
+      {
+        "nsdname": "ns2-01.azure-dns.net."
+      },
+      {
+        "nsdname": "ns3-01.azure-dns.org."
+      },
+      {
+        "nsdname": "ns4-01.azure-dns.info."
+      }
+    ],
+    "TTL": 3600,
+    "etag": "d5ce9e0a-ed94-4851-aff8-16522a774254",
+    "fqdn": "sm.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/NS/sm",
+    "name": "sm",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/NS"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.16"
+      }
+    ],
+    "TTL": 30,
+    "etag": "b4fd04b5-5062-4aa1-977d-ebe545e1ded5",
+    "fqdn": "*.apps.upgrade-0bffba2bf5.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.upgrade-0bffba2bf5",
+    "metadata": {
+      "kubernetes.io_cluster.upgrade-0bffba2bf5": "owned"
+    },
+    "name": "*.apps.upgrade-0bffba2bf5",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.14"
+      }
+    ],
+    "TTL": 30,
+    "etag": "1cbee2c7-89aa-4f22-be74-d28643627608",
+    "fqdn": "*.apps.upgrade-45efc8bd67.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.upgrade-45efc8bd67",
+    "metadata": {
+      "kubernetes.io_cluster.upgrade-45efc8bd67": "owned"
+    },
+    "name": "*.apps.upgrade-45efc8bd67",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  },
+  {
+    "ARecords": [
+      {
+        "ipv4Address": "203.0.113.25"
+      }
+    ],
+    "TTL": 30,
+    "etag": "adc9a523-e2be-4279-b828-e10c18e46529",
+    "fqdn": "*.apps.upgrade-7dcfa1e21a.hcp.example.com.",
+    "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com/A/*.apps.upgrade-7dcfa1e21a",
+    "metadata": {
+      "kubernetes.io_cluster.upgrade-7dcfa1e21a": "owned"
+    },
+    "name": "*.apps.upgrade-7dcfa1e21a",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "shared-resource-group",
+    "targetResource": {},
+    "trafficManagementProfile": {},
+    "type": "Microsoft.Network/dnszones/A"
+  }
+]

@@ -1,0 +1,17 @@
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  name: test-cntrlplane-4826-t2-mc-20261028t144539z
+  labels:
+    machineconfiguration.openshift.io/role: worker
+spec:
+  config:
+    ignition:
+      version: 3.2.0
+    storage:
+      files:
+      - path: /etc/custom-config
+        mode: 420
+        overwrite: true
+        contents:
+          source: data:,CNTRLPLANE-4826-T2-20261028t144539z

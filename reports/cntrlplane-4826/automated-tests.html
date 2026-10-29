@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Automated tests</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topbar"><div class="brand">CNTRLPLANE-4826 · Verification</div><nav><a href="index.html">Dashboard</a><a href="scenario-1.html">T1 Release</a><a href="scenario-2.html">T2 Config</a><a href="scenario-3.html">T3 VM size</a><a href="scenario-4.html">T4 Predicate</a><a href="scenario-5.html">T5 Reconcile</a><a href="scenario-6.html">T6 Scale</a><a href="scenario-7.html">T7 Stable pool</a><a href="scenario-8.html">T8 Compatibility</a><a href="automated-tests.html" class="active">Automated</a><a href="appendices.html">Appendices</a><a href="full-report.html">Corrections log</a></nav></header>
+<main>
+<div class="scenario-head"><div><div class="eyebrow">Automated · PARTIAL</div><h1>Automated tests</h1></div><span class="badge partial">PARTIAL</span></div><p class="lead">Record what the CI system and the local focused unit run actually proved at PR head, and what they did not.</p>
+<h2 id="ci">Prow checks at head <code>ee5691233b</code></h2>
+<div class="table-wrap"><table class=""><thead><tr><th>Check</th><th>Result</th></tr></thead><tbody><tr><td><a href="https://prow.ci.openshift.org/view/gs/test-platform-results-public/pr-logs/pull/openshift_hypershift/10084/pull-ci-openshift-hypershift-main-unit/2115511123393384449">ci/prow/unit</a></td><td><span class="badge pass">PASS</span></td></tr><tr><td><a href="https://prow.ci.openshift.org/view/gs/test-platform-results-public/pr-logs/pull/openshift_hypershift/10084/pull-ci-openshift-hypershift-main-verify/2115511123426938880">ci/prow/verify</a></td><td><span class="badge pass">PASS</span></td></tr><tr><td><a href="https://prow.ci.openshift.org/view/gs/test-platform-results-public/pr-logs/pull/openshift_hypershift/10084/pull-ci-openshift-hypershift-main-verify-deps/2115511123506630656">ci/prow/verify-deps</a></td><td><span class="badge pass">PASS</span></td></tr><tr><td><a href="https://prow.ci.openshift.org/view/gs/test-platform-results-public/pr-logs/pull/openshift_hypershift/10084/pull-ci-openshift-hypershift-main-images/2115511123271749632">ci/prow/images</a></td><td><span class="badge pass">PASS</span></td></tr><tr><td><a href="https://prow.ci.openshift.org/view/gs/test-platform-results-public/pr-logs/pull/openshift_hypershift/10084/pull-ci-openshift-hypershift-main-security/2115511123393384448">ci/prow/security</a></td><td><span class="badge pass">PASS</span></td></tr><tr><td><code>ci/prow/e2e-aws-upgrade-hypershift-operator</code></td><td><span class="badge pending">PENDING</span></td></tr><tr><td><code>ci/prow/e2e-aws</code></td><td><span class="badge pending">PENDING</span></td></tr><tr><td><code>ci/prow/e2e-aks</code></td><td><span class="badge pending">PENDING</span></td></tr><tr><td><code>ci/prow/e2e-v2-azure-self-managed</code></td><td><span class="badge pending">PENDING</span></td></tr></tbody></table></div>
+<p>Unit, verify, verify-deps, images and security are green at head. The e2e jobs were still <em>Waiting for pipeline condition to trigger this job</em> when this bundle was packaged, so they are recorded as pending, not as passes.</p>
+<h2>Local focused unit run at head</h2>
+<p>Command: <code>go test ./hypershift-operator/controllers/nodepool/ -run 'TestMachineDeploymentComplete|TestReconcileMachineDeploymentStatus|TestReconcileWorkload|TestSeedRolloutAnnotation|TestResolveDeployedBootstrapHash|TestRolloutTargetHash' -v -count=1</code></p>
+<p>Result: <strong>PASS</strong> (exit 0). Log: <a href="assets/evidence/r3/unit/head-20261029T003006Z/focused-tests.log"><code>unit/head-20261029T003006Z/focused-tests.log</code></a> · commit <a href="assets/evidence/r3/unit/head-20261029T003006Z/commit.txt"><code>unit/head-20261029T003006Z/commit.txt</code></a> · toolchain <a href="assets/evidence/r3/unit/head-20261029T003006Z/go-version.txt"><code>unit/head-20261029T003006Z/go-version.txt</code></a></p>
+<h2>Old-commit disclosure</h2>
+<div class="callout warn"><p>The earlier tested commit <code>ff673589287e</code> was red: <code>ci/prow/unit</code> failed at 2026-10-28T12:45:47Z and <code>ci/prow/e2e-aks</code> failed at 2026-10-27T13:43:05Z. Those failures were caused by the old base and are not evidence against head; head's unit and verify jobs are green. They are recorded here so the bundle cannot be read as claiming a clean run on the old commit.</p></div>
+
+<p class="back"><a href="index.html">← Return to dashboard</a></p>
+</main>
+<footer><a href="https://github.com/openshift/hypershift/pull/10084">openshift/hypershift#10084</a> · CNTRLPLANE-4826 · round 5 · 2026-10-29 · sanitized bundle</footer>
+</body>
+</html>

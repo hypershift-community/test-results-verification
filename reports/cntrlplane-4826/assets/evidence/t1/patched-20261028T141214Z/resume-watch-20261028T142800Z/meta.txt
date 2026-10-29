@@ -1,0 +1,4 @@
+purpose=read-only continuation after interrupted local runner
+resume_started_utc=2026-10-28T14:39:11Z
+fixed_deadline_utc=2026-10-28T14:42:23Z
+nodepool=test-cntrlplane-4826-patched

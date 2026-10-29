@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Appendices</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topbar"><div class="brand">CNTRLPLANE-4826 · Verification</div><nav><a href="index.html">Dashboard</a><a href="scenario-1.html">T1 Release</a><a href="scenario-2.html">T2 Config</a><a href="scenario-3.html">T3 VM size</a><a href="scenario-4.html">T4 Predicate</a><a href="scenario-5.html">T5 Reconcile</a><a href="scenario-6.html">T6 Scale</a><a href="scenario-7.html">T7 Stable pool</a><a href="scenario-8.html">T8 Compatibility</a><a href="automated-tests.html">Automated</a><a href="appendices.html" class="active">Appendices</a><a href="full-report.html">Corrections log</a></nav></header>
+<main>
+<div class="scenario-head"><div><div class="eyebrow">Appendices · environment, provenance, evidence</div><h1>Appendices</h1></div><span class="badge pending">INFO</span></div><p class="lead">Environment, image provenance, evidence inventory, sanitization and cleanup.</p>
+<h2>Environment</h2>
+<div class="meta-grid">
+  <div><span>Management kubeconfig</span><code>management.kubeconfig (AWS dev cluster, us-east-1)</code></div>
+  <div><span>Hosted platform</span><code>Azure self-managed</code></div>
+  <div><span>HostedCluster name</span><code>test-cntrlplane-4826-hc</code></div>
+  <div><span>CAPI manager</span><code>cluster-api-controller:v1.14.3</code></div>
+  <div><span>Release A</span><code>5.0.0-rc.7</code></div>
+  <div><span>Release B</span><code>5.1.0-0.nightly-multi-2026-10-27-082258</code></div>
+  <div><span>Base commit</span><code>ee327075b1</code></div>
+  <div><span>Head commit</span><code>ee5691233b</code></div>
+</div>
+<p>Pre-test state: <a href="assets/evidence/r3/environment/state-20261028T232221Z"><code>environment/state-20261028T232221Z</code></a></p>
+
+<h2>Operator transitions</h2>
+<div class="table-wrap"><table class=""><thead><tr><th>Run</th><th>Operator image</th><th>Started</th><th>Completed</th></tr></thead><tbody><tr><td><code>base-20261028T233448Z</code></td><td><code>—</code></td><td>2026-10-28T23:34:48Z</td><td>2026-10-28T23:37:45Z</td></tr><tr><td><code>base-20261029T000005Z</code></td><td><code>—</code></td><td>2026-10-29T00:00:05Z</td><td>2026-10-29T00:02:17Z</td></tr><tr><td><code>capture-20261028T232249Z</code></td><td><code>—</code></td><td>—</td><td>—</td></tr><tr><td><code>capture-20261029T011519Z</code></td><td><code>—</code></td><td>—</td><td>—</td></tr><tr><td><code>patched-20261028T232250Z</code></td><td><code>—</code></td><td>2026-10-28T23:22:50Z</td><td>2026-10-28T23:25:43Z</td></tr><tr><td><code>patched-20261028T235639Z</code></td><td><code>—</code></td><td>2026-10-28T23:56:39Z</td><td>2026-10-28T23:59:13Z</td></tr><tr><td><code>patched-20261029T002902Z</code></td><td><code>—</code></td><td>2026-10-29T00:29:02Z</td><td>2026-10-29T00:31:14Z</td></tr><tr><td><code>patched-20261029T011519Z</code></td><td><code>—</code></td><td>2026-10-29T01:15:19Z</td><td>2026-10-29T01:17:30Z</td></tr><tr><td><code>restore-20261029T010342Z</code></td><td><code>—</code></td><td>2026-10-29T01:03:42Z</td><td>2026-10-29T01:05:51Z</td></tr></tbody></table></div>
+
+<h2>Image provenance</h2>
+<ul>
+  <li>Base: <code>quay.io/example/hypershift@sha256:a8848bd5281ac07a23eb2f583f506e59aaa60702ff6aa0cb4530884479821839</code>, embedded commit <code>ee327075b155839511edc3779510ceb95c93a658</code>.</li>
+  <li>Head: <code>quay.io/example/hypershift@sha256:7a2248fdc9d50e99e8b444aa887cea96bdf0023e2e81062f9de21266ddb492a6</code>, embedded commit <code>ee5691233b08e3271f030ebd24055faa6857fd39</code>.</li>
+  <li>Both images were built from the clean worktree at the stated commits and verified with <code>hypershift version</code> inside the running pods.</li>
+</ul>
+
+
+<h2>Round 4 runs</h2>
+<div class="table-wrap"><table class=""><thead><tr><th>Scenario</th><th>Run directory</th><th>Result</th><th>Elapsed (s)</th><th>Completed (UTC)</th></tr></thead><tbody><tr><td>T2 config-only</td><td><code>t2/config-20261029T013911Z</code></td><td><span class="badge pass">PASS</span></td><td>1474</td><td>2026-10-29T02:03:54Z</td></tr><tr><td>T3 VM size</td><td><code>t3/vm-size-20261029T020600Z</code></td><td><span class="badge pass">PASS</span></td><td>653</td><td>2026-10-29T02:17:02Z</td></tr><tr><td>T6 scale</td><td><code>t6/scale-20261029T023240Z</code></td><td><span class="badge pass">PASS</span></td><td>410</td><td>2026-10-29T02:39:40Z</td></tr></tbody></table></div>
+<p>The T2 run used <code>maxSurge=1</code>, the helper default when the pool was created, which serialises replacements. For T3 and T6 the surge was raised to <code>3</code> (NodePool generation 2 → 3, MachineDeployment revision unchanged) so a three-worker Replace rollout runs concurrently. That changes how many replacement Machines are created at once, not the completion predicate. Evidence: <a href="assets/evidence/r4/nodepools/surge-before-t3-s20261029T020425Z"><code>nodepools/surge-before-t3-s20261029T020425Z</code></a>.</p>
+<h3>HostedCluster creation attempts in round 4</h3>
+<p>The round-3 HostedCluster name could not be recreated: the managed resource group still held an egress load balancer whose
+health-probe rule referenced a probe that no longer existed, and Azure rejected every update with
+<code>InvalidResourceReference</code>. Two non-destructive repair attempts also failed. Round 4 therefore used a new HostedCluster
+and infrastructure name inside the <strong>same</strong> managed resource group, which keeps the existing workload-identity role
+assignments and required no Azure deletion. Both failed attempts and the repair logs are archived:
+<a href="assets/evidence/r4/cluster/round4-attempts/create-20261029T011739Z"><code>cluster/round4-attempts/create-20261029T011739Z</code></a> · <a href="assets/evidence/r4/cluster/round4-attempts/create-20261029T012111Z"><code>cluster/round4-attempts/create-20261029T012111Z</code></a> · <a href="assets/evidence/r4/cluster/round4-attempts/lb-repair-20261029T012423Z"><code>cluster/round4-attempts/lb-repair-20261029T012423Z</code></a> .</p>
+<h2>Round-4 cleanup</h2>
+<p>Only the two test NodePools and the test HostedCluster were deleted. No Azure resource group, VNet, NSG, DNS zone or
+role assignment was touched by hand. The management operator deployment was restored to its original image
+<code>quay.io/acm-d/rhtap-hypershift-operator@sha256:d7eb652d&hellip;</code> and two operator pods are Running and Ready.</p>
+<div class="table-wrap"><table class=""><thead><tr><th>Snapshot</th><th>HostedClusters</th><th>NodePools</th><th>Operator image</th><th>Evidence</th></tr></thead><tbody><tr><td><code>final-state-20261029T025221Z</code></td><td>1</td><td>0</td><td><code>rhtap-hypershift-operator@sha256:d7eb652dbbfa…</code></td><td><a href="assets/evidence/r4/cleanup/final-state-20261029T025221Z"><code>cleanup/final-state-20261029T025221Z</code></a></td></tr><tr><td><code>final-state-20261029T025332Z</code></td><td>0</td><td>0</td><td><code>rhtap-hypershift-operator@sha256:d7eb652dbbfa…</code></td><td><a href="assets/evidence/r4/cleanup/final-state-20261029T025332Z"><code>cleanup/final-state-20261029T025332Z</code></a></td></tr></tbody></table></div>
+<h3>Round-4 harness</h3>
+<p>Round-4 runs use a separate script directory so the shared private scripts are untouched:
+<code>private-hypershift-scripts/azure/CNTRLPLANE-4826-r4/</code> with <code>run-t2-config.sh</code>,
+<code>run-t3-vmsize.sh</code>, <code>run-t6-scale.sh</code> and <code>t-lib.sh</code>. Each script snapshots before,
+action and final state, samples every 15 seconds, writes <code>verdict.json</code> with an explicit result, and exits
+non-zero on FAIL.</p>
+<h2>Evidence inventory</h2>
+<p>Round-4 artifacts live under <code>assets/evidence/r4/</code>; round-3 artifacts remain under <code>assets/evidence/r3/</code>. Every linked artifact is a byte-for-byte copy of the archived run output after the sanitization described below. Kubeconfigs, cloud credentials, client/tenant/subscription identifiers and private keys are excluded.</p>
+
+<h2 id="sanitization">Sanitization</h2>
+<ul>
+  <li>The guest <code>kubeconfig</code> and the management kubeconfig are <strong>not</strong> included in this bundle.</li>
+  <li>Azure subscription, tenant and principal identifiers are replaced with stable redaction tokens.</li>
+  <li>Private domains, load-balancer hostnames, secret data and bearer values are replaced.</li>
+  <li>Names of test resources are normalized; image registries are normalized to <code>quay.io/example/</code>.</li>
+  <li>Original SHA-256 manifests are invalidated by sanitization and are not published; hashes of the published copies can be regenerated from the bundle.</li>
+</ul>
+
+<h2>Cleanup</h2>
+<p>Only the test NodePools and the test HostedCluster were deleted. No Azure resource group, VNet, NSG, DNS zone or role assignment was modified by hand. The management operator deployment was restored to its original image.</p>
+<div class="table-wrap"><table class=""><thead><tr><th>Snapshot</th><th>NodePools</th><th>HostedClusters</th><th>Evidence</th></tr></thead><tbody><tr><td><code>20261029T005632Z</code></td><td>—</td><td>—</td><td><a href="assets/evidence/r3/cleanup/20261029T005632Z"><code>cleanup/20261029T005632Z</code></a></td></tr><tr><td><code>final-state-20261029T010605Z</code></td><td>0</td><td>0</td><td><a href="assets/evidence/r3/cleanup/final-state-20261029T010605Z"><code>cleanup/final-state-20261029T010605Z</code></a></td></tr><tr><td><code>post-delete-20261029T005949Z</code></td><td>0</td><td>1</td><td><a href="assets/evidence/r3/cleanup/post-delete-20261029T005949Z"><code>cleanup/post-delete-20261029T005949Z</code></a></td></tr><tr><td><code>post-hc-delete-20261029T010341Z</code></td><td>0</td><td>0</td><td><a href="assets/evidence/r3/cleanup/post-hc-delete-20261029T010341Z"><code>cleanup/post-hc-delete-20261029T010341Z</code></a></td></tr><tr><td><code>pre-delete-20261029T005626Z</code></td><td>2</td><td>1</td><td><a href="assets/evidence/r3/cleanup/pre-delete-20261029T005626Z"><code>cleanup/pre-delete-20261029T005626Z</code></a></td></tr></tbody></table></div>
+<p>Deletion commands: <a href="assets/evidence/r3/cleanup/20261029T005632Z/commands.txt"><code>cleanup/20261029T005632Z/commands.txt</code></a> · HostedCluster deletion: <a href="assets/evidence/r3/cleanup/hc-delete-command.txt"><code>cleanup/hc-delete-command.txt</code></a> · snapshots under <code>assets/evidence/r3/cleanup/</code>.</p>
+
+
+<h2>Round 5 cleanup and teardown</h2>
+<p>Only the round-5 test NodePool and HostedCluster were deleted. The management operator deployment was restored to its original image. No Azure resource group, VNet, NSG, shared DNS zone, role assignment or other Azure resource was created, modified or destroyed by hand. <code>shared-resource-group</code> was not touched.</p>
+<div class="table-wrap"><table class=""><thead><tr><th>Snapshot</th><th>NodePools</th><th>HostedClusters</th><th>Evidence</th></tr></thead><tbody><tr><td><code>20261029T111255Z</code></td><td><code>1</code></td><td><code>1</code></td><td><a href="assets/evidence/r5/cleanup/20261029T111255Z"><code>cleanup/20261029T111255Z</code></a></td></tr><tr><td><code>20261029T111300Z</code></td><td><code>—</code></td><td><code>—</code></td><td><a href="assets/evidence/r5/cleanup/20261029T111300Z"><code>cleanup/20261029T111300Z</code></a></td></tr><tr><td><code>final-state-20261029T112150Z</code></td><td><code>0</code></td><td><code>0</code></td><td><a href="assets/evidence/r5/cleanup/final-state-20261029T112150Z"><code>cleanup/final-state-20261029T112150Z</code></a></td></tr><tr><td><code>hc-delete-20261029T111622Z</code></td><td><code>—</code></td><td><code>—</code></td><td><a href="assets/evidence/r5/cleanup/hc-delete-20261029T111622Z"><code>cleanup/hc-delete-20261029T111622Z</code></a></td></tr></tbody></table></div>
+<p>Post-teardown state: <code>hostedclusters=0</code>, <code>nodepools=0</code>, operator image <code>quay.io/acm-d/rhtap-hypershift-operator@sha256:d7eb652dbbfac8ae9866b413c7125c86961a5cfb46396eb31774e0b3e171a3a5</code> (the original). Raw: <a href="assets/evidence/r5/cleanup/final-state-20261029T112150Z/hostedclusters.json"><code>cleanup/final-state-20261029T112150Z/hostedclusters.json</code></a> · <a href="assets/evidence/r5/cleanup/final-state-20261029T112150Z/nodepools.json"><code>cleanup/final-state-20261029T112150Z/nodepools.json</code></a> · <a href="assets/evidence/r5/cleanup/final-state-20261029T112150Z/operator-deployment.json"><code>cleanup/final-state-20261029T112150Z/operator-deployment.json</code></a>.</p>
+<p>The HostedCluster finalizer removed the cluster-owned Azure resources. CLI-created egress resources from this and earlier rounds remain in the managed resource group and were deliberately left in place, because manual Azure deletion is out of scope for this verification. The inventory is archived at <a href="assets/evidence/r5/cleanup/20261029T111255Z/managed-rg-resources-after.json"><code>cleanup/20261029T111255Z/managed-rg-resources-after.json</code></a>. The shared DNS zones in <code>shared-resource-group</code> remain present.</p>
+<h2>Reproduction</h2>
+<ol>
+  <li>Build base <code>ee327075b1</code> and head <code>ee5691233b</code> with <code>podman build -f ./Dockerfile.dev --platform=linux/amd64</code> and push both images.</li>
+  <li>Create an Azure self-managed HostedCluster with the CAPI manager overridden with the annotation <code>hypershift.openshift.io/capi-manager-image</code>. Use <code>registry.k8s.io/cluster-api/cluster-api-controller:v1.14.3</code> for the 1.14 rounds and <code>v1.13.4</code> for round 5.</li>
+  <li>Run <code>run-t1.sh baseline</code> with the base image and <code>run-t1.sh patched</code> with the head image. Both scripts snapshot before state, patch release B, sample every 5 s, require an explicit PASS/FAIL and archive operator logs and events.</li>
+  <li>For the pre-1.14 row, run <code>run-t1.sh patched</code> against the 1.13.4 manager and evaluate its trace with <code>verify-t8.sh</code>, because the stock runner encodes the 1.14 stall signature as its success gate.</li>
+</ol>
+
+<p class="back"><a href="index.html">← Return to dashboard</a></p>
+</main>
+<footer><a href="https://github.com/openshift/hypershift/pull/10084">openshift/hypershift#10084</a> · CNTRLPLANE-4826 · round 5 · 2026-10-29 · sanitized bundle</footer>
+</body>
+</html>

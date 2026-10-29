@@ -1,0 +1,1 @@
+kubectl patch nodepool test-cntrlplane-4826-r4-head -n clusters --type=merge -p \{\"spec\":\{\"config\":\[\{\"name\":\"test-cntrlplane-4826-t2-mc-20261029t013911z\"\}\]\}\}

@@ -1,0 +1,11 @@
+watch_started_utc=2026-10-28T15:56:20Z
+zsh:8: command not found: mapfile
+watch_started_utc=2026-10-28T15:56:31Z
+2026-10-28T15:56:31Z nodepools_present=3 machinedeployments=0 machinesets=3 machines=9
+2026-10-28T15:57:02Z nodepools_present=2 machinedeployments=0 machinesets=2 machines=4
+2026-10-28T15:57:33Z nodepools_present=1 machinedeployments=0 machinesets=1 machines=1
+2026-10-28T15:58:04Z nodepools_present=1 machinedeployments=0 machinesets=1 machines=1
+2026-10-28T15:58:35Z nodepools_present=1 machinedeployments=0 machinesets=1 machines=1
+2026-10-28T15:59:06Z nodepools_present=1 machinedeployments=0 machinesets=1 machines=1
+2026-10-28T15:59:37Z nodepools_present=0 machinedeployments=0 machinesets=0 machines=0
+watch_completed_utc=2026-10-28T15:59:37Z

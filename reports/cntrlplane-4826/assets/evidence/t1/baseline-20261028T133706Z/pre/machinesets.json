@@ -1,0 +1,359 @@
+{
+  "apiVersion": "v1",
+  "items": [
+    {
+      "apiVersion": "cluster.x-k8s.io/v1beta2",
+      "kind": "MachineSet",
+      "metadata": {
+        "annotations": {
+          "cluster.x-k8s.io/cluster-api-autoscaler-node-group-max-size": "0",
+          "cluster.x-k8s.io/cluster-api-autoscaler-node-group-min-size": "0",
+          "cluster.x-k8s.io/disable-machine-create": "false",
+          "hypershift.openshift.io/nodePool": "clusters/test-cntrlplane-4826-patched",
+          "machinedeployment.clusters.x-k8s.io/desired-replicas": "3",
+          "machinedeployment.clusters.x-k8s.io/max-replicas": "4",
+          "machinedeployment.clusters.x-k8s.io/revision": "1"
+        },
+        "creationTimestamp": "2026-10-28T13:26:14Z",
+        "finalizers": [
+          "cluster.x-k8s.io/machineset"
+        ],
+        "generation": 1,
+        "labels": {
+          "brco-f6265508-test-cntrlplane-4826-patched": "brco-f6265508-test-cntrlplane-4826-patched",
+          "cluster.x-k8s.io/cluster-name": "test-cntrlplane-4826",
+          "cluster.x-k8s.io/deployment-name": "test-cntrlplane-4826-patched",
+          "machine-template-hash": "2192444929-bkf55"
+        },
+        "name": "test-cntrlplane-4826-patched-bkf55",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "ownerReferences": [
+          {
+            "apiVersion": "cluster.x-k8s.io/v1beta2",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "MachineDeployment",
+            "name": "test-cntrlplane-4826-patched",
+            "uid": "f2adcde0-7e6f-44c0-833a-d18b6486a868"
+          }
+        ],
+        "resourceVersion": "129655524",
+        "uid": "35ff4ec1-5d7e-45b6-9ba4-10f3bc6a623b"
+      },
+      "spec": {
+        "clusterName": "test-cntrlplane-4826",
+        "replicas": 3,
+        "selector": {
+          "matchLabels": {
+            "brco-f6265508-test-cntrlplane-4826-patched": "brco-f6265508-test-cntrlplane-4826-patched",
+            "cluster.x-k8s.io/cluster-name": "test-cntrlplane-4826",
+            "machine-template-hash": "2192444929-bkf55"
+          }
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "hypershift.openshift.io/nodePool": "clusters/test-cntrlplane-4826-patched",
+              "hypershift.openshift.io/release-version": "5.0.0-rc.7"
+            },
+            "labels": {
+              "brco-f6265508-test-cntrlplane-4826-patched": "brco-f6265508-test-cntrlplane-4826-patched",
+              "cluster.x-k8s.io/cluster-name": "test-cntrlplane-4826",
+              "machine-template-hash": "2192444929-bkf55"
+            }
+          },
+          "spec": {
+            "bootstrap": {
+              "dataSecretName": "user-data-test-cntrlplane-4826-patched-b229e3aa"
+            },
+            "clusterName": "test-cntrlplane-4826",
+            "deletion": {
+              "nodeDrainTimeoutSeconds": 0,
+              "nodeVolumeDetachTimeoutSeconds": 0
+            },
+            "infrastructureRef": {
+              "apiGroup": "infrastructure.cluster.x-k8s.io",
+              "kind": "AzureMachineTemplate",
+              "name": "test-cntrlplane-4826-patched-e4b9b203"
+            },
+            "version": "5.0.0-rc.7"
+          }
+        }
+      },
+      "status": {
+        "availableReplicas": 3,
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-28T13:26:16Z",
+            "message": "",
+            "observedGeneration": 1,
+            "reason": "NotRemediating",
+            "status": "False",
+            "type": "Remediating"
+          },
+          {
+            "lastTransitionTime": "2026-10-28T13:26:16Z",
+            "message": "",
+            "observedGeneration": 1,
+            "reason": "NotScalingDown",
+            "status": "False",
+            "type": "ScalingDown"
+          },
+          {
+            "lastTransitionTime": "2026-10-28T13:26:17Z",
+            "message": "",
+            "observedGeneration": 1,
+            "reason": "NotScalingUp",
+            "status": "False",
+            "type": "ScalingUp"
+          },
+          {
+            "lastTransitionTime": "2026-10-28T13:33:42Z",
+            "message": "",
+            "observedGeneration": 1,
+            "reason": "Ready",
+            "status": "True",
+            "type": "MachinesReady"
+          },
+          {
+            "lastTransitionTime": "2026-10-28T13:32:38Z",
+            "message": "* Machines test-cntrlplane-4826-patched-bkf55-7lzbt, test-cntrlplane-4826-patched-bkf55-fjnb8, test-cntrlplane-4826-patched-bkf55-gzcfm:\n  * Node.status.nodeInfo.kubeletVersion v1.36.5, 5.0.0-rc.7 required",
+            "observedGeneration": 1,
+            "reason": "NotUpToDate",
+            "status": "False",
+            "type": "MachinesUpToDate"
+          },
+          {
+            "lastTransitionTime": "2026-10-28T13:26:15Z",
+            "message": "",
+            "observedGeneration": 1,
+            "reason": "NotPaused",
+            "status": "False",
+            "type": "Paused"
+          },
+          {
+            "lastTransitionTime": "2026-10-28T13:26:16Z",
+            "message": "",
+            "observedGeneration": 1,
+            "reason": "NotDeleting",
+            "status": "False",
+            "type": "Deleting"
+          }
+        ],
+        "deprecated": {
+          "v1beta1": {
+            "availableReplicas": 3,
+            "conditions": [
+              {
+                "lastTransitionTime": "2026-10-28T13:33:42Z",
+                "status": "True",
+                "type": "Ready"
+              },
+              {
+                "lastTransitionTime": "2026-10-28T13:26:17Z",
+                "status": "True",
+                "type": "MachinesCreated"
+              },
+              {
+                "lastTransitionTime": "2026-10-28T13:27:59Z",
+                "status": "True",
+                "type": "MachinesReady"
+              },
+              {
+                "lastTransitionTime": "2026-10-28T13:33:42Z",
+                "status": "True",
+                "type": "Resized"
+              }
+            ],
+            "fullyLabeledReplicas": 3,
+            "readyReplicas": 3
+          }
+        },
+        "observedGeneration": 1,
+        "readyReplicas": 3,
+        "replicas": 3,
+        "selector": "brco-f6265508-test-cntrlplane-4826-patched=brco-f6265508-test-cntrlplane-4826-patched,cluster.x-k8s.io/cluster-name=test-cntrlplane-4826,machine-template-hash=2192444929-bkf55",
+        "upToDateReplicas": 0
+      }
+    },
+    {
+      "apiVersion": "cluster.x-k8s.io/v1beta2",
+      "kind": "MachineSet",
+      "metadata": {
+        "annotations": {
+          "cluster.x-k8s.io/cluster-api-autoscaler-node-group-max-size": "0",
+          "cluster.x-k8s.io/cluster-api-autoscaler-node-group-min-size": "0",
+          "cluster.x-k8s.io/disable-machine-create": "false",
+          "hypershift.openshift.io/nodePool": "clusters/test-cntrlplane-4826-unpatched",
+          "machinedeployment.clusters.x-k8s.io/desired-replicas": "3",
+          "machinedeployment.clusters.x-k8s.io/max-replicas": "4",
+          "machinedeployment.clusters.x-k8s.io/revision": "1"
+        },
+        "creationTimestamp": "2026-10-28T13:26:14Z",
+        "finalizers": [
+          "cluster.x-k8s.io/machineset"
+        ],
+        "generation": 1,
+        "labels": {
+          "br-f6265508-test-cntrlplane-4826-unpatched": "br-f6265508-test-cntrlplane-4826-unpatched",
+          "cluster.x-k8s.io/cluster-name": "test-cntrlplane-4826",
+          "cluster.x-k8s.io/deployment-name": "test-cntrlplane-4826-unpatched",
+          "machine-template-hash": "1900594097-zftgr"
+        },
+        "name": "test-cntrlplane-4826-unpatched-zftgr",
+        "namespace": "clusters-test-cntrlplane-4826-hc",
+        "ownerReferences": [
+          {
+            "apiVersion": "cluster.x-k8s.io/v1beta2",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "MachineDeployment",
+            "name": "test-cntrlplane-4826-unpatched",
+            "uid": "6eac54bc-8b89-4e0c-bed1-09a81aec8542"
+          }
+        ],
+        "resourceVersion": "129655421",
+        "uid": "dfe75226-51b2-4f2f-a9a0-194fa01c6ae4"
+      },
+      "spec": {
+        "clusterName": "test-cntrlplane-4826",
+        "replicas": 3,
+        "selector": {
+          "matchLabels": {
+            "br-f6265508-test-cntrlplane-4826-unpatched": "br-f6265508-test-cntrlplane-4826-unpatched",
+            "cluster.x-k8s.io/cluster-name": "test-cntrlplane-4826",
+            "machine-template-hash": "1900594097-zftgr"
+          }
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "hypershift.openshift.io/nodePool": "clusters/test-cntrlplane-4826-unpatched",
+              "hypershift.openshift.io/release-version": "5.0.0-rc.7"
+            },
+            "labels": {
+              "br-f6265508-test-cntrlplane-4826-unpatched": "br-f6265508-test-cntrlplane-4826-unpatched",
+              "cluster.x-k8s.io/cluster-name": "test-cntrlplane-4826",
+              "machine-template-hash": "1900594097-zftgr"
+            }
+          },
+          "spec": {
+            "bootstrap": {
+              "dataSecretName": "user-data-test-cntrlplane-4826-unpatched-b229e3aa"
+            },
+            "clusterName": "test-cntrlplane-4826",
+            "deletion": {
+              "nodeDrainTimeoutSeconds": 0,
+              "nodeVolumeDetachTimeoutSeconds": 0
+            },
+            "infrastructureRef": {
+              "apiGroup": "infrastructure.cluster.x-k8s.io",
+              "kind": "AzureMachineTemplate",
+              "name": "test-cntrlplane-4826-unpatched-e4b9b203"
+            },
+            "version": "5.0.0-rc.7"
+          }
+        }
+      },
+      "status": {
+        "availableReplicas": 3,
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-28T13:26:16Z",
+            "message": "",
+            "observedGeneration": 1,
+            "reason": "NotRemediating",
+            "status": "False",
+            "type": "Remediating"
+          },
+          {
+            "lastTransitionTime": "2026-10-28T13:26:16Z",
+            "message": "",
+            "observedGeneration": 1,
+            "reason": "NotScalingDown",
+            "status": "False",
+            "type": "ScalingDown"
+          },
+          {
+            "lastTransitionTime": "2026-10-28T13:26:17Z",
+            "message": "",
+            "observedGeneration": 1,
+            "reason": "NotScalingUp",
+            "status": "False",
+            "type": "ScalingUp"
+          },
+          {
+            "lastTransitionTime": "2026-10-28T13:33:16Z",
+            "message": "",
+            "observedGeneration": 1,
+            "reason": "Ready",
+            "status": "True",
+            "type": "MachinesReady"
+          },
+          {
+            "lastTransitionTime": "2026-10-28T13:31:53Z",
+            "message": "* Machines test-cntrlplane-4826-unpatched-zftgr-kxhkm, test-cntrlplane-4826-unpatched-zftgr-lc8kw, test-cntrlplane-4826-unpatched-zftgr-t59jc:\n  * Node.status.nodeInfo.kubeletVersion v1.36.5, 5.0.0-rc.7 required",
+            "observedGeneration": 1,
+            "reason": "NotUpToDate",
+            "status": "False",
+            "type": "MachinesUpToDate"
+          },
+          {
+            "lastTransitionTime": "2026-10-28T13:26:15Z",
+            "message": "",
+            "observedGeneration": 1,
+            "reason": "NotPaused",
+            "status": "False",
+            "type": "Paused"
+          },
+          {
+            "lastTransitionTime": "2026-10-28T13:26:16Z",
+            "message": "",
+            "observedGeneration": 1,
+            "reason": "NotDeleting",
+            "status": "False",
+            "type": "Deleting"
+          }
+        ],
+        "deprecated": {
+          "v1beta1": {
+            "availableReplicas": 3,
+            "conditions": [
+              {
+                "lastTransitionTime": "2026-10-28T13:33:16Z",
+                "status": "True",
+                "type": "Ready"
+              },
+              {
+                "lastTransitionTime": "2026-10-28T13:26:17Z",
+                "status": "True",
+                "type": "MachinesCreated"
+              },
+              {
+                "lastTransitionTime": "2026-10-28T13:27:14Z",
+                "status": "True",
+                "type": "MachinesReady"
+              },
+              {
+                "lastTransitionTime": "2026-10-28T13:33:16Z",
+                "status": "True",
+                "type": "Resized"
+              }
+            ],
+            "fullyLabeledReplicas": 3,
+            "readyReplicas": 3
+          }
+        },
+        "observedGeneration": 1,
+        "readyReplicas": 3,
+        "replicas": 3,
+        "selector": "br-f6265508-test-cntrlplane-4826-unpatched=br-f6265508-test-cntrlplane-4826-unpatched,cluster.x-k8s.io/cluster-name=test-cntrlplane-4826,machine-template-hash=1900594097-zftgr",
+        "upToDateReplicas": 0
+      }
+    }
+  ],
+  "kind": "List",
+  "metadata": {
+    "resourceVersion": ""
+  }
+}

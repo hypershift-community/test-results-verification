@@ -1,0 +1,67 @@
+=== RUN   TestReconcileMachineDeploymentStatus
+=== RUN   TestReconcileMachineDeploymentStatus/When_a_config_reversion_completes_after_management_drift,_it_should_record_the_completed_payload_and_deliver_the_next_request
+=== RUN   TestReconcileMachineDeploymentStatus/When_a_version_reversion_completes_after_management_drift,_it_should_record_the_completed_payload_and_deliver_the_next_request
+=== RUN   TestReconcileMachineDeploymentStatus/When_the_bootstrap_reference_is_absent,_it_should_preserve_the_completed_hash_during_management_drift
+=== RUN   TestReconcileMachineDeploymentStatus/When_the_bootstrap_reference_is_empty,_it_should_preserve_the_completed_hash_during_management_drift
+=== RUN   TestReconcileMachineDeploymentStatus/When_the_bootstrap_reference_has_no_hash,_it_should_preserve_the_completed_hash_during_management_drift
+=== RUN   TestReconcileMachineDeploymentStatus/When_listing_MachineSets_fails,_it_should_preserve_completion_metadata_and_the_active_request
+=== RUN   TestReconcileMachineDeploymentStatus/When_MachineDeployment_is_complete,_it_should_update_nodePool_version_and_annotations
+=== RUN   TestReconcileMachineDeploymentStatus/When_MachineDeployment_is_not_complete,_it_should_only_update_replicas
+=== RUN   TestReconcileMachineDeploymentStatus/When_MachineDeployment_has_Ready_condition,_it_should_propagate_it_to_nodePool
+--- PASS: TestReconcileMachineDeploymentStatus (1.11s)
+    --- PASS: TestReconcileMachineDeploymentStatus/When_a_config_reversion_completes_after_management_drift,_it_should_record_the_completed_payload_and_deliver_the_next_request (0.70s)
+    --- PASS: TestReconcileMachineDeploymentStatus/When_a_version_reversion_completes_after_management_drift,_it_should_record_the_completed_payload_and_deliver_the_next_request (0.17s)
+    --- PASS: TestReconcileMachineDeploymentStatus/When_the_bootstrap_reference_is_absent,_it_should_preserve_the_completed_hash_during_management_drift (0.04s)
+    --- PASS: TestReconcileMachineDeploymentStatus/When_the_bootstrap_reference_is_empty,_it_should_preserve_the_completed_hash_during_management_drift (0.04s)
+    --- PASS: TestReconcileMachineDeploymentStatus/When_the_bootstrap_reference_has_no_hash,_it_should_preserve_the_completed_hash_during_management_drift (0.05s)
+    --- PASS: TestReconcileMachineDeploymentStatus/When_listing_MachineSets_fails,_it_should_preserve_completion_metadata_and_the_active_request (0.09s)
+    --- PASS: TestReconcileMachineDeploymentStatus/When_MachineDeployment_is_complete,_it_should_update_nodePool_version_and_annotations (0.01s)
+    --- PASS: TestReconcileMachineDeploymentStatus/When_MachineDeployment_is_not_complete,_it_should_only_update_replicas (0.01s)
+    --- PASS: TestReconcileMachineDeploymentStatus/When_MachineDeployment_has_Ready_condition,_it_should_propagate_it_to_nodePool (0.01s)
+=== RUN   TestMachineDeploymentComplete
+=== RUN   TestMachineDeploymentComplete/When_all_status_counters_agree_and_the_current_MachineSet_is_fully_rolled_out,_it_should_return_true
+=== RUN   TestMachineDeploymentComplete/When_upToDateReplicas_is_zero_but_the_current_MachineSet_is_fully_rolled_out,_it_should_return_true
+=== RUN   TestMachineDeploymentComplete/When_upToDateReplicas_is_nil_but_the_current_MachineSet_is_fully_rolled_out,_it_should_return_true
+=== RUN   TestMachineDeploymentComplete/When_the_current_MachineSet_is_not_fully_available,_it_should_return_false
+=== RUN   TestMachineDeploymentComplete/When_the_current_MachineSet_has_fewer_replicas_than_desired,_it_should_return_false
+=== RUN   TestMachineDeploymentComplete/When_there_is_no_MachineSet_at_the_current_revision,_it_should_return_false
+=== RUN   TestMachineDeploymentComplete/When_the_desired_replicas_are_zero_and_nothing_is_running,_it_should_return_true
+=== RUN   TestMachineDeploymentComplete/When_counters_look_complete_but_old_MachineSet_still_has_replicas,_it_should_return_false
+=== RUN   TestMachineDeploymentComplete/When_the_MachineDeployment_availableReplicas_does_not_match_spec,_it_should_return_false
+=== RUN   TestMachineDeploymentComplete/When_the_MachineDeployment_replicas_does_not_match_spec,_it_should_return_false
+=== RUN   TestMachineDeploymentComplete/When_the_MachineDeployment_has_not_observed_its_current_generation,_it_should_return_false
+=== RUN   TestMachineDeploymentComplete/When_the_MachineDeployment_availableReplicas_is_nil,_it_should_return_false
+--- PASS: TestMachineDeploymentComplete (0.00s)
+    --- PASS: TestMachineDeploymentComplete/When_all_status_counters_agree_and_the_current_MachineSet_is_fully_rolled_out,_it_should_return_true (0.00s)
+    --- PASS: TestMachineDeploymentComplete/When_upToDateReplicas_is_zero_but_the_current_MachineSet_is_fully_rolled_out,_it_should_return_true (0.00s)
+    --- PASS: TestMachineDeploymentComplete/When_upToDateReplicas_is_nil_but_the_current_MachineSet_is_fully_rolled_out,_it_should_return_true (0.00s)
+    --- PASS: TestMachineDeploymentComplete/When_the_current_MachineSet_is_not_fully_available,_it_should_return_false (0.00s)
+    --- PASS: TestMachineDeploymentComplete/When_the_current_MachineSet_has_fewer_replicas_than_desired,_it_should_return_false (0.00s)
+    --- PASS: TestMachineDeploymentComplete/When_there_is_no_MachineSet_at_the_current_revision,_it_should_return_false (0.00s)
+    --- PASS: TestMachineDeploymentComplete/When_the_desired_replicas_are_zero_and_nothing_is_running,_it_should_return_true (0.00s)
+    --- PASS: TestMachineDeploymentComplete/When_counters_look_complete_but_old_MachineSet_still_has_replicas,_it_should_return_false (0.00s)
+    --- PASS: TestMachineDeploymentComplete/When_the_MachineDeployment_availableReplicas_does_not_match_spec,_it_should_return_false (0.00s)
+    --- PASS: TestMachineDeploymentComplete/When_the_MachineDeployment_replicas_does_not_match_spec,_it_should_return_false (0.00s)
+    --- PASS: TestMachineDeploymentComplete/When_the_MachineDeployment_has_not_observed_its_current_generation,_it_should_return_false (0.00s)
+    --- PASS: TestMachineDeploymentComplete/When_the_MachineDeployment_availableReplicas_is_nil,_it_should_return_false (0.00s)
+PASS
+ok  	github.com/openshift/hypershift/hypershift-operator/controllers/nodepool	3.254s
+testing: warning: no tests to run
+PASS
+ok  	github.com/openshift/hypershift/hypershift-operator/controllers/nodepool/apiserver-haproxy	2.111s [no tests to run]
+?   	github.com/openshift/hypershift/hypershift-operator/controllers/nodepool/instancetype	[no test files]
+testing: warning: no tests to run
+PASS
+ok  	github.com/openshift/hypershift/hypershift-operator/controllers/nodepool/instancetype/aws	1.293s [no tests to run]
+testing: warning: no tests to run
+PASS
+ok  	github.com/openshift/hypershift/hypershift-operator/controllers/nodepool/instancetype/azure	1.292s [no tests to run]
+testing: warning: no tests to run
+PASS
+ok  	github.com/openshift/hypershift/hypershift-operator/controllers/nodepool/kubevirt	2.362s [no tests to run]
+testing: warning: no tests to run
+PASS
+ok  	github.com/openshift/hypershift/hypershift-operator/controllers/nodepool/metrics	2.208s [no tests to run]
+testing: warning: no tests to run
+PASS
+ok  	github.com/openshift/hypershift/hypershift-operator/controllers/nodepool/openstack	2.209s [no tests to run]

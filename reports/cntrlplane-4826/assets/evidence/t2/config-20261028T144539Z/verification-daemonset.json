@@ -1,0 +1,90 @@
+{
+  "apiVersion": "apps/v1",
+  "kind": "DaemonSet",
+  "metadata": {
+    "annotations": {
+      "deprecated.daemonset.template.generation": "1"
+    },
+    "creationTimestamp": "2026-10-28T14:56:19Z",
+    "generation": 1,
+    "labels": {
+      "app": "test-cntrlplane-4826-t2-verify-20261028t144539z"
+    },
+    "name": "test-cntrlplane-4826-t2-verify-20261028t144539z",
+    "namespace": "default",
+    "resourceVersion": "180125",
+    "uid": "e8b7757d-045d-448f-8711-901ede47019c"
+  },
+  "spec": {
+    "revisionHistoryLimit": 10,
+    "selector": {
+      "matchLabels": {
+        "app": "test-cntrlplane-4826-t2-verify-20261028t144539z"
+      }
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "test-cntrlplane-4826-t2-verify-20261028t144539z"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "command": [
+              "/bin/sh",
+              "-c",
+              "cat /host/etc/custom-config; sleep infinity"
+            ],
+            "image": "quay.io/openshift-release-dev/ocp-v5.0-art-dev@sha256:218f1af7341c29cfb97e692b920cf57f9252809088bb9765120d1cded948d601",
+            "imagePullPolicy": "IfNotPresent",
+            "name": "verify",
+            "resources": {},
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "volumeMounts": [
+              {
+                "mountPath": "/host/etc/custom-config",
+                "name": "custom-config",
+                "readOnly": true
+              }
+            ]
+          }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "nodeSelector": {
+          "hypershift.openshift.io/nodePool": "test-cntrlplane-4826-patched"
+        },
+        "restartPolicy": "Always",
+        "schedulerName": "default-scheduler",
+        "securityContext": {},
+        "terminationGracePeriodSeconds": 30,
+        "volumes": [
+          {
+            "hostPath": {
+              "path": "/etc/custom-config",
+              "type": "File"
+            },
+            "name": "custom-config"
+          }
+        ]
+      }
+    },
+    "updateStrategy": {
+      "rollingUpdate": {
+        "maxSurge": 0,
+        "maxUnavailable": 1
+      },
+      "type": "RollingUpdate"
+    }
+  },
+  "status": {
+    "currentNumberScheduled": 3,
+    "desiredNumberScheduled": 3,
+    "numberAvailable": 3,
+    "numberMisscheduled": 0,
+    "numberReady": 3,
+    "observedGeneration": 1,
+    "updatedNumberScheduled": 3
+  }
+}

@@ -1,0 +1,3 @@
+KUBECONFIG=/home/tester/management.kubeconfig
+NP=test-cntrlplane-4826-hc
+captured_at=2026-10-28T13:21:47Z

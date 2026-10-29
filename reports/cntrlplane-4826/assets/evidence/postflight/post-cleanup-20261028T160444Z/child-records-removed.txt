@@ -1,0 +1,12 @@
+api-test-cntrlplane-4826-hc
+api-test-cntrlplane-4826-hc-external-dns
+cname-api-test-cntrlplane-4826-hc-external-dns
+cname-ignition-test-cntrlplane-4826-hc-external-dns
+cname-konnectivity-test-cntrlplane-4826-hc-external-dns
+cname-oauth-test-cntrlplane-4826-hc-external-dns
+ignition-test-cntrlplane-4826-hc
+ignition-test-cntrlplane-4826-hc-external-dns
+konnectivity-test-cntrlplane-4826-hc
+konnectivity-test-cntrlplane-4826-hc-external-dns
+oauth-test-cntrlplane-4826-hc
+oauth-test-cntrlplane-4826-hc-external-dns

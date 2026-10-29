@@ -1,0 +1,2 @@
+/workspace/private-hypershift-scripts/azure/custom-ingress/tester-sm-custom-ingress-infra-output.yaml
+/workspace/private-hypershift-scripts/azure/custom-ingress/tester-sm-custom-ingress-workload-identities.json

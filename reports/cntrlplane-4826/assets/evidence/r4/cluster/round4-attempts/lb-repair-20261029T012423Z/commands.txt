@@ -1,0 +1,2 @@
+az network lb probe update --subscription redacted-subscription-id -g test-cntrlplane-4826-hc-test-cntrlplane-4826 --lb-name test-cntrlplane-4826 -n aa865908822fb44cba23557e2b8bc89e-TCP-31627 --protocol Tcp --port 31627
+attempt2: az network lb probe update --protocol Http --path /healthz --port 31627

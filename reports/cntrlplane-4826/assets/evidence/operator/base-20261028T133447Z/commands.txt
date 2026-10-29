@@ -1,0 +1,1 @@
+kubectl -n hypershift set image deployment/operator operator=quay.io/example/hypershift@sha256:e848d7a892cbc144bfe0032ddeaccecde94a7c5e2d84f56c2953fb9e5e535834 init-environment=quay.io/example/hypershift@sha256:e848d7a892cbc144bfe0032ddeaccecde94a7c5e2d84f56c2953fb9e5e535834

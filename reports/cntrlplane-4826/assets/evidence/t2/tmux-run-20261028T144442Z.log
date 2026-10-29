@@ -1,0 +1,3 @@
+t2_started_utc=2026-10-28T14:44:43Z
+error: failed to create configmap: ConfigMap "test-cntrlplane-4826-t2-mc-20261028T144444Z" is invalid: metadata.name: Invalid value: "test-cntrlplane-4826-t2-mc-20261028T144444Z": a lowercase RFC 1123 subdomain must consist of lower case alphanumeric characters, '-' or '.', and must start and end with an alphanumeric character (e.g. 'example.com', regex used for validation is '[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*')
+t2_exit=1

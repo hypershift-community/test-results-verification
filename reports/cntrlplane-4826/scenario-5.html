@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T5 — Completion metadata and reconciliation safety</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topbar"><div class="brand">CNTRLPLANE-4826 · Verification</div><nav><a href="index.html">Dashboard</a><a href="scenario-1.html">T1 Release</a><a href="scenario-2.html">T2 Config</a><a href="scenario-3.html">T3 VM size</a><a href="scenario-4.html">T4 Predicate</a><a href="scenario-5.html" class="active">T5 Reconcile</a><a href="scenario-6.html">T6 Scale</a><a href="scenario-7.html">T7 Stable pool</a><a href="scenario-8.html">T8 Compatibility</a><a href="automated-tests.html">Automated</a><a href="appendices.html">Appendices</a><a href="full-report.html">Corrections log</a></nav></header>
+<main>
+<div class="scenario-head"><div><div class="eyebrow">T5 · P0 · PASS</div><h1>T5 — Completion metadata and reconciliation safety</h1></div><span class="badge pass">PASS</span></div><p class="lead">Verify that completion metadata advances only through the status reconciler, and that the same decision is ordered correctly in a live rollout.</p>
+<div class="callout good"><p><strong>Unit and live ordering both pass at head.</strong> The reconciliation tests pass at <code>ee5691233b</code>, and the live T1 patched run's 5-second sampler confirms that <code>status.version</code>, <code>nodePoolCurrentConfig</code> and <code>nodePoolCurrentConfigVersion</code> advanced only after the current MachineSet was 3/3 available and no old MachineSet held replicas.</p></div>
+<h2>Reconciliation tests at head</h2>
+<div class="table-wrap"><table class=""><thead><tr><th>Test</th><th>Status</th><th>Passing subtests</th></tr></thead><tbody><tr><td><code>TestReconcileMachineDeploymentStatus</code></td><td><span class="badge pass">PASS</span></td><td>9</td></tr><tr><td><code>TestReconcileWorkload</code></td><td><span class="badge pass">PASS</span></td><td>32</td></tr><tr><td><code>TestSeedRolloutAnnotation</code></td><td><span class="badge pass">PASS</span></td><td>31</td></tr><tr><td><code>TestResolveDeployedBootstrapHash</code></td><td><span class="badge pass">PASS</span></td><td>12</td></tr><tr><td><code>TestRolloutTargetHash</code></td><td><span class="badge pass">PASS</span></td><td>4</td></tr></tbody></table></div>
+<h2>Live staged sequence (T1 patched)</h2>
+<p>The T1 runner evaluates <code>physicalRolloutComplete</code> — current MachineSet replicas and available replicas equal the desired count, no old MachineSet has replicas, every Machine has a Ready Node, and the MachineDeployment has observed its generation — before accepting any completion annotation. If <code>status.version</code> or either config annotation advances while that predicate is false, the run fails with <code>premature-completion.txt</code>. No such file was produced; see <a href="scenario-1.html">scenario 1</a> for the transition table.</p>
+<h2>Evidence</h2>
+<div class="table-wrap"><table class=""><thead><tr><th>Artifact</th><th>Size</th></tr></thead><tbody><tr><td><a href="assets/evidence/r3/unit/head-20261029T003006Z/focused-tests.log"><code>unit/head-20261029T003006Z/focused-tests.log</code></a></td><td>32.2 KiB</td></tr><tr><td><a href="assets/evidence/r3/unit/head-20261029T003006Z/commit.txt"><code>unit/head-20261029T003006Z/commit.txt</code></a></td><td>41 B</td></tr></tbody></table></div>
+
+<p class="back"><a href="index.html">← Return to dashboard</a></p>
+</main>
+<footer><a href="https://github.com/openshift/hypershift/pull/10084">openshift/hypershift#10084</a> · CNTRLPLANE-4826 · round 5 · 2026-10-29 · sanitized bundle</footer>
+</body>
+</html>

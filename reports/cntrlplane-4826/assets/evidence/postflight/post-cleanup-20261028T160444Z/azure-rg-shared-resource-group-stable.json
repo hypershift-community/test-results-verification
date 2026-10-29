@@ -1,0 +1,9 @@
+{
+  "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group",
+  "location": "centralus",
+  "managedBy": null,
+  "tags": {
+    "openshift.io_cloud-credential-operator_examplesa": "owned",
+    "openshift_creationDate": "2026-05-13T00:20:54.023387+00:00"
+  }
+}

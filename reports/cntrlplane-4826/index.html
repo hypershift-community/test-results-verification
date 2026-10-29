@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CNTRLPLANE-4826 verification dashboard — round 5</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topbar"><div class="brand">CNTRLPLANE-4826 · Verification</div><nav><a href="index.html" class="active">Dashboard</a><a href="scenario-1.html">T1 Release</a><a href="scenario-2.html">T2 Config</a><a href="scenario-3.html">T3 VM size</a><a href="scenario-4.html">T4 Predicate</a><a href="scenario-5.html">T5 Reconcile</a><a href="scenario-6.html">T6 Scale</a><a href="scenario-7.html">T7 Stable pool</a><a href="scenario-8.html">T8 Compatibility</a><a href="automated-tests.html">Automated</a><a href="appendices.html">Appendices</a><a href="full-report.html">Corrections log</a></nav></header>
+<main>
+
+<h1>HyperShift PR #10084 verification — round 5</h1>
+<p class="subtitle">Stop gating NodePool rollout completion on <code>upToDateReplicas</code> · PR head <code>ee5691233b</code> · base <code>ee327075b1</code> · live Azure self-managed cluster on the AWS dev management cluster · CAPI <code>v1.14.3</code> and <code>v1.13.4</code> · 2026-10-29 · tester Bryan Cox (@bryan-cox)</p>
+
+<div class="callout good"><p><strong>The last review gap is closed.</strong> Round 5 runs the same PR head against upstream CAPI <code>v1.13.4</code>, the version the fleet runs today. The A→B Replace rollout completes with <code>upToDateReplicas</code> at the desired count for the entire run, which proves the removed condition was inert before 1.14. Rounds 3 and 4 prove it is load-bearing on 1.14.3.</p></div>
+<div class="callout good"><p><strong>Verdict for the full plan: PASS.</strong> All eight scenarios have a positive verdict at PR head. Every rollout shape that moves completion metadata has live evidence on both CAPI versions. No sample in any round advanced completion metadata before the physical gates were satisfied.</p></div>
+
+<div class="cards">
+  <div class="card"><div class="num">8</div><div class="lbl">live runs with a PASS verdict</div></div>
+  <div class="card"><div class="num">2</div><div class="lbl">CAPI manager versions exercised (v1.14.3 and v1.13.4)</div></div>
+  <div class="card"><div class="num">0</div><div class="lbl">samples where completion metadata moved before the rollout finished</div></div>
+  <div class="card"><div class="num">10 / 10</div><div class="lbl">MachineDeploymentComplete subtests pass at head</div></div>
+</div>
+
+
+<h2>CI at head, refreshed 2026-10-29</h2>
+<p>Snapshot of <code>gh pr checks 10084</code> at PR head <code>ee5691233b</code> (<a href="assets/evidence/r4/ci/20261029T022418Z"><code>ci/20261029T022418Z</code></a>): pass: 31, pending: 10, skipping: 6.</p>
+<div class="table-wrap"><table class=""><thead><tr><th>Prow job</th><th>State</th></tr></thead><tbody><tr><td><code>ci/prow/e2e-aks</code></td><td><span class="badge pending">PENDING</span></td></tr><tr><td><code>ci/prow/e2e-aks-5-0</code></td><td><span class="badge pending">PENDING</span></td></tr><tr><td><code>ci/prow/e2e-aws</code></td><td><span class="badge pending">PENDING</span></td></tr><tr><td><code>ci/prow/e2e-aws-5-0</code></td><td><span class="badge pending">PENDING</span></td></tr><tr><td><code>ci/prow/e2e-aws-upgrade-hypershift-operator</code></td><td><span class="badge pending">PENDING</span></td></tr><tr><td><code>ci/prow/e2e-kubevirt-aws-ovn-reduced</code></td><td><span class="badge pending">PENDING</span></td></tr><tr><td><code>ci/prow/e2e-v2-aws</code></td><td><span class="badge pending">PENDING</span></td></tr><tr><td><code>ci/prow/e2e-v2-azure-self-managed</code></td><td><span class="badge pending">PENDING</span></td></tr><tr><td><code>ci/prow/e2e-v2-gke</code></td><td><span class="badge pending">PENDING</span></td></tr><tr><td><code>ci/prow/images</code></td><td><span class="badge pass">PASS</span></td></tr><tr><td><code>ci/prow/okd-scos-images</code></td><td><span class="badge pass">PASS</span></td></tr><tr><td><code>ci/prow/rosa-e2e-images</code></td><td><span class="badge pass">PASS</span></td></tr><tr><td><code>ci/prow/security</code></td><td><span class="badge pass">PASS</span></td></tr><tr><td><code>ci/prow/unit</code></td><td><span class="badge pass">PASS</span></td></tr><tr><td><code>ci/prow/verify</code></td><td><span class="badge pass">PASS</span></td></tr><tr><td><code>ci/prow/verify-deps</code></td><td><span class="badge pass">PASS</span></td></tr></tbody></table></div>
+<p class="muted">The e2e Prow jobs are queued behind a pipeline condition and have not executed at this head, so this bundle does not claim green e2e. The live runs in this bundle are the manual evidence for the Replace and scale paths.</p>
+
+<h2>Scenario results</h2>
+<div class="table-wrap"><table class="results"><thead><tr><th>Scenario</th><th>Requirement</th><th>Executed at</th><th>Result</th><th>Evidence</th></tr></thead><tbody><tr><td>T1</td><td>Release A→B Replace: unpatched stall and patched completion</td><td>ee569123 head + ee327075 base, live</td><td><span class="badge pass">PASS</span></td><td><a href="scenario-1.html">Details</a></td></tr><tr><td>T2</td><td>Config-only Replace rollout</td><td>ee569123 head, live (round 4)</td><td><span class="badge pass">PASS</span></td><td><a href="scenario-2.html">Details</a></td></tr><tr><td>T3</td><td>Infrastructure-template-only Replace rollout</td><td>ee569123 head, live (round 4)</td><td><span class="badge pass">PASS</span></td><td><a href="scenario-3.html">Details</a></td></tr><tr><td>T4</td><td>Completion-predicate safety matrix</td><td>ee569123 head, unit</td><td><span class="badge pass">PASS</span></td><td><a href="scenario-4.html">Details</a></td></tr><tr><td>T5</td><td>Completion metadata and reconciliation safety</td><td>ee569123 head, unit + live ordering</td><td><span class="badge pass">PASS</span></td><td><a href="scenario-5.html">Details</a></td></tr><tr><td>T6</td><td>Scale-to-zero and scale-back</td><td>ee569123 head, live (round 4)</td><td><span class="badge pass">PASS</span></td><td><a href="scenario-6.html">Details</a></td></tr><tr><td>T7</td><td>Stable pool across operator transition</td><td>ee569123 head, live</td><td><span class="badge pass">PASS</span></td><td><a href="scenario-7.html">Details</a></td></tr><tr><td>T8</td><td>Compatibility and broader regression matrix</td><td>ee569123 head, live on CAPI v1.13.4 (round 5)</td><td><span class="badge pass">PASS</span></td><td><a href="scenario-8.html">Details</a></td></tr></tbody></table></div>
+<p class="muted">PASS means the scenario was executed with a positive verdict against the PR head operator image. PARTIAL and NOT TESTED are never counted toward sufficiency.</p>
+
+<h2>Live runs in this bundle</h2>
+<div class="table-wrap"><table class=""><thead><tr><th>Run</th><th>What it exercises</th><th>Result</th></tr></thead><tbody><tr><td>T1a</td><td>Fresh NodePool frozen under base, completed in place by head</td><td><span class="badge pass">PASS</span></td></tr><tr><td>T1b</td><td>Stable A pool stalled under base, advanced to B by head</td><td><span class="badge pass">PASS</span></td></tr><tr><td>T1c</td><td>Fresh A→B Replace from scratch under head</td><td><span class="badge pass">PASS</span></td></tr><tr><td>T2</td><td>Config-only MachineConfig rollout at head</td><td><span class="badge pass">PASS</span></td></tr><tr><td>T3</td><td>VM-size-only Replace rollout at head</td><td><span class="badge pass">PASS</span></td></tr><tr><td>T6</td><td>Scale 3 → 0 → 3 at head</td><td><span class="badge pass">PASS</span></td></tr><tr><td>T7</td><td>Stable pool across operator image transition</td><td><span class="badge pass">PASS</span></td></tr><tr><td>T8</td><td>Replace A→B at head on CAPI v1.13.4</td><td><span class="badge pass">PASS</span></td></tr></tbody></table></div>
+
+<h2>What round 5 adds</h2>
+<div class="two-col">
+  <div class="note good"><h3>Now proven at ee569123 on CAPI v1.13.4</h3><p>A Replace rollout from <code>5.0.0-rc.7</code> to the 5.1 nightly completed in 804 s (13 min 24 s) with the manager pinned to <code>registry.k8s.io/cluster-api/cluster-api-controller:v1.13.4</code>. <code>upToDateReplicas</code> reached the desired count 11 seconds after the patch and stayed there while all six machines existed, so the old condition could never have blocked completion on this version.</p></div>
+  <div class="note"><h3>Remaining dispositions</h3><p>The second-provider and InPlace matrix rows are marked not required for this predicate, with rationale in <a href="scenario-8.html">T8</a>. They are explicit dispositions, not silent omissions. Prow e2e at head is still queued behind a pipeline condition; the manual runs are the evidence for these paths.</p></div>
+</div>
+
+<h2>Why the bug reproduces on CAPI v1.14.3 and not before</h2>
+<p>CAPI v1.14 compares <code>Node.status.nodeInfo.kubeletVersion</code> with <code>Machine.spec.version</code> for the Machine <code>UpToDate</code> condition. HyperShift sets the Machine version to the OCP release string. On the 1.14.3 cluster the live values were <code>v1.37.1</code> for kubelet and <code>5.1.0-0.nightly-multi-2026-10-27-082258</code> for the Machine, so the comparison can never be equal and <code>upToDateReplicas</code> never settles at the desired count. On 1.13.4 that comparison does not exist, the counter reaches the desired count immediately, and the old predicate worked. The base predicate required the counter; the head predicate derives completion from the MachineSets instead.</p>
+
+<h2>Navigation</h2>
+<div class="navcards">
+  <a class="navcard" href="scenario-1.html"><strong>T1 — Release A→B</strong><span>Creation stall, in-place resume, baseline stall and patched completion, with before/after state and continuous observations.</span></a>
+  <a class="navcard" href="scenario-2.html"><strong>T2 — Config only</strong><span>MachineConfig rollout at head: completion metadata ordering, marker read back from every worker.</span></a>
+  <a class="navcard" href="scenario-3.html"><strong>T3 — VM size only</strong><span>Template-only rollout at head, with the real VM size read back from the Azure API.</span></a>
+  <a class="navcard" href="scenario-6.html"><strong>T6 — Scale</strong><span>3 → 0 → 3 at head with empty-inventory and new-identity checks.</span></a>
+  <a class="navcard" href="scenario-8.html"><strong>T8 — Pre-1.14 compatibility</strong><span>Replace A→B at head against CAPI v1.13.4, with the full counter trace and a scripted verifier.</span></a>
+</div>
+
+<p class="back"><a href="index.html">← Return to dashboard</a></p>
+</main>
+<footer><a href="https://github.com/openshift/hypershift/pull/10084">openshift/hypershift#10084</a> · CNTRLPLANE-4826 · round 5 · 2026-10-29 · sanitized bundle</footer>
+</body>
+</html>

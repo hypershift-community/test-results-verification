@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T7 — Stable pool across operator transition</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topbar"><div class="brand">CNTRLPLANE-4826 · Verification</div><nav><a href="index.html">Dashboard</a><a href="scenario-1.html">T1 Release</a><a href="scenario-2.html">T2 Config</a><a href="scenario-3.html">T3 VM size</a><a href="scenario-4.html">T4 Predicate</a><a href="scenario-5.html">T5 Reconcile</a><a href="scenario-6.html">T6 Scale</a><a href="scenario-7.html" class="active">T7 Stable pool</a><a href="scenario-8.html">T8 Compatibility</a><a href="automated-tests.html">Automated</a><a href="appendices.html">Appendices</a><a href="full-report.html">Corrections log</a></nav></header>
+<main>
+<div class="scenario-head"><div><div class="eyebrow">T7 · P0 · PASS</div><h1>T7 — Stable pool across operator transition</h1></div><span class="badge pass">PASS</span></div><p class="lead">Confirm that changing the management operator image does not itself roll a NodePool or mutate its completion metadata.</p>
+<div class="callout good"><p><strong>Pass at head.</strong> The operator image was switched base → head → base → head on the same management cluster. The NodePool's MachineDeployment generation and MachineSet identities changed only when a NodePool spec field was patched (release A→B), never when the operator image changed. The creation-stall resume is the clearest case: head completed the pending rollout without any NodePool or MachineDeployment spec edit.</p></div>
+<h2>Operator transitions archived in this round</h2>
+<div class="table-wrap"><table class=""><thead><tr><th>Run</th><th>Image</th><th>Embedded commit</th></tr></thead><tbody><tr><td><code>base-20261028T233448Z</code></td><td><code>—</code></td><td><code>ee327075b15</code></td></tr><tr><td><code>base-20261029T000005Z</code></td><td><code>—</code></td><td><code>ee327075b15</code></td></tr><tr><td><code>capture-20261028T232249Z</code></td><td><code>—</code></td><td><code>—</code></td></tr><tr><td><code>patched-20261028T232250Z</code></td><td><code>—</code></td><td><code>ee5691233b0</code></td></tr><tr><td><code>patched-20261028T235639Z</code></td><td><code>—</code></td><td><code>ee5691233b0</code></td></tr><tr><td><code>patched-20261029T002902Z</code></td><td><code>—</code></td><td><code>ee5691233b0</code></td></tr><tr><td><code>restore-20261029T010342Z</code></td><td><code>—</code></td><td><code>—</code></td></tr></tbody></table></div>
+<h2>State evidence</h2>
+<ul>
+  <li>The creation-stall snapshot before the switch and the resolved snapshot after it share the same NodePool UID and the same MachineDeployment UID; only the rollout conditions changed.</li>
+  <li>The T1 baseline pre-state and the patched pre-state show that the release patch, not the operator image, moved the MachineDeployment to a new revision.</li>
+  <li>No NodePool was created, deleted, or re-created by an operator image switch.</li>
+</ul>
+<p>Snapshots: <a href="assets/evidence/r3/t1/creation-stall-base/nodepool.json"><code>t1/creation-stall-base/nodepool.json</code></a> · <a href="assets/evidence/r3/t1/creation-stall-resolved-patched/nodepool.json"><code>t1/creation-stall-resolved-patched/nodepool.json</code></a> · <a href="assets/evidence/r3/t1/resume-after-patched/analysis.json"><code>t1/resume-after-patched/analysis.json</code></a></p>
+
+<p class="back"><a href="index.html">← Return to dashboard</a></p>
+</main>
+<footer><a href="https://github.com/openshift/hypershift/pull/10084">openshift/hypershift#10084</a> · CNTRLPLANE-4826 · round 5 · 2026-10-29 · sanitized bundle</footer>
+</body>
+</html>

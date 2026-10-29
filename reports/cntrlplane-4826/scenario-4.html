@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T4 — Completion-predicate safety matrix</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topbar"><div class="brand">CNTRLPLANE-4826 · Verification</div><nav><a href="index.html">Dashboard</a><a href="scenario-1.html">T1 Release</a><a href="scenario-2.html">T2 Config</a><a href="scenario-3.html">T3 VM size</a><a href="scenario-4.html" class="active">T4 Predicate</a><a href="scenario-5.html">T5 Reconcile</a><a href="scenario-6.html">T6 Scale</a><a href="scenario-7.html">T7 Stable pool</a><a href="scenario-8.html">T8 Compatibility</a><a href="automated-tests.html">Automated</a><a href="appendices.html">Appendices</a><a href="full-report.html">Corrections log</a></nav></header>
+<main>
+<div class="scenario-head"><div><div class="eyebrow">T4 · P0 · PASS</div><h1>T4 — Completion-predicate safety matrix</h1></div><span class="badge pass">PASS</span></div><p class="lead">Exercise the MachineDeploymentComplete contract directly at head, including the cases that were vacuous at the earlier tested commit.</p>
+<div class="callout good"><p><strong>All predicate subtests pass at <code>ee5691233b</code>.</strong> The fixture now sets the MachineDeployment revision annotation and creates a matching current MachineSet, so the available-replicas mismatch, replicas mismatch, unobserved-generation and nil-counter cases reach the counters and generation guards instead of returning early at the old-set guard.</p></div>
+<h2>Subtests executed at head</h2>
+<div class="table-wrap"><table class=""><thead><tr><th>#</th><th>Subtest</th></tr></thead><tbody><tr><td>1</td><td><code>When_all_status_counters_agree_and_the_current_MachineSet_is_fully_rolled_out,_it_should_return_true</code></td></tr><tr><td>2</td><td><code>When_upToDateReplicas_is_zero_but_the_current_MachineSet_is_fully_rolled_out,_it_should_return_true</code></td></tr><tr><td>3</td><td><code>When_upToDateReplicas_is_nil_but_the_current_MachineSet_is_fully_rolled_out,_it_should_return_true</code></td></tr><tr><td>4</td><td><code>When_the_current_MachineSet_is_not_fully_available,_it_should_return_false</code></td></tr><tr><td>5</td><td><code>When_the_current_MachineSet_has_fewer_replicas_than_desired,_it_should_return_false</code></td></tr><tr><td>6</td><td><code>When_there_is_no_MachineSet_at_the_current_revision,_it_should_return_false</code></td></tr><tr><td>7</td><td><code>When_the_desired_replicas_are_zero_and_nothing_is_running,_it_should_return_true</code></td></tr><tr><td>8</td><td><code>When_counters_look_complete_but_old_MachineSet_still_has_replicas,_it_should_return_false</code></td></tr><tr><td>9</td><td><code>When_the_MachineDeployment_availableReplicas_does_not_match_spec,_it_should_return_false</code></td></tr><tr><td>10</td><td><code>When_the_MachineDeployment_replicas_does_not_match_spec,_it_should_return_false</code></td></tr><tr><td>11</td><td><code>When_the_MachineDeployment_has_not_observed_its_current_generation,_it_should_return_false</code></td></tr><tr><td>12</td><td><code>When_the_MachineDeployment_availableReplicas_is_nil,_it_should_return_false</code></td></tr></tbody></table></div>
+<p>Command: <code>go test ./hypershift-operator/controllers/nodepool/ -run 'TestMachineDeploymentComplete|...' -v -count=1</code> · <a href="assets/evidence/r3/unit/head-20261029T003006Z/focused-tests.log"><code>unit/head-20261029T003006Z/focused-tests.log</code></a> · <a href="assets/evidence/r3/unit/head-20261029T003006Z/commit.txt"><code>unit/head-20261029T003006Z/commit.txt</code></a> · <a href="assets/evidence/r3/unit/head-20261029T003006Z/go-version.txt"><code>unit/head-20261029T003006Z/go-version.txt</code></a></p>
+<h2>Coverage gaps that remain</h2>
+<ul>
+  <li>Current-set counters strictly above the desired count.</li>
+  <li>Multiple old-revision MachineSets with active replicas.</li>
+  <li><code>observedGeneration &gt; generation</code> and revision-versus-generation permutations.</li>
+  <li>MachineSet list-order permutations for equivalent valid fixtures.</li>
+</ul>
+<h2>Evidence</h2>
+<div class="table-wrap"><table class=""><thead><tr><th>Artifact</th><th>Size</th></tr></thead><tbody><tr><td><a href="assets/evidence/r3/unit/head-20261029T003006Z/focused-tests.log"><code>unit/head-20261029T003006Z/focused-tests.log</code></a></td><td>32.2 KiB</td></tr><tr><td><a href="assets/evidence/r3/unit/head-20261029T003006Z/commit.txt"><code>unit/head-20261029T003006Z/commit.txt</code></a></td><td>41 B</td></tr><tr><td><a href="assets/evidence/r3/unit/head-20261029T003006Z/git-status.txt"><code>unit/head-20261029T003006Z/git-status.txt</code></a></td><td>19 B</td></tr><tr><td><a href="assets/evidence/r3/unit/head-20261029T003006Z/go-version.txt"><code>unit/head-20261029T003006Z/go-version.txt</code></a></td><td>33 B</td></tr></tbody></table></div>
+
+<p class="back"><a href="index.html">← Return to dashboard</a></p>
+</main>
+<footer><a href="https://github.com/openshift/hypershift/pull/10084">openshift/hypershift#10084</a> · CNTRLPLANE-4826 · round 5 · 2026-10-29 · sanitized bundle</footer>
+</body>
+</html>

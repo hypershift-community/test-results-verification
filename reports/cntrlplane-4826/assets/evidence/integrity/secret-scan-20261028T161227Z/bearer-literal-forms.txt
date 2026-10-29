@@ -1,0 +1,2 @@
+Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+bearer tokens, private keys, or Secret values are embedded in this 

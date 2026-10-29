@@ -1,0 +1,10 @@
+=== RUN   TestReconcileMachineDeploymentStatus
+=== RUN   TestReconcileMachineDeploymentStatus/When_MachineDeployment_is_complete,_it_should_update_nodePool_version_and_annotations
+=== RUN   TestReconcileMachineDeploymentStatus/When_MachineDeployment_is_not_complete,_it_should_only_update_replicas
+=== RUN   TestReconcileMachineDeploymentStatus/When_MachineDeployment_has_Ready_condition,_it_should_propagate_it_to_nodePool
+--- PASS: TestReconcileMachineDeploymentStatus (0.54s)
+    --- PASS: TestReconcileMachineDeploymentStatus/When_MachineDeployment_is_complete,_it_should_update_nodePool_version_and_annotations (0.53s)
+    --- PASS: TestReconcileMachineDeploymentStatus/When_MachineDeployment_is_not_complete,_it_should_only_update_replicas (0.01s)
+    --- PASS: TestReconcileMachineDeploymentStatus/When_MachineDeployment_has_Ready_condition,_it_should_propagate_it_to_nodePool (0.01s)
+PASS
+ok  	github.com/openshift/hypershift/hypershift-operator/controllers/nodepool	2.707s

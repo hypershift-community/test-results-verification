@@ -1,0 +1,14 @@
+pre_test_pods_sha256=992db922934c98927b324c2c20be05b6ae85e3e50a8bd2b5647cced40bcc4239
+restored_pods_sha256=678f62ef975f154928bca2f6b799babcfac7d0eb53ef2e6834fce5f05c1f50b6
+manifest_match=true
+pre_test_deployment_generation=26
+restored_deployment_generation=31
+pre_test_operator_image=quay.io/hypershift/hypershift-operator:latest
+restored_operator_image=quay.io/hypershift/hypershift-operator:latest
+pre_test_pod_image_ids:
+  operator-6878fbf488-8sjjn quay.io/hypershift/hypershift-operator@sha256:0dbb54a999612d55ae0e363fb7bcadeb92df5252ff598db34dd6e3a8b5613c79
+  operator-6878fbf488-8vl4g quay.io/hypershift/hypershift-operator@sha256:4c9efdaafc49378a5b99f55a558ae4682fff7b1683e24dcc4791daa93afd1bb4
+restored_pod_image_ids:
+  operator-6878fbf488-snr8x quay.io/hypershift/hypershift-operator@sha256:6faaca6c330910570cc0d85b2ce8243454f5ecae894d4d57c59034f59b04b629
+  operator-6878fbf488-xvl6n quay.io/hypershift/hypershift-operator@sha256:0dbb54a999612d55ae0e363fb7bcadeb92df5252ff598db34dd6e3a8b5613c79
+note=The deployment manifest matches the pre-test manifest after removing server metadata and status. The `latest` tag is mutable, so the restored pods resolved to a different digest set than the originally captured pods; this is a provenance limitation, not a manifest mismatch.

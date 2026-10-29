@@ -1,0 +1,6 @@
+rg -l -i --hidden --glob '!**/report/**' --glob '!**/integrity/**' --glob '!*.png' 'BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY' <evidence>
+rg -l -i --hidden --glob '!**/report/**' --glob '!**/integrity/**' --glob '!*.png' 'client-key-data|client-certificate-data|^users:' <evidence>
+rg -o -i --hidden --glob '!**/report/**' --glob '!**/integrity/**' --glob '!*.png' 'Bearer[[:space:]]+[^"\\]{0,60}' <evidence>
+python3 scan_json_for_secret_data.py <evidence>
+find <evidence> -path '<evidence>/report' -prune -o -path '<evidence>/integrity' -prune -o -iname '*kubeconfig*' -type f -print
+test ! -e /tmp/guest.kubeconfig

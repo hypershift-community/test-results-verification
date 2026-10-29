@@ -1,0 +1,1 @@
+kubectl delete hostedcluster test-cntrlplane-4826-r4-hc -n clusters --wait=false

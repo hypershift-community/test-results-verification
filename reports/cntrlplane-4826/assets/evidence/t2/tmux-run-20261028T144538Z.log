@@ -1,0 +1,3 @@
+t2_started_utc=2026-10-28T14:45:38Z
+ERROR: custom-config marker was found on 2 of 3 replacement workers
+t2_exit=1

@@ -1,0 +1,16 @@
+{"level":"info","ts":"2026-10-28T19:26:09-04:00","msg":"Using credentials from file","path":"/home/tester/.azure/self-managed-azure-credentials"}
+{"level":"info","ts":"2026-10-28T19:26:10-04:00","msg":"Successfully found existing resource group","name":"test-cntrlplane-4826-hc-test-cntrlplane-4826"}
+{"level":"info","ts":"2026-10-28T19:26:10-04:00","msg":"Using existing network security group","ID":"/subscriptions/redacted-subscription-id/resourceGroups/test-cntrlplane-4826-hc-nsg-test-cntrlplane-4826/providers/Microsoft.Network/networkSecurityGroups/test-cntrlplane-4826-hc-test-cntrlplane-4826-nsg"}
+{"level":"info","ts":"2026-10-28T19:26:10-04:00","msg":"Using existing subnet","ID":"/subscriptions/redacted-subscription-id/resourceGroups/test-cntrlplane-4826-hc-vnet-test-cntrlplane-4826/providers/Microsoft.Network/virtualNetworks/test-cntrlplane-4826-hc-test-cntrlplane-4826/subnets/default"}
+{"level":"info","ts":"2026-10-28T19:26:10-04:00","msg":"Using existing vnet","ID":"/subscriptions/redacted-subscription-id/resourceGroups/test-cntrlplane-4826-hc-vnet-test-cntrlplane-4826/providers/Microsoft.Network/virtualNetworks/test-cntrlplane-4826-hc-test-cntrlplane-4826"}
+{"level":"info","ts":"2026-10-28T19:26:42-04:00","msg":"Successfully created private DNS zone","name":"test-cntrlplane-4826-hc.hcp.example.com"}
+{"level":"info","ts":"2026-10-28T19:26:42-04:00","msg":"Successfully created private DNS zone link"}
+{"level":"info","ts":"2026-10-28T19:26:43-04:00","msg":"Successfully created public IP address for guest cluster egress load balancer"}
+{"level":"info","ts":"2026-10-28T19:26:43-04:00","msg":"Successfully created guest cluster egress load balancer"}
+{"level":"info","ts":"2026-10-28T19:26:44-04:00","msg":"Applied Kube resource","kind":"Namespace","namespace":"","name":"clusters"}
+{"level":"info","ts":"2026-10-28T19:26:44-04:00","msg":"Applied Kube resource","kind":"Secret","namespace":"clusters","name":"test-cntrlplane-4826-hc-pull-secret"}
+{"level":"info","ts":"2026-10-28T19:26:44-04:00","msg":"Applied Kube resource","kind":"Secret","namespace":"clusters","name":"test-cntrlplane-4826-hc-ssh-key"}
+{"level":"info","ts":"2026-10-28T19:26:44-04:00","msg":"Applied Kube resource","kind":"Secret","namespace":"clusters","name":"test-cntrlplane-4826-hc-cloud-credentials"}
+{"level":"info","ts":"2026-10-28T19:26:44-04:00","msg":"Applied Kube resource","kind":"Secret","namespace":"clusters","name":"test-cntrlplane-4826-hcsa-token-issuer-key"}
+{"level":"info","ts":"2026-10-28T19:26:44-04:00","msg":"Applied Kube resource","kind":"Secret","namespace":"clusters","name":"test-cntrlplane-4826-hc-etcd-encryption-key"}
+{"level":"info","ts":"2026-10-28T19:26:44-04:00","msg":"Applied Kube resource","kind":"","namespace":"clusters","name":"test-cntrlplane-4826-hc"}

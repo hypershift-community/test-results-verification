@@ -1,0 +1,1 @@
+2026-10-29T11:13:00Z kubectl delete nodepool test-cntrlplane-4826-r5-head -n clusters --wait=false

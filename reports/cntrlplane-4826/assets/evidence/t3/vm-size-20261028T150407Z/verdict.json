@@ -1,0 +1,204 @@
+{
+  "action": {
+    "generation": 5,
+    "machines": [
+      {
+        "name": "test-cntrlplane-4826-patched-ctnbv-27hw8",
+        "nodeName": "test-cntrlplane-4826-patched-ctnbv-27hw8",
+        "uid": "d1c3c564-e056-4c82-b8d5-8706ea17c134"
+      },
+      {
+        "name": "test-cntrlplane-4826-patched-ctnbv-j74st",
+        "nodeName": "test-cntrlplane-4826-patched-ctnbv-j74st",
+        "uid": "90fce36c-48ad-4fe2-b239-0bd5a935a4a4"
+      },
+      {
+        "name": "test-cntrlplane-4826-patched-ctnbv-k4dr5",
+        "nodeName": "test-cntrlplane-4826-patched-ctnbv-k4dr5",
+        "uid": "a2b71c9c-f42e-4162-88a3-c551ea5fec41"
+      }
+    ],
+    "patchUtc": "2026-10-28T15:04:16Z",
+    "targetPlatformTemplate": "test-cntrlplane-4826-patched-776e47ca",
+    "targetVmSize": "Standard_D4s_v5",
+    "updatingPlatformMachineTemplate": "True"
+  },
+  "after": {
+    "capturedAt": "2026-10-28T15:13:50Z",
+    "config": "86d03f4f",
+    "configVersion": "e7ebf8df",
+    "generation": 5,
+    "guestTargetNodes": [
+      {
+        "created": "2026-10-28T15:08:37Z",
+        "kubeletVersion": "v1.37.1",
+        "name": "test-cntrlplane-4826-patched-4dklb-5jvh4",
+        "ready": "True",
+        "uid": "b6dac062-37a7-45f7-adcf-597e8aee34b0"
+      },
+      {
+        "created": "2026-10-28T15:08:17Z",
+        "kubeletVersion": "v1.37.1",
+        "name": "test-cntrlplane-4826-patched-4dklb-kqtqz",
+        "ready": "True",
+        "uid": "7e72eda9-6886-43e8-99cf-34c011dc3f6d"
+      },
+      {
+        "created": "2026-10-28T15:08:32Z",
+        "kubeletVersion": "v1.37.1",
+        "name": "test-cntrlplane-4826-patched-4dklb-lwmg6",
+        "ready": "True",
+        "uid": "96ab070d-3f7d-48b8-bf91-ea50dfa44b5f"
+      }
+    ],
+    "machineDeploymentAvailableReplicas": 3,
+    "machineDeploymentReplicas": 3,
+    "machineDeploymentRevision": "4",
+    "machineDeploymentUpToDateReplicas": 0,
+    "machineSets": [
+      {
+        "availableReplicas": 0,
+        "name": "test-cntrlplane-4826-patched-2jxvf",
+        "replicas": 0,
+        "revision": "2"
+      },
+      {
+        "availableReplicas": 3,
+        "name": "test-cntrlplane-4826-patched-4dklb",
+        "replicas": 3,
+        "revision": "4"
+      },
+      {
+        "availableReplicas": 0,
+        "name": "test-cntrlplane-4826-patched-bkf55",
+        "replicas": 0,
+        "revision": "1"
+      },
+      {
+        "availableReplicas": 0,
+        "name": "test-cntrlplane-4826-patched-ctnbv",
+        "replicas": 0,
+        "revision": "3"
+      }
+    ],
+    "machines": [
+      {
+        "name": "test-cntrlplane-4826-patched-4dklb-5jvh4",
+        "nodeName": "test-cntrlplane-4826-patched-4dklb-5jvh4",
+        "uid": "19d7b7b6-95cc-49d0-9558-1f79b0e450f4",
+        "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+      },
+      {
+        "name": "test-cntrlplane-4826-patched-4dklb-kqtqz",
+        "nodeName": "test-cntrlplane-4826-patched-4dklb-kqtqz",
+        "uid": "c4b51698-1029-4c06-9b7c-1582df87e469",
+        "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+      },
+      {
+        "name": "test-cntrlplane-4826-patched-4dklb-lwmg6",
+        "nodeName": "test-cntrlplane-4826-patched-4dklb-lwmg6",
+        "uid": "790b2bb3-88c7-4f4b-b63a-365b77d8254f",
+        "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+      }
+    ],
+    "platformTemplate": "test-cntrlplane-4826-patched-776e47ca",
+    "ready": "True",
+    "release": "quay.io/openshift-release-dev/ocp-release-nightly@sha256:08f0905c06195a76138db7071aa77ae644aea401eb832d51ebbf4fb870698346",
+    "updatingConfig": "False",
+    "updatingPlatformMachineTemplate": "False",
+    "updatingVersion": "False",
+    "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+  },
+  "assertions": {
+    "allJoinsBelow12Minutes": true,
+    "configAnnotationsUnchanged": true,
+    "physicalRolloutComplete": true,
+    "platformTemplateAdvanced": "test-cntrlplane-4826-patched-e4b9b203 -> test-cntrlplane-4826-patched-776e47ca",
+    "targetVmSizeOnAllMachines": "3/3",
+    "upToDateReplicasObservedZero": true,
+    "updatingPlatformMachineTemplateCleared": true,
+    "versionUnchanged": true
+  },
+  "azureActual": [
+    {
+      "location": "eastus",
+      "name": "test-cntrlplane-4826-patched-4dklb-5jvh4",
+      "osType": "Linux",
+      "provisioningState": "Succeeded",
+      "vmSize": "Standard_D4s_v5"
+    },
+    {
+      "location": "eastus",
+      "name": "test-cntrlplane-4826-patched-4dklb-kqtqz",
+      "osType": "Linux",
+      "provisioningState": "Succeeded",
+      "vmSize": "Standard_D4s_v5"
+    },
+    {
+      "location": "eastus",
+      "name": "test-cntrlplane-4826-patched-4dklb-lwmg6",
+      "osType": "Linux",
+      "provisioningState": "Succeeded",
+      "vmSize": "Standard_D4s_v5"
+    }
+  ],
+  "before": {
+    "config": "86d03f4f",
+    "configVersion": "e7ebf8df",
+    "generation": 4,
+    "machineDeploymentReplicas": 3,
+    "machineDeploymentRevision": "3",
+    "machineDeploymentUpToDateReplicas": 0,
+    "machines": [
+      {
+        "name": "test-cntrlplane-4826-patched-ctnbv-27hw8",
+        "nodeName": "test-cntrlplane-4826-patched-ctnbv-27hw8",
+        "uid": "d1c3c564-e056-4c82-b8d5-8706ea17c134"
+      },
+      {
+        "name": "test-cntrlplane-4826-patched-ctnbv-j74st",
+        "nodeName": "test-cntrlplane-4826-patched-ctnbv-j74st",
+        "uid": "90fce36c-48ad-4fe2-b239-0bd5a935a4a4"
+      },
+      {
+        "name": "test-cntrlplane-4826-patched-ctnbv-k4dr5",
+        "nodeName": "test-cntrlplane-4826-patched-ctnbv-k4dr5",
+        "uid": "a2b71c9c-f42e-4162-88a3-c551ea5fec41"
+      }
+    ],
+    "platformTemplate": "test-cntrlplane-4826-patched-e4b9b203",
+    "release": "quay.io/openshift-release-dev/ocp-release-nightly@sha256:08f0905c06195a76138db7071aa77ae644aea401eb832d51ebbf4fb870698346",
+    "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+  },
+  "joinDurations": [
+    {
+      "ageSeconds": 571,
+      "createdAt": "2026-10-28T15:04:18Z",
+      "name": "test-cntrlplane-4826-patched-4dklb-5jvh4",
+      "nodeReadyTransition": "2026-10-28T15:09:34Z"
+    },
+    {
+      "ageSeconds": 571,
+      "createdAt": "2026-10-28T15:04:18Z",
+      "name": "test-cntrlplane-4826-patched-4dklb-kqtqz",
+      "nodeReadyTransition": "2026-10-28T15:09:25Z"
+    },
+    {
+      "ageSeconds": 571,
+      "createdAt": "2026-10-28T15:04:18Z",
+      "name": "test-cntrlplane-4826-patched-4dklb-lwmg6",
+      "nodeReadyTransition": "2026-10-28T15:09:45Z"
+    }
+  ],
+  "meta": "mode=vm-size\nnodepool=clusters/test-cntrlplane-4826-patched\ntargetVmSize=Standard_D4s_v5\npreGeneration=4\npreStatusVersion=5.1.0-0.nightly-multi-2026-10-27-082258\npreSpecRelease=quay.io/openshift-release-dev/ocp-release-nightly@sha256:08f0905c06195a76138db7071aa77ae644aea401eb832d51ebbf4fb870698346\nprePlatformMachineTemplate=test-cntrlplane-4826-patched-e4b9b203\ntargetVersion=5.1.0-0.nightly-multi-2026-10-27-082258\noperatorImage=quay.io/example/hypershift@sha256:7bbfc29f4283a5b76ba9d1ee9f6a74864dc874614b26741520ae52d6a887b4a2\npatchUtc=2026-10-28T15:04:16Z\ndeadlineUtc=2026-10-28T15:34:16Z\ndeadlineSeconds=1800\nsuccessEpoch=1793200430\ncompletedUtc=2026-10-28T15:13:53Z\nelapsedSeconds=577",
+  "scope": "Release B and user config fixed; azure vmSize changed Standard_D4s_v4 -> Standard_D4s_v5; physical rollout completed while upToDateReplicas remained zero.",
+  "status": "PASS",
+  "test": "T3 infrastructure-template-only Replace (Azure VM size)",
+  "timing": {
+    "completedUtc": "2026-10-28T15:13:53Z",
+    "deadlineUtc": "2026-10-28T15:34:16Z",
+    "elapsedSeconds": 577,
+    "patchUtc": "2026-10-28T15:04:16Z"
+  },
+  "verifiedUtc": "2026-10-28T15:16:15Z"
+}

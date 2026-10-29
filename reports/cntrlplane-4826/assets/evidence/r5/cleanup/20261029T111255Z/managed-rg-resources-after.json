@@ -1,0 +1,118 @@
+[
+  {
+    "name": "test-cntrlplane-4826-hc-disk-test-cntrlplane-4826",
+    "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+  },
+  {
+    "name": "test-cntrlplane-4826-hc-file-test-cntrlplane-4826",
+    "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+  },
+  {
+    "name": "test-cntrlplane-4826-hc-image-registry-test-cntrlplane-4826",
+    "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+  },
+  {
+    "name": "test-cntrlplane-4826-hc-ingress-test-cntrlplane-4826",
+    "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+  },
+  {
+    "name": "test-cntrlplane-4826-hc-cloud-provider-test-cntrlplane-4826",
+    "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+  },
+  {
+    "name": "test-cntrlplane-4826-hc-node-pool-mgmt-test-cntrlplane-4826",
+    "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+  },
+  {
+    "name": "test-cntrlplane-4826-hc-network-test-cntrlplane-4826",
+    "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+  },
+  {
+    "name": "test-cntrlplane-4826-hc-control-plane-operator-test-cntrlplane-4826",
+    "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+  },
+  {
+    "name": "test-cntrlplane-4826-hc.hcp.example.com",
+    "type": "Microsoft.Network/privateDnsZones"
+  },
+  {
+    "name": "test-cntrlplane-4826-hc.hcp.example.com/test-cntrlplane-4826-hc-test-cntrlplane-4826",
+    "type": "Microsoft.Network/privateDnsZones/virtualNetworkLinks"
+  },
+  {
+    "name": "test-cntrlplane-4826",
+    "type": "Microsoft.Network/publicIPAddresses"
+  },
+  {
+    "name": "test-cntrlplane-4826",
+    "type": "Microsoft.Network/loadBalancers"
+  },
+  {
+    "name": "imageregistrytesterc9npjx",
+    "type": "Microsoft.Storage/storageAccounts"
+  },
+  {
+    "name": "test-cntrlplane-4826-internal",
+    "type": "Microsoft.Network/loadBalancers"
+  },
+  {
+    "name": "imageregistrytestercc4mbz",
+    "type": "Microsoft.Storage/storageAccounts"
+  },
+  {
+    "name": "imageregistrytesterct6gf4",
+    "type": "Microsoft.Storage/storageAccounts"
+  },
+  {
+    "name": "test-cntrlplane-4826-aa865908822fb44cba23557e2b8bc89e",
+    "type": "Microsoft.Network/publicIPAddresses"
+  },
+  {
+    "name": "test-cntrlplane-4826-r4-hc.hcp.example.com",
+    "type": "Microsoft.Network/privateDnsZones"
+  },
+  {
+    "name": "test-cntrlplane-4826-r4-hc.hcp.example.com/test-cntrlplane-4826-r4-hc-test-cntrlplane-4826-r4",
+    "type": "Microsoft.Network/privateDnsZones/virtualNetworkLinks"
+  },
+  {
+    "name": "test-cntrlplane-4826-r4",
+    "type": "Microsoft.Network/publicIPAddresses"
+  },
+  {
+    "name": "test-cntrlplane-4826-r4",
+    "type": "Microsoft.Network/loadBalancers"
+  },
+  {
+    "name": "imageregistrytesterc4kgp5",
+    "type": "Microsoft.Storage/storageAccounts"
+  },
+  {
+    "name": "test-cntrlplane-4826-r4-a6b6f009cbe87436ab6a542d4993ce6b",
+    "type": "Microsoft.Network/publicIPAddresses"
+  },
+  {
+    "name": "test-cntrlplane-4826-r5-hc.hcp.example.com",
+    "type": "Microsoft.Network/privateDnsZones"
+  },
+  {
+    "name": "test-cntrlplane-4826-r5-hc.hcp.example.com/test-cntrlplane-4826-r5-hc-test-cntrlplane-4826-r5",
+    "type": "Microsoft.Network/privateDnsZones/virtualNetworkLinks"
+  },
+  {
+    "name": "test-cntrlplane-4826-r5",
+    "type": "Microsoft.Network/publicIPAddresses"
+  },
+  {
+    "name": "test-cntrlplane-4826-r5",
+    "type": "Microsoft.Network/loadBalancers"
+  },
+  {
+    "name": "imageregistrytestercp52xc",
+    "type": "Microsoft.Storage/storageAccounts"
+  },
+  {
+    "name": "test-cntrlplane-4826-r5-a13df273b06ac43158e789a68061bd08",
+    "type": "Microsoft.Network/publicIPAddresses"
+  }
+]

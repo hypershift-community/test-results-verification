@@ -1,0 +1,55 @@
+[1/2] STEP 1/5: FROM registry.ci.openshift.org/openshift/release:rhel-9-release-golang-1.26-openshift-5.1 AS builder
+[1/2] STEP 2/5: ARG COMMIT_HASH
+--> Using cache b5e264fef2961c684ee0006e4972e172ef51ecdd80e03907a0a698ceadc5ef1d
+--> b5e264fef296
+[1/2] STEP 3/5: WORKDIR /hypershift
+--> Using cache 4d4d567c5c9cf79152d8fd4812ab7b67f3ea98abc09ed417fc988ff74e0501bf
+--> 4d4d567c5c9c
+[1/2] STEP 4/5: COPY . .
+--> 147c8181e9a2
+[1/2] STEP 5/5: RUN make build
+CGO_ENABLED=1 GO111MODULE=on GOWORK=off GOFLAGS=-mod=vendor go build -gcflags=all='-N -l' -ldflags '-X github.com/openshift/hypershift/support/supportedversion.commitHash=ee5691233b08e3271f030ebd24055faa6857fd39' -o bin/hypershift-operator ./hypershift-operator
+CGO_ENABLED=1 GO111MODULE=on GOWORK=off GOFLAGS=-mod=vendor go build -gcflags=all='-N -l' -ldflags '-X github.com/openshift/hypershift/support/supportedversion.commitHash=ee5691233b08e3271f030ebd24055faa6857fd39' -o bin/control-plane-operator ./control-plane-operator
+CGO_ENABLED=1 GO111MODULE=on GOWORK=off GOFLAGS=-mod=vendor go build -gcflags=all='-N -l' -ldflags '-X github.com/openshift/hypershift/support/supportedversion.commitHash=ee5691233b08e3271f030ebd24055faa6857fd39' -o bin/control-plane-pki-operator ./control-plane-pki-operator
+CGO_ENABLED=1 GO111MODULE=on GOWORK=off GOFLAGS=-mod=vendor go build -gcflags=all='-N -l' -ldflags '-X github.com/openshift/hypershift/support/supportedversion.commitHash=ee5691233b08e3271f030ebd24055faa6857fd39' -o bin/karpenter-operator ./karpenter-operator
+CGO_ENABLED=1 GO111MODULE=on GOWORK=off GOFLAGS=-mod=vendor go build -gcflags=all='-N -l' -ldflags '-X github.com/openshift/hypershift/support/supportedversion.commitHash=ee5691233b08e3271f030ebd24055faa6857fd39' -o bin/hypershift .
+CGO_ENABLED=0 GO111MODULE=on GOWORK=off GOFLAGS=-mod=vendor go build -gcflags=all='-N -l' -ldflags '-X github.com/openshift/hypershift/support/supportedversion.commitHash=ee5691233b08e3271f030ebd24055faa6857fd39 -extldflags "-static"' -o bin/hcp ./product-cli
+--> 01d25c675790
+[2/2] STEP 1/18: FROM registry.access.redhat.com/ubi9:latest
+[2/2] STEP 2/18: COPY --from=builder /hypershift/bin/hypershift                     /hypershift/bin/hcp                     /hypershift/bin/hypershift-operator                     /hypershift/bin/karpenter-operator                     /hypershift/bin/control-plane-operator                     /hypershift/bin/control-plane-pki-operator      /usr/bin/
+--> ec3dbadcc604
+[2/2] STEP 3/18: RUN cd /usr/bin &&     ln -s control-plane-operator ignition-server &&     ln -s control-plane-operator konnectivity-socks5-proxy &&     ln -s control-plane-operator availability-prober &&     ln -s control-plane-operator token-minter &&     ln -s control-plane-operator fetch-etcd-certs
+--> 0fa8f8d0d4c3
+[2/2] STEP 4/18: ENTRYPOINT ["/usr/bin/hypershift"]
+--> 826a8aa214ed
+[2/2] STEP 5/18: LABEL io.openshift.hypershift.control-plane-operator-subcommands=true
+--> 5daf1e0c32bd
+[2/2] STEP 6/18: LABEL io.openshift.hypershift.control-plane-operator-skips-haproxy=true
+--> 14a68acb23d8
+[2/2] STEP 7/18: LABEL io.openshift.hypershift.ignition-server-healthz-handler=true
+--> 1e080112e864
+[2/2] STEP 8/18: LABEL io.openshift.hypershift.control-plane-operator-manages-ignition-server=true
+--> 1eb2e8951b30
+[2/2] STEP 9/18: LABEL io.openshift.hypershift.control-plane-operator-manages.cluster-machine-approver=true
+--> aca8ffa84f3d
+[2/2] STEP 10/18: LABEL io.openshift.hypershift.control-plane-operator-manages.cluster-autoscaler=true
+--> dbf987d8e85f
+[2/2] STEP 11/18: LABEL io.openshift.hypershift.control-plane-operator-manages.decompress-decode-config=true
+--> 544fa0d48ee0
+[2/2] STEP 12/18: LABEL io.openshift.hypershift.control-plane-operator-creates-aws-sg=true
+--> 4a2defdccb1f
+[2/2] STEP 13/18: LABEL io.openshift.hypershift.control-plane-operator-applies-management-kas-network-policy-label=true
+--> 17d43dc314cd
+[2/2] STEP 14/18: LABEL io.openshift.hypershift.restricted-psa=true
+--> 0d0bc63b8036
+[2/2] STEP 15/18: LABEL io.openshift.hypershift.control-plane-pki-operator-signs-csrs=true
+--> 85ce61f52772
+[2/2] STEP 16/18: LABEL io.openshift.hypershift.hosted-cluster-config-operator-reports-node-count=true
+--> 52bb32e58fa6
+[2/2] STEP 17/18: LABEL io.openshift.hypershift.control-plane-operator-supports-kas-custom-kubeconfig=true
+--> b5aba4e1aa54
+[2/2] STEP 18/18: LABEL io.openshift.hypershift.control-plane-operator.v2-isdefault=true
+[2/2] COMMIT quay.io/example/hypershift:cntrlplane-4826-head-ee5691233b
+--> f733b3785489
+Successfully tagged quay.io/example/hypershift:cntrlplane-4826-head-ee5691233b
+f733b378548940ebf11d930ad906270e7f853114743a4dfc6a87e4fc37c238a4

@@ -1,0 +1,416 @@
+{
+  "capturedAt": "2026-10-28T14:40:53Z",
+  "guestNodes": [
+    {
+      "created": "2026-10-28T14:32:22Z",
+      "kubeletVersion": "v1.37.1",
+      "name": "test-cntrlplane-4826-patched-2jxvf-2jg5c",
+      "ready": "True",
+      "uid": "806f0727-789b-4e69-bfc3-654a4f46fb69"
+    },
+    {
+      "created": "2026-10-28T14:25:33Z",
+      "kubeletVersion": "v1.37.1",
+      "name": "test-cntrlplane-4826-patched-2jxvf-h4mpp",
+      "ready": "True",
+      "uid": "5a9aba8d-dd25-4a21-bf06-d68a9fba47fb"
+    },
+    {
+      "created": "2026-10-28T14:16:49Z",
+      "kubeletVersion": "v1.37.1",
+      "name": "test-cntrlplane-4826-patched-2jxvf-rrchj",
+      "ready": "True",
+      "uid": "f4ed8f36-dcad-40cc-a4ba-e4ede8e7c014"
+    },
+    {
+      "created": "2026-10-28T13:58:03Z",
+      "kubeletVersion": "v1.37.1",
+      "name": "test-cntrlplane-4826-unpatched-dslll-f62jw",
+      "ready": "True",
+      "uid": "e25cb035-3650-4f26-96ed-729c6dede7b0"
+    },
+    {
+      "created": "2026-10-28T13:48:55Z",
+      "kubeletVersion": "v1.37.1",
+      "name": "test-cntrlplane-4826-unpatched-dslll-hlb8s",
+      "ready": "True",
+      "uid": "49e2f8dc-b8ad-46b9-ad39-a0a6b5288cd7"
+    },
+    {
+      "created": "2026-10-28T13:42:38Z",
+      "kubeletVersion": "v1.37.1",
+      "name": "test-cntrlplane-4826-unpatched-dslll-p6w65",
+      "ready": "True",
+      "uid": "b9163069-d2bf-4f80-a09e-49323e538360"
+    }
+  ],
+  "hostedCluster": {
+    "available": {
+      "lastTransitionTime": "2026-10-27T20:10:19Z",
+      "message": "The hosted control plane is available",
+      "observedGeneration": 5,
+      "reason": "AsExpected",
+      "status": "True"
+    },
+    "degraded": {
+      "lastTransitionTime": "2026-10-28T13:44:18Z",
+      "message": "The hosted cluster is not degraded",
+      "observedGeneration": 5,
+      "reason": "AsExpected",
+      "status": "False"
+    },
+    "generation": 5,
+    "release": "quay.io/openshift-release-dev/ocp-release-nightly@sha256:08f0905c06195a76138db7071aa77ae644aea401eb832d51ebbf4fb870698346",
+    "uid": "762abd32-5efb-4676-a168-4b15be6b40d6",
+    "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+  },
+  "hostedControlPlane": {
+    "available": {
+      "lastTransitionTime": "2026-10-27T20:10:19Z",
+      "message": "",
+      "observedGeneration": 2,
+      "reason": "AsExpected",
+      "status": "True"
+    },
+    "generation": 2,
+    "uid": "b7269017-43d4-4efc-8622-b4c37f14ce2f",
+    "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+  },
+  "machineDeployment": {
+    "availableReplicas": 3,
+    "conditions": [
+      {
+        "lastTransitionTime": "2026-10-28T13:33:43Z",
+        "message": "",
+        "observedGeneration": 2,
+        "reason": "Available",
+        "status": "True",
+        "type": "Available"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T13:32:38Z",
+        "message": "Rolling out 3 not up-to-date replicas\n* Node.status.nodeInfo.kubeletVersion v1.37.1, 5.1.0-0.nightly-multi-2026-10-27-082258 required",
+        "observedGeneration": 2,
+        "reason": "RollingOut",
+        "status": "True",
+        "type": "RollingOut"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T13:26:14Z",
+        "message": "",
+        "observedGeneration": 2,
+        "reason": "NotRemediating",
+        "status": "False",
+        "type": "Remediating"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T14:35:21Z",
+        "message": "",
+        "observedGeneration": 2,
+        "reason": "NotScalingDown",
+        "status": "False",
+        "type": "ScalingDown"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T13:26:18Z",
+        "message": "",
+        "observedGeneration": 2,
+        "reason": "NotScalingUp",
+        "status": "False",
+        "type": "ScalingUp"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T14:35:20Z",
+        "message": "",
+        "observedGeneration": 2,
+        "reason": "Ready",
+        "status": "True",
+        "type": "MachinesReady"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T13:32:38Z",
+        "message": "* Machines test-cntrlplane-4826-patched-2jxvf-2jg5c, test-cntrlplane-4826-patched-2jxvf-h4mpp, test-cntrlplane-4826-patched-2jxvf-rrchj:\n  * Node.status.nodeInfo.kubeletVersion v1.37.1, 5.1.0-0.nightly-multi-2026-10-27-082258 required",
+        "observedGeneration": 2,
+        "reason": "NotUpToDate",
+        "status": "False",
+        "type": "MachinesUpToDate"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T13:26:13Z",
+        "message": "",
+        "observedGeneration": 2,
+        "reason": "NotPaused",
+        "status": "False",
+        "type": "Paused"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T13:26:14Z",
+        "message": "",
+        "observedGeneration": 2,
+        "reason": "NotDeleting",
+        "status": "False",
+        "type": "Deleting"
+      }
+    ],
+    "generation": 2,
+    "observedGeneration": 2,
+    "replicas": 3,
+    "revision": "2",
+    "uid": "f2adcde0-7e6f-44c0-833a-d18b6486a868",
+    "upToDateReplicas": 0,
+    "updatedReplicas": null
+  },
+  "machinedeploymentName": "test-cntrlplane-4826-patched",
+  "managementOperator": {
+    "generation": 30,
+    "images": [
+      {
+        "image": "quay.io/example/hypershift@sha256:7bbfc29f4283a5b76ba9d1ee9f6a74864dc874614b26741520ae52d6a887b4a2",
+        "name": "operator"
+      }
+    ],
+    "observedGeneration": 30,
+    "readyReplicas": 2,
+    "uid": "21cdbcf1-2b12-422a-9406-bf92bfeebf06"
+  },
+  "nodePool": {
+    "annotations": {
+      "hypershift.openshift.io/canonical-data-plane-images": "true",
+      "hypershift.openshift.io/nodePoolCurrentConfig": "95a7feab",
+      "hypershift.openshift.io/nodePoolCurrentConfigVersion": "fc563e6b",
+      "hypershift.openshift.io/nodePoolPlatformMachineTemplate": "test-cntrlplane-4826-patched-e4b9b203"
+    },
+    "conditions": [
+      {
+        "lastTransitionTime": "2026-10-28T13:26:12Z",
+        "message": null,
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "False",
+        "type": "AutoscalingEnabled"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T13:26:12Z",
+        "message": null,
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "UpdateManagementEnabled"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T13:26:12Z",
+        "message": "Using release image: quay.io/openshift-release-dev/ocp-release-nightly@sha256:08f0905c06195a76138db7071aa77ae644aea401eb832d51ebbf4fb870698346",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "ValidReleaseImage"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T13:26:12Z",
+        "message": null,
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "ValidArchPlatform"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T13:26:12Z",
+        "message": "Reconciliation active on resource",
+        "observedGeneration": 2,
+        "reason": "ReconciliationActive",
+        "status": "True",
+        "type": "ReconciliationActive"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T13:26:12Z",
+        "message": "Release image version is valid",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "SupportedVersionSkew"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T13:26:12Z",
+        "message": null,
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "ValidMachineConfig"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T14:35:21Z",
+        "message": null,
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "False",
+        "type": "UpdatingConfig"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T14:35:21Z",
+        "message": null,
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "False",
+        "type": "UpdatingVersion"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T14:13:06Z",
+        "message": "Payload generated successfully",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "ValidGeneratedPayload"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T14:13:10Z",
+        "message": null,
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "ReachedIgnitionEndpoint"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T14:35:20Z",
+        "message": "All is well",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "AllMachinesReady"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T14:34:19Z",
+        "message": "All is well",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "AllNodesHealthy"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T13:26:12Z",
+        "message": "All is well",
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "ValidPlatformConfig"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T13:26:12Z",
+        "message": null,
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "True",
+        "type": "ValidTuningConfig"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T13:33:43Z",
+        "message": null,
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "False",
+        "type": "UpdatingPlatformMachineTemplate"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T13:26:12Z",
+        "message": null,
+        "observedGeneration": 2,
+        "reason": "AsExpected",
+        "status": "False",
+        "type": "AutorepairEnabled"
+      },
+      {
+        "lastTransitionTime": "2026-10-28T14:35:20Z",
+        "message": null,
+        "observedGeneration": 2,
+        "reason": "Ready",
+        "status": "True",
+        "type": "Ready"
+      }
+    ],
+    "generation": 2,
+    "release": "quay.io/openshift-release-dev/ocp-release-nightly@sha256:08f0905c06195a76138db7071aa77ae644aea401eb832d51ebbf4fb870698346",
+    "replicas": 3,
+    "uid": "13ea4860-1374-40b4-9c30-ad8d8f3144d9",
+    "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+  },
+  "nodepoolName": "test-cntrlplane-4826-patched",
+  "ownedMachineSets": [
+    {
+      "availableReplicas": 3,
+      "creationTimestamp": "2026-10-28T14:12:23Z",
+      "name": "test-cntrlplane-4826-patched-2jxvf",
+      "replicas": 3,
+      "revision": "2",
+      "uid": "1d141ec4-856d-4a3a-96a2-2690ee3bbd9e"
+    },
+    {
+      "availableReplicas": 0,
+      "creationTimestamp": "2026-10-28T13:26:14Z",
+      "name": "test-cntrlplane-4826-patched-bkf55",
+      "replicas": 0,
+      "revision": "1",
+      "uid": "35ff4ec1-5d7e-45b6-9ba4-10f3bc6a623b"
+    }
+  ],
+  "ownedMachines": [
+    {
+      "creationTimestamp": "2026-10-28T14:27:51Z",
+      "name": "test-cntrlplane-4826-patched-2jxvf-2jg5c",
+      "nodeName": "test-cntrlplane-4826-patched-2jxvf-2jg5c",
+      "nodeReady": {
+        "lastTransitionTime": "2026-10-28T14:34:19Z",
+        "message": "",
+        "reason": "NodeReady",
+        "status": "True"
+      },
+      "ready": "True",
+      "uid": "5dabc748-5e2f-48ea-9e8f-d701c4c4bbcd",
+      "upToDate": {
+        "lastTransitionTime": "2026-10-28T14:33:39Z",
+        "message": "* Node.status.nodeInfo.kubeletVersion v1.37.1, 5.1.0-0.nightly-multi-2026-10-27-082258 required",
+        "reason": "Updating",
+        "status": "False"
+      },
+      "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+    },
+    {
+      "creationTimestamp": "2026-10-28T14:20:54Z",
+      "name": "test-cntrlplane-4826-patched-2jxvf-h4mpp",
+      "nodeName": "test-cntrlplane-4826-patched-2jxvf-h4mpp",
+      "nodeReady": {
+        "lastTransitionTime": "2026-10-28T14:26:47Z",
+        "message": "",
+        "reason": "NodeReady",
+        "status": "True"
+      },
+      "ready": "True",
+      "uid": "5d7f1bc7-f9c2-45d4-9f3f-3f7977d2447f",
+      "upToDate": {
+        "lastTransitionTime": "2026-10-28T14:26:21Z",
+        "message": "* Node.status.nodeInfo.kubeletVersion v1.37.1, 5.1.0-0.nightly-multi-2026-10-27-082258 required",
+        "reason": "Updating",
+        "status": "False"
+      },
+      "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+    },
+    {
+      "creationTimestamp": "2026-10-28T14:12:25Z",
+      "name": "test-cntrlplane-4826-patched-2jxvf-rrchj",
+      "nodeName": "test-cntrlplane-4826-patched-2jxvf-rrchj",
+      "nodeReady": {
+        "lastTransitionTime": "2026-10-28T14:17:51Z",
+        "message": "",
+        "reason": "NodeReady",
+        "status": "True"
+      },
+      "ready": "True",
+      "uid": "029ee3f1-fbfb-4012-8de7-5e0cdeac612a",
+      "upToDate": {
+        "lastTransitionTime": "2026-10-28T14:17:29Z",
+        "message": "* Node.status.nodeInfo.kubeletVersion v1.37.1, 5.1.0-0.nightly-multi-2026-10-27-082258 required",
+        "reason": "Updating",
+        "status": "False"
+      },
+      "version": "5.1.0-0.nightly-multi-2026-10-27-082258"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+kubectl patch nodepool test-cntrlplane-4826-r4-head -n clusters --type=merge -p {"spec":{"management":{"replace":{"rollingUpdate":{"maxSurge":3}}}}}
+kubectl get nodepool test-cntrlplane-4826-r4-head -n clusters -o json
+kubectl get machinedeployment test-cntrlplane-4826-r4-head -n clusters-test-cntrlplane-4826-r4-hc -o json
+kubectl get machinesets -n clusters-test-cntrlplane-4826-r4-hc -o json

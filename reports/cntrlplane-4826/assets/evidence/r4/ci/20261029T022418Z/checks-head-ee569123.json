@@ -1,0 +1,425 @@
+[
+  {
+    "bucket": "pass",
+    "completedAt": "2026-10-28T19:08:31Z",
+    "description": "",
+    "link": "https://app.codecov.io/gh/openshift/hypershift/pull/10084",
+    "name": "codecov/patch",
+    "startedAt": "2026-10-28T19:08:31Z",
+    "state": "SUCCESS"
+  },
+  {
+    "bucket": "pass",
+    "completedAt": "2026-10-28T19:08:30Z",
+    "description": "",
+    "link": "https://app.codecov.io/gh/openshift/hypershift/pull/10084",
+    "name": "codecov/project",
+    "startedAt": "2026-10-28T19:08:29Z",
+    "state": "SUCCESS"
+  },
+  {
+    "bucket": "pass",
+    "completedAt": "2026-10-28T18:31:11Z",
+    "description": "",
+    "link": "https://github.com/openshift/hypershift/actions/runs/40745483263/job/123019315061",
+    "name": "envtest-kube / Conclusion",
+    "startedAt": "2026-10-28T18:31:08Z",
+    "state": "SUCCESS"
+  },
+  {
+    "bucket": "skipping",
+    "completedAt": "2026-10-28T18:31:03Z",
+    "description": "",
+    "link": "https://github.com/openshift/hypershift/actions/runs/40745483263/job/123019316390",
+    "name": "envtest-kube / Envtest Vanilla Kube ${{ matrix.version }}",
+    "startedAt": "2026-10-28T18:31:04Z",
+    "state": "SKIPPED"
+  },
+  {
+    "bucket": "pass",
+    "completedAt": "2026-10-28T18:39:29Z",
+    "description": "",
+    "link": "https://github.com/openshift/hypershift/actions/runs/40745482918/job/123019052304",
+    "name": "test / Unit Tests (other)",
+    "startedAt": "2026-10-28T18:30:42Z",
+    "state": "SUCCESS"
+  },
+  {
+    "bucket": "pass",
+    "completedAt": "2026-10-28T18:40:44Z",
+    "description": "",
+    "link": "https://github.com/openshift/hypershift/actions/runs/40745482918/job/123019052251",
+    "name": "test / Unit Tests (cpo-hostedcontrolplane)",
+    "startedAt": "2026-10-28T18:30:42Z",
+    "state": "SUCCESS"
+  },
+  {
+    "bucket": "pass",
+    "completedAt": "2026-10-28T18:43:27Z",
+    "description": "",
+    "link": "https://github.com/openshift/hypershift/actions/runs/40745482918/job/123019052217",
+    "name": "test / Unit Tests (cpo-other)",
+    "startedAt": "2026-10-28T18:30:41Z",
+    "state": "SUCCESS"
+  },
+  {
+    "bucket": "pass",
+    "completedAt": "2026-10-28T18:47:25Z",
+    "description": "",
+    "link": "https://github.com/openshift/hypershift/actions/runs/40745482918/job/123019052033",
+    "name": "test / Unit Tests (cmd-support)",
+    "startedAt": "2026-10-28T18:30:40Z",
+    "state": "SUCCESS"
+  },
+  {
+    "bucket": "pass",
+    "completedAt": "2026-10-28T18:39:20Z",
+    "description": "",
+    "link": "https://github.com/openshift/hypershift/actions/runs/40745482918/job/123019051861",
+    "name": "test / Unit Tests (hypershift-operator)",
+    "startedAt": "2026-10-28T18:30:37Z",
+    "state": "SUCCESS"
+  },
+  {
+    "bucket": "pass",
+    "completedAt": "2026-10-28T18:29:27Z",
+    "description": "",
+    "link": "https://github.com/openshift/hypershift/actions/runs/40745483271/job/123018327161",
+    "name": "envtest-ocp / Conclusion",
+    "startedAt": "2026-10-28T18:29:23Z",
+    "state": "SUCCESS"
+  },
+  {
+    "bucket": "pass",
+    "completedAt": "2026-10-28T18:37:02Z",
+    "description": "",
+    "link": "https://github.com/openshift/hypershift/actions/runs/40745483451/job/123018321180",
+    "name": "e2e-compile / E2E Compile",
+    "startedAt": "2026-10-28T18:29:19Z",
+    "state": "SUCCESS"
+  },
+  {
+    "bucket": "skipping",
+    "completedAt": "2026-10-28T18:29:18Z",
+    "description": "",
+    "link": "https://github.com/openshift/hypershift/actions/runs/40745483271/job/123018328352",
+    "name": "envtest-ocp / Envtest OCP (K8s ${{ matrix.version }})",
+    "startedAt": "2026-10-28T18:29:18Z",
+    "state": "SKIPPED"
+  },
+  {
+    "bucket": "pass",
+    "completedAt": "2026-10-28T18:31:03Z",
+    "description": "",
+    "link": "https://github.com/openshift/hypershift/actions/runs/40745483263/job/123018005772",
+    "name": "envtest-kube / Detect Changes",
+    "startedAt": "2026-10-28T18:29:09Z",
+    "state": "SUCCESS"
+  },
+  {
+    "bucket": "pass",
+    "completedAt": "2026-10-28T18:30:06Z",
+    "description": "",
+    "link": "https://github.com/openshift/hypershift/actions/runs/40745482969/job/123018004689",
+    "name": "gitlint / Gitlint",
+    "startedAt": "2026-10-28T18:29:07Z",
+    "state": "SUCCESS"
+  },
+  {
+    "bucket": "pass",
+    "completedAt": "2026-10-28T18:31:44Z",
+    "description": "",
+    "link": "https://coderabbit.ai?utm_source=cr_app&utm_medium=github",
+    "name": "CodeRabbit",
+    "startedAt": "2026-10-28T18:29:01Z",
+    "state": "SUCCESS"
+  },
+  {
+    "bucket": "skipping",
+    "completedAt": "2026-10-28T18:37:14Z",
+    "description": "",
+    "link": "https://red.ht/trusted",
+    "name": "Red Hat Konflux / enterprise-contract-mce-51 / hypershift-release-mce-51",
+    "startedAt": "2026-10-28T18:28:52Z",
+    "state": "NEUTRAL"
+  },
+  {
+    "bucket": "skipping",
+    "completedAt": "2026-10-28T18:50:32Z",
+    "description": "",
+    "link": "https://red.ht/trusted",
+    "name": "Red Hat Konflux / enterprise-contract-mce-51 / hypershift-cli-mce-51",
+    "startedAt": "2026-10-28T18:28:51Z",
+    "state": "NEUTRAL"
+  },
+  {
+    "bucket": "pass",
+    "completedAt": "2026-10-28T18:52:12Z",
+    "description": "",
+    "link": "https://github.com/openshift/hypershift/actions/runs/40745483051/job/123018004735",
+    "name": "verify / Verify",
+    "startedAt": "2026-10-28T18:28:51Z",
+    "state": "SUCCESS"
+  },
+  {
+    "bucket": "pass",
+    "completedAt": "2026-10-28T18:30:35Z",
+    "description": "",
+    "link": "https://github.com/openshift/hypershift/actions/runs/40745482918/job/123018004054",
+    "name": "test / Detect Changes",
+    "startedAt": "2026-10-28T18:28:51Z",
+    "state": "SUCCESS"
+  },
+  {
+    "bucket": "pass",
+    "completedAt": "2026-10-28T18:29:18Z",
+    "description": "",
+    "link": "https://github.com/openshift/hypershift/actions/runs/40745483271/job/123018004678",
+    "name": "envtest-ocp / Detect Changes",
+    "startedAt": "2026-10-28T18:28:51Z",
+    "state": "SUCCESS"
+  },
+  {
+    "bucket": "pass",
+    "completedAt": "2026-10-28T18:29:17Z",
+    "description": "",
+    "link": "https://github.com/openshift/hypershift/actions/runs/40745483451/job/123018005842",
+    "name": "e2e-compile / Detect Changes",
+    "startedAt": "2026-10-28T18:28:51Z",
+    "state": "SUCCESS"
+  },
+  {
+    "bucket": "pass",
+    "completedAt": "2026-10-28T18:29:21Z",
+    "description": "",
+    "link": "https://github.com/openshift/hypershift/actions/runs/40745482873/job/123018002658",
+    "name": "cpo-container-sync / CPO Container Sync",
+    "startedAt": "2026-10-28T18:28:50Z",
+    "state": "SUCCESS"
+  },
+  {
+    "bucket": "skipping",
+    "completedAt": "2026-10-28T18:36:37Z",
+    "description": "",
+    "link": "https://red.ht/trusted",
+    "name": "Red Hat Konflux / hypershift-operator-main-enterprise-contract / hypershift-operator-main",
+    "startedAt": "2026-10-28T18:28:49Z",
+    "state": "NEUTRAL"
+  },
+  {
+    "bucket": "skipping",
+    "completedAt": "2026-10-28T18:36:39Z",
+    "description": "",
+    "link": "https://red.ht/trusted",
+    "name": "Red Hat Konflux / hypershift-operator-enterprise-contract / hypershift-operator-main",
+    "startedAt": "2026-10-28T18:28:49Z",
+    "state": "NEUTRAL"
+  },
+  {
+    "bucket": "pass",
+    "completedAt": "2026-10-28T18:34:02Z",
+    "description": "",
+    "link": "https://github.com/openshift/hypershift/actions/runs/40745482884/job/123018003206",
+    "name": "Deadcode / Deadcode",
+    "startedAt": "2026-10-28T18:28:49Z",
+    "state": "SUCCESS"
+  },
+  {
+    "bucket": "pass",
+    "completedAt": "2026-10-28T18:40:44Z",
+    "description": "",
+    "link": "https://github.com/openshift/hypershift/actions/runs/40745482871/job/123018003317",
+    "name": "lint / Lint",
+    "startedAt": "2026-10-28T18:28:49Z",
+    "state": "SUCCESS"
+  },
+  {
+    "bucket": "pass",
+    "completedAt": "2026-10-28T18:36:39Z",
+    "description": "",
+    "link": "https://konflux-ui.apps.stone-prd-rh01.pg1f.p1.openshiftapps.com/ns/crt-redhat-acm-tenant/pipelinerun/hypershift-release-mce-51-on-pull-request-nqkmn",
+    "name": "Red Hat Konflux / hypershift-release-mce-51-on-pull-request",
+    "startedAt": "2026-10-28T18:28:48Z",
+    "state": "SUCCESS"
+  },
+  {
+    "bucket": "pass",
+    "completedAt": "2026-10-28T18:36:06Z",
+    "description": "",
+    "link": "https://konflux-ui.apps.stone-prd-rh01.pg1f.p1.openshiftapps.com/ns/crt-redhat-acm-tenant/pipelinerun/hypershift-operator-main-on-pr-from-main-x4fdd",
+    "name": "Red Hat Konflux / hypershift-operator-main-on-pr-from-main",
+    "startedAt": "2026-10-28T18:28:48Z",
+    "state": "SUCCESS"
+  },
+  {
+    "bucket": "pass",
+    "completedAt": "2026-10-28T18:49:58Z",
+    "description": "",
+    "link": "https://konflux-ui.apps.stone-prd-rh01.pg1f.p1.openshiftapps.com/ns/crt-redhat-acm-tenant/pipelinerun/hypershift-cli-mce-51-on-pull-request-h9b9d",
+    "name": "Red Hat Konflux / hypershift-cli-mce-51-on-pull-request",
+    "startedAt": "2026-10-28T18:28:48Z",
+    "state": "SUCCESS"
+  },
+  {
+    "bucket": "pass",
+    "completedAt": "2026-10-28T18:29:10Z",
+    "description": "",
+    "link": "https://github.com/openshift/hypershift/actions/runs/40745482958/job/123018003919",
+    "name": "codespell / Codespell",
+    "startedAt": "2026-10-28T18:28:44Z",
+    "state": "SUCCESS"
+  },
+  {
+    "bucket": "pending",
+    "completedAt": "0001-01-01T00:00:00Z",
+    "description": "Not mergeable. Must be by author dependabot[bot] OR Must be by author hypershift-jira-solve-ci[bot] OR Needs lgtm, verified labels.",
+    "link": "https://prow.ci.openshift.org/pr?query=is%3Apr+repo%3Aopenshift%2Fhypershift+author%3Abryan-cox+head%3ACNTRLPLANE-4826",
+    "name": "tide",
+    "startedAt": "0001-01-01T00:00:00Z",
+    "state": "PENDING"
+  },
+  {
+    "bucket": "pass",
+    "completedAt": "0001-01-01T00:00:00Z",
+    "description": "Job succeeded.                     BaseSHA:ee327075b155839511edc3779510ceb95c93a658",
+    "link": "https://prow.ci.openshift.org/view/gs/test-platform-results-public/pr-logs/pull/openshift_hypershift/10084/pull-ci-openshift-hypershift-main-okd-scos-images/2115511123296915456",
+    "name": "ci/prow/okd-scos-images",
+    "startedAt": "0001-01-01T00:00:00Z",
+    "state": "SUCCESS"
+  },
+  {
+    "bucket": "pending",
+    "completedAt": "0001-01-01T00:00:00Z",
+    "description": "Waiting for pipeline condition to trigger this job",
+    "link": "",
+    "name": "ci/prow/e2e-aws",
+    "startedAt": "0001-01-01T00:00:00Z",
+    "state": "PENDING"
+  },
+  {
+    "bucket": "pending",
+    "completedAt": "0001-01-01T00:00:00Z",
+    "description": "Waiting for pipeline condition to trigger this job",
+    "link": "",
+    "name": "ci/prow/e2e-aks",
+    "startedAt": "0001-01-01T00:00:00Z",
+    "state": "PENDING"
+  },
+  {
+    "bucket": "pending",
+    "completedAt": "0001-01-01T00:00:00Z",
+    "description": "Waiting for pipeline condition to trigger this job",
+    "link": "",
+    "name": "ci/prow/e2e-aws-5-0",
+    "startedAt": "0001-01-01T00:00:00Z",
+    "state": "PENDING"
+  },
+  {
+    "bucket": "pending",
+    "completedAt": "0001-01-01T00:00:00Z",
+    "description": "Waiting for pipeline condition to trigger this job",
+    "link": "",
+    "name": "ci/prow/e2e-v2-gke",
+    "startedAt": "0001-01-01T00:00:00Z",
+    "state": "PENDING"
+  },
+  {
+    "bucket": "pending",
+    "completedAt": "0001-01-01T00:00:00Z",
+    "description": "Waiting for pipeline condition to trigger this job",
+    "link": "",
+    "name": "ci/prow/e2e-v2-azure-self-managed",
+    "startedAt": "0001-01-01T00:00:00Z",
+    "state": "PENDING"
+  },
+  {
+    "bucket": "pending",
+    "completedAt": "0001-01-01T00:00:00Z",
+    "description": "Waiting for pipeline condition to trigger this job",
+    "link": "",
+    "name": "ci/prow/e2e-v2-aws",
+    "startedAt": "0001-01-01T00:00:00Z",
+    "state": "PENDING"
+  },
+  {
+    "bucket": "pass",
+    "completedAt": "0001-01-01T00:00:00Z",
+    "description": "Job succeeded.                     BaseSHA:ee327075b155839511edc3779510ceb95c93a658",
+    "link": "https://prow.ci.openshift.org/view/gs/test-platform-results-public/pr-logs/pull/openshift_hypershift/10084/pull-ci-openshift-hypershift-main-images/2115511123271749632",
+    "name": "ci/prow/images",
+    "startedAt": "0001-01-01T00:00:00Z",
+    "state": "SUCCESS"
+  },
+  {
+    "bucket": "pending",
+    "completedAt": "0001-01-01T00:00:00Z",
+    "description": "Waiting for pipeline condition to trigger this job",
+    "link": "",
+    "name": "ci/prow/e2e-aks-5-0",
+    "startedAt": "0001-01-01T00:00:00Z",
+    "state": "PENDING"
+  },
+  {
+    "bucket": "pass",
+    "completedAt": "0001-01-01T00:00:00Z",
+    "description": "Job succeeded.                     BaseSHA:ee327075b155839511edc3779510ceb95c93a658",
+    "link": "https://prow.ci.openshift.org/view/gs/test-platform-results-public/pr-logs/pull/openshift_hypershift/10084/pull-ci-openshift-hypershift-main-rosa-e2e-images/2115511123347247104",
+    "name": "ci/prow/rosa-e2e-images",
+    "startedAt": "0001-01-01T00:00:00Z",
+    "state": "SUCCESS"
+  },
+  {
+    "bucket": "pass",
+    "completedAt": "0001-01-01T00:00:00Z",
+    "description": "Job succeeded.                     BaseSHA:ee327075b155839511edc3779510ceb95c93a658",
+    "link": "https://prow.ci.openshift.org/view/gs/test-platform-results-public/pr-logs/pull/openshift_hypershift/10084/pull-ci-openshift-hypershift-main-security/2115511123393384448",
+    "name": "ci/prow/security",
+    "startedAt": "0001-01-01T00:00:00Z",
+    "state": "SUCCESS"
+  },
+  {
+    "bucket": "pass",
+    "completedAt": "0001-01-01T00:00:00Z",
+    "description": "Job succeeded.                     BaseSHA:ee327075b155839511edc3779510ceb95c93a658",
+    "link": "https://prow.ci.openshift.org/view/gs/test-platform-results-public/pr-logs/pull/openshift_hypershift/10084/pull-ci-openshift-hypershift-main-unit/2115511123393384449",
+    "name": "ci/prow/unit",
+    "startedAt": "0001-01-01T00:00:00Z",
+    "state": "SUCCESS"
+  },
+  {
+    "bucket": "pass",
+    "completedAt": "0001-01-01T00:00:00Z",
+    "description": "Job succeeded.                     BaseSHA:ee327075b155839511edc3779510ceb95c93a658",
+    "link": "https://prow.ci.openshift.org/view/gs/test-platform-results-public/pr-logs/pull/openshift_hypershift/10084/pull-ci-openshift-hypershift-main-verify/2115511123426938880",
+    "name": "ci/prow/verify",
+    "startedAt": "0001-01-01T00:00:00Z",
+    "state": "SUCCESS"
+  },
+  {
+    "bucket": "pass",
+    "completedAt": "0001-01-01T00:00:00Z",
+    "description": "Job succeeded.                     BaseSHA:ee327075b155839511edc3779510ceb95c93a658",
+    "link": "https://prow.ci.openshift.org/view/gs/test-platform-results-public/pr-logs/pull/openshift_hypershift/10084/pull-ci-openshift-hypershift-main-verify-deps/2115511123506630656",
+    "name": "ci/prow/verify-deps",
+    "startedAt": "0001-01-01T00:00:00Z",
+    "state": "SUCCESS"
+  },
+  {
+    "bucket": "pending",
+    "completedAt": "0001-01-01T00:00:00Z",
+    "description": "Waiting for pipeline condition to trigger this job",
+    "link": "",
+    "name": "ci/prow/e2e-kubevirt-aws-ovn-reduced",
+    "startedAt": "0001-01-01T00:00:00Z",
+    "state": "PENDING"
+  },
+  {
+    "bucket": "pending",
+    "completedAt": "0001-01-01T00:00:00Z",
+    "description": "Waiting for pipeline condition to trigger this job",
+    "link": "",
+    "name": "ci/prow/e2e-aws-upgrade-hypershift-operator",
+    "startedAt": "0001-01-01T00:00:00Z",
+    "state": "PENDING"
+  }
+]

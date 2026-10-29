@@ -1,0 +1,2 @@
+NAME                       CLUSTER                    DESIRED NODES   CURRENT NODES   AUTOSCALING   AUTOREPAIR   VERSION                                   UPDATINGVERSION   UPDATINGCONFIG   MESSAGE   LABELS
+test-cntrlplane-4826-hc   test-cntrlplane-4826-hc   3               3               False         False        5.1.0-0.nightly-multi-2026-10-27-082258   False             False                      hypershift.openshift.io/auto-created-for-infra=test-cntrlplane-4826

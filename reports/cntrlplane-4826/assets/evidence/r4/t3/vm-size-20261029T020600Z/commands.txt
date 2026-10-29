@@ -1,0 +1,1 @@
+kubectl patch nodepool test-cntrlplane-4826-r4-head -n clusters --type=merge -p \{\"spec\":\{\"platform\":\{\"azure\":\{\"vmSize\":\"Standard_D4s_v4\"\}\}\}\}

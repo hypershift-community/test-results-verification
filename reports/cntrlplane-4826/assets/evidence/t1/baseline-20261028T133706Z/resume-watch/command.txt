@@ -1,0 +1,1 @@
+DEADLINE_EPOCH=1793196435 NP=test-cntrlplane-4826-unpatched OUT=/workspace/hypershift/.test-evidence/CNTRLPLANE-4826-20261028-r2/t1/baseline-20261028T133706Z/resume-watch GUEST_KUBECONFIG=/tmp/guest.kubeconfig watch-rollout.sh

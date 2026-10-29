@@ -1,0 +1,7 @@
+repair_reason=stale egress LB probe from prior HostedCluster deletion has protocol=Http and path=null; Azure rejects PUT as probe-not-found. Repair protocol to Tcp in place. No resource deletion.
+subscription=redacted-subscription-id
+resource_group=test-cntrlplane-4826-hc-test-cntrlplane-4826
+load_balancer=test-cntrlplane-4826
+probe=aa865908822fb44cba23557e2b8bc89e-TCP-31627
+started_utc=2026-10-29T01:24:23Z
+attempt2_completed_utc=2026-10-29T01:24:44Z

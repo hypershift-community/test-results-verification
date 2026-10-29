@@ -1,0 +1,6 @@
+{
+  "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Storage/storageAccounts/examplesa",
+  "location": "centralus",
+  "name": "examplesa",
+  "state": "Succeeded"
+}

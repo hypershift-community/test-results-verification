@@ -1,0 +1,6 @@
+{
+  "etag": "4f63a88b-ee9b-475e-a88e-0d78b694d0df",
+  "id": "/subscriptions/redacted-subscription-id/resourceGroups/shared-resource-group/providers/Microsoft.Network/dnszones/hcp.example.com",
+  "name": "hcp.example.com",
+  "numberOfRecordSets": 160
+}

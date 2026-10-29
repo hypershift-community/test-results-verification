@@ -1,0 +1,103 @@
+Draft test plan: HyperShift PR #10084
+Summary
+PR: CNTRLPLANE-4826: Stop gating NodePool rollout completion on upToDateReplicas
+Revision reviewed: ff673589287e8f7685435f117cfec1f14c067def. This plan is PR-based; it does not claim an independent review of Jira acceptance criteria. Status: proposed tests, not executed. No cluster, repository, or Jira changes have been made.
+Objective: demonstrate that a Replace NodePool completes a real rollout with CAPI >=1.14 even when MachineDeployment.status.upToDateReplicas remains zero, without accepting incomplete/stale MachineSet state or advancing NodePool completion metadata too early.
+The linked Azure run is useful regression evidence: its Replace release upgrade passed, but CAPI >=1.14 and the zero-counter state were not established. Its existing upgrade assertion waits for UpdatingVersion true then false and ready nodes, rather than explicitly verifying the target status.version and completion-metadata timing.
+Prerequisites and scope
+	•	An already-prepared, isolated Azure self-managed development environment with a healthy HostedCluster and a dedicated Replace NodePool. Never use a shared production pool for these tests. Build/deployment and cleanup procedures are intentionally excluded.
+	•	Two otherwise-equivalent test configurations: unpatched HyperShift at the PR's tested base and patched HyperShift at the reviewed commit. Record any differences. Use a verified CAPI >=1.14 manager in both. The PR identifies hypershift.openshift.io/capi-manager-image as its manager override; configuring that override is outside this test guide.
+	•	Establish CAPI version through build/source provenance for the running image digest, not its tag alone. Record HyperShift operator digest/commit, CAPI manager image/imageID, release payload digests, and provider versions. If CAPI version cannot be verified, the decisive reproduction is BLOCKED, not passed.
+	•	Two distinct, compatible release payloads with their OCP versions recorded. Do not compare kubelet version literally to OCP release version: that mismatch is the PR's reported trigger. A matching kubelet/runtime check must use the expected Kubernetes/runtime data for the chosen payload.
+	•	Proposed standard test size: three replicas with capacity for a surge replica. This is a test design choice to expose overlap, not a product minimum. Keep autoscaling disabled on this dedicated pool during fixed-replica cases.
+	•	Record the pool, its actual MachineDeployment, the control-plane namespace, and owned MachineSets/Machines by label AND ownership. Do not assume resource names equal the NodePool name. Exclude other pools' objects.
+	•	Agree on a rollout deadline before running; reuse the applicable platform-specific e2e timeout for the selected test revision. Use the same deadline for the baseline and patched comparison. Do not extend it after observing a failure.
+Common evidence and assertions
+Start observation BEFORE each requested rollout, and retain it until completion or timeout. Capture timestamped NodePool, MachineDeployment, owned MachineSets/Machines, hosted Node inventory, relevant events, and operator/CAPI logs. Keep generations, resource versions, owner references, and revision annotations. Use watches or controller-test instrumentation; an endpoint-only snapshot cannot demonstrate that completion was never premature. Missing watch history makes the temporal assertion INCONCLUSIVE.
+Illustrative read-only snapshots; MGMT and HOSTED are kubeconfig contexts, NP_NS/NP identify the pool, CP_NS is the discovered control-plane namespace, and MD is its discovered deployment:
+oc --context="$MGMT" -n "$NP_NS" get nodepool "$NP" -o json
+oc --context="$MGMT" -n "$CP_NS" get machinedeployments.cluster.x-k8s.io "$MD" -o json
+oc --context="$MGMT" -n "$CP_NS" get machinesets.cluster.x-k8s.io -o json
+oc --context="$MGMT" -n "$CP_NS" get machines.cluster.x-k8s.io -o json
+oc --context="$HOSTED" get nodes -o json
+At the completion decision for a nonzero desired count D, assert the exact predicate contract:
+	•	MachineDeployment status.replicas and status.availableReplicas are present and equal D; status.observedGeneration >= metadata.generation.
+	•	A current-revision MachineSet exists, matching the MachineDeployment's revision annotation. Its status.replicas and status.availableReplicas equal D.
+	•	Every non-current-revision MachineSet has zero reported replicas. The implementation treats absent MachineSet counters as zero; that is not by itself proof of physical Machine/Node deletion.
+	•	Do NOT require upToDateReplicas to equal D. In the decisive test, positively record that it is zero while the other completion gates succeed.
+	•	As an additional live postcondition, verify target-template Machine membership and ready hosted nodes. Track old Machine/Node identities separately; remaining objects undergoing deletion are not equivalent to running old workers. Unexpected active old workers require investigation even if counters say zero.
+Capture these NodePool fields before, during, and after the rollout:
+	•	status.version and relevant UpdatingVersion, UpdatingConfig, and UpdatingPlatformMachineTemplate conditions.
+	•	hypershift.openshift.io/nodePoolCurrentConfig
+	•	hypershift.openshift.io/nodePoolCurrentConfigVersion
+	•	hypershift.openshift.io/nodePoolPlatformMachineTemplate
+Compare metadata to the actual target config/bootstrap data and infrastructure template, not merely to whether a string changed. Do not expect every field to change in every scenario. Do not use spec.release.image alone as evidence of completed version rollout.
+T1 — Decisive CAPI >=1.14 release-upgrade A/B test (P0)
+	1	On the unpatched configuration, record a healthy starting pool at release A, current metadata, Machine/Node identities, and actual CAPI provenance.
+	2	Request the supported Replace rolling upgrade to distinct release B. Begin the common observation before the request and identify the new deployment/MachineSet revision.
+	3	Require the actual failure precondition: available target workers and completed MachineSet replacement, but upToDateReplicas=0. Record Machine UpToDate conditions/messages and Machine.spec.version versus hosted Node kubeletVersion to tie this to the reported trigger rather than an unrelated timeout.
+	4	Expected baseline: target version/completion metadata fails to advance by the agreed deadline despite the completed worker replacement. If the baseline completes, or zero-counter/healthy-worker evidence is absent, the bug has NOT been reproduced; report INCONCLUSIVE and investigate rather than claim a fixed regression.
+	5	Repeat the same A-to-B operation on the patched configuration with equivalent starting state and the same CAPI image, release pair, and deadline.
+	6	Expected patched outcome: completion succeeds while upToDateReplicas remains zero, status.version equals B's OCP version, UpdatingVersion clears, config-version metadata matches the target, and the common MachineSet/node assertions pass.
+	7	Require actual replacement identities and target template/bootstrap association; do not pass on already-ready workers or a no-op image update. Retain evidence that completion was not advertised before the completion gates were met.
+T2 — Config-only Replace rollout (P0)
+	1	On the patched >=1.14 configuration, keep the release image/version and infrastructure settings fixed. Record config annotations and a healthy pool.
+	2	Apply a supported, benign MachineConfig change using the repository's existing NodePoolMachineconfigRolloutTest pattern. That test uses /etc/custom-config; use a unique marker/content for this run and an appropriate verification workload restricted to this pool.
+	3	Observe the new bootstrap/config and MachineSet revision through replacement. Require the zero upToDateReplicas precondition as in T1.
+	4	Expected: target config and config-version annotations advance only when completion gates succeed; the target marker content is verified on EVERY intended replacement worker; UpdatingConfig clears; status.version remains unchanged. Existence of a DaemonSet alone is insufficient—its per-node results must cover the entire pool.
+T3 — Infrastructure-template-only Replace rollout (P0)
+	1	Keep release and user config fixed. Change the dedicated Azure pool to a valid alternate VM size using the existing VM-size rollout scenario's supported field path.
+	2	Record old and target infrastructure-template references and Machine identities, and observe the rollout under >=1.14 with upToDateReplicas=0.
+	3	Expected: new workers use the target Azure infrastructure template/VM size, the platform-template annotation names that target, and UpdatingPlatformMachineTemplate clears only after the completion gates succeed. No version change is expected. Verify actual infrastructure/template association, not just the requested NodePool spec.
+T4 — Deterministic completion-predicate safety matrix (P0)
+Run/review TestMachineDeploymentComplete with fixtures tied to the PR's exact contract. Add missing combinations if implementing this plan; no such additions are claimed here. Keep all unrelated fields in the healthy state and vary one gate at a time:
+	•	Healthy current set + deployment counters, upToDateReplicas=0: true. Repeat with nil: true.
+	•	Any old-revision set reporting >0 replicas: false, even if deployment counters and current-set availability look complete; repeat with multiple old sets.
+	•	Current set absent for D>0: false, including when only drained old sets remain.
+	•	Current set replicas below OR above D: false; availableReplicas below OR above D: false. Missing current-set replicas/availability with D>0: false.
+	•	Deployment replicas/availableReplicas absent or unequal D: false.
+	•	observedGeneration < generation: false; equality and greater-than values are accepted if all other gates pass.
+	•	D=0 with present zero deployment counters, observed generation caught up, no active old sets, and no current set: true. An old set with replicas or stale observed generation must still block.
+	•	Verify revision comparison uses deployment revision, not deployment generation. Permute MachineSet list order for equivalent valid fixtures.
+Suggested focused command in an already-prepared checkout:
+go test -race ./hypershift-operator/controllers/nodepool/... -run 'TestMachineDeploymentComplete|TestReconcileMachineDeploymentStatus' -count=1
+The repository's normal make test path includes generation and additional tests; this focused command is not a replacement for required repository validation. The PR notes generated mocks are needed in a fresh checkout. Missing prerequisites are BLOCKED, not a test failure proving the patch wrong.
+T5 — Reconciliation metadata and error handling (P0)
+	1	Extend or inspect TestReconcileMachineDeploymentStatus fixtures so zero and nil upToDateReplicas exercise the real reconciliation path, not only the standalone predicate.
+	2	For each incomplete state from T4, reconcile with different target version/config/template values and assert that status.version and completion annotations DO NOT advance to those targets.
+	3	Change only the blocking state to complete, reconcile again, and assert that each applicable field advances to its correct target. Reconcile once more to check stable, idempotent completion.
+	4	Simulate a MachineSet-list error and assert no target completion metadata is written; then recover the list and assert normal progression. Ensure the fixture contains correctly labeled/owned sets so an empty list is not an accidental test setup error.
+	5	Use a controlled fixture sequence with old active set -> missing current set -> current set incomplete -> current set healthy/old sets drained. Assert no premature publication at any intermediate step. Live observation in T1 complements this; it does not replace deterministic race coverage.
+T6 — Scale-to-zero and scale-back regression (P1)
+	1	On a separate dedicated pool with no concurrent release/config change, record a healthy D>0 state; request zero replicas.
+	2	Verify observed generation catches up and reported deployment/old-set replicas drain to zero. The controller must not remain blocked solely because no current MachineSet exists. Keep the nil-vs-zero deployment-counter distinction from T4.
+	3	Request a positive count again. Verify that positive-count completion requires the current revision's desired and available replicas, and ready workers return without an unintended release/config change.
+	4	Verify steady-state annotations/version remain correct. Use deterministic tests for D=0/no-current-set if live CAPI retains a zero-replica current set; record which state the live test actually exercised.
+T7 — Existing stable pool must not roll merely because of this patch (P1)
+Use an environment already prepared to observe a before/after operator transition with no pool-spec change; this guide does not prescribe deployment steps.
+	1	Record NodePool spec/generation, deployment template and generation, MachineSet revisions, Machine/Node identities, and target release/config before the transition.
+	2	Observe the patched controller through an agreed steady-state interval and multiple reconciliations without submitting any NodePool change.
+	3	Expected: no patch-induced template/spec change, new rollout revision, or worker replacement. A previously stuck completion status may legitimately catch up without worker replacement; do not classify that status-only correction as an unwanted rollout. Correlate any replacement with remediation/events before attributing it to the PR.
+T8 — Compatibility and regression matrix (P1 / broader sign-off)
+	•	Required for this Azure gap closure: repeat relevant existing Replace release, MachineConfig, VM-size and scale scenarios with stronger assertions above on verified >=1.14. Require the named cases to execute, not skip.
+	•	Compatibility: repeat T1-T3 on a verified supported pre-1.14 manager (the PR discusses <=1.13), where the environment supports that pairing. Validate normal completion without relying on the zero-counter trigger. Mark unavailable combinations NOT TESTED; do not invent image tags or supported pairings.
+	•	Retain InPlace release/config smoke coverage as a regression check, not evidence that MachineDeploymentComplete's new predicate is exercised.
+	•	Broader shared-controller confidence: execute the decisive Replace scenario on another supported CAPI-backed provider, with that provider's verified manager and infrastructure. Azure-only execution cannot establish all-provider validation; list provider coverage explicitly rather than implying complete coverage.
+	•	Triage the linked run's informing label/toleration failures separately. Require an explicit disposition and, where relevant, a clean rerun. Do not call them pre-existing or patch-caused without comparative evidence. Unrelated N-1/N-2 creation, auto-repair, and encryption skips are not substitutes for missing T1 evidence and need not be made release blockers for this narrow predicate change without a relevant requirement.
+Success criteria and result format
+Minimum targeted Azure fix sign-off: T1-T5 pass, including baseline reproduction, patched completion with verified >=1.14/zero-counter evidence, correct target metadata, and deterministic safety/error tests. If any decisive precondition or history is missing, report the precise limitation instead of PASS. T6-T8 provide the separate compatibility/regression scope; list any unexecuted rows and do not claim complete PR validation while required rows remain untested.
+Record each case as PASS, FAIL, BLOCKED, INCONCLUSIVE, or NOT TESTED, with: exact code/image versions; preconditions observed; action; expected and actual results; timestamps; relevant resource snapshots/logs; and test/JUnit links. Skips and informing failures must be visible in the final report regardless of the overall job badge.
+Troubleshooting
+	•	Counter never reaches zero: verify running CAPI provenance and inspect Machine conditions. Do not patch live status counters to manufacture the decisive reproduction; use fixtures for synthetic states.
+	•	Workers fail provisioning or availability: this is not the completed-rollout/zero-counter precondition. Investigate events and provider/CAPI errors before classifying the fix.
+	•	NodePool remains updating despite satisfied gates: check deployment observed generation, exact revision match, list errors, current-set availability, target config hashes, and current operator image.
+	•	Cannot prolong an unsafe transition naturally: use deterministic reconciliation fixtures; do not delete workers or corrupt status on a shared cluster to force the race.
+	•	Counter snapshots and NodePool events are cross-resource observations, not atomic transactions. Use controlled controller fixtures for exact decision ordering, and report live watch gaps honestly.
+Sources and notes
+	•	PR #10084 description and diff at the reviewed revision.
+	•	hypershift-operator/controllers/nodepool/nodepool_controller.go: MachineDeploymentComplete.
+	•	hypershift-operator/controllers/nodepool/capi.go: reconcileMachineDeploymentStatus and completion annotations.
+	•	hypershift-operator/controllers/nodepool/capi_test.go: TestMachineDeploymentComplete and TestReconcileMachineDeploymentStatus.
+	•	test/e2e/v2/tests/nodepool_lifecycle_test.go: existing Replace version, MachineConfig and VM-size scenarios; version-upgrade assertion at lines 326-409.
+	•	Reviewed Azure Prow run, including junit_public-nodepool-rollouts.xml and junit_public.xml.
+This is a draft guide for review. Executing it, implementing test changes, posting it to Jira, or launching new CI is separate work requiring an explicit request.
