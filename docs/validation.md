@@ -54,6 +54,11 @@ violations), and **2** (usage, I/O, scanner version/failure, or other tool error
 With `go run`, Go itself reports a failed subprocess as a nonzero status;
 invoke the built binary when consuming the exact exit code.
 
+`--body-hash FILE` is a separate mode for computing exception hashes. It
+accepts `--root`, but cannot be combined with `--secrets` or an explicit
+`--format`. Conflicting modes return usage error code 2 without printing a
+hash or a validation result.
+
 ## Diagnostics and Rules
 
 Diagnostics include relative file, line, severity, stable rule ID, and a
@@ -73,6 +78,19 @@ GitHub annotations escape control characters in paths and messages.
   and relationship entry shapes.
 - `PROFILE`, `STRUCTURE`: new-plan IEEE declaration and the seven content
   areas defined in [format.md](format.md#plan-body-structure).
+- `PLAN_CONTENT`: required content within the IEEE plan areas, including
+  non-placeholder identifier fields, acceptance mappings, references,
+  environment details, case objectives and preconditions, execution steps
+  and expected results, risk/mitigation pairs, and approval information.
+  Diagnostics identify the case or incomplete table row. Drafts can retain
+  pending reviewer approval; active plans need a named reviewer and date.
+  See the [content requirements](format.md#plan-body-structure) for supported
+  layouts. Duplicate case IDs and references to undefined mapped cases are
+  `IDENTITY` and `RELATIONSHIP` errors and cannot be excepted.
+- `PLAN_APPROVAL`: missing or incomplete author/reviewer approval for an
+  active plan. This rule cannot be excepted. Changing a historical draft to
+  active requires approval even if its body-pinned content exception remains
+  valid.
 - `NAME`, `IDENTITY`, `RELATIONSHIP`: lowercase artifact paths, unique
   production plan IDs, primary/backport traceability, matching PR
   URLs/numbers, and valid noncyclic replacement-plan references.
@@ -171,7 +189,7 @@ Permitted rules depend on the pinned artifact:
 
 | Exception `path` | Permitted rules |
 |------------------|-----------------|
-| Markdown plan or report | `FRONTMATTER`, plan/report `MISSING_*` core-field rules, `PROFILE`, `STRUCTURE`, `REPORT_BODY` |
+| Markdown plan or report | `FRONTMATTER`, plan/report `MISSING_*` core-field rules, `PROFILE`, `STRUCTURE`, `REPORT_BODY`; historical plan content gaps can also name `PLAN_CONTENT` |
 | `reports/<key>/metadata.yaml` | Bundle-metadata `MISSING_*` rules, such as `MISSING_SCENARIO_COUNT` |
 | `reports/<key>/index.html` | `BUNDLE`, for a migrated bundle with no `metadata.yaml`; the entry point is pinned because the absent file cannot be hashed |
 
@@ -193,6 +211,13 @@ Metadata-only changes retain the hash. A body change invalidates it and
 requires conformity to current policy or renewed, explicit exception review.
 Reviewers—not heuristics—decide whether a rewrite has become material.
 Every exception still receives sanitization and secret checks.
+
+The two `PLAN_CONTENT` legacy entries in `.artifactlint.yaml` preserve
+published plans at the cited `main` revision. They list the cases that lack
+explicit preconditions. These exceptions require review with this change;
+the validator reports `EXCEPTION_APPLIED` warnings while their bodies match.
+They do not supply or infer missing setup. Any body edit invalidates the
+exception and requires the plan to meet the content checks or renewed review.
 
 ## Security Review
 
@@ -220,10 +245,15 @@ test coverage, and any external styling or embedded active content.
 ### Compatibility Evaluation
 
 The cleanup was checked against `main` at `acfe392` on 2026-11-06.
-`make test lint build` passes with its existing plans and report bundles,
-including the pinned secret scanner. Related Jira issues may omit `role`;
-each nonempty Jira list still requires one explicit primary issue. No
-production plan or report needed an edit or a validation exception.
+The content checks identified missing explicit preconditions in TC-025,
+TC-026, TC-027, and TC-041 of `plans/ocpstrat-2653.md`, and TC-002, TC-003,
+TC-004, TC-012, and TC-013 of `plans/ocpstrat-3679.md`. Their bodies remain
+unchanged; exact-path, body-pinned legacy exceptions record these gaps for
+review. The example now explicitly reuses its first case's preconditions.
+Existing report formats and report content do not change.
+
+Related Jira issues may omit `role`; each nonempty Jira list still requires
+one explicit primary issue.
 
 The repository's sanitized `plans/_example.md` passes. Representative open
 contributions were evaluated as artifact-only snapshots without executing

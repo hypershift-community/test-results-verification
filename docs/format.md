@@ -282,9 +282,49 @@ cover multiple areas. Code-fenced headings do not satisfy a content area.
 Explain an inapplicable area rather than silently omitting it; substantial
 adaptations can use an explicitly reviewed `STRUCTURE` exception.
 
-These are machine-checkable **repository requirements**, not a claim that
-lint certifies IEEE compliance. Reviewers assess meaningful steps, expected
-results, acceptance coverage, and adequate evidence.
+The linter also checks the required content within those areas. Empty fields,
+placeholder-only values such as `TBD`, `TODO`, or `N/A`, and tables without
+data rows do not satisfy the requirements:
+
+- The identifier section includes labeled `ID`, `Version`, and calendar
+  `Date` values and references IEEE 829.
+- The introduction describes the purpose or objectives and contains an
+  acceptance-criteria mapping table. Each criterion has a description and
+  references at least one defined `TC-<number>` case. Case IDs are unique.
+- References include an implementation, test, code path, or document through
+  a link or inline code path.
+- The environment identifies the cluster type or test target, platform or
+  provider, version or build, and prerequisites or tooling. Property/value
+  tables, labeled paragraphs, and subsection headings are supported.
+- Every case has its own identified heading, objective, and preconditions.
+  Preconditions may explain why no setup is needed or reference another
+  case. Missing declarations are rejected even when setup might be inferred
+  from other sections.
+- A manual procedure has an action and expected result for every table row,
+  or labeled steps and a labeled expected result. An automated procedure
+  names its test, supplies execution instructions, and states its expected
+  outcome. A build command needs a test-selection instruction; compilation
+  alone is insufficient. A case can explicitly inherit execution instructions
+  from another defined case, but must state its own expected outcome.
+- Every risk-table row pairs a risk with its mitigation or contingency.
+- The approval table identifies an author and date and includes a reviewer
+  role. Drafts may leave reviewer approval pending. An `active` plan requires
+  a named reviewer and real approval date. A recorded review date must be a
+  real calendar date even in a draft.
+
+Fenced examples and HTML comments cannot supply missing objectives,
+preconditions, or case definitions. Code blocks inside explicit execution or
+expected-result fields may document commands and expected output.
+Equivalent case-field headings such as `Prerequisites` and `Procedure` are
+supported. These content checks emit `PLAN_CONTENT`; duplicate case IDs emit
+`IDENTITY`, and undefined acceptance-mapping references emit `RELATIONSHIP`.
+Missing or incomplete active-plan approvals emit `PLAN_APPROVAL`, which a
+legacy exception cannot waive, even after a metadata-only status change.
+Published historical content gaps require an explicit body-pinned legacy
+exception. A layout-adaptation exception cannot waive missing content.
+
+Reviewers assess whether the documented steps, expected results, acceptance
+coverage, and evidence are technically sufficient.
 
 <a id="lightweight-profile-default"></a>
 
@@ -376,8 +416,10 @@ Describe the feature under test and the purpose of this plan.
 | Property | Value |
 |----------|-------|
 | Cluster type | HostedCluster on AWS |
+| Platform | AWS |
 | OCP version | 4.x |
 | Management cluster | ... |
+| Prerequisites | <required setup and tooling> |
 
 ---
 
@@ -414,7 +456,7 @@ Describe the feature under test and the purpose of this plan.
 
 | Role | Name | Date |
 |------|------|------|
-| Author | | |
+| Author | <author handle> | YYYY-MM-DD |
 | Reviewer | | |
 ````
 

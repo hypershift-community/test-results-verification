@@ -128,6 +128,15 @@ Add entries as you discover plans in personal repos or other locations.
 
 ### Adding to the Inventory
 
+The following published plans predate the content checks. Their source bodies
+are preserved, and this PR proposes body-pinned `PLAN_CONTENT` exceptions for
+review rather than inventing preconditions:
+
+| Source | Target path | Known gaps | Status |
+|--------|-------------|------------|--------|
+| [Published OCPSTRAT-2653 plan](https://github.com/hypershift-community/test-results-verification/blob/acfe3927493cd83981f0e0b6132119aa554fce02/plans/ocpstrat-2653.md) | `plans/ocpstrat-2653.md` | TC-025, TC-026, TC-027, and TC-041 omit preconditions | Proposed legacy exception; source unchanged |
+| [Published OCPSTRAT-3679 plan](https://github.com/hypershift-community/test-results-verification/blob/acfe3927493cd83981f0e0b6132119aa554fce02/plans/ocpstrat-3679.md) | `plans/ocpstrat-3679.md` | TC-002, TC-003, TC-004, TC-012, and TC-013 omit preconditions | Proposed legacy exception; source unchanged |
+
 When you discover existing test plans that should be migrated, add a row to
 the table above via PR. Include:
 

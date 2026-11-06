@@ -32,6 +32,13 @@ seven content areas in [docs/format.md](docs/format.md#plan-body-structure).
 Equivalent headings and different numbering are valid. Reviewers still assess
 whether the strategy, steps, acceptance criteria, and evidence are sufficient.
 
+The validator checks content within the sections. Give every case an objective,
+preconditions, execution instructions, and expected results. Map acceptance
+criteria to defined case IDs, pair risks with mitigations, and identify the
+author and reviewer role. Drafts can leave reviewer approval pending; active
+plans need a named reviewer and approval date. See the
+[content checks](docs/format.md#plan-body-structure) for supported layouts.
+
 Preserve incomplete historical content through the
 [reviewed-exception process](docs/validation.md#legacy-and-adaptation-exceptions),
 not by filling gaps with invented facts. A `draft` status alone is not an exemption.

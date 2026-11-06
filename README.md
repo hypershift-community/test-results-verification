@@ -36,8 +36,10 @@ individual personal GitHub repositories.
 Each test plan is a single Markdown file with YAML front-matter metadata.
 **New and materially rewritten plans must declare `ieee_829: true`** and
 cover the content areas in the [format specification](docs/format.md#plan-body-structure).
-Equivalent headings and numbering are supported. Structural validation does
-not certify compliance with the IEEE standard or assess test quality.
+Equivalent headings and numbering are supported. Validation checks the
+required content, including per-case preconditions, execution instructions,
+expected results, acceptance mappings, environment details, risk mitigations,
+and approval records. Reviewers assess technical sufficiency and test quality.
 
 Legacy lightweight/incomplete plans can be preserved through
 [explicit reviewed exceptions](docs/validation.md#legacy-and-adaptation-exceptions).
