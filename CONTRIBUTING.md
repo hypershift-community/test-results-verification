@@ -27,16 +27,14 @@ metadata block with the required core fields (`id`, `title`, `date`,
 are recommended when applicable — see
 [docs/format.md](docs/format.md#metadata-block) for the full field reference.
 
-**Choose a profile for the plan body:**
+**New and materially rewritten plans must set `ieee_829: true`.** Cover the
+seven content areas in [docs/format.md](docs/format.md#plan-body-structure).
+Equivalent headings and different numbering are valid. Reviewers still assess
+whether the strategy, steps, acceptance criteria, and evidence are sufficient.
 
-- **IEEE 829** (`ieee_829: true`) — follow the IEEE 829-2008 body structure
-  with numbered sections. See
-  [docs/format.md](docs/format.md#plan-body-structure) for the recommended
-  sections and template.
-- **Lightweight** (default) — use free-form Markdown covering scope, test
-  cases, and acceptance criteria. There is no required section numbering, but
-  the plan should clearly describe what is tested, how, and what constitutes
-  a pass.
+Preserve incomplete historical content through the
+[reviewed-exception process](docs/validation.md#legacy-and-adaptation-exceptions),
+not by filling gaps with invented facts. A `draft` status alone is not an exemption.
 
 ### 3. Open a pull request
 
@@ -120,6 +118,11 @@ Include:
 - **Evidence** — links to CI runs, logs, screenshots
 - **Verdict** — overall pass/fail and any caveats
 
+The overall verdict is required in YAML metadata; repeating it in a body
+header or dedicated section is optional. If you include explicit pass/fail/skip
+totals, keep them consistent with the test-case results; see the
+[Markdown count-check contract](docs/format.md#explicit-markdown-result-counts).
+
 #### 3. Open a pull request
 
 Use title format: `<JIRA-KEY>: Add verification report for PR #<number>`.
@@ -156,6 +159,23 @@ for the full list of content prohibitions.
 - Use fenced code blocks with language identifiers.
 - Prefer tables for structured data (acceptance criteria mappings, test
   matrices).
+
+## Validation Before Submission
+
+With Go 1.26 installed, run:
+
+```sh
+make install-tools
+make test lint build
+```
+
+Tool installation is explicit; lint never downloads tool executables on its own.
+Use `make lint-go` for Go code and `make lint-artifacts` for artifact validation
+including the pinned secret scanner. A failed or conditional test verdict is
+valid report content and does not itself fail lint.
+
+See [docs/validation.md](docs/validation.md) for rule IDs, local-link checks,
+legacy exceptions, CI enforcement, and security review that automation cannot perform.
 
 ## Questions
 
