@@ -1,0 +1,4 @@
+# Repository-scoped ARC pool on the shared runner cluster.
+self-hosted-runner:
+  labels:
+    - arc-runner-set
