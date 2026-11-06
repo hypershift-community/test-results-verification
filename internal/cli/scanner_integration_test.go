@@ -13,6 +13,21 @@ import (
 	"github.com/hypershift-community/test-results-verification/internal/cli"
 )
 
+func TestPinnedScannerVersion(t *testing.T) {
+	t.Run("When the Makefile installs the scanner, it should pin the version the CLI requires", func(t *testing.T) {
+		g := NewWithT(t)
+		makefile, err := os.ReadFile("../../Makefile")
+		g.Expect(err).NotTo(HaveOccurred())
+		g.Expect(string(makefile)).To(ContainSubstring("GITLEAKS_VERSION := " + cli.GitleaksVersion + "\n"))
+	})
+	t.Run("When detector rules come from the Gitleaks module, it should match the required scanner release", func(t *testing.T) {
+		g := NewWithT(t)
+		goMod, err := os.ReadFile("../../go.mod")
+		g.Expect(err).NotTo(HaveOccurred())
+		g.Expect(string(goMod)).To(ContainSubstring("github.com/zricethezav/gitleaks/v8 v" + cli.GitleaksVersion + "\n"))
+	})
+}
+
 func TestPinnedScannerEvidencePaths(t *testing.T) {
 	tool, err := exec.LookPath("gitleaks")
 	if err != nil {
