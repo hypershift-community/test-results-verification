@@ -7,6 +7,7 @@ import (
 
 	"github.com/yuin/goldmark"
 	"github.com/yuin/goldmark/ast"
+	"github.com/yuin/goldmark/extension"
 	"github.com/yuin/goldmark/text"
 )
 
@@ -34,7 +35,7 @@ var planSections = []struct {
 }
 
 func parseMarkdown(data []byte) (ast.Node, []heading) {
-	doc := goldmark.DefaultParser().Parse(text.NewReader(data))
+	doc := goldmark.New(goldmark.WithExtensions(extension.Table)).Parser().Parse(text.NewReader(data))
 	var headings []heading
 	// ast.Walk only returns errors supplied by the callback, which always returns nil.
 	_ = ast.Walk(doc, func(n ast.Node, entering bool) (ast.WalkStatus, error) {
@@ -43,7 +44,7 @@ func parseMarkdown(data []byte) (ast.Node, []heading) {
 			last := h.Lines().At(h.Lines().Len() - 1)
 			headings = append(headings, heading{
 				name: nodeText(h, data), level: h.Level,
-				start: first.Start, stop: last.Stop,
+				start: bytes.LastIndexByte(data[:first.Start], '\n') + 1, stop: last.Stop,
 				line: bytes.Count(data[:first.Start], []byte("\n")) + 1,
 			})
 		}
@@ -68,30 +69,14 @@ func nodeText(node ast.Node, data []byte) string {
 	return out.String()
 }
 
-func (v *validator) planStructure(f *source, body []byte, offset int) {
+func (v *validator) planStructure(f *source, body []byte, offset int, status, title string) {
 	_, headings := parseMarkdown(body)
+	parts := selectPlanParts(body, headings, title)
 	for _, section := range planSections {
-		found := false
-		for i, h := range headings {
-			name := sectionNumber.ReplaceAllString(strings.ToLower(h.name), "")
-			if !section.aliases.MatchString(name) {
-				continue
-			}
-			stop := len(body)
-			for _, next := range headings[i+1:] {
-				if next.level <= h.level {
-					stop = next.start
-					break
-				}
-			}
-			// Heading markers and thematic separators do not count as section content.
-			if strings.Trim(string(body[h.stop:stop]), " \t\r\n#-_*=") != "" {
-				found = true
-				break
-			}
-		}
-		if !found {
+		part, found := parts[section.name]
+		if !found || strings.Trim(string(part.data), " \t\r\n#-_*=") == "" {
 			v.add(f.path, offset+1, "STRUCTURE", "include a nonempty "+section.name+" section or document a reviewed adaptation")
 		}
 	}
+	v.planContent(f, body, headings, parts, offset, status)
 }

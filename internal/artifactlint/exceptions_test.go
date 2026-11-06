@@ -23,7 +23,7 @@ func TestReviewedExceptions(t *testing.T) {
 		wantError bool
 	}{
 		{"When an explicitly registered legacy body is unchanged, it should accept documented gaps", metadata + body, config, false},
-		{"When only legacy metadata changes, it should retain the body exception", strings.Replace(metadata, "status: draft", "status: active", 1) + body, config, false},
+		{"When only legacy metadata changes, it should retain the body exception", strings.Replace(metadata, "title: Example plan", "title: Preserved plan", 1) + body, config, false},
 		{"When legacy body content changes, it should require renewed review", metadata + body + "New test strategy.\n", config, true},
 		{"When draft content has no exception, it should enforce the new-plan policy", metadata + body, "", true},
 		{"When an exception tries to disable security, it should reject the configuration", metadata + body, strings.Replace(config, "[PROFILE, STRUCTURE]", "[SECURITY]", 1), true},

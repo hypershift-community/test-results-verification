@@ -239,16 +239,16 @@ func (v *validator) plan(f *source) {
 			v.add(f.path, 1, missingRule(field), "include required core metadata or register the legacy gap")
 		}
 		v.add(f.path, 1, "PROFILE", "new plans must declare ieee_829: true")
-		v.planStructure(f, body, offset)
+		v.planStructure(f, body, offset, "", "")
 		return
 	}
 	id := m.text("id", true)
-	m.text("title", true)
+	title := m.text("title", true)
 	m.date()
-	m.enum("status", "draft", "active", "superseded", "archived")
+	status := m.enum("status", "draft", "active", "superseded", "archived")
 	if !m.boolean("ieee_829", false) {
 		m.issue(m.get("ieee_829"), "PROFILE", "new plans must declare ieee_829: true; register legacy exceptions explicitly")
 	}
-	v.planStructure(f, body, offset)
+	v.planStructure(f, body, offset, status, title)
 	v.planRelationships(m, id)
 }

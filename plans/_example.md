@@ -158,6 +158,9 @@ is detected.
 **Objective:** Verify that the feature does not break standard NodePool
 create, scale, and delete operations.
 
+**Preconditions:**
+- TC-001 preconditions apply.
+
 **Primary method (automated):**
 - Test: `TestNodePoolLifecycle` (existing test, unmodified)
 - Run: `make e2e TEST_NAME=TestNodePoolLifecycle`

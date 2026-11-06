@@ -6,11 +6,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/yuin/goldmark"
 	"github.com/yuin/goldmark/ast"
-	"github.com/yuin/goldmark/extension"
 	tableast "github.com/yuin/goldmark/extension/ast"
-	"github.com/yuin/goldmark/text"
 )
 
 var (
@@ -19,7 +16,7 @@ var (
 )
 
 func (v *validator) markdownReportCounts(f *source, body []byte, offset int) {
-	doc := goldmark.New(goldmark.WithExtensions(extension.Table)).Parser().Parse(text.NewReader(body))
+	doc, _ := parseMarkdown(body)
 	var counts map[string]int
 	tables := 0
 	for n := doc.FirstChild(); n != nil; n = n.NextSibling() {

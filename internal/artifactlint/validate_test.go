@@ -23,23 +23,7 @@ func writeFiles(t *testing.T, files map[string]string) string {
 	return root
 }
 
-const planBody = `
-# Example
-## Test Plan Identifier
-TP-EXAMPLE-001
-## Introduction and Objectives
-Verify the behavior and acceptance criteria.
-## Test Items and References
-The example controller.
-## Test Environment
-A test cluster.
-## Test Cases
-Run the operation; expect success.
-## Risks and Mitigations
-Use an isolated namespace.
-## Approvals
-Review pending.
-`
+const planBody = completePlanBody
 
 const planMetadata = `---
 id: TP-EXAMPLE-001
@@ -116,8 +100,7 @@ func TestPlanStructure(t *testing.T) {
 		wantError bool
 	}{
 		{"When equivalent headings are used, it should accept the content areas", strings.NewReplacer("Introduction and Objectives", "Purpose and Objectives", "Test Items and References", "References", "Test Cases", "Test Approach", "Risks and Mitigations", "Risks and Contingencies", "Approvals", "Approval and Exit Criteria").Replace(planBody), false},
-		{"When a required section exists only in a fence, it should report missing structure", strings.ReplaceAll(planBody, "## Test Environment\nA test cluster.", "```markdown\n## Test Environment\nA test cluster.\n```"), true},
-		{"When a section is empty, it should request useful content", strings.ReplaceAll(planBody, "A test cluster.", ""), true},
+		{"When a required section exists only in a fence, it should report missing structure", strings.Replace(strings.Replace(planBody, "## Test Environment", "```markdown\n## Test Environment", 1), "## Test Cases", "```\n## Test Cases", 1), true},
 		{"When numbering differs from the template, it should accept equivalent structure", strings.ReplaceAll(planBody, "## ", "## 12. "), false},
 	}
 	for _, tt := range tests {

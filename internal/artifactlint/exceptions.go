@@ -9,7 +9,7 @@ import (
 
 // Rules a reviewed exception may waive, by the kind of artifact it pins.
 var (
-	markdownExceptionRules       = ruleSet([]string{"FRONTMATTER", "PROFILE", "STRUCTURE", "REPORT_BODY"}, planCoreFields, reportCoreFields)
+	markdownExceptionRules       = ruleSet([]string{"FRONTMATTER", "PROFILE", "STRUCTURE", "PLAN_CONTENT", "REPORT_BODY"}, planCoreFields, reportCoreFields)
 	bundleMetadataExceptionRules = ruleSet(nil, bundleFields)
 	bundleEntryExceptionRules    = ruleSet([]string{"BUNDLE"})
 	adaptationRules              = ruleSet([]string{"STRUCTURE", "REPORT_BODY"})

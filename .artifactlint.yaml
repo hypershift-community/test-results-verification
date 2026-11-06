@@ -1,2 +1,18 @@
 version: 1
-exceptions: []
+exceptions:
+  - path: plans/ocpstrat-2653.md
+    kind: legacy
+    source: https://github.com/hypershift-community/test-results-verification/blob/acfe3927493cd83981f0e0b6132119aa554fce02/plans/ocpstrat-2653.md
+    reason: Preserve the published plan while its authors clarify missing test-case preconditions
+    body_sha256: "b31952ab89a5183c8e4b0fd4b4b6c02a58ad6d6e850ec350a9b014cdddcd344b"
+    gaps:
+      - TC-025, TC-026, TC-027, and TC-041 omit explicit preconditions.
+    rules: [PLAN_CONTENT]
+  - path: plans/ocpstrat-3679.md
+    kind: legacy
+    source: https://github.com/hypershift-community/test-results-verification/blob/acfe3927493cd83981f0e0b6132119aa554fce02/plans/ocpstrat-3679.md
+    reason: Preserve the published plan while its authors clarify missing test-case preconditions
+    body_sha256: "4c6eb52b813dc879b625751128c3a96eb8190c605f9ecaf0a6ef0a04c4eb9da3"
+    gaps:
+      - TC-002, TC-003, TC-004, TC-012, and TC-013 omit explicit preconditions.
+    rules: [PLAN_CONTENT]
