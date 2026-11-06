@@ -160,6 +160,9 @@ func Validate(root string) (Result, error) {
 	}
 	v.planReferences()
 	v.reports()
+	v.links()
+	v.sanitization()
+	v.exceptions()
 	v.result.Sort()
 	return v.result, nil
 }
