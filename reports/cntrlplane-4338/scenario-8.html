@@ -1,0 +1,336 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TC-CA-001 verification</title><style>
+:root{--foreground:#17212d;--muted-foreground:#526173;--border:#d6dde5;--card:#f4f6f8;--success:#087748;--warning:#986300;--destructive:#a32a35;--primary:#175a99;--font-sans:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--font-mono:ui-monospace,SFMono-Regular,Consolas,monospace}
+*{box-sizing:border-box}html,body{margin:0;background:none;color:var(--foreground);font-family:var(--font-sans);line-height:1.55}body{margin:0 5%}main{max-width:1080px;margin:0 auto;padding:0}h1{font-size:25px;line-height:1.25;margin:24px 0 10px}h2{font-size:20px;margin:30px 0 10px}h3{font-size:16px;margin:20px 0 8px}p{max-width:90ch}a{color:var(--primary)}nav{display:flex;gap:14px;flex-wrap:wrap;padding:12px 0;border-bottom:1px solid var(--border);font-size:13px}.muted,small{color:var(--muted-foreground)}.lead{font-size:17px}.status{font-size:12px;font-weight:650;text-transform:uppercase;letter-spacing:.04em}.pass{color:var(--success)}.blocked,.conditional{color:var(--warning)}.fail{color:var(--destructive)}table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:13px;margin:12px 0 22px}th,td{overflow-wrap:anywhere;text-align:left;vertical-align:top;padding:10px 8px;border-bottom:1px solid var(--border)}th{font-weight:650}.comparison{display:grid;grid-template-columns:1fr 1fr;gap:20px}.comparison section{min-width:0;padding:16px;background:var(--card);border-radius:6px}pre,code{font-family:var(--font-mono);font-size:12px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:var(--card);padding:12px;border-radius:5px}code{overflow-wrap:anywhere}.comparison pre{padding:0}.summary{display:flex;gap:30px;flex-wrap:wrap;margin:20px 0}.summary strong{display:block;font-size:25px}.evidence{font-size:13px}svg{max-width:100%;height:auto}footer{margin:30px 0 18px;padding-top:12px;border-top:1px solid var(--border);font-size:12px;color:var(--muted-foreground)}@media(max-width:680px){.comparison{grid-template-columns:1fr}table{font-size:12px}th,td{padding:8px 4px}h1{font-size:22px}}@media(prefers-color-scheme:dark){:root{--foreground:#e2e7ed;--muted-foreground:#a1adba;--border:#354253;--card:#202b37;--success:#63c69a;--warning:#e3ba6b;--destructive:#f28c97;--primary:#87bdf1}}@media print{nav{display:none}a{color:inherit}main{max-width:none}h2,h3{break-after:avoid}section,table{break-inside:avoid}:root{--foreground:#111;--muted-foreground:#444;--border:#bbb;--card:#f5f5f5}body{font-size:10pt}}
+</style></head><body><main><nav aria-label="Report navigation"><a href="index.html">Summary</a><a href="automated-tests.html">Automated tests</a><a href="appendices.html">Environment and provenance</a><a href="cntrlplane-4338-evidence.zip" download>Evidence ZIP</a></nav><h1>TC-CA-001. Live CA selection, rotation, removal and restoration</h1><p><span class="status pass">pass</span></p><p class="lead">Distinct valid CA sources A/B projected correctly; stale copies were removed; workers and connectivity recovered after every change.</p><h2>Objective</h2><p>Exercise CA lifecycle through the supported HC path while preserving source data and independent connectivity.</p><h2>Preconditions</h2><ul><li>Baseline has no HTTP(S) proxy or custom trustedCA dependency; public system trust and the original API CA remain available.</li><li>Two workers, Replace policy, SingleReplica control plane. Readiness timeout: 2,100 seconds per phase; projection bound: 600 seconds.</li><li>Cleanup registered before reference changes; test sources created only in HC namespace, never pre-populated in HCP namespace.</li></ul><h2>Execution</h2><ol><li>Capture baseline configuration, readiness and API/outbound HTTPS; create valid distinguishable CA sources A/B.</li><li>Select A; wait for operator-created HCP copy, named guest copy and user bundle; complete worker rollout and connectivity checks.</li><li>Rotate to B; verify B&#x27;s data, stale A-copy removal and unchanged HC sources; complete worker and connectivity gates.</li><li>Remove reference; verify user/stale-copy cleanup while sources remain; complete readiness and connectivity gates.</li><li>Restore original configuration and baseline worker hash, recheck connectivity, then delete unreferenced test sources.</li></ol><h2>Before and after evidence</h2><div class="comparison"><section><h3>Before</h3><pre>{
+  &quot;configuration&quot;: {
+    &quot;hc_configuration&quot;: {},
+    &quot;hcp_configuration&quot;: {},
+    &quot;guest_image_spec&quot;: {},
+    &quot;guest_image_annotations&quot;: {},
+    &quot;guest_proxy_spec&quot;: {},
+    &quot;hcp_reconciliation&quot;: [
+      {
+        &quot;lastTransitionTime&quot;: &quot;2026-11-09T14:06:54Z&quot;,
+        &quot;message&quot;: &quot;All is well&quot;,
+        &quot;observedGeneration&quot;: 3,
+        &quot;reason&quot;: &quot;AsExpected&quot;,
+        &quot;status&quot;: &quot;True&quot;,
+        &quot;type&quot;: &quot;ConfigOperatorReconciliationSucceeded&quot;
+      }
+    ]
+  },
+  &quot;sources&quot;: {
+    &quot;phase&quot;: &quot;sources-created&quot;,
+    &quot;desired_reference&quot;: null,
+    &quot;guest_reference&quot;: null,
+    &quot;configmaps&quot;: {
+      &quot;verification-4338-ca-a&quot;: {
+        &quot;hc_source&quot;: {
+          &quot;present&quot;: true,
+          &quot;bundle_sha256&quot;: &quot;e967a8059160475cff9a13d1acdb3f900b3d07a8d22d7081599e5a08b5cc7663&quot;
+        },
+        &quot;hcp_copy&quot;: {
+          &quot;present&quot;: false,
+          &quot;bundle_sha256&quot;: null
+        },
+        &quot;guest_copy&quot;: {
+          &quot;present&quot;: false,
+          &quot;bundle_sha256&quot;: null
+        }
+      },
+      &quot;verification-4338-ca-b&quot;: {
+        &quot;hc_source&quot;: {
+          &quot;present&quot;: true,
+          &quot;bundle_sha256&quot;: &quot;9853a2e85a39ea066f565a8c2fa02aad2933fcbd3f4be45a15dea3d587f22f67&quot;
+        },
+        &quot;hcp_copy&quot;: {
+          &quot;present&quot;: false,
+          &quot;bundle_sha256&quot;: null
+        },
+        &quot;guest_copy&quot;: {
+          &quot;present&quot;: false,
+          &quot;bundle_sha256&quot;: null
+        }
+      }
+    },
+    &quot;user_bundle_present&quot;: false,
+    &quot;user_bundle_sha256&quot;: null
+  },
+  &quot;readiness&quot;: {
+    &quot;completed_at&quot;: &quot;2026-11-09T14:32:22.803315+00:00&quot;,
+    &quot;version&quot;: &quot;5.1.0-0.nightly-multi-2026-11-09-000904&quot;,
+    &quot;ready_nodes&quot;: 2,
+    &quot;config_hashes&quot;: {
+      &quot;hc-4338-main-us-east-1a&quot;: &quot;2c215ee4&quot;
+    },
+    &quot;all_gates_passed&quot;: true,
+    &quot;original_checker_machine_config_hashes&quot;: {
+      &quot;hc-4338-main-us-east-1a&quot;: &quot;edc77f5f&quot;
+    },
+    &quot;hash_annotation&quot;: &quot;hypershift.openshift.io/nodePoolCurrentRolloutConfig&quot;,
+    &quot;metadata_corrected_at&quot;: &quot;2026-11-09T14:50:36.679186+00:00&quot;,
+    &quot;correction_reason&quot;: &quot;Use controller rollout hash covering global proxy/image changes; original machine-config hash omitted these inputs. Raw completion snapshot unchanged.&quot;
+  },
+  &quot;connectivity&quot;: {
+    &quot;checked_at&quot;: &quot;2026-11-09T14:32:28.770469+00:00&quot;,
+    &quot;api_readyz&quot;: &quot;ok&quot;,
+    &quot;outbound_https&quot;: &quot;HTTPS 200\n&quot;
+  }
+}</pre></section><section><h3>After</h3><pre>{
+  &quot;selected-a&quot;: {
+    &quot;phase&quot;: &quot;selected-a&quot;,
+    &quot;desired_reference&quot;: {
+      &quot;name&quot;: &quot;verification-4338-ca-a&quot;
+    },
+    &quot;guest_reference&quot;: {
+      &quot;name&quot;: &quot;verification-4338-ca-a&quot;
+    },
+    &quot;configmaps&quot;: {
+      &quot;verification-4338-ca-a&quot;: {
+        &quot;hc_source&quot;: {
+          &quot;present&quot;: true,
+          &quot;bundle_sha256&quot;: &quot;e967a8059160475cff9a13d1acdb3f900b3d07a8d22d7081599e5a08b5cc7663&quot;
+        },
+        &quot;hcp_copy&quot;: {
+          &quot;present&quot;: true,
+          &quot;bundle_sha256&quot;: &quot;e967a8059160475cff9a13d1acdb3f900b3d07a8d22d7081599e5a08b5cc7663&quot;
+        },
+        &quot;guest_copy&quot;: {
+          &quot;present&quot;: true,
+          &quot;bundle_sha256&quot;: &quot;e967a8059160475cff9a13d1acdb3f900b3d07a8d22d7081599e5a08b5cc7663&quot;
+        }
+      },
+      &quot;verification-4338-ca-b&quot;: {
+        &quot;hc_source&quot;: {
+          &quot;present&quot;: true,
+          &quot;bundle_sha256&quot;: &quot;9853a2e85a39ea066f565a8c2fa02aad2933fcbd3f4be45a15dea3d587f22f67&quot;
+        },
+        &quot;hcp_copy&quot;: {
+          &quot;present&quot;: false,
+          &quot;bundle_sha256&quot;: null
+        },
+        &quot;guest_copy&quot;: {
+          &quot;present&quot;: false,
+          &quot;bundle_sha256&quot;: null
+        }
+      }
+    },
+    &quot;user_bundle_present&quot;: true,
+    &quot;user_bundle_sha256&quot;: &quot;e967a8059160475cff9a13d1acdb3f900b3d07a8d22d7081599e5a08b5cc7663&quot;,
+    &quot;readiness&quot;: {
+      &quot;completed_at&quot;: &quot;2026-11-09T14:50:39.996320+00:00&quot;,
+      &quot;version&quot;: &quot;5.1.0-0.nightly-multi-2026-11-09-000904&quot;,
+      &quot;ready_nodes&quot;: 2,
+      &quot;config_hashes&quot;: {
+        &quot;hc-4338-main-us-east-1a&quot;: &quot;2b65376d&quot;
+      },
+      &quot;all_gates_passed&quot;: true
+    },
+    &quot;connectivity&quot;: {
+      &quot;checked_at&quot;: &quot;2026-11-09T14:50:48.625112+00:00&quot;,
+      &quot;api_readyz&quot;: &quot;ok&quot;,
+      &quot;outbound_https&quot;: &quot;HTTPS 200\n&quot;
+    }
+  },
+  &quot;selected-b&quot;: {
+    &quot;phase&quot;: &quot;selected-b&quot;,
+    &quot;desired_reference&quot;: {
+      &quot;name&quot;: &quot;verification-4338-ca-b&quot;
+    },
+    &quot;guest_reference&quot;: {
+      &quot;name&quot;: &quot;verification-4338-ca-b&quot;
+    },
+    &quot;configmaps&quot;: {
+      &quot;verification-4338-ca-a&quot;: {
+        &quot;hc_source&quot;: {
+          &quot;present&quot;: true,
+          &quot;bundle_sha256&quot;: &quot;e967a8059160475cff9a13d1acdb3f900b3d07a8d22d7081599e5a08b5cc7663&quot;
+        },
+        &quot;hcp_copy&quot;: {
+          &quot;present&quot;: false,
+          &quot;bundle_sha256&quot;: null
+        },
+        &quot;guest_copy&quot;: {
+          &quot;present&quot;: false,
+          &quot;bundle_sha256&quot;: null
+        }
+      },
+      &quot;verification-4338-ca-b&quot;: {
+        &quot;hc_source&quot;: {
+          &quot;present&quot;: true,
+          &quot;bundle_sha256&quot;: &quot;9853a2e85a39ea066f565a8c2fa02aad2933fcbd3f4be45a15dea3d587f22f67&quot;
+        },
+        &quot;hcp_copy&quot;: {
+          &quot;present&quot;: true,
+          &quot;bundle_sha256&quot;: &quot;9853a2e85a39ea066f565a8c2fa02aad2933fcbd3f4be45a15dea3d587f22f67&quot;
+        },
+        &quot;guest_copy&quot;: {
+          &quot;present&quot;: true,
+          &quot;bundle_sha256&quot;: &quot;9853a2e85a39ea066f565a8c2fa02aad2933fcbd3f4be45a15dea3d587f22f67&quot;
+        }
+      }
+    },
+    &quot;user_bundle_present&quot;: true,
+    &quot;user_bundle_sha256&quot;: &quot;9853a2e85a39ea066f565a8c2fa02aad2933fcbd3f4be45a15dea3d587f22f67&quot;,
+    &quot;readiness&quot;: {
+      &quot;completed_at&quot;: &quot;2026-11-09T15:07:40.457809+00:00&quot;,
+      &quot;version&quot;: &quot;5.1.0-0.nightly-multi-2026-11-09-000904&quot;,
+      &quot;ready_nodes&quot;: 2,
+      &quot;config_hashes&quot;: {
+        &quot;hc-4338-main-us-east-1a&quot;: &quot;3dc6a404&quot;
+      },
+      &quot;all_gates_passed&quot;: true
+    },
+    &quot;connectivity&quot;: {
+      &quot;checked_at&quot;: &quot;2026-11-09T15:07:49.099884+00:00&quot;,
+      &quot;api_readyz&quot;: &quot;ok&quot;,
+      &quot;outbound_https&quot;: &quot;HTTPS 200\n&quot;
+    }
+  },
+  &quot;reference-removed&quot;: {
+    &quot;phase&quot;: &quot;reference-removed&quot;,
+    &quot;desired_reference&quot;: null,
+    &quot;guest_reference&quot;: {
+      &quot;name&quot;: &quot;&quot;
+    },
+    &quot;configmaps&quot;: {
+      &quot;verification-4338-ca-a&quot;: {
+        &quot;hc_source&quot;: {
+          &quot;present&quot;: true,
+          &quot;bundle_sha256&quot;: &quot;e967a8059160475cff9a13d1acdb3f900b3d07a8d22d7081599e5a08b5cc7663&quot;
+        },
+        &quot;hcp_copy&quot;: {
+          &quot;present&quot;: false,
+          &quot;bundle_sha256&quot;: null
+        },
+        &quot;guest_copy&quot;: {
+          &quot;present&quot;: false,
+          &quot;bundle_sha256&quot;: null
+        }
+      },
+      &quot;verification-4338-ca-b&quot;: {
+        &quot;hc_source&quot;: {
+          &quot;present&quot;: true,
+          &quot;bundle_sha256&quot;: &quot;9853a2e85a39ea066f565a8c2fa02aad2933fcbd3f4be45a15dea3d587f22f67&quot;
+        },
+        &quot;hcp_copy&quot;: {
+          &quot;present&quot;: false,
+          &quot;bundle_sha256&quot;: null
+        },
+        &quot;guest_copy&quot;: {
+          &quot;present&quot;: false,
+          &quot;bundle_sha256&quot;: null
+        }
+      }
+    },
+    &quot;user_bundle_present&quot;: false,
+    &quot;user_bundle_sha256&quot;: null,
+    &quot;readiness&quot;: {
+      &quot;completed_at&quot;: &quot;2026-11-09T15:24:59.815867+00:00&quot;,
+      &quot;version&quot;: &quot;5.1.0-0.nightly-multi-2026-11-09-000904&quot;,
+      &quot;ready_nodes&quot;: 2,
+      &quot;config_hashes&quot;: {
+        &quot;hc-4338-main-us-east-1a&quot;: &quot;2c215ee4&quot;
+      },
+      &quot;all_gates_passed&quot;: true
+    },
+    &quot;connectivity&quot;: {
+      &quot;checked_at&quot;: &quot;2026-11-09T15:25:08.778407+00:00&quot;,
+      &quot;api_readyz&quot;: &quot;ok&quot;,
+      &quot;outbound_https&quot;: &quot;HTTPS 200\n&quot;
+    }
+  }
+}</pre></section></div><h2>Expected and actual results</h2><table><thead><tr><th>Assertion</th><th>Expected</th><th>Actual</th><th>Result</th></tr></thead><tbody><tr><td>CA selection, rotation and removal</td><td>Exact data at each destination and correct stale cleanup.</td><td>{&#x27;result&#x27;: &#x27;pass&#x27;, &#x27;tested_at&#x27;: &#x27;2026-11-09T15:25:23.148317+00:00&#x27;, &#x27;selection_rotation_removal_restoration&#x27;: True, &#x27;operator_created_hcp_copies_only&#x27;: True, &#x27;hc_sources_preserved_until_cleanup&#x27;: True, &#x27;worker_rollouts_and_connectivity_verified_after_each_change&#x27;: True}</td><td><span class="status pass">pass</span></td></tr><tr><td>HC source preservation</td><td>A/B source data unchanged until final cleanup.</td><td>Passed; independent fingerprints retained.</td><td><span class="status pass">pass</span></td></tr><tr><td>Readiness and connectivity</td><td>Fresh HC/HCP, completed CP/guest/worker rollout, two Ready workers, /readyz ok, outbound HTTPS 200 after each phase.</td><td>Passed after each phase; see timestamped readiness and connectivity records.</td><td><span class="status pass">pass</span></td></tr><tr><td>Unrelated configuration and nonterminating Ready workers</td><td>Unchanged guest Image spec and two nonterminating Ready workers at phase completion.</td><td>Verified independently from retained snapshots; see post-run audit.</td><td><span class="status pass">pass</span></td></tr></tbody></table><h2>Restoration and cleanup</h2><pre>{
+  &quot;restored&quot;: {
+    &quot;phase&quot;: &quot;restored-before-source-cleanup&quot;,
+    &quot;desired_reference&quot;: null,
+    &quot;guest_reference&quot;: {
+      &quot;name&quot;: &quot;&quot;
+    },
+    &quot;configmaps&quot;: {
+      &quot;verification-4338-ca-a&quot;: {
+        &quot;hc_source&quot;: {
+          &quot;present&quot;: true,
+          &quot;bundle_sha256&quot;: &quot;e967a8059160475cff9a13d1acdb3f900b3d07a8d22d7081599e5a08b5cc7663&quot;
+        },
+        &quot;hcp_copy&quot;: {
+          &quot;present&quot;: false,
+          &quot;bundle_sha256&quot;: null
+        },
+        &quot;guest_copy&quot;: {
+          &quot;present&quot;: false,
+          &quot;bundle_sha256&quot;: null
+        }
+      },
+      &quot;verification-4338-ca-b&quot;: {
+        &quot;hc_source&quot;: {
+          &quot;present&quot;: true,
+          &quot;bundle_sha256&quot;: &quot;9853a2e85a39ea066f565a8c2fa02aad2933fcbd3f4be45a15dea3d587f22f67&quot;
+        },
+        &quot;hcp_copy&quot;: {
+          &quot;present&quot;: false,
+          &quot;bundle_sha256&quot;: null
+        },
+        &quot;guest_copy&quot;: {
+          &quot;present&quot;: false,
+          &quot;bundle_sha256&quot;: null
+        }
+      }
+    },
+    &quot;user_bundle_present&quot;: false,
+    &quot;user_bundle_sha256&quot;: null
+  },
+  &quot;final&quot;: {
+    &quot;phase&quot;: &quot;final&quot;,
+    &quot;desired_reference&quot;: null,
+    &quot;guest_reference&quot;: {
+      &quot;name&quot;: &quot;&quot;
+    },
+    &quot;configmaps&quot;: {
+      &quot;verification-4338-ca-a&quot;: {
+        &quot;hc_source&quot;: {
+          &quot;present&quot;: false,
+          &quot;bundle_sha256&quot;: null
+        },
+        &quot;hcp_copy&quot;: {
+          &quot;present&quot;: false,
+          &quot;bundle_sha256&quot;: null
+        },
+        &quot;guest_copy&quot;: {
+          &quot;present&quot;: false,
+          &quot;bundle_sha256&quot;: null
+        }
+      },
+      &quot;verification-4338-ca-b&quot;: {
+        &quot;hc_source&quot;: {
+          &quot;present&quot;: false,
+          &quot;bundle_sha256&quot;: null
+        },
+        &quot;hcp_copy&quot;: {
+          &quot;present&quot;: false,
+          &quot;bundle_sha256&quot;: null
+        },
+        &quot;guest_copy&quot;: {
+          &quot;present&quot;: false,
+          &quot;bundle_sha256&quot;: null
+        }
+      }
+    },
+    &quot;user_bundle_present&quot;: false,
+    &quot;user_bundle_sha256&quot;: null
+  },
+  &quot;readiness&quot;: {
+    &quot;completed_at&quot;: &quot;2026-11-09T15:25:10.850041+00:00&quot;,
+    &quot;version&quot;: &quot;5.1.0-0.nightly-multi-2026-11-09-000904&quot;,
+    &quot;ready_nodes&quot;: 2,
+    &quot;config_hashes&quot;: {
+      &quot;hc-4338-main-us-east-1a&quot;: &quot;2c215ee4&quot;
+    },
+    &quot;all_gates_passed&quot;: true
+  },
+  &quot;connectivity&quot;: {
+    &quot;checked_at&quot;: &quot;2026-11-09T15:25:16.729214+00:00&quot;,
+    &quot;api_readyz&quot;: &quot;ok&quot;,
+    &quot;outbound_https&quot;: &quot;HTTPS 200\n&quot;
+  }
+}</pre><h2>Evidence inside the ZIP</h2><p><a href="cntrlplane-4338-evidence.zip" download>Evidence ZIP</a> contains these records.</p><ul><li>live/hc-4338-main/TC-CA-001/</li><li>evidence/post-run-audit.json</li></ul><h2>Scope and limitations</h2><ul><li>This is additional-trust lifecycle testing with direct public HTTPS, not a test of an authenticated outbound proxy.</li><li>No injected live permission failures; deterministic failure policies are covered in TC-REG-005.</li></ul><footer>CNTRLPLANE-4338 | PR #9920 | Generated 2026-11-11T13:27:41.844590+00:00 | HTML is authoritative. Supporting logs and JSON are in the evidence ZIP.</footer></main></body></html>

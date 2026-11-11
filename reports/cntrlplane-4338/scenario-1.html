@@ -1,0 +1,328 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TC-REG-001 verification</title><style>
+:root{--foreground:#17212d;--muted-foreground:#526173;--border:#d6dde5;--card:#f4f6f8;--success:#087748;--warning:#986300;--destructive:#a32a35;--primary:#175a99;--font-sans:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--font-mono:ui-monospace,SFMono-Regular,Consolas,monospace}
+*{box-sizing:border-box}html,body{margin:0;background:none;color:var(--foreground);font-family:var(--font-sans);line-height:1.55}body{margin:0 5%}main{max-width:1080px;margin:0 auto;padding:0}h1{font-size:25px;line-height:1.25;margin:24px 0 10px}h2{font-size:20px;margin:30px 0 10px}h3{font-size:16px;margin:20px 0 8px}p{max-width:90ch}a{color:var(--primary)}nav{display:flex;gap:14px;flex-wrap:wrap;padding:12px 0;border-bottom:1px solid var(--border);font-size:13px}.muted,small{color:var(--muted-foreground)}.lead{font-size:17px}.status{font-size:12px;font-weight:650;text-transform:uppercase;letter-spacing:.04em}.pass{color:var(--success)}.blocked,.conditional{color:var(--warning)}.fail{color:var(--destructive)}table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:13px;margin:12px 0 22px}th,td{overflow-wrap:anywhere;text-align:left;vertical-align:top;padding:10px 8px;border-bottom:1px solid var(--border)}th{font-weight:650}.comparison{display:grid;grid-template-columns:1fr 1fr;gap:20px}.comparison section{min-width:0;padding:16px;background:var(--card);border-radius:6px}pre,code{font-family:var(--font-mono);font-size:12px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:var(--card);padding:12px;border-radius:5px}code{overflow-wrap:anywhere}.comparison pre{padding:0}.summary{display:flex;gap:30px;flex-wrap:wrap;margin:20px 0}.summary strong{display:block;font-size:25px}.evidence{font-size:13px}svg{max-width:100%;height:auto}footer{margin:30px 0 18px;padding-top:12px;border-top:1px solid var(--border);font-size:12px;color:var(--muted-foreground)}@media(max-width:680px){.comparison{grid-template-columns:1fr}table{font-size:12px}th,td{padding:8px 4px}h1{font-size:22px}}@media(prefers-color-scheme:dark){:root{--foreground:#e2e7ed;--muted-foreground:#a1adba;--border:#354253;--card:#202b37;--success:#63c69a;--warning:#e3ba6b;--destructive:#f28c97;--primary:#87bdf1}}@media print{nav{display:none}a{color:inherit}main{max-width:none}h2,h3{break-after:avoid}section,table{break-inside:avoid}:root{--foreground:#111;--muted-foreground:#444;--border:#bbb;--card:#f5f5f5}body{font-size:10pt}}
+</style></head><body><main><nav aria-label="Report navigation"><a href="index.html">Summary</a><a href="automated-tests.html">Automated tests</a><a href="appendices.html">Environment and provenance</a><a href="cntrlplane-4338-evidence.zip" download>Evidence ZIP</a></nav><h1>TC-REG-001. Global configuration and platform equivalence</h1><p><span class="status pass">pass</span></p><p class="lead">24 named leaf fixtures passed on both implementations; full regression runs passed.</p><h2>Objective</h2><p>Preserve owned resources, platform-specific fields, caller immutability, idempotence and ordered errors.</p><h2>Preconditions</h2><ul><li>Pinned baseline b0edc822e1ffb9f0527091a764d940b81b2c34a8 and PR d037aa90aa5b889c69464004df2e74f4c4c5b287 in separate checkouts.</li><li>None, AWS, Azure, GCP, PowerVS and OpenStack fake-client branches; AWS SharedVPC and managed DNS status; endpoint, proxy, validation and write failures.</li><li>No production-source edits; test-only adapters call the original legacy entry points.</li></ul><h2>Execution</h2><ol><li>Run make test-shard for resources/... and support/globalconfig/... with -race -v -p=4 and uncached tests.</li><li>Replay equivalent characterization fixtures against the pre-extraction methods.</li><li>Read complete verbose output, verify intended named outcomes, and compare before/after results.</li></ol><h2>Before and after evidence</h2><div class="comparison"><section><h3>Before</h3><pre>{
+  &quot;source&quot;: &quot;b0edc822e1ffb9f0527091a764d940b81b2c34a8&quot;,
+  &quot;fixture&quot;: &quot;None, AWS, Azure, GCP, PowerVS and OpenStack fake-client branches; AWS SharedVPC and managed DNS status; endpoint, proxy, validation and write failures.&quot;,
+  &quot;actual_outcomes&quot;: [
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestRetrospectiveReconcileGlobal&quot;,
+      &quot;elapsed&quot;: &quot;3.70s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestRetrospectiveReconcileGlobal/When_AWS_managed_ingress_DNS_is_active,_it_should_project_the_status_DNS_zones_into_the_guest_DNS_config&quot;,
+      &quot;elapsed&quot;: &quot;0.12s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestRetrospectiveReconcileGlobal/When_AWS_uses_SharedVPC,_it_should_project_the_DNS_role_and_filter_reserved_tags&quot;,
+      &quot;elapsed&quot;: &quot;0.18s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestRetrospectiveReconcileGlobal/When_Azure_uses_Swift_fields,_it_should_select_the_private_endpoint_without_annotations&quot;,
+      &quot;elapsed&quot;: &quot;0.18s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestRetrospectiveReconcileGlobal/When_Azure_uses_private_topology,_it_should_project_cloud_fields_and_the_private_endpoint&quot;,
+      &quot;elapsed&quot;: &quot;0.17s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestRetrospectiveReconcileGlobal/When_GCP_uses_private_access,_it_should_project_the_endpoint_and_resource_labels&quot;,
+      &quot;elapsed&quot;: &quot;0.17s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestRetrospectiveReconcileGlobal/When_Infrastructure_status_is_unchanged,_it_should_not_write_status_again&quot;,
+      &quot;elapsed&quot;: &quot;0.13s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestRetrospectiveReconcileGlobal/When_Infrastructure_writes_fail,_it_should_aggregate_in_order_and_suppress_status_after_spec_failure&quot;,
+      &quot;elapsed&quot;: &quot;0.19s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestRetrospectiveReconcileGlobal/When_OpenStack_is_configured,_it_should_project_cloud_config_and_user_managed_load_balancing&quot;,
+      &quot;elapsed&quot;: &quot;0.16s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestRetrospectiveReconcileGlobal/When_PowerVS_is_configured,_it_should_project_location_and_resource_fields&quot;,
+      &quot;elapsed&quot;: &quot;0.15s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestRetrospectiveReconcileGlobal/When_global_configuration_changes,_it_should_preserve_platform_fields_and_input_ownership&quot;,
+      &quot;elapsed&quot;: &quot;1.02s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestRetrospectiveReconcileGlobal/When_global_configuration_changes,_it_should_preserve_platform_fields_and_input_ownership/When_platform_is_AWS,_it_should_reconcile_its_global_policy&quot;,
+      &quot;elapsed&quot;: &quot;0.18s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestRetrospectiveReconcileGlobal/When_global_configuration_changes,_it_should_preserve_platform_fields_and_input_ownership/When_platform_is_Azure,_it_should_reconcile_its_global_policy&quot;,
+      &quot;elapsed&quot;: &quot;0.14s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestRetrospectiveReconcileGlobal/When_global_configuration_changes,_it_should_preserve_platform_fields_and_input_ownership/When_platform_is_GCP,_it_should_reconcile_its_global_policy&quot;,
+      &quot;elapsed&quot;: &quot;0.16s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestRetrospectiveReconcileGlobal/When_global_configuration_changes,_it_should_preserve_platform_fields_and_input_ownership/When_platform_is_None,_it_should_reconcile_its_global_policy&quot;,
+      &quot;elapsed&quot;: &quot;0.18s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestRetrospectiveReconcileGlobal/When_global_configuration_changes,_it_should_preserve_platform_fields_and_input_ownership/When_platform_is_OpenStack,_it_should_reconcile_its_global_policy&quot;,
+      &quot;elapsed&quot;: &quot;0.18s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestRetrospectiveReconcileGlobal/When_global_configuration_changes,_it_should_preserve_platform_fields_and_input_ownership/When_platform_is_PowerVS,_it_should_reconcile_its_global_policy&quot;,
+      &quot;elapsed&quot;: &quot;0.16s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestRetrospectiveReconcileGlobal/When_global_configuration_is_created,_it_should_reconcile_owned_fields_from_the_configuration&quot;,
+      &quot;elapsed&quot;: &quot;0.17s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestRetrospectiveReconcileGlobal/When_global_configuration_is_re-reconciled,_it_should_leave_owned_objects_unchanged&quot;,
+      &quot;elapsed&quot;: &quot;0.14s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestRetrospectiveReconcileGlobal/When_global_configuration_is_updated,_it_should_reconcile_owned_fields_without_clobbering_user-owned_fields&quot;,
+      &quot;elapsed&quot;: &quot;0.31s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestRetrospectiveReconcileGlobal/When_guest_Proxy_is_missing,_it_should_report_the_read_error_but_create_later_resources&quot;,
+      &quot;elapsed&quot;: &quot;0.14s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestRetrospectiveReconcileGlobal/When_image_policy_deletion_fails,_it_should_skip_IDMS_but_attempt_subsequent_global_resources&quot;,
+      &quot;elapsed&quot;: &quot;0.11s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestRetrospectiveReconcileGlobal/When_managed_Azure_uses_the_legacy_Swift_annotation,_it_should_retain_the_private_endpoint&quot;,
+      &quot;elapsed&quot;: &quot;0.16s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestRetrospectiveReconcileGlobal/When_multiple_global_writes_fail,_it_should_aggregate_in_order_and_attempt_later_resources&quot;,
+      &quot;elapsed&quot;: &quot;0.10s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestRetrospectiveReconcileGlobal/When_network_validation_fails,_it_should_still_persist_the_network_and_continue_global_policy&quot;,
+      &quot;elapsed&quot;: &quot;0.11s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestRetrospectiveReconcileGlobal/When_the_endpoint_is_absent,_it_should_fail_before_any_global_write&quot;,
+      &quot;elapsed&quot;: &quot;0.00s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources&quot;
+    }
+  ]
+}</pre></section><section><h3>After</h3><pre>{
+  &quot;source&quot;: &quot;d037aa90aa5b889c69464004df2e74f4c4c5b287&quot;,
+  &quot;actual_outcomes&quot;: [
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestReconcileGlobal&quot;,
+      &quot;elapsed&quot;: &quot;3.30s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources/configuration&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestReconcileGlobal/When_AWS_managed_ingress_DNS_is_active,_it_should_project_the_status_DNS_zones_into_the_guest_DNS_config&quot;,
+      &quot;elapsed&quot;: &quot;0.11s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources/configuration&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestReconcileGlobal/When_AWS_uses_SharedVPC,_it_should_project_the_DNS_role_and_filter_reserved_tags&quot;,
+      &quot;elapsed&quot;: &quot;0.15s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources/configuration&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestReconcileGlobal/When_Azure_uses_Swift_fields,_it_should_select_the_private_endpoint_without_annotations&quot;,
+      &quot;elapsed&quot;: &quot;0.15s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources/configuration&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestReconcileGlobal/When_Azure_uses_private_topology,_it_should_project_cloud_fields_and_the_private_endpoint&quot;,
+      &quot;elapsed&quot;: &quot;0.16s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources/configuration&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestReconcileGlobal/When_GCP_uses_private_access,_it_should_project_the_endpoint_and_resource_labels&quot;,
+      &quot;elapsed&quot;: &quot;0.15s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources/configuration&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestReconcileGlobal/When_Infrastructure_status_is_unchanged,_it_should_not_write_status_again&quot;,
+      &quot;elapsed&quot;: &quot;0.11s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources/configuration&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestReconcileGlobal/When_Infrastructure_writes_fail,_it_should_aggregate_in_order_and_suppress_status_after_spec_failure&quot;,
+      &quot;elapsed&quot;: &quot;0.18s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources/configuration&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestReconcileGlobal/When_OpenStack_is_configured,_it_should_project_cloud_config_and_user_managed_load_balancing&quot;,
+      &quot;elapsed&quot;: &quot;0.16s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources/configuration&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestReconcileGlobal/When_PowerVS_is_configured,_it_should_project_location_and_resource_fields&quot;,
+      &quot;elapsed&quot;: &quot;0.14s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources/configuration&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestReconcileGlobal/When_global_configuration_changes,_it_should_preserve_platform_fields_and_input_ownership&quot;,
+      &quot;elapsed&quot;: &quot;0.85s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources/configuration&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestReconcileGlobal/When_global_configuration_changes,_it_should_preserve_platform_fields_and_input_ownership/When_platform_is_AWS,_it_should_reconcile_its_global_policy&quot;,
+      &quot;elapsed&quot;: &quot;0.14s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources/configuration&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestReconcileGlobal/When_global_configuration_changes,_it_should_preserve_platform_fields_and_input_ownership/When_platform_is_Azure,_it_should_reconcile_its_global_policy&quot;,
+      &quot;elapsed&quot;: &quot;0.17s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources/configuration&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestReconcileGlobal/When_global_configuration_changes,_it_should_preserve_platform_fields_and_input_ownership/When_platform_is_GCP,_it_should_reconcile_its_global_policy&quot;,
+      &quot;elapsed&quot;: &quot;0.13s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources/configuration&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestReconcileGlobal/When_global_configuration_changes,_it_should_preserve_platform_fields_and_input_ownership/When_platform_is_None,_it_should_reconcile_its_global_policy&quot;,
+      &quot;elapsed&quot;: &quot;0.13s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources/configuration&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestReconcileGlobal/When_global_configuration_changes,_it_should_preserve_platform_fields_and_input_ownership/When_platform_is_OpenStack,_it_should_reconcile_its_global_policy&quot;,
+      &quot;elapsed&quot;: &quot;0.14s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources/configuration&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestReconcileGlobal/When_global_configuration_changes,_it_should_preserve_platform_fields_and_input_ownership/When_platform_is_PowerVS,_it_should_reconcile_its_global_policy&quot;,
+      &quot;elapsed&quot;: &quot;0.14s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources/configuration&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestReconcileGlobal/When_global_configuration_is_created,_it_should_reconcile_owned_fields_from_the_configuration&quot;,
+      &quot;elapsed&quot;: &quot;0.14s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources/configuration&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestReconcileGlobal/When_global_configuration_is_re-reconciled,_it_should_leave_owned_objects_unchanged&quot;,
+      &quot;elapsed&quot;: &quot;0.16s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources/configuration&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestReconcileGlobal/When_global_configuration_is_updated,_it_should_reconcile_owned_fields_without_clobbering_user-owned_fields&quot;,
+      &quot;elapsed&quot;: &quot;0.28s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources/configuration&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestReconcileGlobal/When_guest_Proxy_is_missing,_it_should_report_the_read_error_but_create_later_resources&quot;,
+      &quot;elapsed&quot;: &quot;0.12s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources/configuration&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestReconcileGlobal/When_image_policy_deletion_fails,_it_should_skip_IDMS_but_attempt_subsequent_global_resources&quot;,
+      &quot;elapsed&quot;: &quot;0.11s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources/configuration&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestReconcileGlobal/When_managed_Azure_uses_the_legacy_Swift_annotation,_it_should_retain_the_private_endpoint&quot;,
+      &quot;elapsed&quot;: &quot;0.15s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources/configuration&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestReconcileGlobal/When_multiple_global_writes_fail,_it_should_aggregate_in_order_and_attempt_later_resources&quot;,
+      &quot;elapsed&quot;: &quot;0.08s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources/configuration&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestReconcileGlobal/When_network_validation_fails,_it_should_still_persist_the_network_and_continue_global_policy&quot;,
+      &quot;elapsed&quot;: &quot;0.11s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources/configuration&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestReconcileGlobal/When_the_endpoint_is_absent,_it_should_fail_before_any_global_write&quot;,
+      &quot;elapsed&quot;: &quot;0.00s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources/configuration&quot;
+    }
+  ]
+}</pre></section></div><h2>Expected and actual results</h2><table><thead><tr><th>Assertion</th><th>Expected</th><th>Actual</th><th>Result</th></tr></thead><tbody><tr><td>TestReconcileGlobal/When_AWS_managed_ingress_DNS_is_active,_it_should_project_the_status_DNS_zones_into_the_guest_DNS_config</td><td>All assertions in this named fixture pass against both implementations.</td><td>PASS against the pre-extraction implementation; PASS against pinned PR head.</td><td><span class="status pass">pass</span></td></tr><tr><td>TestReconcileGlobal/When_AWS_uses_SharedVPC,_it_should_project_the_DNS_role_and_filter_reserved_tags</td><td>All assertions in this named fixture pass against both implementations.</td><td>PASS against the pre-extraction implementation; PASS against pinned PR head.</td><td><span class="status pass">pass</span></td></tr><tr><td>TestReconcileGlobal/When_Azure_uses_Swift_fields,_it_should_select_the_private_endpoint_without_annotations</td><td>All assertions in this named fixture pass against both implementations.</td><td>PASS against the pre-extraction implementation; PASS against pinned PR head.</td><td><span class="status pass">pass</span></td></tr><tr><td>TestReconcileGlobal/When_Azure_uses_private_topology,_it_should_project_cloud_fields_and_the_private_endpoint</td><td>All assertions in this named fixture pass against both implementations.</td><td>PASS against the pre-extraction implementation; PASS against pinned PR head.</td><td><span class="status pass">pass</span></td></tr><tr><td>TestReconcileGlobal/When_GCP_uses_private_access,_it_should_project_the_endpoint_and_resource_labels</td><td>All assertions in this named fixture pass against both implementations.</td><td>PASS against the pre-extraction implementation; PASS against pinned PR head.</td><td><span class="status pass">pass</span></td></tr><tr><td>TestReconcileGlobal/When_Infrastructure_status_is_unchanged,_it_should_not_write_status_again</td><td>All assertions in this named fixture pass against both implementations.</td><td>PASS against the pre-extraction implementation; PASS against pinned PR head.</td><td><span class="status pass">pass</span></td></tr><tr><td>TestReconcileGlobal/When_Infrastructure_writes_fail,_it_should_aggregate_in_order_and_suppress_status_after_spec_failure</td><td>All assertions in this named fixture pass against both implementations.</td><td>PASS against the pre-extraction implementation; PASS against pinned PR head.</td><td><span class="status pass">pass</span></td></tr><tr><td>TestReconcileGlobal/When_OpenStack_is_configured,_it_should_project_cloud_config_and_user_managed_load_balancing</td><td>All assertions in this named fixture pass against both implementations.</td><td>PASS against the pre-extraction implementation; PASS against pinned PR head.</td><td><span class="status pass">pass</span></td></tr><tr><td>TestReconcileGlobal/When_PowerVS_is_configured,_it_should_project_location_and_resource_fields</td><td>All assertions in this named fixture pass against both implementations.</td><td>PASS against the pre-extraction implementation; PASS against pinned PR head.</td><td><span class="status pass">pass</span></td></tr><tr><td>TestReconcileGlobal/When_global_configuration_changes,_it_should_preserve_platform_fields_and_input_ownership/When_platform_is_AWS,_it_should_reconcile_its_global_policy</td><td>All assertions in this named fixture pass against both implementations.</td><td>PASS against the pre-extraction implementation; PASS against pinned PR head.</td><td><span class="status pass">pass</span></td></tr><tr><td>TestReconcileGlobal/When_global_configuration_changes,_it_should_preserve_platform_fields_and_input_ownership/When_platform_is_Azure,_it_should_reconcile_its_global_policy</td><td>All assertions in this named fixture pass against both implementations.</td><td>PASS against the pre-extraction implementation; PASS against pinned PR head.</td><td><span class="status pass">pass</span></td></tr><tr><td>TestReconcileGlobal/When_global_configuration_changes,_it_should_preserve_platform_fields_and_input_ownership/When_platform_is_GCP,_it_should_reconcile_its_global_policy</td><td>All assertions in this named fixture pass against both implementations.</td><td>PASS against the pre-extraction implementation; PASS against pinned PR head.</td><td><span class="status pass">pass</span></td></tr><tr><td>TestReconcileGlobal/When_global_configuration_changes,_it_should_preserve_platform_fields_and_input_ownership/When_platform_is_None,_it_should_reconcile_its_global_policy</td><td>All assertions in this named fixture pass against both implementations.</td><td>PASS against the pre-extraction implementation; PASS against pinned PR head.</td><td><span class="status pass">pass</span></td></tr><tr><td>TestReconcileGlobal/When_global_configuration_changes,_it_should_preserve_platform_fields_and_input_ownership/When_platform_is_OpenStack,_it_should_reconcile_its_global_policy</td><td>All assertions in this named fixture pass against both implementations.</td><td>PASS against the pre-extraction implementation; PASS against pinned PR head.</td><td><span class="status pass">pass</span></td></tr><tr><td>TestReconcileGlobal/When_global_configuration_changes,_it_should_preserve_platform_fields_and_input_ownership/When_platform_is_PowerVS,_it_should_reconcile_its_global_policy</td><td>All assertions in this named fixture pass against both implementations.</td><td>PASS against the pre-extraction implementation; PASS against pinned PR head.</td><td><span class="status pass">pass</span></td></tr><tr><td>TestReconcileGlobal/When_global_configuration_is_created,_it_should_reconcile_owned_fields_from_the_configuration</td><td>All assertions in this named fixture pass against both implementations.</td><td>PASS against the pre-extraction implementation; PASS against pinned PR head.</td><td><span class="status pass">pass</span></td></tr><tr><td>TestReconcileGlobal/When_global_configuration_is_re-reconciled,_it_should_leave_owned_objects_unchanged</td><td>All assertions in this named fixture pass against both implementations.</td><td>PASS against the pre-extraction implementation; PASS against pinned PR head.</td><td><span class="status pass">pass</span></td></tr><tr><td>TestReconcileGlobal/When_global_configuration_is_updated,_it_should_reconcile_owned_fields_without_clobbering_user-owned_fields</td><td>All assertions in this named fixture pass against both implementations.</td><td>PASS against the pre-extraction implementation; PASS against pinned PR head.</td><td><span class="status pass">pass</span></td></tr><tr><td>TestReconcileGlobal/When_guest_Proxy_is_missing,_it_should_report_the_read_error_but_create_later_resources</td><td>All assertions in this named fixture pass against both implementations.</td><td>PASS against the pre-extraction implementation; PASS against pinned PR head.</td><td><span class="status pass">pass</span></td></tr><tr><td>TestReconcileGlobal/When_image_policy_deletion_fails,_it_should_skip_IDMS_but_attempt_subsequent_global_resources</td><td>All assertions in this named fixture pass against both implementations.</td><td>PASS against the pre-extraction implementation; PASS against pinned PR head.</td><td><span class="status pass">pass</span></td></tr><tr><td>TestReconcileGlobal/When_managed_Azure_uses_the_legacy_Swift_annotation,_it_should_retain_the_private_endpoint</td><td>All assertions in this named fixture pass against both implementations.</td><td>PASS against the pre-extraction implementation; PASS against pinned PR head.</td><td><span class="status pass">pass</span></td></tr><tr><td>TestReconcileGlobal/When_multiple_global_writes_fail,_it_should_aggregate_in_order_and_attempt_later_resources</td><td>All assertions in this named fixture pass against both implementations.</td><td>PASS against the pre-extraction implementation; PASS against pinned PR head.</td><td><span class="status pass">pass</span></td></tr><tr><td>TestReconcileGlobal/When_network_validation_fails,_it_should_still_persist_the_network_and_continue_global_policy</td><td>All assertions in this named fixture pass against both implementations.</td><td>PASS against the pre-extraction implementation; PASS against pinned PR head.</td><td><span class="status pass">pass</span></td></tr><tr><td>TestReconcileGlobal/When_the_endpoint_is_absent,_it_should_fail_before_any_global_write</td><td>All assertions in this named fixture pass against both implementations.</td><td>PASS against the pre-extraction implementation; PASS against pinned PR head.</td><td><span class="status pass">pass</span></td></tr></tbody></table><h2>Restoration and cleanup</h2><pre>{
+  &quot;live_mutations&quot;: false,
+  &quot;source_checkouts&quot;: &quot;Isolated; user&#x27;s original checkout unchanged.&quot;
+}</pre><h2>Evidence inside the ZIP</h2><p><a href="cntrlplane-4338-evidence.zip" download>Evidence ZIP</a> contains these records.</p><ul><li>execution/baseline-unit-retry.log</li><li>execution/pr-unit-verbose.log</li><li>evidence/unit-results.json</li><li>evidence/unit/baseline-junit.xml</li><li>evidence/unit/head-junit.xml</li><li>source/hypershift-baseline/</li><li>source/hypershift-pr/</li><li>source/replay-manifest.json</li><li>reproduction/restore_unit_sources.py</li></ul><h2>Scope and limitations</h2><ul><li>Retrospective execution proves fixture equivalence; it cannot prove that characterization ran before the author&#x27;s extraction.</li><li>Fake-client platform branches establish unit behavior, not live non-AWS platform validation.</li><li>Archived Go files are transformed evidence copies and must not be used as executable overlays. source/replay-manifest.json records original/transformed hashes; reproduction/restore_unit_sources.py reconstructs exact pinned head and baseline replay tests from public upstream source.</li></ul><footer>CNTRLPLANE-4338 | PR #9920 | Generated 2026-11-11T13:27:41.844590+00:00 | HTML is authoritative. Supporting logs and JSON are in the evidence ZIP.</footer></main></body></html>

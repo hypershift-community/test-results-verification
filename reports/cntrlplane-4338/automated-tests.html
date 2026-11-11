@@ -1,0 +1,57 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CNTRLPLANE-4338 automated verification</title><style>
+:root{--foreground:#17212d;--muted-foreground:#526173;--border:#d6dde5;--card:#f4f6f8;--success:#087748;--warning:#986300;--destructive:#a32a35;--primary:#175a99;--font-sans:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--font-mono:ui-monospace,SFMono-Regular,Consolas,monospace}
+*{box-sizing:border-box}html,body{margin:0;background:none;color:var(--foreground);font-family:var(--font-sans);line-height:1.55}body{margin:0 5%}main{max-width:1080px;margin:0 auto;padding:0}h1{font-size:25px;line-height:1.25;margin:24px 0 10px}h2{font-size:20px;margin:30px 0 10px}h3{font-size:16px;margin:20px 0 8px}p{max-width:90ch}a{color:var(--primary)}nav{display:flex;gap:14px;flex-wrap:wrap;padding:12px 0;border-bottom:1px solid var(--border);font-size:13px}.muted,small{color:var(--muted-foreground)}.lead{font-size:17px}.status{font-size:12px;font-weight:650;text-transform:uppercase;letter-spacing:.04em}.pass{color:var(--success)}.blocked,.conditional{color:var(--warning)}.fail{color:var(--destructive)}table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:13px;margin:12px 0 22px}th,td{overflow-wrap:anywhere;text-align:left;vertical-align:top;padding:10px 8px;border-bottom:1px solid var(--border)}th{font-weight:650}.comparison{display:grid;grid-template-columns:1fr 1fr;gap:20px}.comparison section{min-width:0;padding:16px;background:var(--card);border-radius:6px}pre,code{font-family:var(--font-mono);font-size:12px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:var(--card);padding:12px;border-radius:5px}code{overflow-wrap:anywhere}.comparison pre{padding:0}.summary{display:flex;gap:30px;flex-wrap:wrap;margin:20px 0}.summary strong{display:block;font-size:25px}.evidence{font-size:13px}svg{max-width:100%;height:auto}footer{margin:30px 0 18px;padding-top:12px;border-top:1px solid var(--border);font-size:12px;color:var(--muted-foreground)}@media(max-width:680px){.comparison{grid-template-columns:1fr}table{font-size:12px}th,td{padding:8px 4px}h1{font-size:22px}}@media(prefers-color-scheme:dark){:root{--foreground:#e2e7ed;--muted-foreground:#a1adba;--border:#354253;--card:#202b37;--success:#63c69a;--warning:#e3ba6b;--destructive:#f28c97;--primary:#87bdf1}}@media print{nav{display:none}a{color:inherit}main{max-width:none}h2,h3{break-after:avoid}section,table{break-inside:avoid}:root{--foreground:#111;--muted-foreground:#444;--border:#bbb;--card:#f5f5f5}body{font-size:10pt}}
+</style></head><body><main><nav aria-label="Report navigation"><a href="index.html">Summary</a><a href="automated-tests.html">Automated tests</a><a href="appendices.html">Environment and provenance</a><a href="cntrlplane-4338-evidence.zip" download>Evidence ZIP</a></nav><h1>Automated verification evidence</h1><p>These are locally executed automated tests and live procedures, not claims that broad platform CI suites were rerun.</p><p>Retrospective equivalence; not proof of historical execution timing</p><p>ProxyParamsFor did not exist before extraction. Its head tests are new-API evidence, not retrospective old-implementation comparisons.</p><p>Recorded outcome counts include parent tests and their subtests. The baseline index also contains four focused adapter-only ProxyParamsFor outcomes; these do not execute a historical API and are excluded from the 50 paired legacy-method outcomes.</p><pre>{
+  &quot;head&quot;: {
+    &quot;packages_passed&quot;: 19,
+    &quot;outcomes&quot;: 516,
+    &quot;failed&quot;: 0,
+    &quot;skipped&quot;: 0
+  },
+  &quot;baseline&quot;: {
+    &quot;packages_passed&quot;: 19,
+    &quot;legacy_and_regression_outcomes&quot;: 516,
+    &quot;adapter_only_new_API_outcomes&quot;: 4,
+    &quot;failed&quot;: 0,
+    &quot;skipped&quot;: 0
+  },
+  &quot;paired_parent_and_subtest_outcomes&quot;: 50,
+  &quot;all_paired_pass&quot;: true,
+  &quot;new_input_api_leaf_tests&quot;: 3,
+  &quot;supplemental_tc_reg_002&quot;: {
+    &quot;paired_leaf_checks&quot;: 1,
+    &quot;baseline&quot;: &quot;pass&quot;,
+    &quot;head&quot;: &quot;pass&quot;,
+    &quot;all_three_states_match_across_revisions&quot;: true
+  },
+  &quot;artifact_reproduction_verification&quot;: {
+    &quot;result&quot;: &quot;pass&quot;,
+    &quot;scope&quot;: &quot;Artifact/reproduction verification only; original live results and original 50 paired characterization outcomes are unchanged.&quot;,
+    &quot;exact_original_fixtures_reconstructed&quot;: 25,
+    &quot;global_replay&quot;: {
+      &quot;baseline&quot;: {
+        &quot;outcomes&quot;: 26,
+        &quot;failures&quot;: 0,
+        &quot;skips&quot;: 0
+      },
+      &quot;head&quot;: {
+        &quot;outcomes&quot;: 26,
+        &quot;failures&quot;: 0,
+        &quot;skips&quot;: 0
+      }
+    },
+    &quot;packaging_driver_tests&quot;: 5,
+    &quot;packaging_driver_failures&quot;: 0,
+    &quot;driver_before_fix_failures&quot;: 2,
+    &quot;published_identifier_occurrences_before&quot;: {
+      &quot;iam_unique_ids&quot;: 12,
+      &quot;reservation_ids&quot;: 6,
+      &quot;compute_hostnames&quot;: 12
+    },
+    &quot;published_identifier_occurrences_after&quot;: {
+      &quot;iam_unique_ids&quot;: 0,
+      &quot;reservation_ids&quot;: 0,
+      &quot;compute_hostnames&quot;: 0
+    }
+  }
+}</pre><h2>Commands and retained output</h2><ul><li>make test-shard TEST_PACKAGES=&#x27;./control-plane-operator/hostedclusterconfigoperator/controllers/resources/... ./support/globalconfig/...&#x27; GO_TEST_FLAGS=&#x27;-race -v -p=4&#x27; NUM_CORES=4</li><li>execution/pr-unit-verbose.log</li><li>execution/baseline-unit-retry.log</li><li>execution/baseline-inputs-focused.log</li><li>evidence/unit/head-junit.xml</li><li>evidence/unit/baseline-junit.xml</li><li>evidence/unit/tc-reg-002-stability/</li><li>evidence/review-verification/</li><li>source/replay-manifest.json</li><li>reproduction/</li></ul><footer>CNTRLPLANE-4338 | PR #9920 | Generated 2026-11-11T13:27:41.844590+00:00 | HTML is authoritative. Supporting logs and JSON are in the evidence ZIP.</footer></main></body></html>

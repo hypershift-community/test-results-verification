@@ -1,0 +1,524 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TC-REG-007 verification</title><style>
+:root{--foreground:#17212d;--muted-foreground:#526173;--border:#d6dde5;--card:#f4f6f8;--success:#087748;--warning:#986300;--destructive:#a32a35;--primary:#175a99;--font-sans:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--font-mono:ui-monospace,SFMono-Regular,Consolas,monospace}
+*{box-sizing:border-box}html,body{margin:0;background:none;color:var(--foreground);font-family:var(--font-sans);line-height:1.55}body{margin:0 5%}main{max-width:1080px;margin:0 auto;padding:0}h1{font-size:25px;line-height:1.25;margin:24px 0 10px}h2{font-size:20px;margin:30px 0 10px}h3{font-size:16px;margin:20px 0 8px}p{max-width:90ch}a{color:var(--primary)}nav{display:flex;gap:14px;flex-wrap:wrap;padding:12px 0;border-bottom:1px solid var(--border);font-size:13px}.muted,small{color:var(--muted-foreground)}.lead{font-size:17px}.status{font-size:12px;font-weight:650;text-transform:uppercase;letter-spacing:.04em}.pass{color:var(--success)}.blocked,.conditional{color:var(--warning)}.fail{color:var(--destructive)}table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:13px;margin:12px 0 22px}th,td{overflow-wrap:anywhere;text-align:left;vertical-align:top;padding:10px 8px;border-bottom:1px solid var(--border)}th{font-weight:650}.comparison{display:grid;grid-template-columns:1fr 1fr;gap:20px}.comparison section{min-width:0;padding:16px;background:var(--card);border-radius:6px}pre,code{font-family:var(--font-mono);font-size:12px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:var(--card);padding:12px;border-radius:5px}code{overflow-wrap:anywhere}.comparison pre{padding:0}.summary{display:flex;gap:30px;flex-wrap:wrap;margin:20px 0}.summary strong{display:block;font-size:25px}.evidence{font-size:13px}svg{max-width:100%;height:auto}footer{margin:30px 0 18px;padding-top:12px;border-top:1px solid var(--border);font-size:12px;color:var(--muted-foreground)}@media(max-width:680px){.comparison{grid-template-columns:1fr}table{font-size:12px}th,td{padding:8px 4px}h1{font-size:22px}}@media(prefers-color-scheme:dark){:root{--foreground:#e2e7ed;--muted-foreground:#a1adba;--border:#354253;--card:#202b37;--success:#63c69a;--warning:#e3ba6b;--destructive:#f28c97;--primary:#87bdf1}}@media print{nav{display:none}a{color:inherit}main{max-width:none}h2,h3{break-after:avoid}section,table{break-inside:avoid}:root{--foreground:#111;--muted-foreground:#444;--border:#bbb;--card:#f5f5f5}body{font-size:10pt}}
+</style></head><body><main><nav aria-label="Report navigation"><a href="index.html">Summary</a><a href="automated-tests.html">Automated tests</a><a href="appendices.html">Environment and provenance</a><a href="cntrlplane-4338-evidence.zip" download>Evidence ZIP</a></nav><h1>TC-REG-007. Live mutable global configuration and original install version</h1><p><span class="status pass">pass</span></p><p class="lead">Both procedures passed: two mutable registry updates/restoration and a genuine baseline-to-PR 5.0.1 → 5.1 upgrade; disposable fixture cleanup verified.</p><h2>Objective</h2><p>Verify global fields converge and restore with healthy workers, while preserving authentic original install metadata through a release upgrade.</p><h2>Preconditions</h2><ul><li>A uses the retained primary HC; B uses a separate healthy 5.0.1 HC running the pre-extraction CPO/HCCO.</li><li>Unused registries unused-4338-a.invalid and unused-4338-b.invalid; 2,100-second per-phase readiness bounds.</li><li>B&#x27;s original version and provenance saved outside the cluster before PR image deployment; original version differs from target.</li><li>Manual-mode cloud credential upgrade prerequisite satisfied after comparing applicable AWS credential requests.</li></ul><h2>Execution</h2><ol><li>A: save configuration and worker hash, change blockedRegistries twice through HC, and verify HCP/guest projection after completed worker rollouts.</li><li>A: add a guest annotation before the second update and verify preservation. Explicitly project the captured baseline Image spec through HC, return HC configuration to its original optional state, wait for the baseline rollout hash and remove the annotation.</li><li>B: retain 5.0.1 install metadata and baseline running-image proof before deploying any PR code; add an unrelated entry without changing version.</li><li>B: deploy PR CPO/HCCO and target 5.1 payload; verify preserved data after PR activation and full upgrade completion.</li><li>B: check complete readiness and connectivity, then normally destroy the disposable fixture and independently verify exact owned resources are gone.</li></ol><h2>Before and after evidence</h2><div class="comparison"><section><h3>Before</h3><pre>{
+  &quot;A&quot;: {
+    &quot;hc_configuration&quot;: {},
+    &quot;hcp_configuration&quot;: {},
+    &quot;guest_image_spec&quot;: {},
+    &quot;guest_image_annotations&quot;: {},
+    &quot;guest_proxy_spec&quot;: {
+      &quot;trustedCA&quot;: {
+        &quot;name&quot;: &quot;&quot;
+      }
+    },
+    &quot;hcp_reconciliation&quot;: [
+      {
+        &quot;lastTransitionTime&quot;: &quot;2026-11-09T14:06:54Z&quot;,
+        &quot;message&quot;: &quot;All is well&quot;,
+        &quot;observedGeneration&quot;: 6,
+        &quot;reason&quot;: &quot;AsExpected&quot;,
+        &quot;status&quot;: &quot;True&quot;,
+        &quot;type&quot;: &quot;ConfigOperatorReconciliationSucceeded&quot;
+      }
+    ]
+  },
+  &quot;B_capture&quot;: {
+    &quot;captured_at&quot;: &quot;2026-11-09T14:31:11.583637+00:00&quot;,
+    &quot;source_revision&quot;: &quot;b0edc822e1ffb9f0527091a764d940b81b2c34a8&quot;,
+    &quot;image&quot;: &quot;quay.io/test-operator/hypershift@sha256:807aba56a0af6447ab43316d69d68c1bd8123a2efd1002d7bf4199f7396b18dc&quot;,
+    &quot;original_install_version&quot;: &quot;5.0.1&quot;,
+    &quot;target_release_component_version&quot;: &quot;5.1.0-0.nightly-multi-2026-11-09-000904&quot;,
+    &quot;versions_differ&quot;: true,
+    &quot;pr_implementation_has_not_run_on_fixture&quot;: true
+  },
+  &quot;B_original_data&quot;: {
+    &quot;invoker&quot;: &quot;hypershift&quot;,
+    &quot;version&quot;: &quot;5.0.1&quot;
+  },
+  &quot;B_saved_data&quot;: {
+    &quot;invoker&quot;: &quot;hypershift&quot;,
+    &quot;verification-unowned&quot;: &quot;cntrlplane-4338-preserve&quot;,
+    &quot;version&quot;: &quot;5.0.1&quot;
+  }
+}</pre></section><section><h3>After</h3><pre>{
+  &quot;A_update_1&quot;: {
+    &quot;hc_configuration&quot;: {
+      &quot;image&quot;: {
+        &quot;registrySources&quot;: {
+          &quot;blockedRegistries&quot;: [
+            &quot;unused-4338-a.invalid&quot;
+          ]
+        }
+      }
+    },
+    &quot;hcp_configuration&quot;: {
+      &quot;image&quot;: {
+        &quot;additionalTrustedCA&quot;: {
+          &quot;name&quot;: &quot;&quot;
+        },
+        &quot;registrySources&quot;: {
+          &quot;blockedRegistries&quot;: [
+            &quot;unused-4338-a.invalid&quot;
+          ]
+        }
+      }
+    },
+    &quot;guest_image_spec&quot;: {
+      &quot;additionalTrustedCA&quot;: {
+        &quot;name&quot;: &quot;&quot;
+      },
+      &quot;imageStreamImportMode&quot;: &quot;&quot;,
+      &quot;registrySources&quot;: {
+        &quot;blockedRegistries&quot;: [
+          &quot;unused-4338-a.invalid&quot;
+        ]
+      }
+    },
+    &quot;guest_image_annotations&quot;: {},
+    &quot;guest_proxy_spec&quot;: {
+      &quot;trustedCA&quot;: {
+        &quot;name&quot;: &quot;&quot;
+      }
+    },
+    &quot;hcp_reconciliation&quot;: [
+      {
+        &quot;lastTransitionTime&quot;: &quot;2026-11-09T14:06:54Z&quot;,
+        &quot;message&quot;: &quot;All is well&quot;,
+        &quot;observedGeneration&quot;: 7,
+        &quot;reason&quot;: &quot;AsExpected&quot;,
+        &quot;status&quot;: &quot;True&quot;,
+        &quot;type&quot;: &quot;ConfigOperatorReconciliationSucceeded&quot;
+      }
+    ]
+  },
+  &quot;A_update_2&quot;: {
+    &quot;hc_configuration&quot;: {
+      &quot;image&quot;: {
+        &quot;registrySources&quot;: {
+          &quot;blockedRegistries&quot;: [
+            &quot;unused-4338-b.invalid&quot;
+          ]
+        }
+      }
+    },
+    &quot;hcp_configuration&quot;: {
+      &quot;image&quot;: {
+        &quot;additionalTrustedCA&quot;: {
+          &quot;name&quot;: &quot;&quot;
+        },
+        &quot;registrySources&quot;: {
+          &quot;blockedRegistries&quot;: [
+            &quot;unused-4338-b.invalid&quot;
+          ]
+        }
+      }
+    },
+    &quot;guest_image_spec&quot;: {
+      &quot;additionalTrustedCA&quot;: {
+        &quot;name&quot;: &quot;&quot;
+      },
+      &quot;imageStreamImportMode&quot;: &quot;&quot;,
+      &quot;registrySources&quot;: {
+        &quot;blockedRegistries&quot;: [
+          &quot;unused-4338-b.invalid&quot;
+        ]
+      }
+    },
+    &quot;guest_image_annotations&quot;: {
+      &quot;verification.hypershift.openshift.io/cntrlplane-4338&quot;: &quot;preserve-me&quot;
+    },
+    &quot;guest_proxy_spec&quot;: {
+      &quot;trustedCA&quot;: {
+        &quot;name&quot;: &quot;&quot;
+      }
+    },
+    &quot;hcp_reconciliation&quot;: [
+      {
+        &quot;lastTransitionTime&quot;: &quot;2026-11-09T14:06:54Z&quot;,
+        &quot;message&quot;: &quot;All is well&quot;,
+        &quot;observedGeneration&quot;: 8,
+        &quot;reason&quot;: &quot;AsExpected&quot;,
+        &quot;status&quot;: &quot;True&quot;,
+        &quot;type&quot;: &quot;ConfigOperatorReconciliationSucceeded&quot;
+      }
+    ]
+  },
+  &quot;B_after_PR_activation&quot;: {
+    &quot;invoker&quot;: &quot;hypershift&quot;,
+    &quot;verification-unowned&quot;: &quot;cntrlplane-4338-preserve&quot;,
+    &quot;version&quot;: &quot;5.0.1&quot;
+  },
+  &quot;B_completed_upgrade&quot;: {
+    &quot;result&quot;: &quot;pass&quot;,
+    &quot;completed_at&quot;: &quot;2026-11-09T15:13:40.537578+00:00&quot;,
+    &quot;baseline_release&quot;: &quot;5.0.1&quot;,
+    &quot;target_release&quot;: &quot;5.1.0-0.nightly-multi-2026-11-09-000904&quot;,
+    &quot;before_data&quot;: {
+      &quot;invoker&quot;: &quot;hypershift&quot;,
+      &quot;verification-unowned&quot;: &quot;cntrlplane-4338-preserve&quot;,
+      &quot;version&quot;: &quot;5.0.1&quot;
+    },
+    &quot;after_data&quot;: {
+      &quot;invoker&quot;: &quot;hypershift&quot;,
+      &quot;verification-unowned&quot;: &quot;cntrlplane-4338-preserve&quot;,
+      &quot;version&quot;: &quot;5.0.1&quot;
+    },
+    &quot;baseline_saved_before_pr_deployment&quot;: true,
+    &quot;runtime_source_verified&quot;: true,
+    &quot;all_readiness_and_connectivity_gates_passed&quot;: true,
+    &quot;normal_fixture_cleanup&quot;: &quot;pass&quot;,
+    &quot;cleanup_completed_at&quot;: &quot;2026-11-09T15:22:50.177752+00:00&quot;
+  },
+  &quot;B_readiness&quot;: {
+    &quot;completed_at&quot;: &quot;2026-11-09T15:13:33.246488+00:00&quot;,
+    &quot;version&quot;: &quot;5.1.0-0.nightly-multi-2026-11-09-000904&quot;,
+    &quot;ready_nodes&quot;: 2,
+    &quot;config_hashes&quot;: {
+      &quot;hc-4338-upgrade-us-east-1a&quot;: &quot;6cf4ad55&quot;
+    },
+    &quot;all_gates_passed&quot;: true
+  }
+}</pre></section></div><h2>Expected and actual results</h2><table><thead><tr><th>Assertion</th><th>Expected</th><th>Actual</th><th>Result</th></tr></thead><tbody><tr><td>A: propagation, annotation preservation and restoration</td><td>Both updates converge; annotation survives; owned settings and baseline rollout hash return, allowing serialization zero values.</td><td>{&#x27;result&#x27;: &#x27;pass&#x27;, &#x27;tested_at&#x27;: &#x27;2026-11-09T16:17:42.678135+00:00&#x27;, &#x27;registry_updates&#x27;: 2, &#x27;annotation_preserved&#x27;: True, &#x27;restoration_verified&#x27;: True, &#x27;worker_rollouts_and_connectivity_verified_after_each_change&#x27;: True, &#x27;restoration_method&#x27;: &#x27;Explicit saved baseline through HC, then restore original optional desired configuration; normalize serialization zero values.&#x27;}</td><td><span class="status pass">pass</span></td></tr><tr><td>B: authentic baseline and changed runtime</td><td>Baseline captured before PR deployment; both changed components run pinned PR digest.</td><td>Verified from saved baseline, timestamps and running container image IDs.</td><td><span class="status pass">pass</span></td></tr><tr><td>B: preserve original install data</td><td>Original 5.0.1 version, hypershift invoker and unrelated entry survive; current release differs.</td><td>{&#x27;invoker&#x27;: &#x27;hypershift&#x27;, &#x27;verification-unowned&#x27;: &#x27;cntrlplane-4338-preserve&#x27;, &#x27;version&#x27;: &#x27;5.0.1&#x27;}</td><td><span class="status pass">pass</span></td></tr><tr><td>Both: readiness and connectivity</td><td>CP and data-plane target complete; two Ready workers; API and outbound HTTPS succeed.</td><td>Passed after each A update/restoration and after B upgrade completion.</td><td><span class="status pass">pass</span></td></tr><tr><td>B: normal cleanup</td><td>Normal destroy succeeds; exact owned cloud resources and selected Kubernetes objects disappear.</td><td>{&#x27;hostedcluster_absent&#x27;: True, &#x27;hostedcontrolplane_namespace_absent&#x27;: True, &#x27;selected_nodepools_absent&#x27;: True, &#x27;controlplane_claim_volumes_absent&#x27;: True, &#x27;Vpcs_absent&#x27;: True, &#x27;Subnets_absent&#x27;: True, &#x27;SecurityGroups_absent&#x27;: True, &#x27;RouteTables_absent&#x27;: True, &#x27;NetworkInterfaces_absent&#x27;: True, &#x27;InternetGateways_absent&#x27;: True, &#x27;VpcEndpoints_absent&#x27;: True, &#x27;Volumes_absent&#x27;: True, &#x27;Addresses_absent&#x27;: True, &#x27;nat_gateways_absent_or_deleted&#x27;: True, &#x27;instances_absent_or_terminated&#x27;: True, &#x27;LoadBalancersV2_absent&#x27;: True, &#x27;LoadBalancersClassic_absent&#x27;: True, &#x27;TargetGroups_absent&#x27;: True, &#x27;Roles_absent&#x27;: True, &#x27;InstanceProfiles_absent&#x27;: True, &#x27;OIDCProviders_absent&#x27;: True, &#x27;PrivateZones_absent&#x27;: True, &#x27;owned_registry_buckets_absent&#x27;: True, &#x27;owned_oidc_objects_absent&#x27;: True}</td><td><span class="status pass">pass</span></td></tr></tbody></table><h2>Restoration and cleanup</h2><pre>{
+  &quot;A_restored&quot;: {
+    &quot;hc_configuration&quot;: {},
+    &quot;hcp_configuration&quot;: {},
+    &quot;guest_image_spec&quot;: {
+      &quot;additionalTrustedCA&quot;: {
+        &quot;name&quot;: &quot;&quot;
+      },
+      &quot;imageStreamImportMode&quot;: &quot;&quot;,
+      &quot;registrySources&quot;: {}
+    },
+    &quot;guest_image_annotations&quot;: {},
+    &quot;guest_proxy_spec&quot;: {
+      &quot;trustedCA&quot;: {
+        &quot;name&quot;: &quot;&quot;
+      }
+    },
+    &quot;hcp_reconciliation&quot;: [
+      {
+        &quot;lastTransitionTime&quot;: &quot;2026-11-09T14:06:54Z&quot;,
+        &quot;message&quot;: &quot;All is well&quot;,
+        &quot;observedGeneration&quot;: 11,
+        &quot;reason&quot;: &quot;AsExpected&quot;,
+        &quot;status&quot;: &quot;True&quot;,
+        &quot;type&quot;: &quot;ConfigOperatorReconciliationSucceeded&quot;
+      }
+    ]
+  },
+  &quot;B_destroy_command&quot;: {
+    &quot;completed_at&quot;: &quot;2026-11-09T15:22:30.505909+00:00&quot;,
+    &quot;exit_code&quot;: 0
+  },
+  &quot;B_independent_verification&quot;: {
+    &quot;checked_at&quot;: &quot;2026-11-09T15:22:30.507044+00:00&quot;,
+    &quot;checks&quot;: {
+      &quot;hostedcluster_absent&quot;: true,
+      &quot;hostedcontrolplane_namespace_absent&quot;: true,
+      &quot;selected_nodepools_absent&quot;: true,
+      &quot;controlplane_claim_volumes_absent&quot;: true,
+      &quot;Vpcs_absent&quot;: true,
+      &quot;Subnets_absent&quot;: true,
+      &quot;SecurityGroups_absent&quot;: true,
+      &quot;RouteTables_absent&quot;: true,
+      &quot;NetworkInterfaces_absent&quot;: true,
+      &quot;InternetGateways_absent&quot;: true,
+      &quot;VpcEndpoints_absent&quot;: true,
+      &quot;Volumes_absent&quot;: true,
+      &quot;Addresses_absent&quot;: true,
+      &quot;nat_gateways_absent_or_deleted&quot;: true,
+      &quot;instances_absent_or_terminated&quot;: true,
+      &quot;LoadBalancersV2_absent&quot;: true,
+      &quot;LoadBalancersClassic_absent&quot;: true,
+      &quot;TargetGroups_absent&quot;: true,
+      &quot;Roles_absent&quot;: true,
+      &quot;InstanceProfiles_absent&quot;: true,
+      &quot;OIDCProviders_absent&quot;: true,
+      &quot;PrivateZones_absent&quot;: true,
+      &quot;owned_registry_buckets_absent&quot;: true,
+      &quot;owned_oidc_objects_absent&quot;: true
+    },
+    &quot;Vpcs&quot;: [],
+    &quot;Subnets&quot;: [],
+    &quot;SecurityGroups&quot;: [],
+    &quot;RouteTables&quot;: [],
+    &quot;NetworkInterfaces&quot;: [],
+    &quot;InternetGateways&quot;: [],
+    &quot;VpcEndpoints&quot;: [],
+    &quot;Volumes&quot;: [],
+    &quot;Addresses&quot;: [],
+    &quot;NatGateways&quot;: [
+      {
+        &quot;CreateTime&quot;: &quot;2026-11-09T13:45:16+00:00&quot;,
+        &quot;DeleteTime&quot;: &quot;2026-11-09T15:21:27+00:00&quot;,
+        &quot;NatGatewayAddresses&quot;: [
+          {
+            &quot;AllocationId&quot;: &quot;eipalloc-redacted-c587fdde4945&quot;,
+            &quot;NetworkInterfaceId&quot;: &quot;eni-redacted-30c598bd5961&quot;,
+            &quot;PrivateIp&quot;: &quot;192.0.2.63&quot;,
+            &quot;PublicIp&quot;: &quot;192.0.2.159&quot;,
+            &quot;AssociationId&quot;: &quot;eipassoc-redacted-75d58c7124cc&quot;,
+            &quot;IsPrimary&quot;: true,
+            &quot;Status&quot;: &quot;succeeded&quot;
+          }
+        ],
+        &quot;NatGatewayId&quot;: &quot;nat-redacted-7f98e1f057fd&quot;,
+        &quot;State&quot;: &quot;deleted&quot;,
+        &quot;SubnetId&quot;: &quot;subnet-redacted-97447eb88a18&quot;,
+        &quot;VpcId&quot;: &quot;vpc-redacted-a9018b3c1627&quot;,
+        &quot;Tags&quot;: [
+          {
+            &quot;Key&quot;: &quot;hypershift.openshift.io/infra-id&quot;,
+            &quot;Value&quot;: &quot;hc-4338-upgrade-4z44b&quot;
+          },
+          {
+            &quot;Key&quot;: &quot;hypershift.openshift.io/cluster-name&quot;,
+            &quot;Value&quot;: &quot;hc-4338-upgrade&quot;
+          },
+          {
+            &quot;Key&quot;: &quot;kubernetes.io/cluster/hc-4338-upgrade-4z44b&quot;,
+            &quot;Value&quot;: &quot;owned&quot;
+          },
+          {
+            &quot;Key&quot;: &quot;Name&quot;,
+            &quot;Value&quot;: &quot;hc-4338-upgrade-4z44b-nat-us-east-1a&quot;
+          },
+          {
+            &quot;Key&quot;: &quot;hypershift.openshift.io/source&quot;,
+            &quot;Value&quot;: &quot;cli&quot;
+          }
+        ],
+        &quot;ConnectivityType&quot;: &quot;public&quot;,
+        &quot;AvailabilityMode&quot;: &quot;zonal&quot;,
+        &quot;AttachedAppliances&quot;: []
+      }
+    ],
+    &quot;Instances&quot;: [
+      {
+        &quot;ReservationId&quot;: &quot;r-redacted-f2ea7de22109&quot;,
+        &quot;OwnerId&quot;: &quot;123456789012&quot;,
+        &quot;Groups&quot;: [],
+        &quot;Instances&quot;: [
+          {
+            &quot;Architecture&quot;: &quot;x86_64&quot;,
+            &quot;BlockDeviceMappings&quot;: [],
+            &quot;ClientToken&quot;: &quot;uid-bd4f7d2b1c11&quot;,
+            &quot;EbsOptimized&quot;: false,
+            &quot;EnaSupport&quot;: true,
+            &quot;Hypervisor&quot;: &quot;xen&quot;,
+            &quot;NetworkInterfaces&quot;: [],
+            &quot;RootDeviceName&quot;: &quot;/dev/xvda&quot;,
+            &quot;RootDeviceType&quot;: &quot;ebs&quot;,
+            &quot;SecurityGroups&quot;: [],
+            &quot;StateReason&quot;: {
+              &quot;Code&quot;: &quot;Client.UserInitiatedShutdown&quot;,
+              &quot;Message&quot;: &quot;Client.UserInitiatedShutdown: User initiated shutdown&quot;
+            },
+            &quot;Tags&quot;: [
+              {
+                &quot;Key&quot;: &quot;MachineName&quot;,
+                &quot;Value&quot;: &quot;clusters-hc-4338-upgrade/hc-4338-upgrade-us-east-1a-fcd5r-db898&quot;
+              },
+              {
+                &quot;Key&quot;: &quot;architecture&quot;,
+                &quot;Value&quot;: &quot;x86_64&quot;
+              },
+              {
+                &quot;Key&quot;: &quot;Name&quot;,
+                &quot;Value&quot;: &quot;hc-4338-upgrade-us-east-1a-fcd5r-db898&quot;
+              },
+              {
+                &quot;Key&quot;: &quot;sigs.k8s.io/cluster-api-provider-aws/cluster/hc-4338-upgrade-4z44b&quot;,
+                &quot;Value&quot;: &quot;owned&quot;
+              },
+              {
+                &quot;Key&quot;: &quot;kubernetes.io/cluster/hc-4338-upgrade-4z44b&quot;,
+                &quot;Value&quot;: &quot;owned&quot;
+              },
+              {
+                &quot;Key&quot;: &quot;sigs.k8s.io/cluster-api-provider-aws/role&quot;,
+                &quot;Value&quot;: &quot;node&quot;
+              }
+            ],
+            &quot;VirtualizationType&quot;: &quot;hvm&quot;,
+            &quot;CpuOptions&quot;: {
+              &quot;CoreCount&quot;: 2,
+              &quot;ThreadsPerCore&quot;: 2
+            },
+            &quot;CapacityReservationSpecification&quot;: {
+              &quot;CapacityReservationPreference&quot;: &quot;open&quot;
+            },
+            &quot;HibernationOptions&quot;: {
+              &quot;Configured&quot;: false
+            },
+            &quot;MetadataOptions&quot;: {
+              &quot;State&quot;: &quot;pending&quot;,
+              &quot;HttpTokens&quot;: &quot;optional&quot;,
+              &quot;HttpPutResponseHopLimit&quot;: 2,
+              &quot;HttpEndpoint&quot;: &quot;enabled&quot;,
+              &quot;HttpProtocolIpv6&quot;: &quot;disabled&quot;,
+              &quot;InstanceMetadataTags&quot;: &quot;disabled&quot;
+            },
+            &quot;EnclaveOptions&quot;: {
+              &quot;Enabled&quot;: false
+            },
+            &quot;PlatformDetails&quot;: &quot;Linux/UNIX&quot;,
+            &quot;UsageOperation&quot;: &quot;RunInstances&quot;,
+            &quot;UsageOperationUpdateTime&quot;: &quot;2026-11-09T15:04:02+00:00&quot;,
+            &quot;MaintenanceOptions&quot;: {
+              &quot;AutoRecovery&quot;: &quot;default&quot;,
+              &quot;RebootMigration&quot;: &quot;default&quot;
+            },
+            &quot;CurrentInstanceBootMode&quot;: &quot;legacy-bios&quot;,
+            &quot;NetworkPerformanceOptions&quot;: {
+              &quot;BandwidthWeighting&quot;: &quot;default&quot;
+            },
+            &quot;Operator&quot;: {
+              &quot;Managed&quot;: false
+            },
+            &quot;InstanceId&quot;: &quot;i-redacted-929657b3914e&quot;,
+            &quot;ImageId&quot;: &quot;ami-redacted-90a58ada8da4&quot;,
+            &quot;State&quot;: {
+              &quot;Code&quot;: 48,
+              &quot;Name&quot;: &quot;terminated&quot;
+            },
+            &quot;PrivateDnsName&quot;: &quot;&quot;,
+            &quot;PublicDnsName&quot;: &quot;&quot;,
+            &quot;StateTransitionReason&quot;: &quot;User initiated (2026-11-09 15:15:07 GMT)&quot;,
+            &quot;AmiLaunchIndex&quot;: 0,
+            &quot;ProductCodes&quot;: [],
+            &quot;InstanceType&quot;: &quot;m5.xlarge&quot;,
+            &quot;LaunchTime&quot;: &quot;2026-11-09T15:04:02+00:00&quot;,
+            &quot;Placement&quot;: {
+              &quot;AvailabilityZoneId&quot;: &quot;use1-az1&quot;,
+              &quot;GroupName&quot;: &quot;&quot;,
+              &quot;Tenancy&quot;: &quot;default&quot;,
+              &quot;AvailabilityZone&quot;: &quot;us-east-1a&quot;
+            },
+            &quot;Monitoring&quot;: {
+              &quot;State&quot;: &quot;disabled&quot;
+            }
+          }
+        ]
+      },
+      {
+        &quot;ReservationId&quot;: &quot;r-redacted-6913bb7398ee&quot;,
+        &quot;OwnerId&quot;: &quot;123456789012&quot;,
+        &quot;Groups&quot;: [],
+        &quot;Instances&quot;: [
+          {
+            &quot;Architecture&quot;: &quot;x86_64&quot;,
+            &quot;BlockDeviceMappings&quot;: [],
+            &quot;ClientToken&quot;: &quot;uid-28cf03abb2cd&quot;,
+            &quot;EbsOptimized&quot;: false,
+            &quot;EnaSupport&quot;: true,
+            &quot;Hypervisor&quot;: &quot;xen&quot;,
+            &quot;NetworkInterfaces&quot;: [],
+            &quot;RootDeviceName&quot;: &quot;/dev/xvda&quot;,
+            &quot;RootDeviceType&quot;: &quot;ebs&quot;,
+            &quot;SecurityGroups&quot;: [],
+            &quot;StateReason&quot;: {
+              &quot;Code&quot;: &quot;Client.UserInitiatedShutdown&quot;,
+              &quot;Message&quot;: &quot;Client.UserInitiatedShutdown: User initiated shutdown&quot;
+            },
+            &quot;Tags&quot;: [
+              {
+                &quot;Key&quot;: &quot;MachineName&quot;,
+                &quot;Value&quot;: &quot;clusters-hc-4338-upgrade/hc-4338-upgrade-us-east-1a-fcd5r-47g2b&quot;
+              },
+              {
+                &quot;Key&quot;: &quot;architecture&quot;,
+                &quot;Value&quot;: &quot;x86_64&quot;
+              },
+              {
+                &quot;Key&quot;: &quot;sigs.k8s.io/cluster-api-provider-aws/cluster/hc-4338-upgrade-4z44b&quot;,
+                &quot;Value&quot;: &quot;owned&quot;
+              },
+              {
+                &quot;Key&quot;: &quot;Name&quot;,
+                &quot;Value&quot;: &quot;hc-4338-upgrade-us-east-1a-fcd5r-47g2b&quot;
+              },
+              {
+                &quot;Key&quot;: &quot;sigs.k8s.io/cluster-api-provider-aws/role&quot;,
+                &quot;Value&quot;: &quot;node&quot;
+              },
+              {
+                &quot;Key&quot;: &quot;kubernetes.io/cluster/hc-4338-upgrade-4z44b&quot;,
+                &quot;Value&quot;: &quot;owned&quot;
+              }
+            ],
+            &quot;VirtualizationType&quot;: &quot;hvm&quot;,
+            &quot;CpuOptions&quot;: {
+              &quot;CoreCount&quot;: 2,
+              &quot;ThreadsPerCore&quot;: 2
+            },
+            &quot;CapacityReservationSpecification&quot;: {
+              &quot;CapacityReservationPreference&quot;: &quot;open&quot;
+            },
+            &quot;HibernationOptions&quot;: {
+              &quot;Configured&quot;: false
+            },
+            &quot;MetadataOptions&quot;: {
+              &quot;State&quot;: &quot;pending&quot;,
+              &quot;HttpTokens&quot;: &quot;optional&quot;,
+              &quot;HttpPutResponseHopLimit&quot;: 2,
+              &quot;HttpEndpoint&quot;: &quot;enabled&quot;,
+              &quot;HttpProtocolIpv6&quot;: &quot;disabled&quot;,
+              &quot;InstanceMetadataTags&quot;: &quot;disabled&quot;
+            },
+            &quot;EnclaveOptions&quot;: {
+              &quot;Enabled&quot;: false
+            },
+            &quot;PlatformDetails&quot;: &quot;Linux/UNIX&quot;,
+            &quot;UsageOperation&quot;: &quot;RunInstances&quot;,
+            &quot;UsageOperationUpdateTime&quot;: &quot;2026-11-09T14:56:37+00:00&quot;,
+            &quot;MaintenanceOptions&quot;: {
+              &quot;AutoRecovery&quot;: &quot;default&quot;,
+              &quot;RebootMigration&quot;: &quot;default&quot;
+            },
+            &quot;CurrentInstanceBootMode&quot;: &quot;legacy-bios&quot;,
+            &quot;NetworkPerformanceOptions&quot;: {
+              &quot;BandwidthWeighting&quot;: &quot;default&quot;
+            },
+            &quot;Operator&quot;: {
+              &quot;Managed&quot;: false
+            },
+            &quot;InstanceId&quot;: &quot;i-redacted-c1f9d3013707&quot;,
+            &quot;ImageId&quot;: &quot;ami-redacted-90a58ada8da4&quot;,
+            &quot;State&quot;: {
+              &quot;Code&quot;: 48,
+              &quot;Name&quot;: &quot;terminated&quot;
+            },
+            &quot;PrivateDnsName&quot;: &quot;&quot;,
+            &quot;PublicDnsName&quot;: &quot;&quot;,
+            &quot;StateTransitionReason&quot;: &quot;User initiated (2026-11-09 15:15:07 GMT)&quot;,
+            &quot;AmiLaunchIndex&quot;: 0,
+            &quot;ProductCodes&quot;: [],
+            &quot;InstanceType&quot;: &quot;m5.xlarge&quot;,
+            &quot;LaunchTime&quot;: &quot;2026-11-09T14:56:37+00:00&quot;,
+            &quot;Placement&quot;: {
+              &quot;AvailabilityZoneId&quot;: &quot;use1-az1&quot;,
+              &quot;GroupName&quot;: &quot;&quot;,
+              &quot;Tenancy&quot;: &quot;default&quot;,
+              &quot;AvailabilityZone&quot;: &quot;us-east-1a&quot;
+            },
+            &quot;Monitoring&quot;: {
+              &quot;State&quot;: &quot;disabled&quot;
+            }
+          }
+        ]
+      }
+    ],
+    &quot;LoadBalancersV2&quot;: [],
+    &quot;LoadBalancersClassic&quot;: [],
+    &quot;TargetGroups&quot;: [],
+    &quot;Roles&quot;: [],
+    &quot;InstanceProfiles&quot;: [],
+    &quot;OIDCProviders&quot;: [],
+    &quot;PrivateZones&quot;: [],
+    &quot;RegistryBucketsRemaining&quot;: [],
+    &quot;OIDCObjectsRemaining&quot;: [],
+    &quot;all_checks_passed&quot;: true
+  }
+}</pre><h2>Evidence inside the ZIP</h2><p><a href="cntrlplane-4338-evidence.zip" download>Evidence ZIP</a> contains these records.</p><ul><li>live/hc-4338-main/TC-REG-007A/</li><li>live/hc-4338-upgrade/TC-REG-007B/</li><li>cleanup/</li><li>evidence/setup/upgrade-credential-prerequisite.json</li><li>evidence/post-run-audit.json</li></ul><h2>Scope and limitations</h2><ul><li>The live upgrade proves preserved data; it cannot prove the release accessor was never called. TC-REG-003 asserts lazy-accessor behavior.</li><li>Older-release setup used a target machine-approver component override to accept a main-CPO flag; baseline CPO/HCCO remained pre-extraction.</li></ul><footer>CNTRLPLANE-4338 | PR #9920 | Generated 2026-11-11T13:27:41.844590+00:00 | HTML is authoritative. Supporting logs and JSON are in the evidence ZIP.</footer></main></body></html>
