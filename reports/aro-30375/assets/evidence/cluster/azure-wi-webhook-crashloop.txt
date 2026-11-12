@@ -1,0 +1,6 @@
+# azure-workload-identity-webhook container log tail (2026-11-12T18:31:22Z)
+    	Minimum TLS version (default "1.3")
+  -version
+    	Print version information and exit
+  -webhook-cert-dir string
+    	Webhook certificates dir to use. Defaults to /certs (default "/certs")

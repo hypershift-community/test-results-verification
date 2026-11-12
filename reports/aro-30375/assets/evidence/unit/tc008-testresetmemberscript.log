@@ -1,0 +1,6 @@
+=== RUN   TestResetMemberScript
+=== PAUSE TestResetMemberScript
+=== CONT  TestResetMemberScript
+--- PASS: TestResetMemberScript (0.00s)
+PASS
+ok  	github.com/openshift/hypershift/control-plane-operator/controllers/hostedcontrolplane/v2/etcd	0.032s

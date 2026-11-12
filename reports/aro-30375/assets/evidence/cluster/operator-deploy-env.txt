@@ -1,0 +1,15 @@
+# hypershift operator deployment env (2026-11-12T18:31:23Z)
+image=<svc-registry>.azurecr.io/<user>/hypershift@sha256:3ab61a2bdceb93b7fe663ec770f291616e8b65357914189e1b87f68d51b74e11
+MY_NAMESPACE=
+MY_NAME=
+METRICS_SET=SRE
+CERT_ROTATION_SCALE=24h0m0s
+KUBE_FEATURE_WatchListClient=false
+IMAGE_SHARED_INGRESS_HAPROXY=<dev-registry>.azurecr.io/redhat-user-workloads/crt-redhat-acm-tenant/hypershift-shared-ingress-main@sha256:5e22710fe440869655329ecc0ef57b4ae15f4ef96e74a8904b1e6fafc0d87678
+MANAGED_SERVICE=ARO-HCP
+ARO_HCP_KEY_VAULT_USER_CLIENT_ID=8b808fd4-b857-4c2c-893e-b2e131a605c9
+ENABLE_SIZE_TAGGING=1
+ENABLE_ETCD_RECOVERY=1
+ENABLE_CPO_OVERRIDES=1
+CAPI_STORAGE_VERSION=v1beta1
+PLATFORMS_INSTALLED=Azure

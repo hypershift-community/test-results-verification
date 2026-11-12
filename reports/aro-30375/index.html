@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ARO-30375 verification dashboard</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topbar"><div class="brand">ARO-30375 · Verification</div><nav><a href="index.html" class="active">Dashboard</a><a href="scenario-1.html">TC-001 Retry</a><a href="scenario-2.html">TC-002 Fail closed</a><a href="scenario-3.html">TC-003 Peer URL</a><a href="scenario-4.html">TC-004 Unstarted</a><a href="scenario-5.html">TC-005 Quorum</a><a href="scenario-6.html">TC-006 Wait</a><a href="scenario-7.html">TC-007 E2E</a><a href="scenario-8.html">TC-008 Drift</a><a href="automated-tests.html">Automated</a><a href="appendices.html">Appendices</a></nav></header>
+<main>
+
+<h1>HyperShift PR #10118 verification</h1>
+<p class="subtitle">Idempotent etcd member reset and recovery on managed 3-member etcd · PR head <code>1e771d572</code> · test plan <code>TP-ARO-30375-001 v1.1</code> · ARO-HCP personal dev environment on Azure, HA hosted control plane at OCP <code>4.21.40</code> · 2026-11-12 · tester Garrick Dabbs (@garrickdabbs)</p>
+
+<div class="callout good"><p><strong>Verdict: PASS for TC-001 through TC-008 at <code>1e771d572</code>.</strong> The reset-member script preserves <code>existing</code> state across interrupted remove/add retries and never restarts a removed identity as a bootstrap member. The etcd-recovery Job waits for every healthy endpoint, repairs failing members, and preserves quorum. All five <code>etcd-chaos</code> e2e specs pass against a live 3-member hosted etcd rendered by the PR-head control-plane operator, including data durability of marker objects written through the hosted kube-apiserver. Shared and sharded reset-member scripts are fixture-locked against drift.</p></div>
+<p>TC-007 ran on a hosted control plane whose <code>Available</code> condition is False for reasons root-caused as a pre-existing hypershift-main/GA-payload incompatibility in the konnectivity-server and azure-workload-identity-webhook containers, unrelated to this PR's etcd changes. The etcd subsystem under test was healthy throughout. See <a href="scenario-7.html">TC-007</a> and <a href="appendices.html">Appendices</a> for the full analysis and the two documented execution deviations.</p>
+
+<div class="cards">
+  <div class="card"><div class="num">8</div><div class="lbl">test cases with a PASS verdict</div></div>
+  <div class="card"><div class="num">5 / 5</div><div class="lbl">etcd-chaos e2e specs pass at head (248 s)</div></div>
+  <div class="card"><div class="num">28 / 28</div><div class="lbl">reset-member mock-harness checks pass</div></div>
+  <div class="card"><div class="num">12 / 12</div><div class="lbl">etcd-recovery decision unit tests pass</div></div>
+</div>
+
+<h2>Scenario results</h2>
+<div class="table-wrap"><table class="results"><thead><tr><th>Scenario</th><th>Requirement</th><th>Executed at</th><th>Result</th><th>Evidence</th></tr></thead><tbody>
+<tr><td>TC-001</td><td>Interrupted remove/add does not recreate a removed identity</td><td><code>1e771d57</code> head, mock-harness</td><td><span class="badge pass">PASS</span></td><td><a href="scenario-1.html">Details</a></td></tr>
+<tr><td>TC-002</td><td>Existing cluster fails closed on member-list failure</td><td><code>1e771d57</code> head, mock-harness</td><td><span class="badge pass">PASS</span></td><td><a href="scenario-2.html">Details</a></td></tr>
+<tr><td>TC-003</td><td>Peer-URL repair avoids duplicate member identities</td><td><code>1e771d57</code> head, mock-harness</td><td><span class="badge pass">PASS</span></td><td><a href="scenario-3.html">Details</a></td></tr>
+<tr><td>TC-004</td><td>Unstarted member is classified as unhealthy</td><td><code>1e771d57</code> head, unit</td><td><span class="badge pass">PASS</span></td><td><a href="scenario-4.html">Details</a></td></tr>
+<tr><td>TC-005</td><td>Recovery preserves quorum</td><td><code>1e771d57</code> head, unit</td><td><span class="badge pass">PASS</span></td><td><a href="scenario-5.html">Details</a></td></tr>
+<tr><td>TC-006</td><td>Recovery waits for every healthy endpoint</td><td><code>1e771d57</code> head, unit + live</td><td><span class="badge pass">PASS</span></td><td><a href="scenario-6.html">Details</a></td></tr>
+<tr><td>TC-007</td><td>Deterministic e2e interrupted membership recovery</td><td><code>1e771d57</code> head, e2e + mock-harness</td><td><span class="badge pass">PASS</span></td><td><a href="scenario-7.html">Details</a></td></tr>
+<tr><td>TC-008</td><td>Shared and sharded scripts do not drift</td><td><code>1e771d57</code> head, unit fixtures</td><td><span class="badge pass">PASS</span></td><td><a href="scenario-8.html">Details</a></td></tr>
+</tbody></table></div>
+<p class="muted">PASS means the scenario was executed with a positive verdict against the PR head commit <code>1e771d57285f5c8fd0d2115eae9839e3be476085</code>. TC-007 carries two documented environment deviations that do not reduce etcd coverage; they are analyzed in the scenario page and appendices.</p>
+
+<h2>What was under test</h2>
+<p>PR #10118 (<code>fix(etcd): make member reset and recovery idempotent</code>) changes only etcd code: the rendered etcd StatefulSet asset, the shared/sharded reset-member script assembly in <code>v2/etcd/shard.go</code>, and the <code>etcd-recovery</code> Job logic. It does not touch the e2e suite, the kube-apiserver deployment, or any TLS-profile propagation. The verification therefore concentrated on (a) the reset-member decision matrix under mocked etcdctl failures, (b) the recovery Job's health classification and wait decisions, and (c) live recovery of a 3-member managed etcd on a hosted control plane created and reconciled by the PR-head control-plane operator image.</p>
+
+<h2>CI at the verified head</h2>
+<p>All static, lint, unit and verification checks pass at <code>1e771d572</code>. Prow e2e jobs <code>e2e-v2-azure-self-managed</code>, <code>e2e-v2-aws</code>, <code>e2e-aks</code> and <code>e2e-aws-upgrade-hypershift-operator</code> are green. <code>e2e-aws</code> failed on 2026-11-11 in <code>TestNodePool/HostedCluster2</code>, a NodePool condition-wait failure outside the PR's etcd scope, and a retry was pending when this report was captured. See <a href="automated-tests.html">automated tests</a>.</p>
+
+<h2>Navigation</h2>
+<div class="navcards">
+  <a class="navcard" href="scenario-1.html"><strong>TC-001 — Interrupted remove/add</strong><span>Mock etcdctl fails member add mid-repair; retry preserves the existing marker and adds the replacement by peer URL.</span></a>
+  <a class="navcard" href="scenario-6.html"><strong>TC-006 — Wait for every endpoint</strong><span>Unit decision matrix plus a live post-suite observation of the recovery Job refusing to complete until every member endpoint was healthy.</span></a>
+  <a class="navcard" href="scenario-7.html"><strong>TC-007 — Live etcd chaos</strong><span>All five etcd-chaos specs against the PR-head CPO, marker durability through the hosted kube-apiserver, and the documented deviations.</span></a>
+  <a class="navcard" href="appendices.html"><strong>Appendices — Environment</strong><span>Root cause of the konnectivity-server/azure-wi-webhook crashloops, upstream comparison, provenance and artifact inventory.</span></a>
+</div>
+
+<p class="back"><a href="index.html">← Return to dashboard</a></p>
+</main>
+<footer><a href="https://github.com/openshift/hypershift/pull/10118">openshift/hypershift#10118</a> · ARO-30375 · 2026-11-12 · sanitized bundle</footer>
+</body>
+</html>

@@ -1,0 +1,22 @@
+# Report metadata — see docs/format.md#html-bundle-metadata
+plan: plans/aro-30375.md
+jira_key: ARO-30375
+format: html-bundle
+date: 2026-11-12
+verdict: pass
+scenario_count: 8
+pass_count: 8
+ci_verified: false
+has_derived_markdown: false
+pr:
+  repo: openshift/hypershift
+  number: 10118
+  url: https://github.com/openshift/hypershift/pull/10118
+tester: "Garrick Dabbs (@garrickdabbs)"
+tags:
+  - hypershift
+  - etcd
+  - recovery
+  - reset-member
+  - azure
+  - aro-30375

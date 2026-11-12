@@ -1,0 +1,7 @@
+# kube-apiserver pod kube-apiserver-6b8c5ff6b-4n7tx container statuses (2026-11-12T18:31:21Z)
+audit-logs ready=true restarts=0 image=sha256:2b27f7e1e0c6258e4e442c50325c2d397f9c3862d88cbbfdbee523ac5b3ebe26
+azure-kms-provider-active ready=true restarts=0 image=sha256:f2632987c28502cad30428cb144f33a847a287c67617fc89ef83b5b16b4726c0
+azure-workload-identity-webhook ready=false restarts=27 image=sha256:d05822475adb1037daa225605283ee2fcb24ff3901f97ccab667ca1a07915b5a
+bootstrap ready=true restarts=0 image=<dev-registry>.azurecr.io/<user>/hypershift:aro30375-1e771d5728
+konnectivity-server ready=false restarts=27 image=sha256:3de2fa0580f158d7600d3b5c1da3d3dda3e811c696b216e11e0bd2f52e84426a
+kube-apiserver ready=true restarts=0 image=sha256:96689319c0459c7cabce025a6ee07cbf61ccca54045dd0623d5f888567fdb226

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ARO-30375 appendices</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topbar"><div class="brand">ARO-30375 · Verification</div><nav><a href="index.html">Dashboard</a><a href="scenario-1.html">TC-001 Retry</a><a href="scenario-2.html">TC-002 Fail closed</a><a href="scenario-3.html">TC-003 Peer URL</a><a href="scenario-4.html">TC-004 Unstarted</a><a href="scenario-5.html">TC-005 Quorum</a><a href="scenario-6.html">TC-006 Wait</a><a href="scenario-7.html">TC-007 E2E</a><a href="scenario-8.html">TC-008 Drift</a><a href="automated-tests.html">Automated</a><a href="appendices.html" class="active">Appendices</a></nav></header>
+<main>
+<div class="scenario-head"><div><div class="eyebrow">Environment · Deviations · Provenance</div><h1>Appendices</h1></div></div>
+
+<h2>A. Test environment</h2>
+<div class="table-wrap"><table class=""><thead><tr><th>Item</th><th>Value</th></tr></thead><tbody>
+<tr><td>Platform</td><td>ARO-HCP personal dev environment (Azure), management AKS + service cluster</td></tr>
+<tr><td>HostedCluster</td><td>HA control plane, 3-member managed etcd, name <code>cluster</code> (namespace redacted)</td></tr>
+<tr><td>OCP version</td><td><code>4.21.40</code>, pinned via exact-version tag to avoid candidate-channel drift</td></tr>
+<tr><td>PR head</td><td><code>1e771d57285f5c8fd0d2115eae9839e3be476085</code> (PR #10118, branch ARO-30375-etcd-bootstrap-recovery)</td></tr>
+<tr><td>Hypershift operator image</td><td>branch build of the head commit (all-in-one HO/CPO image), digest-pinned</td></tr>
+<tr><td>Control-plane-operator image</td><td><code>&lt;dev-registry&gt;.azurecr.io/&lt;user&gt;/hypershift:aro30375-1e771d5728</code> (same branch build, selected via the cpo-overrides map)</td></tr>
+<tr><td>Operator install flags</td><td><code>ENABLE_ETCD_RECOVERY=1</code>, <code>ENABLE_CPO_OVERRIDES=1</code>, <code>CAPI_STORAGE_VERSION=v1beta1</code> (rendered as env vars; see <a href="assets/evidence/cluster/operator-deploy-env.txt"><code>cluster/operator-deploy-env.txt</code></a>)</td></tr>
+<tr><td>etcd-chaos run date</td><td>2026-11-12</td></tr>
+</tbody></table></div>
+<p class="muted">Install flags land as operator ENV VARS, not CLI args, at this commit; verifying them by grepping the deployment for <code>--enable-etcd-recovery</code> produces a false negative.</p>
+
+<h2>B. Environment finding — konnectivity-server and azure-workload-identity-webhook crash-loops</h2>
+<p>The hosted control plane never reaches <code>Available</code> in this environment when it is created from scratch by a main-based control-plane operator on a GA OCP payload. Root cause, verified at each link:</p>
+<div class="table-wrap"><table class=""><thead><tr><th>#</th><th>Fact</th><th>Evidence</th></tr></thead><tbody>
+<tr><td>1</td><td>The CPO renders <code>--tls-min-version=VersionTLS12</code> and <code>--cipher-suites=&lt;6 IANA suites&gt;</code> on the konnectivity-server container, and <code>--tls-cipher-suites</code>/<code>--tls-min-version</code> on the azure-workload-identity-webhook, for every CRD-valid TLS profile (nil defaults to Intermediate)</td><td><a href="assets/evidence/cluster/kas-konnectivity-args.txt"><code>cluster/kas-konnectivity-args.txt</code></a> (live render)</td></tr>
+<tr><td>2</td><td>The GA 4.21.40 payload's <code>proxy-server</code> binary rejects <code>--tls-min-version</code>: <code>error: unknown flag: --tls-min-version</code>; the payload webhook binary rejects <code>-tls-cipher-suites</code></td><td><a href="assets/evidence/cluster/konnectivity-crashloop.txt"><code>cluster/konnectivity-crashloop.txt</code></a> · <a href="assets/evidence/cluster/azure-wi-webhook-crashloop.txt"><code>cluster/azure-wi-webhook-crashloop.txt</code></a></td></tr>
+<tr><td>3</td><td>All GA payloads checked (4.19.0, 4.20.46, 4.21.40/42/43, 4.22.9/22) ship binaries lacking these flags; no GA version avoids the crash-loop</td><td>payload digests probed directly during validation</td></tr>
+<tr><td>4</td><td>Upstream CI is green because it uses CI-stream payloads: the passing <code>e2e-v2-azure-self-managed</code> build at the same head renders byte-identical konnectivity-server arguments but a <code>quay-proxy.ci.openshift.org</code> image that accepts them</td><td><a href="assets/evidence/upstream/upstream-comparison.txt"><code>upstream/upstream-comparison.txt</code></a></td></tr>
+<tr><td>5</td><td>The flag rendering comes from hypershift main commits <code>20a145c472</code>, <code>d0083c95e1</code>, <code>4d4ac2e444</code>, all pre-dating and untouched by PR #10118; the PR's diff touches only etcd code</td><td>PR diff file list</td></tr>
+<tr><td>6</td><td>The kube-apiserver main container runs and serves 6443 throughout; only the two sidecar containers fail, leaving the pods NotReady and the external API load balancer without backends</td><td><a href="assets/evidence/cluster/kas-container-statuses.txt"><code>cluster/kas-container-statuses.txt</code></a></td></tr>
+</tbody></table></div>
+<p>Consequences for this verification: the marker-durability specs connected through the framework's port-forward client (see <a href="scenario-7.html">TC-007</a> deviation 2), and everything else (etcd chaos, recovery Job, convergence) was unaffected. An earlier accepted green run (2026-10-27) reached <code>Available</code> on the same payload because the cluster was initially created by the stock payload CPO, whose render omits the flags; the branch CPO swap afterwards only surged new crash-looping pods while the old Ready pods kept serving the load balancer.</p>
+<p>This incompatibility is a main-line issue independent of this PR and is called out here so the next verifier can reproduce the environment without re-deriving the root cause. Suppressing the flags via the HostedCluster TLS profile is not possible: every CRD-valid profile renders them.</p>
+
+<h2>C. Artifact inventory</h2>
+<div class="table-wrap"><table class=""><thead><tr><th>Path</th><th>Content</th></tr></thead><tbody>
+<tr><td><code>e2e/etcd-chaos.log</code></td><td>Full suite output, 5 specs, sanitized</td></tr>
+<tr><td><code>e2e/junit-etcd-chaos.xml</code></td><td>JUnit report written by the suite's renderer</td></tr>
+<tr><td><code>e2e/portforward-adaptation.patch</code></td><td>The 12-line local test adaptation (published verbatim)</td></tr>
+<tr><td><code>harness/validate-manual-summary.log</code></td><td>Mock-harness check-by-check output, 28 PASS / 0 FAIL</td></tr>
+<tr><td><code>unit/tc004-tc005-testchecketcdstatus.log</code></td><td>TestCheckEtcdStatus (5 subtests)</td></tr>
+<tr><td><code>unit/tc006-wait-decision-tests.log</code></td><td>TestIsHealthyForWait + TestShouldWaitWithoutRecovery (7 subtests)</td></tr>
+<tr><td><code>unit/tc008-testresetmemberscript.log</code>, <code>unit/tc008-fixture-tests.log</code></td><td>Script contract and StatefulSet fixture tests</td></tr>
+<tr><td><code>cluster/</code></td><td>Pre/post pod and StatefulSet state, events, kas container statuses, crash-loop logs, rendered args, operator env, post-suite convergence timeline</td></tr>
+<tr><td><code>upstream/upstream-comparison.txt</code></td><td>Passing upstream build's rendered konnectivity-server vs this environment</td></tr>
+<tr><td><code>scripts/sanitize-evidence.sh</code></td><td>Sanitization transform applied to all published evidence</td></tr>
+</tbody></table></div>
+
+<h2>D. Provenance and sanitization</h2>
+<div class="table-wrap"><table class=""><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody>
+<tr><td>Jira</td><td>ARO-30375</td></tr>
+<tr><td>PR</td><td><a href="https://github.com/openshift/hypershift/pull/10118">openshift/hypershift#10118</a></td></tr>
+<tr><td>Verified head commit</td><td><code>1e771d57285f5c8fd0d2115eae9839e3be476085</code></td></tr>
+<tr><td>Test plan</td><td><code>TP-ARO-30375-001 v1.1</code> (plans/aro-30375.md, PR #17)</td></tr>
+<tr><td>Report date</td><td>2026-11-12</td></tr>
+<tr><td>Verdict</td><td>pass (8/8 scenarios)</td></tr>
+<tr><td>Transformations</td><td>Hosted-cluster and control-plane namespace literals, DNS zone, registry hosts, node names, subscription ID, resource group, ARM resource name and local paths replaced with placeholders; ANSI escapes stripped; sanitized hashes regenerated</td></tr>
+</tbody></table></div>
+<p class="muted">No credentials, bearer tokens, private keys or customer data appear in this bundle. Registry hosts and image repositories are internal to the dev environment and were replaced; remaining digests reference the public OCP payload repository.</p>
+
+<h2>E. Notes for the next verifier</h2>
+<ul>
+<li>The cluster under test and its resource groups were deprovisioned via the ARM API after evidence capture; the hosted-cluster deletion and resource-group deletes run asynchronously.</li>
+<li>To reproduce the etcd-chaos run: build the PR branch operator with the cpo-overrides map covering the pinned OCP version, deploy with <code>ENABLE_ETCD_RECOVERY=1</code>, create the HC with the exact-version pin, then run <code>bin/test-e2e-v2 --ginkgo.label-filter=etcd-chaos</code> with <code>E2E_HOSTED_CLUSTER_NAME</code>/<code>E2E_HOSTED_CLUSTER_NAMESPACE</code> and the management kubeconfig.</li>
+<li>If the external API load balancer times out on a from-scratch cluster, check the konnectivity-server container log first; appendix B is the expected explanation, not a PR regression.</li>
+</ul>
+<p class="back"><a href="index.html">← Return to dashboard</a></p>
+</main>
+<footer><a href="https://github.com/openshift/hypershift/pull/10118">openshift/hypershift#10118</a> · ARO-30375 · 2026-11-12 · sanitized bundle</footer>
+</body>
+</html>

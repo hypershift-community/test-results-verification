@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TC-005 — Recovery preserves quorum</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topbar"><div class="brand">ARO-30375 · Verification</div><nav><a href="index.html">Dashboard</a><a href="scenario-1.html">TC-001 Retry</a><a href="scenario-2.html">TC-002 Fail closed</a><a href="scenario-3.html">TC-003 Peer URL</a><a href="scenario-4.html">TC-004 Unstarted</a><a href="scenario-5.html" class="active">TC-005 Quorum</a><a href="scenario-6.html">TC-006 Wait</a><a href="scenario-7.html">TC-007 E2E</a><a href="scenario-8.html">TC-008 Drift</a><a href="automated-tests.html">Automated</a><a href="appendices.html">Appendices</a></nav></header>
+<main>
+<div class="scenario-head"><div><div class="eyebrow">TC-005 · unit tier · PASS</div><h1>TC-005 — Recovery preserves quorum</h1></div><span class="badge pass">PASS</span></div>
+<p class="lead">The recovery path must not attempt member repair when doing so would drop the cluster below quorum, and must not mistake an unrelated pod failure for the unhealthy member.</p>
+<div class="callout good"><p><strong>Result: PASS.</strong> With two of three members unhealthy, the classifier reports the cluster as not recoverable instead of repairing. When the failing pod is not the unhealthy member, the cluster is likewise reported not recoverable. The live runs corroborate: through every chaos spec and the post-suite repair cycle, a quorum member set of three was maintained and the hosted kube-apiserver served throughout.</p></div>
+
+<div class="meta-grid">
+  <div><span>Executed at</span><code>1e771d57285f5c8fd0d2115eae9839e3be476085</code></div>
+  <div><span>Method</span><code>go test ./etcd-recovery/... at head</code></div>
+  <div><span>Date</span><code>2026-11-12</code></div>
+  <div><span>Plan section</span><code>TP-ARO-30375-001 v1.1 §5.5</code></div>
+</div>
+
+<h2>Checks</h2>
+<div class="table-wrap"><table class=""><thead><tr><th>Subtest</th><th>Result</th></tr></thead><tbody>
+<tr><td>two of three members unhealthy, cluster reported not recoverable</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>failing pod not the unhealthy member, cluster reported not recoverable</td><td><span class="badge pass">PASS</span></td></tr>
+</tbody></table></div>
+
+<h2>Interpretation</h2>
+<p>These guards keep the recovery Job conservative: it only acts when exactly the failing-member shape it can safely repair is present. Repairing into a two-of-three-unhealthy cluster would destroy quorum; repairing the wrong pod would duplicate the fault. The live TC-007 runs never hit either guard state (they inject single-member faults), which is itself consistent with the classifier never misfiring under legal chaos.</p>
+<p>Evidence: <a href="assets/evidence/unit/tc004-tc005-testchecketcdstatus.log"><code>unit/tc004-tc005-testchecketcdstatus.log</code></a>; live corroboration in <a href="assets/evidence/cluster/etcd-pods-final.txt"><code>cluster/etcd-pods-final.txt</code></a> and <a href="assets/evidence/cluster/post-suite-convergence.txt"><code>cluster/post-suite-convergence.txt</code></a>.</p>
+<p class="back"><a href="index.html">← Return to dashboard</a></p>
+</main>
+<footer><a href="https://github.com/openshift/hypershift/pull/10118">openshift/hypershift#10118</a> · ARO-30375 · 2026-11-12 · sanitized bundle</footer>
+</body>
+</html>

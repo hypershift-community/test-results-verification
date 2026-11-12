@@ -1,0 +1,17 @@
+# Post-suite etcd convergence timeline (30s polls, 2026-11-12, UTC-0800 local)
+# After the etcd-chaos suite reported SUCCESS (5/5 specs, sts 3/3 ready at suite
+# end ~10:17), the etcd-recovery Job stayed active and performed one more repair
+# cycle on etcd-2 before completing. Cluster converged 3/3 and stayed there.
+10:21:08 sts=2/3 etcd-2-restarts=4 job(active/suspend)=1/false
+10:21:40 sts=2/3 etcd-2-restarts=4 job(active/suspend)=1/false
+10:22:12 sts=2/3 etcd-2-restarts=5 job(active/suspend)=1/false
+10:22:43 sts=2/3 etcd-2-restarts=5 job(active/suspend)=1/false
+10:23:15 sts=2/3 etcd-2-restarts=5 job(active/suspend)=/false
+10:23:47 sts=2/3 etcd-2-restarts=0 job(active/suspend)=1/false   <- pod recreated by repair
+10:24:18 sts=3/3 etcd-2-restarts=0 job(active/suspend)=1/false
+10:24:50 sts=3/3 etcd-2-restarts=0 job(active/suspend)=          <- job completed
+10:25:22 sts=3/3 etcd-2-restarts=0 job(active/suspend)=
+10:25:54 sts=3/3 etcd-2-restarts=0 job(active/suspend)=
+10:26:26 sts=3/3 etcd-2-restarts=0 job(active/suspend)=
+10:26:57 sts=3/3 etcd-2-restarts=0 job(active/suspend)=
+# Events: job/etcd-recovery "Completed" observed at 10:24 (3m56s before a 10:28 query).

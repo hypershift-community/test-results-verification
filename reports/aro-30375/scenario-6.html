@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TC-006 — Recovery waits for every healthy endpoint</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topbar"><div class="brand">ARO-30375 · Verification</div><nav><a href="index.html">Dashboard</a><a href="scenario-1.html">TC-001 Retry</a><a href="scenario-2.html">TC-002 Fail closed</a><a href="scenario-3.html">TC-003 Peer URL</a><a href="scenario-4.html">TC-004 Unstarted</a><a href="scenario-5.html">TC-005 Quorum</a><a href="scenario-6.html" class="active">TC-006 Wait</a><a href="scenario-7.html">TC-007 E2E</a><a href="scenario-8.html">TC-008 Drift</a><a href="automated-tests.html">Automated</a><a href="appendices.html">Appendices</a></nav></header>
+<main>
+<div class="scenario-head"><div><div class="eyebrow">TC-006 · unit tier + live observation · PASS</div><h1>TC-006 — Recovery waits for every healthy endpoint</h1></div><span class="badge pass">PASS</span></div>
+<p class="lead">Success may only be reported after every member endpoint is healthy: endpoint-only unhealthiness waits without deleting resources, and a repaired cluster is not declared healthy while any member lacks a client URL or any pod is still failing.</p>
+<div class="callout good"><p><strong>Result: PASS.</strong> <code>TestIsHealthyForWait</code> (3 subtests) and <code>TestShouldWaitWithoutRecovery</code> (4 subtests) pass at head. A live post-suite observation corroborates the behavior end to end: after the chaos suite finished, the etcd-recovery Job stayed active for seven more minutes, performed one additional repair of a flapping member, and only reported completion once all three members were ready.</p></div>
+
+<div class="meta-grid">
+  <div><span>Executed at</span><code>1e771d57285f5c8fd0d2115eae9839e3be476085</code></div>
+  <div><span>Method</span><code>go test at head + live Job observation</code></div>
+  <div><span>Date</span><code>2026-11-12</code></div>
+  <div><span>Plan section</span><code>TP-ARO-30375-001 v1.1 §5.6</code></div>
+</div>
+
+<h2>Checks — unit decision matrix (7 subtests)</h2>
+<div class="table-wrap"><table class=""><thead><tr><th>Subtest</th><th>Result</th></tr></thead><tbody>
+<tr><td>recovery targets resolved and all members healthy, healthy</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>member with no client URL, not healthy</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>pod still failing, not healthy</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>every member healthy, returns without waiting</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>only a member endpoint unhealthy, waits without recovery</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>pod failing, recovers instead of only waiting</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>member missing, recovers instead of only waiting</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>failing pod with unhealthy endpoint, recovers instead of only waiting</td><td><span class="badge pass">PASS</span></td></tr>
+</tbody></table></div>
+<p class="muted">The plan's fallback step table (endpoint-only unhealthiness waits; failing pod selects the recovery path; success only after the endpoint is healthy) maps one-to-one onto these subtests.</p>
+
+<h2>Live corroboration — post-suite convergence</h2>
+<p>After the <a href="scenario-7.html">TC-007</a> suite reported SUCCESS with the StatefulSet at 3/3 ready, the etcd-recovery Job did not immediately complete. It kept watching, found member <code>etcd-2</code>'s container crash-looping (<code>listener failed: server is stopping</code>), performed one more remove/re-add and pod recreation, and only then reported <code>Completed</code>. The full 30-second-poll timeline:</p>
+<div class="table-wrap"><table class=""><thead><tr><th>Time (local)</th><th>StatefulSet ready</th><th>etcd-2 restarts</th><th>Recovery Job</th></tr></thead><tbody>
+<tr><td>10:21:08</td><td>2/3</td><td>4</td><td>active</td></tr>
+<tr><td>10:22:12</td><td>2/3</td><td>5</td><td>active</td></tr>
+<tr><td>10:23:47</td><td>2/3</td><td>0 (pod recreated by repair)</td><td>active</td></tr>
+<tr><td>10:24:18</td><td>3/3</td><td>0</td><td>active</td></tr>
+<tr><td>10:24:50</td><td>3/3</td><td>0</td><td>completed</td></tr>
+<tr><td>10:26:57</td><td>3/3</td><td>0</td><td>— (job removed)</td></tr>
+</tbody></table></div>
+<p>The Job was deleted by the control-plane operator after completion, which is the designed lifecycle. No further flapping was observed.</p>
+
+<h2>Interpretation</h2>
+<p>This is the property that keeps recovery honest: the Job's success criterion is cluster-wide endpoint health, not pod readiness alone. The unit matrix covers each decision branch; the live observation shows the composed loop (classify, repair only what fails, re-check every endpoint, then finish) converging on a real cluster.</p>
+<p>Evidence: <a href="assets/evidence/unit/tc006-wait-decision-tests.log"><code>unit/tc006-wait-decision-tests.log</code></a> · <a href="assets/evidence/cluster/post-suite-convergence.txt"><code>cluster/post-suite-convergence.txt</code></a> · <a href="assets/evidence/cluster/cp-events-final.txt"><code>cluster/cp-events-final.txt</code></a> (job <code>Completed</code> event).</p>
+<p class="back"><a href="index.html">← Return to dashboard</a></p>
+</main>
+<footer><a href="https://github.com/openshift/hypershift/pull/10118">openshift/hypershift#10118</a> · ARO-30375 · 2026-11-12 · sanitized bundle</footer>
+</body>
+</html>

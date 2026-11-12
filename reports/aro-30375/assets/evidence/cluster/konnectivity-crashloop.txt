@@ -1,0 +1,6 @@
+# konnectivity-server container log tail (2026-11-12T18:31:21Z)
+      --uds-name string                    uds-name should be empty for TCP traffic. For UDS set to its name.
+  -v, --v Level                            number for the log level verbosity (default 4)
+      --vmodule moduleSpec                 comma-separated list of pattern=N settings for file-filtered logging
+
+E1112 18:27:14.656817       1 main.go:49] error: unknown flag: --tls-min-version

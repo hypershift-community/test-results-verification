@@ -1,0 +1,14 @@
+=== RUN   TestCheckEtcdStatus
+=== RUN   TestCheckEtcdStatus/When_a_member_has_not_started_and_its_pod_is_crash_looping,_it_should_report_a_failing_pod_without_erroring
+=== RUN   TestCheckEtcdStatus/When_a_member_has_not_started_but_no_pod_has_restarted,_it_should_not_report_the_cluster_as_unhealthy
+=== RUN   TestCheckEtcdStatus/When_two_of_three_members_are_unhealthy,_it_should_report_the_cluster_as_not_recoverable
+=== RUN   TestCheckEtcdStatus/When_a_member_reports_more_than_one_client_URL,_it_should_return_an_error
+=== RUN   TestCheckEtcdStatus/When_the_failing_pod_is_not_the_unhealthy_member,_it_should_report_the_cluster_as_not_recoverable
+--- PASS: TestCheckEtcdStatus (0.05s)
+    --- PASS: TestCheckEtcdStatus/When_a_member_has_not_started_and_its_pod_is_crash_looping,_it_should_report_a_failing_pod_without_erroring (0.05s)
+    --- PASS: TestCheckEtcdStatus/When_a_member_has_not_started_but_no_pod_has_restarted,_it_should_not_report_the_cluster_as_unhealthy (0.00s)
+    --- PASS: TestCheckEtcdStatus/When_two_of_three_members_are_unhealthy,_it_should_report_the_cluster_as_not_recoverable (0.00s)
+    --- PASS: TestCheckEtcdStatus/When_a_member_reports_more_than_one_client_URL,_it_should_return_an_error (0.00s)
+    --- PASS: TestCheckEtcdStatus/When_the_failing_pod_is_not_the_unhealthy_member,_it_should_report_the_cluster_as_not_recoverable (0.00s)
+PASS
+ok  	github.com/openshift/hypershift/etcd-recovery	0.073s
