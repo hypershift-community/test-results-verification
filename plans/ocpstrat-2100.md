@@ -1,7 +1,7 @@
 ---
 id: TP-OCPSTRAT-2100-NUTANIX-001
 version: "1.1"
-date: 2026-11-10
+date: 2026-11-12
 title: "Agent HostedCluster with Nutanix worker VMs"
 jira_issues:
   - key: OCPSTRAT-2100
@@ -11,6 +11,7 @@ pull_requests:
   - repo: openshift/release
     number: 86870
     url: https://github.com/openshift/release/pull/86870
+    role: implementation
 status: draft
 tags:
   - nutanix
@@ -26,9 +27,9 @@ ieee_829: true
 
 **ID:** TP-OCPSTRAT-2100-NUTANIX-001
 
-**Version:** 1.10
+**Version:** 1.1
 
-**Date:** 2026-11-10
+**Date:** 2026-11-12
 
 **IEEE 829 Compliance:** This plan follows the IEEE 829-2008 structure for
 software and system test documentation.
@@ -120,6 +121,7 @@ cleanup fails.
 | Feature | [OCPSTRAT-2100](https://redhat.atlassian.net/browse/OCPSTRAT-2100), limited here to Nutanix work |
 | Implementation design | [openshift/release#86867](https://github.com/openshift/release/pull/86867), a review-only plan PR; it does not itself implement the workflow |
 | Implementation revision | [openshift/release@cadcee28fc8b](https://github.com/openshift/release/commit/cadcee28fc8be3fbd6649cf5dd96ef81ada15c19) (2026-11-09); this plan targets the tracked files at this commit |
+| Nutanix periodic | [Pinned CI configuration](https://github.com/openshift/release/blob/cadcee28fc8be3fbd6649cf5dd96ef81ada15c19/ci-operator/config/openshift/hypershift/openshift-hypershift-release-5.1__periodics-mce.yaml) selects OCP 5.1 CI candidates and MCE 5.1 for Nutanix conformance |
 | Agent manual workflow | [HyperShift Agent guide](https://github.com/openshift/hypershift/blob/51bfaf4a8d2a8b4cb3e80987b2748623c642f8ea/docs/content/how-to/agent/create-agent-cluster.md) describes HostedCluster and InfraEnv creation, manual ISO boot, Agent approval, NodePool scaling, and discovery-image boot before reuse; the Nutanix worker and destroy refs manage CI VMs separately |
 | Workflow | `ci-operator/step-registry/hypershift/mce/agent/nutanix/conformance/hypershift-mce-agent-nutanix-conformance-workflow.yaml`; declares the `NUTANIX_QUOTA_SLICE` lease and runs the Nutanix create chain |
 | Creation chain | `ci-operator/step-registry/hypershift/mce/agent/nutanix/create/hypershift-mce-agent-nutanix-create-chain.yaml` |
@@ -131,6 +133,10 @@ cleanup fails.
 
 | Property | Required state |
 | --- | --- |
+| Cluster type | Agent-platform HostedCluster with its control plane on the baremetal-backed MCE management cluster and guest Nodes on Nutanix worker VMs |
+| Platform | Nutanix Prism Element for worker VMs; OFCIR baremetal management cluster |
+| Version or build | OCP 5.1 CI candidate and MCE 5.1 in the pinned Nutanix periodic configuration; record the exact guest release image and MCE build for each run |
+| Prerequisites or tooling | Allocated OFCIR management cluster and Nutanix quota slice, Prism credentials, MCE Assisted Service, IPv4 subnet and proxy access; use `oc`, Nutanix provisioning Ansible roles, `openshift-tests`, and CI artifact collection |
 | Management cluster | Existing baremetal-backed OFCIR profile with MCE and Assisted Service; HostedCluster control plane remains here |
 | Guest cluster | Agent-platform HostedCluster and NodePool; management and guest kubeconfigs remain distinct |
 | Nutanix allocation | Separate declarative `nutanix-quota-slice` lease, Prism credentials, one matching Prism Element cluster and selected subnet, and a derived IPv4 ingress VIP outside its DHCP pools |
@@ -163,10 +169,13 @@ or unavailable check is not a pass.
 
 ### 5.1 TC-001: Declarative Nutanix Lease and Context
 
+**Objective:** Confirm the Nutanix lease and IPv4 context identify one Prism
+cluster and selected subnet before provisioning.
+
 **Preconditions:** The management allocation exists, and the Nutanix lease
 service and Prism credential mount are available.
 
-| Automated action | Expected result |
+| Action | Expected result |
 | --- | --- |
 | CI-operator assigns the workflow's `nutanix-quota-slice` lease to `NUTANIX_QUOTA_SLICE` | A separate Nutanix allocation is present without replacing the baremetal management allocation |
 | Run `hypershift-mce-agent-nutanix-context` | Non-IPv4 input fails; the lease, CI run ID, and Prism credential fields are present; exactly one matching Prism Element cluster and selected subnet resolve |
@@ -178,9 +187,12 @@ the private Nutanix context file.
 
 ### 5.2 TC-002: Assisted Service Readiness
 
+**Objective:** Confirm Assisted Service reaches its required readiness
+conditions before the InfraEnv is created.
+
 **Preconditions:** The management cluster and MCE are available.
 
-| Automated action | Expected result |
+| Action | Expected result |
 | --- | --- |
 | Run `hypershift-mce-agent-create-agentserviceconfig` | `AgentServiceConfig/agent` reaches `ReconcileCompleted` |
 | Wait for Assisted Service components | The Assisted Service deployment is `Available` and an Assisted Image Service pod is `Ready` within the step timeouts |
@@ -189,10 +201,13 @@ the private Nutanix context file.
 
 ### 5.3 TC-003: Proxy, Ingress Gateway, Worker DNS, and Discovery ISO
 
+**Objective:** Verify the proxy, ingress gateway, worker DNS, network
+configuration, and discovery ISO are ready for Nutanix worker discovery.
+
 **Preconditions:** TC-001 and TC-002 pass; the intended Agent namespace,
 Squid endpoint, and HostedCluster `noProxy` value are available.
 
-| Action or check | Expected result |
+| Action | Expected result |
 | --- | --- |
 | Run `hypershift-mce-agent-create-hostedcluster` | The HostedCluster proxy uses Squid and includes the context step's selected Nutanix subnet CIDR in `noProxy` |
 | Run `hypershift-agent-create-proxy` | The Assisted Service route is discovered before Squid's allowlist is updated |
@@ -210,9 +225,12 @@ Agents after worker boot.
 
 ### 5.4 TC-004: Nutanix Worker VM Records
 
+**Objective:** Verify provisioning creates only the expected worker VMs with
+traceable image, VM, and NIC identities and the intended hardware shape.
+
 **Preconditions:** TC-003 passes and the Nutanix allocation is active.
 
-| Automated action | Expected result |
+| Action | Expected result |
 | --- | --- |
 | Run `hypershift-mce-agent-nutanix-workers` | The step confirms tunnel and worker DNS state, downloads the InfraEnv ISO through Squid, uploads one image, and creates exactly `NUTANIX_WORKERS` worker VMs; the default is three and no Nutanix control-plane VM is created |
 | Inspect provisioning records and each VM | Exactly one uploaded image UUID and one distinct UUID per worker are recorded; each queried VM has one unambiguous NIC MAC matching its reserved NMStateConfig MAC |
@@ -222,9 +240,12 @@ Agents after worker boot.
 
 ### 5.5 TC-005: Agent Discovery and Inventory
 
+**Objective:** Verify the expected Agents register through this run's InfraEnv
+and report NIC inventories before identity matching.
+
 **Preconditions:** TC-004 passes and the VMs boot the InfraEnv ISO.
 
-| Automated action | Expected result |
+| Action | Expected result |
 | --- | --- |
 | Wait for Agents associated with this run's InfraEnv | Exactly `NUTANIX_WORKERS` Agents register within the deadline; an extra Agent or timeout fails |
 | Wait for each Agent's interface inventory | Every Agent reports NIC MAC information before VM-to-Agent matching begins |
@@ -234,9 +255,12 @@ inventory status.
 
 ### 5.6 TC-006: VM-to-Agent Identity and Run Isolation
 
+**Objective:** Prove each run-owned VM maps to exactly one Agent and unrelated
+Agents remain outside the run's selection and approval.
+
 **Preconditions:** TC-005 passes and worker VM MACs are recorded.
 
-| Automated action | Expected result |
+| Action | Expected result |
 | --- | --- |
 | Match each recorded VM MAC to Agent inventory | Every VM maps to exactly one distinct Agent; missing or ambiguous mappings fail |
 | Label and count the matched Agents | The run label selects exactly `NUTANIX_WORKERS` Agents; unrelated Agents remain unselected and unapproved |
@@ -245,10 +269,13 @@ inventory status.
 
 ### 5.7 TC-007: NodePool Membership and Installation
 
+**Objective:** Verify only the matched Agents are approved and installed into
+the intended NodePool after network and proxy validation.
+
 **Preconditions:** TC-006 passes; the intended NodePool starts at zero
 replicas.
 
-| Automated action | Expected result |
+| Action | Expected result |
 | --- | --- |
 | Restrict the NodePool selector to this run's Agent label | The selector matches only the mapped Agents |
 | Apply the Ignition proxy override and approve the selected Agents | Each selected Agent retains the expected HTTP and HTTPS proxy settings and is approved before installation |
@@ -260,9 +287,12 @@ Ignition override, network validations, conditions, and installation states.
 
 ### 5.8 TC-008: Guest Node Count and Readiness
 
+**Objective:** Verify installation completes its disk reboot and exactly the
+expected guest Nodes become Ready.
+
 **Preconditions:** TC-007 passes and the guest kubeconfig is available.
 
-| Automated action | Expected result |
+| Action | Expected result |
 | --- | --- |
 | Poll guest Nodes with the guest kubeconfig | Exactly `NUTANIX_WORKERS` Nodes exist and all have `Ready=True` within the deadline; an extra Node or timeout fails |
 
@@ -278,6 +308,9 @@ and redacted Agent installation state and guest Node condition summaries.
 
 ### 5.9 TC-009: Worker Proxy, HTTPS, DNS, and Trust
 
+**Objective:** Verify every worker reaches required endpoints through the
+configured proxy or direct path with working DNS and certificate trust.
+
 **Preconditions:** TC-008 passes. Record the configured Squid IP and listener
 port, and derive required destination hostnames and ports from the InfraEnv and
 Assisted Service routes, ISO/rootfs URLs, guest kubeconfig, HostedCluster
@@ -285,7 +318,7 @@ services, and registry/test configuration. Do not assume every TLS endpoint
 uses port 443; include the observed API, ignition, OAuth, and Konnectivity
 NodePorts where applicable.
 
-| Action or check | Expected result |
+| Action | Expected result |
 | --- | --- |
 | Read guest `Proxy/cluster` | Both `spec.httpProxy` and `spec.httpsProxy` equal the expected Squid URL |
 | Probe the Squid listener from every guest Node with `oc debug node` | Each Node opens a TCP connection to the Squid host and port |
@@ -310,9 +343,12 @@ The evidence must come from the workers used for that conformance run.
 
 ### 5.10 TC-010: Ingress, Guest, and HostedCluster Health
 
+**Objective:** Verify ingress, guest ClusterVersion, ManagedCluster, and
+HostedCluster health after the Nutanix workers become Ready.
+
 **Preconditions:** TC-008 passes and guest API access is stable.
 
-| Action or check | Expected result |
+| Action | Expected result |
 | --- | --- |
 | Run `hypershift-agent-create-metallb` and `hypershift-mce-agent-nutanix-ingress-tunnel-verify` | The MetalLB ingress Service has the selected VIP and ready router endpoints; the proxy host resolves the canary Route to that VIP and routes it over the WireGuard `/32` path with a recent handshake; the gateway uses its worker-subnet address and has active forwarding |
 | Probe the ingress canary in `hypershift-mce-agent-nutanix-ingress-tunnel-verify` | Direct HTTPS from the gateway and baremetal host, plus HTTPS through Squid, return 2xx/3xx; direct port 80 probes respond; the ingress operator is available, not degraded, and reports `CanaryChecksSucceeding=True` |
@@ -327,9 +363,12 @@ release version used to select version-dependent checks.
 
 ### 5.11 TC-011: Guest Conformance
 
+**Objective:** Run the selected guest conformance suite and account for its
+results, skipped tests, and disabled monitors.
+
 **Preconditions:** TC-009 and TC-010 pass and the guest kubeconfig is available.
 
-| Automated action | Expected result |
+| Action | Expected result |
 | --- | --- |
 | Run the `hypershift-conformance` test chain | `openshift-tests run openshift/conformance/parallel` targets the guest cluster and produces JUnit output |
 | Review the selected test list, skips, exit status, and JUnit | Selected conformance tests pass; compare the applied skips with the workflow's three `TEST_SKIPS` patterns and two disabled monitors in `TEST_ARGS`, and triage other skips or failures before acceptance |
@@ -366,6 +405,9 @@ The suite covers areas such as:
 
 ### 5.12 TC-012: NodePool Scale-Out, Scale-In, and Agent Reuse
 
+**Objective:** Verify NodePool scaling and released Agent capacity preserve
+workload availability and VM-to-Agent identity across reuse.
+
 **Preconditions:** Use a retained verification environment built with the same
 setup steps and three Ready workers after TC-008, capacity for one more Nutanix
 VM, and the same proxy, gateway, DNS, and InfraEnv configuration. Track any
@@ -373,7 +415,7 @@ extra VM and image by exact identity in private run state for TC-013 cleanup.
 The pinned workflow scales once from zero to the fixed `NUTANIX_WORKERS` count;
 it does not execute this scenario.
 
-| Action or check | Expected result |
+| Action | Expected result |
 | --- | --- |
 | Run a four-replica HTTP application behind a Service, with a `minAvailable: 3` PodDisruptionBudget and placement that permits rescheduling; probe the Service continuously | The application is healthy on the initial three Nodes and the probe establishes a baseline before scaling |
 | Reserve a fourth worker MAC, create its run-labeled NMStateConfig, boot a fourth run-owned VM from an InfraEnv ISO containing that configuration, and map its Agent | The new Agent has the expected MAC, proxy and DNS settings, passes validations, and receives the same Ignition proxy override and approval as the original workers; record the VM and any new image in private run state for exact cleanup |
@@ -394,11 +436,14 @@ from the conformance run.
 
 This case records CI resource hygiene separately from product verification.
 
+**Objective:** Verify run-owned resources are removed and residual resources
+are reported independently of Nutanix lease release.
+
 **Preconditions:** The workflow reaches post steps after a successful or
 failed pre or test phase, or the retained TC-012 environment is ready for
 teardown. Retain diagnostics before deletion.
 
-| Automated action | Expected result |
+| Action | Expected result |
 | --- | --- |
 | Run `hypershift-mce-agent-nutanix-discard-agents` before `hypershift-mce-agent-destroy` | Run-owned disposable Agents, including those registered before run-label assignment, and InfraEnv are removed before HostedCluster destruction |
 | Run `hypershift-mce-agent-destroy` | The run's HostedCluster, NodePool, and ManagedCluster are absent after bounded polling; check independently because the chain tolerates an `hcp destroy` error |
@@ -443,7 +488,7 @@ finish and inspect the Nutanix lease afterward. The destroy step's failure
 establishes a CI cleanup failure; it does not establish that the lease remains
 held.
 
-| Action or check | Expected result |
+| Action | Expected result |
 | --- | --- |
 | Inspect the destroy step and remaining post steps | The destroy step exits nonzero and reports that deletion cannot be verified; CI-operator attempts to release the lease after the workflow returns despite the cleanup error |
 | Independently inspect the resource and the lease after workflow completion | Record whether the resource is absent, present, or unconfirmed, and query the lease service for the run's lease state and holder; the lease is no longer held by this run. Report a held lease as a separate release failure and preserve unrelated resources |
@@ -465,6 +510,9 @@ separately because the workflow sets `allow_best_effort_post_steps: true`.
 
 ### 5.14 TC-014: Manual Prism Provisioning and Guest Workload
 
+**Objective:** Verify the documented customer procedure provisions three
+Nutanix workers through Prism and runs a workload on the guest cluster.
+
 **Execution:** Required manual product case in a separate, customer-like
 Nutanix environment. Follow the customer-facing Agent platform and Prism
 instructions, recording their titles and revisions. Do not invoke the CI
@@ -479,7 +527,7 @@ proxy, certificate trust, and ingress prerequisites are available. Use the
 documented customer procedure to create a separate Agent HostedCluster and an
 initially empty NodePool.
 
-| Manual action or check | Expected result |
+| Action | Expected result |
 | --- | --- |
 | Create and inspect the HostedCluster, NodePool, and InfraEnv using the documented Agent platform procedure | The NodePool starts at zero replicas; the InfraEnv reaches `ImageCreated` and provides a downloadable discovery ISO with the documented network and proxy settings |
 | In Prism, upload the InfraEnv ISO and create three worker VMs with an empty installation disk, a NIC on the intended subnet, and the ISO attached as a virtual CD-ROM | Each VM has the planned CPU, memory, and disk size; its UUID and NIC MAC are unique and recorded; the first boot loads the discovery ISO |
@@ -497,7 +545,7 @@ unrelated resources.
 
 ## 6. Risks and Mitigations
 
-| Risk or coverage boundary | Mitigation or interpretation |
+| Risk | Mitigation |
 | --- | --- |
 | The pinned worker step checks proxy fields and TCP reachability but not the full worker request path | Complete all worker-origin checks in TC-009 before conformance; a green workflow run alone does not pass this gate |
 | CI provisions Nutanix VMs through Ansible and may hide manual prerequisites | Execute required TC-014 through Prism using customer-facing instructions; record any setup available only in CI scripts as a documentation gap and a failed manual case |
@@ -511,4 +559,4 @@ unrelated resources.
 | Role | Name | Date |
 | --- | --- | --- |
 | Author | Martin Gencur | 2026-10-15 |
-| Nutanix test reviewer |  |  |
+| Reviewer |  |  |
