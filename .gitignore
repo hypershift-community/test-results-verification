@@ -1,2 +1,5 @@
 .claude/settings.local.json
 .serena/*
+.work/
+bin/
+coverage.out

@@ -1,0 +1,53 @@
+name: Validate
+
+on:
+  # Every PR, including stacked PRs; fork runs require maintainer approval
+  # (see docs/validation.md#enforcement).
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate artifacts and Go
+    runs-on: arc-runner-set
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+      - name: Prepare writable Go caches
+        shell: bash
+        run: |
+          : "${RUNNER_TEMP:?RUNNER_TEMP is required}" "${GITHUB_ENV:?GITHUB_ENV is required}"
+          mkdir -p "$RUNNER_TEMP/go-build" "$RUNNER_TEMP/go-mod" "$RUNNER_TEMP/golangci-lint" "$RUNNER_TEMP/xdg-cache"
+          {
+            printf 'GOCACHE=%s\n' "$RUNNER_TEMP/go-build"
+            printf 'GOMODCACHE=%s\n' "$RUNNER_TEMP/go-mod"
+            printf 'GOLANGCI_LINT_CACHE=%s\n' "$RUNNER_TEMP/golangci-lint"
+            # x/tools' module index uses the OS cache, not the Go-specific paths.
+            printf 'XDG_CACHE_HOME=%s\n' "$RUNNER_TEMP/xdg-cache"
+          } >> "$GITHUB_ENV"
+      - uses: actions/setup-go@924ae3a1cded613372ab5595356fb5720e22ba16 # v6.5.0
+        with:
+          go-version-file: go.mod
+          cache: true
+      - name: Install pinned tools
+        run: make install-tools
+      - name: Test behavior
+        run: make test
+      - name: Lint code and artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          make lint 2>&1 | tee "$RUNNER_TEMP/lint-output.log"
+          if grep -Fq 'failed to create modcache index dir:' "$RUNNER_TEMP/lint-output.log"; then
+            printf '::error::golangci-lint failed to initialize its module-index cache\n'
+            exit 1
+          fi
+      - name: Build CLI
+        run: make build
