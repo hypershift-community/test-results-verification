@@ -1,7 +1,7 @@
 ---
 id: TP-OCPSTRAT-2653-001
-version: "1.0"
-date: 2026-10-14
+version: "1.1"
+date: 2026-11-18
 title: "Deterministic LoadBalancer IP Management for Hosted Control Planes"
 jira_issues:
   - key: OCPSTRAT-2653
@@ -20,6 +20,22 @@ pull_requests:
     number: 9898
     url: https://github.com/openshift/hypershift/pull/9898
     role: implementation
+  - repo: openshift/hypershift
+    number: 10133
+    url: https://github.com/openshift/hypershift/pull/10133
+    role: implementation
+  - repo: openshift/hypershift
+    number: 10142
+    url: https://github.com/openshift/hypershift/pull/10142
+    role: implementation
+  - repo: openshift/hypershift
+    number: 10237
+    url: https://github.com/openshift/hypershift/pull/10237
+    role: test
+  - repo: openshift/release
+    number: 88475
+    url: https://github.com/openshift/release/pull/88475
+    role: test
 status: draft
 tags:
   - loadbalancer
@@ -38,8 +54,8 @@ author: jparrill
 ## 1. Test Plan Identifier
 
 **ID:** TP-OCPSTRAT-2653-001
-**Version:** 1.0
-**Date:** 2026-10-14
+**Version:** 1.1
+**Date:** 2026-11-18
 **IEEE 829 Compliance:** This document follows the IEEE 829-2008 Standard
 for Software and System Test Documentation.
 
@@ -52,18 +68,18 @@ for Software and System Test Documentation.
 This plan defines the verification strategy for **Deterministic LoadBalancer
 IP Management** in HyperShift. The feature allows users to pin a fixed IP on
 the KAS (Kubernetes API Server) LoadBalancer Service via HostedCluster
-annotations, preventing IP drift across lifecycle events on bare-metal and
-on-prem deployments.
+annotations, preventing IP drift across lifecycle events on bare-metal,
+on-prem and cloud deployments.
 
 Key capabilities under test:
 
-**Day 1 (PR #9913 + #9898 — implemented):**
-- `serviceAnnotations` passthrough from `HostedCluster.spec.services[].servicePublishingStrategy.loadBalancer` to KAS Service via CPO (`ReconcileService()` and `ReconcilePrivateService()`)
-- `loadBalancerClass` selection on the KAS Service (MetalLB, F5, Cilium, etc.)
-- CEL validation: `loadBalancerClass` immutability, `serviceAnnotations` immutability (TechPreview — mutable at GA), services-list entry/type immutability with IBMCloud exemption
-- `spec.services` CEL migration from full-list equality to per-entry immutability (entries and strategy types cannot be added/removed/changed; `serviceAnnotations` is immutable during TechPreview and becomes mutable at GA)
+**Day 1 (PRs #9898, #9913, #10133, #10142 — implemented):**
+- `serviceAnnotations` passthrough from `HostedCluster.spec.services[].servicePublishingStrategy.loadBalancer` to **the primary** kube-apiserver Service via CPO (`ReconcileService()` for a public cluster, `ReconcilePrivateService()` for a private one). Only the Service exposing the primary endpoint receives the address annotations; requesting the same address on both leaves whichever load balancer loses the race pending forever, so `ReconcilePrivateService()` actively removes them once a public endpoint exists.
+- `loadBalancerClass` selection on the KAS Service (MetalLB, F5, Cilium, etc.). Unlike the annotations, it applies to every LoadBalancer KAS Service because it selects the provisioning controller rather than an address — but only at Service creation, or when a Service is converted to type `LoadBalancer`. An existing LoadBalancer Service that predates the field is left without one, because Kubernetes makes `loadBalancerClass` immutable once set.
+- CEL validation: `loadBalancerClass` qualified-name format, `serviceAnnotations` provider-prefix allowlist plus size bounds (see §3 Design notes), and whole-list `spec.services` immutability with the IBMCloud exemption.
+- `spec.services` immutability: PR #9913 **kept** `ListType=atomic` and the pre-existing deep-equality CEL rule (`self.services == oldSelf.services`, IBMCloud exempt). It did **not** convert the rules to per-entry immutability — that conversion is Day 2 work, needed so `serviceAnnotations` can become mutable.
 
-**Day 2 (not yet implemented — test cases defined against enhancement design):**
+**Day 2 (not yet implemented — targeted at OCP 5.2; test cases defined against enhancement design):**
 - Zero-rollout sidecar updates via SIGUSR2 (no pod restart on IP change)
 - Ignition server `/kas-ip` endpoint for node IP discovery
 - Config hash stability across IP changes (placeholder mechanism)
@@ -72,9 +88,9 @@ Key capabilities under test:
 
 ### 2.2 Objectives
 
-1. Verify `serviceAnnotations` on `HostedCluster.spec` are passed through to the KAS Service (public and private) and the LB acquires the specified IP.
-2. Verify `loadBalancerClass` is correctly set on the KAS Service.
-3. Verify CEL validation enforces `loadBalancerClass` immutability, `serviceAnnotations` mutability, and services-list entry/type immutability.
+1. Verify `serviceAnnotations` on `HostedCluster.spec` are passed through to the **primary** kube-apiserver Service — public for a public cluster, private for a private one — and the LB acquires the specified IP.
+2. Verify `loadBalancerClass` is set at Service creation and on conversion to type `LoadBalancer`, and is deliberately not retro-fitted to a pre-existing LoadBalancer Service.
+3. Verify CEL validation enforces `loadBalancerClass` format, the `serviceAnnotations` provider-prefix allowlist and size bounds, and whole-list `spec.services` immutability.
 4. Verify no regression for existing HCs without LB annotations.
 5. *(Day 2)* Verify IP changes trigger sidecar reload (SIGUSR2), not pod rollout.
 6. *(Day 2)* Verify the `/kas-ip` ignition server endpoint returns the correct IP.
@@ -85,7 +101,7 @@ Key capabilities under test:
 
 | Acceptance Criterion | Test Cases |
 |----------------------|------------|
-| AC #1 — Annotations passed through to KAS Service | TC-001, TC-003 (Section 5.1) |
+| AC #1 — Annotations passed through to the primary KAS Service | TC-001, TC-003 (Section 5.1) |
 | AC #2 — loadBalancerClass correctly set | TC-002 (Section 5.1) |
 | AC #3 — No regression without annotations | TC-004 (Section 5.1) |
 | AC #4 — IP change triggers SIGUSR2, no rollout | TC-005, TC-006, TC-007 (Section 5.2) |
@@ -94,7 +110,6 @@ Key capabilities under test:
 | AC #7 — /kas-ip endpoint correct | TC-012 through TC-015 (Section 5.4) |
 | AC #8 — Upgrade flow and condition transitions | TC-029 through TC-032 (Section 5.9) |
 | AC #9 — Kubelet via HAProxy (prerequisite) | TC-016 (Section 5.5) |
-| AC #10 — Private HC annotation passthrough | TC-033 (Section 5.1) |
 | AC #16 — Non-regression without feature (gate on, no annotations) | TC-004, TC-017, TC-018 (Section 5.1) |
 | AC #17 — Version skew NodePool compatibility | TC-010, TC-011 (Section 5.3) |
 | AC #18 — Cilium LB IPAM integration | TC-028 (Section 5.8) |
@@ -119,8 +134,11 @@ automated methods will be added when the implementation lands.
 | Item | Reference |
 |------|-----------|
 | Enhancement proposal | [openshift/enhancements#2117](https://github.com/openshift/enhancements/pull/2117) |
-| Implementation PR (API + CEL) | [openshift/hypershift#9913](https://github.com/openshift/hypershift/pull/9913) |
+| Implementation PR (API fields) | [openshift/hypershift#9913](https://github.com/openshift/hypershift/pull/9913) |
+| Implementation PR (annotation allowlist + size bounds) | [openshift/hypershift#10142](https://github.com/openshift/hypershift/pull/10142) |
+| Implementation PR (CPO passthrough to KAS Services) | [openshift/hypershift#10133](https://github.com/openshift/hypershift/pull/10133) |
 | Implementation PR (feature gate) | [openshift/hypershift#9898](https://github.com/openshift/hypershift/pull/9898) |
+| Implementation PR (CLI flags, envtest and e2e) | [openshift/hypershift#10237](https://github.com/openshift/hypershift/pull/10237) |
 | Implementation PR (ignition server /kas-ip) | TBD — tracked by [CNTRLPLANE-4799](https://issues.redhat.com/browse/CNTRLPLANE-4799) |
 | Strategy Jira | [OCPSTRAT-2653](https://issues.redhat.com/browse/OCPSTRAT-2653) |
 | Epic | [CNTRLPLANE-4574](https://issues.redhat.com/browse/CNTRLPLANE-4574) |
@@ -129,17 +147,36 @@ automated methods will be added when the implementation lands.
 
 **Design notes:**
 
-- PR #9913 changes `spec.services` CEL immutability rules from full-list
-  equality (`self.services == oldSelf.services`) to per-entry checks: service
-  keys and strategy types are immutable, but fields within each entry (like
-  `serviceAnnotations`) are immutable during TechPreview and mutable at GA.
-  The `ListType=atomic` kubebuilder marker
-  remains on the Go struct; the migration is CEL-based, not listType-based.
-- `serviceAnnotations` is a plain `map[string]string` with `MinProperties=1`
-  and `MaxProperties=10`. There is no CEL allowlist restricting annotation
-  keys — any valid annotation key is accepted.
-- `loadBalancerClass` has CEL validation for valid qualified-name format and
-  is immutable after creation (matching Kubernetes Service semantics).
+- PR #9913 **kept** `spec.services` as `ListType=atomic` with the pre-existing
+  deep-equality CEL rule (`self.services == oldSelf.services`, IBMCloud exempt).
+  No per-entry rules were introduced. Deep equality covers the new fields
+  automatically — `loadBalancerClass` and `serviceAnnotations` are immutable
+  because every field of every service entry is. Converting to per-entry
+  immutability (service keys and strategy types fixed, `serviceAnnotations`
+  mutable) is **Day 2** work, required before annotations can change at runtime.
+- `serviceAnnotations` is a `map[string]string` with `MinProperties=1` and
+  `MaxProperties=10`, plus a **CEL provider-prefix allowlist**. Every key must
+  start with one of: `metallb.io/`, `metallb.universe.tf/`,
+  `service.beta.kubernetes.io/aws-load-balancer-eip`,
+  `service.beta.kubernetes.io/aws-load-balancer-subnet`,
+  `service.beta.kubernetes.io/aws-load-balancer-target-group`,
+  `service.beta.kubernetes.io/azure-load-balancer-ipv`,
+  `service.beta.kubernetes.io/azure-load-balancer-resource-group`,
+  `networking.gke.io/` (except `networking.gke.io/load-balancer-type`),
+  `cis.f5.com/`, `lbipam.cilium.io/`, `loadbalancer.openstack.org/`.
+  Keys are limited to 317 characters and values to 253. HyperShift does not
+  validate annotation *value* semantics.
+- `loadBalancerClass` has CEL validation for valid qualified-name format
+  (≤253 chars, name segment ≤63) and is immutable after creation, both because
+  of the whole-list rule and because Kubernetes Services make the field
+  immutable (matching Kubernetes Service semantics). It is applied on create,
+  and when a Service is converted to type `LoadBalancer` on a private → public
+  endpoint transition.
+- AWS carve-out: `service.beta.kubernetes.io/aws-load-balancer-type` is skipped
+  on AWS in both reconciliation paths (OCPBUGS-16728 — the admission policy
+  blocks changing the NLB type after creation, so a user value would make every
+  subsequent Service update fail). Note this key is not in the CEL allowlist
+  today, so the guard is defensive and currently unreachable from user input.
 - *(Day 2)* Sidecar reload uses SIGUSR2 signal, avoiding full pod rollout.
 
 ---
@@ -150,10 +187,11 @@ automated methods will be added when the implementation lands.
 |----------|-------|
 | Bare-metal simulation | Agent platform with KubeVirt |
 | Cloud provider | AWS |
-| LB provider (CI) | MetalLB |
+| LB provider (CI) | AWS NLB (existing optional lane); MetalLB on Agent (planned) |
 | Management cluster OCP version | 4.18+ |
 | HostedCluster release image (min) | 5.1+ (Day 2 sidecar requires 5.1+ NodePool images) |
-| Prerequisites | `hypershift` CLI, `oc` CLI, MetalLB operator installed |
+| Prerequisites | `hypershift` CLI, `oc` CLI. The AWS lane reserves an EIP and a management-VPC subnet in a pre-step. The planned Agent lane requires the MetalLB operator. |
+| Provider lanes | AWS (live, optional), Agent (next; MetalLB + Cilium variants), Azure (after Agent), KubeVirt (last) |
 | FeatureGate | `DeterministicLBIP` |
 
 ### CI Execution Strategy
@@ -162,15 +200,18 @@ Test cases are consolidated to minimize E2E test count while maximizing
 coverage. Unit and integration tests run in presubmit; heavier E2E
 scenarios run in periodic jobs.
 
-**E2E tests (7 total):**
+**E2E tests:**
 
 | E2E Test | TCs Covered | Platform | CI Tier |
 |----------|-------------|----------|---------|
-| Day 1 lifecycle — create HC with MetalLB + LBclass, verify IP, private HC with annotations | TC-001, 002, 003, 033 | Agent/MetalLB | Presubmit |
+| Day 1 deterministic LB — create a `PublicAndPrivate` HC with EIP/subnet passthrough, verify the public KAS Service keeps the reserved address and survives reconciliation | TC-001 (AWS EIP), TC-003 | AWS NLB + EIP | Optional presubmit `e2e-v2-aws-deterministic-lb` ([release#88475](https://github.com/openshift/release/pull/88475)) |
+| Day 1 lifecycle — create HC with MetalLB fixed IP and `loadBalancerClass` | TC-001, TC-002 | Agent/MetalLB | Presubmit (lane not implemented) |
+| Day 1 Azure deterministic LB — create HC with an Azure LB IP annotation, verify the address on `kube-apiserverlb` and the Azure routing | TC-001 (Azure LB IP), TC-042 | Azure LB | Presubmit (planned, after Agent) |
+| Day 1 KubeVirt deterministic LB — create HC with management-cluster LB annotations, verify the fixed address | TC-001 | KubeVirt | TBD (last) |
 | Day 2 lifecycle — change IP (no rollout + hash), non-IP annotation change, annotation removal, kubelet via HAProxy | TC-005, 006, 007, 016, 034 | Agent/MetalLB | Presubmit |
 | Day 2 scale + upgrade — scale-up NP after IP change, InPlace upgrade with deterministic IP | TC-008, 009 | Agent/MetalLB | Periodic |
 | Upgrade flow — HO old→new, HC version upgrade, mixed NP versions, partial upgrade, condition transitions, absent condition handling | TC-010, 011, 029, 030, 031, 032 | Agent/MetalLB | Periodic |
-| Cilium — create HC with Cilium LB IPAM annotations | TC-028 | Cilium | Periodic |
+| Agent/Cilium variant — create HC with Cilium LB IPAM annotations (Agent platform, Cilium LB) | TC-028 | Agent + Cilium | Periodic (variant not implemented) |
 | Proxy Day 2 — create HC with proxy config, verify IP update via manifest rewrite | TC-036 | Agent/MetalLB | Periodic |
 | Init container resilience — ignition server unavailable during scale-up | TC-035 | Agent/MetalLB | Periodic |
 
@@ -178,19 +219,82 @@ scenarios run in periodic jobs.
 
 | Suite | TCs Covered | CI Tier |
 |-------|-------------|---------|
-| CEL validation | TC-019 to TC-024, TC-039, TC-040 | Presubmit |
+| CEL validation | TC-019 to TC-024, TC-039 | Presubmit |
 | Hash stability | TC-025 to TC-027, TC-041 | Presubmit |
 | /kas-ip HTTP handler | TC-012 to TC-015, TC-037, TC-038 | Presubmit |
-| CPO annotation passthrough | TC-033, TC-034 (GA only) | Presubmit |
+| CPO annotation passthrough | TC-034 (GA only), TC-040 | Presubmit |
 | Azure service routing | TC-042 | Presubmit |
 
-**Non-regression tests (gate enabled, no annotations — require new E2E with gate on):**
+**Non-regression tests (gate enabled, no annotations):**
 
 | Scenario | TCs | Note |
 |----------|-----|------|
-| Legacy HC lifecycle with gate enabled | TC-004 | Existing AWS/private lifecycle jobs run with gate **off**; these TCs verify gate **on** changes nothing for clusters that don't use the feature. |
-| Private HC unaffected | TC-017 | Requires gate-on environment |
-| Cloud provider unaffected | TC-018 | Requires gate-on environment |
+| Legacy HC lifecycle with gate enabled | TC-004 | Covered by the existing `e2e-v2-aws` presubmit: it installs the operator with `TECH_PREVIEW_NO_UPGRADE=true` and creates its `public` variant with `--feature-set=TechPreviewNoUpgrade` and no `serviceAnnotations`. The full AWS suite runs on that cluster. No dedicated assertion that the annotations are absent was added. |
+| Cloud provider unaffected | TC-018 | Same cluster as TC-004: the KAS Service obtains its NLB and the NodePools reach `Ready`, or the suite fails. |
+| Private HC unaffected | TC-017 | Not separately exercised. See the endpoint-access scope decision below. |
+
+**Provider scope decisions for Day 1:**
+
+- The AWS lane runs a single `PublicAndPrivate` variant. It covers the public
+  endpoint and asserts that the private endpoint does **not** receive the
+  deterministic annotations. No separate `Public` or `Private` AWS variant is
+  added: the private and public-and-private paths are treated as covered by the
+  public lane plus the envtest reconciliation suite, which reconciles both KAS
+  Services and the PublicAndPrivate→Private transition.
+- `loadBalancerClass` is not exercised on AWS. The AWS cloud provider ignores
+  Services that set a class, so the KAS Service never obtains an address and the
+  HostedCluster never becomes available. TC-002 stays with the Agent/MetalLB
+  lane.
+- The private endpoint is not run against a live private AWS cluster. The public
+  lane covers the shared passthrough path and the envtest suite covers the
+  private Service wiring; there is no separate Day 1 case.
+
+**Platforms affected (Day 1):** the feature applies to any HostedCluster whose
+APIServer service publishing strategy is `LoadBalancer`, regardless of
+`spec.platform.type`. The platform only changes the LB implementation and the
+annotation prefix; the passthrough path is the same. Day 1 coverage by platform:
+
+| Platform / LB implementation | Affected | Day 1 coverage |
+|------------------------------|----------|----------------|
+| AWS (NLB + EIP) | Yes | Live lane `e2e-v2-aws-deterministic-lb`: TC-001, TC-003; non-regression TC-004/TC-018 in `e2e-v2-aws` |
+| Azure (Azure LB; public Service `kube-apiserverlb`, private port 7443) | Yes | TC-042 (unit now; E2E planned after Agent) |
+| Agent / bare metal (MetalLB) | Yes | Next lane: TC-001, TC-002 |
+| Agent / bare metal (Cilium LB IPAM) | Yes | TC-028; periodic variant |
+| KubeVirt (management-cluster LB) | Yes | E2E planned last |
+| IBMCloud | Carve-out only | TC-039 (CEL), not deterministic annotations |
+| GKE, F5 and OpenStack prefixes | Allowlisted | No Day 1 lane |
+| Private endpoint (internal LB) | Yes, private Service only | Covered by the public lane; envtest covers the private Service wiring; no separate case |
+| APIServer strategy Route or NodePort | No | Non-regression TC-004/TC-018 |
+
+Platforms using Route or NodePort for the APIServer are unaffected: the feature
+only rewrites annotations on the Service that exposes the primary endpoint, and
+that Service is a LoadBalancer only for the rows marked Yes.
+
+**Coverage limits of the AWS lane:** the spec carries the `Informing` label, so
+an assertion failure is reported as a skipped informing failure and does not
+fail the job; the job is `optional: true`; and the spec skips when the EIP
+pre-step did not export `HYPERSHIFT_DETERMINISTIC_LB_EIP`,
+`HYPERSHIFT_DETERMINISTIC_LB_SUBNET` or `E2E_EXPECTED_DETERMINISTIC_LB_IP`. A
+green job therefore counts as coverage only when the JUnit reports the spec as
+passed, not skipped.
+
+### Day 1 verification evidence (2026-11-18)
+
+Taken from the optional AWS lane rehearsal ([Prow
+job](https://prow.ci.openshift.org/view/gs/test-platform-results-public/pr-logs/pull/openshift_release/88475/rehearse-88475-pull-ci-openshift-hypershift-main-e2e-v2-aws-deterministic-lb/2123000912807989248),
+`e2e-v2-aws-deterministic-lb`). JUnit: 1 test, 0 failures, 40.6 s; the suite ran
+1 of 1178 specs under the `deterministic-lb-ip` label filter.
+
+| Test case | Evidence | Status |
+|-----------|----------|--------|
+| TC-001 | The pre-step reserved an EIP and the HC was created with the EIP and subnet annotations. The spec `should configure the primary kube-apiserver LoadBalancer Service from the HostedCluster annotations` reported the public KAS Service with both annotations, and its NLB resolved to the reserved address. | Verified (AWS NLB/EIP) |
+| TC-003 | Same run: the spec removed the control-plane component label, waited for the operator to restore it, and held Service UID, annotations, class and ingress stable for 30 s. | Verified (30 s window; the 5-minute window is deferred) |
+| TC-004 | The `e2e-v2-aws` presubmit runs gate-on with no annotations and the full AWS suite passes on that cluster. | Covered implicitly; no dedicated assertion |
+| TC-018 | Same cluster: the KAS Service obtains its NLB and the NodePools reach `Ready`. | Covered implicitly |
+| TC-002 | The envtest reconciliation suite asserts the field on both KAS Services; there is no live provisioning run. | Partial (Agent/MetalLB lane) |
+| TC-019–TC-024, TC-039 | CEL YAML suite. | Verified (automated) |
+| TC-040 | No reachable test: admission rejects every CPO-managed key. | Gap |
+| TC-028, TC-042 | Allowlist admission and unit coverage only. | Partial |
 
 ---
 
@@ -198,27 +302,31 @@ scenarios run in periodic jobs.
 
 ### 5.1 Day 1 — Annotation Passthrough and loadBalancerClass
 
-#### 5.1.1 TC-001: MetalLB Fixed IP via Service Annotation
+#### 5.1.1 TC-001: Fixed IP via Service Annotation
 
-**Objective:** Verify that a MetalLB IP-pool annotation on the HostedCluster
-spec results in the KAS Service acquiring the specified fixed IP.
+**Objective:** Verify that a provider LoadBalancer IP annotation on the
+HostedCluster spec results in the KAS Service acquiring the specified fixed IP.
+The live Day 1 lane uses an AWS NLB with an Elastic IP; the Agent/MetalLB lane
+uses a MetalLB address from an IPAddressPool.
 
 **Preconditions:**
-- MetalLB operator installed on management cluster with an IPAddressPool.
+- A LoadBalancer provider that assigns an address from an annotation: AWS NLB
+  with an EIP (live lane) or MetalLB with an IPAddressPool (Agent lane).
 - FeatureGate `DeterministicLBIP` enabled.
 
 **Primary method (automated):**
-- E2E: Day 1 lifecycle presubmit (see §4 CI table).
+- E2E: `e2e-v2-aws-deterministic-lb` optional presubmit (AWS EIP) and the
+  Agent/MetalLB presubmit once implemented (see §4 CI table).
 - Unit: CPO annotation passthrough suite.
 
 **Fallback method (manual):**
 
 | Step | Action | Expected Result |
 |------|--------|-----------------|
-| 1 | Create HC with `spec.services[kube-apiserver].servicePublishingStrategy.loadBalancer.serviceAnnotations: {"metallb.universe.tf/address-pool": "<pool-name>", "metallb.universe.tf/loadBalancerIPs": "<target-ip>"}` | HC creation succeeds |
-| 2 | Inspect the KAS Service in the HCP namespace | Service has the MetalLB annotation |
-| 3 | Wait for LB IP assignment | Service `.status.loadBalancer.ingress[0].ip` matches the target IP |
-| 4 | Verify KAS is reachable at the assigned IP | `oc --server=https://<ip>:6443 get ns` succeeds |
+| 1 | Create HC with a provider IP annotation (`metallb.universe.tf/loadBalancerIPs`, `lbipam.cilium.io/ips`, or `service.beta.kubernetes.io/aws-load-balancer-eip-allocations`) | HC creation succeeds |
+| 2 | Inspect the KAS Service in the HCP namespace | Service has the requested annotation |
+| 3 | Wait for LB address assignment | Service `.status.loadBalancer.ingress` resolves to the requested address |
+| 4 | Verify KAS is reachable at the assigned address | `oc --server=https://<address>:6443 get ns` succeeds |
 
 ---
 
@@ -228,11 +336,16 @@ spec results in the KAS Service acquiring the specified fixed IP.
 propagated to the KAS Service.
 
 **Preconditions:**
-- A LoadBalancer controller that watches the target class is installed.
+- A LoadBalancer controller that watches the target class is installed for a
+  live run; envtest does not require one.
 
 **Primary method (automated):**
-- E2E: Day 1 lifecycle presubmit (see §4 CI table).
+- Envtest: `loadBalancerClass` on both KAS Services (see §4 CI table).
 - Unit: CPO annotation passthrough suite.
+
+**Live coverage:** none. AWS ignores Services that set a class, so the KAS
+Service stays `Pending`; the Agent/MetalLB lane that can exercise it is not
+implemented.
 
 **Fallback method (manual):**
 
@@ -276,7 +389,7 @@ works identically to pre-feature behavior.
 - FeatureGate `DeterministicLBIP` enabled.
 
 **Primary method (automated):**
-- E2E: non-regression test in gate-on environment (see §4 CI table).
+- E2E: `e2e-v2-aws` presubmit, gate on and no annotations (see §4 CI table).
 
 **Fallback method (manual):**
 
@@ -289,31 +402,7 @@ works identically to pre-feature behavior.
 
 ---
 
-#### 5.1.5 TC-033: Private HostedCluster with serviceAnnotations
-
-**Objective:** Verify that a private HostedCluster with `serviceAnnotations`
-gets annotations on its private KAS Service via `ReconcilePrivateService()`.
-
-**Preconditions:**
-- Private HC (endpoint access = Private). FeatureGate `DeterministicLBIP` enabled.
-- MetalLB operator installed with an IPAddressPool.
-
-**Primary method (automated):**
-- E2E: Day 1 lifecycle presubmit (see §4 CI table).
-- Unit: CPO annotation passthrough suite.
-
-**Fallback method (manual):**
-
-| Step | Action | Expected Result |
-|------|--------|-----------------|
-| 1 | Create private HC with `serviceAnnotations` including MetalLB pool annotation | HC creation succeeds |
-| 2 | Inspect the private KAS Service in the HCP namespace | Service has the user-specified annotations |
-| 3 | Verify `loadBalancerClass` set if configured | `.spec.loadBalancerClass` matches HC spec |
-| 4 | Verify KAS is reachable via private path | API server responds via private networking |
-
----
-
-#### 5.1.6 TC-034: Annotation Removal from Spec (Day 2 / GA)
+#### 5.1.5 TC-034: Annotation Removal from Spec (Day 2 / GA)
 
 > **⚠️ Phase note:** `serviceAnnotations` is immutable during TechPreview.
 > This TC verifies annotation removal which requires mutability — it is
@@ -342,7 +431,7 @@ causes it to be removed from the KAS Service on the next reconciliation.
 
 ---
 
-#### 5.1.7 TC-017: Private HostedCluster Unaffected
+#### 5.1.6 TC-017: Private HostedCluster Unaffected
 
 **Objective:** Verify that private HCs (endpoint access = Private) are not
 affected by the deterministic IP feature when the gate is enabled.
@@ -351,7 +440,7 @@ affected by the deterministic IP feature when the gate is enabled.
 - Private HC (no public LB). FeatureGate `DeterministicLBIP` enabled.
 
 **Primary method (automated):**
-- E2E: non-regression test in gate-on environment (see §4 CI table).
+- E2E: not run in a dedicated private lane; the envtest reconciliation suite covers the private KAS Service wiring (see §4 CI table).
 
 **Fallback method (manual):**
 
@@ -363,7 +452,7 @@ affected by the deterministic IP feature when the gate is enabled.
 
 ---
 
-#### 5.1.8 TC-018: Cloud Provider Unaffected
+#### 5.1.7 TC-018: Cloud Provider Unaffected
 
 **Objective:** Verify that cloud-provider HCs (e.g. AWS) continue to work
 without requiring the deterministic IP feature when the gate is enabled.
@@ -372,7 +461,7 @@ without requiring the deterministic IP feature when the gate is enabled.
 - AWS HC without LB annotations. FeatureGate `DeterministicLBIP` enabled.
 
 **Primary method (automated):**
-- E2E: non-regression test in gate-on environment (see §4 CI table).
+- E2E: `e2e-v2-aws` presubmit, gate on and no annotations (see §4 CI table).
 
 **Fallback method (manual):**
 
@@ -735,27 +824,51 @@ connects to KAS through HAProxy using the deterministic IP.
 
 ### 5.6 CEL Validation
 
-#### 5.6.1 TC-019: serviceAnnotations Accepts Any Valid Key
+#### 5.6.1 TC-019: serviceAnnotations Enforces the Provider-Prefix Allowlist and Size Bounds
 
-**Objective:** Verify that `serviceAnnotations` accepts any valid Kubernetes
-annotation key within the `MinProperties=1` / `MaxProperties=10` bounds.
-PR #9913 does not impose a CEL allowlist on annotation keys.
+**Objective:** Verify that `serviceAnnotations` accepts keys that start with one
+of the allowlisted provider prefixes within the `MinProperties=1` /
+`MaxProperties=10` bounds, and rejects keys outside the allowlist.
+Matching an allowlisted prefix is necessary but not sufficient: a specific
+allowlisted key can still be denied (`networking.gke.io/load-balancer-type`),
+and a malformed qualified name is rejected regardless of its prefix.
+See §3 Design notes for the full prefix list and the explicit denials.
 
 **Preconditions:**
 - FeatureGate `DeterministicLBIP` enabled.
 
 **Primary method (automated):**
-- Unit: CEL validation suite (see §4 CI table).
+- Test: the `DeterministicLBIP` envtest suite that drives CEL admission. The
+  cases are `cmd/install/assets/crds/hypershift-operator/tests/hostedclusters.hypershift.openshift.io/featuregated.hostedclusters.deterministiclbip.testsuite.yaml`,
+  which `test/envtest/suite_test.go` generates into the Ginkgo suite. The spec
+  in `test/envtest/deterministic_lb_ip_test.go` reconciles Services and does
+  not exercise admission.
+- Run: `make test-envtest-ocp` executes the whole `./test/envtest/...` package
+  across the supported versions and forwards no selection flags. To run this
+  suite alone on one version, resolve the assets to an absolute path and call
+  the test binary directly:
+  `KUBEBUILDER_ASSETS="$(hack/tools/bin/setup-envtest use --use-env --bin-dir "$PWD/hack/tools/bin/envtest-ocp" -p path --index https://raw.githubusercontent.com/openshift/api/master/envtest-releases.yaml 1.34.1)" go test -tags envtest ./test/envtest/ -run TestAPIs -count=1 -v -args -ginkgo.focus='DeterministicLBIP'`
+  On Kubernetes 1.34.1 this selects 48 of 1147 specs and all 48 pass. The
+  `--bin-dir` value must be absolute: a relative path resolves against the
+  package directory, so the suite cannot start its control plane.
+- Expected outcome: allowlisted prefixes are admitted; a non-allowlisted key,
+  `networking.gke.io/load-balancer-type`, a malformed qualified name, more than
+  10 entries, zero entries, and a value longer than 253 characters are each
+  rejected at admission.
 
 **Fallback method (manual):**
 
 | Step | Action | Expected Result |
 |------|--------|-----------------|
-| 1 | Create HC with a MetalLB annotation (`metallb.universe.tf/address-pool: "pool-1"`) | Accepted |
-| 2 | Create HC with a custom annotation (`custom.example.com/foo: "bar"`) | Accepted — no key restriction |
-| 3 | Create HC with 10 annotations (max) | Accepted |
-| 4 | Create HC with 11 annotations | Rejected by `MaxProperties=10` validation |
-| 5 | Create HC with 0 annotations (empty map `{}`) | Rejected by `MinProperties=1` validation |
+| 1 | Create HC with a MetalLB annotation (`metallb.universe.tf/address-pool: "pool-1"`) | Accepted — `metallb.universe.tf/` is allowlisted |
+| 2 | Create HC with a Cilium annotation (`lbipam.cilium.io/ips: "10.0.0.5"`) | Accepted — `lbipam.cilium.io/` is allowlisted |
+| 3 | Create HC with a non-allowlisted key (`custom.example.com/foo: "bar"`) | Rejected — key must start with an allowlisted provider prefix |
+| 4 | Create HC with `networking.gke.io/load-balancer-type: "Internal"` | Rejected — this specific GKE key is denied even though the prefix is allowed |
+| 5 | Create HC with a malformed key under an allowlisted prefix (`metallb.io/Bad..Key: "x"`) | Rejected — the name segment must be a valid qualified name |
+| 6 | Create HC with 10 annotations (max) | Accepted |
+| 7 | Create HC with 11 annotations | Rejected by `MaxProperties=10` validation |
+| 8 | Create HC with 0 annotations (empty map `{}`) | Rejected by `MinProperties=1` validation |
+| 9 | Create HC with a value longer than 253 characters | Rejected by the value-length rule |
 
 ---
 
@@ -875,10 +988,12 @@ correct format (qualified name).
 
 ---
 
-#### 5.6.7 TC-039: IBMCloud CEL Carve-out Preserved After Migration
+#### 5.6.7 TC-039: IBMCloud CEL Carve-out Preserved
 
 **Objective:** Verify that the IBMCloud exemption from `services` immutability
-is preserved after the CEL rule migration (deep-equality to per-field).
+is preserved. There is no CEL rule migration in Day 1 — PR #9913 kept the
+pre-existing deep-equality rule — so this case guards the exemption itself, and
+must keep passing unchanged when the per-entry conversion lands in Day 2.
 
 **Preconditions:**
 - FeatureGate `DeterministicLBIP` enabled.
@@ -897,25 +1012,57 @@ is preserved after the CEL rule migration (deep-equality to per-field).
 
 ---
 
-#### 5.6.8 TC-040: CPO-Managed Annotation Key Precedence
+#### 5.6.8 TC-040: CPO-Managed Annotation Precedence
 
-**Objective:** Verify CPO-managed annotation keys (e.g. `aws-load-balancer-type`)
-are not blocked by CEL (since there is no key allowlist), but CPO overwrites
-them on reconciliation. The user's value is accepted but does not persist.
+**Objective:** Verify that CPO's own platform annotations end up on the reconciled
+KAS Service whatever the user supplied, and that the one key CPO refuses to pass
+through — `aws-load-balancer-type` on AWS — is dropped.
 
-**Preconditions:**
-- FeatureGate `DeterministicLBIP` enabled.
+**This collision cannot be produced through the API.** Every annotation CPO sets
+on the KAS Services falls outside the CEL allowlist:
+`service.beta.kubernetes.io/aws-load-balancer-type`,
+`.../aws-load-balancer-attributes`,
+`.../aws-load-balancer-cross-zone-load-balancing-enabled`,
+`.../aws-load-balancer-internal`,
+`.../azure-load-balancer-internal`, and
+`external-dns.alpha.kubernetes.io/hostname`. Admission rejects all of them before
+CPO sees them, so the ordering is only reachable from a unit test that injects
+the annotation into the HCP spec.
+
+**What the existing tests actually cover** — two narrower behaviours, neither of
+which is general precedence:
+
+- Coexistence: a user annotation and CPO's platform annotations both survive on
+  the reconciled Service, with no shared key
+  (`TestReconcilePrivateService`, case "When creating a private service with
+  serviceAnnotations it should preserve CPO platform annotations").
+- The skip guard: a user-supplied `aws-load-balancer-type` is not applied on
+  either path (`TestReconcilePrivateServiceAWSNLBAnnotation`, cases "…it should
+  ignore a user-supplied NLB annotation").
+
+No case applies a user value for a CPO-managed key and then observes CPO's later
+write winning. That test is **missing**, and this case stays a gap until it
+exists. A non-skipped CPO-managed key such as
+`service.beta.kubernetes.io/aws-load-balancer-attributes` would exercise it.
+
+**Preconditions:** None beyond a reconcilable HCP; the unit tests build the spec in memory.
 
 **Primary method (automated):**
-- Unit: CEL validation suite (see §4 CI table).
 
-**Fallback method (manual):**
+**Test:** KAS Service reconciliation suite in `kas/service_test.go`.
 
-| Step | Action | Expected Result |
-|------|--------|-----------------|
-| 1 | Create HC with `serviceAnnotations` containing `service.beta.kubernetes.io/aws-load-balancer-type: "external"` | HC creation accepted — CEL does not restrict keys |
-| 2 | Inspect KAS Service after CPO reconciliation | CPO's value (`nlb`) overwrites user value — CPO takes precedence for its managed keys |
-| 3 | Create HC with `serviceAnnotations` containing `metallb.universe.tf/loadBalancerIPs: "10.0.0.1"` | Accepted and persisted — not a CPO-managed key |
+**Run:** `go test ./control-plane-operator/controllers/hostedcontrolplane/kas/ -run 'TestReconcile'`
+
+**Expected outcome:** CPO's platform annotations are present on the reconciled
+Service, and a user-supplied `aws-load-balancer-type` is not applied on AWS.
+
+Remaining gap: nothing asserts that CPO's later write overrides an applied user
+value, which is what the objective states. The case is not closed by the
+existing tests.
+
+**Fallback method (manual):** None available. Admission rejects every
+CPO-managed key, so no manual procedure reaches reconciliation with a colliding
+annotation.
 
 ---
 
@@ -930,6 +1077,13 @@ them on reconciliation. The user's value is accepted but does not persist.
 
 **Objective:** Verify that annotation values are replaced with placeholders
 before computing the config hash, so that IP changes don't affect the hash.
+
+**Preconditions:**
+- `DeterministicLBIP` FeatureGate enabled.
+- A `HostedControlPlane` whose KAS service uses the `LoadBalancer` publishing
+  strategy, with `serviceAnnotations` set to an IP-bearing key.
+- The placeholder mechanism has no implementation yet — this case is defined
+  against the enhancement design (CNTRLPLANE-4800).
 
 **Primary method (automated):**
 - Unit test in the config hash computation package.
@@ -948,6 +1102,13 @@ before computing the config hash, so that IP changes don't affect the hash.
 
 **Objective:** Verify end-to-end that changing the IP annotation does not
 change the deployment config hash.
+
+**Preconditions:**
+- `DeterministicLBIP` FeatureGate enabled.
+- A reconcilable `HostedControlPlane` able to re-render the NodePool config
+  payload, with `serviceAnnotations` set to an IP-bearing key.
+- Not implemented yet — defined against the enhancement design
+  (CNTRLPLANE-4800).
 
 **Primary method (automated):**
 - Integration test that creates a config, changes the IP, and asserts hash equality.
@@ -975,6 +1136,13 @@ hash computation path: the unit test directly calls the config renderer with
 annotation values, bypassing API admission. It verifies the code path, not
 the user-facing API flow.
 
+**Preconditions:**
+- `DeterministicLBIP` FeatureGate **disabled** in the test harness.
+- Direct access to the config renderer, so annotation values can be supplied
+  without passing HostedCluster admission.
+- Not implemented yet — defined against the enhancement design
+  (CNTRLPLANE-4800).
+
 **Primary method (automated):**
 - Unit test with FeatureGate disabled, calling the config renderer directly.
 
@@ -994,6 +1162,13 @@ the user-facing API flow.
 **Objective:** Verify the sidecar sed correctly brackets IPv6 addresses in the
 haproxy.cfg backend directive.
 
+**Preconditions:**
+- `DeterministicLBIP` FeatureGate enabled.
+- An IPv6 or dual-stack management cluster, or the ability to render the
+  HAProxy config template directly with a supplied address.
+- Not implemented yet — defined against the enhancement design
+  (CNTRLPLANE-4800).
+
 **Primary method (automated):**
 - Unit test in the haproxy config template package.
 
@@ -1009,24 +1184,27 @@ haproxy.cfg backend directive.
 
 ### 5.8 Provider Validation
 
-> Cilium validation runs in periodic CI jobs.
+> Cilium LB IPAM is an Agent LB implementation; its Agent variant runs in
+> periodic CI.
 
-#### 5.8.1 TC-028: Cilium LB IPAM Integration
+#### 5.8.1 TC-028: Cilium LB IPAM Integration (Agent variant)
 
-**Objective:** Verify deterministic IP assignment works with Cilium LB IPAM.
+**Objective:** Verify deterministic IP assignment works with Cilium LB IPAM on
+the Agent platform.
 
 **Preconditions:**
+- Agent platform (the management cluster provides the LB).
 - Cilium with LB IPAM enabled on the management cluster.
 - IP pool configured in Cilium.
 
 **Primary method (automated):**
-- E2E: Cilium periodic (see §4 CI table).
+- E2E: Agent Cilium variant, periodic (see §4 CI table).
 
 **Fallback method (manual):**
 
 | Step | Action | Expected Result |
 |------|--------|-----------------|
-| 1 | Create HC with `serviceAnnotations: {"io.cilium/lb-ipam-ips": "<target-ip>"}` | HC creation succeeds |
+| 1 | Create HC with `serviceAnnotations: {"lbipam.cilium.io/ips": "<target-ip>"}` | HC creation succeeds — `lbipam.cilium.io/` is allowlisted (see TC-019) |
 | 2 | Verify Cilium assigns the requested IP | Service LB IP matches requested IP |
 | 3 | Verify KAS is reachable | API server responds |
 
