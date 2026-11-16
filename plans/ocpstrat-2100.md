@@ -1,7 +1,7 @@
 ---
 id: TP-OCPSTRAT-2100-NUTANIX-001
-version: "1.1"
-date: 2026-11-12
+version: "1.2"
+date: 2026-11-16
 title: "Agent HostedCluster with Nutanix worker VMs"
 jira_issues:
   - key: OCPSTRAT-2100
@@ -27,9 +27,9 @@ ieee_829: true
 
 **ID:** TP-OCPSTRAT-2100-NUTANIX-001
 
-**Version:** 1.1
+**Version:** 1.2
 
-**Date:** 2026-11-12
+**Date:** 2026-11-16
 
 **IEEE 829 Compliance:** This plan follows the IEEE 829-2008 structure for
 software and system test documentation.
@@ -42,9 +42,10 @@ Verify the **Nutanix workstreams** of OCPSTRAT-2100: an Agent HostedCluster
 whose control plane runs on the existing baremetal-backed MCE management
 cluster and whose guest workers are Nutanix VMs booted from an MCE InfraEnv
 discovery ISO. The `hypershift-mce-agent-nutanix-conformance` workflow is the
-primary test vehicle. It also provisions an ingress tunnel gateway and worker
-DNS. The default run provisions three workers, verifies their identity and
-readiness, then runs guest-cluster conformance.
+primary test vehicle. It also provisions an ingress tunnel gateway and
+run-owned Route53 records for worker DNS; workers use the Nutanix subnet's
+DHCP-provided resolver. The default run provisions three workers, verifies
+their identity and readiness, then runs guest-cluster conformance.
 
 The plan covers Nutanix infrastructure allocation, HostedCluster worker
 provisioning, Agent and NodePool membership, guest health, conformance, and
@@ -57,8 +58,9 @@ OCPSTRAT-2100 and will be tracked separately in a next release.
 ### 2.2 Objectives
 
 1. Prove that the declarative Nutanix lease, selected subnet, credentials,
-   Assisted Service, proxy, ingress gateway, worker DNS, NMStateConfigs, and
-   discovery ISO are ready before worker provisioning.
+   Assisted Service, proxy, public Route53 records, ingress gateway,
+   DHCP-provided worker DNS, NMStateConfigs, and discovery ISO are ready before
+   worker provisioning.
 2. Prove that exactly the intended Nutanix VMs become distinct, approved
    Agents and Ready guest Nodes in the intended NodePool; verify scale-out,
    scale-in, application recovery, and reuse of released capacity.
@@ -67,8 +69,8 @@ OCPSTRAT-2100 and will be tracked separately in a next release.
    health, and the guest conformance suite. Verify manual Prism provisioning
    through Agent registration, NodePool membership, and workload execution.
 4. Track CI resource hygiene by checking cleanup of run-owned workers, gateway,
-   DNS, and management resources. Optionally exercise provisioning failure
-   cleanup and failed cleanup verification with retained diagnostics; report
+   Route53 records, and management resources. Optionally exercise provisioning
+   failure cleanup and failed cleanup verification with retained diagnostics; report
    any cleanup failure even though CI-operator releases the Nutanix lease when
    the workflow ends.
 
@@ -78,7 +80,7 @@ OCPSTRAT-2100 and will be tracked separately in a next release.
 | --- | --- |
 | Declarative Nutanix lease and valid IPv4 context | TC-001 |
 | Assisted Service becomes ready | TC-002 |
-| Proxy, ingress gateway, worker DNS, NMStateConfigs, and InfraEnv ISO | TC-003 |
+| Proxy, Route53 records, ingress gateway, DHCP DNS, NMStateConfigs, and InfraEnv ISO | TC-003 |
 | Expected worker VMs and unambiguous UUID/MAC records | TC-004 |
 | Exact InfraEnv Agent discovery and inventory | TC-005 |
 | One-to-one VM/Agent identity and run isolation | TC-006 |
@@ -88,7 +90,7 @@ OCPSTRAT-2100 and will be tracked separately in a next release.
 | Ingress canary, guest, ManagedCluster, and HostedCluster health | TC-010 |
 | Guest conformance and JUnit results | TC-011 |
 | Workload continuity, Agent unbinding, and VM reuse across NodePool scaling | TC-012 |
-| CI hygiene: run-scoped worker, DNS, and gateway cleanup; lease release | TC-013 |
+| CI hygiene: run-scoped worker, Route53 record, and gateway cleanup; lease release | TC-013 |
 | Documented manual Prism provisioning through a running guest workload | TC-014 |
 
 ### 2.4 Entry and Exit Criteria
@@ -106,8 +108,8 @@ verification incomplete.
 
 TC-013 records CI resource hygiene separately. Verify normal-run cleanup and
 lease release independently; unverified deletion or residual resources leave
-the CI hygiene result incomplete. The six pre-test failure exercises and the
-cleanup-verification failure exercise in TC-013 are optional: record each as
+the CI hygiene result incomplete. The seven pre-test failure exercises and the
+cleanup-verification failure exercises in TC-013 are optional: record each as
 run or not run and report any findings, without changing the product
 verification result. The workflow permits best-effort post steps, so a green
 test phase alone does not establish cleanup success.
@@ -120,14 +122,14 @@ cleanup fails.
 | --- | --- |
 | Feature | [OCPSTRAT-2100](https://redhat.atlassian.net/browse/OCPSTRAT-2100), limited here to Nutanix work |
 | Implementation design | [openshift/release#86867](https://github.com/openshift/release/pull/86867), a review-only plan PR; it does not itself implement the workflow |
-| Implementation revision | [openshift/release@cadcee28fc8b](https://github.com/openshift/release/commit/cadcee28fc8be3fbd6649cf5dd96ef81ada15c19) (2026-11-09); this plan targets the tracked files at this commit |
-| Nutanix periodic | [Pinned CI configuration](https://github.com/openshift/release/blob/cadcee28fc8be3fbd6649cf5dd96ef81ada15c19/ci-operator/config/openshift/hypershift/openshift-hypershift-release-5.1__periodics-mce.yaml) selects OCP 5.1 CI candidates and MCE 5.1 for Nutanix conformance |
+| Implementation revision | [openshift/release@62886039c64e](https://github.com/openshift/release/commit/62886039c64e99795102535939fab923b62d6ed0) (2026-11-13); this plan targets the tracked files at this commit |
+| Nutanix periodic | [Pinned CI configuration](https://github.com/openshift/release/blob/62886039c64e99795102535939fab923b62d6ed0/ci-operator/config/openshift/hypershift/openshift-hypershift-release-5.1__periodics-mce.yaml) selects OCP 5.1 CI candidates and MCE 5.1 for Nutanix conformance |
 | Agent manual workflow | [HyperShift Agent guide](https://github.com/openshift/hypershift/blob/51bfaf4a8d2a8b4cb3e80987b2748623c642f8ea/docs/content/how-to/agent/create-agent-cluster.md) describes HostedCluster and InfraEnv creation, manual ISO boot, Agent approval, NodePool scaling, and discovery-image boot before reuse; the Nutanix worker and destroy refs manage CI VMs separately |
 | Workflow | `ci-operator/step-registry/hypershift/mce/agent/nutanix/conformance/hypershift-mce-agent-nutanix-conformance-workflow.yaml`; declares the `NUTANIX_QUOTA_SLICE` lease and runs the Nutanix create chain |
 | Creation chain | `ci-operator/step-registry/hypershift/mce/agent/nutanix/create/hypershift-mce-agent-nutanix-create-chain.yaml` |
-| Provisioning refs | `hypershift-mce-agent-nutanix-context`, `hypershift-mce-agent-nutanix-ingress-tunnel-setup`, `hypershift-mce-agent-nutanix-worker-dns`, `hypershift-mce-agent-nutanix-infraenv`, and `hypershift-mce-agent-nutanix-workers` |
+| Provisioning refs | `hypershift-mce-agent-nutanix-context`, `hypershift-agent-create-config-dns`, `hypershift-mce-agent-nutanix-dns`, `hypershift-mce-agent-nutanix-ingress-tunnel-setup`, `hypershift-mce-agent-nutanix-infraenv`, and `hypershift-mce-agent-nutanix-workers` |
 | Validation refs | `hypershift-mce-agent-nutanix-ingress-tunnel-verify`, `hypershift-agent-check-conditions`, and the `hypershift-conformance` test chain |
-| Cleanup refs | `hypershift-mce-agent-nutanix-discard-agents`, `hypershift-mce-agent-destroy`, `hypershift-mce-agent-nutanix-destroy`, `hypershift-mce-agent-nutanix-worker-dns-cleanup`, `hypershift-mce-agent-nutanix-ingress-tunnel-cleanup`, and `ofcir-release` |
+| Cleanup refs | `hypershift-mce-agent-nutanix-discard-agents`, `hypershift-mce-agent-destroy`, `hypershift-mce-agent-nutanix-destroy`, `hypershift-mce-agent-nutanix-ingress-tunnel-cleanup`, `hypershift-mce-agent-nutanix-dns-cleanup`, and `ofcir-release` |
 
 ## 4. Test Environment
 
@@ -136,17 +138,18 @@ cleanup fails.
 | Cluster type | Agent-platform HostedCluster with its control plane on the baremetal-backed MCE management cluster and guest Nodes on Nutanix worker VMs |
 | Platform | Nutanix Prism Element for worker VMs; OFCIR baremetal management cluster |
 | Version or build | OCP 5.1 CI candidate and MCE 5.1 in the pinned Nutanix periodic configuration; record the exact guest release image and MCE build for each run |
-| Prerequisites or tooling | Allocated OFCIR management cluster and Nutanix quota slice, Prism credentials, MCE Assisted Service, IPv4 subnet and proxy access; use `oc`, Nutanix provisioning Ansible roles, `openshift-tests`, and CI artifact collection |
+| Prerequisites or tooling | Allocated OFCIR management cluster and Nutanix quota slice, Prism credentials, MCE Assisted Service, IPv4 subnet with DHCP DNS, public Route53 hosted zone for `HYPERSHIFT_BASE_DOMAIN`, pool AWS credentials, and proxy access; use `oc`, `aws`, `jq`, Nutanix provisioning Ansible roles, `openshift-tests`, and CI artifact collection |
 | Management cluster | Existing baremetal-backed OFCIR profile with MCE and Assisted Service; HostedCluster control plane remains here |
 | Guest cluster | Agent-platform HostedCluster and NodePool; management and guest kubeconfigs remain distinct |
+| CI base domain | `HYPERSHIFT_BASE_DOMAIN` defaults to `ci.hypershift.devcluster.openshift.com`; the HostedCluster, management-host DNS, Squid apps-domain ACL, and public Route53 hosted zone use the same domain |
 | Nutanix allocation | Separate declarative `nutanix-quota-slice` lease, Prism credentials, one matching Prism Element cluster and selected subnet, and a derived IPv4 ingress VIP outside its DHCP pools |
-| Worker network | IPv4 subnet with usable DHCP worker addressing and routing to the gateway, proxy, and guest endpoints; shared subnet DHCP options remain unchanged |
+| Worker network | IPv4 subnet with DHCP-provided worker addresses and DNS resolvers, plus routing to the gateway, proxy, and guest endpoints; shared subnet DHCP options remain unchanged |
 | Ingress path | Lease-owned Nutanix gateway VM, WireGuard tunnel to the baremetal proxy host, host `/32` route to the ingress VIP, and MetalLB ingress Service |
-| Worker DNS | Run-scoped dnsmasq on the baremetal WireGuard IP, gateway forwarding on UDP/TCP 53, and worker NMStateConfigs with DHCP addressing and the gateway DNS IP |
+| Worker DNS | Run-owned public Route53 `api`, `api-int`, and `*.apps` A records plus an ownership TXT marker; API records point to a management worker IP and apps to the ingress VIP, while Nutanix workers use DHCP-provided DNS |
 | Worker baseline | `NUTANIX_WORKERS=3` by default; verify the design's 8-vCPU, 16-GB RAM, and 120-GB disk baseline per VM |
 | Scale test capacity | One additional worker VM slot and a discovery ISO with its matching NMStateConfig for TC-012; track its VM and any image for cleanup |
-| Proxy | Baremetal Squid endpoint, HostedCluster `noProxy` value, Assisted Service routes, observed endpoint ports, and any required CA trust bundle available for discovery and guest workers |
-| Test tools | `oc`, Nutanix provisioning Ansible roles, `openshift-tests`, and artifact/JUnit collection supplied by the CI workflow |
+| Proxy | Baremetal Squid endpoint, HostedCluster `noProxy` value, Assisted Service routes, apps-domain destination ACL, observed endpoint ports, and any required CA trust bundle available for discovery and guest workers |
+| Test tools | `oc`, `aws`, `jq`, Nutanix provisioning Ansible roles, `openshift-tests`, and artifact/JUnit collection supplied by the CI workflow |
 | Manual provisioning tools | Prism UI access and the customer-facing Agent HostedCluster, InfraEnv, NodePool, and Nutanix VM instructions used for TC-014 |
 
 **Architecture scope:** Only `x86_64` will be tested for Nutanix because
@@ -199,29 +202,31 @@ conditions before the InfraEnv is created.
 
 **Evidence:** Step log and sanitized component conditions.
 
-### 5.3 TC-003: Proxy, Ingress Gateway, Worker DNS, and Discovery ISO
+### 5.3 TC-003: Proxy, Route53 DNS, Ingress Gateway, and Discovery ISO
 
-**Objective:** Verify the proxy, ingress gateway, worker DNS, network
-configuration, and discovery ISO are ready for Nutanix worker discovery.
+**Objective:** Verify the proxy, run-owned Route53 records, ingress gateway,
+DHCP-based worker network configuration, and discovery ISO are ready for
+Nutanix worker discovery.
 
 **Preconditions:** TC-001 and TC-002 pass; the intended Agent namespace,
-Squid endpoint, and HostedCluster `noProxy` value are available.
+Squid endpoint, HostedCluster `noProxy` value, public Route53 zone, and pool
+AWS credentials are available.
 
 | Action | Expected result |
 | --- | --- |
-| Run `hypershift-mce-agent-create-hostedcluster` | The HostedCluster proxy uses Squid and includes the context step's selected Nutanix subnet CIDR in `noProxy` |
-| Run `hypershift-agent-create-proxy` | The Assisted Service route is discovered before Squid's allowlist is updated |
+| Run `hypershift-agent-create-config-dns` and `hypershift-mce-agent-create-hostedcluster` | The optional `HYPERSHIFT_BASE_DOMAIN` override is applied consistently to management-host DNS and the HostedCluster; the HostedCluster proxy uses Squid and includes the selected Nutanix subnet CIDR in `noProxy` |
+| Run `hypershift-agent-create-proxy` | The Assisted Service route is discovered before Squid's allowlist is updated; the HostedCluster apps domain is allowed through Squid for ingress canary and guest Route requests |
+| Run `hypershift-mce-agent-nutanix-dns` and inspect its Route53 state and record sets | Exactly one matching public hosted zone is selected; no conflicting record is overwritten; run-owned `api` and `api-int` A records point to the selected management worker IPv4, `*.apps` points to the ingress VIP, and an ownership TXT record identifies the run. All four records have TTL 60; the Route53 change completes and exact records are retained for guarded cleanup |
 | Run `hypershift-mce-agent-nutanix-ingress-tunnel-setup` | The derived VIP is outside every reported subnet DHCP pool before gateway creation; a run-owned gateway VM and image are recorded, the gateway gets a distinct DHCP address, its forwarding service is active, and the baremetal host has a WireGuard handshake and `/32` VIP route |
-| Run `hypershift-mce-agent-nutanix-worker-dns` | Run-scoped dnsmasq is active only on the host's WireGuard IP; UDP/TCP 53 firewall rules admit the gateway tunnel peer, and the gateway forwards worker DNS without changing shared subnet DHCP options |
-| Check resolver answers | `api` and `api-int` resolve to the management address, `*.apps` resolves to the ingress VIP, and unrelated names forward upstream; obtain equivalent query evidence if `dig` is absent from the host, because the step's query check is conditional |
-| Run `hypershift-mce-agent-nutanix-infraenv` | Exactly `NUTANIX_WORKERS` distinct MACs have run-labeled NMStateConfigs with IPv4 DHCP, `auto-dns: false`, IPv6 disabled, and the gateway DNS IP; the InfraEnv selects those configs, uses `x86_64` and the expected proxy fields, reaches `ImageCreated`, and publishes an ISO download URL |
+| Run `hypershift-mce-agent-nutanix-infraenv` | Exactly `NUTANIX_WORKERS` distinct MACs have run-labeled NMStateConfigs with IPv4 DHCP for addresses and DNS, no static DNS override, and IPv6 disabled; the InfraEnv selects those configs, uses `x86_64` and the expected proxy fields, reaches `ImageCreated`, and publishes an ISO download URL |
 
-**Evidence:** HostedCluster proxy configuration; proxy, tunnel setup, worker
-DNS, and InfraEnv step logs;
-sanitized gateway and DNS state, firewall/service/route checks, resolver
-answers, NMStateConfig count and network fields, and redacted InfraEnv status.
-The ISO is generated by MCE InfraEnv. TC-007 checks the DNS path from the
-Agents after worker boot.
+**Evidence:** HostedCluster base-domain and proxy configuration; proxy,
+Route53, tunnel setup, and InfraEnv step logs; sanitized Route53 zone and
+record-set summaries, ownership-state status, gateway service/route checks,
+NMStateConfig count and network fields, and redacted InfraEnv status. The ISO
+is generated by MCE InfraEnv. TC-007 checks DNS from Agents after boot, and
+TC-009 checks the DHCP resolver and DNS answers from installed workers. Keep
+AWS credentials and private record values out of the report.
 
 ### 5.4 TC-004: Nutanix Worker VM Records
 
@@ -232,7 +237,7 @@ traceable image, VM, and NIC identities and the intended hardware shape.
 
 | Action | Expected result |
 | --- | --- |
-| Run `hypershift-mce-agent-nutanix-workers` | The step confirms tunnel and worker DNS state, downloads the InfraEnv ISO through Squid, uploads one image, and creates exactly `NUTANIX_WORKERS` worker VMs; the default is three and no Nutanix control-plane VM is created |
+| Run `hypershift-mce-agent-nutanix-workers` | The step confirms ingress tunnel readiness, downloads the InfraEnv ISO through Squid, uploads one image, and creates exactly `NUTANIX_WORKERS` worker VMs; the default is three and no Nutanix control-plane VM is created |
 | Inspect provisioning records and each VM | Exactly one uploaded image UUID and one distinct UUID per worker are recorded; each queried VM has one unambiguous NIC MAC matching its reserved NMStateConfig MAC |
 | Compare VM shape with the design baseline | Each worker has the intended 8 vCPUs, 16 GB RAM, and 120 GB disk |
 
@@ -328,10 +333,11 @@ NodePorts where applicable.
 | Verify certificate trust in discovery and installed worker environments | Any required private CA bundle is present in both environments; worker HTTPS succeeds with certificate verification enabled, without `--insecure` or TLS interception |
 
 **Evidence:** Sanitized endpoint/port/path inventory; redacted Proxy,
-InfraEnv, worker proxy file, service configuration, MachineConfigPool, and CA
-summaries; per-worker DNS, CONNECT, TLS, and service-response results; and
-redacted Squid ACL and access-log evidence. Do not copy private endpoint URLs,
-credentials, or certificates into the report.
+InfraEnv, worker DHCP resolver, worker proxy file, service configuration,
+MachineConfigPool, and CA summaries; per-worker DNS, CONNECT, TLS, and
+service-response results; and redacted Squid ACL and access-log evidence.
+Do not copy private endpoint URLs, DNS record values, credentials, or
+certificates into the report.
 
 The pinned `hypershift-mce-agent-nutanix-workers` step checks the Proxy fields
 and TCP listener only. The other checks are required before full conformance
@@ -377,7 +383,7 @@ The workflow's `test` phase runs `openshift/conformance/parallel` against the
 hosted guest cluster after the Nutanix create chain. It provides broad
 OpenShift end-to-end coverage rather than a Nutanix-specific test suite.
 
-The [pinned workflow exclusions](https://github.com/openshift/release/blob/cadcee28fc8be3fbd6649cf5dd96ef81ada15c19/ci-operator/step-registry/hypershift/mce/agent/nutanix/conformance/hypershift-mce-agent-nutanix-conformance-workflow.yaml#L39-L50)
+The [pinned workflow exclusions](https://github.com/openshift/release/blob/62886039c64e99795102535939fab923b62d6ed0/ci-operator/step-registry/hypershift/mce/agent/nutanix/conformance/hypershift-mce-agent-nutanix-conformance-workflow.yaml#L39-L49)
 leave these behaviors outside the selected suite:
 
 | Mechanism | Exclusion | Bug IDs cited in workflow | Behavior not verified |
@@ -401,7 +407,8 @@ The suite covers areas such as:
 - Security and APIs: authentication, RBAC, security constraints, and API resources.
 - OpenShift features: builds, images, the registry, and oc commands.
 
-**Evidence:** CI test-phase log, selected/skipped test list, and JUnit files.
+**Evidence:** CI test-phase log, redacted conformance proxy bypass settings,
+selected/skipped test list, and JUnit files.
 
 ### 5.12 TC-012: NodePool Scale-Out, Scale-In, and Agent Reuse
 
@@ -410,15 +417,16 @@ workload availability and VM-to-Agent identity across reuse.
 
 **Preconditions:** Use a retained verification environment built with the same
 setup steps and three Ready workers after TC-008, capacity for one more Nutanix
-VM, and the same proxy, gateway, DNS, and InfraEnv configuration. Track any
-extra VM and image by exact identity in private run state for TC-013 cleanup.
+VM, and the same proxy, gateway, DHCP DNS, Route53 records, and InfraEnv
+configuration. Track any extra VM and image by exact identity in private run
+state for TC-013 cleanup.
 The pinned workflow scales once from zero to the fixed `NUTANIX_WORKERS` count;
 it does not execute this scenario.
 
 | Action | Expected result |
 | --- | --- |
 | Run a four-replica HTTP application behind a Service, with a `minAvailable: 3` PodDisruptionBudget and placement that permits rescheduling; probe the Service continuously | The application is healthy on the initial three Nodes and the probe establishes a baseline before scaling |
-| Reserve a fourth worker MAC, create its run-labeled NMStateConfig, boot a fourth run-owned VM from an InfraEnv ISO containing that configuration, and map its Agent | The new Agent has the expected MAC, proxy and DNS settings, passes validations, and receives the same Ignition proxy override and approval as the original workers; record the VM and any new image in private run state for exact cleanup |
+| Reserve a fourth worker MAC, create its run-labeled NMStateConfig with IPv4 DHCP for addresses and DNS, boot a fourth run-owned VM from an InfraEnv ISO containing that configuration, and map its Agent | The new Agent has the expected MAC, DHCP resolver and proxy settings, passes DNS and installation validations using the existing Route53 names, and receives the same Ignition proxy override and approval as the original workers; record the VM and any new image in private run state for exact cleanup |
 | Scale the NodePool from three to four | The new Agent binds, the NodePool and guest cluster reach four Ready Nodes within the TC-007/TC-008 installation and readiness deadlines, and a Node-targeted canary runs on the new worker |
 | Place one application replica on each of the four Nodes while keeping its placement flexible | Every Node carries a replica before scale-in, and the Service probe remains healthy |
 | Scale the NodePool from four back to three and identify the selected Machine, Agent, Node, and VM | The removed Node is drained through pod eviction, its application replica reschedules onto a remaining Ready Node, four application replicas recover within 10 minutes, and the Service remains reachable; the NodePool and guest cluster settle at three Ready Nodes |
@@ -436,8 +444,9 @@ from the conformance run.
 
 This case records CI resource hygiene separately from product verification.
 
-**Objective:** Verify run-owned resources are removed and residual resources
-are reported independently of Nutanix lease release.
+**Objective:** Verify run-owned resources, including Route53 records, are
+removed and residual resources are reported independently of Nutanix lease
+release.
 
 **Preconditions:** The workflow reaches post steps after a successful or
 failed pre or test phase, or the retained TC-012 environment is ready for
@@ -449,13 +458,13 @@ teardown. Retain diagnostics before deletion.
 | Run `hypershift-mce-agent-destroy` | The run's HostedCluster, NodePool, and ManagedCluster are absent after bounded polling; check independently because the chain tolerates an `hcp destroy` error |
 | Run `hypershift-mce-agent-nutanix-destroy` | Run-owned Agents, InfraEnv, NMStateConfigs, and pull secret are absent; unrelated resources remain untouched; each recorded or exact-name-recovered worker VM and discovery image UUID returns HTTP 404 after bounded polling |
 | Remove any additional TC-012 VM or image by its recorded identity | Dynamically provisioned resources absent from the fixed-count workflow records are deleted and independently verified absent; no broad subnet or name-prefix deletion occurs |
-| Run `hypershift-mce-agent-nutanix-worker-dns-cleanup` | The run's baremetal dnsmasq service is inactive; its unit file, config, and marker are absent; its UDP/TCP 53 rich rules are absent from runtime and permanent firewall configuration; shared subnet DHCP options remain unchanged |
 | Run `hypershift-mce-agent-nutanix-ingress-tunnel-cleanup` | The proxy-host WireGuard service is inactive and its interface, config, key, unit file, and marker are absent; the run's ingress VIP `/32` route and WireGuard UDP firewall port are absent; the gateway VM and image UUIDs return HTTP 404 in Prism; unrelated lease resources remain untouched |
+| Run `hypershift-mce-agent-nutanix-dns-cleanup` | The saved Route53 zone, four exact record sets, and ownership TXT marker are checked against this run before deletion; only matching records are deleted, the change reaches completion, and all four records are verified absent. Changed or unverified records cause a failed step with state retained for investigation; unrelated records remain untouched |
 | Review `ofcir-release` and the CI-operator Nutanix lease result | The management lease is released by its post step; CI-operator releases the declarative Nutanix lease when the workflow ends even if cleanup fails, so any residual resources are recorded as a cleanup failure |
 
 #### Optional provisioning failure exercises
 
-The six cases below are optional CI cleanup checks. Record each as run or not
+The seven cases below are optional CI cleanup checks. Record each as run or not
 run and report cleanup findings separately from the product result. Exercise
 lease acquisition failure before any pre step can run.
 
@@ -466,37 +475,46 @@ run state. The pinned workflow has no built-in fault-injection controls, so
 use a dedicated test configuration. Capture resource inventories before the
 run and before cleanup. For each executed case, confirm the test phase did not
 start, retain the failing step's diagnostics, verify absence of every run-owned
-resource created before failure, and compare the inventories to prove cleanup
-did not delete or modify unrelated resources. A missing expected post step or
-required diagnostic artifact does not count as a pass.
+resource and Route53 record created before failure, and compare the inventories
+to prove cleanup did not delete or modify unrelated resources. A missing
+expected post step or required diagnostic artifact does not count as a pass.
 
 | Failure boundary | Retained diagnostics | Cleanup assertion |
 | --- | --- | --- |
 | Nutanix lease acquisition fails or times out before provisioning | CI-operator lease events and failure log; before/after lease occupancy and resource inventory | No Nutanix lease remains held and no run-owned resources were created; do not assume pre or post steps ran |
-| InfraEnv image creation fails or `ImageCreated` times out | InfraEnv conditions and events, creation-step log, and gateway/DNS state before cleanup | InfraEnv, NMStateConfigs, pull secret, gateway, DNS, and other resources created earlier in the run are removed; no worker VM or Nutanix discovery image remains |
+| Route53 record creation fails after state is prepared or its change wait times out | DNS step log, Route53 change status, and sanitized ownership state and zone record summaries before and after cleanup | No conflicting record is modified; cleanup removes any record proven to belong to the run and verifies its absence. Unconfirmed ownership or deletion is reported as a CI hygiene failure with state retained |
+| InfraEnv image creation fails or `ImageCreated` times out | InfraEnv conditions and events, creation-step log, and gateway and Route53 state before cleanup | InfraEnv, NMStateConfigs, pull secret, gateway, Route53 records, and other resources created earlier in the run are removed; no worker VM or Nutanix discovery image remains |
 | Discovery ISO downloads but Nutanix image upload fails | Worker/Ansible upload logs, InfraEnv status, and exact-name Prism image lookup before cleanup | Any partially uploaded Nutanix image is removed by its recorded or recovered UUID; no worker VM remains |
 | Worker provisioning fails after at least one VM is created but before all UUIDs are recorded | Worker/Ansible failure log and exact-name/UUID Prism inventory of the partial VM set | Every created worker VM and the uploaded image are removed, including VMs recovered by exact run-owned name |
 | Agent registration or inventory matching fails after worker VMs boot | Worker log, InfraEnv and Agent conditions/events, Agent count, and available MAC-to-VM mapping | Registered Agents are removed even if they received no run label; all run-owned VMs and images are removed |
 | NodePool installation or guest Node readiness fails after Agent approval and NodePool scaling | Worker log and Agent validation/state, NodePool, Machine, and guest Node conditions and events | The run's HostedCluster, NodePool, ManagedCluster, Agents, workers, and image are absent after teardown |
 
-#### Optional cleanup-verification failure exercise
+#### Optional cleanup-verification failure exercises
 
-In a separate disposable run, inject a failure after provisioning so
+In separate disposable runs, inject a failure after provisioning so either
 `hypershift-mce-agent-nutanix-destroy` cannot confirm that a run-owned worker
-VM, discovery image, or management resource is gone. Allow the workflow to
-finish and inspect the Nutanix lease afterward. The destroy step's failure
-establishes a CI cleanup failure; it does not establish that the lease remains
-held.
+VM, discovery image, or management resource is gone, or
+`hypershift-mce-agent-nutanix-dns-cleanup` cannot verify Route53 record
+ownership or deletion. Use an isolated public DNS zone for the Route53 case.
+Allow each workflow to finish and inspect the Nutanix lease afterward. A
+failing cleanup step establishes a CI cleanup failure; it does not establish
+that the lease remains held.
 
 | Action | Expected result |
 | --- | --- |
-| Inspect the destroy step and remaining post steps | The destroy step exits nonzero and reports that deletion cannot be verified; CI-operator attempts to release the lease after the workflow returns despite the cleanup error |
-| Independently inspect the resource and the lease after workflow completion | Record whether the resource is absent, present, or unconfirmed, and query the lease service for the run's lease state and holder; the lease is no longer held by this run. Report a held lease as a separate release failure and preserve unrelated resources |
+| Block the Nutanix destroy step from verifying deletion and inspect remaining post steps | The destroy step exits nonzero and reports that deletion cannot be verified; CI-operator attempts to release the lease after the workflow returns despite the cleanup error |
+| Change a record or ownership marker in the isolated Route53 zone, or prevent the DNS cleanup step from verifying deletion | The DNS cleanup step exits nonzero, refuses to delete changed records, and retains its state file when ownership or deletion cannot be verified; unrelated zone records remain untouched |
+| Independently inspect the affected resource, DNS records, and lease after workflow completion | Record whether each resource or record is absent, present, or unconfirmed, and query the lease service for the run's lease state and holder; the lease is no longer held by this run. Report a held lease as a separate release failure and preserve unrelated resources |
+
+After retaining the failure evidence, restore the disposable test record or
+verification access, rerun exact cleanup, and independently verify absence of
+every run-owned resource and Route53 record. Keep the original cleanup failure
+in the CI hygiene result.
 
 **Evidence:** Logs for each post step; zero run-labeled NMStateConfigs;
 sanitized management-resource counts; worker, supplemental, and gateway
-VM/image absence results; worker DNS service, unit, config, marker, and runtime
-and permanent firewall-rule absence checks; proxy-host WireGuard service,
+VM/image absence results; sanitized Route53 zone, record-set, change-status,
+ownership-marker, and retained-state checks; proxy-host WireGuard service,
 interface, config, key, unit, marker, route, and firewall-port absence checks;
 and lease release results. The gateway VM absence also removes its in-VM
 forwarding and NAT rules.
@@ -505,8 +523,10 @@ For each executed failure case, retain the injected-failure record,
 failing-step log, pre-cleanup status and inventory, available `info` artifacts,
 post-step logs, and independent post-cleanup inventory and lease checks.
 Lease acquisition may fail before `info` or other post steps can run; use the
-CI-operator lease log and independent inventory for that case. Review cleanup
-separately because the workflow sets `allow_best_effort_post_steps: true`.
+CI-operator lease log and independent inventory for that case. Include Route53
+state and record summaries in applicable pre-cleanup and post-cleanup inventories.
+Review cleanup separately because the workflow sets
+`allow_best_effort_post_steps: true`.
 
 ### 5.14 TC-014: Manual Prism Provisioning and Guest Workload
 
@@ -517,9 +537,9 @@ Nutanix workers through Prism and runs a workload on the guest cluster.
 Nutanix environment. Follow the customer-facing Agent platform and Prism
 instructions, recording their titles and revisions. Do not invoke the CI
 Nutanix step scripts or Ansible roles, source the CI shared directory, or reuse
-CI-generated InfraEnv images and network resources. If a required setup step
-exists only in a CI script, record the documentation gap and do not pass this
-case.
+CI-generated InfraEnv images, Route53 records, or tunnel resources. If a
+required setup step exists only in a CI script, record the documentation gap
+and do not pass this case.
 
 **Preconditions:** An isolated Nutanix allocation has capacity for three
 `x86_64` worker VMs. MCE, Assisted Service, and the documented IPv4, DNS,
@@ -549,7 +569,7 @@ unrelated resources.
 | --- | --- |
 | The pinned worker step checks proxy fields and TCP reachability but not the full worker request path | Complete all worker-origin checks in TC-009 before conformance; a green workflow run alone does not pass this gate |
 | CI provisions Nutanix VMs through Ansible and may hide manual prerequisites | Execute required TC-014 through Prism using customer-facing instructions; record any setup available only in CI scripts as a documentation gap and a failed manual case |
-| The worker DNS step checks resolver answers only when `dig` is installed | Obtain equivalent query results when that check is skipped; use the Agent DNS validations to verify the worker-side path |
+| The public Route53 zone publishes private API and ingress addresses, and records could conflict or remain after a failed cleanup | Verify the selected zone and exact A/TXT records before worker boot; check worker DNS through DHCP, and use guarded cleanup plus independent absence checks for every run-owned record |
 | The fixed-count conformance workflow has no dynamic NodePool scaling step | Execute TC-012 in a retained environment; record its run evidence and keep exact cleanup identities in private run state |
 | CI-operator releases the Nutanix lease even if best-effort cleanup fails | Review every available post step and track residual resources as a CI hygiene failure; use the optional TC-013 failure exercises to assess cleanup resilience |
 | The `info` step collects diagnostics but adds no pass/fail checks | Use its artifacts for investigation, not as proof of additional coverage |
