@@ -1,0 +1,157 @@
+version: 1
+exceptions:
+  - path: plans/ocpstrat-2653.md
+    kind: legacy
+    source: https://github.com/hypershift-community/test-results-verification/blob/acfe3927493cd83981f0e0b6132119aa554fce02/plans/ocpstrat-2653.md
+    reason: Preserve the published plan while its authors clarify missing test-case preconditions
+    body_sha256: "b31952ab89a5183c8e4b0fd4b4b6c02a58ad6d6e850ec350a9b014cdddcd344b"
+    gaps:
+      - "TC-025, TC-026, TC-027, and TC-041 omit explicit preconditions."
+    rules: [PLAN_CONTENT]
+    findings:
+      - rule: PLAN_CONTENT
+        line: 895
+        message: "test case must specify preconditions, or explain why none apply"
+      - rule: PLAN_CONTENT
+        line: 913
+        message: "test case must specify preconditions, or explain why none apply"
+      - rule: PLAN_CONTENT
+        line: 931
+        message: "test case must specify preconditions, or explain why none apply"
+      - rule: PLAN_CONTENT
+        line: 958
+        message: "test case must specify preconditions, or explain why none apply"
+  - path: plans/ocpstrat-3679.md
+    kind: legacy
+    source: https://github.com/hypershift-community/test-results-verification/blob/acfe3927493cd83981f0e0b6132119aa554fce02/plans/ocpstrat-3679.md
+    reason: Preserve the published plan while its authors clarify missing test-case preconditions
+    body_sha256: "4c6eb52b813dc879b625751128c3a96eb8190c605f9ecaf0a6ef0a04c4eb9da3"
+    gaps:
+      - "TC-002, TC-003, TC-004, TC-012, and TC-013 omit explicit preconditions."
+    rules: [PLAN_CONTENT]
+    findings:
+      - rule: PLAN_CONTENT
+        line: 201
+        message: "test case must specify preconditions, or explain why none apply"
+      - rule: PLAN_CONTENT
+        line: 231
+        message: "test case must specify preconditions, or explain why none apply"
+      - rule: PLAN_CONTENT
+        line: 263
+        message: "test case must specify preconditions, or explain why none apply"
+      - rule: PLAN_CONTENT
+        line: 587
+        message: "test case must specify preconditions, or explain why none apply"
+      - rule: PLAN_CONTENT
+        line: 619
+        message: "test case must specify preconditions, or explain why none apply"
+  - path: plans/cntrlplane-4338.md
+    kind: legacy
+    source: https://github.com/hypershift-community/test-results-verification/blob/574e5008de4587ee7333ef012b645c82d4f531eb/plans/cntrlplane-4338.md
+    reason: Preserve the plan published before enforcement without rewriting its verification procedures
+    body_sha256: "e68f467081aa9021b3fa8c966f56eb5dd3b1b0e8c752480a4a7473558fcf7f63"
+    gaps:
+      - "Nine cases use narrative objectives, setup, execution instructions, and outcomes instead of the supported labeled fields."
+      - "Environment details and risks use prose instead of recognized environment fields and a risk-mitigation table."
+      - "Sign-off instructions do not provide an author/date and reviewer-role approval table."
+    rules: [PLAN_CONTENT]
+    findings:
+      - rule: PLAN_CONTENT
+        line: 67
+        message: "test environment must specify non-placeholder cluster type or test target"
+      - rule: PLAN_CONTENT
+        line: 67
+        message: "test environment must specify non-placeholder platform or provider"
+      - rule: PLAN_CONTENT
+        line: 67
+        message: "test environment must specify non-placeholder prerequisites or tooling"
+      - rule: PLAN_CONTENT
+        line: 67
+        message: "test environment must specify non-placeholder version or build"
+      - rule: PLAN_CONTENT
+        line: 151
+        message: "test case must include actions and expected results for every step, or an automated test reference, run command, and expected outcome"
+      - rule: PLAN_CONTENT
+        line: 151
+        message: "test case must specify a non-placeholder objective"
+      - rule: PLAN_CONTENT
+        line: 151
+        message: "test case must specify preconditions, or explain why none apply"
+      - rule: PLAN_CONTENT
+        line: 177
+        message: "test case must include actions and expected results for every step, or an automated test reference, run command, and expected outcome"
+      - rule: PLAN_CONTENT
+        line: 177
+        message: "test case must specify a non-placeholder objective"
+      - rule: PLAN_CONTENT
+        line: 177
+        message: "test case must specify preconditions, or explain why none apply"
+      - rule: PLAN_CONTENT
+        line: 198
+        message: "test case must include actions and expected results for every step, or an automated test reference, run command, and expected outcome"
+      - rule: PLAN_CONTENT
+        line: 198
+        message: "test case must specify a non-placeholder objective"
+      - rule: PLAN_CONTENT
+        line: 198
+        message: "test case must specify preconditions, or explain why none apply"
+      - rule: PLAN_CONTENT
+        line: 218
+        message: "test case must include actions and expected results for every step, or an automated test reference, run command, and expected outcome"
+      - rule: PLAN_CONTENT
+        line: 218
+        message: "test case must specify a non-placeholder objective"
+      - rule: PLAN_CONTENT
+        line: 218
+        message: "test case must specify preconditions, or explain why none apply"
+      - rule: PLAN_CONTENT
+        line: 247
+        message: "test case must include actions and expected results for every step, or an automated test reference, run command, and expected outcome"
+      - rule: PLAN_CONTENT
+        line: 247
+        message: "test case must specify a non-placeholder objective"
+      - rule: PLAN_CONTENT
+        line: 247
+        message: "test case must specify preconditions, or explain why none apply"
+      - rule: PLAN_CONTENT
+        line: 279
+        message: "test case must include actions and expected results for every step, or an automated test reference, run command, and expected outcome"
+      - rule: PLAN_CONTENT
+        line: 279
+        message: "test case must specify a non-placeholder objective"
+      - rule: PLAN_CONTENT
+        line: 279
+        message: "test case must specify preconditions, or explain why none apply"
+      - rule: PLAN_CONTENT
+        line: 306
+        message: "test case must include actions and expected results for every step, or an automated test reference, run command, and expected outcome"
+      - rule: PLAN_CONTENT
+        line: 306
+        message: "test case must specify a non-placeholder objective"
+      - rule: PLAN_CONTENT
+        line: 306
+        message: "test case must specify preconditions, or explain why none apply"
+      - rule: PLAN_CONTENT
+        line: 344
+        message: "test case must include actions and expected results for every step, or an automated test reference, run command, and expected outcome"
+      - rule: PLAN_CONTENT
+        line: 344
+        message: "test case must specify a non-placeholder objective"
+      - rule: PLAN_CONTENT
+        line: 344
+        message: "test case must specify preconditions, or explain why none apply"
+      - rule: PLAN_CONTENT
+        line: 407
+        message: "test case must include actions and expected results for every step, or an automated test reference, run command, and expected outcome"
+      - rule: PLAN_CONTENT
+        line: 407
+        message: "test case must specify a non-placeholder objective"
+      - rule: PLAN_CONTENT
+        line: 407
+        message: "test case must specify preconditions, or explain why none apply"
+      - rule: PLAN_CONTENT
+        line: 510
+        message: "approvals must identify an author with a date and a reviewer role; active plans also require a named reviewer and approval date"
+      - rule: PLAN_CONTENT
+        line: 510
+        message: "include a populated risk-and-mitigation table"

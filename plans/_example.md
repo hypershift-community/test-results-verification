@@ -31,7 +31,7 @@ author: HyperShift Team
 
 > **This is a sanitized example using the IEEE 829 profile** (`ieee_829: true`).
 > All identifiers, cluster names, and data are fictional. Use this file as a
-> reference when writing IEEE 829-style plans. For lightweight plans, see the
+> reference when writing new IEEE 829-style plans. For preserved legacy plans, see the
 > [lightweight template](../docs/format.md#lightweight-template-default) in
 > the format specification.
 
@@ -157,6 +157,9 @@ is detected.
 
 **Objective:** Verify that the feature does not break standard NodePool
 create, scale, and delete operations.
+
+**Preconditions:**
+- TC-001 preconditions apply.
 
 **Primary method (automated):**
 - Test: `TestNodePoolLifecycle` (existing test, unmodified)
