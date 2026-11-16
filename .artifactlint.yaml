@@ -1,26 +1,5 @@
 version: 1
 exceptions:
-  - path: plans/ocpstrat-2653.md
-    kind: legacy
-    source: https://github.com/hypershift-community/test-results-verification/blob/acfe3927493cd83981f0e0b6132119aa554fce02/plans/ocpstrat-2653.md
-    reason: Preserve the published plan while its authors clarify missing test-case preconditions
-    body_sha256: "b31952ab89a5183c8e4b0fd4b4b6c02a58ad6d6e850ec350a9b014cdddcd344b"
-    gaps:
-      - "TC-025, TC-026, TC-027, and TC-041 omit explicit preconditions."
-    rules: [PLAN_CONTENT]
-    findings:
-      - rule: PLAN_CONTENT
-        line: 895
-        message: "test case must specify preconditions, or explain why none apply"
-      - rule: PLAN_CONTENT
-        line: 913
-        message: "test case must specify preconditions, or explain why none apply"
-      - rule: PLAN_CONTENT
-        line: 931
-        message: "test case must specify preconditions, or explain why none apply"
-      - rule: PLAN_CONTENT
-        line: 958
-        message: "test case must specify preconditions, or explain why none apply"
   - path: plans/ocpstrat-3679.md
     kind: legacy
     source: https://github.com/hypershift-community/test-results-verification/blob/acfe3927493cd83981f0e0b6132119aa554fce02/plans/ocpstrat-3679.md
