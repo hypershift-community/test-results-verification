@@ -74,6 +74,11 @@ test plan for OCPSTRAT-3298.
 Use Markdown reports for lightweight, single-PR verification results that
 do not require the full HTML bundle structure.
 
+A Markdown-report directory may also carry a single `index.md` summarising its
+reports and tracking outstanding verification. The index is directory
+documentation: it carries no report front matter and is not linted as a report.
+A directory that holds only an index is still treated as an incomplete bundle.
+
 ## Metadata Block
 
 Every plan file **must** begin with a YAML front-matter block. This block
