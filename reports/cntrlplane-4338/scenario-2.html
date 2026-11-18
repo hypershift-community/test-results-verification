@@ -1,0 +1,169 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TC-REG-002 verification</title><style>
+:root{--foreground:#17212d;--muted-foreground:#526173;--border:#d6dde5;--card:#f4f6f8;--success:#087748;--warning:#986300;--destructive:#a32a35;--primary:#175a99;--font-sans:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--font-mono:ui-monospace,SFMono-Regular,Consolas,monospace}
+*{box-sizing:border-box}html,body{margin:0;background:none;color:var(--foreground);font-family:var(--font-sans);line-height:1.55}body{margin:0 5%}main{max-width:1080px;margin:0 auto;padding:0}h1{font-size:25px;line-height:1.25;margin:24px 0 10px}h2{font-size:20px;margin:30px 0 10px}h3{font-size:16px;margin:20px 0 8px}p{max-width:90ch}a{color:var(--primary)}nav{display:flex;gap:14px;flex-wrap:wrap;padding:12px 0;border-bottom:1px solid var(--border);font-size:13px}.muted,small{color:var(--muted-foreground)}.lead{font-size:17px}.status{font-size:12px;font-weight:650;text-transform:uppercase;letter-spacing:.04em}.pass{color:var(--success)}.blocked,.conditional{color:var(--warning)}.fail{color:var(--destructive)}table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:13px;margin:12px 0 22px}th,td{overflow-wrap:anywhere;text-align:left;vertical-align:top;padding:10px 8px;border-bottom:1px solid var(--border)}th{font-weight:650}.comparison{display:grid;grid-template-columns:1fr 1fr;gap:20px}.comparison section{min-width:0;padding:16px;background:var(--card);border-radius:6px}pre,code{font-family:var(--font-mono);font-size:12px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:var(--card);padding:12px;border-radius:5px}code{overflow-wrap:anywhere}.comparison pre{padding:0}.summary{display:flex;gap:30px;flex-wrap:wrap;margin:20px 0}.summary strong{display:block;font-size:25px}.evidence{font-size:13px}svg{max-width:100%;height:auto}footer{margin:30px 0 18px;padding-top:12px;border-top:1px solid var(--border);font-size:12px;color:var(--muted-foreground)}@media(max-width:680px){.comparison{grid-template-columns:1fr}table{font-size:12px}th,td{padding:8px 4px}h1{font-size:22px}}@media(prefers-color-scheme:dark){:root{--foreground:#e2e7ed;--muted-foreground:#a1adba;--border:#354253;--card:#202b37;--success:#63c69a;--warning:#e3ba6b;--destructive:#f28c97;--primary:#87bdf1}}@media print{nav{display:none}a{color:inherit}main{max-width:none}h2,h3{break-after:avoid}section,table{break-inside:avoid}:root{--foreground:#111;--muted-foreground:#444;--border:#bbb;--card:#f5f5f5}body{font-size:10pt}}
+</style></head><body><main><nav aria-label="Report navigation"><a href="index.html">Summary</a><a href="automated-tests.html">Automated tests</a><a href="appendices.html">Environment and provenance</a><a href="cntrlplane-4338-evidence.zip" download>Evidence ZIP</a></nav><h1>TC-REG-002. Image-policy replacement and removal</h1><p><span class="status pass">pass</span></p><p class="lead">4 named leaf fixtures passed on both implementations; full regression runs passed. The required post-removal stability assertion also passed on both revisions in a supplemental run.</p><h2>Objective</h2><p>Preserve legacy ICSP deletion order, IDMS mirrors, labels, empty-source behavior and error continuation.</p><h2>Preconditions</h2><ul><li>Pinned baseline b0edc822e1ffb9f0527091a764d940b81b2c34a8 and PR d037aa90aa5b889c69464004df2e74f4c4c5b287 in separate checkouts.</li><li>Legacy ICSP and stale IDMS seeded; configured and removed sources; deletion failure also asserted by TestReconcileGlobal.</li><li>No production-source edits; test-only adapters call the original legacy entry points.</li></ul><h2>Execution</h2><ol><li>Run make test-shard for resources/... and support/globalconfig/... with -race -v -p=4 and uncached tests.</li><li>Replay equivalent characterization fixtures against the pre-extraction methods.</li><li>Read complete verbose output, verify intended named outcomes, and compare before/after results.</li><li>Apply a test-only source overlay for plan step 2; capture configured IDMS, cleared IDMS and unchanged IDMS after another removal reconciliation on each revision.</li></ol><h2>Before and after evidence</h2><div class="comparison"><section><h3>Before</h3><pre>{
+  &quot;original_fixture_outcomes&quot;: [
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestRetrospectiveReconcileImagePolicy&quot;,
+      &quot;elapsed&quot;: &quot;0.11s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestRetrospectiveReconcileImagePolicy/When_ICSP_and_stale_IDMS_exist,_it_should_delete_ICSP_before_replacing_mirrors_and_remain_idempotent&quot;,
+      &quot;elapsed&quot;: &quot;0.02s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestRetrospectiveReconcileImagePolicy/When_ICS_has_content,_it_should_return_an_IDMS_with_the_same_content&quot;,
+      &quot;elapsed&quot;: &quot;0.03s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestRetrospectiveReconcileImagePolicy/When_ICS_is_empty,_it_should_return_an_empty_IDMS&quot;,
+      &quot;elapsed&quot;: &quot;0.02s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestRetrospectiveReconcileImagePolicy/When_ICS_is_removed_after_reconcile,_it_should_sync_IDMS_to_match&quot;,
+      &quot;elapsed&quot;: &quot;0.03s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources&quot;
+    }
+  ],
+  &quot;supplemental_idms_states&quot;: {
+    &quot;after_removal&quot;: {
+      &quot;metadata&quot;: {
+        &quot;name&quot;: &quot;cluster&quot;,
+        &quot;resourceVersion&quot;: &quot;2&quot;,
+        &quot;labels&quot;: {
+          &quot;machineconfiguration.openshift.io/role&quot;: &quot;worker&quot;
+        }
+      },
+      &quot;spec&quot;: {
+        &quot;imageDigestMirrors&quot;: []
+      },
+      &quot;status&quot;: {}
+    },
+    &quot;after_repeated_removal&quot;: {
+      &quot;metadata&quot;: {
+        &quot;name&quot;: &quot;cluster&quot;,
+        &quot;resourceVersion&quot;: &quot;2&quot;,
+        &quot;labels&quot;: {
+          &quot;machineconfiguration.openshift.io/role&quot;: &quot;worker&quot;
+        }
+      },
+      &quot;spec&quot;: {
+        &quot;imageDigestMirrors&quot;: []
+      },
+      &quot;status&quot;: {}
+    },
+    &quot;configured&quot;: {
+      &quot;metadata&quot;: {
+        &quot;name&quot;: &quot;cluster&quot;,
+        &quot;resourceVersion&quot;: &quot;1&quot;,
+        &quot;labels&quot;: {
+          &quot;machineconfiguration.openshift.io/role&quot;: &quot;worker&quot;
+        }
+      },
+      &quot;spec&quot;: {
+        &quot;imageDigestMirrors&quot;: [
+          {
+            &quot;source&quot;: &quot;quay.io/openshift-release-dev/ocp-release&quot;,
+            &quot;mirrors&quot;: [
+              &quot;mirror.example.com/release&quot;
+            ]
+          }
+        ]
+      },
+      &quot;status&quot;: {}
+    }
+  }
+}</pre></section><section><h3>After</h3><pre>{
+  &quot;original_fixture_outcomes&quot;: [
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestReconcileImagePolicy&quot;,
+      &quot;elapsed&quot;: &quot;0.08s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources/configuration&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestReconcileImagePolicy/When_ICSP_and_stale_IDMS_exist,_it_should_delete_ICSP_before_replacing_mirrors_and_remain_idempotent&quot;,
+      &quot;elapsed&quot;: &quot;0.02s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources/configuration&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestReconcileImagePolicy/When_ICS_has_content,_it_should_return_an_IDMS_with_the_same_content&quot;,
+      &quot;elapsed&quot;: &quot;0.02s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources/configuration&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestReconcileImagePolicy/When_ICS_is_empty,_it_should_return_an_empty_IDMS&quot;,
+      &quot;elapsed&quot;: &quot;0.02s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources/configuration&quot;
+    },
+    {
+      &quot;result&quot;: &quot;PASS&quot;,
+      &quot;test&quot;: &quot;TestReconcileImagePolicy/When_ICS_is_removed_after_reconcile,_it_should_sync_IDMS_to_match&quot;,
+      &quot;elapsed&quot;: &quot;0.03s&quot;,
+      &quot;package&quot;: &quot;github.com/openshift/hypershift/control-plane-operator/hostedclusterconfigoperator/controllers/resources/configuration&quot;
+    }
+  ],
+  &quot;supplemental_idms_states&quot;: {
+    &quot;after_removal&quot;: {
+      &quot;metadata&quot;: {
+        &quot;name&quot;: &quot;cluster&quot;,
+        &quot;resourceVersion&quot;: &quot;2&quot;,
+        &quot;labels&quot;: {
+          &quot;machineconfiguration.openshift.io/role&quot;: &quot;worker&quot;
+        }
+      },
+      &quot;spec&quot;: {
+        &quot;imageDigestMirrors&quot;: []
+      },
+      &quot;status&quot;: {}
+    },
+    &quot;after_repeated_removal&quot;: {
+      &quot;metadata&quot;: {
+        &quot;name&quot;: &quot;cluster&quot;,
+        &quot;resourceVersion&quot;: &quot;2&quot;,
+        &quot;labels&quot;: {
+          &quot;machineconfiguration.openshift.io/role&quot;: &quot;worker&quot;
+        }
+      },
+      &quot;spec&quot;: {
+        &quot;imageDigestMirrors&quot;: []
+      },
+      &quot;status&quot;: {}
+    },
+    &quot;configured&quot;: {
+      &quot;metadata&quot;: {
+        &quot;name&quot;: &quot;cluster&quot;,
+        &quot;resourceVersion&quot;: &quot;1&quot;,
+        &quot;labels&quot;: {
+          &quot;machineconfiguration.openshift.io/role&quot;: &quot;worker&quot;
+        }
+      },
+      &quot;spec&quot;: {
+        &quot;imageDigestMirrors&quot;: [
+          {
+            &quot;source&quot;: &quot;quay.io/openshift-release-dev/ocp-release&quot;,
+            &quot;mirrors&quot;: [
+              &quot;mirror.example.com/release&quot;
+            ]
+          }
+        ]
+      },
+      &quot;status&quot;: {}
+    }
+  }
+}</pre></section></div><h2>Expected and actual results</h2><table><thead><tr><th>Assertion</th><th>Expected</th><th>Actual</th><th>Result</th></tr></thead><tbody><tr><td>TestReconcileImagePolicy/When_ICSP_and_stale_IDMS_exist,_it_should_delete_ICSP_before_replacing_mirrors_and_remain_idempotent</td><td>All assertions in this named fixture pass against both implementations.</td><td>PASS against the pre-extraction implementation; PASS against pinned PR head.</td><td><span class="status pass">pass</span></td></tr><tr><td>TestReconcileImagePolicy/When_ICS_has_content,_it_should_return_an_IDMS_with_the_same_content</td><td>All assertions in this named fixture pass against both implementations.</td><td>PASS against the pre-extraction implementation; PASS against pinned PR head.</td><td><span class="status pass">pass</span></td></tr><tr><td>TestReconcileImagePolicy/When_ICS_is_empty,_it_should_return_an_empty_IDMS</td><td>All assertions in this named fixture pass against both implementations.</td><td>PASS against the pre-extraction implementation; PASS against pinned PR head.</td><td><span class="status pass">pass</span></td></tr><tr><td>TestReconcileImagePolicy/When_ICS_is_removed_after_reconcile,_it_should_sync_IDMS_to_match</td><td>All assertions in this named fixture pass against both implementations.</td><td>PASS against the pre-extraction implementation; PASS against pinned PR head.</td><td><span class="status pass">pass</span></td></tr><tr><td>Stable empty IDMS after repeated removal reconciliation</td><td>After configured sources are removed, another empty-input reconciliation preserves the complete empty IDMS and worker-role label.</td><td>Supplemental test-only overlays passed against baseline and PR head with -race and -count=1. Configured, removed and repeated-removal states match across revisions.</td><td><span class="status pass">pass</span></td></tr></tbody></table><h2>Restoration and cleanup</h2><pre>{
+  &quot;live_mutations&quot;: false,
+  &quot;source_checkouts&quot;: &quot;Isolated; user&#x27;s original checkout unchanged.&quot;
+}</pre><h2>Evidence inside the ZIP</h2><p><a href="cntrlplane-4338-evidence.zip" download>Evidence ZIP</a> contains these records.</p><ul><li>execution/baseline-unit-retry.log</li><li>execution/pr-unit-verbose.log</li><li>evidence/unit-results.json</li><li>evidence/unit/baseline-junit.xml</li><li>evidence/unit/head-junit.xml</li><li>source/hypershift-baseline/</li><li>source/hypershift-pr/</li><li>source/replay-manifest.json</li><li>reproduction/restore_unit_sources.py</li><li>evidence/unit/tc-reg-002-stability/</li><li>reproduction/verify_image_policy_stability.py</li></ul><h2>Scope and limitations</h2><ul><li>Retrospective execution proves fixture equivalence; it cannot prove that characterization ran before the author&#x27;s extraction.</li><li>Fake-client platform branches establish unit behavior, not live non-AWS platform validation.</li><li>Archived Go files are transformed evidence copies and must not be used as executable overlays. source/replay-manifest.json records original/transformed hashes; reproduction/restore_unit_sources.py reconstructs exact pinned head and baseline replay tests from public upstream source.</li><li>The supplemental check ran after report review and is separate from the original 50 paired parent/subtest outcomes. Original fixtures and product source were unchanged.</li></ul><footer>CNTRLPLANE-4338 | PR #9920 | Generated 2026-11-11T13:27:41.844590+00:00 | HTML is authoritative. Supporting logs and JSON are in the evidence ZIP.</footer></main></body></html>

@@ -1,0 +1,28 @@
+jira_key: CNTRLPLANE-4338
+format: html-bundle
+date: '2026-11-11'
+verdict: conditional
+functional_verdict: pass
+verdict_label: PASS with documented verification limitations
+verdict_scope: Executed functional checks. Full plan acceptance remains conditional
+  on exact trigger attribution, historical characterization timing and documentation/reviewer
+  agreement.
+plan_acceptance: conditional
+scenario_count: 9
+pass_count: 8
+ci_verified: true
+has_derived_markdown: false
+tester: Automated verification runner
+pr:
+  repo: openshift/hypershift
+  number: 9920
+  url: https://github.com/openshift/hypershift/pull/9920
+plan_url: https://github.com/hypershift-community/test-results-verification/blob/9755833b2efd5143db21dce2cf0e6b028ece1452/plans/cntrlplane-4338.md
+plan_id: CNTRLPLANE-4338-supplemental-verification
+plan_version: 4
+ieee_829: true
+tags:
+- global-configuration
+- aws
+- main-5.1
+- supplemental-verification

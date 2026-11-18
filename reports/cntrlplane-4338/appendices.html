@@ -1,0 +1,170 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CNTRLPLANE-4338 environment and provenance</title><style>
+:root{--foreground:#17212d;--muted-foreground:#526173;--border:#d6dde5;--card:#f4f6f8;--success:#087748;--warning:#986300;--destructive:#a32a35;--primary:#175a99;--font-sans:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--font-mono:ui-monospace,SFMono-Regular,Consolas,monospace}
+*{box-sizing:border-box}html,body{margin:0;background:none;color:var(--foreground);font-family:var(--font-sans);line-height:1.55}body{margin:0 5%}main{max-width:1080px;margin:0 auto;padding:0}h1{font-size:25px;line-height:1.25;margin:24px 0 10px}h2{font-size:20px;margin:30px 0 10px}h3{font-size:16px;margin:20px 0 8px}p{max-width:90ch}a{color:var(--primary)}nav{display:flex;gap:14px;flex-wrap:wrap;padding:12px 0;border-bottom:1px solid var(--border);font-size:13px}.muted,small{color:var(--muted-foreground)}.lead{font-size:17px}.status{font-size:12px;font-weight:650;text-transform:uppercase;letter-spacing:.04em}.pass{color:var(--success)}.blocked,.conditional{color:var(--warning)}.fail{color:var(--destructive)}table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:13px;margin:12px 0 22px}th,td{overflow-wrap:anywhere;text-align:left;vertical-align:top;padding:10px 8px;border-bottom:1px solid var(--border)}th{font-weight:650}.comparison{display:grid;grid-template-columns:1fr 1fr;gap:20px}.comparison section{min-width:0;padding:16px;background:var(--card);border-radius:6px}pre,code{font-family:var(--font-mono);font-size:12px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:var(--card);padding:12px;border-radius:5px}code{overflow-wrap:anywhere}.comparison pre{padding:0}.summary{display:flex;gap:30px;flex-wrap:wrap;margin:20px 0}.summary strong{display:block;font-size:25px}.evidence{font-size:13px}svg{max-width:100%;height:auto}footer{margin:30px 0 18px;padding-top:12px;border-top:1px solid var(--border);font-size:12px;color:var(--muted-foreground)}@media(max-width:680px){.comparison{grid-template-columns:1fr}table{font-size:12px}th,td{padding:8px 4px}h1{font-size:22px}}@media(prefers-color-scheme:dark){:root{--foreground:#e2e7ed;--muted-foreground:#a1adba;--border:#354253;--card:#202b37;--success:#63c69a;--warning:#e3ba6b;--destructive:#f28c97;--primary:#87bdf1}}@media print{nav{display:none}a{color:inherit}main{max-width:none}h2,h3{break-after:avoid}section,table{break-inside:avoid}:root{--foreground:#111;--muted-foreground:#444;--border:#bbb;--card:#f5f5f5}body{font-size:10pt}}
+</style></head><body><main><nav aria-label="Report navigation"><a href="index.html">Summary</a><a href="automated-tests.html">Automated tests</a><a href="appendices.html">Environment and provenance</a><a href="cntrlplane-4338-evidence.zip" download>Evidence ZIP</a></nav><h1>Environment and provenance</h1><h2>Environment</h2><pre>{
+  &quot;provider&quot;: &quot;AWS&quot;,
+  &quot;region&quot;: &quot;us-east-1&quot;,
+  &quot;architecture&quot;: &quot;linux/amd64&quot;,
+  &quot;main_release&quot;: &quot;5.1.0-0.nightly-multi-2026-11-09-000904&quot;,
+  &quot;previous_release&quot;: &quot;5.0.1&quot;,
+  &quot;worker_count_per_fixture&quot;: 2,
+  &quot;worker_type&quot;: &quot;m5.xlarge&quot;,
+  &quot;worker_upgrade_policy&quot;: &quot;Replace&quot;,
+  &quot;control_plane_availability&quot;: &quot;SingleReplica&quot;,
+  &quot;infra_availability&quot;: &quot;SingleReplica&quot;,
+  &quot;nodepool_convergence_timeout_seconds_per_phase&quot;: 2100,
+  &quot;live_test_order&quot;: &quot;Serial configuration mutations within primary HC; independent upgrade fixture.&quot;
+}</pre><h2>Source, build, and running binaries</h2><pre>{
+  &quot;baseline_revision&quot;: &quot;b0edc822e1ffb9f0527091a764d940b81b2c34a8&quot;,
+  &quot;pr_revision&quot;: &quot;d037aa90aa5b889c69464004df2e74f4c4c5b287&quot;,
+  &quot;images&quot;: [
+    {
+      &quot;flavor&quot;: &quot;pr&quot;,
+      &quot;source_revision&quot;: &quot;d037aa90aa5b889c69464004df2e74f4c4c5b287&quot;,
+      &quot;image_tag&quot;: &quot;quay.io/test-operator/hypershift:cntrlplane-4338-pr-20261109&quot;,
+      &quot;image_digest&quot;: &quot;sha256:e3f3c6a560d34155c708b2d78c38b9b261c2e3c2900f2b37023536643885d758&quot;,
+      &quot;image&quot;: &quot;quay.io/test-operator/hypershift@sha256:e3f3c6a560d34155c708b2d78c38b9b261c2e3c2900f2b37023536643885d758&quot;,
+      &quot;build_environment&quot;: {
+        &quot;GOOS&quot;: &quot;linux&quot;,
+        &quot;GOARCH&quot;: &quot;amd64&quot;,
+        &quot;CGO_ENABLED&quot;: &quot;0&quot;
+      },
+      &quot;note&quot;: &quot;Only source-pinned binaries and original capability labels enter the runtime image.&quot;
+    },
+    {
+      &quot;flavor&quot;: &quot;baseline&quot;,
+      &quot;source_revision&quot;: &quot;b0edc822e1ffb9f0527091a764d940b81b2c34a8&quot;,
+      &quot;image_tag&quot;: &quot;quay.io/test-operator/hypershift:cntrlplane-4338-baseline-20261109&quot;,
+      &quot;image_digest&quot;: &quot;sha256:807aba56a0af6447ab43316d69d68c1bd8123a2efd1002d7bf4199f7396b18dc&quot;,
+      &quot;image&quot;: &quot;quay.io/test-operator/hypershift@sha256:807aba56a0af6447ab43316d69d68c1bd8123a2efd1002d7bf4199f7396b18dc&quot;,
+      &quot;build_environment&quot;: {
+        &quot;GOOS&quot;: &quot;linux&quot;,
+        &quot;GOARCH&quot;: &quot;amd64&quot;,
+        &quot;CGO_ENABLED&quot;: &quot;0&quot;
+      },
+      &quot;note&quot;: &quot;Only source-pinned binaries and original capability labels enter the runtime image.&quot;
+    }
+  ],
+  &quot;running_binary_verification&quot;: [
+    {
+      &quot;flavor&quot;: &quot;baseline&quot;,
+      &quot;collected_at&quot;: &quot;2026-11-09T14:16:20.841754+00:00&quot;,
+      &quot;version_output&quot;: &quot;control-plane-operator version b0edc822e1ffb9f0527091a764d940b81b2c34a8&quot;,
+      &quot;local_binary_sha256&quot;: &quot;b47464b4fe59af1711701b03be3c0269f1fa291604cba378787f41eeba18b32a&quot;,
+      &quot;running_binary_sha256&quot;: &quot;b47464b4fe59af1711701b03be3c0269f1fa291604cba378787f41eeba18b32a&quot;,
+      &quot;identical_binary&quot;: true,
+      &quot;production_go_source_matches_pinned_revision&quot;: true,
+      &quot;test_only_tracked_changes&quot;: [
+        &quot;control-plane-operator/hostedclusterconfigoperator/controllers/resources/foundation_order_test.go&quot;
+      ]
+    },
+    {
+      &quot;flavor&quot;: &quot;pr&quot;,
+      &quot;collected_at&quot;: &quot;2026-11-09T14:16:25.335397+00:00&quot;,
+      &quot;version_output&quot;: &quot;control-plane-operator version d037aa90aa5b889c69464004df2e74f4c4c5b287&quot;,
+      &quot;local_binary_sha256&quot;: &quot;417342865a32fcfe8e375feb65b98c8a9e1b05516f9a4769c96c369baf644732&quot;,
+      &quot;running_binary_sha256&quot;: &quot;417342865a32fcfe8e375feb65b98c8a9e1b05516f9a4769c96c369baf644732&quot;,
+      &quot;identical_binary&quot;: true,
+      &quot;production_go_source_matches_pinned_revision&quot;: true,
+      &quot;test_only_tracked_changes&quot;: []
+    }
+  ],
+  &quot;source_ownership_review&quot;: {
+    &quot;base&quot;: &quot;b0edc822e1ffb9f0527091a764d940b81b2c34a8&quot;,
+    &quot;head&quot;: &quot;d037aa90aa5b889c69464004df2e74f4c4c5b287&quot;,
+    &quot;watch_registration_identical&quot;: true,
+    &quot;characterization_history&quot;: &quot;Single squashed implementation commit; no independent pre-extraction execution record obtained. Retrospective comparison required.&quot;,
+    &quot;documentation_discrepancy&quot;: {
+      &quot;readme&quot;: &quot;GlobalConfigParams and a private compatibility snapshot&quot;,
+      &quot;actual_signature&quot;: &quot;ReconcileGlobal(ctx, HostedCluster, ControlPlane, *HostedControlPlane)&quot;,
+      &quot;decision&quot;: &quot;Record as unresolved source-documentation discrepancy; no code changes to the reviewed PR.&quot;
+    },
+    &quot;ownership_review&quot;: {
+      &quot;configuration_policy&quot;: &quot;Resource selection and mutation are in configuration/global.go, image_policy.go, install.go, observed.go and proxy.go. Shared manifests/globalconfig helper APIs remain referenced in their existing packages.&quot;,
+      &quot;adapters&quot;: &quot;HostedCluster and ControlPlane are distinct adapter types over client/upsert transport; no controller-wide context is added. Call sites explicitly bind guest r.client and management r.cpClient.&quot;,
+      &quot;root&quot;: &quot;resources.go retains shared HCP/pull-secret/release loading, nonadjacent phase calls, logging, error aggregation and HCP condition patching. It supplies hcp.DeepCopy to ReconcileGlobal.&quot;,
+      &quot;aggregate&quot;: &quot;Root errors.As unwraps the observed aggregate and appends its entries separately in source order; root deferred status reconciliation records observed generation and reconcile error context.&quot;,
+      &quot;proxy_policies&quot;: &quot;TrustedCA stale deletion logs errors and continues on both clients; user bundle read/upsert/delete errors propagate and preserve source/destination semantics.&quot;,
+      &quot;limitation&quot;: &quot;Full *HostedControlPlane input remains broader than README-described GlobalConfigParams; documentation alignment and human design approval are pending.&quot;
+    },
+    &quot;reviewed_head_files&quot;: [
+      {
+        &quot;path&quot;: &quot;resources.go&quot;,
+        &quot;sha256&quot;: &quot;f6d52126f631c001cf49582ed94f6c62efa5000884332e279e51fd48b7e8cd0a&quot;
+      },
+      {
+        &quot;path&quot;: &quot;configuration/adapters.go&quot;,
+        &quot;sha256&quot;: &quot;7e1a83523ada88cf38409fa31d038f876c98116bb7721e791789a4582b39780a&quot;
+      },
+      {
+        &quot;path&quot;: &quot;configuration/inputs.go&quot;,
+        &quot;sha256&quot;: &quot;d31f64fdc3f02be66dc79c2af26c323a5ffc8012ac2da2fa0e7161b41e6ef7c1&quot;
+      },
+      {
+        &quot;path&quot;: &quot;configuration/global.go&quot;,
+        &quot;sha256&quot;: &quot;8a8b4722abdb090ed747000e2276a37fcc715b287b0d0a62188a3f5f0d25ba85&quot;
+      },
+      {
+        &quot;path&quot;: &quot;configuration/image_policy.go&quot;,
+        &quot;sha256&quot;: &quot;883b3156d111dc3cd656988a348ad9741462d6f61cdd0b57b48dd3befd5f7846&quot;
+      },
+      {
+        &quot;path&quot;: &quot;configuration/install.go&quot;,
+        &quot;sha256&quot;: &quot;6302aaa7e662523ddba31ef8c1520728c65853dac4ba0fc6c7a7b80ea8a2ffe4&quot;
+      },
+      {
+        &quot;path&quot;: &quot;configuration/observed.go&quot;,
+        &quot;sha256&quot;: &quot;828fe6efb26cc0219e714477f9eddab0d433428baa8568176771706e27748536&quot;
+      },
+      {
+        &quot;path&quot;: &quot;configuration/proxy.go&quot;,
+        &quot;sha256&quot;: &quot;d76075b3ed48c553627554e0b3765fc54de692d152b6fb1097ace3ae284c5b17&quot;
+      },
+      {
+        &quot;path&quot;: &quot;configuration/README.md&quot;,
+        &quot;sha256&quot;: &quot;7aa4f7704cab603d0a6696b8bbb00b6fa64986f135fc0651e48aa94fc8a824e6&quot;
+      }
+    ]
+  },
+  &quot;lifecycle_skill&quot;: {
+    &quot;pr&quot;: &quot;https://github.com/openshift/hypershift/pull/10151&quot;,
+    &quot;revision&quot;: &quot;d12f02033f5e51a2183034d3a0b955c1aa4fa25c&quot;
+  }
+}</pre><h2>Sanitization and evidence integrity</h2><p>Credentials, Secret resources, guest/management kubeconfigs, private keys and CSR contents are excluded. Credential-bearing fields such as the registry configuration&#x27;s httpSecret are omitted. Raw originals remain restricted locally.</p><p>Live identifiers, names, endpoint hosts, account IDs, addresses and local paths are pseudonymized consistently. SHA-256 values, versions, times, conditions and tested configuration markers remain. Managed fields and last-applied annotations are omitted.</p><p>The ZIP contains a per-file SHA-256 manifest. Its contents are validated and secret-scanned before compression; a ZIP is not treated as proof of scanner coverage.</p><p>Large JSONL streams are split at record boundaries into ordered parts below 4 MiB. The chunk index records the complete sanitized stream hash and record count. Every observation in each retained stream is preserved; discarded/corrupt watch attempts remain excluded as disclosed.</p><p>The archive retains a sanitized plan copy with public CI citations preserved and a reference to the pinned original. All previously published artifact paths remain inside the ZIP; an accompanying clarification identifies stale descriptive labels in unchanged auxiliary creation metadata.</p><p>Stored Go fixture copies are transformed evidence, not executable overlays. source/replay-manifest.json records original and transformed hashes. reproduction/restore_unit_sources.py reconstructs exact original head and retrospective baseline tests from pinned public upstream source and verifies every original hash. The original executions used these exact source bytes, not the transformed archive copies.</p><p>Archive SHA-256: <code>d6111af6991879f8629523d566b073b0bff9ea2bb721f11b4bbe490a59c163a2</code></p><h2>Validation</h2><pre>{
+  &quot;validator_pr&quot;: &quot;https://github.com/hypershift-community/test-results-verification/pull/10&quot;,
+  &quot;revision&quot;: &quot;18bde2d45d63e2e256e0576e3b52e1c8314d1f66&quot;,
+  &quot;gitleaks_version&quot;: &quot;8.30.1&quot;,
+  &quot;scope&quot;: &quot;Standalone delivered report root and separately uncompressed evidence&quot;,
+  &quot;required_command&quot;: &quot;verify-artifacts --root delivery --secrets --format json&quot;,
+  &quot;upstream_plan&quot;: &quot;10 pre-existing PLAN_CONTENT errors when unchanged plan v4 is added to validator checkout; standalone report validation does not waive them.&quot;,
+  &quot;uncompressed_evidence_result&quot;: {
+    &quot;errors&quot;: 0,
+    &quot;warnings&quot;: 0,
+    &quot;findings&quot;: []
+  },
+  &quot;report_artifact_result&quot;: {
+    &quot;errors&quot;: 0,
+    &quot;warnings&quot;: 1,
+    &quot;findings&quot;: [
+      {
+        &quot;path&quot;: &quot;reports/cntrlplane-4338/cntrlplane-4338-evidence.zip&quot;,
+        &quot;line&quot;: 1,
+        &quot;rule&quot;: &quot;SIZE&quot;,
+        &quot;severity&quot;: &quot;warning&quot;,
+        &quot;message&quot;: &quot;avoid assets larger than 5 MiB; review storage and retention&quot;
+      }
+    ]
+  }
+}</pre><h2>Fixture disposition</h2><pre>{
+  &quot;primary&quot;: &quot;hc-4338-main: retained, configuration restored, final complete readiness verified&quot;,
+  &quot;upgrade&quot;: &quot;hc-4338-upgrade: normally destroyed; independent exact-resource checks passed&quot;,
+  &quot;primary_final_readiness&quot;: {
+    &quot;completed_at&quot;: &quot;2026-11-09T16:20:13.434178+00:00&quot;,
+    &quot;version&quot;: &quot;5.1.0-0.nightly-multi-2026-11-09-000904&quot;,
+    &quot;ready_nodes&quot;: 2,
+    &quot;config_hashes&quot;: {
+      &quot;hc-4338-main-us-east-1a&quot;: &quot;2c215ee4&quot;
+    },
+    &quot;all_gates_passed&quot;: true
+  }
+}</pre><footer>CNTRLPLANE-4338 | PR #9920 | Generated 2026-11-11T13:27:41.844590+00:00 | HTML is authoritative. Supporting logs and JSON are in the evidence ZIP.</footer></main></body></html>
