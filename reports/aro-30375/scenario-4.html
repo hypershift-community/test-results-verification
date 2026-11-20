@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TC-004 — Unstarted member is classified as unhealthy</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topbar"><div class="brand">ARO-30375 · Verification</div><nav><a href="index.html">Dashboard</a><a href="scenario-1.html">TC-001 Retry</a><a href="scenario-2.html">TC-002 Fail closed</a><a href="scenario-3.html">TC-003 Peer URL</a><a href="scenario-4.html" class="active">TC-004 Unstarted</a><a href="scenario-5.html">TC-005 Quorum</a><a href="scenario-6.html">TC-006 Wait</a><a href="scenario-7.html">TC-007 E2E</a><a href="scenario-8.html">TC-008 Drift</a><a href="automated-tests.html">Automated</a><a href="appendices.html">Appendices</a></nav></header>
+<main>
+<div class="scenario-head"><div><div class="eyebrow">TC-004 · unit tier · PASS</div><h1>TC-004 — Unstarted member is classified as unhealthy</h1></div><span class="badge pass">PASS</span></div>
+<p class="lead">The recovery Job's health classifier must treat a member that has not started (crash-looping pod) as a failing pod without declaring the whole cluster unrecoverable.</p>
+<div class="callout good"><p><strong>Result: PASS.</strong> <code>TestCheckEtcdStatus</code> passes all five subtests at head, including the two that define this scenario: a not-started member with a crash-looping pod reports a failing pod without erroring, and a not-started member with no restarted pods does not report the cluster as unhealthy.</p></div>
+
+<div class="meta-grid">
+  <div><span>Executed at</span><code>1e771d57285f5c8fd0d2115eae9839e3be476085</code></div>
+  <div><span>Method</span><code>go test ./etcd-recovery/... at head</code></div>
+  <div><span>Date</span><code>2026-11-12</code></div>
+  <div><span>Plan section</span><code>TP-ARO-30375-001 v1.1 §5.4</code></div>
+</div>
+
+<h2>Checks — TestCheckEtcdStatus (5 subtests)</h2>
+<div class="table-wrap"><table class=""><thead><tr><th>Subtest</th><th>Result</th></tr></thead><tbody>
+<tr><td>not-started member, crash-looping pod reports failing pod without erroring</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>not-started member, no restarted pods, cluster not reported unhealthy</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>two of three members unhealthy, cluster not recoverable</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>member reporting more than one client URL returns an error</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>failing pod not the unhealthy member, cluster not recoverable</td><td><span class="badge pass">PASS</span></td></tr>
+</tbody></table></div>
+
+<h2>Interpretation</h2>
+<p>The first two subtests are TC-004 proper: the classifier distinguishes "member is down and its pod is crash-looping" (act: repair the pod) from "member is merely starting" (act: wait). The remaining three subtests also feed <a href="scenario-5.html">TC-005</a>. This classification is exercised live in <a href="scenario-7.html">TC-007</a>: after the suite's all-members kill and again after the post-suite repair cycle, the recovery Job repaired the crash-looping member instead of declaring the cluster unrecoverable.</p>
+<p>Evidence: <a href="assets/evidence/unit/tc004-tc005-testchecketcdstatus.log"><code>unit/tc004-tc005-testchecketcdstatus.log</code></a>. The same tests also run in CI (<code>test / Unit Tests (other)</code>, green at head).</p>
+<p class="back"><a href="index.html">← Return to dashboard</a></p>
+</main>
+<footer><a href="https://github.com/openshift/hypershift/pull/10118">openshift/hypershift#10118</a> · ARO-30375 · 2026-11-12 · sanitized bundle</footer>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TC-002 — Existing cluster fails closed on member-list failure</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topbar"><div class="brand">ARO-30375 · Verification</div><nav><a href="index.html">Dashboard</a><a href="scenario-1.html">TC-001 Retry</a><a href="scenario-2.html" class="active">TC-002 Fail closed</a><a href="scenario-3.html">TC-003 Peer URL</a><a href="scenario-4.html">TC-004 Unstarted</a><a href="scenario-5.html">TC-005 Quorum</a><a href="scenario-6.html">TC-006 Wait</a><a href="scenario-7.html">TC-007 E2E</a><a href="scenario-8.html">TC-008 Drift</a><a href="automated-tests.html">Automated</a><a href="appendices.html">Appendices</a></nav></header>
+<main>
+<div class="scenario-head"><div><div class="eyebrow">TC-002 · unit tier · PASS</div><h1>TC-002 — Existing cluster fails closed on member-list failure</h1></div><span class="badge pass">PASS</span></div>
+<p class="lead">When <code>etcdctl member list</code> fails on a pod that already carries an <code>existing</code> marker, the script must refuse to proceed rather than fall back to bootstrap mode.</p>
+<div class="callout good"><p><strong>Result: PASS.</strong> The script exits nonzero, logs <code>refusing to start in bootstrap mode</code>, leaves the marker at <code>existing</code>, and attempts no member remove or add. 4 of 4 checks pass.</p></div>
+
+<div class="meta-grid">
+  <div><span>Executed at</span><code>1e771d57285f5c8fd0d2115eae9839e3be476085</code></div>
+  <div><span>Method</span><code>rendered shared reset-member script + mock etcdctl</code></div>
+  <div><span>Date</span><code>2026-11-12</code></div>
+  <div><span>Plan section</span><code>TP-ARO-30375-001 v1.1 §5.2</code></div>
+</div>
+
+<h2>Checks</h2>
+<div class="table-wrap"><table class=""><thead><tr><th>Check</th><th>Result</th></tr></thead><tbody>
+<tr><td>Script exits nonzero</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>Log contains <code>refusing to start in bootstrap mode</code></td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>Marker remains <code>existing</code></td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>No member remove/add attempted</td><td><span class="badge pass">PASS</span></td></tr>
+</tbody></table></div>
+
+<h2>Interpretation</h2>
+<p>Failing closed here is the safety property that prevents the incident class entirely: a transient control-plane-network failure during <code>member list</code> must never be interpreted as "no cluster exists". The mock records every etcdctl invocation, and the assertion confirms the call sequence contains neither <code>member remove</code> nor <code>member add</code> after the list failure. The same guard string (<code>refusing to start in bootstrap mode</code>) is asserted present in the live rendered etcd StatefulSet during TC-007 environment verification.</p>
+<p>Evidence: <a href="assets/evidence/harness/validate-manual-summary.log"><code>harness/validate-manual-summary.log</code></a> (TC-002 section).</p>
+<p class="back"><a href="index.html">← Return to dashboard</a></p>
+</main>
+<footer><a href="https://github.com/openshift/hypershift/pull/10118">openshift/hypershift#10118</a> · ARO-30375 · 2026-11-12 · sanitized bundle</footer>
+</body>
+</html>

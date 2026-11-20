@@ -1,0 +1,4 @@
+=== RUN   TestControlPlaneComponents
+--- PASS: TestControlPlaneComponents (10.88s)
+PASS
+ok  	github.com/openshift/hypershift/control-plane-operator/controllers/hostedcontrolplane	10.917s

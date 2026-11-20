@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TC-007 — Deterministic e2e interrupted membership recovery</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topbar"><div class="brand">ARO-30375 · Verification</div><nav><a href="index.html">Dashboard</a><a href="scenario-1.html">TC-001 Retry</a><a href="scenario-2.html">TC-002 Fail closed</a><a href="scenario-3.html">TC-003 Peer URL</a><a href="scenario-4.html">TC-004 Unstarted</a><a href="scenario-5.html">TC-005 Quorum</a><a href="scenario-6.html">TC-006 Wait</a><a href="scenario-7.html" class="active">TC-007 E2E</a><a href="scenario-8.html">TC-008 Drift</a><a href="automated-tests.html">Automated</a><a href="appendices.html">Appendices</a></nav></header>
+<main>
+<div class="scenario-head"><div><div class="eyebrow">TC-007 · e2e tier · PASS with documented deviations</div><h1>TC-007 — Deterministic e2e interrupted membership recovery</h1></div><span class="badge pass">PASS</span></div>
+<p class="lead">Exercise the PR-head control-plane operator against a live 3-member managed etcd: member data loss, repeated kills, simultaneous loss of all members, data corruption and member removal, with data durability verified through the hosted kube-apiserver.</p>
+<div class="callout good"><p><strong>Result: PASS.</strong> All five <code>etcd-chaos</code> specs pass at head in 248 s. The interrupted remove/add retry path itself (plan's primary method, marked <em>proposed</em>) is covered deterministically by the <a href="scenario-1.html">TC-001</a> mock harness; the live run covers the same reset-member and recovery code end to end. Two environment deviations apply and are documented below; neither reduces etcd coverage.</p></div>
+
+<div class="meta-grid">
+  <div><span>Executed at</span><code>1e771d57285f5c8fd0d2115eae9839e3be476085</code></div>
+  <div><span>Suite</span><code>test-e2e-v2, label-filter etcd-chaos</code></div>
+  <div><span>HostedCluster</span><code>HA, 3-member etcd, OCP 4.21.40 (pinned)</code></div>
+  <div><span>CPO image</span><code>PR-head branch build, tag aro30375-1e771d5728</code></div>
+  <div><span>Operator flags</span><code>ENABLE_ETCD_RECOVERY=1, ENABLE_CPO_OVERRIDES=1</code></div>
+  <div><span>Date</span><code>2026-11-12</code></div>
+  <div><span>Duration</span><code>248.286 s (5 specs, 0 failures)</code></div>
+  <div><span>Plan section</span><code>TP-ARO-30375-001 v1.1 §5.7</code></div>
+</div>
+
+<h2>Environment verification before the run</h2>
+<div class="table-wrap"><table class=""><thead><tr><th>Precondition</th><th>Observed</th></tr></thead><tbody>
+<tr><td>Control-plane-operator image is the PR-head branch build</td><td><code>&lt;dev-registry&gt;.azurecr.io/&lt;user&gt;/hypershift:aro30375-1e771d5728</code></td></tr>
+<tr><td>etcd StatefulSet has 3 replicas, all ready</td><td><code>replicas=3 ready=3</code>, pods <code>etcd-0/1/2</code> 4/4 Running</td></tr>
+<tr><td>PR changes rendered in the etcd StatefulSet</td><td><code>refusing to start in bootstrap mode</code> guard present in the rendered StatefulSet</td></tr>
+<tr><td>Hosted kube-apiserver serving</td><td><code>/readyz</code> returns ok; marker ConfigMap round-trips</td></tr>
+</tbody></table></div>
+
+<h2>Spec results</h2>
+<div class="table-wrap"><table class="results"><thead><tr><th>Spec</th><th>What it does</th><th>Duration</th><th>Result</th></tr></thead><tbody>
+<tr><td>single member loses its data</td><td>Deletes one member's pod and PVC; reset-member rebuilds it into the existing cluster</td><td>112.147 s</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>random members repeatedly killed</td><td>Deletes a random etcd pod every 5 s for 30 s; verifies convergence and marker durability</td><td>43.461 s</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>all members killed simultaneously</td><td>Deletes all 3 pods in parallel; verifies pod replacement, convergence and marker durability</td><td>23.959 s</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>single member's data corrupted</td><td>Destroys a data directory; etcd-recovery Job activates (15 s) and repairs</td><td>66.561 s</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>member removed from the etcd cluster</td><td>Removes member <code>etcd-2</code> by ID, deletes its pod; recovery Job re-adds by peer URL; StatefulSet converges</td><td>2.130 s</td><td><span class="badge pass">PASS</span></td></tr>
+</tbody></table></div>
+<p class="muted">Suite summary: <code>SUCCESS! -- 5 Passed | 0 Failed | 2 Pending | 1155 Skipped</code>. Marker ConfigMaps were written to the hosted cluster's <code>default</code> namespace before each kill cycle and read back unchanged after convergence (resource versions and data verified by the suite's <code>verifyMarkerSurvived</code>).</p>
+
+<h2>Corroboration</h2>
+<p>The same suite passed on 2026-10-27 against an earlier PR-branch CPO (<code>ac99802e1a</code>) on an OCP 4.21.40 cluster in the same environment, and passed upstream in CI contexts at head. The etcd-recovery Job was exercised again after the suite by a naturally occurring flap: see <a href="scenario-6.html">TC-006</a> for the live wait-for-every-endpoint observation that followed this run.</p>
+
+<h2>Deviation 1 — hosted control plane is Partial, not Available</h2>
+<p>The plan's precondition is a "dedicated healthy HCP". The cluster under test has <code>EtcdAvailable=True</code>, <code>InfrastructureReady=True</code> and a serving kube-apiserver, but <code>Available=False</code> because the <code>konnectivity-server</code> and <code>azure-workload-identity-webhook</code> containers in the kube-apiserver pods crash-loop. This is a pre-existing incompatibility between hypershift <em>main</em> TLS-profile propagation (commits <code>20a145c472</code>, <code>d0083c95e1</code>, <code>4d4ac2e444</code>, all outside this PR) and GA OCP payload binaries: the rendered flags <code>--tls-min-version=VersionTLS12</code>/<code>--cipher-suites</code> are rejected by the GA 4.x payload's <code>proxy-server</code> and webhook binaries. Upstream CI passes because it consumes CI-stream payloads whose binaries accept the flags; the rendered arguments are otherwise identical. The PR under test changes no TLS or kube-apiserver code. Full root-cause chain with evidence: <a href="appendices.html">Appendices</a>.</p>
+<p>Everything TC-007 exercises lives in the etcd subsystem (StatefulSet, reset-member, recovery Job) and the kube-apiserver main container, all of which were healthy. The crash-looping containers are data-plane connectivity components with no role in the etcd recovery path.</p>
+
+<h2>Deviation 2 — marker specs connected via port-forward</h2>
+<p>Because all kube-apiserver pods on this from-scratch cluster carry the crash-looping containers, the pods are NotReady and the external API load balancer has no ready backends (TLS handshake timeout). The two marker-durability specs were therefore run with the e2e framework's own <code>GetHostedClusterClientViaPortForward</code> client, which connects to the same kube-apiserver pods on port 6443 through the management cluster API. This is an upstream framework facility intended exactly for environments where external DNS or load balancers are unavailable. The write path still crosses the real kube-apiserver and the real etcd, so durability semantics are unchanged. The local adaptation is 12 lines, was applied only to the test binary (the suite is upstream code, not part of the PR), and is published verbatim: <a href="assets/evidence/e2e/portforward-adaptation.patch"><code>e2e/portforward-adaptation.patch</code></a>.</p>
+
+<h2>Interpretation</h2>
+<p>The plan marks this test case's coverage <em>partial</em> because the exact deterministic interruption (inject a failure at <code>MemberAdd</code>, then retry) is only <em>proposed</em> as a new suite spec and is not implemented in the PR. The validation therefore composes the deterministic interruption path (TC-001 mock harness: failed add, preserved <code>existing</code> marker, successful retry with peer-URL add) with live end-to-end recovery of every adjacent fault shape on a 3-member cluster rendered by the head CPO. Together these cover the root-cause criteria: no removed identity is ever restarted as a bootstrap member, repairs are idempotent across retries, and quorum plus data survive every injected fault.</p>
+<p>Evidence: <a href="assets/evidence/e2e/etcd-chaos.log"><code>e2e/etcd-chaos.log</code></a> (full suite output) · <a href="assets/evidence/e2e/junit-etcd-chaos.xml"><code>e2e/junit-etcd-chaos.xml</code></a> · <a href="assets/evidence/cluster/etcd-pods-final.txt"><code>cluster/etcd-pods-final.txt</code></a> · <a href="assets/evidence/cluster/etcd-sts-after.txt"><code>cluster/etcd-sts-after.txt</code></a></p>
+<p class="back"><a href="index.html">← Return to dashboard</a></p>
+</main>
+<footer><a href="https://github.com/openshift/hypershift/pull/10118">openshift/hypershift#10118</a> · ARO-30375 · 2026-11-12 · sanitized bundle</footer>
+</body>
+</html>

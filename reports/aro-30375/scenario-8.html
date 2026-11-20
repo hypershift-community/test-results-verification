@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TC-008 — Shared and sharded scripts do not drift</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topbar"><div class="brand">ARO-30375 · Verification</div><nav><a href="index.html">Dashboard</a><a href="scenario-1.html">TC-001 Retry</a><a href="scenario-2.html">TC-002 Fail closed</a><a href="scenario-3.html">TC-003 Peer URL</a><a href="scenario-4.html">TC-004 Unstarted</a><a href="scenario-5.html">TC-005 Quorum</a><a href="scenario-6.html">TC-006 Wait</a><a href="scenario-7.html">TC-007 E2E</a><a href="scenario-8.html" class="active">TC-008 Drift</a><a href="automated-tests.html">Automated</a><a href="appendices.html">Appendices</a></nav></header>
+<main>
+<div class="scenario-head"><div><div class="eyebrow">TC-008 · unit tier · PASS</div><h1>TC-008 — Shared and sharded scripts do not drift</h1></div><span class="badge pass">PASS</span></div>
+<p class="lead">The reset-member script is assembled once and consumed by both the shared and sharded etcd renderers; fixture tests must lock both renderings against each other and against the script contract.</p>
+<div class="callout good"><p><strong>Result: PASS.</strong> <code>TestResetMemberScript</code> and the <code>TestControlPlaneComponents</code> etcd StatefulSet fixtures (including the AROSwift, EtcdRestore, GCP, IBMCloud, ModernTLS and TechPreviewNoUpgrade variants) pass at head. The PR's changed fixtures are part of the PR diff, so the fixtures and the code they lock move in the same commit.</p></div>
+
+<div class="meta-grid">
+  <div><span>Executed at</span><code>1e771d57285f5c8fd0d2115eae9839e3be476085</code></div>
+  <div><span>Method</span><code>go test ./control-plane-operator/... at head</code></div>
+  <div><span>Date</span><code>2026-11-12</code></div>
+  <div><span>Plan section</span><code>TP-ARO-30375-001 v1.1 §5.8</code></div>
+</div>
+
+<h2>Checks</h2>
+<div class="table-wrap"><table class=""><thead><tr><th>Test</th><th>Scope</th><th>Result</th></tr></thead><tbody>
+<tr><td><code>TestResetMemberScript</code></td><td>Script assembly contract (shared and sharded paths)</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td><code>TestControlPlaneComponents</code> etcd fixtures</td><td>Rendered StatefulSet golden files for 7 variants incl. sharded and restore scenarios</td><td><span class="badge pass">PASS</span></td></tr>
+</tbody></table></div>
+
+<h2>Interpretation</h2>
+<p>The PR updates the shared StatefulSet asset and the shard assembly together, and carries the matching fixture updates (<code>zz_fixture_TestControlPlaneComponents_etcd_statefulset.yaml</code> for the default, AROSwift, EtcdRestore, GCP, IBMCloud, ModernTLS and TechPreviewNoUpgrade variants). Because the fixtures are exact renderings, a drift between the shared script text and any sharded variant would fail these tests. The live TC-007 run additionally confirmed the rendered StatefulSet on a real cluster contains the new guard, closing the loop between fixture and deployed artifact.</p>
+<p>Evidence: <a href="assets/evidence/unit/tc008-testresetmemberscript.log"><code>unit/tc008-testresetmemberscript.log</code></a> · <a href="assets/evidence/unit/tc008-fixture-tests.log"><code>unit/tc008-fixture-tests.log</code></a>. These tests also run in CI (<code>test / Unit Tests (cpo-hostedcontrolplane)</code>, green at head).</p>
+<p class="back"><a href="index.html">← Return to dashboard</a></p>
+</main>
+<footer><a href="https://github.com/openshift/hypershift/pull/10118">openshift/hypershift#10118</a> · ARO-30375 · 2026-11-12 · sanitized bundle</footer>
+</body>
+</html>

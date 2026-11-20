@@ -1,0 +1,23 @@
+{
+  "jira": "ARO-30375",
+  "pr": "https://github.com/openshift/hypershift/pull/10118",
+  "pr_head_commit": "1e771d57285f5c8fd0d2115eae9839e3be476085",
+  "test_plan": "TP-ARO-30375-001 v1.1 (plans/aro-30375.md)",
+  "report_date": "2026-11-12",
+  "source_evidence_files": 17,
+  "published_evidence_files": 17,
+  "verdict": "pass",
+  "scenario_count": 8,
+  "pass_count": 8,
+  "transformations": [
+    "Hosted-cluster and control-plane namespace literals replaced",
+    "Private registry hosts replaced with placeholder hosts",
+    "DNS zone, region account and cluster DNS id replaced",
+    "Management node names replaced with mgmt-node",
+    "Subscription ID, resource group and ARM cluster name replaced",
+    "Local user paths replaced",
+    "Pod and service IP literals replaced with placeholder subnets",
+    "ANSI escape sequences stripped from logs",
+    "Sanitized evidence hashes regenerated"
+  ]
+}

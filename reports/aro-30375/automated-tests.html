@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ARO-30375 automated tests</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topbar"><div class="brand">ARO-30375 · Verification</div><nav><a href="index.html">Dashboard</a><a href="scenario-1.html">TC-001 Retry</a><a href="scenario-2.html">TC-002 Fail closed</a><a href="scenario-3.html">TC-003 Peer URL</a><a href="scenario-4.html">TC-004 Unstarted</a><a href="scenario-5.html">TC-005 Quorum</a><a href="scenario-6.html">TC-006 Wait</a><a href="scenario-7.html">TC-007 E2E</a><a href="scenario-8.html">TC-008 Drift</a><a href="automated-tests.html" class="active">Automated</a><a href="appendices.html">Appendices</a></nav></header>
+<main>
+<div class="scenario-head"><div><div class="eyebrow">CI and locally executed automation</div><h1>Automated tests at the verified head</h1></div></div>
+<p class="lead">Everything that runs mechanically against <code>1e771d57285f5c8fd0d2115eae9839e3be476085</code>: GitHub check runs, Prow presubmits, and the unit and suite binaries executed locally for this verification.</p>
+
+<h2>Prow and GitHub checks (captured 2026-11-12)</h2>
+<div class="table-wrap"><table class="results"><thead><tr><th>Job</th><th>Result</th><th>Notes</th></tr></thead><tbody>
+<tr><td>lint / codespell / gitlint / deadcode / verify</td><td><span class="badge pass">SUCCESS</span></td><td>static checks</td></tr>
+<tr><td>test / Unit Tests (all shards)</td><td><span class="badge pass">SUCCESS</span></td><td>includes cpo-hostedcontrolplane (TC-008 fixtures) and etcd-recovery tests (TC-004/005/006)</td></tr>
+<tr><td>envtest-ocp / envtest-kube</td><td><span class="badge pass">SUCCESS</span></td><td>CEL validation matrix</td></tr>
+<tr><td>e2e-compile</td><td><span class="badge pass">SUCCESS</span></td><td>v2 suite compiles at head</td></tr>
+<tr><td>ci/pipeline-gate, Konflux enterprise contracts</td><td><span class="badge pass">SUCCESS</span></td><td>—</td></tr>
+<tr><td>e2e-v2-azure-self-managed</td><td><span class="badge pass">SUCCESS</span></td><td>passing build's rendered kube-apiserver used as the upstream comparison in the appendices</td></tr>
+<tr><td>e2e-v2-aws</td><td><span class="badge pass">SUCCESS</span></td><td>—</td></tr>
+<tr><td>e2e-aks</td><td><span class="badge pass">SUCCESS</span></td><td>—</td></tr>
+<tr><td>e2e-aws-upgrade-hypershift-operator</td><td><span class="badge pass">SUCCESS</span></td><td>relevant because the PR changes the etcd StatefulSet template and rolls it out partitioned</td></tr>
+<tr><td>e2e-aws</td><td><span class="badge pending">FAILURE, retry pending</span></td><td>2026-11-11 run failed in <code>TestNodePool/HostedCluster2</code> (NodePool condition wait on a nested cluster: wanted <code>ClusterVersionProgressing=True</code>, got <code>False</code>); 5 failures of 601 tests, none etcd-related. A retry started 2026-11-12 16:47 UTC and was still pending at capture time.</td></tr>
+</tbody></table></div>
+
+<h2>Locally executed automation (2026-11-12, at head)</h2>
+<div class="table-wrap"><table class="results"><thead><tr><th>Run</th><th>Command shape</th><th>Result</th></tr></thead><tbody>
+<tr><td>etcd-recovery decision tests</td><td><code>go test ./etcd-recovery/...</code></td><td><span class="badge pass">PASS</span> — TestCheckEtcdStatus (5), TestIsHealthyForWait (3), TestShouldWaitWithoutRecovery (4)</td></tr>
+<tr><td>reset-member script test</td><td><code>go test</code> (TestResetMemberScript)</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>etcd StatefulSet fixtures</td><td><code>go test</code> (TestControlPlaneComponents)</td><td><span class="badge pass">PASS</span> — 10.9 s, all fixture variants</td></tr>
+<tr><td>reset-member mock harness</td><td>rendered script + mock etcdctl, 7 scenarios</td><td><span class="badge pass">PASS</span> — 28 checks, 0 failures</td></tr>
+<tr><td>etcd-chaos e2e suite</td><td><code>test-e2e-v2 --ginkgo.label-filter=etcd-chaos</code> against the live HC</td><td><span class="badge pass">PASS</span> — 5 specs in 248 s, JUnit written</td></tr>
+</tbody></table></div>
+
+<p class="muted">The <code>etcd-chaos</code> suite is upstream code and is not part of the PR diff; the PR touches only etcd rendering and recovery code plus their unit fixtures. The local suite binary included the port-forward adaptation documented in <a href="scenario-7.html">TC-007</a>.</p>
+
+<h2>CI at the verified head</h2>
+<p>The PR was open (not merged) at capture time. The pending <code>e2e-aws</code> retry is the only red or unknown signal; its observed failure mode is a NodePool lifecycle condition wait, which does not intersect the etcd recovery surface. The passing <code>e2e-aws-upgrade-hypershift-operator</code> job is the most relevant presubmit for the PR's rollout behavior, since the changed etcd StatefulSet template rolls out partitioned across existing hosted clusters when the operator upgrades.</p>
+<p class="back"><a href="index.html">← Return to dashboard</a></p>
+</main>
+<footer><a href="https://github.com/openshift/hypershift/pull/10118">openshift/hypershift#10118</a> · ARO-30375 · 2026-11-12 · sanitized bundle</footer>
+</body>
+</html>

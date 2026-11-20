@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <testsuites tests="5" disabled="0" errors="0" failures="0" time="248.286152709">
+      
+      <testsuite name="hypershift-e2e" package="/home/<user>/repos/hypershift" tests="5" disabled="0" skipped="0" errors="0" failures="0" time="248.286152709" timestamp="2026-11-12T10:14:47">
+          
+          <properties>
+              
+              <property name="SuiteSucceeded" value="true"></property>
+              
+              <property name="SuiteHasProgrammaticFocus" value="false"></property>
+              
+              <property name="SpecialSuiteFailureReason" value=""></property>
+              
+              <property name="SuiteLabels" value="[]"></property>
+              
+              <property name="SuiteSemVerConstraints" value="[]"></property>
+              
+              <property name="SuiteComponentSemVerConstraints" value="[]"></property>
+              
+              <property name="RandomSeed" value="1794507287"></property>
+              
+              <property name="RandomizeAllSpecs" value="false"></property>
+              
+              <property name="LabelFilter" value="etcd-chaos"></property>
+              
+              <property name="SemVerFilter" value=""></property>
+              
+              <property name="FocusStrings" value=""></property>
+              
+              <property name="SkipStrings" value=""></property>
+              
+              <property name="FocusFiles" value=""></property>
+              
+              <property name="SkipFiles" value=""></property>
+              
+              <property name="FailOnPending" value="false"></property>
+              
+              <property name="FailOnEmpty" value="false"></property>
+              
+              <property name="FailFast" value="false"></property>
+              
+              <property name="FlakeAttempts" value="0"></property>
+              
+              <property name="DryRun" value="false"></property>
+              
+              <property name="ParallelTotal" value="1"></property>
+              
+              <property name="OutputInterceptorMode" value=""></property>
+          
+          </properties>
+          
+          <testcase name="[sig-hypershift][Jira:Hypershift][Feature:EtcdResilience] Etcd Chaos should recover after a single member loses its data" classname="hypershift-e2e" status="passed" time="112.147388923">
+              
+              <system-err>&gt; Enter [BeforeAll] [sig-hypershift][Jira:Hypershift][Feature:EtcdResilience] Etcd Chaos - /home/<user>/repos/hypershift/test/e2e/v2/tests/etcd_chaos_test.go:58 @ 11/12/26 10:14:47.515
+&lt; Exit [BeforeAll] [sig-hypershift][Jira:Hypershift][Feature:EtcdResilience] Etcd Chaos - /home/<user>/repos/hypershift/test/e2e/v2/tests/etcd_chaos_test.go:58 @ 11/12/26 10:14:47.515 (0s)
+&gt; Enter [It] should recover after a single member loses its data - /home/<user>/repos/hypershift/test/e2e/v2/tests/etcd_chaos_test.go:69 @ 11/12/26 10:14:47.515
+Found 3 etcd pods
+Deleting etcd pod etcd-0 and PVC data-etcd-0
+Deleted etcd PVC data-etcd-0
+Deleted etcd pod etcd-0
+Waiting for deleted etcd pod is replaced
+observed *v1.Pod ocm-arohcppers-REDACTED-cluster/etcd-0 invalid at RV 734796 after 75ms: pod UID 121003ec-0fab-46c5-b372-481179c78f3d
+observed *v1.Pod ocm-arohcppers-REDACTED-cluster/etcd-0 valid at RV 735160 after 5s: pod UID c0b9d2f1-9d6d-4cce-88f6-9caf4a7d236c
+Successfully waited for deleted etcd pod is replaced in 30.075s
+Waiting for etcd StatefulSet replicas to converge
+observed *v1.StatefulSet ocm-arohcppers-REDACTED-cluster/etcd invalid at RV 735161 after 50ms: wanted 3 ready replicas, got 2
+observed *v1.StatefulSet ocm-arohcppers-REDACTED-cluster/etcd valid at RV 736120 after 4.975s: wanted 3 ready replicas, got 3
+Successfully waited for etcd StatefulSet replicas to converge in 1m20.1s
+&lt; Exit [It] should recover after a single member loses its data - /home/<user>/repos/hypershift/test/e2e/v2/tests/etcd_chaos_test.go:69 @ 11/12/26 10:16:39.662 (1m52.147s)
+</system-err>
+          
+          </testcase>
+          
+          <testcase name="[sig-hypershift][Jira:Hypershift][Feature:EtcdResilience] Etcd Chaos should preserve data when random members are repeatedly killed" classname="hypershift-e2e" status="passed" time="43.461390451">
+              
+              <system-err>&gt; Enter [It] should preserve data when random members are repeatedly killed - /home/<user>/repos/hypershift/test/e2e/v2/tests/etcd_chaos_test.go:123 @ 11/12/26 10:16:39.662
+Waiting for create marker ConfigMap
+Successfully waited for create marker ConfigMap in 350ms
+Created marker ConfigMap default/marker-ttdmk
+Found 3 etcd pods
+Deleting random etcd pods every 5s for 30s
+Deleted pod etcd-2
+Deleted pod etcd-2
+Deleted pod etcd-0
+Deleted pod etcd-0
+Deleted pod etcd-2
+Deleted pod etcd-0
+Waiting for etcd StatefulSet replicas to converge
+observed *v1.StatefulSet ocm-arohcppers-REDACTED-cluster/etcd invalid at RV 736683 after 175ms: wanted 3 ready replicas, got 1
+observed *v1.StatefulSet ocm-arohcppers-REDACTED-cluster/etcd invalid at RV 736769 after 5.025s: wanted 3 ready replicas, got 2
+observed *v1.StatefulSet ocm-arohcppers-REDACTED-cluster/etcd valid at RV 736828 after 4.925s: wanted 3 ready replicas, got 3
+Successfully waited for etcd StatefulSet replicas to converge in 10.15s
+Waiting for verify marker data survived disruption
+observed *v1.ConfigMap default/marker-ttdmk valid at RV 2135 after 50ms: incorrect data: 
+Successfully waited for verify marker data survived disruption in 50ms
+&lt; Exit [It] should preserve data when random members are repeatedly killed - /home/<user>/repos/hypershift/test/e2e/v2/tests/etcd_chaos_test.go:123 @ 11/12/26 10:17:23.072 (43.41s)
+&gt; Enter [DeferCleanup (Each)] [sig-hypershift][Jira:Hypershift][Feature:EtcdResilience] Etcd Chaos - /home/<user>/repos/hypershift/test/e2e/v2/tests/etcd_chaos_test.go:144 @ 11/12/26 10:17:23.072
+&lt; Exit [DeferCleanup (Each)] [sig-hypershift][Jira:Hypershift][Feature:EtcdResilience] Etcd Chaos - /home/<user>/repos/hypershift/test/e2e/v2/tests/etcd_chaos_test.go:144 @ 11/12/26 10:17:23.124 (52ms)
+&gt; Enter [DeferCleanup (Each)] [sig-hypershift][Jira:Hypershift][Feature:EtcdResilience] Etcd Chaos - /home/<user>/repos/hypershift/test/e2e/v2/tests/etcd_chaos_test.go:139 @ 11/12/26 10:17:23.124
+&lt; Exit [DeferCleanup (Each)] [sig-hypershift][Jira:Hypershift][Feature:EtcdResilience] Etcd Chaos - /home/<user>/repos/hypershift/test/e2e/v2/tests/etcd_chaos_test.go:139 @ 11/12/26 10:17:23.124 (0s)
+</system-err>
+          
+          </testcase>
+          
+          <testcase name="[sig-hypershift][Jira:Hypershift][Feature:EtcdResilience] Etcd Chaos should preserve data when all members are killed simultaneously" classname="hypershift-e2e" status="passed" time="23.958570009">
+              
+              <system-err>&gt; Enter [It] should preserve data when all members are killed simultaneously - /home/<user>/repos/hypershift/test/e2e/v2/tests/etcd_chaos_test.go:182 @ 11/12/26 10:17:23.124
+Waiting for create marker ConfigMap
+Successfully waited for create marker ConfigMap in 350ms
+Created marker ConfigMap default/marker-7ssdk
+Found 3 etcd pods
+Deleting all 3 etcd pods simultaneously
+Deleted pod etcd-2
+Deleted pod etcd-0
+Deleted pod etcd-1
+Waiting for etcd pods to be replaced
+observed valid **v1.Pod state after 50ms
+ - observed **v1.Pod ocm-arohcppers-REDACTED-cluster/etcd-0 valid: pod UID a542bfa6-d957-47b7-8d90-1602b65ce52b
+Successfully waited for etcd pods to be replaced in 50ms
+Waiting for etcd StatefulSet replicas to converge
+observed *v1.StatefulSet ocm-arohcppers-REDACTED-cluster/etcd valid at RV 736927 after 50ms: wanted 3 ready replicas, got 3
+Successfully waited for etcd StatefulSet replicas to converge in 50ms
+Waiting for verify marker data survived disruption
+observed *v1.ConfigMap default/marker-7ssdk valid at RV 2151 after 22.4s: incorrect data: 
+Successfully waited for verify marker data survived disruption in 22.4s
+&lt; Exit [It] should preserve data when all members are killed simultaneously - /home/<user>/repos/hypershift/test/e2e/v2/tests/etcd_chaos_test.go:182 @ 11/12/26 10:17:47.031 (23.908s)
+&gt; Enter [DeferCleanup (Each)] [sig-hypershift][Jira:Hypershift][Feature:EtcdResilience] Etcd Chaos - /home/<user>/repos/hypershift/test/e2e/v2/tests/etcd_chaos_test.go:203 @ 11/12/26 10:17:47.031
+&lt; Exit [DeferCleanup (Each)] [sig-hypershift][Jira:Hypershift][Feature:EtcdResilience] Etcd Chaos - /home/<user>/repos/hypershift/test/e2e/v2/tests/etcd_chaos_test.go:203 @ 11/12/26 10:17:47.082 (51ms)
+&gt; Enter [DeferCleanup (Each)] [sig-hypershift][Jira:Hypershift][Feature:EtcdResilience] Etcd Chaos - /home/<user>/repos/hypershift/test/e2e/v2/tests/etcd_chaos_test.go:198 @ 11/12/26 10:17:47.082
+&lt; Exit [DeferCleanup (Each)] [sig-hypershift][Jira:Hypershift][Feature:EtcdResilience] Etcd Chaos - /home/<user>/repos/hypershift/test/e2e/v2/tests/etcd_chaos_test.go:198 @ 11/12/26 10:17:47.082 (0s)
+</system-err>
+          
+          </testcase>
+          
+          <testcase name="[sig-hypershift][Jira:Hypershift][Feature:EtcdResilience] Etcd Chaos should recover after a single member&#39;s data is corrupted" classname="hypershift-e2e" status="passed" time="66.56149331">
+              
+              <system-err>&gt; Enter [It] should recover after a single member&#39;s data is corrupted - /home/<user>/repos/hypershift/test/e2e/v2/tests/etcd_chaos_test.go:271 @ 11/12/26 10:17:47.082
+Found 3 etcd pods
+Destroying data directory on etcd pod: etcd-1
+Waiting for etcd recovery job to be active
+Failed to get *v1.Job: jobs.batch &#34;etcd-recovery&#34; not found
+observed *v1.Job ocm-arohcppers-REDACTED-cluster/etcd-recovery valid at RV 737468 after 15.05s: wanted status active to be 1, got 1
+Successfully waited for etcd recovery job to be active in 15.05s
+Waiting for etcd StatefulSet replicas to converge
+observed *v1.StatefulSet ocm-arohcppers-REDACTED-cluster/etcd invalid at RV 737414 after 75ms: wanted 3 ready replicas, got 2
+observed *v1.StatefulSet ocm-arohcppers-REDACTED-cluster/etcd valid at RV 738109 after 5.05s: wanted 3 ready replicas, got 3
+Successfully waited for etcd StatefulSet replicas to converge in 50.15s
+&lt; Exit [It] should recover after a single member&#39;s data is corrupted - /home/<user>/repos/hypershift/test/e2e/v2/tests/etcd_chaos_test.go:271 @ 11/12/26 10:18:53.644 (1m6.561s)
+</system-err>
+          
+          </testcase>
+          
+          <testcase name="[sig-hypershift][Jira:Hypershift][Feature:EtcdResilience] Etcd Chaos should recover after a member is removed from the etcd cluster" classname="hypershift-e2e" status="passed" time="2.129676501">
+              
+              <system-err>&gt; Enter [It] should recover after a member is removed from the etcd cluster - /home/<user>/repos/hypershift/test/e2e/v2/tests/etcd_chaos_test.go:319 @ 11/12/26 10:18:53.644
+Found 3 etcd pods
+Discovering member ID for: etcd-2
+Removing etcd member etcd-2 (ID: f21e8c395ee3a9a8)
+Deleting pod: etcd-2
+Waiting for etcd recovery job to be active
+observed *v1.Job ocm-arohcppers-REDACTED-cluster/etcd-recovery valid at RV 737477 after 50ms: wanted status active to be 1, got 1
+Successfully waited for etcd recovery job to be active in 50ms
+Waiting for etcd StatefulSet replicas to converge
+observed *v1.StatefulSet ocm-arohcppers-REDACTED-cluster/etcd valid at RV 738164 after 100ms: wanted 3 ready replicas, got 3
+Successfully waited for etcd StatefulSet replicas to converge in 100ms
+&lt; Exit [It] should recover after a member is removed from the etcd cluster - /home/<user>/repos/hypershift/test/e2e/v2/tests/etcd_chaos_test.go:319 @ 11/12/26 10:18:55.774 (2.13s)
+</system-err>
+          
+          </testcase>
+      
+      </testsuite>
+  
+  </testsuites>

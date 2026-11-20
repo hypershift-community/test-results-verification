@@ -1,0 +1,728 @@
+=== RUN   TestAzureTestMatrix
+    azure_test_matrix_test.go:22: Azure test matrix validation requires an unfiltered test invocation
+--- SKIP: TestAzureTestMatrix (0.00s)
+=== RUN   TestComponentSupportsTLSConfig
+=== PAUSE TestComponentSupportsTLSConfig
+=== RUN   TestVerifyIntermediateTLSConnectivityAfterDowngrade
+=== PAUSE TestVerifyIntermediateTLSConnectivityAfterDowngrade
+=== RUN   TestImageMirroringExpected
+=== RUN   TestImageMirroringExpected/When_the_fixture_has_two_sources_and_multiple_mirrors,_it_should_snapshot_the_HC_input
+=== RUN   TestImageMirroringExpected/When_additional_sources_exist,_it_should_retain_all_entries
+=== RUN   TestImageMirroringExpected/When_ICS_is_nil,_it_should_reject_setup
+=== RUN   TestImageMirroringExpected/When_ICS_is_empty,_it_should_reject_setup
+=== RUN   TestImageMirroringExpected/When_a_source_is_blank,_it_should_reject_setup
+=== RUN   TestImageMirroringExpected/When_mirrors_are_empty,_it_should_reject_setup
+=== RUN   TestImageMirroringExpected/When_a_mirror_is_blank,_it_should_reject_setup
+=== RUN   TestImageMirroringExpected/When_a_source_is_duplicated,_it_should_reject_setup
+=== RUN   TestImageMirroringExpected/When_the_real_fixture_source_is_missing,_it_should_reject_setup
+=== RUN   TestImageMirroringExpected/When_the_virtual_fixture_source_is_missing,_it_should_reject_setup
+=== RUN   TestImageMirroringExpected/When_Route_host_is_empty,_it_should_reject_setup
+=== RUN   TestImageMirroringExpected/When_Route_host_is_wrong,_it_should_reject_setup
+=== RUN   TestImageMirroringExpected/When_a_mirror_only_shares_the_host_prefix,_it_should_reject_setup
+=== RUN   TestImageMirroringExpected/When_a_mirror_has_no_repository_path,_it_should_reject_setup
+=== RUN   TestImageMirroringExpected/When_HC_is_nil,_it_should_reject_setup_without_panic
+=== RUN   TestImageMirroringExpected/When_Route_is_nil,_it_should_reject_setup_without_panic
+--- PASS: TestImageMirroringExpected (0.00s)
+    --- PASS: TestImageMirroringExpected/When_the_fixture_has_two_sources_and_multiple_mirrors,_it_should_snapshot_the_HC_input (0.00s)
+    --- PASS: TestImageMirroringExpected/When_additional_sources_exist,_it_should_retain_all_entries (0.00s)
+    --- PASS: TestImageMirroringExpected/When_ICS_is_nil,_it_should_reject_setup (0.00s)
+    --- PASS: TestImageMirroringExpected/When_ICS_is_empty,_it_should_reject_setup (0.00s)
+    --- PASS: TestImageMirroringExpected/When_a_source_is_blank,_it_should_reject_setup (0.00s)
+    --- PASS: TestImageMirroringExpected/When_mirrors_are_empty,_it_should_reject_setup (0.00s)
+    --- PASS: TestImageMirroringExpected/When_a_mirror_is_blank,_it_should_reject_setup (0.00s)
+    --- PASS: TestImageMirroringExpected/When_a_source_is_duplicated,_it_should_reject_setup (0.00s)
+    --- PASS: TestImageMirroringExpected/When_the_real_fixture_source_is_missing,_it_should_reject_setup (0.00s)
+    --- PASS: TestImageMirroringExpected/When_the_virtual_fixture_source_is_missing,_it_should_reject_setup (0.00s)
+    --- PASS: TestImageMirroringExpected/When_Route_host_is_empty,_it_should_reject_setup (0.00s)
+    --- PASS: TestImageMirroringExpected/When_Route_host_is_wrong,_it_should_reject_setup (0.00s)
+    --- PASS: TestImageMirroringExpected/When_a_mirror_only_shares_the_host_prefix,_it_should_reject_setup (0.00s)
+    --- PASS: TestImageMirroringExpected/When_a_mirror_has_no_repository_path,_it_should_reject_setup (0.00s)
+    --- PASS: TestImageMirroringExpected/When_HC_is_nil,_it_should_reject_setup_without_panic (0.00s)
+    --- PASS: TestImageMirroringExpected/When_Route_is_nil,_it_should_reject_setup_without_panic (0.00s)
+=== RUN   TestImageMirroringConfigured
+=== RUN   TestImageMirroringConfigured/When_HC_is_nil,_it_should_report_not_configured
+=== RUN   TestImageMirroringConfigured/When_HC_has_no_imageContentSources,_it_should_report_not_configured
+=== RUN   TestImageMirroringConfigured/When_the_fixture_Route_is_missing,_it_should_report_not_configured
+=== RUN   TestImageMirroringConfigured/When_imageContentSources_and_the_fixture_Route_are_present,_it_should_report_configured
+=== RUN   TestImageMirroringConfigured/When_imageContentSources_are_malformed,_it_should_still_report_configured_so_strict_checks_fail
+--- PASS: TestImageMirroringConfigured (0.00s)
+    --- PASS: TestImageMirroringConfigured/When_HC_is_nil,_it_should_report_not_configured (0.00s)
+    --- PASS: TestImageMirroringConfigured/When_HC_has_no_imageContentSources,_it_should_report_not_configured (0.00s)
+    --- PASS: TestImageMirroringConfigured/When_the_fixture_Route_is_missing,_it_should_report_not_configured (0.00s)
+    --- PASS: TestImageMirroringConfigured/When_imageContentSources_and_the_fixture_Route_are_present,_it_should_report_configured (0.00s)
+    --- PASS: TestImageMirroringConfigured/When_imageContentSources_are_malformed,_it_should_still_report_configured_so_strict_checks_fail (0.00s)
+=== RUN   TestImageMirroringLoadSetup
+=== RUN   TestImageMirroringLoadSetup/When_the_HC_has_imageContentSources_and_the_fixture_Route_exists,_it_should_return_the_validated_setup
+=== RUN   TestImageMirroringLoadSetup/When_the_fixture_Route_does_not_exist,_it_should_report_not_configured_without_error_so_the_spec_skips
+=== RUN   TestImageMirroringLoadSetup/When_only_a_Route_in_another_namespace_exists,_it_should_report_not_configured_without_error
+=== RUN   TestImageMirroringLoadSetup/When_the_HC_has_no_imageContentSources,_it_should_report_not_configured_without_error_so_the_spec_skips
+=== RUN   TestImageMirroringLoadSetup/When_the_Route_read_fails,_it_should_return_the_error_so_the_spec_fails_instead_of_skipping
+=== RUN   TestImageMirroringLoadSetup/When_the_setup_is_present_but_invalid,_it_should_return_the_error_so_the_spec_fails
+--- PASS: TestImageMirroringLoadSetup (0.13s)
+    --- PASS: TestImageMirroringLoadSetup/When_the_HC_has_imageContentSources_and_the_fixture_Route_exists,_it_should_return_the_validated_setup (0.13s)
+    --- PASS: TestImageMirroringLoadSetup/When_the_fixture_Route_does_not_exist,_it_should_report_not_configured_without_error_so_the_spec_skips (0.00s)
+    --- PASS: TestImageMirroringLoadSetup/When_only_a_Route_in_another_namespace_exists,_it_should_report_not_configured_without_error (0.00s)
+    --- PASS: TestImageMirroringLoadSetup/When_the_HC_has_no_imageContentSources,_it_should_report_not_configured_without_error_so_the_spec_skips (0.00s)
+    --- PASS: TestImageMirroringLoadSetup/When_the_Route_read_fails,_it_should_return_the_error_so_the_spec_fails_instead_of_skipping (0.00s)
+    --- PASS: TestImageMirroringLoadSetup/When_the_setup_is_present_but_invalid,_it_should_return_the_error_so_the_spec_fails (0.00s)
+=== RUN   TestImageMirroringCheckMappings
+=== RUN   TestImageMirroringCheckMappings/When_mappings_match,_it_should_accept_ordered_mirrors
+=== RUN   TestImageMirroringCheckMappings/When_outer_entries_are_reordered,_it_should_accept_them
+=== RUN   TestImageMirroringCheckMappings/When_an_entry_is_missing,_it_should_reject_it
+=== RUN   TestImageMirroringCheckMappings/When_an_entry_is_extra,_it_should_reject_it
+=== RUN   TestImageMirroringCheckMappings/When_sources_are_duplicated,_it_should_reject_them
+=== RUN   TestImageMirroringCheckMappings/When_sources_are_wrong,_it_should_reject_them
+=== RUN   TestImageMirroringCheckMappings/When_mirrors_belong_to_the_wrong_source,_it_should_reject_them
+=== RUN   TestImageMirroringCheckMappings/When_mirror_priority_changes,_it_should_reject_it
+=== RUN   TestImageMirroringCheckMappings/When_a_mirror_is_dropped,_it_should_reject_it
+=== RUN   TestImageMirroringCheckMappings/When_a_mirror_is_duplicated,_it_should_reject_it
+=== RUN   TestImageMirroringCheckMappings/When_actual_mappings_are_empty,_it_should_reject_them
+=== RUN   TestImageMirroringCheckMappings/When_HC_contains_repeated_mirrors,_it_should_preserve_their_multiplicity
+=== RUN   TestImageMirroringCheckMappings/When_expected_mappings_are_nil,_it_should_reject_vacuous_equality
+=== RUN   TestImageMirroringCheckMappings/When_expected_mappings_are_empty,_it_should_reject_vacuous_equality
+=== RUN   TestImageMirroringCheckMappings/When_expected_source_is_blank,_it_should_reject_it
+=== RUN   TestImageMirroringCheckMappings/When_expected_mirrors_are_empty,_it_should_reject_them
+=== RUN   TestImageMirroringCheckMappings/When_expected_sources_are_duplicated,_it_should_reject_them
+--- PASS: TestImageMirroringCheckMappings (0.00s)
+    --- PASS: TestImageMirroringCheckMappings/When_mappings_match,_it_should_accept_ordered_mirrors (0.00s)
+    --- PASS: TestImageMirroringCheckMappings/When_outer_entries_are_reordered,_it_should_accept_them (0.00s)
+    --- PASS: TestImageMirroringCheckMappings/When_an_entry_is_missing,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckMappings/When_an_entry_is_extra,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckMappings/When_sources_are_duplicated,_it_should_reject_them (0.00s)
+    --- PASS: TestImageMirroringCheckMappings/When_sources_are_wrong,_it_should_reject_them (0.00s)
+    --- PASS: TestImageMirroringCheckMappings/When_mirrors_belong_to_the_wrong_source,_it_should_reject_them (0.00s)
+    --- PASS: TestImageMirroringCheckMappings/When_mirror_priority_changes,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckMappings/When_a_mirror_is_dropped,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckMappings/When_a_mirror_is_duplicated,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckMappings/When_actual_mappings_are_empty,_it_should_reject_them (0.00s)
+    --- PASS: TestImageMirroringCheckMappings/When_HC_contains_repeated_mirrors,_it_should_preserve_their_multiplicity (0.00s)
+    --- PASS: TestImageMirroringCheckMappings/When_expected_mappings_are_nil,_it_should_reject_vacuous_equality (0.00s)
+    --- PASS: TestImageMirroringCheckMappings/When_expected_mappings_are_empty,_it_should_reject_vacuous_equality (0.00s)
+    --- PASS: TestImageMirroringCheckMappings/When_expected_source_is_blank,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckMappings/When_expected_mirrors_are_empty,_it_should_reject_them (0.00s)
+    --- PASS: TestImageMirroringCheckMappings/When_expected_sources_are_duplicated,_it_should_reject_them (0.00s)
+=== RUN   TestImageMirroringCheckIDMS
+=== RUN   TestImageMirroringCheckIDMS/When_the_named_IDMS_matches_with_unrelated_metadata,_it_should_accept_it
+=== RUN   TestImageMirroringCheckIDMS/When_name_is_unrelated,_it_should_reject_it
+=== RUN   TestImageMirroringCheckIDMS/When_namespace_is_nonempty,_it_should_reject_it
+=== RUN   TestImageMirroringCheckIDMS/When_worker_label_is_missing,_it_should_reject_it
+=== RUN   TestImageMirroringCheckIDMS/When_worker_label_is_wrong,_it_should_reject_it
+=== RUN   TestImageMirroringCheckIDMS/When_mappings_are_empty,_it_should_reject_them
+=== RUN   TestImageMirroringCheckIDMS/When_collection_is_nil,_it_should_reject_it
+=== RUN   TestImageMirroringCheckIDMS/When_collection_is_empty,_it_should_reject_it
+=== RUN   TestImageMirroringCheckIDMS/When_target_is_nil,_it_should_reject_it
+=== RUN   TestImageMirroringCheckIDMS/When_multiple_targets_exist,_it_should_reject_them
+--- PASS: TestImageMirroringCheckIDMS (0.00s)
+    --- PASS: TestImageMirroringCheckIDMS/When_the_named_IDMS_matches_with_unrelated_metadata,_it_should_accept_it (0.00s)
+    --- PASS: TestImageMirroringCheckIDMS/When_name_is_unrelated,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckIDMS/When_namespace_is_nonempty,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckIDMS/When_worker_label_is_missing,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckIDMS/When_worker_label_is_wrong,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckIDMS/When_mappings_are_empty,_it_should_reject_them (0.00s)
+    --- PASS: TestImageMirroringCheckIDMS/When_collection_is_nil,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckIDMS/When_collection_is_empty,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckIDMS/When_target_is_nil,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckIDMS/When_multiple_targets_exist,_it_should_reject_them (0.00s)
+=== RUN   TestImageMirroringCheckConfigMap
+=== RUN   TestImageMirroringCheckConfigMap/When_the_payload_matches,_it_should_allow_unrelated_metadata_and_data
+=== RUN   TestImageMirroringCheckConfigMap/When_YAML_key_order_and_formatting_differ,_it_should_accept_them
+=== RUN   TestImageMirroringCheckConfigMap/When_CM_name_is_wrong,_it_should_reject_it
+=== RUN   TestImageMirroringCheckConfigMap/When_CM_namespace_is_wrong,_it_should_reject_it
+=== RUN   TestImageMirroringCheckConfigMap/When_core_label_is_missing,_it_should_reject_it
+=== RUN   TestImageMirroringCheckConfigMap/When_core_label_is_wrong,_it_should_reject_it
+=== RUN   TestImageMirroringCheckConfigMap/When_config_is_missing,_it_should_reject_it
+=== RUN   TestImageMirroringCheckConfigMap/When_config_is_empty,_it_should_reject_it
+=== RUN   TestImageMirroringCheckConfigMap/When_YAML_is_malformed,_it_should_retry_with_decode_diagnostics
+=== RUN   TestImageMirroringCheckConfigMap/When_kind_is_wrong,_it_should_reject_it
+=== RUN   TestImageMirroringCheckConfigMap/When_API_version_is_wrong,_it_should_reject_it
+=== RUN   TestImageMirroringCheckConfigMap/When_GVK_is_absent,_it_should_reject_it
+=== RUN   TestImageMirroringCheckConfigMap/When_payload_name_is_wrong,_it_should_reject_it
+=== RUN   TestImageMirroringCheckConfigMap/When_payload_namespace_is_nonempty,_it_should_reject_it
+=== RUN   TestImageMirroringCheckConfigMap/When_payload_worker_label_is_wrong,_it_should_reject_it
+=== RUN   TestImageMirroringCheckConfigMap/When_payload_worker_label_is_missing,_it_should_reject_it
+=== RUN   TestImageMirroringCheckConfigMap/When_payload_spec_is_empty,_it_should_reject_it
+=== RUN   TestImageMirroringCheckConfigMap/When_payload_mappings_are_wrong,_it_should_reject_them
+=== RUN   TestImageMirroringCheckConfigMap/When_collection_is_nil,_it_should_reject_it
+=== RUN   TestImageMirroringCheckConfigMap/When_collection_is_empty,_it_should_reject_it
+=== RUN   TestImageMirroringCheckConfigMap/When_target_is_nil,_it_should_reject_it
+=== RUN   TestImageMirroringCheckConfigMap/When_multiple_targets_exist,_it_should_reject_them
+=== RUN   TestImageMirroringCheckConfigMap/When_namespace_is_empty,_it_should_reject_it
+--- PASS: TestImageMirroringCheckConfigMap (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_the_payload_matches,_it_should_allow_unrelated_metadata_and_data (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_YAML_key_order_and_formatting_differ,_it_should_accept_them (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_CM_name_is_wrong,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_CM_namespace_is_wrong,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_core_label_is_missing,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_core_label_is_wrong,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_config_is_missing,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_config_is_empty,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_YAML_is_malformed,_it_should_retry_with_decode_diagnostics (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_kind_is_wrong,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_API_version_is_wrong,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_GVK_is_absent,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_payload_name_is_wrong,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_payload_namespace_is_nonempty,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_payload_worker_label_is_wrong,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_payload_worker_label_is_missing,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_payload_spec_is_empty,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_payload_mappings_are_wrong,_it_should_reject_them (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_collection_is_nil,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_collection_is_empty,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_target_is_nil,_it_should_reject_it (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_multiple_targets_exist,_it_should_reject_them (0.00s)
+    --- PASS: TestImageMirroringCheckConfigMap/When_namespace_is_empty,_it_should_reject_it (0.00s)
+=== RUN   TestImageMirroringGetIDMS
+=== RUN   TestImageMirroringGetIDMS/When_the_exact_hosted_IDMS_exists,_it_should_return_the_observed_singleton
+=== RUN   TestImageMirroringGetIDMS/When_IDMS_is_absent,_it_should_preserve_NotFound
+=== RUN   TestImageMirroringGetIDMS/When_only_an_unrelated_IDMS_exists,_it_should_preserve_NotFound
+=== RUN   TestImageMirroringGetIDMS/When_API_fails,_it_should_preserve_the_error
+--- PASS: TestImageMirroringGetIDMS (0.01s)
+    --- PASS: TestImageMirroringGetIDMS/When_the_exact_hosted_IDMS_exists,_it_should_return_the_observed_singleton (0.00s)
+    --- PASS: TestImageMirroringGetIDMS/When_IDMS_is_absent,_it_should_preserve_NotFound (0.00s)
+    --- PASS: TestImageMirroringGetIDMS/When_only_an_unrelated_IDMS_exists,_it_should_preserve_NotFound (0.00s)
+    --- PASS: TestImageMirroringGetIDMS/When_API_fails,_it_should_preserve_the_error (0.00s)
+=== RUN   TestImageMirroringGetConfigMap
+=== RUN   TestImageMirroringGetConfigMap/When_the_exact_HCP_ConfigMap_exists,_it_should_return_its_payload
+=== RUN   TestImageMirroringGetConfigMap/When_ConfigMap_is_absent,_it_should_preserve_NotFound
+=== RUN   TestImageMirroringGetConfigMap/When_only_a_wrong_namespace_ConfigMap_exists,_it_should_preserve_NotFound
+=== RUN   TestImageMirroringGetConfigMap/When_only_an_unrelated_ConfigMap_exists,_it_should_preserve_NotFound
+=== RUN   TestImageMirroringGetConfigMap/When_API_fails,_it_should_preserve_the_error
+=== RUN   TestImageMirroringGetConfigMap/When_namespace_is_empty,_it_should_fail_without_an_API_call
+--- PASS: TestImageMirroringGetConfigMap (0.01s)
+    --- PASS: TestImageMirroringGetConfigMap/When_the_exact_HCP_ConfigMap_exists,_it_should_return_its_payload (0.00s)
+    --- PASS: TestImageMirroringGetConfigMap/When_ConfigMap_is_absent,_it_should_preserve_NotFound (0.00s)
+    --- PASS: TestImageMirroringGetConfigMap/When_only_a_wrong_namespace_ConfigMap_exists,_it_should_preserve_NotFound (0.00s)
+    --- PASS: TestImageMirroringGetConfigMap/When_only_an_unrelated_ConfigMap_exists,_it_should_preserve_NotFound (0.00s)
+    --- PASS: TestImageMirroringGetConfigMap/When_API_fails,_it_should_preserve_the_error (0.00s)
+    --- PASS: TestImageMirroringGetConfigMap/When_namespace_is_empty,_it_should_fail_without_an_API_call (0.00s)
+=== RUN   TestImageMirroringVirtualMirror
+=== RUN   TestImageMirroringVirtualMirror/When_the_virtual_source_has_a_mirror_at_the_Route_host,_it_should_return_its_host_and_path
+=== RUN   TestImageMirroringVirtualMirror/When_the_virtual_source_lists_another_mirror_first,_it_should_select_the_one_at_the_Route_host
+=== RUN   TestImageMirroringVirtualMirror/When_the_Route_host_is_empty,_it_should_return_an_error
+=== RUN   TestImageMirroringVirtualMirror/When_no_mirror_is_at_the_Route_host,_it_should_return_an_error
+=== RUN   TestImageMirroringVirtualMirror/When_a_mirror_only_shares_the_host_prefix,_it_should_return_an_error
+=== RUN   TestImageMirroringVirtualMirror/When_the_mirror_has_no_repository_path,_it_should_return_an_error
+=== RUN   TestImageMirroringVirtualMirror/When_the_virtual_source_is_missing,_it_should_return_an_error
+=== RUN   TestImageMirroringVirtualMirror/When_the_sources_are_nil,_it_should_return_an_error
+=== RUN   TestImageMirroringVirtualMirror/When_the_virtual_source_constant_is_inspected,_it_should_use_an_unresolvable_.invalid_host
+--- PASS: TestImageMirroringVirtualMirror (0.00s)
+    --- PASS: TestImageMirroringVirtualMirror/When_the_virtual_source_has_a_mirror_at_the_Route_host,_it_should_return_its_host_and_path (0.00s)
+    --- PASS: TestImageMirroringVirtualMirror/When_the_virtual_source_lists_another_mirror_first,_it_should_select_the_one_at_the_Route_host (0.00s)
+    --- PASS: TestImageMirroringVirtualMirror/When_the_Route_host_is_empty,_it_should_return_an_error (0.00s)
+    --- PASS: TestImageMirroringVirtualMirror/When_no_mirror_is_at_the_Route_host,_it_should_return_an_error (0.00s)
+    --- PASS: TestImageMirroringVirtualMirror/When_a_mirror_only_shares_the_host_prefix,_it_should_return_an_error (0.00s)
+    --- PASS: TestImageMirroringVirtualMirror/When_the_mirror_has_no_repository_path,_it_should_return_an_error (0.00s)
+    --- PASS: TestImageMirroringVirtualMirror/When_the_virtual_source_is_missing,_it_should_return_an_error (0.00s)
+    --- PASS: TestImageMirroringVirtualMirror/When_the_sources_are_nil,_it_should_return_an_error (0.00s)
+    --- PASS: TestImageMirroringVirtualMirror/When_the_virtual_source_constant_is_inspected,_it_should_use_an_unresolvable_.invalid_host (0.00s)
+=== RUN   TestImageMirroringDigestRef
+=== RUN   TestImageMirroringDigestRef/When_the_image_is_the_pinned_fixture_image,_it_should_build_a_by-digest_reference_on_the_repository
+=== RUN   TestImageMirroringDigestRef/When_the_repository_host_has_a_port,_it_should_accept_it
+=== RUN   TestImageMirroringDigestRef/When_the_image_has_no_digest,_it_should_return_an_error
+=== RUN   TestImageMirroringDigestRef/When_the_digest_is_malformed,_it_should_return_an_error
+=== RUN   TestImageMirroringDigestRef/When_the_repository_is_blank,_it_should_return_an_error
+=== RUN   TestImageMirroringDigestRef/When_the_repository_has_a_digest,_it_should_return_an_error
+=== RUN   TestImageMirroringDigestRef/When_the_repository_has_a_tag,_it_should_return_an_error
+--- PASS: TestImageMirroringDigestRef (0.00s)
+    --- PASS: TestImageMirroringDigestRef/When_the_image_is_the_pinned_fixture_image,_it_should_build_a_by-digest_reference_on_the_repository (0.00s)
+    --- PASS: TestImageMirroringDigestRef/When_the_repository_host_has_a_port,_it_should_accept_it (0.00s)
+    --- PASS: TestImageMirroringDigestRef/When_the_image_has_no_digest,_it_should_return_an_error (0.00s)
+    --- PASS: TestImageMirroringDigestRef/When_the_digest_is_malformed,_it_should_return_an_error (0.00s)
+    --- PASS: TestImageMirroringDigestRef/When_the_repository_is_blank,_it_should_return_an_error (0.00s)
+    --- PASS: TestImageMirroringDigestRef/When_the_repository_has_a_digest,_it_should_return_an_error (0.00s)
+    --- PASS: TestImageMirroringDigestRef/When_the_repository_has_a_tag,_it_should_return_an_error (0.00s)
+=== RUN   TestImageMirroringImageIDDigest
+=== RUN   TestImageMirroringImageIDDigest/When_the_imageID_is_a_CRI-O_repository_digest,_it_should_return_the_digest
+=== RUN   TestImageMirroringImageIDDigest/When_the_imageID_has_the_docker-pullable_prefix,_it_should_return_the_digest
+=== RUN   TestImageMirroringImageIDDigest/When_the_imageID_is_a_bare_image_ID,_it_should_return_an_error
+=== RUN   TestImageMirroringImageIDDigest/When_the_imageID_is_empty,_it_should_return_an_error
+=== RUN   TestImageMirroringImageIDDigest/When_the_imageID_digest_is_malformed,_it_should_return_an_error
+--- PASS: TestImageMirroringImageIDDigest (0.00s)
+    --- PASS: TestImageMirroringImageIDDigest/When_the_imageID_is_a_CRI-O_repository_digest,_it_should_return_the_digest (0.00s)
+    --- PASS: TestImageMirroringImageIDDigest/When_the_imageID_has_the_docker-pullable_prefix,_it_should_return_the_digest (0.00s)
+    --- PASS: TestImageMirroringImageIDDigest/When_the_imageID_is_a_bare_image_ID,_it_should_return_an_error (0.00s)
+    --- PASS: TestImageMirroringImageIDDigest/When_the_imageID_is_empty,_it_should_return_an_error (0.00s)
+    --- PASS: TestImageMirroringImageIDDigest/When_the_imageID_digest_is_malformed,_it_should_return_an_error (0.00s)
+=== RUN   TestImageMirroringTrustBundle
+=== RUN   TestImageMirroringTrustBundle/When_the_HC_references_a_populated_ConfigMap,_it_should_return_its_CA_bundle
+=== RUN   TestImageMirroringTrustBundle/When_the_HC_is_nil,_it_should_return_an_error
+=== RUN   TestImageMirroringTrustBundle/When_the_HC_has_no_trust_bundle,_it_should_return_an_error
+=== RUN   TestImageMirroringTrustBundle/When_the_ConfigMap_is_missing,_it_should_return_an_error
+=== RUN   TestImageMirroringTrustBundle/When_the_ConfigMap_key_is_empty,_it_should_return_an_error
+--- PASS: TestImageMirroringTrustBundle (0.01s)
+    --- PASS: TestImageMirroringTrustBundle/When_the_HC_references_a_populated_ConfigMap,_it_should_return_its_CA_bundle (0.00s)
+    --- PASS: TestImageMirroringTrustBundle/When_the_HC_is_nil,_it_should_return_an_error (0.00s)
+    --- PASS: TestImageMirroringTrustBundle/When_the_HC_has_no_trust_bundle,_it_should_return_an_error (0.00s)
+    --- PASS: TestImageMirroringTrustBundle/When_the_ConfigMap_is_missing,_it_should_return_an_error (0.00s)
+    --- PASS: TestImageMirroringTrustBundle/When_the_ConfigMap_key_is_empty,_it_should_return_an_error (0.00s)
+=== RUN   TestImageMirroringHTTPClient
+=== RUN   TestImageMirroringHTTPClient/When_the_trust_bundle_has_no_PEM_certificate,_it_should_return_an_error
+=== RUN   TestImageMirroringHTTPClient/When_the_trust_bundle_has_a_certificate,_it_should_return_a_client_with_a_timeout
+--- PASS: TestImageMirroringHTTPClient (0.00s)
+    --- PASS: TestImageMirroringHTTPClient/When_the_trust_bundle_has_no_PEM_certificate,_it_should_return_an_error (0.00s)
+    --- PASS: TestImageMirroringHTTPClient/When_the_trust_bundle_has_a_certificate,_it_should_return_a_client_with_a_timeout (0.00s)
+=== RUN   TestImageMirroringFetchManifest
+=== RUN   TestImageMirroringFetchManifest/When_the_mirror_serves_the_list_with_the_trusted_CA,_it_should_return_the_exact_body
+=== RUN   TestImageMirroringFetchManifest/When_the_manifest_is_unknown,_it_should_return_the_status_and_body
+=== RUN   TestImageMirroringFetchManifest/When_the_server_certificate_is_not_signed_by_the_trust_bundle,_it_should_return_a_TLS_error
+2026/11/12 10:14:47 http: TLS handshake error from 127.0.0.1:52404: remote error: tls: bad certificate
+--- PASS: TestImageMirroringFetchManifest (0.01s)
+    --- PASS: TestImageMirroringFetchManifest/When_the_mirror_serves_the_list_with_the_trusted_CA,_it_should_return_the_exact_body (0.00s)
+    --- PASS: TestImageMirroringFetchManifest/When_the_manifest_is_unknown,_it_should_return_the_status_and_body (0.00s)
+    --- PASS: TestImageMirroringFetchManifest/When_the_server_certificate_is_not_signed_by_the_trust_bundle,_it_should_return_a_TLS_error (0.00s)
+=== RUN   TestImageMirroringPlatformDigest
+=== RUN   TestImageMirroringPlatformDigest/When_the_node_is_linux/amd64,_it_should_return_the_amd64_manifest_digest
+=== RUN   TestImageMirroringPlatformDigest/When_the_node_is_linux/arm64,_it_should_return_the_arm64_manifest_digest
+=== RUN   TestImageMirroringPlatformDigest/When_the_body_does_not_hash_to_the_requested_digest,_it_should_return_an_error
+=== RUN   TestImageMirroringPlatformDigest/When_several_entries_match_the_platform,_it_should_return_an_error
+=== RUN   TestImageMirroringPlatformDigest/When_no_entry_matches_the_platform,_it_should_return_an_error
+=== RUN   TestImageMirroringPlatformDigest/When_the_manifest_is_not_a_list,_it_should_return_an_error
+=== RUN   TestImageMirroringPlatformDigest/When_the_body_is_not_JSON,_it_should_return_an_error
+=== RUN   TestImageMirroringPlatformDigest/When_the_matching_entry_digest_is_malformed,_it_should_return_an_error
+=== RUN   TestImageMirroringPlatformDigest/When_the_test_manifest_list_is_hashed,_it_should_match_the_pinned_fixture_image_digest
+--- PASS: TestImageMirroringPlatformDigest (0.00s)
+    --- PASS: TestImageMirroringPlatformDigest/When_the_node_is_linux/amd64,_it_should_return_the_amd64_manifest_digest (0.00s)
+    --- PASS: TestImageMirroringPlatformDigest/When_the_node_is_linux/arm64,_it_should_return_the_arm64_manifest_digest (0.00s)
+    --- PASS: TestImageMirroringPlatformDigest/When_the_body_does_not_hash_to_the_requested_digest,_it_should_return_an_error (0.00s)
+    --- PASS: TestImageMirroringPlatformDigest/When_several_entries_match_the_platform,_it_should_return_an_error (0.00s)
+    --- PASS: TestImageMirroringPlatformDigest/When_no_entry_matches_the_platform,_it_should_return_an_error (0.00s)
+    --- PASS: TestImageMirroringPlatformDigest/When_the_manifest_is_not_a_list,_it_should_return_an_error (0.00s)
+    --- PASS: TestImageMirroringPlatformDigest/When_the_body_is_not_JSON,_it_should_return_an_error (0.00s)
+    --- PASS: TestImageMirroringPlatformDigest/When_the_matching_entry_digest_is_malformed,_it_should_return_an_error (0.00s)
+    --- PASS: TestImageMirroringPlatformDigest/When_the_test_manifest_list_is_hashed,_it_should_match_the_pinned_fixture_image_digest (0.00s)
+=== RUN   TestImageMirroringReadyLinuxNodes
+=== RUN   TestImageMirroringReadyLinuxNodes/When_nodes_are_Ready_linux_nodes,_it_should_count_them
+=== RUN   TestImageMirroringReadyLinuxNodes/When_a_linux_node_is_not_Ready,_it_should_not_count_it
+=== RUN   TestImageMirroringReadyLinuxNodes/When_a_Ready_node_is_not_linux,_it_should_not_count_it
+=== RUN   TestImageMirroringReadyLinuxNodes/When_there_are_no_nodes,_it_should_return_zero
+--- PASS: TestImageMirroringReadyLinuxNodes (0.00s)
+    --- PASS: TestImageMirroringReadyLinuxNodes/When_nodes_are_Ready_linux_nodes,_it_should_count_them (0.00s)
+    --- PASS: TestImageMirroringReadyLinuxNodes/When_a_linux_node_is_not_Ready,_it_should_not_count_it (0.00s)
+    --- PASS: TestImageMirroringReadyLinuxNodes/When_a_Ready_node_is_not_linux,_it_should_not_count_it (0.00s)
+    --- PASS: TestImageMirroringReadyLinuxNodes/When_there_are_no_nodes,_it_should_return_zero (0.00s)
+=== RUN   TestImageMirroringWorkloadPod
+=== RUN   TestImageMirroringWorkloadPod/When_a_workload_pod_is_built,_it_should_be_a_restricted_one-shot_pod_that_always_pulls_the_image
+--- PASS: TestImageMirroringWorkloadPod (0.00s)
+    --- PASS: TestImageMirroringWorkloadPod/When_a_workload_pod_is_built,_it_should_be_a_restricted_one-shot_pod_that_always_pulls_the_image (0.00s)
+=== RUN   TestImageMirroringCheckPulledPod
+=== RUN   TestImageMirroringCheckPulledPod/When_the_container_exited_0_and_the_pod_Succeeded,_it_should_be_done
+=== RUN   TestImageMirroringCheckPulledPod/When_the_pod_is_Pending_without_container_statuses,_it_should_keep_polling
+=== RUN   TestImageMirroringCheckPulledPod/When_the_pod_is_unschedulable,_it_should_keep_polling_and_report_the_reason
+=== RUN   TestImageMirroringCheckPulledPod/When_only_another_container_has_a_status,_it_should_keep_polling
+=== RUN   TestImageMirroringCheckPulledPod/When_the_container_is_creating,_it_should_keep_polling
+=== RUN   TestImageMirroringCheckPulledPod/When_the_image_pull_fails,_it_should_keep_polling_and_report_the_message
+=== RUN   TestImageMirroringCheckPulledPod/When_the_image_pull_backs_off,_it_should_keep_polling
+=== RUN   TestImageMirroringCheckPulledPod/When_the_container_is_running,_it_should_keep_polling
+=== RUN   TestImageMirroringCheckPulledPod/When_the_container_exited_0_but_the_pod_has_not_Succeeded_yet,_it_should_keep_polling
+=== RUN   TestImageMirroringCheckPulledPod/When_the_container_config_cannot_be_created,_it_should_fail_terminally
+=== RUN   TestImageMirroringCheckPulledPod/When_the_image_name_is_invalid,_it_should_fail_terminally
+=== RUN   TestImageMirroringCheckPulledPod/When_the_container_exits_non-zero,_it_should_fail_terminally
+=== RUN   TestImageMirroringCheckPulledPod/When_the_pod_Failed,_it_should_fail_terminally
+=== RUN   TestImageMirroringCheckPulledPod/When_the_pod_is_nil,_it_should_fail_terminally
+--- PASS: TestImageMirroringCheckPulledPod (0.00s)
+    --- PASS: TestImageMirroringCheckPulledPod/When_the_container_exited_0_and_the_pod_Succeeded,_it_should_be_done (0.00s)
+    --- PASS: TestImageMirroringCheckPulledPod/When_the_pod_is_Pending_without_container_statuses,_it_should_keep_polling (0.00s)
+    --- PASS: TestImageMirroringCheckPulledPod/When_the_pod_is_unschedulable,_it_should_keep_polling_and_report_the_reason (0.00s)
+    --- PASS: TestImageMirroringCheckPulledPod/When_only_another_container_has_a_status,_it_should_keep_polling (0.00s)
+    --- PASS: TestImageMirroringCheckPulledPod/When_the_container_is_creating,_it_should_keep_polling (0.00s)
+    --- PASS: TestImageMirroringCheckPulledPod/When_the_image_pull_fails,_it_should_keep_polling_and_report_the_message (0.00s)
+    --- PASS: TestImageMirroringCheckPulledPod/When_the_image_pull_backs_off,_it_should_keep_polling (0.00s)
+    --- PASS: TestImageMirroringCheckPulledPod/When_the_container_is_running,_it_should_keep_polling (0.00s)
+    --- PASS: TestImageMirroringCheckPulledPod/When_the_container_exited_0_but_the_pod_has_not_Succeeded_yet,_it_should_keep_polling (0.00s)
+    --- PASS: TestImageMirroringCheckPulledPod/When_the_container_config_cannot_be_created,_it_should_fail_terminally (0.00s)
+    --- PASS: TestImageMirroringCheckPulledPod/When_the_image_name_is_invalid,_it_should_fail_terminally (0.00s)
+    --- PASS: TestImageMirroringCheckPulledPod/When_the_container_exits_non-zero,_it_should_fail_terminally (0.00s)
+    --- PASS: TestImageMirroringCheckPulledPod/When_the_pod_Failed,_it_should_fail_terminally (0.00s)
+    --- PASS: TestImageMirroringCheckPulledPod/When_the_pod_is_nil,_it_should_fail_terminally (0.00s)
+=== RUN   TestImageMirroringPodState
+=== RUN   TestImageMirroringPodState/When_the_pod_is_nil,_it_should_not_panic_and_report_no_container_status
+=== RUN   TestImageMirroringPodState/When_the_workload_container_has_a_status,_it_should_return_that_status
+--- PASS: TestImageMirroringPodState (0.00s)
+    --- PASS: TestImageMirroringPodState/When_the_pod_is_nil,_it_should_not_panic_and_report_no_container_status (0.00s)
+    --- PASS: TestImageMirroringPodState/When_the_workload_container_has_a_status,_it_should_return_that_status (0.00s)
+=== RUN   TestImageMirroringCheckImageID
+=== RUN   TestImageMirroringCheckImageID/When_the_imageID_has_the_per-platform_digest,_it_should_succeed
+=== RUN   TestImageMirroringCheckImageID/When_the_imageID_has_the_manifest_list_digest,_it_should_succeed
+=== RUN   TestImageMirroringCheckImageID/When_the_imageID_has_another_platform_digest,_it_should_return_an_error
+=== RUN   TestImageMirroringCheckImageID/When_the_imageID_is_a_bare_image_ID,_it_should_return_an_error
+=== RUN   TestImageMirroringCheckImageID/When_the_container_has_no_status,_it_should_return_an_error
+=== RUN   TestImageMirroringCheckImageID/When_no_digests_are_accepted,_it_should_return_an_error
+=== RUN   TestImageMirroringCheckImageID/When_the_pod_is_nil,_it_should_return_an_error
+--- PASS: TestImageMirroringCheckImageID (0.00s)
+    --- PASS: TestImageMirroringCheckImageID/When_the_imageID_has_the_per-platform_digest,_it_should_succeed (0.00s)
+    --- PASS: TestImageMirroringCheckImageID/When_the_imageID_has_the_manifest_list_digest,_it_should_succeed (0.00s)
+    --- PASS: TestImageMirroringCheckImageID/When_the_imageID_has_another_platform_digest,_it_should_return_an_error (0.00s)
+    --- PASS: TestImageMirroringCheckImageID/When_the_imageID_is_a_bare_image_ID,_it_should_return_an_error (0.00s)
+    --- PASS: TestImageMirroringCheckImageID/When_the_container_has_no_status,_it_should_return_an_error (0.00s)
+    --- PASS: TestImageMirroringCheckImageID/When_no_digests_are_accepted,_it_should_return_an_error (0.00s)
+    --- PASS: TestImageMirroringCheckImageID/When_the_pod_is_nil,_it_should_return_an_error (0.00s)
+=== RUN   TestShowEnvHelp
+Environment Variables:
+================================================================================
+
+ARTIFACT_DIR (optional) [default: /tmp/artifacts]
+  Directory for test artifacts. Defaults to /tmp/artifacts.
+  Current value: /home/<user>/ScratchPad/aro30375-validation-20261112
+
+AWS_GUEST_INFRA_CREDENTIALS_FILE (optional) [default: /home/<user>/.aws/credentials]
+  Path to the AWS guest infrastructure credentials file. Defaults to ~/.aws/credentials.
+
+AZURE_CREDS (optional) [default: /etc/hypershift-ci-jobs-self-managed-azure/credentials.json]
+  Azure credentials for worker serial diagnostics
+
+AZURE_JOURNAL_SSH_JUMP_HOST (optional)
+  Optional SSH jump host for worker journals
+
+AZURE_JOURNAL_SSH_KEY (optional)
+  Optional worker SSH private key file for journal fallback
+
+AZURE_JOURNAL_SSH_KNOWN_HOSTS (optional)
+  Known hosts file for worker journal SSH access
+
+AZURE_PRIVATE_ADDITIONAL_ALLOWED_SUBSCRIPTIONS (optional)
+  Comma-separated list of Azure subscription IDs permitted to create Private Endpoints.
+
+AZURE_PRIVATE_NAT_SUBNET_ID (optional)
+  Azure resource ID of the NAT subnet for Private Link Service. Auto-created by PLS controller if not set.
+
+E2E_AZURE_CREDENTIALS_FILE (optional)
+  Path to Azure service principal credentials JSON file for platform-specific tests (auto-repair, disk encryption).
+
+E2E_AZURE_DISK_ENCRYPTION_SET_ID (optional)
+  Azure DiskEncryptionSet resource ID for disk encryption NodePool tests.
+
+E2E_EXTERNAL_OIDC_CA_BUNDLE_FILE (optional)
+  Path to the CA bundle file for the External OIDC issuer (Keycloak). Written by the lifecycle PostCreate.
+
+E2E_EXTERNAL_OIDC_TEST_USERS (optional)
+  Comma-separated list of test users in user:password format for External OIDC testing. Written by the lifecycle PostCreate.
+
+E2E_HOSTED_CLUSTER_NAME (optional)
+  Name of the HostedCluster to test. Required for tests that interact with a hosted cluster.
+  Current value: cluster
+
+E2E_HOSTED_CLUSTER_NAMESPACE (optional)
+  Namespace of the HostedCluster to test. Required for tests that interact with a hosted cluster.
+  Current value: ocm-arohcppers-REDACTED
+
+E2E_LATEST_RELEASE_IMAGE (optional)
+  Latest OCP release image for control plane upgrade tests.
+
+E2E_N1_RELEASE_IMAGE (optional)
+  N-1 minor release image for NodePool previous-release tests.
+
+E2E_N2_RELEASE_IMAGE (optional)
+  N-2 minor release image for NodePool previous-release tests.
+
+E2E_PREVIOUS_RELEASE_IMAGE (optional)
+  N-1 OCP release image (previous minor) for control plane upgrade tests.
+
+E2E_SERVICE_DOMAIN (optional)
+  Service domain used for custom DNS endpoint testing. Optional; test is skipped when empty.
+
+E2E_SHOW_ENV_HELP (optional)
+  When set to any non-empty value, displays environment variable help and exits without running tests.
+
+KUBECONFIG_SOURCE (optional)
+  Management-cluster kubeconfig for the source role in a cross-cluster restore test.
+
+KUBECONFIG_TARGET (optional)
+  Management-cluster kubeconfig for the target role in a cross-cluster restore test.
+
+PULL_SECRET_FILE (optional)
+  Path to pull secret file for release image lookups. Used by Karpenter version field tests.
+
+RUN_KARPENTER_TESTS (optional)
+  When the value is exactly "true", it lowers the minimum hosted-cluster version from 4.23 to 4.22.
+
+--- PASS: TestShowEnvHelp (0.00s)
+=== RUN   TestE2EV2
+Running Suite: hypershift-e2e - /home/<user>/repos/hypershift
+=============================================================
+Random Seed: 1794507287
+
+Will run 5 of 1162 specs
+------------------------------
+[BeforeSuite] 
+/home/<user>/repos/hypershift/test/e2e/v2/tests/suite_test.go:79
+[BeforeSuite] PASSED [0.003 seconds]
+------------------------------
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+P [PENDING]
+[sig-hypershift][Jira:Hypershift][Feature:DNS] Hosted Cluster DNS when KubeAPIDNSName and custom certificate are configured should make KAS reachable via the custom DNS endpoint [hosted-cluster-dns, Informing]
+/home/<user>/repos/hypershift/test/e2e/v2/tests/hosted_cluster_dns_test.go:38
+------------------------------
+P [PENDING]
+[sig-hypershift][Jira:Hypershift][Feature:DNS] Hosted Cluster DNS when KubeAPIDNSName and custom certificate are configured should keep KAS reachable via the internal SVC URL [hosted-cluster-dns, Informing]
+/home/<user>/repos/hypershift/test/e2e/v2/tests/hosted_cluster_dns_test.go:68
+------------------------------
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+------------------------------
+[sig-hypershift][Jira:Hypershift][Feature:EtcdResilience] Etcd Chaos should recover after a single member loses its data [lifecycle, etcd-chaos]
+/home/<user>/repos/hypershift/test/e2e/v2/tests/etcd_chaos_test.go:69
+  Found 3 etcd pods
+  Deleting etcd pod etcd-0 and PVC data-etcd-0
+  Deleted etcd PVC data-etcd-0
+  Deleted etcd pod etcd-0
+  Waiting for deleted etcd pod is replaced
+  observed *v1.Pod ocm-arohcppers-REDACTED-cluster/etcd-0 invalid at RV 734796 after 75ms: pod UID 121003ec-0fab-46c5-b372-481179c78f3d
+  observed *v1.Pod ocm-arohcppers-REDACTED-cluster/etcd-0 valid at RV 735160 after 5s: pod UID c0b9d2f1-9d6d-4cce-88f6-9caf4a7d236c
+  Successfully waited for deleted etcd pod is replaced in 30.075s
+  Waiting for etcd StatefulSet replicas to converge
+  observed *v1.StatefulSet ocm-arohcppers-REDACTED-cluster/etcd invalid at RV 735161 after 50ms: wanted 3 ready replicas, got 2
+  observed *v1.StatefulSet ocm-arohcppers-REDACTED-cluster/etcd valid at RV 736120 after 4.975s: wanted 3 ready replicas, got 3
+  Successfully waited for etcd StatefulSet replicas to converge in 1m20.1s
+• [112.147 seconds]
+------------------------------
+[sig-hypershift][Jira:Hypershift][Feature:EtcdResilience] Etcd Chaos should preserve data when random members are repeatedly killed [lifecycle, etcd-chaos]
+/home/<user>/repos/hypershift/test/e2e/v2/tests/etcd_chaos_test.go:123
+  Waiting for create marker ConfigMap
+  Successfully waited for create marker ConfigMap in 350ms
+  Created marker ConfigMap default/marker-ttdmk
+  Found 3 etcd pods
+  Deleting random etcd pods every 5s for 30s
+  Deleted pod etcd-2
+  Deleted pod etcd-2
+  Deleted pod etcd-0
+  Deleted pod etcd-0
+  Deleted pod etcd-2
+  Deleted pod etcd-0
+  Waiting for etcd StatefulSet replicas to converge
+  observed *v1.StatefulSet ocm-arohcppers-REDACTED-cluster/etcd invalid at RV 736683 after 175ms: wanted 3 ready replicas, got 1
+  observed *v1.StatefulSet ocm-arohcppers-REDACTED-cluster/etcd invalid at RV 736769 after 5.025s: wanted 3 ready replicas, got 2
+  observed *v1.StatefulSet ocm-arohcppers-REDACTED-cluster/etcd valid at RV 736828 after 4.925s: wanted 3 ready replicas, got 3
+  Successfully waited for etcd StatefulSet replicas to converge in 10.15s
+  Waiting for verify marker data survived disruption
+  observed *v1.ConfigMap default/marker-ttdmk valid at RV 2135 after 50ms: incorrect data: 
+  Successfully waited for verify marker data survived disruption in 50ms
+• [43.461 seconds]
+------------------------------
+[sig-hypershift][Jira:Hypershift][Feature:EtcdResilience] Etcd Chaos should preserve data when all members are killed simultaneously [lifecycle, etcd-chaos]
+/home/<user>/repos/hypershift/test/e2e/v2/tests/etcd_chaos_test.go:182
+  Waiting for create marker ConfigMap
+  Successfully waited for create marker ConfigMap in 350ms
+  Created marker ConfigMap default/marker-7ssdk
+  Found 3 etcd pods
+  Deleting all 3 etcd pods simultaneously
+  Deleted pod etcd-2
+  Deleted pod etcd-0
+  Deleted pod etcd-1
+  Waiting for etcd pods to be replaced
+  observed valid **v1.Pod state after 50ms
+   - observed **v1.Pod ocm-arohcppers-REDACTED-cluster/etcd-0 valid: pod UID a542bfa6-d957-47b7-8d90-1602b65ce52b
+  Successfully waited for etcd pods to be replaced in 50ms
+  Waiting for etcd StatefulSet replicas to converge
+  observed *v1.StatefulSet ocm-arohcppers-REDACTED-cluster/etcd valid at RV 736927 after 50ms: wanted 3 ready replicas, got 3
+  Successfully waited for etcd StatefulSet replicas to converge in 50ms
+  Waiting for verify marker data survived disruption
+  observed *v1.ConfigMap default/marker-7ssdk valid at RV 2151 after 22.4s: incorrect data: 
+  Successfully waited for verify marker data survived disruption in 22.4s
+• [23.959 seconds]
+------------------------------
+[sig-hypershift][Jira:Hypershift][Feature:EtcdResilience] Etcd Chaos should recover after a single member's data is corrupted [lifecycle, etcd-chaos]
+/home/<user>/repos/hypershift/test/e2e/v2/tests/etcd_chaos_test.go:271
+  Found 3 etcd pods
+  Destroying data directory on etcd pod: etcd-1
+  Waiting for etcd recovery job to be active
+  Failed to get *v1.Job: jobs.batch "etcd-recovery" not found
+  observed *v1.Job ocm-arohcppers-REDACTED-cluster/etcd-recovery valid at RV 737468 after 15.05s: wanted status active to be 1, got 1
+  Successfully waited for etcd recovery job to be active in 15.05s
+  Waiting for etcd StatefulSet replicas to converge
+  observed *v1.StatefulSet ocm-arohcppers-REDACTED-cluster/etcd invalid at RV 737414 after 75ms: wanted 3 ready replicas, got 2
+  observed *v1.StatefulSet ocm-arohcppers-REDACTED-cluster/etcd valid at RV 738109 after 5.05s: wanted 3 ready replicas, got 3
+  Successfully waited for etcd StatefulSet replicas to converge in 50.15s
+• [66.561 seconds]
+------------------------------
+[sig-hypershift][Jira:Hypershift][Feature:EtcdResilience] Etcd Chaos should recover after a member is removed from the etcd cluster [lifecycle, etcd-chaos]
+/home/<user>/repos/hypershift/test/e2e/v2/tests/etcd_chaos_test.go:319
+  Found 3 etcd pods
+  Discovering member ID for: etcd-2
+  Removing etcd member etcd-2 (ID: f21e8c395ee3a9a8)
+  Deleting pod: etcd-2
+  Waiting for etcd recovery job to be active
+  observed *v1.Job ocm-arohcppers-REDACTED-cluster/etcd-recovery valid at RV 737477 after 50ms: wanted status active to be 1, got 1
+  Successfully waited for etcd recovery job to be active in 50ms
+  Waiting for etcd StatefulSet replicas to converge
+  observed *v1.StatefulSet ocm-arohcppers-REDACTED-cluster/etcd valid at RV 738164 after 100ms: wanted 3 ready replicas, got 3
+  Successfully waited for etcd StatefulSet replicas to converge in 100ms
+• [2.130 seconds]
+------------------------------
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+------------------------------
+[ReportAfterSuite] Write unified JUnit
+/home/<user>/repos/hypershift/test/e2e/v2/tests/suite_test.go:70
+[ReportAfterSuite] PASSED [0.002 seconds]
+------------------------------
+
+Ran 5 of 1162 Specs in 248.286 seconds
+SUCCESS! -- 5 Passed | 0 Failed | 2 Pending | 1155 Skipped
+--- PASS: TestE2EV2 (248.30s)
+=== CONT  TestComponentSupportsTLSConfig
+=== RUN   TestComponentSupportsTLSConfig/control-plane-pki-operator
+=== PAUSE TestComponentSupportsTLSConfig/control-plane-pki-operator
+=== RUN   TestComponentSupportsTLSConfig/aws-pod-identity-webhook
+=== PAUSE TestComponentSupportsTLSConfig/aws-pod-identity-webhook
+=== RUN   TestComponentSupportsTLSConfig/konnectivity-server
+=== PAUSE TestComponentSupportsTLSConfig/konnectivity-server
+=== CONT  TestComponentSupportsTLSConfig/control-plane-pki-operator
+=== RUN   TestComponentSupportsTLSConfig/control-plane-pki-operator/When_the_TLS_flag_is_in_Command,_it_should_support_profile_configuration
+=== PAUSE TestComponentSupportsTLSConfig/control-plane-pki-operator/When_the_TLS_flag_is_in_Command,_it_should_support_profile_configuration
+=== RUN   TestComponentSupportsTLSConfig/control-plane-pki-operator/When_the_TLS_flag_is_in_Args,_it_should_support_profile_configuration_without_a_ConfigMap
+=== PAUSE TestComponentSupportsTLSConfig/control-plane-pki-operator/When_the_TLS_flag_is_in_Args,_it_should_support_profile_configuration_without_a_ConfigMap
+=== RUN   TestComponentSupportsTLSConfig/control-plane-pki-operator/When_the_TLS_flag_is_absent,_it_should_not_require_a_profile-driven_restart
+=== PAUSE TestComponentSupportsTLSConfig/control-plane-pki-operator/When_the_TLS_flag_is_absent,_it_should_not_require_a_profile-driven_restart
+=== RUN   TestComponentSupportsTLSConfig/control-plane-pki-operator/When_only_unrelated_flags_are_present,_it_should_not_require_a_profile-driven_restart
+=== PAUSE TestComponentSupportsTLSConfig/control-plane-pki-operator/When_only_unrelated_flags_are_present,_it_should_not_require_a_profile-driven_restart
+=== RUN   TestComponentSupportsTLSConfig/control-plane-pki-operator/When_the_deployment_is_missing,_it_should_report_the_lookup_error
+=== PAUSE TestComponentSupportsTLSConfig/control-plane-pki-operator/When_the_deployment_is_missing,_it_should_report_the_lookup_error
+=== RUN   TestComponentSupportsTLSConfig/control-plane-pki-operator/When_the_target_container_is_missing,_it_should_report_an_error_instead_of_hiding_a_regression
+=== PAUSE TestComponentSupportsTLSConfig/control-plane-pki-operator/When_the_target_container_is_missing,_it_should_report_an_error_instead_of_hiding_a_regression
+=== CONT  TestComponentSupportsTLSConfig/control-plane-pki-operator/When_the_TLS_flag_is_in_Command,_it_should_support_profile_configuration
+=== CONT  TestComponentSupportsTLSConfig/control-plane-pki-operator/When_the_target_container_is_missing,_it_should_report_an_error_instead_of_hiding_a_regression
+=== CONT  TestComponentSupportsTLSConfig/control-plane-pki-operator/When_the_deployment_is_missing,_it_should_report_the_lookup_error
+=== CONT  TestComponentSupportsTLSConfig/control-plane-pki-operator/When_the_TLS_flag_is_absent,_it_should_not_require_a_profile-driven_restart
+=== CONT  TestComponentSupportsTLSConfig/konnectivity-server
+=== RUN   TestComponentSupportsTLSConfig/konnectivity-server/When_the_TLS_flag_is_in_Command,_it_should_support_profile_configuration
+=== PAUSE TestComponentSupportsTLSConfig/konnectivity-server/When_the_TLS_flag_is_in_Command,_it_should_support_profile_configuration
+=== RUN   TestComponentSupportsTLSConfig/konnectivity-server/When_the_TLS_flag_is_in_Args,_it_should_support_profile_configuration_without_a_ConfigMap
+=== PAUSE TestComponentSupportsTLSConfig/konnectivity-server/When_the_TLS_flag_is_in_Args,_it_should_support_profile_configuration_without_a_ConfigMap
+=== RUN   TestComponentSupportsTLSConfig/konnectivity-server/When_the_TLS_flag_is_absent,_it_should_not_require_a_profile-driven_restart
+=== PAUSE TestComponentSupportsTLSConfig/konnectivity-server/When_the_TLS_flag_is_absent,_it_should_not_require_a_profile-driven_restart
+=== RUN   TestComponentSupportsTLSConfig/konnectivity-server/When_only_unrelated_flags_are_present,_it_should_not_require_a_profile-driven_restart
+=== PAUSE TestComponentSupportsTLSConfig/konnectivity-server/When_only_unrelated_flags_are_present,_it_should_not_require_a_profile-driven_restart
+=== CONT  TestComponentSupportsTLSConfig/control-plane-pki-operator/When_the_TLS_flag_is_in_Args,_it_should_support_profile_configuration_without_a_ConfigMap
+=== RUN   TestComponentSupportsTLSConfig/konnectivity-server/When_the_deployment_is_missing,_it_should_report_the_lookup_error
+=== CONT  TestVerifyIntermediateTLSConnectivityAfterDowngrade
+=== PAUSE TestComponentSupportsTLSConfig/konnectivity-server/When_the_deployment_is_missing,_it_should_report_the_lookup_error
+=== RUN   TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_PKI_support_is_false,_webhook_support_is_false_and_konnectivity_support_is_false,_it_should_wait_only_for_supported_components_and_probe_all_components
+=== PAUSE TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_PKI_support_is_false,_webhook_support_is_false_and_konnectivity_support_is_false,_it_should_wait_only_for_supported_components_and_probe_all_components
+=== RUN   TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_PKI_support_is_true,_webhook_support_is_false_and_konnectivity_support_is_false,_it_should_wait_only_for_supported_components_and_probe_all_components
+=== CONT  TestComponentSupportsTLSConfig/aws-pod-identity-webhook
+=== RUN   TestComponentSupportsTLSConfig/konnectivity-server/When_the_target_container_is_missing,_it_should_report_an_error_instead_of_hiding_a_regression
+=== PAUSE TestComponentSupportsTLSConfig/konnectivity-server/When_the_target_container_is_missing,_it_should_report_an_error_instead_of_hiding_a_regression
+=== CONT  TestComponentSupportsTLSConfig/control-plane-pki-operator/When_only_unrelated_flags_are_present,_it_should_not_require_a_profile-driven_restart
+=== CONT  TestComponentSupportsTLSConfig/konnectivity-server/When_the_TLS_flag_is_in_Command,_it_should_support_profile_configuration
+=== CONT  TestComponentSupportsTLSConfig/konnectivity-server/When_the_deployment_is_missing,_it_should_report_the_lookup_error
+=== PAUSE TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_PKI_support_is_true,_webhook_support_is_false_and_konnectivity_support_is_false,_it_should_wait_only_for_supported_components_and_probe_all_components
+=== CONT  TestComponentSupportsTLSConfig/konnectivity-server/When_the_target_container_is_missing,_it_should_report_an_error_instead_of_hiding_a_regression
+=== CONT  TestComponentSupportsTLSConfig/konnectivity-server/When_the_TLS_flag_is_in_Args,_it_should_support_profile_configuration_without_a_ConfigMap
+=== RUN   TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_PKI_support_is_false,_webhook_support_is_true_and_konnectivity_support_is_false,_it_should_wait_only_for_supported_components_and_probe_all_components
+=== PAUSE TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_PKI_support_is_false,_webhook_support_is_true_and_konnectivity_support_is_false,_it_should_wait_only_for_supported_components_and_probe_all_components
+=== RUN   TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_PKI_support_is_true,_webhook_support_is_true_and_konnectivity_support_is_false,_it_should_wait_only_for_supported_components_and_probe_all_components
+=== PAUSE TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_PKI_support_is_true,_webhook_support_is_true_and_konnectivity_support_is_false,_it_should_wait_only_for_supported_components_and_probe_all_components
+=== RUN   TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_PKI_support_is_false,_webhook_support_is_false_and_konnectivity_support_is_true,_it_should_wait_only_for_supported_components_and_probe_all_components
+=== PAUSE TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_PKI_support_is_false,_webhook_support_is_false_and_konnectivity_support_is_true,_it_should_wait_only_for_supported_components_and_probe_all_components
+=== CONT  TestComponentSupportsTLSConfig/konnectivity-server/When_the_TLS_flag_is_absent,_it_should_not_require_a_profile-driven_restart
+=== RUN   TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_PKI_support_is_true,_webhook_support_is_false_and_konnectivity_support_is_true,_it_should_wait_only_for_supported_components_and_probe_all_components
+=== PAUSE TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_PKI_support_is_true,_webhook_support_is_false_and_konnectivity_support_is_true,_it_should_wait_only_for_supported_components_and_probe_all_components
+=== RUN   TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_PKI_support_is_false,_webhook_support_is_true_and_konnectivity_support_is_true,_it_should_wait_only_for_supported_components_and_probe_all_components
+=== PAUSE TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_PKI_support_is_false,_webhook_support_is_true_and_konnectivity_support_is_true,_it_should_wait_only_for_supported_components_and_probe_all_components
+=== RUN   TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_PKI_support_is_true,_webhook_support_is_true_and_konnectivity_support_is_true,_it_should_wait_only_for_supported_components_and_probe_all_components
+=== PAUSE TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_PKI_support_is_true,_webhook_support_is_true_and_konnectivity_support_is_true,_it_should_wait_only_for_supported_components_and_probe_all_components
+=== RUN   TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_control-plane-pki-operator_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing
+=== PAUSE TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_control-plane-pki-operator_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing
+=== RUN   TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_aws-pod-identity-webhook_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing
+=== PAUSE TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_aws-pod-identity-webhook_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing
+=== RUN   TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_konnectivity-server_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing
+=== CONT  TestComponentSupportsTLSConfig/konnectivity-server/When_only_unrelated_flags_are_present,_it_should_not_require_a_profile-driven_restart
+=== PAUSE TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_konnectivity-server_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing
+=== CONT  TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_PKI_support_is_false,_webhook_support_is_false_and_konnectivity_support_is_false,_it_should_wait_only_for_supported_components_and_probe_all_components
+=== RUN   TestComponentSupportsTLSConfig/aws-pod-identity-webhook/When_the_TLS_flag_is_in_Command,_it_should_support_profile_configuration
+=== CONT  TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_PKI_support_is_false,_webhook_support_is_true_and_konnectivity_support_is_true,_it_should_wait_only_for_supported_components_and_probe_all_components
+=== CONT  TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_PKI_support_is_false,_webhook_support_is_false_and_konnectivity_support_is_true,_it_should_wait_only_for_supported_components_and_probe_all_components
+=== CONT  TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_PKI_support_is_true,_webhook_support_is_false_and_konnectivity_support_is_false,_it_should_wait_only_for_supported_components_and_probe_all_components
+=== CONT  TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_konnectivity-server_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing
+=== RUN   TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_konnectivity-server_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_deployment_is_missing,_it_should_preserve_the_wrapped_NotFound_error
+=== PAUSE TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_konnectivity-server_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_deployment_is_missing,_it_should_preserve_the_wrapped_NotFound_error
+=== CONT  TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_PKI_support_is_true,_webhook_support_is_true_and_konnectivity_support_is_false,_it_should_wait_only_for_supported_components_and_probe_all_components
+=== RUN   TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_konnectivity-server_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_target_container_is_missing,_it_should_report_the_missing_container
+=== PAUSE TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_konnectivity-server_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_target_container_is_missing,_it_should_report_the_missing_container
+=== RUN   TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_konnectivity-server_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_context_is_canceled,_it_should_preserve_the_wrapped_cancellation_error
+=== PAUSE TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_konnectivity-server_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_context_is_canceled,_it_should_preserve_the_wrapped_cancellation_error
+=== CONT  TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_control-plane-pki-operator_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing
+=== RUN   TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_control-plane-pki-operator_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_deployment_is_missing,_it_should_preserve_the_wrapped_NotFound_error
+=== PAUSE TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_control-plane-pki-operator_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_deployment_is_missing,_it_should_preserve_the_wrapped_NotFound_error
+=== RUN   TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_control-plane-pki-operator_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_target_container_is_missing,_it_should_report_the_missing_container
+=== CONT  TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_PKI_support_is_true,_webhook_support_is_false_and_konnectivity_support_is_true,_it_should_wait_only_for_supported_components_and_probe_all_components
+=== PAUSE TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_control-plane-pki-operator_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_target_container_is_missing,_it_should_report_the_missing_container
+=== RUN   TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_control-plane-pki-operator_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_context_is_canceled,_it_should_preserve_the_wrapped_cancellation_error
+=== CONT  TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_aws-pod-identity-webhook_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing
+=== PAUSE TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_control-plane-pki-operator_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_context_is_canceled,_it_should_preserve_the_wrapped_cancellation_error
+=== RUN   TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_aws-pod-identity-webhook_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_deployment_is_missing,_it_should_preserve_the_wrapped_NotFound_error
+=== CONT  TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_PKI_support_is_false,_webhook_support_is_true_and_konnectivity_support_is_false,_it_should_wait_only_for_supported_components_and_probe_all_components
+=== CONT  TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_PKI_support_is_true,_webhook_support_is_true_and_konnectivity_support_is_true,_it_should_wait_only_for_supported_components_and_probe_all_components
+=== PAUSE TestComponentSupportsTLSConfig/aws-pod-identity-webhook/When_the_TLS_flag_is_in_Command,_it_should_support_profile_configuration
+=== PAUSE TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_aws-pod-identity-webhook_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_deployment_is_missing,_it_should_preserve_the_wrapped_NotFound_error
+=== RUN   TestComponentSupportsTLSConfig/aws-pod-identity-webhook/When_the_TLS_flag_is_in_Args,_it_should_support_profile_configuration_without_a_ConfigMap
+=== RUN   TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_aws-pod-identity-webhook_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_target_container_is_missing,_it_should_report_the_missing_container
+=== PAUSE TestComponentSupportsTLSConfig/aws-pod-identity-webhook/When_the_TLS_flag_is_in_Args,_it_should_support_profile_configuration_without_a_ConfigMap
+=== PAUSE TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_aws-pod-identity-webhook_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_target_container_is_missing,_it_should_report_the_missing_container
+=== RUN   TestComponentSupportsTLSConfig/aws-pod-identity-webhook/When_the_TLS_flag_is_absent,_it_should_not_require_a_profile-driven_restart
+=== PAUSE TestComponentSupportsTLSConfig/aws-pod-identity-webhook/When_the_TLS_flag_is_absent,_it_should_not_require_a_profile-driven_restart
+=== RUN   TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_aws-pod-identity-webhook_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_context_is_canceled,_it_should_preserve_the_wrapped_cancellation_error
+=== RUN   TestComponentSupportsTLSConfig/aws-pod-identity-webhook/When_only_unrelated_flags_are_present,_it_should_not_require_a_profile-driven_restart
+=== PAUSE TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_aws-pod-identity-webhook_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_context_is_canceled,_it_should_preserve_the_wrapped_cancellation_error
+=== CONT  TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_konnectivity-server_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_deployment_is_missing,_it_should_preserve_the_wrapped_NotFound_error
+=== PAUSE TestComponentSupportsTLSConfig/aws-pod-identity-webhook/When_only_unrelated_flags_are_present,_it_should_not_require_a_profile-driven_restart
+=== RUN   TestComponentSupportsTLSConfig/aws-pod-identity-webhook/When_the_deployment_is_missing,_it_should_report_the_lookup_error
+=== PAUSE TestComponentSupportsTLSConfig/aws-pod-identity-webhook/When_the_deployment_is_missing,_it_should_report_the_lookup_error
+=== RUN   TestComponentSupportsTLSConfig/aws-pod-identity-webhook/When_the_target_container_is_missing,_it_should_report_an_error_instead_of_hiding_a_regression
+=== PAUSE TestComponentSupportsTLSConfig/aws-pod-identity-webhook/When_the_target_container_is_missing,_it_should_report_an_error_instead_of_hiding_a_regression
+=== CONT  TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_konnectivity-server_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_target_container_is_missing,_it_should_report_the_missing_container
+=== CONT  TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_konnectivity-server_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_context_is_canceled,_it_should_preserve_the_wrapped_cancellation_error
+=== CONT  TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_control-plane-pki-operator_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_deployment_is_missing,_it_should_preserve_the_wrapped_NotFound_error
+=== CONT  TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_control-plane-pki-operator_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_target_container_is_missing,_it_should_report_the_missing_container
+=== CONT  TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_aws-pod-identity-webhook_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_context_is_canceled,_it_should_preserve_the_wrapped_cancellation_error
+=== CONT  TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_control-plane-pki-operator_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_context_is_canceled,_it_should_preserve_the_wrapped_cancellation_error
+=== CONT  TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_aws-pod-identity-webhook_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_deployment_is_missing,_it_should_preserve_the_wrapped_NotFound_error
+=== CONT  TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_aws-pod-identity-webhook_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_target_container_is_missing,_it_should_report_the_missing_container
+=== CONT  TestComponentSupportsTLSConfig/aws-pod-identity-webhook/When_the_TLS_flag_is_in_Command,_it_should_support_profile_configuration
+=== CONT  TestComponentSupportsTLSConfig/aws-pod-identity-webhook/When_the_target_container_is_missing,_it_should_report_an_error_instead_of_hiding_a_regression
+=== CONT  TestComponentSupportsTLSConfig/aws-pod-identity-webhook/When_the_deployment_is_missing,_it_should_report_the_lookup_error
+=== CONT  TestComponentSupportsTLSConfig/aws-pod-identity-webhook/When_only_unrelated_flags_are_present,_it_should_not_require_a_profile-driven_restart
+=== CONT  TestComponentSupportsTLSConfig/aws-pod-identity-webhook/When_the_TLS_flag_is_in_Args,_it_should_support_profile_configuration_without_a_ConfigMap
+=== CONT  TestComponentSupportsTLSConfig/aws-pod-identity-webhook/When_the_TLS_flag_is_absent,_it_should_not_require_a_profile-driven_restart
+--- PASS: TestVerifyIntermediateTLSConnectivityAfterDowngrade (0.00s)
+    --- PASS: TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_PKI_support_is_false,_webhook_support_is_false_and_konnectivity_support_is_true,_it_should_wait_only_for_supported_components_and_probe_all_components (0.01s)
+    --- PASS: TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_PKI_support_is_true,_webhook_support_is_false_and_konnectivity_support_is_false,_it_should_wait_only_for_supported_components_and_probe_all_components (0.01s)
+    --- PASS: TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_PKI_support_is_false,_webhook_support_is_true_and_konnectivity_support_is_true,_it_should_wait_only_for_supported_components_and_probe_all_components (0.01s)
+    --- PASS: TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_PKI_support_is_false,_webhook_support_is_false_and_konnectivity_support_is_false,_it_should_wait_only_for_supported_components_and_probe_all_components (0.01s)
+    --- PASS: TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_PKI_support_is_false,_webhook_support_is_true_and_konnectivity_support_is_false,_it_should_wait_only_for_supported_components_and_probe_all_components (0.01s)
+    --- PASS: TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_PKI_support_is_true,_webhook_support_is_true_and_konnectivity_support_is_false,_it_should_wait_only_for_supported_components_and_probe_all_components (0.01s)
+    --- PASS: TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_PKI_support_is_true,_webhook_support_is_true_and_konnectivity_support_is_true,_it_should_wait_only_for_supported_components_and_probe_all_components (0.01s)
+    --- PASS: TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_PKI_support_is_true,_webhook_support_is_false_and_konnectivity_support_is_true,_it_should_wait_only_for_supported_components_and_probe_all_components (0.01s)
+    --- PASS: TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_aws-pod-identity-webhook_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing (0.00s)
+        --- PASS: TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_aws-pod-identity-webhook_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_context_is_canceled,_it_should_preserve_the_wrapped_cancellation_error (0.00s)
+        --- PASS: TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_aws-pod-identity-webhook_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_target_container_is_missing,_it_should_report_the_missing_container (0.00s)
+        --- PASS: TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_aws-pod-identity-webhook_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_deployment_is_missing,_it_should_preserve_the_wrapped_NotFound_error (0.00s)
+    --- PASS: TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_konnectivity-server_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing (0.00s)
+        --- PASS: TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_konnectivity-server_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_deployment_is_missing,_it_should_preserve_the_wrapped_NotFound_error (0.01s)
+        --- PASS: TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_konnectivity-server_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_target_container_is_missing,_it_should_report_the_missing_container (0.01s)
+        --- PASS: TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_konnectivity-server_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_context_is_canceled,_it_should_preserve_the_wrapped_cancellation_error (0.01s)
+    --- PASS: TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_control-plane-pki-operator_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing (0.00s)
+        --- PASS: TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_control-plane-pki-operator_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_deployment_is_missing,_it_should_preserve_the_wrapped_NotFound_error (0.01s)
+        --- PASS: TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_control-plane-pki-operator_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_context_is_canceled,_it_should_preserve_the_wrapped_cancellation_error (0.01s)
+        --- PASS: TestVerifyIntermediateTLSConnectivityAfterDowngrade/When_control-plane-pki-operator_capability_detection_fails,_it_should_preserve_the_UID_and_avoid_waiting_or_probing/When_the_target_container_is_missing,_it_should_report_the_missing_container (0.01s)
+--- PASS: TestComponentSupportsTLSConfig (0.00s)
+    --- PASS: TestComponentSupportsTLSConfig/konnectivity-server (0.00s)
+        --- PASS: TestComponentSupportsTLSConfig/konnectivity-server/When_the_deployment_is_missing,_it_should_report_the_lookup_error (0.01s)
+        --- PASS: TestComponentSupportsTLSConfig/konnectivity-server/When_the_TLS_flag_is_absent,_it_should_not_require_a_profile-driven_restart (0.01s)
+        --- PASS: TestComponentSupportsTLSConfig/konnectivity-server/When_the_TLS_flag_is_in_Command,_it_should_support_profile_configuration (0.01s)
+        --- PASS: TestComponentSupportsTLSConfig/konnectivity-server/When_only_unrelated_flags_are_present,_it_should_not_require_a_profile-driven_restart (0.01s)
+        --- PASS: TestComponentSupportsTLSConfig/konnectivity-server/When_the_target_container_is_missing,_it_should_report_an_error_instead_of_hiding_a_regression (0.01s)
+        --- PASS: TestComponentSupportsTLSConfig/konnectivity-server/When_the_TLS_flag_is_in_Args,_it_should_support_profile_configuration_without_a_ConfigMap (0.01s)
+    --- PASS: TestComponentSupportsTLSConfig/control-plane-pki-operator (0.00s)
+        --- PASS: TestComponentSupportsTLSConfig/control-plane-pki-operator/When_the_deployment_is_missing,_it_should_report_the_lookup_error (0.01s)
+        --- PASS: TestComponentSupportsTLSConfig/control-plane-pki-operator/When_the_target_container_is_missing,_it_should_report_an_error_instead_of_hiding_a_regression (0.01s)
+        --- PASS: TestComponentSupportsTLSConfig/control-plane-pki-operator/When_the_TLS_flag_is_in_Command,_it_should_support_profile_configuration (0.01s)
+        --- PASS: TestComponentSupportsTLSConfig/control-plane-pki-operator/When_only_unrelated_flags_are_present,_it_should_not_require_a_profile-driven_restart (0.01s)
+        --- PASS: TestComponentSupportsTLSConfig/control-plane-pki-operator/When_the_TLS_flag_is_in_Args,_it_should_support_profile_configuration_without_a_ConfigMap (0.01s)
+        --- PASS: TestComponentSupportsTLSConfig/control-plane-pki-operator/When_the_TLS_flag_is_absent,_it_should_not_require_a_profile-driven_restart (0.01s)
+    --- PASS: TestComponentSupportsTLSConfig/aws-pod-identity-webhook (0.00s)
+        --- PASS: TestComponentSupportsTLSConfig/aws-pod-identity-webhook/When_the_TLS_flag_is_in_Command,_it_should_support_profile_configuration (0.00s)
+        --- PASS: TestComponentSupportsTLSConfig/aws-pod-identity-webhook/When_the_TLS_flag_is_in_Args,_it_should_support_profile_configuration_without_a_ConfigMap (0.00s)
+        --- PASS: TestComponentSupportsTLSConfig/aws-pod-identity-webhook/When_the_target_container_is_missing,_it_should_report_an_error_instead_of_hiding_a_regression (0.00s)
+        --- PASS: TestComponentSupportsTLSConfig/aws-pod-identity-webhook/When_the_deployment_is_missing,_it_should_report_the_lookup_error (0.00s)
+        --- PASS: TestComponentSupportsTLSConfig/aws-pod-identity-webhook/When_the_TLS_flag_is_absent,_it_should_not_require_a_profile-driven_restart (0.00s)
+        --- PASS: TestComponentSupportsTLSConfig/aws-pod-identity-webhook/When_only_unrelated_flags_are_present,_it_should_not_require_a_profile-driven_restart (0.00s)
+PASS

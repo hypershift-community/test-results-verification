@@ -1,0 +1,443 @@
+LAST SEEN   TYPE      REASON                   OBJECT                                        MESSAGE
+10m         Normal    Scheduled                pod/etcd-1                                    Successfully assigned ocm-arohcppers-REDACTED-cluster/etcd-1 to mgmt-node
+16m         Normal    Scheduled                pod/etcd-recovery-r4f9s                       Successfully assigned ocm-arohcppers-REDACTED-cluster/etcd-recovery-r4f9s to mgmt-node
+10m         Normal    Scheduled                pod/etcd-2                                    Successfully assigned ocm-arohcppers-REDACTED-cluster/etcd-2 to mgmt-node
+15m         Normal    Scheduled                pod/etcd-0                                    Successfully assigned ocm-arohcppers-REDACTED-cluster/etcd-0 to mgmt-node
+11m         Normal    Scheduled                pod/etcd-2                                    Successfully assigned ocm-arohcppers-REDACTED-cluster/etcd-2 to mgmt-node
+11m         Normal    Scheduled                pod/etcd-2                                    Successfully assigned ocm-arohcppers-REDACTED-cluster/etcd-2 to mgmt-node
+11m         Normal    Scheduled                pod/etcd-2                                    Successfully assigned ocm-arohcppers-REDACTED-cluster/etcd-2 to mgmt-node
+11m         Normal    Scheduled                pod/etcd-0                                    Successfully assigned ocm-arohcppers-REDACTED-cluster/etcd-0 to mgmt-node
+11m         Normal    Scheduled                pod/etcd-0                                    Successfully assigned ocm-arohcppers-REDACTED-cluster/etcd-0 to mgmt-node
+9m57s       Normal    Scheduled                pod/etcd-0                                    Successfully assigned ocm-arohcppers-REDACTED-cluster/etcd-0 to mgmt-node
+11m         Normal    Scheduled                pod/etcd-0                                    Successfully assigned ocm-arohcppers-REDACTED-cluster/etcd-0 to mgmt-node
+15m         Normal    Scheduled                pod/kube-apiserver-6b8c5ff6b-5hlmx            Successfully assigned ocm-arohcppers-REDACTED-cluster/kube-apiserver-6b8c5ff6b-5hlmx to mgmt-node
+16m         Warning   FailedScheduling         pod/kube-apiserver-6b8c5ff6b-5hlmx            0/6 nodes are available: 3 node(s) didn't match pod anti-affinity rules, 3 node(s) had untolerated taint(s). no new claims to deallocate, preemption: not eligible due to preemptionPolicy=Never.
+16m         Warning   FailedScheduling         pod/kube-apiserver-6b8c5ff6b-5hlmx            0/6 nodes are available: 3 node(s) didn't match pod anti-affinity rules, 3 node(s) had untolerated taint(s). no new claims to deallocate, preemption: not eligible due to preemptionPolicy=Never.
+10m         Normal    Scheduled                pod/etcd-0                                    Successfully assigned ocm-arohcppers-REDACTED-cluster/etcd-0 to mgmt-node
+16m         Warning   FailedScheduling         pod/kube-apiserver-6b8c5ff6b-5hlmx            0/6 nodes are available: 2 node(s) didn't match pod anti-affinity rules, 4 node(s) had untolerated taint(s). no new claims to deallocate, preemption: not eligible due to preemptionPolicy=Never.
+9m11s       Normal    Scheduled                pod/etcd-2                                    Successfully assigned ocm-arohcppers-REDACTED-cluster/etcd-2 to mgmt-node
+4m46s       Normal    Scheduled                pod/etcd-2                                    Successfully assigned ocm-arohcppers-REDACTED-cluster/etcd-2 to mgmt-node
+5m          Normal    Scheduled                pod/etcd-recovery-4gjxf                       Successfully assigned ocm-arohcppers-REDACTED-cluster/etcd-recovery-4gjxf to mgmt-node
+10m         Normal    Scheduled                pod/etcd-recovery-d9zps                       Successfully assigned ocm-arohcppers-REDACTED-cluster/etcd-recovery-d9zps to mgmt-node
+12m         Normal    Scheduled                pod/etcd-0                                    Successfully assigned ocm-arohcppers-REDACTED-cluster/etcd-0 to mgmt-node
+44m         Warning   FailedCreate             replicaset/router-76ccbcc47d                  Error creating: pods "router-76ccbcc47d-k858b" is forbidden: ValidatingAdmissionPolicy 'image-registry-allowlist-policy' with binding 'image-registry-allowlist-policy-binding' denied request: One or more container images are not from an allowed registry. Allowed registries: <svc-registry>.azurecr.io,<dev-registry>.azurecr.io,mcr.microsoft.com,kubernetesshared.azurecr.io,docker.io/grafana,docker.io/library/postgres,quay.io/redhat-user-workloads/crt-redhat-acm-tenant,quay.io/openshift-release-dev/ocp-release. Images: haproxy-router-haproxy32
+44m         Warning   FailedCreate             replicaset/ignition-server-proxy-768f9d6689   Error creating: pods "ignition-server-proxy-768f9d6689-bmrx4" is forbidden: ValidatingAdmissionPolicy 'image-registry-allowlist-policy' with binding 'image-registry-allowlist-policy-binding' denied request: One or more container images are not from an allowed registry. Allowed registries: <svc-registry>.azurecr.io,<dev-registry>.azurecr.io,mcr.microsoft.com,kubernetesshared.azurecr.io,docker.io/grafana,docker.io/library/postgres,quay.io/redhat-user-workloads/crt-redhat-acm-tenant,quay.io/openshift-release-dev/ocp-release. Images: haproxy-router-haproxy32
+27m         Warning   FailedCreate             replicaset/router-76ccbcc47d                  Error creating: pods "router-76ccbcc47d-6sclx" is forbidden: ValidatingAdmissionPolicy 'image-registry-allowlist-policy' with binding 'image-registry-allowlist-policy-binding' denied request: One or more container images are not from an allowed registry. Allowed registries: <svc-registry>.azurecr.io,<dev-registry>.azurecr.io,mcr.microsoft.com,kubernetesshared.azurecr.io,docker.io/grafana,docker.io/library/postgres,quay.io/redhat-user-workloads/crt-redhat-acm-tenant,quay.io/openshift-release-dev/ocp-release. Images: haproxy-router-haproxy32
+27m         Warning   FailedCreate             replicaset/ignition-server-proxy-768f9d6689   Error creating: pods "ignition-server-proxy-768f9d6689-d4rjj" is forbidden: ValidatingAdmissionPolicy 'image-registry-allowlist-policy' with binding 'image-registry-allowlist-policy-binding' denied request: One or more container images are not from an allowed registry. Allowed registries: <svc-registry>.azurecr.io,<dev-registry>.azurecr.io,mcr.microsoft.com,kubernetesshared.azurecr.io,docker.io/grafana,docker.io/library/postgres,quay.io/redhat-user-workloads/crt-redhat-acm-tenant,quay.io/openshift-release-dev/ocp-release. Images: haproxy-router-haproxy32
+20m         Warning   BackOff                  pod/kube-apiserver-6b8c5ff6b-m8bw9            Back-off restarting failed container konnectivity-server in pod kube-apiserver-6b8c5ff6b-m8bw9_ocm-arohcppers-REDACTED-cluster(c98d2de1-ef19-4dab-bc17-6aa9a06f184a)
+17m         Warning   NodeNotReady             pod/cluster-api-59f785cd7-t2gdx               Node is not ready
+17m         Warning   NodeNotReady             pod/etcd-0                                    Node is not ready
+17m         Warning   NodeNotReady             pod/control-plane-operator-685bb66d68-dggcn   Node is not ready
+17m         Warning   NodeNotReady             pod/ignition-server-7976cc46c8-vd8tm          Node is not ready
+16m         Normal    SuccessfulCreate         replicaset/kube-apiserver-6b8c5ff6b           Created pod: kube-apiserver-6b8c5ff6b-5hlmx
+16m         Normal    TaintManagerEviction     pod/kube-apiserver-6b8c5ff6b-m8bw9            Marking for deletion Pod ocm-arohcppers-REDACTED-cluster/kube-apiserver-6b8c5ff6b-m8bw9
+16m         Normal    NotTriggerScaleUp        pod/kube-apiserver-6b8c5ff6b-5hlmx            pod didn't trigger scale-up: 3 node(s) had untolerated taint(s), 3 node(s) didn't match pod anti-affinity rules
+16m         Normal    Pulled                   pod/kube-apiserver-6b8c5ff6b-m8bw9            Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:e282b5fa2d3cd6f5b81ede8424b7b6398a42adcd6ef0273273c0e7188f9e8ef8" already present on machine and can be accessed by the pod
+16m         Warning   Unhealthy                pod/control-plane-operator-685bb66d68-dggcn   Readiness probe failed: Get "http://10.128.x.x:6060/readyz": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+16m         Warning   BackOff                  pod/control-plane-operator-685bb66d68-dggcn   Back-off restarting failed container control-plane-operator in pod control-plane-operator-685bb66d68-dggcn_ocm-arohcppers-REDACTED-cluster(fe6c0fbc-4e3b-4728-980b-9244ebac3d18)
+16m         Normal    Pulled                   pod/control-plane-operator-685bb66d68-dggcn   Container image "<dev-registry>.azurecr.io/<user>/hypershift:aro30375-1e771d5728" already present on machine and can be accessed by the pod
+16m         Warning   Unhealthy                pod/control-plane-operator-685bb66d68-dggcn   Readiness probe failed: Get "http://10.128.x.x:6060/readyz": dial tcp 10.128.x.x:6060: connect: connection refused
+16m         Normal    Started                  pod/control-plane-operator-685bb66d68-dggcn   Container started
+16m         Normal    Created                  pod/control-plane-operator-685bb66d68-dggcn   Container created
+16m         Normal    TaintManagerEviction     pod/featuregate-generator-hn2kh               Cancelling deletion of Pod ocm-arohcppers-REDACTED-cluster/featuregate-generator-hn2kh
+16m         Normal    TaintManagerEviction     pod/ignition-server-7976cc46c8-vd8tm          Cancelling deletion of Pod ocm-arohcppers-REDACTED-cluster/ignition-server-7976cc46c8-vd8tm
+16m         Normal    Killing                  pod/etcd-0                                    Stopping container etcd-metrics
+16m         Normal    Killing                  pod/etcd-0                                    Stopping container healthz
+16m         Normal    Killing                  pod/etcd-0                                    Stopping container etcd-defrag
+16m         Normal    Killing                  pod/etcd-0                                    Stopping container etcd
+16m         Normal    TaintManagerEviction     pod/etcd-0                                    Cancelling deletion of Pod ocm-arohcppers-REDACTED-cluster/etcd-0
+16m         Normal    TaintManagerEviction     pod/etcd-0                                    Marking for deletion Pod ocm-arohcppers-REDACTED-cluster/etcd-0
+16m         Normal    TaintManagerEviction     pod/control-plane-operator-685bb66d68-dggcn   Cancelling deletion of Pod ocm-arohcppers-REDACTED-cluster/control-plane-operator-685bb66d68-dggcn
+16m         Normal    TaintManagerEviction     pod/cluster-api-59f785cd7-t2gdx               Cancelling deletion of Pod ocm-arohcppers-REDACTED-cluster/cluster-api-59f785cd7-t2gdx
+16m         Normal    TaintManagerEviction     pod/capi-provider-7d8c4fb95b-7dgnp            Cancelling deletion of Pod ocm-arohcppers-REDACTED-cluster/capi-provider-7d8c4fb95b-7dgnp
+16m         Normal    TaintManagerEviction     pod/capi-provider-5765488dfc-sx8cr            Cancelling deletion of Pod ocm-arohcppers-REDACTED-cluster/capi-provider-5765488dfc-sx8cr
+16m         Normal    SuccessfulCreate         job/etcd-recovery                             Created pod: etcd-recovery-r4f9s
+16m         Normal    Pulled                   pod/etcd-recovery-r4f9s                       Container image "<svc-registry>.azurecr.io/<user>/hypershift@sha256:3ab61a2bdceb93b7fe663ec770f291616e8b65357914189e1b87f68d51b74e11" already present on machine and can be accessed by the pod
+16m         Normal    Created                  pod/etcd-recovery-r4f9s                       Container created
+16m         Normal    Started                  pod/etcd-recovery-r4f9s                       Container started
+16m         Normal    WaitForFirstConsumer     persistentvolumeclaim/data-etcd-0             waiting for first consumer to be created before binding
+16m         Normal    ExternalProvisioning     persistentvolumeclaim/data-etcd-0             Waiting for a volume to be created either by the external provisioner 'disk.csi.azure.com' or manually by the system administrator. If volume creation is delayed, please verify that the provisioner is running and correctly registered.
+16m         Warning   Unhealthy                pod/etcd-0                                    Readiness probe failed: Get "https://10.128.x.x:9980/readyz": dial tcp 10.128.x.x:9980: connect: connection refused
+16m         Normal    WaitForPodScheduled      persistentvolumeclaim/data-etcd-0             waiting for pod etcd-0 to be scheduled
+16m         Normal    Provisioning             persistentvolumeclaim/data-etcd-0             External provisioner is provisioning volume for claim "ocm-arohcppers-REDACTED-cluster/data-etcd-0"
+15m         Normal    ProvisioningSucceeded    persistentvolumeclaim/data-etcd-0             Successfully provisioned volume pvc-e07cdfde-0e51-4be1-9872-b3603d59cf55
+15m         Normal    SuccessfulAttachVolume   pod/etcd-0                                    AttachVolume.Attach succeeded for volume "pvc-e07cdfde-0e51-4be1-9872-b3603d59cf55"
+15m         Normal    Started                  pod/etcd-0                                    Container started
+15m         Normal    Created                  pod/etcd-0                                    Container created
+15m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/<user>/hypershift:aro30375-1e771d5728" already present on machine and can be accessed by the pod
+15m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+15m         Normal    Created                  pod/etcd-0                                    Container created
+15m         Normal    Started                  pod/etcd-0                                    Container started
+15m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+15m         Normal    Created                  pod/etcd-0                                    Container created
+15m         Normal    Started                  pod/etcd-0                                    Container started
+15m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+15m         Normal    Created                  pod/etcd-0                                    Container created
+15m         Normal    Started                  pod/etcd-0                                    Container started
+15m         Normal    Created                  pod/etcd-0                                    Container created
+15m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/<user>/hypershift:aro30375-1e771d5728" already present on machine and can be accessed by the pod
+15m         Normal    Created                  pod/etcd-0                                    Container created
+15m         Normal    Started                  pod/etcd-0                                    Container started
+15m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:17e58ac83b26f66e575773421a7d6af61067d1187467ebba984b3a4bb5104cce" already present on machine and can be accessed by the pod
+15m         Normal    Started                  pod/etcd-0                                    Container started
+15m         Warning   Unhealthy                pod/etcd-0                                    Startup probe failed: Get "https://10.128.x.x:9980/readyz": context deadline exceeded
+15m         Warning   Unhealthy                pod/etcd-0                                    Startup probe failed: Get "https://10.128.x.x:9980/readyz": net/http: request canceled (Client.Timeout exceeded while awaiting headers)
+15m         Normal    Created                  pod/kube-apiserver-6b8c5ff6b-5hlmx            Container created
+15m         Normal    Pulled                   pod/kube-apiserver-6b8c5ff6b-5hlmx            Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:3d6d40d3d54e7c89b90c78ec9ffe28f3eb5777f2f109c10ba01a69827298a449" already present on machine and can be accessed by the pod
+15m         Normal    Started                  pod/kube-apiserver-6b8c5ff6b-5hlmx            Container started
+15m         Normal    Pulled                   pod/kube-apiserver-6b8c5ff6b-5hlmx            Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:9276368466b2e37635353963aff06960576951cada5bd6e126d773830939f658" already present on machine and can be accessed by the pod
+15m         Normal    Created                  pod/kube-apiserver-6b8c5ff6b-5hlmx            Container created
+15m         Normal    Started                  pod/kube-apiserver-6b8c5ff6b-5hlmx            Container started
+15m         Normal    Pulled                   pod/kube-apiserver-6b8c5ff6b-5hlmx            Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:789a28fb7596a1195e0cfe4b8fc632ec801ad35b432e34e6133bfe4e1980877b" already present on machine and can be accessed by the pod
+15m         Normal    Created                  pod/kube-apiserver-6b8c5ff6b-5hlmx            Container created
+15m         Normal    Started                  pod/kube-apiserver-6b8c5ff6b-5hlmx            Container started
+15m         Normal    Created                  pod/kube-apiserver-6b8c5ff6b-5hlmx            Container created
+15m         Normal    Pulled                   pod/kube-apiserver-6b8c5ff6b-5hlmx            Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:3d6d40d3d54e7c89b90c78ec9ffe28f3eb5777f2f109c10ba01a69827298a449" already present on machine and can be accessed by the pod
+15m         Normal    Created                  pod/kube-apiserver-6b8c5ff6b-5hlmx            Container created
+15m         Normal    Pulled                   pod/kube-apiserver-6b8c5ff6b-5hlmx            Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:f287601f827f1e805382b7fc2afd879dc6282f8e790d1f41cd81636a94c32f9b" already present on machine and can be accessed by the pod
+15m         Normal    Started                  pod/kube-apiserver-6b8c5ff6b-5hlmx            Container started
+15m         Normal    Started                  pod/kube-apiserver-6b8c5ff6b-5hlmx            Container started
+15m         Normal    Pulled                   pod/kube-apiserver-6b8c5ff6b-5hlmx            Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:789a28fb7596a1195e0cfe4b8fc632ec801ad35b432e34e6133bfe4e1980877b" already present on machine and can be accessed by the pod
+15m         Normal    Pulled                   pod/kube-apiserver-6b8c5ff6b-5hlmx            Container image "<dev-registry>.azurecr.io/<user>/hypershift:aro30375-1e771d5728" already present on machine and can be accessed by the pod
+15m         Normal    Started                  pod/kube-apiserver-6b8c5ff6b-5hlmx            Container started
+15m         Normal    Created                  pod/kube-apiserver-6b8c5ff6b-5hlmx            Container created
+15m         Normal    Created                  pod/kube-apiserver-6b8c5ff6b-5hlmx            Container created
+15m         Normal    Started                  pod/kube-apiserver-6b8c5ff6b-5hlmx            Container started
+15m         Normal    Created                  pod/kube-apiserver-6b8c5ff6b-5hlmx            Container created
+15m         Normal    Pulled                   pod/kube-apiserver-6b8c5ff6b-5hlmx            Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:074a1e3a7f25c42d5bc454773480e5a2978b8c7da122f7e7248b2c8f3633fe4c" already present on machine and can be accessed by the pod
+15m         Normal    Started                  pod/kube-apiserver-6b8c5ff6b-5hlmx            Container started
+14m         Normal    Completed                job/etcd-recovery                             Job completed
+14m         Normal    LeaderElection           lease/control-plane-operator-leader-elect     control-plane-operator-685bb66d68-dggcn_61c07a94-469d-41fc-8a08-85bb7aa0191f became leader
+14m         Warning   BackOff                  pod/kube-apiserver-6b8c5ff6b-5hlmx            Back-off restarting failed container konnectivity-server in pod kube-apiserver-6b8c5ff6b-5hlmx_ocm-arohcppers-REDACTED-cluster(7d33d194-9d6c-45cd-a914-f51936bc4544)
+14m         Warning   BackOff                  pod/kube-apiserver-6b8c5ff6b-5hlmx            Back-off restarting failed container azure-workload-identity-webhook in pod kube-apiserver-6b8c5ff6b-5hlmx_ocm-arohcppers-REDACTED-cluster(7d33d194-9d6c-45cd-a914-f51936bc4544)
+13m         Normal    Killing                  pod/etcd-0                                    Stopping container etcd-defrag
+13m         Normal    Killing                  pod/etcd-0                                    Stopping container etcd
+13m         Normal    Killing                  pod/etcd-0                                    Stopping container healthz
+13m         Normal    Killing                  pod/etcd-0                                    Stopping container etcd-metrics
+13m         Warning   Unhealthy                pod/etcd-0                                    Readiness probe failed: Get "https://10.128.x.x:9980/readyz": dial tcp 10.128.x.x:9980: connect: connection refused
+13m         Normal    WaitForFirstConsumer     persistentvolumeclaim/data-etcd-0             waiting for first consumer to be created before binding
+13m         Normal    Provisioning             persistentvolumeclaim/data-etcd-0             External provisioner is provisioning volume for claim "ocm-arohcppers-REDACTED-cluster/data-etcd-0"
+13m         Normal    ExternalProvisioning     persistentvolumeclaim/data-etcd-0             Waiting for a volume to be created either by the external provisioner 'disk.csi.azure.com' or manually by the system administrator. If volume creation is delayed, please verify that the provisioner is running and correctly registered.
+12m         Normal    ProvisioningSucceeded    persistentvolumeclaim/data-etcd-0             Successfully provisioned volume pvc-f2a04af8-cfff-4229-8c88-f8d04ff7e1f6
+12m         Normal    SuccessfulAttachVolume   pod/etcd-0                                    AttachVolume.Attach succeeded for volume "pvc-f2a04af8-cfff-4229-8c88-f8d04ff7e1f6"
+12m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/<user>/hypershift:aro30375-1e771d5728" already present on machine and can be accessed by the pod
+12m         Normal    Created                  pod/etcd-0                                    Container created
+12m         Normal    Started                  pod/etcd-0                                    Container started
+12m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+12m         Normal    Created                  pod/etcd-0                                    Container created
+12m         Normal    Created                  pod/etcd-0                                    Container created
+12m         Normal    Started                  pod/etcd-0                                    Container started
+12m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+12m         Normal    Started                  pod/etcd-0                                    Container started
+12m         Normal    Started                  pod/etcd-0                                    Container started
+12m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+12m         Normal    Created                  pod/etcd-0                                    Container created
+12m         Normal    Started                  pod/etcd-0                                    Container started
+12m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:17e58ac83b26f66e575773421a7d6af61067d1187467ebba984b3a4bb5104cce" already present on machine and can be accessed by the pod
+12m         Normal    Created                  pod/etcd-0                                    Container created
+12m         Normal    Started                  pod/etcd-0                                    Container started
+12m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/<user>/hypershift:aro30375-1e771d5728" already present on machine and can be accessed by the pod
+12m         Normal    Created                  pod/etcd-0                                    Container created
+11m         Warning   Unhealthy                pod/etcd-0                                    Startup probe failed: Get "https://10.128.x.x:9980/readyz": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+11m         Warning   Unhealthy                pod/etcd-0                                    Startup probe failed: Get "https://10.128.x.x:9980/readyz": net/http: request canceled (Client.Timeout exceeded while awaiting headers)
+11m         Normal    Killing                  pod/etcd-2                                    Stopping container etcd-metrics
+11m         Normal    Killing                  pod/etcd-2                                    Stopping container etcd
+11m         Normal    Killing                  pod/etcd-2                                    Stopping container etcd-defrag
+11m         Normal    Killing                  pod/etcd-2                                    Stopping container healthz
+11m         Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/<user>/hypershift:aro30375-1e771d5728" already present on machine and can be accessed by the pod
+11m         Normal    Created                  pod/etcd-2                                    Container created
+11m         Normal    Started                  pod/etcd-2                                    Container started
+11m         Normal    Started                  pod/etcd-2                                    Container started
+11m         Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+11m         Normal    Created                  pod/etcd-2                                    Container created
+11m         Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+11m         Normal    Started                  pod/etcd-2                                    Container started
+11m         Normal    Created                  pod/etcd-2                                    Container created
+11m         Normal    Started                  pod/etcd-2                                    Container started
+11m         Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+11m         Normal    Created                  pod/etcd-2                                    Container created
+11m         Normal    Started                  pod/etcd-2                                    Container started
+11m         Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:17e58ac83b26f66e575773421a7d6af61067d1187467ebba984b3a4bb5104cce" already present on machine and can be accessed by the pod
+11m         Normal    Created                  pod/etcd-2                                    Container created
+11m         Normal    Started                  pod/etcd-2                                    Container started
+11m         Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/<user>/hypershift:aro30375-1e771d5728" already present on machine and can be accessed by the pod
+11m         Normal    Created                  pod/etcd-2                                    Container created
+11m         Normal    Killing                  pod/etcd-2                                    Stopping container etcd-defrag
+11m         Normal    Killing                  pod/etcd-2                                    Stopping container healthz
+11m         Normal    Killing                  pod/etcd-2                                    Stopping container etcd-metrics
+11m         Normal    Killing                  pod/etcd-2                                    Stopping container etcd
+11m         Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/<user>/hypershift:aro30375-1e771d5728" already present on machine and can be accessed by the pod
+11m         Normal    Created                  pod/etcd-2                                    Container created
+11m         Normal    Started                  pod/etcd-2                                    Container started
+11m         Normal    Created                  pod/etcd-2                                    Container created
+11m         Normal    Started                  pod/etcd-2                                    Container started
+11m         Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+11m         Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+11m         Normal    Created                  pod/etcd-2                                    Container created
+11m         Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+11m         Normal    Created                  pod/etcd-2                                    Container created
+11m         Normal    Started                  pod/etcd-2                                    Container started
+11m         Normal    Started                  pod/etcd-2                                    Container started
+11m         Normal    Created                  pod/etcd-2                                    Container created
+11m         Normal    Started                  pod/etcd-2                                    Container started
+11m         Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:17e58ac83b26f66e575773421a7d6af61067d1187467ebba984b3a4bb5104cce" already present on machine and can be accessed by the pod
+11m         Normal    Created                  pod/etcd-2                                    Container created
+11m         Normal    Started                  pod/etcd-2                                    Container started
+11m         Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/<user>/hypershift:aro30375-1e771d5728" already present on machine and can be accessed by the pod
+11m         Normal    Killing                  pod/etcd-0                                    Stopping container healthz
+11m         Normal    Killing                  pod/etcd-0                                    Stopping container etcd-metrics
+11m         Normal    Killing                  pod/etcd-0                                    Stopping container etcd-defrag
+11m         Normal    Killing                  pod/etcd-0                                    Stopping container etcd
+11m         Normal    Started                  pod/etcd-0                                    Container started
+11m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/<user>/hypershift:aro30375-1e771d5728" already present on machine and can be accessed by the pod
+11m         Normal    Created                  pod/etcd-0                                    Container created
+11m         Normal    Created                  pod/etcd-0                                    Container created
+11m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+11m         Normal    Started                  pod/etcd-0                                    Container started
+11m         Normal    Started                  pod/etcd-0                                    Container started
+11m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+11m         Normal    Created                  pod/etcd-0                                    Container created
+11m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/<user>/hypershift:aro30375-1e771d5728" already present on machine and can be accessed by the pod
+11m         Normal    Started                  pod/etcd-0                                    Container started
+11m         Normal    Created                  pod/etcd-0                                    Container created
+11m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:17e58ac83b26f66e575773421a7d6af61067d1187467ebba984b3a4bb5104cce" already present on machine and can be accessed by the pod
+11m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+11m         Normal    Created                  pod/etcd-0                                    Container created
+11m         Normal    Started                  pod/etcd-0                                    Container started
+11m         Normal    Started                  pod/etcd-0                                    Container started
+11m         Normal    Created                  pod/etcd-0                                    Container created
+11m         Normal    Killing                  pod/etcd-0                                    Stopping container etcd
+11m         Normal    Killing                  pod/etcd-0                                    Stopping container etcd-metrics
+11m         Normal    Killing                  pod/etcd-0                                    Stopping container etcd-defrag
+11m         Normal    Killing                  pod/etcd-0                                    Stopping container healthz
+11m         Normal    Created                  pod/etcd-0                                    Container created
+11m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/<user>/hypershift:aro30375-1e771d5728" already present on machine and can be accessed by the pod
+11m         Normal    Started                  pod/etcd-0                                    Container started
+11m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+11m         Normal    Created                  pod/etcd-0                                    Container created
+11m         Normal    Started                  pod/etcd-0                                    Container started
+11m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:17e58ac83b26f66e575773421a7d6af61067d1187467ebba984b3a4bb5104cce" already present on machine and can be accessed by the pod
+11m         Normal    Created                  pod/etcd-0                                    Container created
+11m         Normal    Started                  pod/etcd-0                                    Container started
+11m         Normal    Created                  pod/etcd-0                                    Container created
+11m         Normal    Created                  pod/etcd-0                                    Container created
+11m         Normal    Started                  pod/etcd-0                                    Container started
+11m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/<user>/hypershift:aro30375-1e771d5728" already present on machine and can be accessed by the pod
+11m         Normal    Started                  pod/etcd-0                                    Container started
+11m         Normal    Started                  pod/etcd-0                                    Container started
+11m         Normal    Created                  pod/etcd-0                                    Container created
+11m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+11m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+11m         Normal    Killing                  pod/etcd-2                                    Stopping container healthz
+11m         Normal    Killing                  pod/etcd-2                                    Stopping container etcd-metrics
+11m         Normal    Killing                  pod/etcd-2                                    Stopping container etcd-defrag
+11m         Normal    Killing                  pod/etcd-2                                    Stopping container etcd
+11m         Normal    Created                  pod/etcd-2                                    Container created
+11m         Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/<user>/hypershift:aro30375-1e771d5728" already present on machine and can be accessed by the pod
+11m         Normal    Started                  pod/etcd-2                                    Container started
+11m         Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+11m         Normal    Created                  pod/etcd-2                                    Container created
+11m         Normal    Started                  pod/etcd-2                                    Container started
+11m         Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+11m         Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+11m         Normal    Created                  pod/etcd-2                                    Container created
+11m         Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:17e58ac83b26f66e575773421a7d6af61067d1187467ebba984b3a4bb5104cce" already present on machine and can be accessed by the pod
+11m         Normal    Started                  pod/etcd-2                                    Container started
+11m         Normal    Created                  pod/etcd-2                                    Container created
+11m         Normal    Started                  pod/etcd-2                                    Container started
+11m         Normal    Created                  pod/etcd-2                                    Container created
+11m         Normal    Started                  pod/etcd-2                                    Container started
+11m         Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/<user>/hypershift:aro30375-1e771d5728" already present on machine and can be accessed by the pod
+11m         Normal    Created                  pod/etcd-2                                    Container created
+11m         Normal    Started                  pod/etcd-2                                    Container started
+11m         Normal    Killing                  pod/etcd-0                                    Stopping container healthz
+11m         Normal    Killing                  pod/etcd-0                                    Stopping container etcd-metrics
+11m         Normal    Killing                  pod/etcd-0                                    Stopping container etcd-defrag
+11m         Normal    Killing                  pod/etcd-0                                    Stopping container etcd
+11m         Normal    Started                  pod/etcd-0                                    Container started
+11m         Normal    Created                  pod/etcd-0                                    Container created
+11m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/<user>/hypershift:aro30375-1e771d5728" already present on machine and can be accessed by the pod
+11m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+11m         Normal    Started                  pod/etcd-0                                    Container started
+11m         Normal    Created                  pod/etcd-0                                    Container created
+11m         Normal    Created                  pod/etcd-0                                    Container created
+11m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+11m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/<user>/hypershift:aro30375-1e771d5728" already present on machine and can be accessed by the pod
+11m         Normal    Started                  pod/etcd-0                                    Container started
+11m         Normal    Created                  pod/etcd-0                                    Container created
+11m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:17e58ac83b26f66e575773421a7d6af61067d1187467ebba984b3a4bb5104cce" already present on machine and can be accessed by the pod
+11m         Normal    Started                  pod/etcd-0                                    Container started
+11m         Normal    Created                  pod/etcd-0                                    Container created
+11m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+11m         Normal    Started                  pod/etcd-0                                    Container started
+11m         Normal    Created                  pod/etcd-0                                    Container created
+11m         Normal    Started                  pod/etcd-0                                    Container started
+10m         Normal    Killing                  pod/etcd-0                                    Stopping container etcd-metrics
+10m         Normal    Killing                  pod/etcd-2                                    Stopping container etcd
+10m         Normal    Killing                  pod/etcd-1                                    Stopping container etcd
+10m         Normal    Killing                  pod/etcd-1                                    Stopping container healthz
+10m         Normal    Killing                  pod/etcd-1                                    Stopping container etcd-metrics
+10m         Normal    SuccessfulCreate         statefulset/etcd                              Create Pod etcd-1 in StatefulSet etcd successful
+10m         Normal    Killing                  pod/etcd-0                                    Stopping container etcd
+10m         Normal    Killing                  pod/etcd-0                                    Stopping container etcd-defrag
+10m         Normal    Killing                  pod/etcd-0                                    Stopping container healthz
+10m         Normal    NoPods                   poddisruptionbudget/etcd                      No matching pods found
+10m         Normal    Killing                  pod/etcd-2                                    Stopping container healthz
+10m         Normal    Killing                  pod/etcd-2                                    Stopping container etcd-metrics
+10m         Normal    Killing                  pod/etcd-2                                    Stopping container etcd-defrag
+10m         Normal    Killing                  pod/etcd-1                                    Stopping container etcd-defrag
+10m         Normal    Started                  pod/etcd-0                                    Container started
+10m         Normal    Started                  pod/etcd-2                                    Container started
+10m         Normal    Pulled                   pod/etcd-1                                    Container image "<dev-registry>.azurecr.io/<user>/hypershift:aro30375-1e771d5728" already present on machine and can be accessed by the pod
+10m         Normal    Created                  pod/etcd-1                                    Container created
+10m         Normal    Started                  pod/etcd-1                                    Container started
+10m         Normal    Created                  pod/etcd-2                                    Container created
+10m         Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/<user>/hypershift:aro30375-1e771d5728" already present on machine and can be accessed by the pod
+10m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/<user>/hypershift:aro30375-1e771d5728" already present on machine and can be accessed by the pod
+10m         Normal    Created                  pod/etcd-0                                    Container created
+10m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+10m         Normal    Created                  pod/etcd-0                                    Container created
+10m         Normal    Started                  pod/etcd-1                                    Container started
+10m         Normal    Started                  pod/etcd-2                                    Container started
+10m         Normal    Created                  pod/etcd-1                                    Container created
+10m         Normal    Pulled                   pod/etcd-1                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+10m         Normal    Started                  pod/etcd-0                                    Container started
+10m         Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+10m         Normal    Created                  pod/etcd-2                                    Container created
+10m         Normal    Pulled                   pod/etcd-1                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:17e58ac83b26f66e575773421a7d6af61067d1187467ebba984b3a4bb5104cce" already present on machine and can be accessed by the pod
+10m         Normal    Created                  pod/etcd-0                                    Container created
+10m         Normal    Created                  pod/etcd-2                                    Container created
+10m         Normal    Started                  pod/etcd-2                                    Container started
+10m         Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+10m         Normal    Created                  pod/etcd-2                                    Container created
+10m         Normal    Started                  pod/etcd-2                                    Container started
+10m         Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:17e58ac83b26f66e575773421a7d6af61067d1187467ebba984b3a4bb5104cce" already present on machine and can be accessed by the pod
+10m         Normal    Created                  pod/etcd-2                                    Container created
+10m         Normal    Started                  pod/etcd-2                                    Container started
+10m         Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/<user>/hypershift:aro30375-1e771d5728" already present on machine and can be accessed by the pod
+10m         Normal    Created                  pod/etcd-2                                    Container created
+10m         Normal    Started                  pod/etcd-2                                    Container started
+10m         Normal    Pulled                   pod/etcd-1                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+10m         Normal    Started                  pod/etcd-1                                    Container started
+10m         Normal    Pulled                   pod/etcd-1                                    Container image "<dev-registry>.azurecr.io/<user>/hypershift:aro30375-1e771d5728" already present on machine and can be accessed by the pod
+10m         Normal    Created                  pod/etcd-1                                    Container created
+10m         Normal    Started                  pod/etcd-1                                    Container started
+10m         Normal    Pulled                   pod/etcd-1                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+10m         Normal    Started                  pod/etcd-1                                    Container started
+10m         Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+10m         Normal    Created                  pod/etcd-1                                    Container created
+10m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+10m         Normal    Created                  pod/etcd-1                                    Container created
+10m         Normal    Started                  pod/etcd-0                                    Container started
+10m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:17e58ac83b26f66e575773421a7d6af61067d1187467ebba984b3a4bb5104cce" already present on machine and can be accessed by the pod
+10m         Normal    Created                  pod/etcd-0                                    Container created
+10m         Normal    Started                  pod/etcd-0                                    Container started
+10m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/<user>/hypershift:aro30375-1e771d5728" already present on machine and can be accessed by the pod
+10m         Normal    Created                  pod/etcd-0                                    Container created
+10m         Normal    Started                  pod/etcd-0                                    Container started
+10m         Normal    Started                  pod/etcd-1                                    Container started
+10m         Normal    Created                  pod/etcd-1                                    Container created
+10m         Warning   FailedCreate             replicaset/ignition-server-proxy-768f9d6689   Error creating: pods "ignition-server-proxy-768f9d6689-jmh9b" is forbidden: ValidatingAdmissionPolicy 'image-registry-allowlist-policy' with binding 'image-registry-allowlist-policy-binding' denied request: One or more container images are not from an allowed registry. Allowed registries: <svc-registry>.azurecr.io,<dev-registry>.azurecr.io,mcr.microsoft.com,kubernetesshared.azurecr.io,docker.io/grafana,docker.io/library/postgres,quay.io/redhat-user-workloads/crt-redhat-acm-tenant,quay.io/openshift-release-dev/ocp-release. Images: haproxy-router-haproxy32
+10m         Warning   FailedCreate             replicaset/router-76ccbcc47d                  Error creating: pods "router-76ccbcc47d-bdz9c" is forbidden: ValidatingAdmissionPolicy 'image-registry-allowlist-policy' with binding 'image-registry-allowlist-policy-binding' denied request: One or more container images are not from an allowed registry. Allowed registries: <svc-registry>.azurecr.io,<dev-registry>.azurecr.io,mcr.microsoft.com,kubernetesshared.azurecr.io,docker.io/grafana,docker.io/library/postgres,quay.io/redhat-user-workloads/crt-redhat-acm-tenant,quay.io/openshift-release-dev/ocp-release. Images: haproxy-router-haproxy32
+10m         Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+10m         Normal    Started                  pod/etcd-0                                    Container started
+10m         Normal    Created                  pod/etcd-0                                    Container created
+10m         Normal    SuccessfulCreate         job/etcd-recovery                             Created pod: etcd-recovery-d9zps
+10m         Normal    Started                  pod/etcd-recovery-d9zps                       Container started
+10m         Normal    Created                  pod/etcd-recovery-d9zps                       Container created
+10m         Normal    Pulled                   pod/etcd-recovery-d9zps                       Container image "<svc-registry>.azurecr.io/<user>/hypershift@sha256:3ab61a2bdceb93b7fe663ec770f291616e8b65357914189e1b87f68d51b74e11" already present on machine and can be accessed by the pod
+10m         Warning   BackOff                  pod/etcd-0                                    Back-off restarting failed container etcd in pod etcd-0_ocm-arohcppers-REDACTED-cluster(a542bfa6-d957-47b7-8d90-1602b65ce52b)
+10m         Normal    Killing                  pod/etcd-0                                    Stopping container etcd-metrics
+10m         Normal    Killing                  pod/etcd-0                                    Stopping container etcd-defrag
+10m         Normal    Killing                  pod/etcd-0                                    Stopping container healthz
+10m         Normal    Provisioning             persistentvolumeclaim/data-etcd-0             External provisioner is provisioning volume for claim "ocm-arohcppers-REDACTED-cluster/data-etcd-0"
+10m         Normal    SuccessfulCreate         statefulset/etcd                              Create Claim data-etcd-0 Pod etcd-0 in StatefulSet etcd success
+10m         Normal    SuccessfulCreate         statefulset/etcd                              Create Pod etcd-0 in StatefulSet etcd successful
+10m         Warning   FailedCreate             statefulset/etcd                              Create Pod etcd-0 in StatefulSet etcd failed error: pvc data-etcd-0 is being deleted
+10m         Normal    WaitForFirstConsumer     persistentvolumeclaim/data-etcd-0             waiting for first consumer to be created before binding
+10m         Normal    ExternalProvisioning     persistentvolumeclaim/data-etcd-0             Waiting for a volume to be created either by the external provisioner 'disk.csi.azure.com' or manually by the system administrator. If volume creation is delayed, please verify that the provisioner is running and correctly registered.
+9m58s       Normal    ProvisioningSucceeded    persistentvolumeclaim/data-etcd-0             Successfully provisioned volume pvc-1a72a6ec-8932-41f3-9ff3-828d160a6c9a
+9m50s       Normal    SuccessfulAttachVolume   pod/etcd-0                                    AttachVolume.Attach succeeded for volume "pvc-1a72a6ec-8932-41f3-9ff3-828d160a6c9a"
+9m47s       Normal    Started                  pod/etcd-0                                    Container started
+9m47s       Normal    Created                  pod/etcd-0                                    Container created
+9m47s       Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/<user>/hypershift:aro30375-1e771d5728" already present on machine and can be accessed by the pod
+9m36s       Normal    Created                  pod/etcd-0                                    Container created
+9m36s       Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+9m36s       Normal    Started                  pod/etcd-0                                    Container started
+9m35s       Normal    Started                  pod/etcd-0                                    Container started
+9m35s       Normal    Started                  pod/etcd-0                                    Container started
+9m35s       Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+9m35s       Normal    Created                  pod/etcd-0                                    Container created
+9m35s       Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+9m35s       Normal    Created                  pod/etcd-0                                    Container created
+9m35s       Normal    Started                  pod/etcd-0                                    Container started
+9m35s       Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:17e58ac83b26f66e575773421a7d6af61067d1187467ebba984b3a4bb5104cce" already present on machine and can be accessed by the pod
+9m35s       Normal    Created                  pod/etcd-0                                    Container created
+9m34s       Normal    Pulled                   pod/etcd-0                                    Container image "<dev-registry>.azurecr.io/<user>/hypershift:aro30375-1e771d5728" already present on machine and can be accessed by the pod
+9m34s       Normal    Created                  pod/etcd-0                                    Container created
+9m34s       Normal    Started                  pod/etcd-0                                    Container started
+9m23s       Normal    Killing                  pod/etcd-2                                    Stopping container healthz
+9m23s       Normal    Killing                  pod/etcd-2                                    Stopping container etcd-defrag
+9m23s       Normal    Killing                  pod/etcd-2                                    Stopping container etcd-metrics
+9m23s       Normal    Killing                  pod/etcd-2                                    Stopping container etcd
+9m13s       Warning   Unhealthy                pod/etcd-2                                    Readiness probe failed: Get "https://10.128.x.x:9980/readyz": dial tcp 10.128.x.x:9980: connect: connection refused
+9m13s       Warning   Unhealthy                pod/etcd-2                                    Readiness probe failed: Get "https://10.128.x.x:9980/readyz": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+9m8s        Normal    Created                  pod/etcd-2                                    Container created
+9m8s        Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/<user>/hypershift:aro30375-1e771d5728" already present on machine and can be accessed by the pod
+9m8s        Normal    Started                  pod/etcd-2                                    Container started
+9m6s        Normal    Started                  pod/etcd-2                                    Container started
+9m6s        Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+9m6s        Normal    Created                  pod/etcd-2                                    Container created
+9m5s        Normal    Started                  pod/etcd-2                                    Container started
+9m5s        Normal    Created                  pod/etcd-2                                    Container created
+9m5s        Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+9m5s        Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:17e58ac83b26f66e575773421a7d6af61067d1187467ebba984b3a4bb5104cce" already present on machine and can be accessed by the pod
+9m4s        Normal    Started                  pod/etcd-2                                    Container started
+9m4s        Normal    Created                  pod/etcd-2                                    Container created
+9m4s        Normal    Started                  pod/etcd-2                                    Container started
+9m4s        Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/<user>/hypershift:aro30375-1e771d5728" already present on machine and can be accessed by the pod
+9m4s        Normal    Created                  pod/etcd-2                                    Container created
+8m52s       Normal    Created                  pod/etcd-2                                    Container created
+8m52s       Normal    Started                  pod/etcd-2                                    Container started
+8m23s       Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+5m58s       Warning   BackOff                  pod/etcd-2                                    Back-off restarting failed container etcd in pod etcd-2_ocm-arohcppers-REDACTED-cluster(61be06b3-66cd-4522-8848-6c83b4e04dec)
+5m45s       Normal    LeaderElection           lease/etcd-defrag-controller-leader-elect     etcd-1_0911fcd8-ac44-4b50-8d6a-ad6a097fb1e7 became leader
+5m4s        Warning   BackOff                  pod/kube-apiserver-6b8c5ff6b-zjndz            Back-off restarting failed container konnectivity-server in pod kube-apiserver-6b8c5ff6b-zjndz_ocm-arohcppers-REDACTED-cluster(3051373d-fc49-4086-87fb-8a9d01272aea)
+5m          Normal    SuccessfulCreate         job/etcd-recovery                             Created pod: etcd-recovery-4gjxf
+5m          Normal    Pulled                   pod/etcd-recovery-4gjxf                       Container image "<svc-registry>.azurecr.io/<user>/hypershift@sha256:3ab61a2bdceb93b7fe663ec770f291616e8b65357914189e1b87f68d51b74e11" already present on machine and can be accessed by the pod
+5m          Normal    Created                  pod/etcd-recovery-4gjxf                       Container created
+5m          Normal    Started                  pod/etcd-recovery-4gjxf                       Container started
+4m59s       Normal    SuccessfulCreate         statefulset/etcd                              Create Claim data-etcd-2 Pod etcd-2 in StatefulSet etcd success
+4m59s       Normal    WaitForFirstConsumer     persistentvolumeclaim/data-etcd-2             waiting for first consumer to be created before binding
+4m59s       Warning   FailedCreate             statefulset/etcd                              Create Pod etcd-2 in StatefulSet etcd failed error: pvc data-etcd-2 is being deleted
+4m58s       Normal    ExternalProvisioning     persistentvolumeclaim/data-etcd-2             Waiting for a volume to be created either by the external provisioner 'disk.csi.azure.com' or manually by the system administrator. If volume creation is delayed, please verify that the provisioner is running and correctly registered.
+4m58s       Normal    SuccessfulCreate         statefulset/etcd                              Create Pod etcd-2 in StatefulSet etcd successful
+4m58s       Normal    Provisioning             persistentvolumeclaim/data-etcd-2             External provisioner is provisioning volume for claim "ocm-arohcppers-REDACTED-cluster/data-etcd-2"
+4m47s       Normal    ProvisioningSucceeded    persistentvolumeclaim/data-etcd-2             Successfully provisioned volume pvc-d80f97a9-3e2a-45f1-9f10-549762c84919
+4m39s       Normal    SuccessfulAttachVolume   pod/etcd-2                                    AttachVolume.Attach succeeded for volume "pvc-d80f97a9-3e2a-45f1-9f10-549762c84919"
+4m36s       Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/<user>/hypershift:aro30375-1e771d5728" already present on machine and can be accessed by the pod
+4m36s       Normal    Started                  pod/etcd-2                                    Container started
+4m36s       Normal    Created                  pod/etcd-2                                    Container created
+4m35s       Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+4m35s       Normal    Created                  pod/etcd-2                                    Container created
+4m34s       Normal    Created                  pod/etcd-2                                    Container created
+4m34s       Normal    Started                  pod/etcd-2                                    Container started
+4m34s       Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+4m33s       Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/<user>/hypershift:aro30375-1e771d5728" already present on machine and can be accessed by the pod
+4m33s       Normal    Created                  pod/etcd-2                                    Container created
+4m33s       Normal    Started                  pod/etcd-2                                    Container started
+4m33s       Normal    Created                  pod/etcd-2                                    Container created
+4m33s       Normal    Created                  pod/etcd-2                                    Container created
+4m33s       Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bc65d37111461c2ee02a3e554cf53cb481f5cdbd22e77a13041bbf7d89565259" already present on machine and can be accessed by the pod
+4m33s       Normal    Started                  pod/etcd-2                                    Container started
+4m33s       Normal    Started                  pod/etcd-2                                    Container started
+4m33s       Normal    Pulled                   pod/etcd-2                                    Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:17e58ac83b26f66e575773421a7d6af61067d1187467ebba984b3a4bb5104cce" already present on machine and can be accessed by the pod
+4m33s       Normal    Started                  pod/etcd-2                                    Container started
+4m16s       Warning   Unhealthy                pod/etcd-2                                    Startup probe failed: Get "https://10.128.x.x:9980/readyz": net/http: request canceled (Client.Timeout exceeded while awaiting headers)
+4m15s       Normal    Pulled                   pod/kube-apiserver-6b8c5ff6b-5hlmx            Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:e282b5fa2d3cd6f5b81ede8424b7b6398a42adcd6ef0273273c0e7188f9e8ef8" already present on machine and can be accessed by the pod
+4m15s       Warning   Unhealthy                pod/kube-apiserver-6b8c5ff6b-5hlmx            Readiness probe failed: Get "http://10.128.x.x:2041/healthz": dial tcp 10.128.x.x:2041: connect: connection refused
+4m6s        Warning   Unhealthy                pod/etcd-2                                    Startup probe failed: Get "https://10.128.x.x:9980/readyz": context deadline exceeded
+3m59s       Warning   BackOff                  pod/kube-apiserver-6b8c5ff6b-4n7tx            Back-off restarting failed container konnectivity-server in pod kube-apiserver-6b8c5ff6b-4n7tx_ocm-arohcppers-REDACTED-cluster(c90bb93d-1203-454a-ae25-2d36d87c9d75)
+3m56s       Normal    Completed                job/etcd-recovery                             Job completed
+115s        Normal    Pulled                   pod/kube-apiserver-6b8c5ff6b-zjndz            Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:e282b5fa2d3cd6f5b81ede8424b7b6398a42adcd6ef0273273c0e7188f9e8ef8" already present on machine and can be accessed by the pod
+64s         Normal    Pulled                   pod/kube-apiserver-6b8c5ff6b-4n7tx            Container image "<dev-registry>.azurecr.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:e282b5fa2d3cd6f5b81ede8424b7b6398a42adcd6ef0273273c0e7188f9e8ef8" already present on machine and can be accessed by the pod

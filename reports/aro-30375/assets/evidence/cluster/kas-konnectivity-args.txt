@@ -1,0 +1,22 @@
+# rendered kube-apiserver konnectivity-server command+args (2026-11-12T18:31:38Z)
+## konnectivity-server
+command: /usr/bin/proxy-server
+args: --logtostderr=true --log-file-max-size=0 --cluster-cert /etc/konnectivity/cluster/tls.crt --cluster-key /etc/konnectivity/cluster/tls.key --cluster-ca-cert /etc/konnectivity/ca/ca.crt --server-cert /etc/konnectivity/server/tls.crt --server-key /etc/konnectivity/server/tls.key --server-ca-cert /etc/konnectivity/ca/ca.crt --server-port 8090 --agent-port 8091 --health-port 2041 --admin-port=8093 --mode=http-connect --proxy-strategies=destHost,defaultRoute --keepalive-time 30s --frontend-keepalive-time 30s --server-count 3 --tls-min-version=VersionTLS12 --cipher-suites=TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+## azure-workload-identity-webhook
+command: /bin/sh -ec
+args: set -u
+until curl -kfsS "https://localhost:6443/version" >/dev/null; do
+  echo "waiting for kube-apiserver /version endpoint to become available"
+  sleep 2
+done
+exec /usr/bin/azure-workload-identity-webhook \
+  --webhook-cert-dir=/var/run/app/certs \
+  --health-addr=:9440 \
+  --audience=api://AzureADTokenExchange \
+  --kubeconfig=/var/run/app/kubeconfig/kubeconfig \
+  --metrics-addr=:9441 \
+  --log-level=info \
+  --tls-cipher-suites=TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 \
+  --tls-min-version=VersionTLS12 \
+  --disable-cert-rotation
+

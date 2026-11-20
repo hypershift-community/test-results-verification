@@ -1,0 +1,22 @@
+=== RUN   TestIsHealthyForWait
+=== RUN   TestIsHealthyForWait/When_recovery_targets_are_resolved_and_all_members_are_healthy,_it_should_be_healthy
+=== RUN   TestIsHealthyForWait/When_a_member_has_no_client_URL,_it_should_not_be_healthy
+=== RUN   TestIsHealthyForWait/When_a_pod_is_still_failing,_it_should_not_be_healthy
+--- PASS: TestIsHealthyForWait (0.00s)
+    --- PASS: TestIsHealthyForWait/When_recovery_targets_are_resolved_and_all_members_are_healthy,_it_should_be_healthy (0.00s)
+    --- PASS: TestIsHealthyForWait/When_a_member_has_no_client_URL,_it_should_not_be_healthy (0.00s)
+    --- PASS: TestIsHealthyForWait/When_a_pod_is_still_failing,_it_should_not_be_healthy (0.00s)
+=== RUN   TestShouldWaitWithoutRecovery
+=== RUN   TestShouldWaitWithoutRecovery/When_every_member_is_healthy,_it_should_return_without_waiting
+=== RUN   TestShouldWaitWithoutRecovery/When_only_a_member_endpoint_is_unhealthy,_it_should_wait_without_recovery
+=== RUN   TestShouldWaitWithoutRecovery/When_a_pod_is_failing,_it_should_recover_instead_of_only_waiting
+=== RUN   TestShouldWaitWithoutRecovery/When_a_member_is_missing,_it_should_recover_instead_of_only_waiting
+=== RUN   TestShouldWaitWithoutRecovery/When_a_failing_pod_also_has_an_unhealthy_endpoint,_it_should_recover_instead_of_only_waiting
+--- PASS: TestShouldWaitWithoutRecovery (0.00s)
+    --- PASS: TestShouldWaitWithoutRecovery/When_every_member_is_healthy,_it_should_return_without_waiting (0.00s)
+    --- PASS: TestShouldWaitWithoutRecovery/When_only_a_member_endpoint_is_unhealthy,_it_should_wait_without_recovery (0.00s)
+    --- PASS: TestShouldWaitWithoutRecovery/When_a_pod_is_failing,_it_should_recover_instead_of_only_waiting (0.00s)
+    --- PASS: TestShouldWaitWithoutRecovery/When_a_member_is_missing,_it_should_recover_instead_of_only_waiting (0.00s)
+    --- PASS: TestShouldWaitWithoutRecovery/When_a_failing_pod_also_has_an_unhealthy_endpoint,_it_should_recover_instead_of_only_waiting (0.00s)
+PASS
+ok  	github.com/openshift/hypershift/etcd-recovery	0.025s

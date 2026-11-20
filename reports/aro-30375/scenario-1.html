@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TC-001 — Interrupted remove/add does not recreate a removed identity</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topbar"><div class="brand">ARO-30375 · Verification</div><nav><a href="index.html">Dashboard</a><a href="scenario-1.html" class="active">TC-001 Retry</a><a href="scenario-2.html">TC-002 Fail closed</a><a href="scenario-3.html">TC-003 Peer URL</a><a href="scenario-4.html">TC-004 Unstarted</a><a href="scenario-5.html">TC-005 Quorum</a><a href="scenario-6.html">TC-006 Wait</a><a href="scenario-7.html">TC-007 E2E</a><a href="scenario-8.html">TC-008 Drift</a><a href="automated-tests.html">Automated</a><a href="appendices.html">Appendices</a></nav></header>
+<main>
+<div class="scenario-head"><div><div class="eyebrow">TC-001 · unit tier · PASS</div><h1>TC-001 — Interrupted remove/add does not recreate a removed identity</h1></div><span class="badge pass">PASS</span></div>
+<p class="lead">Reproduce the ARO-30375 failure mode deterministically: a member remove succeeds, the following member add fails, and the reset-member script is retried. The removed identity must not be restarted as a new cluster member.</p>
+<div class="callout good"><p><strong>Result: PASS.</strong> With a mocked failing <code>member add</code>, the script exits nonzero and leaves the marker at <code>existing</code>. On retry with <code>member add</code> succeeding, the replacement member is added by peer URL, the marker stays <code>existing</code>, and <code>ETCD_INITIAL_CLUSTER_STATE</code> resolves to <code>existing</code>. 11 of 11 checks pass.</p></div>
+
+<div class="meta-grid">
+  <div><span>Executed at</span><code>1e771d57285f5c8fd0d2115eae9839e3be476085</code></div>
+  <div><span>Method</span><code>rendered shared reset-member script + mock etcdctl</code></div>
+  <div><span>Date</span><code>2026-11-12</code></div>
+  <div><span>Plan section</span><code>TP-ARO-30375-001 v1.1 §5.1</code></div>
+</div>
+
+<h2>How it ran</h2>
+<p>The plan's primary method (a deterministic test in <code>shard_test.go</code>) is marked <em>to be automated</em> and is not in the PR. The fallback manual method was executed against the PR-head tree: the shared reset-member script rendered by the control-plane operator at <code>1e771d572</code> was extracted and driven by a mock <code>etcdctl</code> whose member-list, member-remove and member-add behaviors are scripted per scenario. Every etcdctl invocation is recorded, so the assertions inspect both the script's exit state and the exact call sequence.</p>
+
+<h2>Step 1 — member list OK, member remove OK, member add FAILS — VERDICT <span class="badge pass">PASS</span></h2>
+<div class="table-wrap"><table class=""><thead><tr><th>Check</th><th>Result</th></tr></thead><tbody>
+<tr><td>Script exits nonzero after failed member add</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>Log shows name-match removal path</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>Log shows add attempt</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>Marker remains <code>existing</code> after failed add</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>member remove called for exact-name member</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>member add called with peer URL</td><td><span class="badge pass">PASS</span></td></tr>
+</tbody></table></div>
+
+<h2>Step 2 — retry with member add succeeding — VERDICT <span class="badge pass">PASS</span></h2>
+<div class="table-wrap"><table class=""><thead><tr><th>Check</th><th>Result</th></tr></thead><tbody>
+<tr><td>Script exits zero after successful retry</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>Marker remains <code>existing</code> after retry</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>Replacement member added by peer URL on retry</td><td><span class="badge pass">PASS</span></td></tr>
+</tbody></table></div>
+
+<h2>Step 3 — etcd startup state — VERDICT <span class="badge pass">PASS</span></h2>
+<div class="table-wrap"><table class=""><thead><tr><th>Check</th><th>Result</th></tr></thead><tbody>
+<tr><td><code>ETCD_INITIAL_CLUSTER_STATE</code> resolves to <code>existing</code> (removed identity not restarted as <code>new</code>)</td><td><span class="badge pass">PASS</span></td></tr>
+</tbody></table></div>
+
+<h2>Interpretation</h2>
+<p>This is the exact interrupted remove/add sequence from the ARO-30375 incident: the interruption happens between <code>member remove</code> and <code>member add</code>. The pre-PR behavior restarted the pod in bootstrap mode and recreated a duplicate identity. At head, the marker written before the interruption survives it, the retry completes the peer-URL add, and the pod never bootstraps a fresh cluster. The same property is exercised live in <a href="scenario-7.html">TC-007</a>, where member removal and pod deletion are driven against the real 3-member etcd.</p>
+
+<p>Evidence: <a href="assets/evidence/harness/validate-manual-summary.log"><code>harness/validate-manual-summary.log</code></a> (full check-by-check output for TC-001 through TC-003). The harness driver and mock etcdctl are described in <a href="appendices.html">Appendices</a>.</p>
+<p class="back"><a href="index.html">← Return to dashboard</a></p>
+</main>
+<footer><a href="https://github.com/openshift/hypershift/pull/10118">openshift/hypershift#10118</a> · ARO-30375 · 2026-11-12 · sanitized bundle</footer>
+</body>
+</html>

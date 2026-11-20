@@ -1,0 +1,12 @@
+# Upstream passing build comparison (public prow artifacts, build 2119742876421197824)
+# Job: pull-ci-openshift-hypershift-main-e2e-v2-azure-self-managed at PR #10118 head 1e771d5728
+# Source: storage.googleapis.com test-platform-results-public (public bucket)
+
+## Upstream (PASSING) konnectivity-server image + args
+image: quay-proxy.ci.openshift.org/openshift/ci@sha256:de491f2bb112539c7dc7f04205373e0c504ff84f4f25423009e0cf5f5318758a
+args: --logtostderr=true --log-file-max-size=0 --cluster-cert /etc/konnectivity/cluster/tls.crt --cluster-key /etc/konnectivity/cluster/tls.key --cluster-ca-cert /etc/konnectivity/ca/ca.crt --server-cert /etc/konnectivity/server/tls.crt --server-key /etc/konnectivity/server/tls.key --server-ca-cert /etc/konnectivity/ca/ca.crt --server-port 8090 --agent-port 8091 --health-port 2041 --admin-port=8093 --mode=http-connect --proxy-strategies=destHost,defaultRoute --keepalive-time 30s --frontend-keepalive-time 30s --server-count 1 --tls-min-version=VersionTLS12 --cipher-suites=TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+
+## This environment (crashlooping) konnectivity-server args
+identical to upstream including --tls-min-version=VersionTLS12 and --cipher-suites=<6 suites>;
+only the image differs: upstream uses a CI-stream payload image (quay-proxy.ci.openshift.org),
+this environment uses the GA 4.21.40 payload image, whose proxy-server binary rejects --tls-min-version.

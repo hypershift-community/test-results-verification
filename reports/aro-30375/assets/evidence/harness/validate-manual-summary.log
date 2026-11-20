@@ -1,0 +1,45 @@
+===== TC-001: Interrupted remove/add does not recreate a removed identity =====
+./harness/validate-manual.sh: line 59: /home/<user>/ScratchPad/aro30375-validation-20261112/harness/states/tc001/clusterstate/state: No such file or directory
+--- Step 1: member list OK, member remove OK, member add FAILS
+  PASS: script exits nonzero after failed member add
+  PASS: log shows name-match removal path
+  PASS: log shows add attempt
+  PASS: marker remains 'existing' after failed add
+  PASS: member remove called for exact-name member
+  PASS: member add called with peer URL
+--- Step 2: retry (same pod state) with member add succeeding
+  PASS: script exits zero after successful retry
+  PASS: marker remains 'existing' after retry
+  PASS: replacement member added by peer URL on retry
+--- Step 3: inspect etcd startup state
+ETCD_INITIAL_CLUSTER_STATE resolves to: existing
+  PASS: removed identity is not restarted as 'new'
+
+===== TC-002: Existing cluster fails closed on member-list failure =====
+  PASS: script exits nonzero
+  PASS: log contains 'refusing to start in bootstrap mode'
+  PASS: marker remains 'existing'
+  PASS: no member remove/add attempted
+
+===== TC-003: Peer-URL repair avoids duplicate member identities =====
+--- Step 1: member name exists
+  PASS: script exits zero
+  PASS: existing member is removed
+  PASS: member is re-added by peer URL
+--- Step 2: unnamed peer URL exists
+  PASS: script exits zero
+  PASS: log reports nothing-to-do for unnamed peer URL
+  PASS: no duplicate member add is attempted
+  PASS: no member remove is attempted
+--- Step 3: name and peer URL absent
+  PASS: script exits zero
+  PASS: log reports add path
+  PASS: no member remove is attempted
+  PASS: member added with exact peer URL
+--- Step 4: hostname appears only in a URL
+  PASS: script exits zero
+  PASS: etcd-0-backup row is NOT selected by name matching (no remove)
+  PASS: member added with exact peer URL
+
+===== SUMMARY =====
+PASS: 28  FAIL: 0

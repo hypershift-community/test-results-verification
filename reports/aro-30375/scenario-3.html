@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TC-003 — Peer-URL repair avoids duplicate member identities</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topbar"><div class="brand">ARO-30375 · Verification</div><nav><a href="index.html">Dashboard</a><a href="scenario-1.html">TC-001 Retry</a><a href="scenario-2.html">TC-002 Fail closed</a><a href="scenario-3.html" class="active">TC-003 Peer URL</a><a href="scenario-4.html">TC-004 Unstarted</a><a href="scenario-5.html">TC-005 Quorum</a><a href="scenario-6.html">TC-006 Wait</a><a href="scenario-7.html">TC-007 E2E</a><a href="scenario-8.html">TC-008 Drift</a><a href="automated-tests.html">Automated</a><a href="appendices.html">Appendices</a></nav></header>
+<main>
+<div class="scenario-head"><div><div class="eyebrow">TC-003 · unit tier · PASS</div><h1>TC-003 — Peer-URL repair avoids duplicate member identities</h1></div><span class="badge pass">PASS</span></div>
+<p class="lead">Cover the four membership shapes the repair logic can encounter, and confirm the member is always (re)registered exactly once, by peer URL, with no duplicate adds.</p>
+<div class="callout good"><p><strong>Result: PASS.</strong> All four shapes behave as specified: an existing name is removed and re-added by peer URL; an unnamed matching peer URL is left alone; a fully absent member is added with the exact peer URL; and a hostname appearing only inside a URL is never selected by name matching. 13 of 13 checks pass.</p></div>
+
+<div class="meta-grid">
+  <div><span>Executed at</span><code>1e771d57285f5c8fd0d2115eae9839e3be476085</code></div>
+  <div><span>Method</span><code>rendered shared reset-member script + mock etcdctl</code></div>
+  <div><span>Date</span><code>2026-11-12</code></div>
+  <div><span>Plan section</span><code>TP-ARO-30375-001 v1.1 §5.3</code></div>
+</div>
+
+<h2>Scenario 1 — member name exists — VERDICT <span class="badge pass">PASS</span></h2>
+<div class="table-wrap"><table class=""><thead><tr><th>Check</th><th>Result</th></tr></thead><tbody>
+<tr><td>Script exits zero</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>Existing member is removed</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>Member is re-added by peer URL</td><td><span class="badge pass">PASS</span></td></tr>
+</tbody></table></div>
+
+<h2>Scenario 2 — unnamed peer URL exists — VERDICT <span class="badge pass">PASS</span></h2>
+<div class="table-wrap"><table class=""><thead><tr><th>Check</th><th>Result</th></tr></thead><tbody>
+<tr><td>Script exits zero</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>Log reports nothing-to-do for unnamed peer URL</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>No duplicate member add is attempted</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>No member remove is attempted</td><td><span class="badge pass">PASS</span></td></tr>
+</tbody></table></div>
+
+<h2>Scenario 3 — name and peer URL absent — VERDICT <span class="badge pass">PASS</span></h2>
+<div class="table-wrap"><table class=""><thead><tr><th>Check</th><th>Result</th></tr></thead><tbody>
+<tr><td>Script exits zero</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>Log reports add path</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>No member remove is attempted</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>Member added with exact peer URL</td><td><span class="badge pass">PASS</span></td></tr>
+</tbody></table></div>
+
+<h2>Scenario 4 — hostname appears only inside a URL — VERDICT <span class="badge pass">PASS</span></h2>
+<div class="table-wrap"><table class=""><thead><tr><th>Check</th><th>Result</th></tr></thead><tbody>
+<tr><td>Script exits zero</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td><code>etcd-0-backup</code> row is not selected by name matching (no remove)</td><td><span class="badge pass">PASS</span></td></tr>
+<tr><td>Member added with exact peer URL</td><td><span class="badge pass">PASS</span></td></tr>
+</tbody></table></div>
+
+<h2>Interpretation</h2>
+<p>Scenario 4 is the subtle one and the direct regression guard for the ARO-30375 duplicate-identity mechanism: a member row whose name merely contains the local hostname (for example a stale backup row such as <code>etcd-0-backup</code>) must not match by name, or the repair would remove the wrong member and add a duplicate. The mock's recorded call sequence proves only the peer-URL-exact add occurs.</p>
+<p>Evidence: <a href="assets/evidence/harness/validate-manual-summary.log"><code>harness/validate-manual-summary.log</code></a> (TC-003 section).</p>
+<p class="back"><a href="index.html">← Return to dashboard</a></p>
+</main>
+<footer><a href="https://github.com/openshift/hypershift/pull/10118">openshift/hypershift#10118</a> · ARO-30375 · 2026-11-12 · sanitized bundle</footer>
+</body>
+</html>

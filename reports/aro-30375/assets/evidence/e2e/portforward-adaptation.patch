@@ -1,0 +1,42 @@
+diff --git a/test/e2e/v2/tests/etcd_chaos_test.go b/test/e2e/v2/tests/etcd_chaos_test.go
+index 9038bc0e10..d9d5d9549c 100644
+--- a/test/e2e/v2/tests/etcd_chaos_test.go
++++ b/test/e2e/v2/tests/etcd_chaos_test.go
+@@ -127,8 +127,17 @@ func EtcdKillRandomMembersTest(getTestCtx internal.TestContextGetter) {
+ 
+ 		hc, err := testCtx.GetHostedCluster()
+ 		Expect(err).NotTo(HaveOccurred())
+-		hcClient, err := testCtx.GetHostedClusterClient(hc)
++		// LOCAL VALIDATION ADAPTATION (ARO-30375, not for upstream): this
++		// cluster's external API LB has no ready backends because
++		// konnectivity-server and azure-workload-identity-webhook crashloop
++		// from a pre-existing hypershift-main/GA-payload TLS flag
++		// incompatibility unrelated to PR #10118. Connect through the
++		// framework's port-forward client, which talks to the same
++		// kube-apiserver pods on 6443.
++		pfc, err := testCtx.GetHostedClusterClientViaPortForward(hc)
+ 		Expect(err).NotTo(HaveOccurred())
++		DeferCleanup(pfc.Close)
++		hcClient := pfc.Client
+ 
+ 		// Create marker data that should survive the chaos
+ 		markerCM := createMarkerConfigMap(ctx, hcClient)
+@@ -177,8 +186,17 @@ func EtcdKillAllMembersTest(getTestCtx internal.TestContextGetter) {
+ 
+ 		hc, err := testCtx.GetHostedCluster()
+ 		Expect(err).NotTo(HaveOccurred())
+-		hcClient, err := testCtx.GetHostedClusterClient(hc)
++		// LOCAL VALIDATION ADAPTATION (ARO-30375, not for upstream): this
++		// cluster's external API LB has no ready backends because
++		// konnectivity-server and azure-workload-identity-webhook crashloop
++		// from a pre-existing hypershift-main/GA-payload TLS flag
++		// incompatibility unrelated to PR #10118. Connect through the
++		// framework's port-forward client, which talks to the same
++		// kube-apiserver pods on 6443.
++		pfc, err := testCtx.GetHostedClusterClientViaPortForward(hc)
+ 		Expect(err).NotTo(HaveOccurred())
++		DeferCleanup(pfc.Close)
++		hcClient := pfc.Client
+ 
+ 		// Create marker data that should survive the chaos
+ 		markerCM := createMarkerConfigMap(ctx, hcClient)
