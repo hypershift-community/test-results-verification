@@ -1,0 +1,3 @@
+GO111MODULE=on GOWORK=off GOFLAGS=-mod=vendor go test -race -tags=e2ev2 -count=1 -timeout=10m ./test/e2e/v2/internal ./test/e2e/v2/cmd/run-tests
+ok  	github.com/openshift/hypershift/test/e2e/v2/internal	3.882s
+ok  	github.com/openshift/hypershift/test/e2e/v2/cmd/run-tests	18.802s

@@ -1,0 +1,2 @@
+make: `~/hypershift/hack/tools/bin/golangci-lint' is up to date.
+make: `~/hypershift/hack/tools/bin/hypershiftlinter.so' is up to date.

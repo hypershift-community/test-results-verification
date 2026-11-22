@@ -1,0 +1,84 @@
+Environment Variables:
+================================================================================
+
+ARTIFACT_DIR (optional) [default: /tmp/artifacts]
+  Directory for test artifacts. Defaults to /tmp/artifacts.
+
+AWS_GUEST_INFRA_CREDENTIALS_FILE (optional) [default: ~/.aws/credentials]
+  Path to the AWS guest infrastructure credentials file. Defaults to ~/.aws/credentials.
+
+AWS_MULTI_ARCH (optional)
+  Enable multi-arch cluster tests on AWS
+
+AZURE_PRIVATE_ADDITIONAL_ALLOWED_SUBSCRIPTIONS (optional)
+  Comma-separated list of Azure subscription IDs permitted to create Private Endpoints.
+
+AZURE_PRIVATE_NAT_SUBNET_ID (optional)
+  Azure resource ID of the NAT subnet for Private Link Service. Auto-created by PLS controller if not set.
+
+E2E_AZURE_CREDENTIALS_FILE (optional)
+  Path to Azure service principal credentials JSON file for platform-specific tests (auto-repair, disk encryption).
+
+E2E_AZURE_DISK_ENCRYPTION_SET_ID (optional)
+  Azure DiskEncryptionSet resource ID for disk encryption NodePool tests.
+
+E2E_EXTERNAL_OIDC_CA_BUNDLE_FILE (optional)
+  Path to the CA bundle file for the External OIDC issuer (Keycloak). Written by the lifecycle PostCreate.
+
+E2E_EXTERNAL_OIDC_TEST_USERS (optional)
+  Comma-separated list of test users in user:password format for External OIDC testing. Written by the lifecycle PostCreate.
+
+E2E_HOSTED_CLUSTER_NAME (optional)
+  Name of the HostedCluster to test. Required for tests that interact with a hosted cluster.
+
+E2E_HOSTED_CLUSTER_NAMESPACE (optional)
+  Namespace of the HostedCluster to test. Required for tests that interact with a hosted cluster.
+
+E2E_LATEST_RELEASE_IMAGE (optional)
+  Latest OCP release image for control plane upgrade tests.
+
+E2E_N1_RELEASE_IMAGE (optional)
+  N-1 minor release image for NodePool previous-release tests.
+
+E2E_N2_RELEASE_IMAGE (optional)
+  N-2 minor release image for NodePool previous-release tests.
+
+E2E_PREVIOUS_RELEASE_IMAGE (optional)
+  N-1 OCP release image (previous minor) for control plane upgrade tests.
+
+E2E_SERVICE_DOMAIN (optional)
+  Service domain used for custom DNS endpoint testing. Optional; test is skipped when empty.
+
+E2E_SHOW_ENV_HELP (optional)
+  When set to any non-empty value, displays environment variable help and exits without running tests.
+
+PULL_SECRET_FILE (optional)
+  Path to pull secret file for release image lookups. Used by Karpenter version field tests.
+
+RUN_KARPENTER_TESTS (optional)
+  When the value is exactly "true", it lowers the minimum hosted-cluster version from 4.23 to 4.22.
+
+Running Suite: hypershift-e2e - ~/hypershift
+================================================================================================
+Random Seed: 1792153925
+
+Will run 0 of 1149 specs
+SS
+P [PENDING]
+[sig-hypershift][Jira:Hypershift][Feature:DNS] Hosted Cluster DNS when KubeAPIDNSName and custom certificate are configured should make KAS reachable via the custom DNS endpoint [hosted-cluster-dns, Informing]
+~/hypershift/test/e2e/v2/tests/hosted_cluster_dns_test.go:38
+------------------------------
+P [PENDING]
+[sig-hypershift][Jira:Hypershift][Feature:DNS] Hosted Cluster DNS when KubeAPIDNSName and custom certificate are configured should keep KAS reachable via the internal SVC URL [hosted-cluster-dns, Informing]
+~/hypershift/test/e2e/v2/tests/hosted_cluster_dns_test.go:68
+------------------------------
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+------------------------------
+[ReportAfterSuite] Write unified JUnit
+~/hypershift/test/e2e/v2/tests/suite_test.go:70
+[ReportAfterSuite] PASSED [0.000 seconds]
+------------------------------
+
+Ran 0 of 1149 Specs in 0.029 seconds
+SUCCESS! -- 0 Passed | 0 Failed | 2 Pending | 1147 Skipped
+PASS
