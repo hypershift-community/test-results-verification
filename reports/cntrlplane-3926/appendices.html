@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Appendices — CNTRLPLANE-3926 verification</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topbar"><div class="brand">CNTRLPLANE-3926 · Verification report</div><nav><a href="index.html">Dashboard</a><a href="scenario-1.html">1 · Smoke</a><a href="scenario-2.html">2 · Harness</a><a href="scenario-3.html">3 · Reachability</a><a href="automated-tests.html">Automated tests</a><a href="appendices.html" class="active">Appendices</a><a href="../../plans/cntrlplane-3926.md">Test plan</a><a href="https://github.com/openshift/hypershift/pull/9996">PR #9996</a></nav></header>
+<main>
+<h1>Appendices</h1>
+<p class="subtitle">Traceability, environment, design decisions, independent review, sanitization, and how the report was produced</p>
+<ul>
+  <li><a href="#a-traceability">A. Traceability: which code each scenario ran</a></li>
+  <li><a href="#b-environment">B. Environment</a></li>
+  <li><a href="#c-design-decisions">C. Design decisions (D1–D9)</a></li>
+  <li><a href="#d-independent-review">D. Independent review of the Scenario 3 evidence</a></li>
+  <li><a href="#e-sanitization">E. Sanitization and placeholders</a></li>
+  <li><a href="#f-provenance">F. Provenance, AI assistance and glossary</a></li>
+  <li><a href="#kit-changes">G. Kit changes (evidence vs. reproduction kit)</a></li>
+  <li><a href="#h-follow-ups">H. Follow-ups</a></li>
+</ul>
+
+<h2 id="a-traceability">A. Traceability: which code each scenario ran</h2>
+<p>The live scenarios ran before the branch was rebased onto <code>a325c54776</code> and pushed. Pre-rebase hashes
+(<code>2432ffc8af</code>, <code>38342d4965</code>) exist only locally. The public PR hashes are what you can check:</p>
+<table><thead><tr><th>Scenario</th><th>Ran at (local)</th><th>Equivalent PR commit</th><th>Difference to PR head <code>8d54f7ab32</code></th></tr></thead><tbody>
+<tr><td>2 · Harness</td><td><code>2432ffc8af</code></td><td><code>5ef41d4148</code> (range-diff “=”)</td><td><code>mirrorregistry</code> package: none</td></tr>
+<tr><td>3 · Reachability</td><td><code>38342d4965</code></td><td><code>64ca1b82a7</code> (range-diff “!”: rebase merged upstream <code>externalOIDC</code> into <code>PreCreate</code>)</td>
+<td><code>mirrorregistry</code> package: none; <code>test/e2e/v2</code>: none (only the CI-shard commit follows)</td></tr>
+</tbody></table>
+<p>Commands you can re-run on the PR branch: <code>git diff --stat 5ef41d4148 8d54f7ab32 -- test/e2e/v2/util/mirrorregistry/</code> and
+<code>git diff --stat 64ca1b82a7 8d54f7ab32 -- test/e2e/v2/</code> (both empty).</p>
+<details class="output"><summary>Full output (<code>git range-diff</code> and <code>git diff --stat</code>)</summary><pre tabindex="0"><code>$ git range-diff 629dfa6c2e..38342d4965 a325c54776..8d54f7ab32
+ 1:  102b425645 =  1:  9656f904e3 test(e2e): add mirror registry fixture API skeleton
+ 2:  c812d7d1e8 =  2:  2ebf132029 test(e2e): add mirror registry option validation
+ 3:  7e7fe25417 =  3:  e4d77de8e5 test(e2e): generate mirror registry TLS materials
+ 4:  52c8cdd051 =  4:  a4bad66ed5 test(e2e): add mirror registry resource builders
+ 5:  600eb8a3c5 =  5:  b31eae58e7 test(e2e): add job-based mirror registry image copier
+ 6:  583ce6fa05 =  6:  34918df65a test(e2e): clarify mirror registry Setup re-run semantics
+ 7:  96ef6cf22f =  7:  3bba2c5ddb test(e2e): orchestrate mirror registry setup and teardown
+ 8:  2432ffc8af =  8:  5ef41d4148 fix(e2e): persist mirror registry CA across setup calls
+ 9:  38342d4965 !  9:  64ca1b82a7 test(e2e): wire opt-in AWS image mirroring lifecycle
+    @@ test/e2e/v2/lifecycle/aws.go: import (
+      	crclient &quot;sigs.k8s.io/controller-runtime/pkg/client&quot;
+      )
+     @@ test/e2e/v2/lifecycle/aws.go: type AWSPlatformConfig struct {
+    - 	zones          []string
+      	additionalTags []string
+      	sharedDir      string
+    + 	externalOIDC   externalOIDCSetup
+     +	imageMirroring bool
+     +
+     +	newMirrorRegistry func(crclient.Client, mirrorregistry.Options) (mirrorRegistry, error)
+    @@ test/e2e/v2/lifecycle/aws.go: type AWSPlatformConfig struct {
+      
+      func NewAWSPlatformConfig(opts AWSPlatformOptions, sharedDir string) *AWSPlatformConfig {
+     @@ test/e2e/v2/lifecycle/aws.go: func NewAWSPlatformConfig(opts AWSPlatformOptions, sharedDir string) *AWSPlatfor
+    - 		sharedDir:      sharedDir,
+      		additionalTags: tags,
+      		zones:          zones,
+    + 		externalOIDC:   externalOIDCSetup{sharedDir: sharedDir},
+     +		imageMirroring: opts.ImageMirroring,
+     +		newMirrorRegistry: func(cl crclient.Client, opts mirrorregistry.Options) (mirrorRegistry, error) {
+     +			return mirrorregistry.New(cl, opts)
+    @@ test/e2e/v2/lifecycle/aws.go: func NewAWSPlatformConfig(opts AWSPlatformOptions,
+      
+      	log.Printf(&quot;AWS platform config: region=%s, zones=%v, additionalTags=%v&quot;, cfg.region, cfg.zones, cfg.additionalTags)
+     @@ test/e2e/v2/lifecycle/aws.go: func (a *AWSPlatformConfig) ClusterSpecs(releaseImage, n1Image string) []Cluster
+    - 	if envArgs := os.Getenv(&quot;EXTRA_ARGS&quot;); envArgs != &quot;&quot; {
+      		extraArgs = strings.Fields(envArgs)
+      	}
+    + 	oneInitialReplica := 1
+     -	return []ClusterSpec{
+     +	specs := []ClusterSpec{
+      		{
+      			Variant: &quot;public&quot;,
+      			ExtraArgs: append(extraArgs, []string{
+     @@ test/e2e/v2/lifecycle/aws.go: func (a *AWSPlatformConfig) ClusterSpecs(releaseImage, n1Image string) []Cluster
+    - 			}...),
+    + 			ExtraArgs:               extraArgs,
+      		},
+      	}
+     +	if a.imageMirroring {
+    @@ test/e2e/v2/lifecycle/aws.go: func (a *AWSPlatformConfig) CreateArgs() []string
+     +// only with a TEST_PLAN selecting image-mirroring: this hook does not receive the
+     +// plan&#x27;s filtered cluster specs.
+      func (a *AWSPlatformConfig) PreCreate(ctx context.Context, cl crclient.WithWatch, namespace string) error {
+    --	return nil
+    +-	return a.externalOIDC.preCreate(ctx, cl)
+    ++	if err := a.externalOIDC.preCreate(ctx, cl); err != nil {
+    ++		return err
+    ++	}
+    ++	return a.setupImageMirroring(ctx, cl)
+    ++}
+    ++
+    ++func (a *AWSPlatformConfig) setupImageMirroring(ctx context.Context, cl crclient.Client) error {
+     +	if !a.imageMirroring {
+     +		return nil
+     +	}
+    @@ test/e2e/v2/lifecycle/aws_test.go (new)
+     +			dir := t.TempDir()
+     +			cfg := NewAWSPlatformConfig(AWSPlatformOptions{ImageMirroring: tt.enabled}, dir)
+     +			specs := cfg.ClusterSpecs(&quot;current&quot;, &quot;previous&quot;)
+    -+			wantCount := 4
+    ++			wantCount := 6
+     +			if tt.enabled {
+     +				wantCount++
+     +			}
+    @@ test/e2e/v2/lifecycle/aws_test.go (new)
+     +					&quot;--additional-trust-bundle=&quot; + filepath.Join(dir, &quot;mirror-registry-ca.pem&quot;),
+     +					&quot;--image-content-sources=&quot; + filepath.Join(dir, &quot;mirror-registry-ics.yaml&quot;),
+     +				}}
+    -+				if !reflect.DeepEqual(specs[4], want) {
+    -+					t.Fatalf(&quot;got %+v, want %+v&quot;, specs[4], want)
+    ++				if !reflect.DeepEqual(specs[6], want) {
+    ++					t.Fatalf(&quot;got %+v, want %+v&quot;, specs[6], want)
+     +				}
+     +				baseline := NewAWSPlatformConfig(AWSPlatformOptions{}, dir)
+    -+				if !reflect.DeepEqual(specs[:4], baseline.ClusterSpecs(&quot;current&quot;, &quot;previous&quot;)) {
+    ++				if !reflect.DeepEqual(specs[:6], baseline.ClusterSpecs(&quot;current&quot;, &quot;previous&quot;)) {
+     +					t.Fatal(&quot;existing variants changed&quot;)
+     +				}
+     +				if !reflect.DeepEqual(cfg.DefaultTestPlan(), baseline.DefaultTestPlan()) {
+    @@ test/e2e/v2/lifecycle/aws_test.go (new)
+     +			if !tt.missingStream {
+     +				builder.WithObjects(cliStream(testCLIImage))
+     +			}
+    -+			err := cfg.PreCreate(t.Context(), builder.Build(), &quot;clusters&quot;)
+    ++			err := cfg.setupImageMirroring(t.Context(), builder.Build())
+     +			if tt.wantError != &quot;&quot; {
+     +				if err == nil || !strings.Contains(err.Error(), tt.wantError) {
+     +					t.Fatalf(&quot;got %v, want error containing %q&quot;, err, tt.wantError)
+ -:  ---------- &gt; 10:  8d54f7ab32 ci: run mirror registry fixture unit tests in other shard
+
+$ git diff --stat 2432ffc8af 8d54f7ab32 -- test/e2e/v2/util/mirrorregistry/   # T6 commit vs PR head (empty = identical)
+$ git diff --stat 38342d4965 8d54f7ab32 -- test/e2e/v2/util/mirrorregistry/   # T8 commit vs PR head
+
+# Public PR hashes (verifiable on GitHub): mirrorregistry package at 5ef41d4148 (= T6 commit after rebase) vs PR head
+$ git diff --stat 5ef41d4148 8d54f7ab32 -- test/e2e/v2/util/mirrorregistry/   # empty = identical
+$ git diff --stat 64ca1b82a7 8d54f7ab32 -- test/e2e/v2/   # T8-equivalent commit vs PR head (only the CI shard commit follows)
+</code></pre></details>
+
+<h2 id="b-environment">B. Environment</h2>
+<table><tbody>
+<tr><th>Management cluster</th><td>OpenShift 4.20.0, a HyperShift hosted cluster on AWS used as management cluster (same topology as CI's nested
+management clusters); ingress certificate signed by an internal root CA; default StorageClass <code>gp3-csi</code></td></tr>
+<tr><th>HyperShift</th><td>Operator server <code>e83d907270ba</code> (supports OCP 4.14–4.21); CLI <code>cce02430ccc1</code></td></tr>
+<tr><th>Hosted cluster (Scenario 3)</th><td>OCP 4.20.0 (<code>quay.io/openshift-release-dev/ocp-release:4.20.0-x86_64</code>), 1 NodePool × 2 workers,
+RHCOS 9.6.20250925-0, kubelet v1.33.5, CRI-O 1.33.4, AWS <code>us-east-1a</code>, default endpoint access</td></tr>
+<tr><th>Images</th><td>Registry and test payload <code>quay.io/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f</code>
+(2.8.2, multi-arch); copier <code>quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:0a9d58f9…</code> (oc 4.20.0, from the <code>openshift/cli</code> ImageStream)</td></tr>
+<tr><th>Workstation</th><td>macOS; unit tests run with go1.26.3</td></tr>
+</tbody></table>
+
+<h2 id="c-design-decisions">C. Design decisions (D1–D9)</h2>
+<p>These were agreed before implementation and are part of the PR description. The scenarios test them directly
+(for example, D4's exposure invariant is TC-08). Raw copy: <a href="assets/evidence/decisions.md"><code>decisions.md</code></a>.</p>
+<details><summary>Show the design decisions</summary><div class="evidence"><blockquote>
+<p>Copy this section into the PR description so reviewers see the trade-offs.
+Status: agreed with the assignee on 2026-10-09; open to reviewer challenge.</p>
+</blockquote>
+<h3 id="c-context">Context</h3>
+<p><a href="https://redhat.atlassian.net/browse/CNTRLPLANE-3926">CNTRLPLANE-3926</a> provides the in-cluster mirror
+registry shared by the OCPSTRAT-3316 epics: CNTRLPLANE-3922 (<code>imageContentSources</code> → hosted cluster IDMS),
+CNTRLPLANE-3923 (<code>--registry-overrides</code>) and CNTRLPLANE-3924 (management-cluster IDMS).
+It is test infrastructure (a fixture), not image-resolution code.</p>
+<h3 id="c-d1-location-and-shape">D1 — Location and shape</h3>
+<ul>
+<li>Package <code>test/e2e/v2/util/mirrorregistry/</code>, <strong>no build tag</strong>, no Ginkgo/Gomega imports. Its unit tests
+  therefore run in the standard <code>make test</code> (<code>go test ./...</code>, Prow <code>unit</code>), and the package is callable from
+  Ginkgo tests, from <code>lifecycle</code> hooks and from any future CI step. The package is added to the <code>other</code>
+  shard of the GitHub Actions unit-test workflow, which otherwise does not cover <code>test/e2e/v2/</code>.</li>
+<li>Not placed in <code>support/imageresolution/</code> (enhancement openshift/enhancements#1981): that package is for
+  production resolution. The fixture must not import the production resolvers/providers
+  (<code>support/releaseinfo</code>, <code>support/imageregistry</code>, <code>support/globalconfig</code>) so that the OCPSTRAT-3877
+  refactor can change them without touching the fixture, and so the tests never compute their
+  expectations with the code under test.</li>
+<li>The fixture only provisions and reports. It never asserts fallback policy (OCPBUGS-128661): that belongs
+  in the consuming tests.</li>
+<li>Resources are reconciled with <code>support/upsert</code> (the repository's create-or-update pattern).</li>
+</ul>
+<h3 id="c-d2-exposure-route-with-tls-passthrough-explicit-host">D2 — Exposure: Route with TLS passthrough, explicit host</h3>
+<ul>
+<li><code>registry</code> serves TLS itself on port 5000; a <code>passthrough</code> Route exposes it.</li>
+<li>The Route host is set explicitly to <code>&lt;name&gt;-&lt;namespace&gt;.&lt;ingress domain&gt;</code> (ingress domain read from
+  <code>ingresses.config.openshift.io/cluster</code>). This makes the hostname known before any resource exists, so the
+  serving certificate (and, in the future, a CA distributed earlier in the pipeline) can be prepared in
+  advance.</li>
+<li>Rationale: in CI (and on our dev setup) the management cluster is a <em>nested</em> hosted cluster whose ingress
+  certificate is signed by an internal <code>root-ca</code>, so reusing the ingress certificate gives no trust
+  advantage, and hosted-cluster nodes cannot reach the in-cluster Service.</li>
+</ul>
+<h4 id="c-network-assumptions-and-boundaries">Network assumptions and boundaries</h4>
+<ul>
+<li><strong>Hosted-cluster endpoint access does not matter.</strong> <code>--endpoint-access</code> (Public / PublicAndPrivate /
+  Private) only changes how control-plane endpoints are exposed. Nodes pull from the mirror through the worker
+  VPC outbound path, which <code>hypershift create infra aws</code> builds identically in all three modes (private
+  subnets + NAT). The manual validation used exactly that path. No OCPSTRAT-3316 issue asks for topology
+  coverage.</li>
+<li><strong>Workers need outbound access to the management-cluster ingress</strong> (NAT, internet gateway or cluster proxy;
+  with a proxy, the mirror host must not be in <code>noProxy</code>). A fully disconnected VPC cannot reach the Route.</li>
+<li><strong>The management-cluster ingress must be external.</strong> If it were internal (e.g. a Private management cluster
+  with an NLB), guest VPCs could not reach it. <code>Setup</code> fails early in that case: it probes the public endpoint
+  from the test process, which runs outside the management cluster.</li>
+<li><strong>OpenShift management cluster only.</strong> The fixture uses a Route, <code>ingresses.config.openshift.io</code>, and relies on
+  the <code>restricted-v2</code> SCC to assign a non-root UID (the registry image has no <code>USER</code>). The lifecycle reads the
+  copier image from the <code>openshift/cli</code> ImageStream. This covers every current consumer, including the v2
+  Azure self-managed suite (OpenShift management cluster). AKS-based management clusters (ARO HCP, other
+  managed services) are not supported. Supporting them is additive and does not change the public API:
+  optional <code>LoadBalancer</code> exposure (Service selecting only the read-only pod, to keep D4), IP SANs, an explicit
+  pod <code>runAsUser</code>/<code>fsGroup</code> off OpenShift, and a caller-chosen copier image.</li>
+</ul>
+<h3 id="c-d3-tls-helper-ca-by-default-caller-supplied-ca-supported">D3 — TLS: helper CA by default, caller-supplied CA supported</h3>
+<ul>
+<li>Default: the helper generates a CA and signs a serving certificate whose SANs are the Route host, the
+  Service DNS names, and optional extra names (e.g. <code>*.apps.&lt;domain&gt;</code>).</li>
+<li>The CA (cert + key) is stored in a Secret <code>&lt;name&gt;-ca</code> in the fixture namespace and reused by later <code>Setup</code>
+  calls, so trust already distributed to consumers (<code>additionalTrustBundle</code>) survives re-runs. The namespace is
+  ephemeral and owned by the fixture; the key never leaves the management cluster except through the caller.</li>
+<li>A caller can pass an existing CA (cert + key). This is the hook for CNTRLPLANE-3923/3924: there, the
+  management cluster's own nodes must trust the mirror, and their trust comes from the parent hosted
+  cluster created <em>before</em> the mirror exists, so the CA must be generated earlier in the CI pipeline.</li>
+<li>Consumers receive the CA bundle and pass it to <code>HostedCluster.spec.additionalTrustBundle</code>
+  (<code>hypershift create cluster --additional-trust-bundle</code>). Creating the hosted cluster with it from the
+  start avoids a NodePool rollout. No <code>--insecure-registry</code> anywhere.</li>
+</ul>
+<h3 id="c-d4-no-authentication-push-only-internally-read-only-before-exposure">D4 — No authentication; push only internally; read-only before exposure</h3>
+<ul>
+<li><code>registry</code> htpasswd auth is all-or-nothing (no anonymous read with authenticated write), and adding
+  credentials would require merging them into the hosted cluster pull secret <em>and</em> (for 3923/3924) the
+  management cluster pull secret owned by the parent cluster.</li>
+<li>Instead: images are copied through the internal Service while the registry is writable; the registry is
+  then restarted with <code>storage.maintenance.readonly.enabled=true</code>; <strong>only then</strong> is the Route created.
+  Invariant: the Route exists only while the registry is read-only. A repeated <code>Setup</code> first deletes the Route
+  and waits until public routing is withdrawn before re-enabling writes.
+  The public endpoint is anonymous and read-only and never accepts pushes.</li>
+<li>Residual risk: mirrored content is anonymously readable for the lifetime of the job at an unguessable
+  per-job hostname on an ephemeral cluster. Reviewers may ask for htpasswd; it can be added later
+  without changing the public API (new optional field).</li>
+</ul>
+<h3 id="c-d5-copy-in-cluster-job-running-oc">D5 — Copy: in-cluster Job running <code>oc</code></h3>
+<ul>
+<li>Copying runs as a Kubernetes Job in the registry namespace, using an image that contains <code>oc</code>
+  (configurable; default chosen during the smoke test). It talks to the registry through the internal
+  Service, trusting the CA, and reads sources with a caller-supplied pull secret (in presubmit CI the
+  release under test lives in <code>registry.build*.ci.openshift.org</code>, which needs credentials).</li>
+<li>Avoids depending on <code>oc</code>/<code>skopeo</code> being present in the <code>hypershift-tests</code> image and keeps traffic
+  in-cluster. The copier sits behind an <code>ImageCopier</code> interface so unit tests use a fake.</li>
+<li>Digests must be preserved: manifest lists are kept, no <code>--filter-by-os</code>. IDMS only redirects
+  by-digest pulls, so consumers reference images by digest.</li>
+<li>Single images: <code>oc image mirror</code>. Full release payloads (needed by CNTRLPLANE-3931, two releases):
+  <code>oc adm release mirror</code>.</li>
+</ul>
+<h3 id="c-d6-mirror-layout-and-image-content-source-mapping">D6 — Mirror layout and image-content-source mapping</h3>
+<ul>
+<li>Mirror repository for a source repository <code>&lt;reg&gt;/&lt;path&gt;</code> is <code>&lt;host&gt;/&lt;reg&gt;/&lt;path&gt;</code> (source registry
+  host kept as first path component → no collisions between registries).</li>
+<li>The fixture returns <code>[]hyperv1.ImageContentSource</code> (the exact type used by
+  <code>hypershift create cluster --image-content-sources</code>), one entry per source repository.</li>
+<li>A mapping can declare a <strong>virtual source repository</strong> that does not exist upstream (e.g.
+  <code>mirror-source.hypershift-e2e.invalid/...</code>). A pod referencing <code>&lt;virtual repo&gt;@&lt;digest&gt;</code> can only start
+  if the node pulled from the mirror — endpoint-specific evidence for CNTRLPLANE-3928 without blocking
+  quay.io or parsing registry logs.</li>
+</ul>
+<h3 id="c-d7-storage">D7 — Storage</h3>
+<ul>
+<li>Always a PersistentVolumeClaim (size configurable, default 20Gi, default StorageClass). Deployment uses
+  the <code>Recreate</code> strategy (RWO volume).</li>
+<li>No <code>emptyDir</code> option: the registry reads its configuration only at startup, so the read-only switch (D4)
+  restarts the pod, and an <code>emptyDir</code> would lose everything that was just copied.</li>
+<li>The registry is configured with a mounted <code>config.yml</code> (ConfigMap); a config hash annotation on the pod
+  template rolls the pod when read-only is toggled.</li>
+<li>Sizing for two full payloads (CNTRLPLANE-3931) is decided in that story; the fixture just exposes the
+  knob.</li>
+</ul>
+<h3 id="c-d8-registry-image">D8 — Registry image</h3>
+<ul>
+<li>Configurable; default <code>quay.io/libpod/registry:2.8.2</code> pinned by manifest-list digest (non-Docker-Hub
+  location, avoids rate limits in CI). Verified under the <code>restricted-v2</code> SCC (random UID) on a nested
+  management cluster.</li>
+</ul>
+<h3 id="c-d9-ci-integration-v2-lifecycle">D9 — CI integration (v2 lifecycle)</h3>
+<ul>
+<li>The existing <code>PlatformConfig.PreCreate</code> hook in <code>create-guests</code> (already used for Keycloak on Azure)
+  deploys the registry before any hosted cluster is created and writes to <code>SHARED_DIR</code>:
+  CA bundle, <code>imageContentSources</code> YAML, and a small JSON with endpoint and mirrored image refs.</li>
+<li>A dedicated AWS cluster variant (<code>image-mirroring</code>) is added only when the mirroring lane is enabled
+  (opt-in env var set by the new job from CNTRLPLANE-3929). Its extra args point at the files above
+  (<code>--additional-trust-bundle</code>, <code>--image-content-sources</code>). Existing jobs and the default AWS plan are
+  unaffected.</li>
+<li>Teardown: in CI the nested management cluster is destroyed with the job; <code>Teardown</code> (delete the owned
+  namespace) exists for local runs and is idempotent.</li>
+</ul>
+<h3 id="c-out-of-scope-for-this-pr-tracked-elsewhere">Out of scope for this PR (tracked elsewhere)</h3>
+<ul>
+<li>Making management-cluster nodes trust the mirror (CNTRLPLANE-3923/3924): needs an openshift/release change
+  to create the nested management cluster with the CA. This PR only provides the caller-supplied-CA hook.</li>
+<li><code>--registry-overrides</code> HO installation wiring (3930/3931), test assertions (3927/3928/3932/3933), Prow job
+  (3929).</li>
+</ul></div></details>
+
+<h2 id="d-independent-review">D. Independent review of the Scenario 3 evidence</h2>
+<p>After the run, a separate session reviewed the pasted evidence against <a href="scripts/reachability/VERIFY.md"><code>VERIFY.md</code></a>.
+It made no cluster or AWS calls and was not allowed to edit the evidence blocks. It checked secret hygiene, every step against its expected result,
+and cross-step consistency (same CA fingerprint, host, digest and node throughout; a plausible timeline; mirror log not truncated).
+Verdict: <b>PASS with notes</b>. The review is reproduced below after sanitization. Raw copy:
+<a href="assets/evidence/review-T8a.md"><code>review-T8a.md</code></a>. A third party can repeat this review with the same checklist.</p>
+<details><summary>Show the review</summary><div class="evidence"><p>Evidence: <code>reachability/RESULTS.md</code> (run of 2026-10-14 on <code>mgmt</code>, HC <code>clusters/mirror-reach</code>, INFRA_ID <code>mirror-reach-kn775</code>).
+Spec: <code>reachability/VERIFY.md</code>. Read-only: no cluster or AWS calls. Local file <code>out/mirror/</code> listed only, not read.</p>
+<h4 id="d-verdict-pass-with-notes">Verdict: PASS with notes</h4>
+<p><strong>Secret hygiene: clean.</strong> No <code>client-key-data</code>, <code>token:</code>, <code>certificate-authority-data</code>, <code>PRIVATE KEY</code>, <code>auths</code>/<code>auth":</code>,
+<code>AKIA</code>, <code>aws_secret_access_key</code> or PEM blocks in <code>RESULTS.md</code>. The account ID <code>123456789012</code> and AWS resource IDs are
+present: they are not secrets, but strip them from anything posted publicly (the PR paragraph below has none).</p>
+<p>Completeness: Evidence for steps 0–8 is all present, including the optional step 7.</p>
+<h4 id="d-per-step-results">Per-step results</h4>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Expected</th>
+<th>Observed</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>ns absent, no HC, HO up with 4.20, ARN tester, public zone, pull secret, harness builds</td>
+<td><code>namespaces "test-mirror-registry" not found</code>; <code>No resources found</code>; Server <code>e83d9072…</code> supports <code>4.21, 4.20, …</code>; <code>arn:aws:iam::123456789012:user/tester</code>; <code>hypershift.example.com.   False</code>; <code>pull secret has quay.io</code>; <code>harness builds</code></td>
+<td>OK</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Setup exit 0, copier image, Result shape, verify 5/5, ics.yaml 2 entries, CA subject, fingerprint</td>
+<td><code>setup finished in 46s</code>; <code>copier image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:0a9d58f9…</code>; <code>Host</code> = HOST, <code>InternalHost</code> <code>mirror-registry.test-mirror-registry.svc:5000</code>; 2 Images, <code>MirrorRef</code> <code>HOST/quay.io/libpod/registry@sha256:e642e860…</code> and <code>HOST/mirror-source.hypershift-e2e.invalid/libpod/registry@sha256:e642e860…</code>; 5 PASS, <code>verify: 0 failure(s)</code>; ics.yaml virtual first, then quay, each 1 mirror <code>HOST/&lt;source&gt;</code>; <code>CN=hypershift-e2e-mirror-registry-ca</code>; <code>AA:83:E6:32:…:1F:B9</code>; watcher: no <code>VIOLATION</code>, route admitted 15:35:33</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>2</td>
+<td>CLI ok, Applied CM/HC/NodePool, INFRA_ID, check hc 3/3, spec values</td>
+<td><code>Applied Kube resource</code> ConfigMap <code>clusters/user-ca-bundle</code>, <code>mirror-reach</code> (kind printed as <code>""</code>), NodePool <code>mirror-reach-us-east-1a</code>; no error lines; <code>INFRA_ID=mirror-reach-kn775</code>; 3 PASS, <code>check hc: 0 failure(s)</code>; <code>{"name":"user-ca-bundle"}</code>; ICS has the same 2 entries as step 1</td>
+<td>OK (see note N2)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>HC Available, NodePool 2/2, AllNodesHealthy</td>
+<td><code>condition met</code> ×2; HC <code>AVAILABLE True</code> "The hosted control plane is available"; NodePool <code>2 2 … 4.20.0 False False</code>; no condition mentions the mirror, ICS, IDMS or user-ca-bundle</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2 Ready nodes, RHCOS 9.6 / v1.33 / cri-o 1.33</td>
+<td><code>ip-10-0-130-125.ec2.internal</code>, <code>ip-10-0-134-84.ec2.internal</code> both <code>Ready worker v1.33.5</code>, RHCOS <code>9.6.20250925-0</code>, <code>cri-o://1.33.4-4.rhaos4.20…</code>; CV <code>False True … monitoring is not available</code> (expected)</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>5</td>
+<td>check guest 7/7, IDMS, registries.conf digest-only</td>
+<td>7 PASS, <code>check guest: 0 failure(s)</code>, node under test <code>ip-10-0-130-125</code>; IDMS 2 entries mapped to <code>HOST/&lt;source&gt;</code>, no <code>mirrorSourcePolicy</code>; <code>location = "mirror-source.hypershift-e2e.invalid/libpod/registry"</code> → <code>[[registry.mirror]] location = "HOST/mirror-source…/libpod/registry"</code>, <code>pull-from-mirror = "digest-only"</code>; curl PASS (<code>{} 200</code>)</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>6</td>
+<td>digest pod Running after a real pull, tag pod fails on DNS, check pods 5/5, mirror log CRI-O manifests 200</td>
+<td><code>mirror-by-digest 1/1 Running</code>; <code>Pulling image "…invalid/libpod/registry@sha256:e642e860…"</code> → <code>Successfully pulled image … in 807ms</code>; pod log <code>listening on [::]:5000</code>; imageID <code>…invalid/libpod/registry@sha256:da1fbcd1…</code> (instance digest); <code>mirror-by-tag ErrImagePull</code> → <code>lookup mirror-source.hypershift-e2e.invalid on 10.0.0.2:53: no such host</code> (no TLS/401/403 to HOST); no PodSecurity warning; check pods 6 PASS (the spec says 5; the script has 6 checks), <code>0 failure(s)</code>, <code>manifests → 200 (4/4 lines)</code>, <code>no tag lookups</code>; raw mirror lines: <code>GET /v2/mirror-source…/libpod/registry/blobs/sha256:…</code>, <code>http.request.host=HOST</code>, <code>useragent="cri-o/1.33.4 os/linux arch/amd64"</code>, <code>status=200</code></td>
+<td>OK (see note N1)</td>
+</tr>
+<tr>
+<td>7</td>
+<td>after &gt; before, new Pulled event</td>
+<td><code>before=4 after=8</code>; <code>Successfully pulled image … in 67ms</code> for the recreated pod pinned with <code>spec.nodeName</code> to the same node</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>8</td>
+<td>destroy ok, no HC/NP/HCP ns, no VPC/instances, <code>clusters</code> deleted, teardown, ns NotFound</td>
+<td><code>Successfully destroyed cluster and infrastructure … mirror-reach-kn775</code> (16:05:57→16:12:04, ~6 min; NAT/VPC retries were transient); <code>No resources found</code>; <code>clusters-mirror-reach</code> NotFound; VPC and instance queries empty; <code>namespace "clusters" deleted</code>; <code>teardown finished in 21s</code>; <code>test-mirror-registry</code> NotFound</td>
+<td>OK (see note N3)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="d-cross-step-consistency">Cross-step consistency</h4>
+<ul>
+<li><strong>CA:</strong> there is a single <code>harness setup</code> run (one Setup log, one copy job). <code>check.sh</code> builds <code>CA_FP</code> from the same
+  <code>$RUN/ca-only/ca.crt</code> that step 1 fingerprinted (<code>AA:83:E6:32…1F:B9</code>). The HC ConfigMap, the guest
+  <code>user-ca-bundle</code> and the node anchor all matched that CA. Consistent.</li>
+<li><strong>HOST:</strong> <code>mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com</code>
+  is the same in the Result, ics.yaml, HC spec, IDMS, registries.conf, curl and the mirror log <code>http.request.host</code>. Consistent.</li>
+<li><strong>Digest:</strong> <code>sha256:e642e860…</code> is the same in the pod spec (check pods PASS), the Pulling/Pulled events and the
+  step 7 event. The raw mirror log URI with the manifest digest was not pasted (N1). The imageID <code>da1fbcd1…</code> is the
+  amd64 instance digest, as the spec allows.</li>
+<li><strong>Node:</strong> <code>ip-10-0-130-125.ec2.internal</code> is used for the step 5 node checks, both step 6 pods and step 7. Consistent.</li>
+<li><strong>Timeline</strong> (local +02:00): Setup 15:34:46–15:35:31 &lt; create 15:37:46–15:38:12 &lt; pod pull 15:56:53 (mirror log
+  13:56:53Z) &lt; destroy 16:05:57–16:12:04 &lt; teardown 16:14:38. The step 6 count (4 manifest lines) equals the step 7
+  <code>before=4</code>, so the mirror log was not truncated between the two steps. The <code>listening on [::]:5000</code> line in step 6
+  comes from the test pod's own log (the test image is itself a registry), not from the mirror.</li>
+<li><strong>Context:</strong> the harness logs show the mgmt API (<code>api.mgmt.hypershift.example.com:6443</code>). <code>hs</code>
+  only receives the <code>mc.kubeconfig</code> from <code>env.sh</code>, which contains just mgmt. All prompts show <code>mgmt</code>.
+  The parent cluster does not appear anywhere.</li>
+</ul>
+<h4 id="d-findings">Findings</h4>
+<table>
+<thead>
+<tr>
+<th>Sev</th>
+<th>Step</th>
+<th>Problem</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>minor</td>
+<td>6</td>
+<td>The raw mirror-log excerpt (<code>… \| tail -5</code>) shows only blob GETs. The manifest GET line is proven only by the <code>check.sh pods</code> PASS (<code>4/4 lines</code>) and by step 7 (<code>4→8</code>). Blob GETs from the virtual-repo path also imply that a manifest was resolved first.</td>
+<td>Not blocking. For future runs, change the runbook command to <code>grep -F "/v2/$VIRTUAL_REPO/manifests/"</code> (see below).</td>
+</tr>
+<tr>
+<td>nit</td>
+<td>6</td>
+<td><code>VERIFY.md</code> expects "check pods 5 PASS", but <code>check.sh pods</code> prints 6 checks. <code>4/4 lines</code> means 2 requests (manifest list + amd64 manifest), because each request is logged twice (logfmt + access log).</td>
+<td>Fix the count in VERIFY/RUNBOOK.</td>
+</tr>
+<tr>
+<td>nit</td>
+<td>2</td>
+<td>The CLI logs the HostedCluster as <code>"kind":""</code>. This is an upstream CLI quirk, and <code>check.sh hc</code> confirms the HC exists. Create took ~26 s (runbook said 3–6 min).</td>
+<td>None.</td>
+</tr>
+<tr>
+<td>note</td>
+<td>8</td>
+<td><code>hypershift destroy</code> deletes the CLI-generated Secrets but leaves the <code>clusters/user-ca-bundle</code> ConfigMap behind. The name is fixed per namespace. It was removed here by deleting the <code>clusters</code> namespace.</td>
+<td>Follow-up for CNTRLPLANE-3929: confirm that destroy-guests or namespace cleanup removes it, so a later HC in the same namespace does not inherit a stale CA.</td>
+</tr>
+</tbody>
+</table>
+<p>No leftovers: the VPC, instances, NAT/EIP, subnets, IGW, Route53 private zones, IAM roles, instance profile and OIDC
+provider were all deleted (destroy log + empty queries). The VPC delete succeeded, which also rules out leftover
+non-default security groups.</p>
+<h4 id="d-checksh-false-negatives"><code>check.sh</code> false negatives</h4>
+<p>None (every line PASS). Suggested improvements for reuse:
+- RUNBOOK step 6: <code>k -n "$NS" logs "deploy/$NAME" | grep cri-o | grep -F "/v2/$VIRTUAL_REPO/manifests/" | tail -4</code>
+  so that the manifest GET lines are pasted.
+- <code>check.sh pods</code>: report requests, not lines, e.g. count only <code>http.response.status=200</code> lines. Optionally also assert
+  that <code>http.request.host</code> == HOST.</p>
+<h4 id="d-known-limitation-not-a-finding">Known limitation (not a finding)</h4>
+<p>T8 fed the CLI from the <code>harness setup</code> outputs (<code>ca-only/ca.crt</code>, <code>ics.yaml</code>), not from the T7 <code>PreCreate</code> files.
+Both come from <code>yaml.Marshal</code> of the same <code>[]hyperv1.ImageContentSource</code> and the same <code>Result.CABundlePEM</code>, and T7 unit
+tests cover the file contents. The CNTRLPLANE-3929 job will be the first end-to-end run of <code>create-guests</code>.</p>
+<h4 id="d-pr-evidence-paragraph">PR evidence paragraph</h4>
+<blockquote>
+<p>Manually validated on a dedicated AWS HostedCluster (OCP 4.20.0, 2 workers, RHCOS 9.6 / CRI-O 1.33) created with
+<code>hypershift create cluster aws --additional-trust-bundle &lt;fixture CA&gt; --image-content-sources &lt;fixture ICS&gt;</code>, using
+the outputs of a fresh fixture <code>Setup</code> (46 s). The HostedCluster carried the CA ConfigMap and both ICS entries.
+In the hosted cluster, the IDMS, <code>openshift-config/user-ca-bundle</code>, the node trust anchor and a digest-only
+<code>registries.conf</code> mirror entry were all present, and <code>curl https://&lt;mirror&gt;/v2/</code> from a node with system trust
+returned <code>{} 200</code>. A pod referencing <code>mirror-source.hypershift-e2e.invalid/libpod/registry@sha256:e642e860…</code> with
+<code>imagePullPolicy: Always</code> pulled in 807 ms and ran. The mirror logged CRI-O (<code>cri-o/1.33.4</code>) anonymous <code>GET</code> requests
+for that repository → 200. Negative control: the same repository by tag failed with <code>no such host</code>, and the mirror
+logged no tag lookup. Recreating the pod on the same node produced new manifest requests (4→8). Cleanup:
+HostedCluster, AWS infrastructure and fixture namespace removed, no leftovers.</p>
+</blockquote></div></details>
+
+<h2 id="e-sanitization">E. Sanitization and placeholders</h2>
+<p>Evidence was copied from an allowlist of files and transformed with a fixed substitution map. No other edits were made.
+Private keys, kubeconfigs and generated certificates (<code>out/</code> directories) were never copied. Afterwards, a scanner checked
+every published file for private-key headers, AWS access keys, kubeconfig credentials, pull-secret <code>auths</code>, account IDs,
+internal hostnames, AWS resource IDs and local paths, and found nothing. Private RFC 1918 pod/node IPs and public image digests are kept:
+they identify nothing outside the destroyed clusters and are needed for cross-step consistency.</p>
+<table><thead><tr><th>Placeholder</th><th>Replaces</th></tr></thead><tbody><tr><td><code>mgmt</code></td><td>Kubeconfig context and cluster name of the management cluster</td></tr><tr><td><code>hypershift.example.com</code></td><td>Public Route53 base domain (the mirror host is <code>mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com</code>)</td></tr><tr><td><code>api.mgmt.hypershift.example.com</code></td><td>Management-cluster API endpoint (an AWS ELB hostname)</td></tr><tr><td><code>123456789012</code>, <code>user/tester</code></td><td>AWS account ID and IAM principal</td></tr><tr><td><code>oidc-bucket</code></td><td>S3 bucket used as OIDC issuer</td></tr><tr><td><code>vpc-0000000000000000</code> (and <code>subnet-</code>, <code>nat-</code>, <code>rtb-</code>, <code>igw-</code>, <code>sg-</code>, …)</td><td>AWS resource IDs (all deleted at the end of Scenario 3)</td></tr><tr><td><code>Z00000000000000000000</code></td><td>Route53 hosted zone IDs</td></tr><tr><td><code>~/hypershift</code></td><td>Local path of the hypershift checkout</td></tr><tr><td><code>parent-cluster</code>, <code>ci-registry-context</code>, <code>tester</code></td><td>Internal cluster/context names and user namespace names</td></tr><tr><td><code>$ </code></td><td>Shell prompt (the original prompt showed context and git branch)</td></tr><tr><td><code>[PKCS#8 key header line]</code></td><td>Output of <code>head -1 ca.key</code> (the PEM header line only, never key material)</td></tr></tbody></table>
+
+<h2 id="f-provenance">F. Provenance, AI assistance and glossary</h2>
+<ul>
+  <li>Every cluster and AWS command was run by a human (@Nirshal), and the output was pasted verbatim into the results files.</li>
+  <li>Runbooks, check scripts and the harness were written with an LLM coding assistant and reviewed by the tester.</li>
+  <li>The Scenario 3 review (appendix D) was performed by an LLM in a separate, read-only session using the written checklist.</li>
+  <li>This report (pages, plan, sanitization) was assembled with an LLM assistant from those files. Scenario verdicts are copied
+  from the results files, not re-judged.</li>
+</ul>
+<table><thead><tr><th>Term in the evidence</th><th>Meaning</th></tr></thead><tbody><tr><td><code>T0</code></td><td>Smoke test: Scenario 1</td></tr><tr><td><code>T1–T5a</code></td><td>Implementation commits (options, TLS, builders, copier, orchestration, CA persistence), each reviewed</td></tr><tr><td><code>T6</code></td><td>Live validation of the fixture: Scenario 2</td></tr><tr><td><code>T7</code></td><td>Lifecycle wiring (opt-in AWS <code>image-mirroring</code> variant)</td></tr><tr><td><code>T8</code></td><td>Hosted-node reachability: Scenario 3</td></tr><tr><td><code>T8a</code></td><td>Independent, read-only verification of the T8 evidence (appendix D)</td></tr><tr><td><code>T9</code></td><td>Pull request</td></tr><tr><td><code>D1–D9</code></td><td>Design decisions (appendix C)</td></tr><tr><td>README.md / HANDOFF.md / plan.md / gate.sh</td><td>Internal working notes and the local quality gate; not published</td></tr></tbody></table>
+
+<h2 id="kit-changes">G. Kit changes (evidence vs. reproduction kit)</h2>
+<p>The files in <a href="scripts/README.md"><code>scripts/</code></a> are the sanitized originals with only these changes. Context, domain and
+AWS inputs are read from the environment (defaults = the sanitized values), the harness reads the context from <code>$CTX</code>,
+and the internal workflow notes at the end of two runbooks are removed. Every other kit file is unchanged.</p>
+<details class="output"><summary>Unified diff</summary><pre tabindex="0"><code>--- evidence/harness/RUNBOOK.md
++++ scripts/harness/RUNBOOK.md
+@@ -8,3 +8,3 @@
+ Scope and safety:
+-- Only context `mgmt` (hard-coded in `main.go`), only namespace `test-mirror-registry`
++- Only context `$CTX` (default `mgmt`, see `env.sh`), only namespace `test-mirror-registry`
+   (+ cluster-scoped reads of the ingress domain and the `openshift/cli` ImageStream).
+@@ -166,2 +166 @@
+ ```
+-Then update `README.md` status and `HANDOFF.md` &quot;Next&quot; (T7).
+
+--- evidence/harness/env.sh
++++ scripts/harness/env.sh
+@@ -3,3 +3,3 @@
+ 
+-export CTX=mgmt
++export CTX=&quot;${CTX:-mgmt}&quot;          # kubeconfig context of the management cluster
+ export NS=test-mirror-registry      # mirrorregistry.DefaultNamespace
+
+--- evidence/harness/main.go
++++ scripts/harness/main.go
+@@ -6,3 +6,4 @@
+ // setup writes DIR/result.json (Result without the CA), DIR/ics.yaml (image content sources) and
+-// DIR/ca-only/ca.crt (CA only, usable as a skopeo --cert-dir). Only context mgmt is accepted.
++// DIR/ca-only/ca.crt (CA only, usable as a skopeo --cert-dir). Only the kubeconfig context in $CTX
++// (default &quot;mgmt&quot;, set by env.sh) is used.
+ package main
+@@ -35,3 +36,2 @@
+ const (
+-	kubeContext  = &quot;mgmt&quot;
+ 	testImage    = &quot;quay.io/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f&quot;
+@@ -155,2 +155,10 @@
+ 
++// kubeContext returns the only kubeconfig context the harness talks to ($CTX, as exported by env.sh).
++func kubeContext() string {
++	if ctx := os.Getenv(&quot;CTX&quot;); ctx != &quot;&quot; {
++		return ctx
++	}
++	return &quot;mgmt&quot;
++}
++
+ func newClient() (crclient.Client, error) {
+@@ -158,6 +166,6 @@
+ 		clientcmd.NewDefaultClientConfigLoadingRules(),
+-		&amp;clientcmd.ConfigOverrides{CurrentContext: kubeContext},
++		&amp;clientcmd.ConfigOverrides{CurrentContext: kubeContext()},
+ 	).ClientConfig()
+ 	if err != nil {
+-		return nil, fmt.Errorf(&quot;load kubeconfig context %s: %w&quot;, kubeContext, err)
++		return nil, fmt.Errorf(&quot;load kubeconfig context %s: %w&quot;, kubeContext(), err)
+ 	}
+@@ -172,3 +180,3 @@
+ 	}
+-	log(&quot;context %s → %s&quot;, kubeContext, cfg.Host)
++	log(&quot;context %s → %s&quot;, kubeContext(), cfg.Host)
+ 	return crclient.New(cfg, crclient.Options{Scheme: scheme})
+
+--- evidence/reachability/RUNBOOK.md
++++ scripts/reachability/RUNBOOK.md
+@@ -248,2 +248 @@
+ 
+-Then: update `README.md` (T8 done) and `HANDOFF.md` &quot;Next&quot; (T9), and copy the evidence summary into `decisions.md`/PR notes.
+
+--- evidence/reachability/env.sh
++++ scripts/reachability/env.sh
+@@ -20,3 +20,3 @@
+ # Management cluster and mirror fixture (mirrorregistry defaults).
+-export CTX=mgmt
++export CTX=&quot;${CTX:-mgmt}&quot;              # kubeconfig context of the management cluster
+ export NS=test-mirror-registry          # mirrorregistry.DefaultNamespace
+@@ -43,7 +43,7 @@
+ export HCP_NS=&quot;${HC_NS}-${HC_NAME}&quot;
+-export BASE_DOMAIN=hypershift.example.com   # public Route53 zone (same as the parent HC)
+-export AWS_REGION=us-east-1
+-export AWS_CREDS=&quot;${HOME}/.aws/credentials&quot;
+-export PULL_SECRET=&quot;${HOME}/pull-secret&quot;
+-export RELEASE_IMAGE=quay.io/openshift-release-dev/ocp-release:4.20.0-x86_64   # HO supports 4.14–4.21
++export BASE_DOMAIN=&quot;${BASE_DOMAIN:-hypershift.example.com}&quot;   # public Route53 zone (same as the parent HC)
++export AWS_REGION=&quot;${AWS_REGION:-us-east-1}&quot;
++export AWS_CREDS=&quot;${AWS_CREDS:-${HOME}/.aws/credentials}&quot;
++export PULL_SECRET=&quot;${PULL_SECRET:-${HOME}/pull-secret}&quot;
++export RELEASE_IMAGE=&quot;${RELEASE_IMAGE:-quay.io/openshift-release-dev/ocp-release:4.20.0-x86_64}&quot;   # HO supports 4.14–4.21
+ 
+
+--- evidence/smoke/env.sh
++++ scripts/smoke/env.sh
+@@ -3,3 +3,3 @@
+ 
+-export CTX=mgmt
++export CTX=&quot;${CTX:-mgmt}&quot;          # kubeconfig context of the management cluster
+ export NS=test-mirror-registry
+</code></pre></details>
+
+<h2 id="h-follow-ups">H. Follow-ups</h2>
+<ul>
+  <li>CNTRLPLANE-3929: <code>hypershift destroy</code> leaves the CLI-created <code>user-ca-bundle</code> ConfigMap in the HostedCluster namespace.
+  Make sure cleanup removes it, so a later cluster in the same namespace does not inherit a stale CA.</li>
+  <li>CNTRLPLANE-3928: <code>imagePullPolicy: Always</code> re-fetches manifests from the mirror even when the image is cached (TC-17).</li>
+  <li>CNTRLPLANE-3931: one 4.20 payload is about 22 GiB stored, so budget a ~60 Gi PVC for two payloads and measure mirror time against the job timeout.</li>
+  <li>Kit: in reachability step 6, grep <code>/manifests/</code> lines for the raw excerpt; correct the <code>check.sh pods</code> count (6) in the runbook and <code>VERIFY.md</code>.</li>
+</ul>
+
+</main>
+<footer>
+CNTRLPLANE-3926 — in-cluster mirror registry fixture for HyperShift e2e v2 ·
+<a href="https://github.com/openshift/hypershift/pull/9996">openshift/hypershift#9996</a> · report date 2026-10-15.<br>
+All evidence is sanitized (cluster names, domains, AWS identifiers and local paths replaced; see
+<a href="appendices.html#e-sanitization">appendix E</a>). Cluster commands were run by a human; runbooks, scripts,
+the independent evidence review and this report were prepared with AI assistance (see appendix F).
+</footer>
+</body>
+</html>

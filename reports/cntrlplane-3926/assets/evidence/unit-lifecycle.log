@@ -1,0 +1,249 @@
+# commit: 8d54f7ab3249ddf01777824b35a60e1025d72972
+# go version go1.26.3 darwin/arm64
+# command: GOWORK=off GOFLAGS=-mod=vendor go test -tags e2ev2 -race -count=1 -cover -v ./test/e2e/v2/lifecycle/
+# date: 2026-10-15T08:14:03Z
+=== RUN   TestNewPlatformConfig
+=== RUN   TestNewPlatformConfig/When_mirroring_is_unset,_it_should_remain_disabled
+2026/10/15 10:14:08 AWS platform config: region=us-east-1, zones=[us-east-1a], additionalTags=[expirationDate=2026-10-15T12:14:08Z]
+=== RUN   TestNewPlatformConfig/When_mirroring_is_false,_it_should_remain_disabled
+2026/10/15 10:14:08 AWS platform config: region=us-east-1, zones=[us-east-1a], additionalTags=[expirationDate=2026-10-15T12:14:08Z]
+=== RUN   TestNewPlatformConfig/When_mirroring_is_true,_it_should_enable_the_AWS_option
+2026/10/15 10:14:08 AWS platform config: region=us-east-1, zones=[us-east-1a], additionalTags=[expirationDate=2026-10-15T12:14:08Z]
+=== RUN   TestNewPlatformConfig/When_mirroring_is_True,_it_should_enable_the_AWS_option
+2026/10/15 10:14:08 AWS platform config: region=us-east-1, zones=[us-east-1a], additionalTags=[expirationDate=2026-10-15T12:14:08Z]
+=== RUN   TestNewPlatformConfig/When_mirroring_is_one,_it_should_enable_the_AWS_option
+2026/10/15 10:14:08 AWS platform config: region=us-east-1, zones=[us-east-1a], additionalTags=[expirationDate=2026-10-15T12:14:08Z]
+=== RUN   TestNewPlatformConfig/When_mirroring_is_False,_it_should_remain_disabled
+2026/10/15 10:14:08 AWS platform config: region=us-east-1, zones=[us-east-1a], additionalTags=[expirationDate=2026-10-15T12:14:08Z]
+=== RUN   TestNewPlatformConfig/When_mirroring_is_zero,_it_should_remain_disabled
+2026/10/15 10:14:08 AWS platform config: region=us-east-1, zones=[us-east-1a], additionalTags=[expirationDate=2026-10-15T12:14:08Z]
+=== RUN   TestNewPlatformConfig/When_mirroring_is_yes,_it_should_return_a_descriptive_error
+=== RUN   TestNewPlatformConfig/When_mirroring_is_invalid,_it_should_return_a_descriptive_error
+--- PASS: TestNewPlatformConfig (0.00s)
+    --- PASS: TestNewPlatformConfig/When_mirroring_is_unset,_it_should_remain_disabled (0.00s)
+    --- PASS: TestNewPlatformConfig/When_mirroring_is_false,_it_should_remain_disabled (0.00s)
+    --- PASS: TestNewPlatformConfig/When_mirroring_is_true,_it_should_enable_the_AWS_option (0.00s)
+    --- PASS: TestNewPlatformConfig/When_mirroring_is_True,_it_should_enable_the_AWS_option (0.00s)
+    --- PASS: TestNewPlatformConfig/When_mirroring_is_one,_it_should_enable_the_AWS_option (0.00s)
+    --- PASS: TestNewPlatformConfig/When_mirroring_is_False,_it_should_remain_disabled (0.00s)
+    --- PASS: TestNewPlatformConfig/When_mirroring_is_zero,_it_should_remain_disabled (0.00s)
+    --- PASS: TestNewPlatformConfig/When_mirroring_is_yes,_it_should_return_a_descriptive_error (0.00s)
+    --- PASS: TestNewPlatformConfig/When_mirroring_is_invalid,_it_should_return_a_descriptive_error (0.00s)
+=== RUN   TestNewAWSPlatformConfig
+=== RUN   TestNewAWSPlatformConfig/When_mirroring_is_disabled,_it_should_retain_the_disabled_option
+2026/10/15 10:14:08 AWS platform config: region=us-east-1, zones=[us-east-1a us-east-1b], additionalTags=[expirationDate=2026-10-15T12:14:08Z]
+=== RUN   TestNewAWSPlatformConfig/When_mirroring_is_enabled,_it_should_retain_the_enabled_option
+2026/10/15 10:14:08 AWS platform config: region=us-east-1, zones=[us-east-1a us-east-1b], additionalTags=[expirationDate=2026-10-15T12:14:08Z]
+--- PASS: TestNewAWSPlatformConfig (0.00s)
+    --- PASS: TestNewAWSPlatformConfig/When_mirroring_is_disabled,_it_should_retain_the_disabled_option (0.00s)
+    --- PASS: TestNewAWSPlatformConfig/When_mirroring_is_enabled,_it_should_retain_the_enabled_option (0.00s)
+=== RUN   TestAWSPlatformConfigClusterSpecs
+=== RUN   TestAWSPlatformConfigClusterSpecs/When_mirroring_is_disabled,_it_should_preserve_the_existing_variants
+2026/10/15 10:14:08 AWS platform config: region=, zones=[], additionalTags=[expirationDate=2026-10-15T12:14:08Z]
+=== RUN   TestAWSPlatformConfigClusterSpecs/When_mirroring_is_enabled,_it_should_add_only_the_opt-in_variant
+2026/10/15 10:14:08 AWS platform config: region=, zones=[], additionalTags=[expirationDate=2026-10-15T12:14:08Z]
+2026/10/15 10:14:08 AWS platform config: region=, zones=[], additionalTags=[expirationDate=2026-10-15T12:14:08Z]
+--- PASS: TestAWSPlatformConfigClusterSpecs (0.00s)
+    --- PASS: TestAWSPlatformConfigClusterSpecs/When_mirroring_is_disabled,_it_should_preserve_the_existing_variants (0.00s)
+    --- PASS: TestAWSPlatformConfigClusterSpecs/When_mirroring_is_enabled,_it_should_add_only_the_opt-in_variant (0.00s)
+=== RUN   TestAWSPlatformConfigPreCreate
+=== RUN   TestAWSPlatformConfigPreCreate/When_mirroring_is_disabled,_it_should_do_nothing
+2026/10/15 10:14:08 AWS platform config: region=, zones=[], additionalTags=[expirationDate=2026-10-15T12:14:08Z]
+=== RUN   TestAWSPlatformConfigPreCreate/When_mirroring_is_enabled,_it_should_set_up_the_fixture_and_write_artifacts
+2026/10/15 10:14:08 AWS platform config: region=, zones=[], additionalTags=[expirationDate=2026-10-15T12:14:08Z]
+=== RUN   TestAWSPlatformConfigPreCreate/When_the_shared_directory_is_empty,_it_should_fail_before_setup
+2026/10/15 10:14:08 AWS platform config: region=, zones=[], additionalTags=[expirationDate=2026-10-15T12:14:08Z]
+=== RUN   TestAWSPlatformConfigPreCreate/When_the_CLI_ImageStream_is_missing,_it_should_return_the_lookup_error
+2026/10/15 10:14:08 AWS platform config: region=, zones=[], additionalTags=[expirationDate=2026-10-15T12:14:08Z]
+=== RUN   TestAWSPlatformConfigPreCreate/When_registry_initialization_fails,_it_should_return_the_error
+2026/10/15 10:14:08 AWS platform config: region=, zones=[], additionalTags=[expirationDate=2026-10-15T12:14:08Z]
+=== RUN   TestAWSPlatformConfigPreCreate/When_registry_setup_fails,_it_should_return_the_error
+2026/10/15 10:14:08 AWS platform config: region=, zones=[], additionalTags=[expirationDate=2026-10-15T12:14:08Z]
+=== RUN   TestAWSPlatformConfigPreCreate/When_artifact_writing_fails,_it_should_return_the_error
+2026/10/15 10:14:08 AWS platform config: region=, zones=[], additionalTags=[expirationDate=2026-10-15T12:14:08Z]
+--- PASS: TestAWSPlatformConfigPreCreate (0.40s)
+    --- PASS: TestAWSPlatformConfigPreCreate/When_mirroring_is_disabled,_it_should_do_nothing (0.37s)
+    --- PASS: TestAWSPlatformConfigPreCreate/When_mirroring_is_enabled,_it_should_set_up_the_fixture_and_write_artifacts (0.01s)
+    --- PASS: TestAWSPlatformConfigPreCreate/When_the_shared_directory_is_empty,_it_should_fail_before_setup (0.00s)
+    --- PASS: TestAWSPlatformConfigPreCreate/When_the_CLI_ImageStream_is_missing,_it_should_return_the_lookup_error (0.01s)
+    --- PASS: TestAWSPlatformConfigPreCreate/When_registry_initialization_fails,_it_should_return_the_error (0.00s)
+    --- PASS: TestAWSPlatformConfigPreCreate/When_registry_setup_fails,_it_should_return_the_error (0.00s)
+    --- PASS: TestAWSPlatformConfigPreCreate/When_artifact_writing_fails,_it_should_return_the_error (0.00s)
+=== RUN   TestAzurePlatformConfigClusterSpecs
+=== PAUSE TestAzurePlatformConfigClusterSpecs
+=== RUN   TestAzureOAuthLBPrivateExtraArgs
+=== PAUSE TestAzureOAuthLBPrivateExtraArgs
+=== RUN   TestExternalOIDCTransitionComplete
+=== PAUSE TestExternalOIDCTransitionComplete
+=== RUN   TestManifestRoundTrip
+=== RUN   TestManifestRoundTrip/When_written_with_a_single_cluster,_it_should_deserialize_identically
+=== RUN   TestManifestRoundTrip/When_written_with_multiple_clusters,_it_should_deserialize_identically
+--- PASS: TestManifestRoundTrip (0.00s)
+    --- PASS: TestManifestRoundTrip/When_written_with_a_single_cluster,_it_should_deserialize_identically (0.00s)
+    --- PASS: TestManifestRoundTrip/When_written_with_multiple_clusters,_it_should_deserialize_identically (0.00s)
+=== RUN   TestResolveVariants
+=== RUN   TestResolveVariants/When_all_parallel_variants_exist,_it_should_return_resolved_map
+=== RUN   TestResolveVariants/When_sequential_variants_exist,_it_should_return_resolved_map
+=== RUN   TestResolveVariants/When_a_parallel_variant_is_missing,_it_should_return_an_error
+=== RUN   TestResolveVariants/When_a_sequential_variant_is_missing,_it_should_return_an_error
+=== RUN   TestResolveVariants/When_duplicate_variants_exist_across_parallel_and_sequential,_it_should_deduplicate
+--- PASS: TestResolveVariants (0.00s)
+    --- PASS: TestResolveVariants/When_all_parallel_variants_exist,_it_should_return_resolved_map (0.00s)
+    --- PASS: TestResolveVariants/When_sequential_variants_exist,_it_should_return_resolved_map (0.00s)
+    --- PASS: TestResolveVariants/When_a_parallel_variant_is_missing,_it_should_return_an_error (0.00s)
+    --- PASS: TestResolveVariants/When_a_sequential_variant_is_missing,_it_should_return_an_error (0.00s)
+    --- PASS: TestResolveVariants/When_duplicate_variants_exist_across_parallel_and_sequential,_it_should_deduplicate (0.00s)
+=== RUN   TestLookupCluster
+=== RUN   TestLookupCluster/when_variant_exists_should_return_the_entry
+=== RUN   TestLookupCluster/when_variant_does_not_exist_should_return_an_error
+--- PASS: TestLookupCluster (0.00s)
+    --- PASS: TestLookupCluster/when_variant_exists_should_return_the_entry (0.00s)
+    --- PASS: TestLookupCluster/when_variant_does_not_exist_should_return_an_error (0.00s)
+=== RUN   TestCliImage
+=== RUN   TestCliImage/When_latest_has_a_resolved_digest,_it_should_return_the_imported_reference
+=== RUN   TestCliImage/When_the_stream_does_not_exist,_it_should_return_an_error
+=== RUN   TestCliImage/When_latest_has_no_reference,_it_should_return_an_error
+=== RUN   TestCliImage/When_latest_has_only_a_mutable_tag,_it_should_reject_it
+=== RUN   TestCliImage/When_latest_has_no_history,_it_should_return_an_error
+=== RUN   TestCliImage/When_only_another_tag_is_resolved,_it_should_return_an_error
+=== RUN   TestCliImage/When_latest_has_multiple_imports,_it_should_use_the_newest
+--- PASS: TestCliImage (0.03s)
+    --- PASS: TestCliImage/When_latest_has_a_resolved_digest,_it_should_return_the_imported_reference (0.00s)
+    --- PASS: TestCliImage/When_the_stream_does_not_exist,_it_should_return_an_error (0.00s)
+    --- PASS: TestCliImage/When_latest_has_no_reference,_it_should_return_an_error (0.00s)
+    --- PASS: TestCliImage/When_latest_has_only_a_mutable_tag,_it_should_reject_it (0.00s)
+    --- PASS: TestCliImage/When_latest_has_no_history,_it_should_return_an_error (0.00s)
+    --- PASS: TestCliImage/When_only_another_tag_is_resolved,_it_should_return_an_error (0.00s)
+    --- PASS: TestCliImage/When_latest_has_multiple_imports,_it_should_use_the_newest (0.00s)
+=== RUN   TestWriteMirrorRegistryResult
+=== RUN   TestWriteMirrorRegistryResult/When_setup_returns_a_result,_it_should_write_the_CA_and_mappings_and_JSON_without_CA
+=== RUN   TestWriteMirrorRegistryResult/When_the_CA_path_cannot_be_written,_it_should_return_the_file_error
+=== RUN   TestWriteMirrorRegistryResult/When_the_mappings_path_cannot_be_written,_it_should_return_the_file_error
+=== RUN   TestWriteMirrorRegistryResult/When_the_JSON_path_cannot_be_written,_it_should_return_the_file_error
+--- PASS: TestWriteMirrorRegistryResult (0.00s)
+    --- PASS: TestWriteMirrorRegistryResult/When_setup_returns_a_result,_it_should_write_the_CA_and_mappings_and_JSON_without_CA (0.00s)
+    --- PASS: TestWriteMirrorRegistryResult/When_the_CA_path_cannot_be_written,_it_should_return_the_file_error (0.00s)
+    --- PASS: TestWriteMirrorRegistryResult/When_the_mappings_path_cannot_be_written,_it_should_return_the_file_error (0.00s)
+    --- PASS: TestWriteMirrorRegistryResult/When_the_JSON_path_cannot_be_written,_it_should_return_the_file_error (0.00s)
+=== RUN   TestTestPlanValidate
+=== RUN   TestTestPlanValidate/When_all_matrix_variants_exist_in_the_registry,_it_should_succeed
+=== RUN   TestTestPlanValidate/When_a_parallel_matrix_variant_is_not_in_the_registry,_it_should_return_an_error
+=== RUN   TestTestPlanValidate/When_a_sequential_matrix_variant_is_not_in_the_registry,_it_should_return_an_error
+=== RUN   TestTestPlanValidate/When_test_group_names_collide,_it_should_return_an_error
+--- PASS: TestTestPlanValidate (0.00s)
+    --- PASS: TestTestPlanValidate/When_all_matrix_variants_exist_in_the_registry,_it_should_succeed (0.00s)
+    --- PASS: TestTestPlanValidate/When_a_parallel_matrix_variant_is_not_in_the_registry,_it_should_return_an_error (0.00s)
+    --- PASS: TestTestPlanValidate/When_a_sequential_matrix_variant_is_not_in_the_registry,_it_should_return_an_error (0.00s)
+    --- PASS: TestTestPlanValidate/When_test_group_names_collide,_it_should_return_an_error (0.00s)
+=== RUN   TestTestMatrixValidate
+=== RUN   TestTestMatrixValidate/When_all_group_names_are_unique,_it_should_succeed
+=== RUN   TestTestMatrixValidate/When_parallel_groups_have_duplicate_names,_it_should_return_an_error
+=== RUN   TestTestMatrixValidate/When_a_sequential_step_duplicates_a_parallel_name,_it_should_return_an_error
+=== RUN   TestTestMatrixValidate/When_a_group_name_contains_a_path_separator,_it_should_return_an_error
+=== RUN   TestTestMatrixValidate/When_a_group_name_contains_a_traversal_sequence,_it_should_return_an_error
+=== RUN   TestTestMatrixValidate/When_a_variant_is_used_by_concurrent_lanes,_it_should_return_an_error
+=== RUN   TestTestMatrixValidate/When_a_variant_is_reused_by_steps_in_one_sequential_lane,_it_should_succeed
+=== RUN   TestTestMatrixValidate/When_same-named_sequential_lanes_reuse_a_variant,_it_should_return_an_error
+--- PASS: TestTestMatrixValidate (0.00s)
+    --- PASS: TestTestMatrixValidate/When_all_group_names_are_unique,_it_should_succeed (0.00s)
+    --- PASS: TestTestMatrixValidate/When_parallel_groups_have_duplicate_names,_it_should_return_an_error (0.00s)
+    --- PASS: TestTestMatrixValidate/When_a_sequential_step_duplicates_a_parallel_name,_it_should_return_an_error (0.00s)
+    --- PASS: TestTestMatrixValidate/When_a_group_name_contains_a_path_separator,_it_should_return_an_error (0.00s)
+    --- PASS: TestTestMatrixValidate/When_a_group_name_contains_a_traversal_sequence,_it_should_return_an_error (0.00s)
+    --- PASS: TestTestMatrixValidate/When_a_variant_is_used_by_concurrent_lanes,_it_should_return_an_error (0.00s)
+    --- PASS: TestTestMatrixValidate/When_a_variant_is_reused_by_steps_in_one_sequential_lane,_it_should_succeed (0.00s)
+    --- PASS: TestTestMatrixValidate/When_same-named_sequential_lanes_reuse_a_variant,_it_should_return_an_error (0.00s)
+=== RUN   TestTestMatrixVariants
+=== RUN   TestTestMatrixVariants/When_the_matrix_has_parallel_groups,_it_should_return_their_variants
+=== RUN   TestTestMatrixVariants/When_the_matrix_has_sequential_groups,_it_should_return_their_variants
+=== RUN   TestTestMatrixVariants/When_a_variant_appears_in_both_parallel_and_sequential,_it_should_be_deduplicated
+=== RUN   TestTestMatrixVariants/When_the_matrix_is_empty,_it_should_return_no_variants
+--- PASS: TestTestMatrixVariants (0.00s)
+    --- PASS: TestTestMatrixVariants/When_the_matrix_has_parallel_groups,_it_should_return_their_variants (0.00s)
+    --- PASS: TestTestMatrixVariants/When_the_matrix_has_sequential_groups,_it_should_return_their_variants (0.00s)
+    --- PASS: TestTestMatrixVariants/When_a_variant_appears_in_both_parallel_and_sequential,_it_should_be_deduplicated (0.00s)
+    --- PASS: TestTestMatrixVariants/When_the_matrix_is_empty,_it_should_return_no_variants (0.00s)
+=== RUN   TestTestGroupJUnitFile
+=== RUN   TestTestGroupJUnitFile/When_the_group_name_is_simple,_it_should_return_junit_{name}.xml
+=== RUN   TestTestGroupJUnitFile/When_the_group_name_differs_from_the_variant,_it_should_use_the_group_name
+=== RUN   TestTestGroupJUnitFile/When_the_group_name_contains_path_traversal,_it_should_panic
+--- PASS: TestTestGroupJUnitFile (0.00s)
+    --- PASS: TestTestGroupJUnitFile/When_the_group_name_is_simple,_it_should_return_junit_{name}.xml (0.00s)
+    --- PASS: TestTestGroupJUnitFile/When_the_group_name_differs_from_the_variant,_it_should_use_the_group_name (0.00s)
+    --- PASS: TestTestGroupJUnitFile/When_the_group_name_contains_path_traversal,_it_should_panic (0.00s)
+=== RUN   TestTestPlanFilterClusterSpecs
+=== RUN   TestTestPlanFilterClusterSpecs/When_the_matrix_references_a_subset_of_the_registry,_it_should_return_only_those_specs
+=== RUN   TestTestPlanFilterClusterSpecs/When_the_matrix_references_multiple_variants,_it_should_return_all_of_them
+=== RUN   TestTestPlanFilterClusterSpecs/When_the_matrix_references_an_unknown_variant,_it_should_silently_skip_it
+--- PASS: TestTestPlanFilterClusterSpecs (0.00s)
+    --- PASS: TestTestPlanFilterClusterSpecs/When_the_matrix_references_a_subset_of_the_registry,_it_should_return_only_those_specs (0.00s)
+    --- PASS: TestTestPlanFilterClusterSpecs/When_the_matrix_references_multiple_variants,_it_should_return_all_of_them (0.00s)
+    --- PASS: TestTestPlanFilterClusterSpecs/When_the_matrix_references_an_unknown_variant,_it_should_silently_skip_it (0.00s)
+=== RUN   TestParseTestPlan
+=== RUN   TestParseTestPlan/When_parsing_JSON_with_parallel_groups,_it_should_deserialize_correctly
+=== RUN   TestParseTestPlan/When_parsing_JSON_with_sequential_groups,_it_should_deserialize_correctly
+=== RUN   TestParseTestPlan/When_parsing_JSON_with_an_unknown_field,_it_should_return_an_error
+=== RUN   TestParseTestPlan/When_parsing_YAML_with_an_unknown_field,_it_should_return_an_error
+=== RUN   TestParseTestPlan/When_parsing_YAML_with_parallel_groups,_it_should_deserialize_correctly
+=== RUN   TestParseTestPlan/When_parsing_YAML_with_sequential_groups,_it_should_deserialize_correctly
+--- PASS: TestParseTestPlan (0.00s)
+    --- PASS: TestParseTestPlan/When_parsing_JSON_with_parallel_groups,_it_should_deserialize_correctly (0.00s)
+    --- PASS: TestParseTestPlan/When_parsing_JSON_with_sequential_groups,_it_should_deserialize_correctly (0.00s)
+    --- PASS: TestParseTestPlan/When_parsing_JSON_with_an_unknown_field,_it_should_return_an_error (0.00s)
+    --- PASS: TestParseTestPlan/When_parsing_YAML_with_an_unknown_field,_it_should_return_an_error (0.00s)
+    --- PASS: TestParseTestPlan/When_parsing_YAML_with_parallel_groups,_it_should_deserialize_correctly (0.00s)
+    --- PASS: TestParseTestPlan/When_parsing_YAML_with_sequential_groups,_it_should_deserialize_correctly (0.00s)
+=== CONT  TestAzurePlatformConfigClusterSpecs
+=== CONT  TestAzureOAuthLBPrivateExtraArgs
+=== CONT  TestExternalOIDCTransitionComplete
+=== RUN   TestAzurePlatformConfigClusterSpecs/When_public_Azure_variant_is_configured,_it_should_request_two_initial_replicas
+--- PASS: TestAzureOAuthLBPrivateExtraArgs (0.00s)
+=== PAUSE TestAzurePlatformConfigClusterSpecs/When_public_Azure_variant_is_configured,_it_should_request_two_initial_replicas
+=== RUN   TestAzurePlatformConfigClusterSpecs/When_upgrade_Azure_variant_is_configured,_it_should_request_two_initial_replicas
+=== PAUSE TestAzurePlatformConfigClusterSpecs/When_upgrade_Azure_variant_is_configured,_it_should_request_two_initial_replicas
+=== RUN   TestAzurePlatformConfigClusterSpecs/When_private_Azure_variant_is_configured,_it_should_request_one_initial_replica
+=== PAUSE TestAzurePlatformConfigClusterSpecs/When_private_Azure_variant_is_configured,_it_should_request_one_initial_replica
+=== RUN   TestAzurePlatformConfigClusterSpecs/When_OAuth_LoadBalancer_Azure_variant_is_configured,_it_should_request_one_initial_replica
+=== PAUSE TestAzurePlatformConfigClusterSpecs/When_OAuth_LoadBalancer_Azure_variant_is_configured,_it_should_request_one_initial_replica
+=== RUN   TestAzurePlatformConfigClusterSpecs/When_OAuth_LoadBalancer_private_Azure_variant_is_configured,_it_should_request_one_initial_replica
+=== PAUSE TestAzurePlatformConfigClusterSpecs/When_OAuth_LoadBalancer_private_Azure_variant_is_configured,_it_should_request_one_initial_replica
+=== RUN   TestAzurePlatformConfigClusterSpecs/When_external_OIDC_Azure_variant_is_configured,_it_should_request_one_initial_replica
+=== PAUSE TestAzurePlatformConfigClusterSpecs/When_external_OIDC_Azure_variant_is_configured,_it_should_request_one_initial_replica
+=== CONT  TestAzurePlatformConfigClusterSpecs/When_upgrade_Azure_variant_is_configured,_it_should_request_two_initial_replicas
+=== CONT  TestAzurePlatformConfigClusterSpecs/When_external_OIDC_Azure_variant_is_configured,_it_should_request_one_initial_replica
+=== CONT  TestAzurePlatformConfigClusterSpecs/When_private_Azure_variant_is_configured,_it_should_request_one_initial_replica
+=== CONT  TestAzurePlatformConfigClusterSpecs/When_OAuth_LoadBalancer_private_Azure_variant_is_configured,_it_should_request_one_initial_replica
+=== CONT  TestAzurePlatformConfigClusterSpecs/When_OAuth_LoadBalancer_Azure_variant_is_configured,_it_should_request_one_initial_replica
+=== CONT  TestAzurePlatformConfigClusterSpecs/When_public_Azure_variant_is_configured,_it_should_request_two_initial_replicas
+--- PASS: TestAzurePlatformConfigClusterSpecs (0.00s)
+    --- PASS: TestAzurePlatformConfigClusterSpecs/When_upgrade_Azure_variant_is_configured,_it_should_request_two_initial_replicas (0.00s)
+    --- PASS: TestAzurePlatformConfigClusterSpecs/When_external_OIDC_Azure_variant_is_configured,_it_should_request_one_initial_replica (0.00s)
+    --- PASS: TestAzurePlatformConfigClusterSpecs/When_private_Azure_variant_is_configured,_it_should_request_one_initial_replica (0.00s)
+    --- PASS: TestAzurePlatformConfigClusterSpecs/When_OAuth_LoadBalancer_private_Azure_variant_is_configured,_it_should_request_one_initial_replica (0.00s)
+    --- PASS: TestAzurePlatformConfigClusterSpecs/When_OAuth_LoadBalancer_Azure_variant_is_configured,_it_should_request_one_initial_replica (0.00s)
+    --- PASS: TestAzurePlatformConfigClusterSpecs/When_public_Azure_variant_is_configured,_it_should_request_two_initial_replicas (0.00s)
+=== RUN   TestExternalOIDCTransitionComplete/When_OAuth_deployments_are_absent_and_KAS_uses_the_expected_issuer,_it_should_report_the_transition_complete
+=== PAUSE TestExternalOIDCTransitionComplete/When_OAuth_deployments_are_absent_and_KAS_uses_the_expected_issuer,_it_should_report_the_transition_complete
+=== RUN   TestExternalOIDCTransitionComplete/When_an_OAuth_deployment_still_exists,_it_should_report_the_transition_incomplete
+=== PAUSE TestExternalOIDCTransitionComplete/When_an_OAuth_deployment_still_exists,_it_should_report_the_transition_incomplete
+=== RUN   TestExternalOIDCTransitionComplete/When_KAS_still_uses_the_previous_authentication_configuration,_it_should_report_the_transition_incomplete
+=== PAUSE TestExternalOIDCTransitionComplete/When_KAS_still_uses_the_previous_authentication_configuration,_it_should_report_the_transition_incomplete
+=== RUN   TestExternalOIDCTransitionComplete/When_KAS_still_uses_OAuth_webhook_authentication,_it_should_report_the_transition_incomplete
+=== PAUSE TestExternalOIDCTransitionComplete/When_KAS_still_uses_OAuth_webhook_authentication,_it_should_report_the_transition_incomplete
+=== RUN   TestExternalOIDCTransitionComplete/When_the_authentication_configuration_is_malformed,_it_should_return_an_error
+=== PAUSE TestExternalOIDCTransitionComplete/When_the_authentication_configuration_is_malformed,_it_should_return_an_error
+=== CONT  TestExternalOIDCTransitionComplete/When_OAuth_deployments_are_absent_and_KAS_uses_the_expected_issuer,_it_should_report_the_transition_complete
+=== CONT  TestExternalOIDCTransitionComplete/When_the_authentication_configuration_is_malformed,_it_should_return_an_error
+=== CONT  TestExternalOIDCTransitionComplete/When_KAS_still_uses_the_previous_authentication_configuration,_it_should_report_the_transition_incomplete
+=== CONT  TestExternalOIDCTransitionComplete/When_KAS_still_uses_OAuth_webhook_authentication,_it_should_report_the_transition_incomplete
+=== CONT  TestExternalOIDCTransitionComplete/When_an_OAuth_deployment_still_exists,_it_should_report_the_transition_incomplete
+--- PASS: TestExternalOIDCTransitionComplete (0.00s)
+    --- PASS: TestExternalOIDCTransitionComplete/When_the_authentication_configuration_is_malformed,_it_should_return_an_error (0.01s)
+    --- PASS: TestExternalOIDCTransitionComplete/When_KAS_still_uses_the_previous_authentication_configuration,_it_should_report_the_transition_incomplete (0.01s)
+    --- PASS: TestExternalOIDCTransitionComplete/When_OAuth_deployments_are_absent_and_KAS_uses_the_expected_issuer,_it_should_report_the_transition_complete (0.01s)
+    --- PASS: TestExternalOIDCTransitionComplete/When_KAS_still_uses_OAuth_webhook_authentication,_it_should_report_the_transition_incomplete (0.01s)
+    --- PASS: TestExternalOIDCTransitionComplete/When_an_OAuth_deployment_still_exists,_it_should_report_the_transition_incomplete (0.01s)
+PASS
+coverage: 54.8% of statements
+ok  	github.com/openshift/hypershift/test/e2e/v2/lifecycle	2.863s	coverage: 54.8% of statements
+# exit: 0

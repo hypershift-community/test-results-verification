@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ${NAME}
+  namespace: ${NS}
+  labels:
+    app.kubernetes.io/name: ${NAME}
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  # storageClassName omitted: cluster default (gp3-csi on mgmt)

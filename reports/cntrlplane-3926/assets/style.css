@@ -1,0 +1,58 @@
+/* CNTRLPLANE-3926 verification report — self-contained stylesheet (no external resources). */
+:root {
+  --fg: #1f2328; --muted: #59636e; --bg: #ffffff; --panel: #f6f8fa; --border: #d1d9e0;
+  --accent: #0b5cad; --pass: #1a7f37; --pass-bg: #dafbe1; --note: #9a6700; --note-bg: #fff8c5;
+  --info: #0969da; --info-bg: #ddf4ff; --fail: #cf222e; --fail-bg: #ffebe9;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+* { box-sizing: border-box; }
+body { margin: 0; color: var(--fg); background: var(--bg);
+  font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif; }
+a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
+.topbar { position: sticky; top: 0; z-index: 10; background: #24292f; color: #fff; padding: .5rem 1.25rem;
+  display: flex; flex-wrap: wrap; gap: .4rem 1.25rem; align-items: center; }
+.topbar .brand { font-weight: 600; margin-right: .75rem; }
+.topbar nav { display: flex; flex-wrap: wrap; gap: .25rem; }
+.topbar nav a { color: #d0d7de; padding: .2rem .55rem; border-radius: 6px; font-size: .92rem; }
+.topbar nav a.active, .topbar nav a:hover { background: #3d444d; color: #fff; text-decoration: none; }
+main { max-width: 1180px; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
+footer { max-width: 1180px; margin: 0 auto; padding: 1rem 1.25rem 2rem; color: var(--muted); font-size: .85rem;
+  border-top: 1px solid var(--border); }
+h1 { font-size: 1.75rem; margin: .2rem 0 .4rem; } h2 { font-size: 1.35rem; margin-top: 2rem;
+  padding-bottom: .3rem; border-bottom: 1px solid var(--border); }
+h3 { font-size: 1.12rem; margin-top: 1.6rem; } h4 { font-size: 1rem; margin-top: 1.3rem; }
+.subtitle { color: var(--muted); margin: 0 0 1rem; }
+code { font-family: var(--mono); font-size: .86em; background: var(--panel); padding: .1em .35em; border-radius: 4px;
+  overflow-wrap: anywhere; }
+pre { background: var(--panel); border: 1px solid var(--border); border-radius: 6px; padding: .75rem .9rem;
+  overflow-x: auto; font-size: .8rem; line-height: 1.45; }
+pre code { background: none; padding: 0; font-size: inherit; overflow-wrap: normal; white-space: pre; }
+table { border-collapse: collapse; width: 100%; margin: .75rem 0 1.25rem; font-size: .9rem; display: block; overflow-x: auto; }
+th, td { border: 1px solid var(--border); padding: .4rem .6rem; text-align: left; vertical-align: top; }
+th { background: var(--panel); font-weight: 600; }
+td:has(> .badge) { white-space: nowrap; }
+details { border: 1px solid var(--border); border-radius: 6px; margin: .6rem 0; background: #fff; }
+details > summary { cursor: pointer; padding: .45rem .75rem; font-weight: 600; background: var(--panel); border-radius: 6px; }
+details[open] > summary { border-bottom: 1px solid var(--border); border-radius: 6px 6px 0 0; }
+details > *:not(summary) { margin-left: .75rem; margin-right: .75rem; }
+details.output > pre { margin: .6rem .75rem; }
+.badge { display: inline-block; padding: .1rem .55rem; border-radius: 999px; font-size: .78rem; font-weight: 700;
+  letter-spacing: .02em; white-space: nowrap; }
+.pass { background: var(--pass-bg); color: var(--pass); } .note { background: var(--note-bg); color: var(--note); }
+.info { background: var(--info-bg); color: var(--info); } .fail { background: var(--fail-bg); color: var(--fail); }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: .75rem; margin: 1rem 0 1.5rem; }
+.card { border: 1px solid var(--border); border-radius: 8px; padding: .75rem .9rem; background: var(--panel); }
+.card .num { font-size: 1.6rem; font-weight: 700; } .card .lbl { color: var(--muted); font-size: .85rem; }
+.callout { border-left: 4px solid var(--info); background: var(--info-bg); padding: .6rem .9rem; border-radius: 0 6px 6px 0; margin: 1rem 0; }
+.callout.warn { border-color: var(--note); background: var(--note-bg); }
+.callout.ok { border-color: var(--pass); background: var(--pass-bg); }
+.callout > :first-child { margin-top: 0; } .callout > :last-child { margin-bottom: 0; }
+.kv { display: grid; grid-template-columns: max-content 1fr; gap: .25rem 1rem; margin: .5rem 0 1rem; }
+.kv dt { color: var(--muted); } .kv dd { margin: 0; }
+.flow { display: flex; flex-wrap: wrap; align-items: stretch; gap: .35rem; margin: 1rem 0 1.25rem; }
+.flow .step { flex: 1 1 140px; border: 1px solid var(--border); border-radius: 8px; padding: .5rem .6rem; background: var(--panel);
+  font-size: .85rem; } .flow .step b { display: block; font-size: .9rem; margin-bottom: .15rem; }
+.flow .arrow { align-self: center; color: var(--muted); font-weight: 700; }
+.evidence h3 { font-size: 1.05rem; } .evidence h4 { font-size: .98rem; }
+.small { font-size: .85rem; color: var(--muted); }
+@media print { .topbar { position: static; } details { break-inside: avoid; } }

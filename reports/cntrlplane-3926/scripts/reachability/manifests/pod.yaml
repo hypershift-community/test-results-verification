@@ -1,0 +1,35 @@
+# Rendered by `pod <name> <image>` (env.sh). Restricted-PSA compliant; the registry image's default
+# entrypoint serves plain HTTP on :5000 from an emptyDir (nothing is pushed, it only has to start).
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ${POD_NAME}
+  namespace: ${GUEST_NS}
+  labels:
+    app: mirror-reach-check
+spec:
+  terminationGracePeriodSeconds: 5
+  securityContext:
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
+  containers:
+  - name: registry
+    image: ${IMAGE}
+    imagePullPolicy: Always       # never trust a cached copy: the kubelet must ask a registry for the manifest
+    ports:
+    - containerPort: 5000
+    resources:
+      requests:
+        cpu: 10m
+        memory: 32Mi
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop: ["ALL"]
+    volumeMounts:
+    - name: data
+      mountPath: /var/lib/registry
+  volumes:
+  - name: data
+    emptyDir: {}

@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scenario 1 — Smoke (design validation) — CNTRLPLANE-3926 verification</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topbar"><div class="brand">CNTRLPLANE-3926 · Verification report</div><nav><a href="index.html">Dashboard</a><a href="scenario-1.html" class="active">1 · Smoke</a><a href="scenario-2.html">2 · Harness</a><a href="scenario-3.html">3 · Reachability</a><a href="automated-tests.html">Automated tests</a><a href="appendices.html">Appendices</a><a href="../../plans/cntrlplane-3926.md">Test plan</a><a href="https://github.com/openshift/hypershift/pull/9996">PR #9996</a></nav></header>
+<main>
+<h1>Scenario 1 — Smoke (design validation)</h1>
+<p class="subtitle">Pre-implementation check of the fixture design with hand-written manifests</p>
+<dl class="kv">
+  <dt>Objective</dt><dd>Check the assumptions behind the design decisions (D2–D8) with real resources before writing code, and record
+  the facts the implementation needs. The manifests used here became the reference for the resource builders.</dd>
+  <dt>Code under test</dt><dd>None. Hand-written manifests (<code>scripts/smoke/manifests/*.yaml</code>)
+  applied with <code>oc</code>; the PR code is verified in Scenarios 2 and 3</dd>
+  <dt>Environment</dt><dd>Management cluster <code>mgmt</code>: OpenShift 4.20.0 (itself a HyperShift hosted cluster on AWS, as in CI);
+  namespace <code>test-mirror-registry</code>; registry <code>quay.io/libpod/registry@sha256:e642e860…</code> (2.8.2); copier image from the
+  <code>openshift/cli</code> ImageStream (oc 4.20.0)</dd>
+  <dt>Date</dt><dd>2026-10-12</dd>
+  <dt>Verdict</dt><dd><span class="badge pass">PASS</span> Must-have steps 1–9 OK; discovery steps 10–11 recorded</dd>
+</dl>
+<div class="callout"><p><b>Findings that shaped the code:</b> the serving certificate CN cannot be the Route host (over 64 characters, RFC 5280),
+so the CN is short and hostnames are SANs only. <code>restricted-v2</code> must assign the UID and <code>fsGroup</code>, so builders set no fixed IDs.
+<code>--keep-manifest-list=true</code> is needed to keep the list digest and copies all architectures. One 4.20 payload is about 22 GiB, which
+sizes the PVC for CNTRLPLANE-3931. The CI image has no <code>oc</code>, so copying runs in-cluster.</p></div>
+<h2 id="test-cases">Test cases</h2>
+<table><thead><tr><th>TC</th><th>Test case</th><th>Runbook steps</th><th>Covers</th><th>Result</th><th>Key evidence</th></tr></thead><tbody><tr id="tc-01"><td><b>TC-01</b></td><td>Registry runs under <code>restricted-v2</code> with TLS</td><td>1–3, 9</td><td>AC1, AC4</td><td><span class="badge pass">PASS</span></td><td>SCC <code>restricted-v2</code>, random UID; <code>listening on [::]:5000, tls</code>; probes 200 over HTTP/2</td></tr><tr id="tc-02"><td><b>TC-02</b></td><td>In-cluster copy preserves digests (real + virtual repository)</td><td>4, 7</td><td>AC2</td><td><span class="badge pass">PASS</span></td><td>2 × (7 manifests, 36 blobs, 51.88 MiB) in ~6.5 s; both repositories serve <code>sha256:e642e860…</code></td></tr><tr id="tc-03"><td><b>TC-03</b></td><td>Read-only mode rejects pushes and keeps content</td><td>5, 7</td><td>D4</td><td><span class="badge pass">PASS</span></td><td><code>HTTP 405 Method not allowed</code>; digests still served after the read-only restart</td></tr><tr id="tc-04"><td><b>TC-04</b></td><td>Passthrough Route: anonymous read, verified TLS, no push</td><td>6–8</td><td>AC3, AC4</td><td><span class="badge pass">PASS</span></td><td><code>Admitted=True</code>; <code>{}  HTTP 200</code> with CA; curl exit 60 without; skopeo push → 405; re-apply <code>unchanged</code></td></tr><tr id="tc-05"><td><b>TC-05</b></td><td>Release payload sizing and source repositories (dry-run)</td><td>10</td><td>AC2</td><td><span class="badge info">RECORDED</span></td><td>4.20.0: 192 manifests, 444 blobs, 22.08 GiB; <code>ocp-release</code> + <code>ocp-v4.0-art-dev</code> → one mirror repository</td></tr><tr id="tc-06"><td><b>TC-06</b></td><td><code>oc</code> in the CI test image</td><td>11</td><td>D5</td><td><span class="badge info">RECORDED</span></td><td>absent → copying must run in-cluster (Job with <code>openshift/cli</code>)</td></tr></tbody></table>
+
+<h2 id="procedure">Procedure</h2>
+<p>The runbook below is the one in the reproduction kit (<a href="scripts/smoke/RUNBOOK.md"><code>scripts/smoke/RUNBOOK.md</code></a>).
+It is the executed runbook after sanitization, minus the internal workflow notes listed under
+<a href="appendices.html#kit-changes">kit changes</a>.</p>
+<details><summary>Runbook — expected results for every step</summary>
+<div class="evidence"><p>Goal: verify the assumptions behind <code>decisions.md</code> with real resources, and record the facts the delegated
+tasks (T3 builders, T4 copier) need. Fill <code>RESULTS.md</code> as you go (each step has a <strong>Record</strong> line).</p>
+<p>Scope and safety:
+- Only context <code>mgmt</code>, only namespace <code>test-mirror-registry</code> (+ one cluster-scoped read of the ingress
+  domain, ImageStream and ClusterVersion). Nothing on the parent cluster, no HostedCluster changes.
+- Every <code>oc</code> call goes through <code>k</code> (= <code>oc --context mgmt</code>).
+- <code>out/</code> holds a private key: it stays under <code>.work/</code> (gitignored). Never paste it anywhere.
+- Step 10 copies the management cluster pull secret into the test namespace: do not print it; it is deleted
+  with the namespace in step 12.
+- Time: ~1–2 hours. Steps 1–9 are the must-haves; 10–11 are discovery for later stories.</p>
+<p>All commands are run from the repository root in a bash/zsh shell.</p>
+<hr />
+<h4 id="s1-rb-0-environment">0. Environment</h4>
+<p><pre class="highlight"><code class="language-bash">source .work/cntrlplane-3926/smoke/env.sh
+k get ns "$NS"            # expected: NotFound (start clean)</code></pre>
+Expected: the echo shows <code>HOST=mirror-registry-test-mirror-registry.apps.mgmt...</code>, a <code>CLI_IMAGE</code> by digest
+in <code>quay.io/openshift-release-dev/ocp-v4.0-art-dev</code>, and a <code>RELEASE_IMAGE</code> by digest.</p>
+<h4 id="s1-rb-1-ca-and-serving-certificate-local-openssl">1. CA and serving certificate (local, openssl)</h4>
+<p><pre class="highlight"><code class="language-bash">cd "$OUT/certs"
+cat &gt; ca.ext &lt;&lt;'EOF'
+basicConstraints=critical,CA:TRUE
+keyUsage=critical,keyCertSign,cRLSign
+subjectKeyIdentifier=hash
+EOF
+openssl genrsa -out ca.key 4096
+openssl req -new -key ca.key -subj "/CN=hypershift-e2e-mirror-registry-ca" -out ca.csr
+openssl x509 -req -in ca.csr -signkey ca.key -days 30 -extfile ca.ext -out ca.crt
+
+cat &gt; tls.ext &lt;&lt;EOF
+basicConstraints=CA:FALSE
+keyUsage=critical,digitalSignature,keyEncipherment
+extendedKeyUsage=serverAuth
+subjectAltName=DNS:${HOST},DNS:${NAME},DNS:${NAME}.${NS},DNS:${NAME}.${NS}.svc,DNS:${NAME}.${NS}.svc.cluster.local
+EOF
+openssl genrsa -out tls.key 2048
+### CN is limited to 64 characters (RFC 5280) and $HOST is longer; clients match the SANs, so keep CN short.
+openssl req -new -key tls.key -subj "/CN=${NAME}" -out tls.csr
+openssl x509 -req -in tls.csr -CA ca.crt -CAkey ca.key -CAcreateserial -days 30 -extfile tls.ext -out tls.crt
+openssl verify -CAfile ca.crt tls.crt          # expected: tls.crt: OK
+cd - &gt;/dev/null</code></pre>
+These mirror what T2 will do in Go (<code>support/certs</code>).</p>
+<h4 id="s1-rb-2-namespace-tls-secret-ca-configmap-registry-config-writable">2. Namespace, TLS Secret, CA ConfigMap, registry config (writable)</h4>
+<pre class="highlight"><code class="language-bash">k create namespace "$NS"
+k label namespace "$NS" app.kubernetes.io/part-of=hypershift-e2e-mirror-registry
+k -n "$NS" create secret tls "${NAME}-tls" --cert="$OUT/certs/tls.crt" --key="$OUT/certs/tls.key"
+k -n "$NS" create configmap "${NAME}-ca" --from-file=ca.crt="$OUT/certs/ca.crt"
+READONLY=false render registry-config.yaml | k apply -f -
+render pvc.yaml | k apply -f -
+render service.yaml | k apply -f -</code></pre>
+<h4 id="s1-rb-3-registry-deployment-restricted-v2-pvc">3. Registry Deployment (restricted-v2, PVC)</h4>
+<p><pre class="highlight"><code class="language-bash">render deployment.yaml | k apply -f -
+k -n "$NS" rollout status deploy/"$NAME" --timeout=5m
+POD=$(k -n "$NS" get pod -l app.kubernetes.io/name="$NAME" -o jsonpath='{.items[0].metadata.name}')
+k -n "$NS" get pod "$POD" -o jsonpath='{.metadata.annotations.openshift\.io/scc}{"  uid="}{.spec.containers[0].securityContext.runAsUser}{"\n"}'
+k -n "$NS" logs "$POD" | grep -m1 -i 'listening on'   # startup line (tail would only show probe noise)</code></pre>
+Expected:
+- rollout succeeds; no PodSecurity admission warnings on apply;
+- SCC <code>restricted-v2</code>, a high random UID;
+- log line similar to <code>listening on [::]:5000, tls</code>.</p>
+<p>If the pod crash-loops: check <code>k -n "$NS" logs "$POD"</code> (config path/permissions) and <code>k -n "$NS" describe pod "$POD"</code>.</p>
+<p><strong>Record:</strong> SCC, UID, any change needed to the Deployment, log line.</p>
+<h4 id="s1-rb-4-copy-one-image-twice-real-virtual-source-via-the-internal-service">4. Copy one image twice (real + virtual source) via the internal Service</h4>
+<p><pre class="highlight"><code class="language-bash">export JOB_NAME=mirror-test \
+  ARG1="${TEST_SRC_REPO}@${TEST_DIGEST}" ARG2="${INTERNAL}/quay.io/libpod/registry" \
+  ARG3="${TEST_SRC_REPO}@${TEST_DIGEST}" ARG4="${INTERNAL}/${VIRTUAL_REPO}"
+render job-mirror.yaml | k apply -f -
+k -n "$NS" wait --for=condition=complete job/mirror-test --timeout=10m \
+  || k -n "$NS" wait --for=condition=failed job/mirror-test --timeout=1s
+k -n "$NS" logs job/mirror-test</code></pre>
+Expected: Job <code>Complete</code>; logs show both mirrors and the manifest list <code>sha256:e642e860...</code> plus per-arch manifests;
+no TLS errors (proves the combined CA bundle via <code>SSL_CERT_FILE</code> works for <code>oc</code>).</p>
+<p>Checks:
+- <code>oc image mirror</code> accepted a destination <strong>without tag</strong> for a by-digest source (if not, record the error and
+  what destination form works, e.g. adding <code>:mirror</code>);
+- the repository layout <code>&lt;registry&gt;/&lt;source-registry&gt;/&lt;path&gt;</code> (D6) is accepted, including the <code>.invalid</code> host
+  as a path component.</p>
+<p><strong>Record:</strong> <code>oc</code> client version from the log, exact working command line, any flag changes.</p>
+<h4 id="s1-rb-5-switch-to-read-only-and-prove-pushes-are-rejected">5. Switch to read-only and prove pushes are rejected</h4>
+<p><pre class="highlight"><code class="language-bash">READONLY=true render registry-config.yaml | k apply -f -
+k -n "$NS" rollout restart deploy/"$NAME"
+k -n "$NS" rollout status deploy/"$NAME" --timeout=5m
+
+export JOB_NAME=mirror-readonly-check \
+  ARG1="${TEST_SRC_REPO}@${TEST_DIGEST}" ARG2="${INTERNAL}/readonly-check/registry" ARG3="" ARG4=""
+render job-mirror.yaml | k apply -f -
+k -n "$NS" wait --for=condition=failed job/mirror-readonly-check --timeout=10m
+k -n "$NS" logs job/mirror-readonly-check | tail -n 10</code></pre>
+Expected: Job <strong>Failed</strong>; the error mentions the registry being read-only / method not allowed / unavailable.
+Content from step 4 survived the restart (checked in step 7) — this is why storage must be a PVC.</p>
+<p><strong>Record:</strong> exact error text (T4 can match it in diagnostics), restart duration.</p>
+<h4 id="s1-rb-6-expose-with-a-passthrough-route-explicit-host">6. Expose with a passthrough Route (explicit host)</h4>
+<p><pre class="highlight"><code class="language-bash">render route.yaml | k apply -f -
+k -n "$NS" get route "$NAME" -o jsonpath='{.spec.host}{"  "}{.status.ingress[0].conditions[0].type}={.status.ingress[0].conditions[0].status}{"\n"}'</code></pre>
+Expected: host equals <code>$HOST</code>, <code>Admitted=True</code>.</p>
+<p><strong>Record:</strong> whether setting <code>spec.host</code> explicitly needed anything special.</p>
+<h4 id="s1-rb-7-verify-from-the-laptop-anonymous-read-only-tls-verified-digest-preserved">7. Verify from the laptop: anonymous, read-only, TLS verified, digest preserved</h4>
+<p><pre class="highlight"><code class="language-bash">### TLS verified against our CA only; anonymous; expect HTTP 200 and body {}
+curl -sS --cacert "$OUT/certs/ca.crt" -w '  HTTP %{http_code}\n' "https://${HOST}/v2/"
+
+### Without our CA the TLS handshake must fail (proves verification is real)
+curl -sS -o /dev/null "https://${HOST}/v2/" ; echo "exit=$? (expected non-zero, certificate error)"
+
+### skopeo needs a directory with ONLY the CA: a *.key without a matching *.cert there is an error.
+mkdir -p "$OUT/ca-only" &amp;&amp; cp "$OUT/certs/ca.crt" "$OUT/ca-only/ca.crt"
+
+### Digest preserved for both repositories (manifest list digest == TEST_DIGEST)
+for repo in quay.io/libpod/registry "${VIRTUAL_REPO}"; do
+  echo "$repo: sha256:$(skopeo inspect --raw --no-creds --cert-dir "$OUT/ca-only" \
+    "docker://${HOST}/${repo}@${TEST_DIGEST}" | shasum -a 256 | cut -d' ' -f1)"
+done
+echo "expected: ${TEST_DIGEST}"
+
+### Pushing through the public Route must fail (read-only)
+skopeo copy --all --dest-no-creds --dest-cert-dir "$OUT/ca-only" \
+  "docker://${TEST_SRC_REPO}@${TEST_DIGEST}" "docker://${HOST}/route-push-check/registry:x" ; echo "exit=$? (expected non-zero)"</code></pre>
+<strong>Record:</strong> all four outcomes.</p>
+<h4 id="s1-rb-8-idempotency-of-the-manifests">8. Idempotency of the manifests</h4>
+<p><pre class="highlight"><code class="language-bash">for f in registry-config pvc service deployment route; do READONLY=true render $f.yaml | k apply -f -; done</code></pre>
+Expected: everything <code>unchanged</code> (or <code>configured</code> without a pod restart). Tells T5 which fields the API server
+defaults and the create-or-update logic must tolerate.</p>
+<p><strong>Record:</strong> objects reported as <code>configured</code> and why.</p>
+<h4 id="s1-rb-9-pod-level-facts-for-the-builders">9. Pod-level facts for the builders</h4>
+<p><pre class="highlight"><code class="language-bash">k -n "$NS" get pod -l app.kubernetes.io/name="$NAME" -o yaml | grep -A12 'securityContext:' | head -40
+k -n "$NS" get pvc "$NAME" -o jsonpath='{.spec.storageClassName} {.status.capacity.storage}{"\n"}'</code></pre>
+<strong>Record:</strong> the effective securityContext injected by the SCC (fsGroup, runAsUser range), StorageClass.</p>
+<h4 id="s1-rb-10-discovery-full-release-payload-size-and-source-repositories-dry-run-only">10. (Discovery) Full release payload — size and source repositories, dry-run only</h4>
+<p><pre class="highlight"><code class="language-bash">### Copy the management cluster pull secret into the test namespace without printing it.
+k get secret pull-secret -n openshift-config -o json \
+  | jq --arg ns "$NS" '{apiVersion, kind, type, data, metadata: {name: "source-pull-secret", namespace: $ns}}' \
+  | k apply -f - &gt;/dev/null &amp;&amp; echo "source-pull-secret created"
+render job-release-dryrun.yaml | k apply -f -
+k -n "$NS" wait --for=condition=complete job/release-dryrun --timeout=15m \
+  || k -n "$NS" wait --for=condition=failed job/release-dryrun --timeout=1s
+k -n "$NS" logs job/release-dryrun</code></pre>
+Expected: payload size summary, the unique component repositories (typically
+<code>quay.io/openshift-release-dev/ocp-v4.0-art-dev</code>), and an IDMS snippet listing the source repositories
+(<code>ocp-release</code> and <code>ocp-v4.0-art-dev</code>) mapped to the mirror repository. Nothing is pushed (<code>--dry-run</code>, and
+the registry is read-only anyway).</p>
+<p>Note: <code>oc adm release mirror</code> prints a deprecation warning (removal planned in <code>oc</code> 6.0, replaced by
+<code>oc-mirror</code>). Record it; it affects CNTRLPLANE-3931 later, not this PR.</p>
+<p><strong>Record:</strong> total payload size (for PVC sizing in 3931), source repository list, whether parsing the IDMS
+output is a reasonable way to fill <code>CopyResult.ReleaseSourceRepositories</code> or whether <code>--pullspecs</code> is simpler.</p>
+<h4 id="s1-rb-11-discovery-optional-does-the-ci-test-image-contain-oc">11. (Discovery, optional) Does the CI test image contain <code>oc</code>?</h4>
+<p>Needs a login to <code>registry.ci.openshift.org</code> (your <code>ci-registry</code> context):
+<pre class="highlight"><code class="language-bash">oc --context ci-registry-context registry login --registry registry.ci.openshift.org --to="$OUT/ci-auth.json"
+podman run --rm --authfile "$OUT/ci-auth.json" --entrypoint /bin/sh \
+  registry.ci.openshift.org/openshift/release:rhel-9-release-golang-1.26-openshift-5.1 -c 'command -v oc &amp;&amp; oc version --client || echo "no oc"'
+rm -f "$OUT/ci-auth.json"</code></pre>
+<strong>Record:</strong> present / absent. (The in-cluster Job design does not depend on it; it matters only if we ever
+want to resolve the <code>cli</code> image from the CI pod instead of the <code>openshift/cli</code> ImageStream.)</p>
+<h4 id="s1-rb-12-teardown">12. Teardown</h4>
+<p><pre class="highlight"><code class="language-bash">k delete namespace "$NS" --wait=true --timeout=5m
+k get pv | grep "${NS}/${NAME}" || echo "PV gone (reclaimPolicy Delete)"</code></pre>
+Optionally keep the namespace until <code>RESULTS.md</code> is filled; nothing else depends on it.</p></div>
+</details>
+<h2 id="results">Results and evidence</h2>
+<p>The text below is the results file from the run, unchanged except for sanitization (raw copy:
+<a href="assets/evidence/smoke-RESULTS.md"><code>assets/evidence/smoke-RESULTS.md</code></a>).
+Long command outputs are collapsed.</p>
+<div class="evidence"><p>Date: 2026/10/12  Cluster: mgmt (OCP 4.20.0, nested hosted cluster)  Run by: @Nirshal</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Item</th>
+<th>Result</th>
+<th>Notes / exact values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+<td>Registry image runs under restricted-v2</td>
+<td>OK</td>
+<td>SCC <code>restricted-v2</code>, UID <code>1000630000</code>; HTTPS probes return 200 (evidence 3)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Deployment changes needed</td>
+<td>NONE</td>
+<td><code>manifests/deployment.yaml</code> works as written; startup log <code>listening on [::]:5000, tls</code>, registry 2.8.2</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Copy Job succeeds (real + <code>.invalid</code> virtual repo)</td>
+<td>OK</td>
+<td><code>openshift/cli</code> image, oc <code>4.20.0-202509230043</code>; 2 × (7 manifests, 36 blobs, 51.88 MiB) in ~6.5 s each</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Destination without tag accepted for by-digest source</td>
+<td>OK</td>
+<td><code>oc image mirror --keep-manifest-list=true &lt;repo&gt;@sha256:… &lt;internal&gt;/&lt;src-registry&gt;/&lt;path&gt;</code> (pushed by digest, no tag)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>CA trust via combined <code>SSL_CERT_FILE</code> works</td>
+<td>OK</td>
+<td>no TLS errors to quay.io (system CAs) nor to the internal Service (our CA)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Read-only config value works (<code>storage.maintenance.readonly.enabled</code>)</td>
+<td>OK</td>
+<td>ConfigMap toggle + <code>rollout restart</code>; Job Failed as expected</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Push rejected in read-only, error text</td>
+<td>OK</td>
+<td>every blob upload gets <code>HTTP 405</code> <code>Method not allowed</code> (evidence 5)</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Passthrough Route with explicit host admitted</td>
+<td>OK</td>
+<td>explicit <code>spec.host</code> accepted as-is, nothing special needed</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>/v2/</code> 200 anonymous with CA</td>
+<td>OK</td>
+<td><code>{}  HTTP 200</code> with <code>--cacert ca.crt</code>, no credentials</td>
+</tr>
+<tr>
+<td>7</td>
+<td>TLS fails without CA</td>
+<td>OK</td>
+<td>curl exit 60 <code>unable to get local issuer certificate</code></td>
+</tr>
+<tr>
+<td>7</td>
+<td>Digest preserved (both repos)</td>
+<td>OK</td>
+<td>both repos serve <code>sha256:e642e860…</code> = source manifest-list digest; content survived the read-only restart</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Push via Route rejected</td>
+<td>OK</td>
+<td>skopeo exit 1, <code>StatusCode: 405, "Method not allowed"</code> on blob upload</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Re-apply idempotent</td>
+<td>OK</td>
+<td>all 5 objects <code>unchanged</code>, no pod restart</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Effective securityContext / StorageClass</td>
+<td>OK</td>
+<td>SCC injects <code>runAsUser: 1000630000</code> (container), <code>fsGroup: 1000630000</code> + SELinux <code>s0:c25,c15</code> (pod); PVC <code>gp3-csi</code> 5Gi</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Payload size</td>
+<td>OK</td>
+<td>4.20.0 x86_64: 192 manifests, 444 blobs, <strong>22.08 GiB</strong> to transfer/store (<code>--size</code>: 23.7 GB, 251 layers)</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Release source repositories</td>
+<td>OK</td>
+<td><code>quay.io/openshift-release-dev/ocp-release</code> (release) + <code>quay.io/openshift-release-dev/ocp-v4.0-art-dev</code> (components), both → one mirror repo</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Best way to get them (IDMS output vs <code>--pullspecs</code>)</td>
+<td>OK</td>
+<td><code>--pullspecs</code> (release repo + unique component repos): stable, not tied to the deprecated mirror command's text output</td>
+</tr>
+<tr>
+<td>11</td>
+<td><code>oc</code> in CI test image</td>
+<td>ABSENT</td>
+<td>base image <code>openshift/release:rhel-9-release-golang-1.26-openshift-5.1</code> has no <code>oc</code> on PATH; <code>Dockerfile.e2e</code> adds none → in-cluster copy Job is required</td>
+</tr>
+</tbody>
+</table>
+<h3 id="s1-ev-values-to-copy-into-code">Values to copy into code</h3>
+<ul>
+<li><code>DefaultRegistryImage</code>: <code>quay.io/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f</code> — confirmed, set in <code>api.go</code></li>
+<li>Copier image default: <code>openshift/cli</code> ImageStream <code>latest</code> — confirmed (steps 4, 10); CI test image has no <code>oc</code> (step 11)</li>
+<li>Final manifests: <code>manifests/</code> worked <strong>unchanged</strong> — they are the golden reference for T3/T4</li>
+</ul>
+<p>Step 12 (teardown): namespace deleted, PV released (reclaim <code>Delete</code>). Run completed 2026/10/12.</p>
+<h3 id="s1-ev-surprises-decisions-to-revisit">Surprises / decisions to revisit</h3>
+<ul>
+<li>Step 10: one payload is ~22 GiB stored. Two consecutive payloads for CNTRLPLANE-3931 share many layers but
+  should be budgeted at ~45 GiB → PVC ~60 Gi there. The default 20 Gi stays right for the guest-IDMS lane
+  (single small images). Mirror <strong>time</strong> for 22 GiB was not measured (dry-run); 3931 must measure it against
+  the Prow job timeout.</li>
+<li>Step 10: <code>CopyResult.ReleaseSourceRepositories</code> shape confirmed: per release, the release repository plus the
+  unique component repositories (here 2 entries), all mapped to one mirror repository.</li>
+<li>Step 4: <code>--keep-manifest-list=true</code> copies <strong>all architectures</strong> of a manifest list (here 6 manifests,
+  51.88 MiB instead of a few MiB for amd64 only). It is required to keep the list digest. Fine for small
+  test images; for release payloads (CNTRLPLANE-3931) the standard <code>ocp-release</code> images are single-arch, so
+  size stays per-payload. Keep in mind for PVC sizing if multi-arch payloads are ever mirrored.</li>
+<li>Step 4: the second copy re-uploaded all blobs (<code>mounts=0</code>) although they already existed in the first
+  repository. Storage is content-addressed (no double disk usage), only transfer time is spent. Not worth
+  optimizing for test images.</li>
+<li>Step 1: the serving certificate CN cannot be the Route host (&gt; 64 characters, RFC 5280). Use a short CN
+  (<code>mirror-registry</code>) and put hostnames only in the SANs. Folded into <code>RUNBOOK.md</code> and <code>plan.md</code> T2.</li>
+</ul>
+<h3 id="s1-ev-evidence">Evidence</h3>
+<h4 id="s1-ev-step-3-registry-pod-logs">Step 3 — registry pod logs</h4>
+<p>Registry version <code>go1.19.9</code> build; kubelet HTTPS probes on <code>/v2/</code> answered 200 over HTTP/2 (HTTP/2 is only
+negotiated over TLS, so the registry is serving TLS with our certificate).</p>
+<pre class="highlight"><code class="language-text">10.133.0.2 - - [12/Oct/2026:08:58:51 +0000] "GET /v2/ HTTP/2.0" 200 2 "" "kube-probe/1.33"
+time="2026-10-12T08:58:53.597323518Z" level=info msg="response completed" go.version=go1.19.9 http.request.host="10.133.1.247:5000" http.request.id=67db714b-dc62-4193-9b0e-49a1800f380f http.request.method=GET http.request.remoteaddr="10.133.0.2:37684" http.request.uri="/v2/" http.request.useragent="kube-probe/1.33" http.response.contenttype="application/json; charset=utf-8" http.response.duration=1.561024ms http.response.status=200 http.response.written=2
+10.133.0.2 - - [12/Oct/2026:08:58:53 +0000] "GET /v2/ HTTP/2.0" 200 2 "" "kube-probe/1.33"
+time="2026-10-12T08:58:56.190554648Z" level=info msg="response completed" go.version=go1.19.9 http.request.host="10.133.1.247:5000" http.request.id=3144f94a-e258-4e4d-ba86-5d05d5c157f4 http.request.method=GET http.request.remoteaddr="10.133.0.2:49024" http.request.uri="/v2/" http.request.useragent="kube-probe/1.33" http.response.contenttype="application/json; charset=utf-8" http.response.duration=1.015674ms http.response.status=200 http.response.written=2
+10.133.0.2 - - [12/Oct/2026:08:58:56 +0000] "GET /v2/ HTTP/2.0" 200 2 "" "kube-probe/1.33"</code></pre>
+<p>Startup line:</p>
+<pre class="highlight"><code class="language-text">time="2026-10-12T08:54:15.191612123Z" level=info msg="listening on [::]:5000, tls" go.version=go1.19.9 instance.id=8770d4e2-b38c-435d-948d-0520dcd8c92f service=registry version=2.8.2</code></pre>
+<h4 id="s1-ev-step-4-copy-job-logs">Step 4 — copy Job logs</h4>
+<p>Both copies completed. Manifest list <code>sha256:e642e860…</code> plus its 6 per-architecture manifests were pushed by
+digest to both <code>quay.io/libpod/registry</code> and <code>mirror-source.hypershift-e2e.invalid/libpod/registry</code>, i.e. the
+D6 layout (including the <code>.invalid</code> host as a path component) is accepted. Digest equality on the public
+endpoint is checked in step 7.</p>
+<details class="output"><summary>Command output (161 lines) — click to expand</summary><pre class="highlight"><code class="language-text">Client Version: 4.20.0-202509230043.p2.ga434281.assembly.stream.el9-a434281
+Kustomize Version: v5.6.0
+=== mirror quay.io/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f -&gt; mirror-registry.test-mirror-registry.svc:5000/quay.io/libpod/registry
+mirror-registry.test-mirror-registry.svc:5000/
+quay.io/libpod/registry
+blobs:
+quay.io/libpod/registry sha256:356f0e046603015c84a7d938f4737b363a2760ac2099f484dcc1d6ec3dd844ac 214B
+quay.io/libpod/registry sha256:3745f5e7cc696592c982fb456207ad8a32889e9a5a5b8f17525a469397aa5aab 214B
+quay.io/libpod/registry sha256:7417fa3c6d923a722787ff60825c3c40f74621ab2e4abcc120e25b10a35e4811 214B
+quay.io/libpod/registry sha256:af0cc111bdb4ccbcbe9e1d7fcdd884315e9d108ae06718871fbccea824878c20 214B
+quay.io/libpod/registry sha256:b58a5a1ef3b60d92194b55c0fabaf01e31cdc2671f4198dee4162ad3a922507e 214B
+quay.io/libpod/registry sha256:2cbeb3fe0742f6fcada760aa65bc6d3bf83b16a8190cc936f2bde2477a2770d7 215B
+quay.io/libpod/registry sha256:5259fb81414efda435e8c80ae21d277a27b149f488b6c7f55216119025b2444c 398B
+quay.io/libpod/registry sha256:6f22f5bf08e6a4c52dcaa0f76c001116ca484b811f4aabe2e1114ede0473768d 398B
+quay.io/libpod/registry sha256:9c0525345bde84293b274deb702098f1a0dbffc62e1b7270e06f8eea0f1c1a29 398B
+quay.io/libpod/registry sha256:121f958bea53668d782691e643e9401ea21dd36c9d81078b51964d2e82b51376 399B
+quay.io/libpod/registry sha256:89015d87ad663ad7dc3c895507a48abf75af42d5aa96f45cf58774376507ef39 399B
+quay.io/libpod/registry sha256:9d2d3fd2527f6cdd52276d364a2cabb589e3bbc8a745e9c20469086ae906d95e 399B
+quay.io/libpod/registry sha256:a7014e8ccc173fe30110a1dcfc70dc51f019db33b9c55714472ff9c440ddec60 4.024KiB
+quay.io/libpod/registry sha256:0030ba3d620c647159c935ee778991c68ef3e51a274703753b0bc530104ef5e5 4.026KiB
+quay.io/libpod/registry sha256:8e3c88d183641f876f31f8e1597dd4a1eb58a0f912c450094b9fa5054c369159 4.029KiB
+quay.io/libpod/registry sha256:20b02a79df1e04210278fa01c2f0386a50d5118808176a8601acd1149afcfbfc 4.039KiB
+quay.io/libpod/registry sha256:5339f63f9a359dc7afd94a5c68c51eb22c4cfd631cdb62f41065983a30d5838a 4.04KiB
+quay.io/libpod/registry sha256:3c11102b94173ff36b94a107731091ea1b4d68d51acce12c7d7a02f863b444a9 4.042KiB
+quay.io/libpod/registry sha256:a47bd95d78f565e902bafd0264a979eb4f6f71e22c0464011bf9db6feb0579e6 277.4KiB
+quay.io/libpod/registry sha256:c4d48a809fc2256f8aa0aeee47998488d64409855adba00a7cb3007ab9f3286e 278KiB
+quay.io/libpod/registry sha256:8564ce36feee688566265012773f1c8c7c046ceefe86ca763eb702682f4e6e75 278.2KiB
+quay.io/libpod/registry sha256:175521994a5932158dbd78d2153c38836ab5e1db0ceb4af91113d4c49c5caba2 278.4KiB
+quay.io/libpod/registry sha256:5d54e960e981301b0098c80d2e61d694333b5ab480a007a3a8d0fa629662d377 279.6KiB
+quay.io/libpod/registry sha256:c966ad2cdd35689da92e7c8fd39bd37cd6080c484e6ccaf00672c154cd4f6c2a 279.9KiB
+quay.io/libpod/registry sha256:f8dec92eec42224ef9e6ca9c6207ea6b9195dcf93d06bd5ceff0f814b62bf064 2.765MiB
+quay.io/libpod/registry sha256:af09961d4a43b504efc76e38b50918977c28be73eeb8b926247783a00e8b9f2f 2.999MiB
+quay.io/libpod/registry sha256:998cc98447b44e5f0fe799dce691412796ba586ab22eb7c99aebf9d45f34833b 3.065MiB
+quay.io/libpod/registry sha256:9fda8d8052c61740409c4bea888859c141fd8cc3f58ac61943144ff6d1681b2d 3.176MiB
+quay.io/libpod/registry sha256:55353ca330e9474ce7b858eca6842bb540ef4a70b2981c2ed47eefb9ef4253ad 3.191MiB
+quay.io/libpod/registry sha256:7264a8db6415046d36d16ba98b79778e18accee6ffa71850405994cffa9be7de 3.244MiB
+quay.io/libpod/registry sha256:1c079a77918c61cc345bb0ae4562cc6899919358575cce027348d0d152129519 5.001MiB
+quay.io/libpod/registry sha256:cb9be1f8a1947aa58bb268c308b33b52ab00c239d020b6230ef9accdcebfcfd2 5.134MiB
+quay.io/libpod/registry sha256:5b6190aef38cde840b7e3d42e994f80ada99568850af79c76d02de250bdbf822 5.311MiB
+quay.io/libpod/registry sha256:93cca240aafc896515ff6b5406baf949e4054d981f863022f3471a389e425967 5.312MiB
+quay.io/libpod/registry sha256:4ef77a110d155ae5e1170b2dd0199770fcf951614ae89fe3de52643dfc68f1da 5.389MiB
+quay.io/libpod/registry sha256:88b450dec42ebc9659f10c6fd6d2326706fec4ab7aadf0c38973d930c23c546a 5.634MiB
+manifests:
+sha256:4cab339812e3bfa9e2242292f46ca2a99e804a4604d29f342f2b935381ebad3c
+sha256:a353b4af55af90d0d30511d2191edb9da38f174390ce91e2329fa1839b6c2408
+sha256:d72af0ec30bf3a5531f2d4dc4d0893f11b40cfd0a5dcbcbdcc19adde233847d2
+sha256:da1fbcd13a7ddc77d0d964a5c5c4cb707b5d440a028b0b42fe574b9e99077e27
+sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f
+sha256:ea32c4ea1ffa10d85c25b55e3e775a72013e685bf80f8da79ec5c5ddc4a4a63f
+sha256:fab2c6a4bb4acf3ee3ae611943e2596a73e9adb4da74432b1bcd686539f7f56f
+stats: shared=0 unique=36 size=51.88MiB ratio=1.00
+
+phase 0:
+mirror-registry.test-mirror-registry.svc:5000 quay.io/libpod/registry blobs=36 mounts=0 manifests=7 shared=0
+
+info: Planning completed in 950ms
+uploading: mirror-registry.test-mirror-registry.svc:5000/quay.io/libpod/registry sha256:c4d48a809fc2256f8aa0aeee47998488d64409855adba00a7cb3007ab9f3286e 278KiB
+uploading: mirror-registry.test-mirror-registry.svc:5000/quay.io/libpod/registry sha256:a47bd95d78f565e902bafd0264a979eb4f6f71e22c0464011bf9db6feb0579e6 277.4KiB
+uploading: mirror-registry.test-mirror-registry.svc:5000/quay.io/libpod/registry sha256:5d54e960e981301b0098c80d2e61d694333b5ab480a007a3a8d0fa629662d377 279.6KiB
+uploading: mirror-registry.test-mirror-registry.svc:5000/quay.io/libpod/registry sha256:55353ca330e9474ce7b858eca6842bb540ef4a70b2981c2ed47eefb9ef4253ad 3.191MiB
+uploading: mirror-registry.test-mirror-registry.svc:5000/quay.io/libpod/registry sha256:cb9be1f8a1947aa58bb268c308b33b52ab00c239d020b6230ef9accdcebfcfd2 5.134MiB
+uploading: mirror-registry.test-mirror-registry.svc:5000/quay.io/libpod/registry sha256:175521994a5932158dbd78d2153c38836ab5e1db0ceb4af91113d4c49c5caba2 278.4KiB
+uploading: mirror-registry.test-mirror-registry.svc:5000/quay.io/libpod/registry sha256:7264a8db6415046d36d16ba98b79778e18accee6ffa71850405994cffa9be7de 3.244MiB
+uploading: mirror-registry.test-mirror-registry.svc:5000/quay.io/libpod/registry sha256:88b450dec42ebc9659f10c6fd6d2326706fec4ab7aadf0c38973d930c23c546a 5.634MiB
+uploading: mirror-registry.test-mirror-registry.svc:5000/quay.io/libpod/registry sha256:1c079a77918c61cc345bb0ae4562cc6899919358575cce027348d0d152129519 5.001MiB
+uploading: mirror-registry.test-mirror-registry.svc:5000/quay.io/libpod/registry sha256:4ef77a110d155ae5e1170b2dd0199770fcf951614ae89fe3de52643dfc68f1da 5.389MiB
+uploading: mirror-registry.test-mirror-registry.svc:5000/quay.io/libpod/registry sha256:af09961d4a43b504efc76e38b50918977c28be73eeb8b926247783a00e8b9f2f 2.999MiB
+uploading: mirror-registry.test-mirror-registry.svc:5000/quay.io/libpod/registry sha256:c966ad2cdd35689da92e7c8fd39bd37cd6080c484e6ccaf00672c154cd4f6c2a 279.9KiB
+uploading: mirror-registry.test-mirror-registry.svc:5000/quay.io/libpod/registry sha256:f8dec92eec42224ef9e6ca9c6207ea6b9195dcf93d06bd5ceff0f814b62bf064 2.765MiB
+uploading: mirror-registry.test-mirror-registry.svc:5000/quay.io/libpod/registry sha256:998cc98447b44e5f0fe799dce691412796ba586ab22eb7c99aebf9d45f34833b 3.065MiB
+uploading: mirror-registry.test-mirror-registry.svc:5000/quay.io/libpod/registry sha256:8564ce36feee688566265012773f1c8c7c046ceefe86ca763eb702682f4e6e75 278.2KiB
+uploading: mirror-registry.test-mirror-registry.svc:5000/quay.io/libpod/registry sha256:93cca240aafc896515ff6b5406baf949e4054d981f863022f3471a389e425967 5.312MiB
+uploading: mirror-registry.test-mirror-registry.svc:5000/quay.io/libpod/registry sha256:5b6190aef38cde840b7e3d42e994f80ada99568850af79c76d02de250bdbf822 5.311MiB
+uploading: mirror-registry.test-mirror-registry.svc:5000/quay.io/libpod/registry sha256:9fda8d8052c61740409c4bea888859c141fd8cc3f58ac61943144ff6d1681b2d 3.176MiB
+sha256:ea32c4ea1ffa10d85c25b55e3e775a72013e685bf80f8da79ec5c5ddc4a4a63f mirror-registry.test-mirror-registry.svc:5000/quay.io/libpod/registry
+sha256:fab2c6a4bb4acf3ee3ae611943e2596a73e9adb4da74432b1bcd686539f7f56f mirror-registry.test-mirror-registry.svc:5000/quay.io/libpod/registry
+sha256:4cab339812e3bfa9e2242292f46ca2a99e804a4604d29f342f2b935381ebad3c mirror-registry.test-mirror-registry.svc:5000/quay.io/libpod/registry
+sha256:d72af0ec30bf3a5531f2d4dc4d0893f11b40cfd0a5dcbcbdcc19adde233847d2 mirror-registry.test-mirror-registry.svc:5000/quay.io/libpod/registry
+sha256:a353b4af55af90d0d30511d2191edb9da38f174390ce91e2329fa1839b6c2408 mirror-registry.test-mirror-registry.svc:5000/quay.io/libpod/registry
+sha256:da1fbcd13a7ddc77d0d964a5c5c4cb707b5d440a028b0b42fe574b9e99077e27 mirror-registry.test-mirror-registry.svc:5000/quay.io/libpod/registry
+sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f mirror-registry.test-mirror-registry.svc:5000/quay.io/libpod/registry
+info: Mirroring completed in 6.56s (8.29MB/s)
+=== mirror quay.io/libpod/registry@sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f -&gt; mirror-registry.test-mirror-registry.svc:5000/mirror-source.hypershift-e2e.invalid/libpod/registry
+mirror-registry.test-mirror-registry.svc:5000/
+mirror-source.hypershift-e2e.invalid/libpod/registry
+blobs:
+quay.io/libpod/registry sha256:356f0e046603015c84a7d938f4737b363a2760ac2099f484dcc1d6ec3dd844ac 214B
+quay.io/libpod/registry sha256:3745f5e7cc696592c982fb456207ad8a32889e9a5a5b8f17525a469397aa5aab 214B
+quay.io/libpod/registry sha256:7417fa3c6d923a722787ff60825c3c40f74621ab2e4abcc120e25b10a35e4811 214B
+quay.io/libpod/registry sha256:af0cc111bdb4ccbcbe9e1d7fcdd884315e9d108ae06718871fbccea824878c20 214B
+quay.io/libpod/registry sha256:b58a5a1ef3b60d92194b55c0fabaf01e31cdc2671f4198dee4162ad3a922507e 214B
+quay.io/libpod/registry sha256:2cbeb3fe0742f6fcada760aa65bc6d3bf83b16a8190cc936f2bde2477a2770d7 215B
+quay.io/libpod/registry sha256:5259fb81414efda435e8c80ae21d277a27b149f488b6c7f55216119025b2444c 398B
+quay.io/libpod/registry sha256:6f22f5bf08e6a4c52dcaa0f76c001116ca484b811f4aabe2e1114ede0473768d 398B
+quay.io/libpod/registry sha256:9c0525345bde84293b274deb702098f1a0dbffc62e1b7270e06f8eea0f1c1a29 398B
+quay.io/libpod/registry sha256:121f958bea53668d782691e643e9401ea21dd36c9d81078b51964d2e82b51376 399B
+quay.io/libpod/registry sha256:89015d87ad663ad7dc3c895507a48abf75af42d5aa96f45cf58774376507ef39 399B
+quay.io/libpod/registry sha256:9d2d3fd2527f6cdd52276d364a2cabb589e3bbc8a745e9c20469086ae906d95e 399B
+quay.io/libpod/registry sha256:a7014e8ccc173fe30110a1dcfc70dc51f019db33b9c55714472ff9c440ddec60 4.024KiB
+quay.io/libpod/registry sha256:0030ba3d620c647159c935ee778991c68ef3e51a274703753b0bc530104ef5e5 4.026KiB
+quay.io/libpod/registry sha256:8e3c88d183641f876f31f8e1597dd4a1eb58a0f912c450094b9fa5054c369159 4.029KiB
+quay.io/libpod/registry sha256:20b02a79df1e04210278fa01c2f0386a50d5118808176a8601acd1149afcfbfc 4.039KiB
+quay.io/libpod/registry sha256:5339f63f9a359dc7afd94a5c68c51eb22c4cfd631cdb62f41065983a30d5838a 4.04KiB
+quay.io/libpod/registry sha256:3c11102b94173ff36b94a107731091ea1b4d68d51acce12c7d7a02f863b444a9 4.042KiB
+quay.io/libpod/registry sha256:a47bd95d78f565e902bafd0264a979eb4f6f71e22c0464011bf9db6feb0579e6 277.4KiB
+quay.io/libpod/registry sha256:c4d48a809fc2256f8aa0aeee47998488d64409855adba00a7cb3007ab9f3286e 278KiB
+quay.io/libpod/registry sha256:8564ce36feee688566265012773f1c8c7c046ceefe86ca763eb702682f4e6e75 278.2KiB
+quay.io/libpod/registry sha256:175521994a5932158dbd78d2153c38836ab5e1db0ceb4af91113d4c49c5caba2 278.4KiB
+quay.io/libpod/registry sha256:5d54e960e981301b0098c80d2e61d694333b5ab480a007a3a8d0fa629662d377 279.6KiB
+quay.io/libpod/registry sha256:c966ad2cdd35689da92e7c8fd39bd37cd6080c484e6ccaf00672c154cd4f6c2a 279.9KiB
+quay.io/libpod/registry sha256:f8dec92eec42224ef9e6ca9c6207ea6b9195dcf93d06bd5ceff0f814b62bf064 2.765MiB
+quay.io/libpod/registry sha256:af09961d4a43b504efc76e38b50918977c28be73eeb8b926247783a00e8b9f2f 2.999MiB
+quay.io/libpod/registry sha256:998cc98447b44e5f0fe799dce691412796ba586ab22eb7c99aebf9d45f34833b 3.065MiB
+quay.io/libpod/registry sha256:9fda8d8052c61740409c4bea888859c141fd8cc3f58ac61943144ff6d1681b2d 3.176MiB
+quay.io/libpod/registry sha256:55353ca330e9474ce7b858eca6842bb540ef4a70b2981c2ed47eefb9ef4253ad 3.191MiB
+quay.io/libpod/registry sha256:7264a8db6415046d36d16ba98b79778e18accee6ffa71850405994cffa9be7de 3.244MiB
+quay.io/libpod/registry sha256:1c079a77918c61cc345bb0ae4562cc6899919358575cce027348d0d152129519 5.001MiB
+quay.io/libpod/registry sha256:cb9be1f8a1947aa58bb268c308b33b52ab00c239d020b6230ef9accdcebfcfd2 5.134MiB
+quay.io/libpod/registry sha256:5b6190aef38cde840b7e3d42e994f80ada99568850af79c76d02de250bdbf822 5.311MiB
+quay.io/libpod/registry sha256:93cca240aafc896515ff6b5406baf949e4054d981f863022f3471a389e425967 5.312MiB
+quay.io/libpod/registry sha256:4ef77a110d155ae5e1170b2dd0199770fcf951614ae89fe3de52643dfc68f1da 5.389MiB
+quay.io/libpod/registry sha256:88b450dec42ebc9659f10c6fd6d2326706fec4ab7aadf0c38973d930c23c546a 5.634MiB
+manifests:
+sha256:4cab339812e3bfa9e2242292f46ca2a99e804a4604d29f342f2b935381ebad3c
+sha256:a353b4af55af90d0d30511d2191edb9da38f174390ce91e2329fa1839b6c2408
+sha256:d72af0ec30bf3a5531f2d4dc4d0893f11b40cfd0a5dcbcbdcc19adde233847d2
+sha256:da1fbcd13a7ddc77d0d964a5c5c4cb707b5d440a028b0b42fe574b9e99077e27
+sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f
+sha256:ea32c4ea1ffa10d85c25b55e3e775a72013e685bf80f8da79ec5c5ddc4a4a63f
+sha256:fab2c6a4bb4acf3ee3ae611943e2596a73e9adb4da74432b1bcd686539f7f56f
+stats: shared=0 unique=36 size=51.88MiB ratio=1.00
+
+phase 0:
+mirror-registry.test-mirror-registry.svc:5000 mirror-source.hypershift-e2e.invalid/libpod/registry blobs=36 mounts=0 manifests=7 shared=0
+
+info: Planning completed in 470ms
+uploading: mirror-registry.test-mirror-registry.svc:5000/mirror-source.hypershift-e2e.invalid/libpod/registry sha256:8564ce36feee688566265012773f1c8c7c046ceefe86ca763eb702682f4e6e75 278.2KiB
+uploading: mirror-registry.test-mirror-registry.svc:5000/mirror-source.hypershift-e2e.invalid/libpod/registry sha256:5b6190aef38cde840b7e3d42e994f80ada99568850af79c76d02de250bdbf822 5.311MiB
+uploading: mirror-registry.test-mirror-registry.svc:5000/mirror-source.hypershift-e2e.invalid/libpod/registry sha256:5d54e960e981301b0098c80d2e61d694333b5ab480a007a3a8d0fa629662d377 279.6KiB
+uploading: mirror-registry.test-mirror-registry.svc:5000/mirror-source.hypershift-e2e.invalid/libpod/registry sha256:1c079a77918c61cc345bb0ae4562cc6899919358575cce027348d0d152129519 5.001MiB
+uploading: mirror-registry.test-mirror-registry.svc:5000/mirror-source.hypershift-e2e.invalid/libpod/registry sha256:cb9be1f8a1947aa58bb268c308b33b52ab00c239d020b6230ef9accdcebfcfd2 5.134MiB
+uploading: mirror-registry.test-mirror-registry.svc:5000/mirror-source.hypershift-e2e.invalid/libpod/registry sha256:c4d48a809fc2256f8aa0aeee47998488d64409855adba00a7cb3007ab9f3286e 278KiB
+uploading: mirror-registry.test-mirror-registry.svc:5000/mirror-source.hypershift-e2e.invalid/libpod/registry sha256:a47bd95d78f565e902bafd0264a979eb4f6f71e22c0464011bf9db6feb0579e6 277.4KiB
+uploading: mirror-registry.test-mirror-registry.svc:5000/mirror-source.hypershift-e2e.invalid/libpod/registry sha256:175521994a5932158dbd78d2153c38836ab5e1db0ceb4af91113d4c49c5caba2 278.4KiB
+uploading: mirror-registry.test-mirror-registry.svc:5000/mirror-source.hypershift-e2e.invalid/libpod/registry sha256:4ef77a110d155ae5e1170b2dd0199770fcf951614ae89fe3de52643dfc68f1da 5.389MiB
+uploading: mirror-registry.test-mirror-registry.svc:5000/mirror-source.hypershift-e2e.invalid/libpod/registry sha256:55353ca330e9474ce7b858eca6842bb540ef4a70b2981c2ed47eefb9ef4253ad 3.191MiB
+uploading: mirror-registry.test-mirror-registry.svc:5000/mirror-source.hypershift-e2e.invalid/libpod/registry sha256:9fda8d8052c61740409c4bea888859c141fd8cc3f58ac61943144ff6d1681b2d 3.176MiB
+uploading: mirror-registry.test-mirror-registry.svc:5000/mirror-source.hypershift-e2e.invalid/libpod/registry sha256:7264a8db6415046d36d16ba98b79778e18accee6ffa71850405994cffa9be7de 3.244MiB
+uploading: mirror-registry.test-mirror-registry.svc:5000/mirror-source.hypershift-e2e.invalid/libpod/registry sha256:88b450dec42ebc9659f10c6fd6d2326706fec4ab7aadf0c38973d930c23c546a 5.634MiB
+uploading: mirror-registry.test-mirror-registry.svc:5000/mirror-source.hypershift-e2e.invalid/libpod/registry sha256:af09961d4a43b504efc76e38b50918977c28be73eeb8b926247783a00e8b9f2f 2.999MiB
+uploading: mirror-registry.test-mirror-registry.svc:5000/mirror-source.hypershift-e2e.invalid/libpod/registry sha256:998cc98447b44e5f0fe799dce691412796ba586ab22eb7c99aebf9d45f34833b 3.065MiB
+uploading: mirror-registry.test-mirror-registry.svc:5000/mirror-source.hypershift-e2e.invalid/libpod/registry sha256:93cca240aafc896515ff6b5406baf949e4054d981f863022f3471a389e425967 5.312MiB
+uploading: mirror-registry.test-mirror-registry.svc:5000/mirror-source.hypershift-e2e.invalid/libpod/registry sha256:f8dec92eec42224ef9e6ca9c6207ea6b9195dcf93d06bd5ceff0f814b62bf064 2.765MiB
+uploading: mirror-registry.test-mirror-registry.svc:5000/mirror-source.hypershift-e2e.invalid/libpod/registry sha256:c966ad2cdd35689da92e7c8fd39bd37cd6080c484e6ccaf00672c154cd4f6c2a 279.9KiB
+sha256:a353b4af55af90d0d30511d2191edb9da38f174390ce91e2329fa1839b6c2408 mirror-registry.test-mirror-registry.svc:5000/mirror-source.hypershift-e2e.invalid/libpod/registry
+sha256:fab2c6a4bb4acf3ee3ae611943e2596a73e9adb4da74432b1bcd686539f7f56f mirror-registry.test-mirror-registry.svc:5000/mirror-source.hypershift-e2e.invalid/libpod/registry
+sha256:da1fbcd13a7ddc77d0d964a5c5c4cb707b5d440a028b0b42fe574b9e99077e27 mirror-registry.test-mirror-registry.svc:5000/mirror-source.hypershift-e2e.invalid/libpod/registry
+sha256:d72af0ec30bf3a5531f2d4dc4d0893f11b40cfd0a5dcbcbdcc19adde233847d2 mirror-registry.test-mirror-registry.svc:5000/mirror-source.hypershift-e2e.invalid/libpod/registry
+sha256:ea32c4ea1ffa10d85c25b55e3e775a72013e685bf80f8da79ec5c5ddc4a4a63f mirror-registry.test-mirror-registry.svc:5000/mirror-source.hypershift-e2e.invalid/libpod/registry
+sha256:4cab339812e3bfa9e2242292f46ca2a99e804a4604d29f342f2b935381ebad3c mirror-registry.test-mirror-registry.svc:5000/mirror-source.hypershift-e2e.invalid/libpod/registry
+sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f mirror-registry.test-mirror-registry.svc:5000/mirror-source.hypershift-e2e.invalid/libpod/registry
+info: Mirroring completed in 6.55s (8.304MB/s)</code></pre></details>
+<h4 id="s1-ev-step-5-read-only-push-rejection">Step 5 — read-only push rejection</h4>
+<p>The registry answers blob uploads with <code>HTTP 405 Method not allowed</code> (plain-text body, hence oc's JSON parse
+message). T4 can match <code>HTTP 405</code> / <code>Method not allowed</code> to report "registry is read-only" in diagnostics.</p>
+<pre class="highlight"><code class="language-text">error: unable to push quay.io/libpod/registry: failed to upload blob sha256:a7014e8ccc173fe30110a1dcfc70dc51f019db33b9c55714472ff9c440ddec60: error parsing HTTP 405 response body: invalid character 'M' looking for beginning of value: "Method not allowed\n"
+error: unable to push quay.io/libpod/registry: failed to upload blob sha256:6f22f5bf08e6a4c52dcaa0f76c001116ca484b811f4aabe2e1114ede0473768d: error parsing HTTP 405 response body: invalid character 'M' looking for beginning of value: "Method not allowed\n"
+error: unable to push quay.io/libpod/registry: failed to upload blob sha256:7417fa3c6d923a722787ff60825c3c40f74621ab2e4abcc120e25b10a35e4811: error parsing HTTP 405 response body: invalid character 'M' looking for beginning of value: "Method not allowed\n"
+error: unable to push quay.io/libpod/registry: failed to upload blob sha256:89015d87ad663ad7dc3c895507a48abf75af42d5aa96f45cf58774376507ef39: error parsing HTTP 405 response body: invalid character 'M' looking for beginning of value: "Method not allowed\n"
+error: unable to upload blob sha256:a47bd95d78f565e902bafd0264a979eb4f6f71e22c0464011bf9db6feb0579e6 to mirror-registry.test-mirror-registry.svc:5000/readonly-check/registry: error parsing HTTP 405 response body: invalid character 'M' looking for beginning of value: "Method not allowed\n"
+error: unable to upload blob sha256:cb9be1f8a1947aa58bb268c308b33b52ab00c239d020b6230ef9accdcebfcfd2 to mirror-registry.test-mirror-registry.svc:5000/readonly-check/registry: error parsing HTTP 405 response body: invalid character 'M' looking for beginning of value: "Method not allowed\n"
+error: unable to push quay.io/libpod/registry: failed to upload blob sha256:3745f5e7cc696592c982fb456207ad8a32889e9a5a5b8f17525a469397aa5aab: error parsing HTTP 405 response body: invalid character 'M' looking for beginning of value: "Method not allowed\n"
+error: unable to push quay.io/libpod/registry: failed to upload blob sha256:b58a5a1ef3b60d92194b55c0fabaf01e31cdc2671f4198dee4162ad3a922507e: error parsing HTTP 405 response body: invalid character 'M' looking for beginning of value: "Method not allowed\n"
+info: Mirroring completed in 6.49s (0B/s)
+error: one or more errors occurred while uploading images</code></pre>
+<h4 id="s1-ev-step-7-laptop-checks">Step 7 — laptop checks</h4>
+<p>Anonymous <code>/v2/</code> OK with our CA, TLS refused without it, virtual-repository digest matches, push through the
+Route rejected with 405. The <code>quay.io/libpod/registry</code> digest line was lost in the paste and re-run separately
+(see the end of this block).</p>
+<details class="output"><summary>Command output (36 lines) — click to expand</summary><pre class="highlight"><code class="language-text">(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) ✗ curl -sS --cacert "$OUT/certs/ca.crt" -w '  HTTP %{http_code}\n' "https://${HOST}/v2/"
+{}  HTTP 200
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) ✗ curl -sS -o /dev/null "https://${HOST}/v2/" ; echo "exit=$? (expected non-zero, certificate error)"
+curl: (60) SSL certificate problem: unable to get local issuer certificate
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+how to fix it, please visit the web page mentioned above.
+exit=60 (expected non-zero, certificate error)
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) ✗ mkdir -p "$OUT/ca-only" &amp;&amp; cp "$OUT/certs/ca.crt" "$OUT/ca-only/ca.crt"
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) ✗ for repo in quay.io/libpod/registry "${VIRTUAL_REPO}"; do
+echo "$repo: sha256:$(skopeo inspect --raw --no-creds --cert-dir "$OUT/ca-only" \
+"docker://${HOST}/${repo}@${TEST_DIGEST}" | shasum -a 256 | cut -d' ' -f1)"
+done
+quay.io/libpod/registry: sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f
+mirror-source.hypershift-e2e.invalid/libpod/registry: sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) ✗ echo "expected: ${TEST_DIGEST}"
+expected: sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) ✗ skopeo copy --all --dest-no-creds --dest-cert-dir "$OUT/ca-only" \
+"docker://${TEST_SRC_REPO}@${TEST_DIGEST}" "docker://${HOST}/route-push-check/registry:x" ; echo "exit=$? (expected non-zero)"
+Getting image list signatures
+Copying 6 images generated from 6 images in list
+Copying image sha256:da1fbcd13a7ddc77d0d964a5c5c4cb707b5d440a028b0b42fe574b9e99077e27 (1/6)
+Getting image source signatures
+Copying blob 121f958bea53 [&gt;-------------------------------------] 8.0b / 399.0b | 6.1 KiB/s
+Copying blob c4d48a809fc2 [--------------------------------------] 8.0b / 278.0KiB | 91.5 KiB/s
+Copying blob 7264a8db6415 [--------------------------------------] 8.0b / 3.2MiB | 176.4 KiB/s
+Copying blob 7417fa3c6d92 [&gt;-------------------------------------] 8.0b / 214.0b | 416.7 KiB/s
+Copying blob 88b450dec42e [--------------------------------------] 8.0b / 5.6MiB | 310.4 KiB/s
+FATA[0003] copying image 1/6 from manifest list: writing blob: initiating layer upload to /v2/route-push-check/registry/blobs/uploads/ in mirror-registry-test-mirror-registry.apps.mgmt.hypershift.example.com: StatusCode: 405, "Method not allowed\n"
+exit=1 (expected non-zero)
+$ # re-run for quay.io/libpod/registry
+$ echo "sha256:$(skopeo inspect --raw --no-creds --cert-dir "$OUT/ca-only" "docker://${HOST}/quay.io/libpod/registry@${TEST_DIGEST}" | shasum -a 256 | cut -d' ' -f1)"
+sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f
+$ echo "expected: ${TEST_DIGEST}"
+expected: sha256:e642e8604d305a3b82c8c1807b5df7a1a84cc650d57a60f9c5c2b78efec54b3f</code></pre></details>
+<h4 id="s1-ev-step-8-re-apply-output">Step 8 — re-apply output</h4>
+<p>All objects <code>unchanged</code>; registry pod not restarted.</p>
+<pre class="highlight"><code class="language-text">(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) ✗ k -n "$NS" get pods
+NAME                               READY   STATUS      RESTARTS   AGE
+mirror-readonly-check-bg7vw        0/1     Error       0          11m
+mirror-registry-67bc44dc59-qz9dk   1/1     Running     0          12m
+mirror-test-pmtxt                  0/1     Completed   0          19m
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) ✗ for f in registry-config pvc service deployment route; do READONLY=true render $f.yaml | k apply -f -; done
+configmap/mirror-registry-config unchanged
+persistentvolumeclaim/mirror-registry unchanged
+service/mirror-registry unchanged
+deployment.apps/mirror-registry unchanged
+route.route.openshift.io/mirror-registry unchanged
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) ✗ k -n "$NS" get pods
+NAME                               READY   STATUS      RESTARTS   AGE
+mirror-readonly-check-bg7vw        0/1     Error       0          12m
+mirror-registry-67bc44dc59-qz9dk   1/1     Running     0          13m
+mirror-test-pmtxt                  0/1     Completed   0          20m
+(⎈|mgmt:default)➜  hypershift-fork git:(CNTRLPLANE-3926) ✗</code></pre>
+<h4 id="s1-ev-step-9-effective-securitycontext">Step 9 — effective securityContext</h4>
+<p>Defaults injected by <code>restricted-v2</code> (not set in our manifest): container <code>runAsUser</code>, pod <code>fsGroup</code> and
+SELinux level. Our manifest sets <code>runAsNonRoot</code>, <code>seccompProfile</code>, <code>allowPrivilegeEscalation</code>, <code>drop: ALL</code>.
+The builders (T3) must <strong>not</strong> set a fixed UID/fsGroup.</p>
+<pre class="highlight"><code class="language-text">$ k -n "$NS" get pod -l app.kubernetes.io/name="$NAME" -o yaml | grep -A12 'securityContext:' | head -40
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - ALL
+        runAsUser: 1000630000
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /etc/registry
+        name: config
+        readOnly: true
+      - mountPath: /certs
+--
+    securityContext:
+      fsGroup: 1000630000
+      runAsNonRoot: true
+      seLinuxOptions:
+        level: s0:c25,c15
+      seccompProfile:
+        type: RuntimeDefault
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+
+$ k -n "$NS" get pvc "$NAME" -o jsonpath='{.spec.storageClassName} {.status.capacity.storage}{"\n"}'
+gp3-csi 5Gi</code></pre>
+<h4 id="s1-ev-step-10-release-dry-run-output">Step 10 — release dry-run output</h4>
+<p>Dry-run only (nothing pushed). Release = the management cluster's own 4.20.0 x86_64 payload. Size is the
+compressed transfer/storage size reported by the mirror planner. Both source repositories map to a single
+mirror repository (<code>&lt;host&gt;/quay.io/openshift-release-dev/ocp-release</code>), consistent with D6.</p>
+<details class="output"><summary>Command output (41 lines) — click to expand</summary><pre class="highlight"><code class="language-text">$ k -n "$NS" logs job/release-dryrun
+=== size
+  service-ca-operator                              1y       4    185.8       54.5  A
+  telemeter                                        1y       4    174.7       43.4  A
+  tests                                            1y       5    428.6      122.1  A
+  thanos                                           1y       4    179.5       48.2  A
+  tools                                            1y       4    306.4      175.1  A
+  volume-data-source-validator                     1y       4    158.1       26.8  A
+  vsphere-cloud-controller-manager                 1y       4    154.2       22.9  A
+  vsphere-cluster-api-controllers                  1y       4    152.1       20.7  A
+  vsphere-csi-driver                               1y       4    162.8       31.4  A
+  vsphere-csi-driver-operator                      1y       4    182.8       51.5  A
+  vsphere-csi-driver-syncer                        1y       4    153.3       21.9  A
+  vsphere-problem-detector                         1y       4    179.8       48.5  A
+
+  23.7GB across 251 layers, 3 different base images
+
+=== component repositories (unique)
+quay.io/openshift-release-dev/ocp-v4.0-art-dev
+=== mirror dry-run
+      sha256:fc832d6c086430f7b4841101512c95fa6788f84a9b8e89ebabfda1bcad6073f8 -&gt; 4.20.0-x86_64-insights-operator
+      sha256:fd8aa5e47d7d104e9db12009963556175580f41cb6be2feaf561a24a4b92d22b -&gt; 4.20.0-x86_64-telemeter
+      sha256:fd999c36faf3fffb2242648b2738733ab143ce62dd278f0795d01af4aec39790 -&gt; 4.20.0-x86_64-cluster-cloud-controller-manager-operator
+  stats: shared=4 unique=440 size=22.08GiB ratio=0.99
+
+phase 0:
+  mirror-registry.test-mirror-registry.svc:5000 quay.io/openshift-release-dev/ocp-release blobs=444 mounts=0 manifests=192 shared=4
+
+info: Planning completed in 37.32s
+info: Dry run complete
+
+Success
+Update image:  mirror-registry.test-mirror-registry.svc:5000/quay.io/openshift-release-dev/ocp-release:4.20.0-x86_64
+Mirror prefix: mirror-registry.test-mirror-registry.svc:5000/quay.io/openshift-release-dev/ocp-release
+
+imageDigestSources:
+- mirrors:
+  - mirror-registry.test-mirror-registry.svc:5000/quay.io/openshift-release-dev/ocp-release
+  source: quay.io/openshift-release-dev/ocp-release
+- mirrors:
+  - mirror-registry.test-mirror-registry.svc:5000/quay.io/openshift-release-dev/ocp-release
+  source: quay.io/openshift-release-dev/ocp-v4.0-art-dev</code></pre></details>
+<h4 id="s1-ev-step-11-oc-in-the-ci-test-image">Step 11 — <code>oc</code> in the CI test image</h4>
+<p>Base of the final stage of <code>Dockerfile.e2e</code>. <code>Dockerfile.e2e</code> only copies HyperShift binaries and installs
+<code>azure-cli</code> on top, so the <code>hypershift-tests</code> image has no <code>oc</code> either. This confirms D5: copying must run
+in-cluster (Job with the <code>openshift/cli</code> image), not from the CI pod.</p>
+<pre class="highlight"><code class="language-text">$ podman run --rm --authfile "$OUT/ci-auth.json" --entrypoint /bin/sh \
+    registry.ci.openshift.org/openshift/release:rhel-9-release-golang-1.26-openshift-5.1 -c 'command -v oc &amp;&amp; oc version --client || echo "no oc"'
+...
+Writing manifest to image destination
+no oc</code></pre></div>
+
+</main>
+<footer>
+CNTRLPLANE-3926 — in-cluster mirror registry fixture for HyperShift e2e v2 ·
+<a href="https://github.com/openshift/hypershift/pull/9996">openshift/hypershift#9996</a> · report date 2026-10-15.<br>
+All evidence is sanitized (cluster names, domains, AWS identifiers and local paths replaced; see
+<a href="appendices.html#e-sanitization">appendix E</a>). Cluster commands were run by a human; runbooks, scripts,
+the independent evidence review and this report were prepared with AI assistance (see appendix F).
+</footer>
+</body>
+</html>

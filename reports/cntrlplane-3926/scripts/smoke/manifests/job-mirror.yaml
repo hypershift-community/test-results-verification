@@ -1,0 +1,69 @@
+# Copies images into the registry through the internal Service, trusting the registry CA.
+# Arguments are SRC DST pairs (ARG1 ARG2 [ARG3 ARG4]). Sources must be by digest.
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ${JOB_NAME}
+  namespace: ${NS}
+  labels:
+    app.kubernetes.io/name: ${NAME}
+spec:
+  backoffLimit: 0
+  activeDeadlineSeconds: 900
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: ${NAME}-copier
+    spec:
+      restartPolicy: Never
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+      - name: copy
+        image: ${CLI_IMAGE}
+        command:
+        - /bin/bash
+        - -c
+        - |
+          set -euo pipefail
+          export HOME=/tmp
+          # Trust the system CAs (for the sources) plus the registry CA (for the destination).
+          cat /etc/pki/tls/certs/ca-bundle.crt /run/mirror-ca/ca.crt > /tmp/ca-bundle.pem
+          export SSL_CERT_FILE=/tmp/ca-bundle.pem
+          AUTH=()
+          if [ -f /run/source-pull-secret/.dockerconfigjson ]; then
+            AUTH=(-a /run/source-pull-secret/.dockerconfigjson)
+          fi
+          oc version --client
+          while [ "$#" -ge 2 ] && [ -n "$1" ]; do   # unused ARG3/ARG4 are empty strings
+            echo "=== mirror $1 -> $2"
+            oc image mirror --keep-manifest-list=true "${AUTH[@]}" "$1" "$2"
+            shift 2
+          done
+        - copy
+        args: ["${ARG1}", "${ARG2}", "${ARG3}", "${ARG4}"]
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: ["ALL"]
+        volumeMounts:
+        - name: mirror-ca
+          mountPath: /run/mirror-ca
+          readOnly: true
+        - name: source-pull-secret
+          mountPath: /run/source-pull-secret
+          readOnly: true
+      volumes:
+      - name: mirror-ca
+        configMap:
+          name: ${NAME}-ca
+      - name: source-pull-secret
+        secret:
+          secretName: source-pull-secret
+          optional: true
