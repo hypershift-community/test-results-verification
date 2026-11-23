@@ -1,0 +1,23 @@
+plan: ocpstrat-2100
+jira_key: OCPSTRAT-2100
+format: html-bundle
+date: '2026-11-23'
+verdict: conditional
+scenario_count: 14
+pass_count: 9
+ci_verified: true
+has_derived_markdown: false
+tester: CI run and user-supplied manual evidence
+pr:
+  repo: openshift/release
+  number: 86870
+  url: https://github.com/openshift/release/pull/86870
+plan_id: TP-OCPSTRAT-2100-NUTANIX-001
+plan_version: '1.2'
+ci_run: '2123824421046063104'
+pr_head: cbad36b61950c384f27f2c481518adf9d37f6566
+tags:
+  - nutanix
+  - hypershift
+  - agent
+  - conformance
