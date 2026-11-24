@@ -253,9 +253,9 @@ findings:
     message: test case must specify preconditions, or explain why none apply
 ```
 
-The three content exceptions in `.artifactlint.yaml` preserve published plans
-at their cited `main` revisions. OCPSTRAT-2653 and OCPSTRAT-3679 list nine
-missing precondition declarations. CNTRLPLANE-4338 uses narrative case and
+The content exceptions in `.artifactlint.yaml` preserve published plans
+at their cited `main` revisions, listing the missing declarations each still
+carries. CNTRLPLANE-4338 uses narrative case and
 environment details, risks, and sign-off instructions outside the supported
 field and table layouts. Its entry lists 33 specific format findings. These
 proposals require review with this PR. Matching entries produce

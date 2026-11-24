@@ -23,6 +23,28 @@ func TestMarkdownReportPRDiagnostics(t *testing.T) {
 	})
 }
 
+func TestReportsIndex(t *testing.T) {
+	t.Parallel()
+	const index = "# Verification status\n\n| PR | Verdict |\n|---|---|\n| [42](https://github.com/openshift/hypershift/pull/42) | pass |\n"
+	tests := []struct {
+		name    string
+		files   map[string]string
+		wantErr bool
+	}{
+		{"When a report directory carries an index, it should accept the index without report metadata", map[string]string{"reports/cntrlplane-7/42.md": markdownReport, "reports/cntrlplane-7/index.md": index}, false},
+		{"When a report directory carries only an index, it should still require a report", map[string]string{"reports/cntrlplane-7/index.md": index}, true},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+			g := NewWithT(t)
+			result, err := artifactlint.Validate(writeFiles(t, tt.files))
+			g.Expect(err).NotTo(HaveOccurred())
+			g.Expect(result.HasErrors()).To(Equal(tt.wantErr), "%+v", result.Findings)
+		})
+	}
+}
+
 func TestMarkdownReportVerdict(t *testing.T) {
 	t.Parallel()
 	withoutHeading := strings.Replace(markdownReport, "## Verdict\nConditional: follow-up required.\n", "", 1)

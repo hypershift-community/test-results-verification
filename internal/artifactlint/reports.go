@@ -12,6 +12,24 @@ var (
 	scenarioFilename = regexp.MustCompile(`^scenario-[1-9][0-9]*\.html$`)
 )
 
+// reportsIndexName is the optional directory index of a Markdown-report
+// directory. It summarises the reports instead of verifying a single PR, so it
+// carries no report front matter and is skipped by report validation.
+const reportsIndexName = "index.md"
+
+// prReportCount counts the PR-numbered reports in a directory, ignoring its
+// index. A directory that carries only an index has no evidence of its own and
+// must not pass as a report collection.
+func prReportCount(names []string) int {
+	n := 0
+	for _, name := range names {
+		if path.Base(name) != reportsIndexName {
+			n++
+		}
+	}
+	return n
+}
+
 func (v *validator) reports() {
 	directories := map[string]bool{}
 	markdownReports := map[string][]string{}
@@ -47,6 +65,10 @@ func (v *validator) reports() {
 			if htmlMarkers[dir] && !prFilename.MatchString(base) {
 				continue
 			}
+			// A directory index documents the reports beside it; it is not one.
+			if base == reportsIndexName {
+				continue
+			}
 			if !prFilename.MatchString(base) {
 				v.add(name, 1, "NAME", "name Markdown reports with their positive PR number")
 			}
@@ -54,7 +76,7 @@ func (v *validator) reports() {
 		}
 	}
 	for _, dir := range sortedKeys(directories) {
-		if htmlMarkers[dir] || len(markdownReports[dir]) == 0 {
+		if htmlMarkers[dir] || prReportCount(markdownReports[dir]) == 0 {
 			v.htmlReport(dir)
 		}
 	}
